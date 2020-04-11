@@ -11,3 +11,15 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+.pointer {
+  cursor: pointer;
+  opacity: .8;
+  transition: .2s;
+}
+
+.pointer:hover {
+  opacity: 1;
+}
+
+

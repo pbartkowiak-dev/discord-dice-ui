@@ -1,0 +1,62 @@
+:root {
+	--dice-size: 90px;
+	--dice-size-mobile: 50px;
+}
+
+.dice {
+	display: flex;
+    justify-content: center;
+	flex-direction: row;
+}
+
+.dice .card-body {
+	padding: 5px;
+}
+
+.dice .card-footer {
+	min-width: 150px;
+	border-top: 0;
+}
+
+.dice .btn.dropdown-toggle {
+    min-width: 76px;
+}
+
+.dice__image {
+	width: 100%;
+	height: var(--dice-size-mobile);
+	background-size: var(--dice-size-mobile);
+	background-position: center center;
+	background-repeat: no-repeat;
+	cursor: pointer;
+	opacity: .8;
+	transition: .2s;
+}
+
+.dice__image:hover {
+	opacity: 1;
+}
+
+.dice--d100 .dice__image { background-image: url('../img/d100.png') }
+.dice--d20 .dice__image { background-image: url('../img/d20.png') }
+.dice--d12 .dice__image { background-image: url('../img/d12.png') }
+.dice--d10 .dice__image { background-image: url('../img/d10.png') }
+.dice--d8 .dice__image {  background-image: url('../img/d8.png') }
+.dice--d6 .dice__image {  background-image: url('../img/d6.png') }
+.dice--d4 .dice__image {  background-image: url('../img/d4.png') }
+
+@media only screen and (min-width: 960px) {
+	.dice {
+		flex-direction: column;
+	}
+	.dice .card-body {
+		padding: 1.25rem;
+	}
+	.dice .card-footer {
+		border-top: 1px solid rgba(0,0,0,.125);
+	}
+	.dice__image {
+		height: var(--dice-size);
+		background-size: var(--dice-size);
+	}
+}

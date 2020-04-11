@@ -1,0 +1,71 @@
+:root {
+	--col-gap-mobile : 2px;
+	--col-gap : 8px;
+}
+
+.dice-module-container {
+	width: 100%;
+	text-align: center;
+    display: flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: center;
+}
+
+.dice-module {
+	max-width: 350px;
+	width: 100%;
+	margin-bottom: 5px;
+}
+
+.dice-options .card-body {
+	padding: 10px;
+}
+
+.dice-options .icon-info {
+	display: none;
+}
+
+.dice-form {
+	margin-bottom: 8px;
+	width: 100%;
+	text-align: left;
+	display: grid;
+	row-gap: 5px;
+}
+
+.dice-list {
+	width: 100%;
+	display: grid;
+	grid-gap:
+		var(--col-gap-mobile)
+		var(--col-gap-mobile);
+	grid-template-columns: 1fr;
+	margin-bottom: 35px;
+}
+
+@media only screen and (min-width: 960px) {
+	.dice-module {
+		max-width: 1080px;
+	}
+	.dice-options .card-body {
+		padding: 15px;
+	}
+	.dice-options .icon-info {
+		display: inline-block;
+	}
+	.dice-form {
+		display: grid;
+		grid-auto-flow: column;
+		grid-template-columns: auto;
+		grid-template-rows: 1fr 1fr;
+
+	}
+	.dice-list {
+		grid-gap:
+		var(--col-gap)
+		var(--col-gap);
+		grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+		margin-bottom: 15px;
+	}
+}
