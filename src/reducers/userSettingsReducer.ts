@@ -13,7 +13,6 @@ const initialState:userSettingsType = {
 };
 
 function userSettingsReducer(state = initialState, action:any) {
-	console.log('action', action)
 	switch (action.type) {
 		case SAVE_USER_SETTINGS:
 			return action.userSettings;

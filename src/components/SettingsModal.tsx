@@ -4,6 +4,8 @@ import Button from 'react-bootstrap/Button';
 import UserSettingsForm from './UserSettingsForm';
 import localStorageUserSettingsManager from '../utils/localStorageUserSettingsManager';
 import getRandomUserColor from '../utils/getRandomUserColor';
+import './SettingsModal.css';
+import { version } from '../../package.json';
 
 type SettingsModalProps = {
 	showSettingsModal: boolean,
@@ -37,7 +39,7 @@ function SettingsModal({
 		<>
 			<Modal show={showSettingsModal} onHide={handleClose}>
 				<Modal.Header closeButton>
-					<Modal.Title>Settings</Modal.Title>
+					<Modal.Title>Settings<p className="version-subtitle">v. {version}</p></Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
 				<UserSettingsForm

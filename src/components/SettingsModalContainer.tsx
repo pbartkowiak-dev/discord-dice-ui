@@ -1,4 +1,4 @@
-import React, { useEffect  } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { openSettingsModal, closeSettingsModal, saveUserSettings } from '../actions';
 import SettingsModal from './SettingsModal';
@@ -6,7 +6,6 @@ import localStorageUserSettingsManager from '../utils/localStorageUserSettingsMa
 
 
 const mapStateToProps = (state:any) => {
-	console.log('mapStateToProps state', state);
 	return {
 		showSettingsModal: state.showSettingsModal,
 		userSettings: state.userSettings,
@@ -30,7 +29,6 @@ function SettingsModalContainer({
 
 	useEffect(() => {
 		const localStorageUserSettings = localStorageUserSettingsManager.load();
-		console.log('localStorageUserSettings', localStorageUserSettings);
 		if (localStorageUserSettings && localStorageUserSettings.hookUrl) {
 			saveUserSettings(localStorageUserSettings);
 		} else {
@@ -41,7 +39,7 @@ function SettingsModalContainer({
 
 	return (
 		<>
-			<SettingsModal 
+			<SettingsModal
 				showSettingsModal={showSettingsModal}
 				closeSettingsModal={closeSettingsModal}
 				saveUserSettings={saveUserSettings}

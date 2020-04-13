@@ -3,59 +3,44 @@ import './DiceModule.css';
 import { classic } from '../consts/diceSets';
 import Dice from './Dice';
 import DiceModuleOptions from './DiceModuleOptions';
-import rollDice from '../utils/rollDice';
-import { requestParams, request } from '../utils/request';
+import { request } from '../utils/request';
+import getMsgParams from '../utils/getMsgParams';
 
-function DiceModule ({userSettings, rollOptions, showMsg}:DiceModuleProps) {
-	console.log('rollOptions', rollOptions)
-	const handleRollDice = (diceType:number, diceAmount:number = 1, modifier:number = 0) => {
-		const keepUnits = true;
-		const result = rollDice(diceType, diceAmount, keepUnits);
-		const resultsWord = diceAmount > 1 ? 'results' : 'result';
-		const rolled = `${diceAmount}d${diceType}${modifier ? '+'+modifier : '' }`;
-		const username = userSettings.username || 'USERNAME_MISSING'
-		const msgTitle = `${username} rolled \`${rolled}\` ${resultsWord}: \`${result.join(', ')}\`.`
-		const fields = [];
+type DiceModuleProps = {
+	userSettings: any,
+	rollOptions: any,
+	showMsg: Function,
+	openModifierModal: Function,
+	selectDice: Function
+};
 
-		if (rollOptions.sumResults) {
-			fields.push({
-				name: ':arrow_right: Sum',
-				value: `Total: \`${result.reduce((a, b) => a + b, modifier)}\`.`
-			});
-		}
-		if (rollOptions.keepHighest) {
-			fields.push({
-				name: ':arrow_up: Highest',
-				value: `Highest result: \`${Math.max(...result)}\`.`
-			});
-		}
-		if (rollOptions.keepLowest) {
-			fields.push({
-				name: ':arrow_down: Lowest',
-				value: `Lowest result: \`${Math.min(...result)}\`.`
-			});
-		}
-		if (rollOptions.cocBonus) {
-			fields.push({
-				name: ':arrow_heading_up: Bonus Dice',
-				value: `Bonus Dice result: \`${Math.max(...result)}\`.`
-			});
-		}
-		if (rollOptions.cocPenalty) {
-			fields.push({
-				name: ':arrow_heading_down: Penalty Dice',
-				value: `Penalty Dice result: \`${Math.min(...result)}\`.`
-			});
-		}
-		const msgParams:requestParams = {
-			hookUrl: userSettings.hookUrl,
-			msgTitle,
-			color: userSettings.userColor,
-			fields
-		};
+function DiceModule ({
+	userSettings,
+	rollOptions,
+	showMsg,
+	openModifierModal,
+	selectDice
+}:DiceModuleProps) {
+	const handleRoll = (diceType:number, diceAmount:number = 1,  modifier:number = 0) => {
+		const msgParams = getMsgParams({
+			diceType,
+			diceAmount,
+			modifier,
+			rollOptions,
+			userSettings
+		});
 		showMsg(msgParams);
 		request(msgParams);
 	}
+
+	const handleRollDice = (diceType:number, diceAmount:number = 1) => {
+		if (rollOptions.addModifier) {
+			selectDice({ diceType, diceAmount });
+			openModifierModal();
+		} else {
+			handleRoll(diceType, diceAmount, 0);
+		}
+	};
 
 	const diceSet = classic.map(diceType => {
 		return (
@@ -76,11 +61,5 @@ function DiceModule ({userSettings, rollOptions, showMsg}:DiceModuleProps) {
 		</div>
 	);
 }
-
-type DiceModuleProps = {
-	userSettings: any,
-	rollOptions:any,
-	showMsg: Function
-};
 
 export default DiceModule;

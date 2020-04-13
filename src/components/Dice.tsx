@@ -13,12 +13,12 @@ function Dice({
 	const diceTypeNum = diceType.replace(/\D/g,'');
 
 	const DropdownContent = () => {
-		const maxDiceInOneRoll = 4;
+		const maxDiceInOneRoll = 5;
 		const options =  new Array(maxDiceInOneRoll).fill('').map((_, index) => {
-			const dicesWord = index === 0 ? 'dice' : 'dices';
+			const dieWord = index === 0 ? 'die' : 'dice';
 			return (
-				<Dropdown.Item onClick={ () => handleRollDice(diceTypeNum, index + 1) }>
-					<span>Roll <strong>{index + 1}</strong> {dicesWord}</span>
+				<Dropdown.Item key={index} onClick={ () => handleRollDice(diceTypeNum, index + 1) }>
+					<span>Roll <strong>{index + 1}</strong> {dieWord}</span>
 				</Dropdown.Item>
 			);
 		});

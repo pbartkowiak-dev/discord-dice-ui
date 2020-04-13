@@ -34,11 +34,8 @@ function request ({
 			body: JSON.stringify(msg)
 		};
 
-
-		fetch(hookUrl, data)
-			.then(response => {
-				console.log('response', response);
-			});
+		// @TODO Add error handling
+		fetch(hookUrl, data);
 	}
 }
 

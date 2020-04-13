@@ -8,7 +8,6 @@ function settingsModalReducer(state = false, action:any) {
 			return true;
 	}
 	return state;
-
 }
 
 export default settingsModalReducer;

@@ -9,7 +9,6 @@ const localStorageUserSettingsManager = {
 	},
 
 	load() {
-		console.log('load')
 		const userSettings = localStorage.getItem('userSettings');
 		if (userSettings) {
 			try {
