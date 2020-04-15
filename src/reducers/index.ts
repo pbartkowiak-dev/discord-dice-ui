@@ -3,7 +3,7 @@ import settingsModalReducer from './settingsModalReducer';
 import userSettingsReducer from './userSettingsReducer';
 import modifierModalReducer from './modifierModalReducer';
 import selectedDiceReducer from './selectedDiceReducer';
-// import msgReducer from './msgReducer';
+import msgReducer from './msgReducer';
 import { reducer as formReducer } from 'redux-form'
 
 export default combineReducers({
@@ -12,5 +12,5 @@ export default combineReducers({
 	userSettings: userSettingsReducer,
 	selectedDice: selectedDiceReducer,
 	form: formReducer,
-	// msg: msgReducer
+	msg: msgReducer
 });

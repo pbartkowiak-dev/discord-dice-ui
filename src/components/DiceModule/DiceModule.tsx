@@ -1,10 +1,12 @@
 import React from 'react';
 import './DiceModule.css';
-import { classic } from '../consts/diceSets';
+import { classic } from '../../consts/diceSets';
 import Dice from './Dice';
 import DiceModuleOptions from './DiceModuleOptions';
-import { request } from '../utils/request';
-import getMsgParams from '../utils/getMsgParams';
+import { request } from '../../utils/request';
+import getMsgParams from '../../utils/getMsgParams';
+import getLocalMsgParams from '../../utils/getLocalMsgParams';
+import rollDice from '../../utils/rollDice';
 
 type DiceModuleProps = {
 	userSettings: any,
@@ -20,18 +22,28 @@ function DiceModule ({
 	showMsg,
 	openModifierModal,
 	selectDice
-}:DiceModuleProps) {
-	const handleRoll = (diceType:number, diceAmount:number = 1,  modifier:number = 0) => {
+}:DiceModuleProps
+) {
+	const handleRoll = (diceType:number, diceAmount:number,  modifier:number) => {
+		// @TODO ADD KEEPUNITS
+		const keepUnits = false;
+		const result = rollDice(diceType, diceAmount, keepUnits);
 		const msgParams = getMsgParams({
 			diceType,
-			diceAmount,
 			modifier,
 			rollOptions,
-			userSettings
+			userSettings,
+			result
 		});
-		showMsg(msgParams);
+		const localMsgParams = getLocalMsgParams({
+			fields: msgParams.fields,
+			modifier: msgParams.description,
+			diceType,
+			result
+		});
+		showMsg(localMsgParams);
 		request(msgParams);
-	}
+	};
 
 	const handleRollDice = (diceType:number, diceAmount:number = 1) => {
 		if (rollOptions.addModifier) {

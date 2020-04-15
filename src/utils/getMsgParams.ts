@@ -1,33 +1,38 @@
-import rollDice from './rollDice';
 import { requestParams } from './request';
 
 type getMsgParamsProps = {
 	diceType:number,
-	diceAmount: number,
 	modifier: number,
 	rollOptions: any,
-	userSettings: any
+	userSettings: any,
+	result:Array<any>
 }
 
 const getMsgParams = ({
 	diceType,
-	diceAmount = 1,
 	modifier = 0,
 	rollOptions,
-	userSettings
+	userSettings,
+	result
 }:getMsgParamsProps) => {
-	const keepUnits = true;
-	const result = rollDice(diceType, diceAmount, keepUnits);
-	const resultsWord = diceAmount > 1 ? 'Results' : 'Result';
-	const modSymbol = modifier >= 0 ? '+' : ''
-	const rolled = `${diceAmount}d${diceType}${modifier ? `${modSymbol}` + modifier : '' }`;
+	const diceAmount = result.length;
+	const rolledWord = diceAmount > 1 ? 'Results' : 'Result';
+	const modSymbol = modifier >= 0 ? '+' : '-'
+	const rolled = `${diceAmount}d${diceType}`;
 	const username = userSettings.username || 'USERNAME_MISSING'
-	const msgTitle = `${username} rolled \`${rolled}\`. ${resultsWord}: \`${result.join(', ')}\`.`
+	const msgTitle = `${username} rolled \`${rolled}\`. ${rolledWord}: \`${result.join(', ')}\`.`
 	const fields = [];
+	let description = '';
+
+	if (rollOptions.addModifier) {
+		description = `**Modifier**: \`${modSymbol}${Math.abs(modifier)}\`.`
+	}
 
 	if (rollOptions.sumResults) {
+		let name = `:arrow_right: Sum of \`${result.join('+')}\``;
+		if (0 !== Number(modifier)) name += ` ${modSymbol} \`${Math.abs(modifier)}\``;
 		fields.push({
-			name: ':arrow_right: Sum',
+			name,
 			value: `Total: \`${result.reduce((a, b) => Number(a) + Number(b), Number(modifier))}\`.`
 		});
 	}
@@ -59,7 +64,8 @@ const getMsgParams = ({
 		hookUrl: userSettings.hookUrl,
 		msgTitle,
 		color: userSettings.userColor,
-		fields
+		fields,
+		description
 	};
 	return msgParams;
 };

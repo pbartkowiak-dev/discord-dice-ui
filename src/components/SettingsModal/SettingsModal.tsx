@@ -2,10 +2,10 @@ import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import UserSettingsForm from './UserSettingsForm';
-import localStorageUserSettingsManager from '../utils/localStorageUserSettingsManager';
-import getRandomUserColor from '../utils/getRandomUserColor';
+import localStorageUserSettingsManager from '../../utils/localStorageUserSettingsManager';
+import getRandomUserColor from '../../utils/getRandomUserColor';
 import './SettingsModal.css';
-import { version } from '../../package.json';
+import { version } from '../../../package.json';
 
 type SettingsModalProps = {
 	showSettingsModal: boolean,

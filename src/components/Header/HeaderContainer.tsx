@@ -1,7 +1,7 @@
 import React from 'react';
 import Header from './Header';
 import { connect } from 'react-redux';
-import { openSettingsModal, closeSettingsModal } from '../actions';
+import { openSettingsModal, closeSettingsModal } from '../../actions';
 
 const mapDispatchToProps = { openSettingsModal, closeSettingsModal };
 

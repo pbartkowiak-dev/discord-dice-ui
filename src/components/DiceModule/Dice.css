@@ -5,7 +5,7 @@
 
 .dice {
 	display: flex;
-    justify-content: center;
+	ustify-content: center;
 	flex-direction: row;
 }
 
@@ -19,7 +19,7 @@
 }
 
 .dice .btn.dropdown-toggle {
-    min-width: 76px;
+	min-width: 76px;
 }
 
 .dice__image {
@@ -37,13 +37,13 @@
 	opacity: 1;
 }
 
-.dice--d100 .dice__image { background-image: url('../img/d100.png') }
-.dice--d20 .dice__image { background-image: url('../img/d20.png') }
-.dice--d12 .dice__image { background-image: url('../img/d12.png') }
-.dice--d10 .dice__image { background-image: url('../img/d10.png') }
-.dice--d8 .dice__image {  background-image: url('../img/d8.png') }
-.dice--d6 .dice__image {  background-image: url('../img/d6.png') }
-.dice--d4 .dice__image {  background-image: url('../img/d4.png') }
+.dice--d100 .dice__image { background-image: url('../../img/d100.png') }
+.dice--d20 .dice__image { background-image: url('../../img/d20.png') }
+.dice--d12 .dice__image { background-image: url('../../img/d12.png') }
+.dice--d10 .dice__image { background-image: url('../../img/d10.png') }
+.dice--d8 .dice__image {  background-image: url('../../img/d8.png') }
+.dice--d6 .dice__image {  background-image: url('../../img/d6.png') }
+.dice--d4 .dice__image {  background-image: url('../../img/d4.png') }
 
 @media only screen and (min-width: 960px) {
 	.dice {

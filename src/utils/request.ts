@@ -1,4 +1,4 @@
-type fieldEmbeded = {
+type fieldEmbedded = {
 	name: string,
 	value: string
 }
@@ -7,27 +7,30 @@ export type requestParams = {
 	hookUrl: string,
 	msgTitle: string,
 	color: number,
-	fields: Array<fieldEmbeded>
+	fields: Array<fieldEmbedded>,
+	description: string
 }
 
 function request ({
 	hookUrl,
 	msgTitle,
 	color,
-	fields
+	fields,
+	description
 }: requestParams) {
 	if (hookUrl) {
 		const msg = {
-			username: "Dice Roller",
+			username: 'Dice Roller',
 			embeds: [{
 				title: msgTitle,
+				description,
 				color,
 				fields
 			}]
 		};
 
 		const data = {
-			method: "POST",
+			method: 'POST',
 			headers: {
 				"content-type": "application/json",
 			},

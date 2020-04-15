@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { showMsg, openModifierModal, selectDice } from '../actions';
+import { showMsg, openModifierModal, selectDice } from '../../actions';
 import DiceModule from './DiceModule';
 
 function mapStateToProps(state:any) {

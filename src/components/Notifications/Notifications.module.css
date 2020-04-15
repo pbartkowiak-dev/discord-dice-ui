@@ -1,0 +1,24 @@
+.notificationToast {
+	position: fixed;
+	bottom: 10px;
+	right: 20px;
+	z-index: 10;
+	background-color: #fff;
+	-webkit-backface-visibility: hidden;
+	-moz-backface-visibility: hidden;
+	backface-visibility: hidden;
+	/* font-size: 1rem; */
+}
+
+.notificationList {
+	list-style: circle;
+	text-align: left;
+}
+
+.notificationModifier {
+	list-style: disc;
+	text-align: left;
+	font-weight: bold;
+	padding-bottom: 5px;
+	margin-bottom: 4px;
+}

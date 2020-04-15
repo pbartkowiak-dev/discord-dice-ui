@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { openSettingsModal, closeSettingsModal, saveUserSettings } from '../actions';
+import { openSettingsModal, closeSettingsModal, saveUserSettings } from '../../actions';
 import SettingsModal from './SettingsModal';
-import localStorageUserSettingsManager from '../utils/localStorageUserSettingsManager';
+import localStorageUserSettingsManager from '../../utils/localStorageUserSettingsManager';
 
 
 const mapStateToProps = (state:any) => {
