@@ -49,7 +49,6 @@ export const SHOW_MSG = 'SHOW_MSG';
 export const HIDE_MSG = 'HIDE_MSG';
 
 export function showMsg(msgParams:requestParams) {
-	console.log('showMsg', msgParams)
 	return {
 		type: SHOW_MSG,
 		msgParams

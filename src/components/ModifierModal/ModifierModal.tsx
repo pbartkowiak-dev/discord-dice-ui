@@ -3,8 +3,8 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import ModifierForm from './ModifierForm';
 import { request } from '../../utils/request';
-import getMsgParams from '../../utils/getMsgParams';
-import getLocalMsgParams from '../../utils/getLocalMsgParams';
+import getRequestMsg from '../../utils/getRequestMsg';
+import getLocalMsg from '../../utils/getLocalMsg';
 import rollDice from '../../utils/rollDice';
 
 type ModifierModalProps = {
@@ -30,25 +30,20 @@ function ModifierModal({
 	};
 
 	const handleSubmit = (values:any) => {
-		// @TODO ADD KEEPUNITS
-		const keepUnits = false;
 		const { diceType, diceAmount } = selectedDice;
-		const result = rollDice(diceType, diceAmount, keepUnits);
-		const msgParams = getMsgParams({
+		const modifier = values.modifier ? Number(values.modifier) : 0; 
+		const result = rollDice({
 			diceType,
-			modifier: Number(values.modifier),
+			diceAmount,
 			rollOptions,
-			userSettings,
-			result
+			modifier
 		});
-		const localMsgParams = getLocalMsgParams({
-			fields: msgParams.fields,
-			modifier: msgParams.description,
-			diceType: selectedDice.diceType,
-			result
-		});
-		showMsg(localMsgParams);
-		request(msgParams);
+		const requestMsg = getRequestMsg(result, rollOptions, userSettings);
+		const localMsg = getLocalMsg(result, rollOptions);
+
+		showMsg(localMsg);
+		request(requestMsg);
+		
 		closeModifierModal();
 	};
 

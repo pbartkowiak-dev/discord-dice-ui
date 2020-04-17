@@ -52,7 +52,7 @@ function DiceModuleForm(props:any) {
 			<Field name="keepHighest" id="keepHighest" label="Keep highest" component={RenderCheckbox} />
 			<Field name="keepLowest" id="keepLowest" label="Keep lowest" component={RenderCheckbox} />
 			<Field name="sumResults" id="sumResults" label="Sum results" component={RenderCheckbox} />
-			<Field name="addModifier" id="addModifier" label="Add modifier" component={RenderCheckbox} />
+			<Field name="useModifier" id="useModifier" label="Add modifier" component={RenderCheckbox} />
 			<Field name="cocBonus" id="cocBonus" label={bonusDieLabel} component={RenderCheckbox} />
 			<Field name="cocPenalty" id="cocPenalty" label={penaltyDieLabel} component={RenderCheckbox} />
 		</Form>

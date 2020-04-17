@@ -20,7 +20,7 @@ type ModifierModalContainerProps = {
 function ModifierModalContainer({
 	hideMsg,
 	msgData
-}:any) {
+}:ModifierModalContainerProps) {
 	return (
 		<>
 			<Notifications

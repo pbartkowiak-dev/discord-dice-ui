@@ -4,9 +4,10 @@ import { classic } from '../../consts/diceSets';
 import Dice from './Dice';
 import DiceModuleOptions from './DiceModuleOptions';
 import { request } from '../../utils/request';
-import getMsgParams from '../../utils/getMsgParams';
-import getLocalMsgParams from '../../utils/getLocalMsgParams';
+import getRequestMsg from '../../utils/getRequestMsg';
+import getLocalMsg from '../../utils/getLocalMsg';
 import rollDice from '../../utils/rollDice';
+import CondeSpan from '../CodeSpan/CodeSpan';
 
 type DiceModuleProps = {
 	userSettings: any,
@@ -24,33 +25,26 @@ function DiceModule ({
 	selectDice
 }:DiceModuleProps
 ) {
-	const handleRoll = (diceType:number, diceAmount:number,  modifier:number) => {
-		// @TODO ADD KEEPUNITS
-		const keepUnits = false;
-		const result = rollDice(diceType, diceAmount, keepUnits);
-		const msgParams = getMsgParams({
+	const handleRoll = (diceType:number, diceAmount:number) => {
+		const result = rollDice({
 			diceType,
-			modifier,
+			diceAmount,
 			rollOptions,
-			userSettings,
-			result
+			modifier: 0
 		});
-		const localMsgParams = getLocalMsgParams({
-			fields: msgParams.fields,
-			modifier: msgParams.description,
-			diceType,
-			result
-		});
-		showMsg(localMsgParams);
-		request(msgParams);
+		const requestMsg = getRequestMsg(result, rollOptions, userSettings);
+		const localMsg = getLocalMsg(result, rollOptions);
+
+		showMsg(localMsg);
+		request(requestMsg);
 	};
 
 	const handleRollDice = (diceType:number, diceAmount:number = 1) => {
-		if (rollOptions.addModifier) {
+		if (rollOptions.useModifier) {
 			selectDice({ diceType, diceAmount });
 			openModifierModal();
 		} else {
-			handleRoll(diceType, diceAmount, 0);
+			handleRoll(diceType, diceAmount);
 		}
 	};
 
@@ -67,6 +61,7 @@ function DiceModule ({
 	return (
 		<div className="dice-module-container">
 			<DiceModuleOptions/>
+			<CondeSpan>test</CondeSpan>
 			<div className="dice-module dice-list">
 				{diceSet}
 			</div>

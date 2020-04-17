@@ -7,18 +7,26 @@
 	-webkit-backface-visibility: hidden;
 	-moz-backface-visibility: hidden;
 	backface-visibility: hidden;
-	/* font-size: 1rem; */
+}
+
+.notificationHeader {
+	color: #000;
 }
 
 .notificationList {
 	list-style: circle;
 	text-align: left;
+	margin-bottom: 0;
+	padding-left: 30px;
 }
 
-.notificationModifier {
-	list-style: disc;
-	text-align: left;
+.notificationBody {
+	padding: 6px 12px 11px;	
+}
+
+.notificationListModifier {
+	list-style: none;
 	font-weight: bold;
-	padding-bottom: 5px;
-	margin-bottom: 4px;
+	margin-bottom: 2px;
+	margin-left: -30px;
 }
