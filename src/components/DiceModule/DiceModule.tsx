@@ -61,7 +61,6 @@ function DiceModule ({
 	return (
 		<div className="dice-module-container">
 			<DiceModuleOptions/>
-			<CondeSpan>test</CondeSpan>
 			<div className="dice-module dice-list">
 				{diceSet}
 			</div>

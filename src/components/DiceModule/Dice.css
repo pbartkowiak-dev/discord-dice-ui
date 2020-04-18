@@ -5,8 +5,9 @@
 
 .dice {
 	display: flex;
-	ustify-content: center;
+	justify-content: center;
 	flex-direction: row;
+	overflow: hidden;
 }
 
 .dice .card-body {
@@ -14,7 +15,6 @@
 }
 
 .dice .card-footer {
-	min-width: 150px;
 	border-top: 0;
 }
 
@@ -44,6 +44,22 @@
 .dice--d8 .dice__image {  background-image: url('../../img/d8.png') }
 .dice--d6 .dice__image {  background-image: url('../../img/d6.png') }
 .dice--d4 .dice__image {  background-image: url('../../img/d4.png') }
+
+@media only screen and (min-width: 480px) {
+	.dice {
+		flex-direction: column;
+	}
+	.dice .card-body {
+		padding: 1.25rem;
+	}
+	.dice .card-footer {
+		border-top: 1px solid rgba(0,0,0,.125);
+	}
+	.dice__image {
+		height: var(--dice-size);
+		background-size: var(--dice-size);
+	}
+}
 
 @media only screen and (min-width: 960px) {
 	.dice {
