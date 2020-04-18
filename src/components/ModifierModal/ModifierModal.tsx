@@ -60,7 +60,7 @@ function ModifierModal({
 					<Button variant="secondary" onClick={handleClose}>
 						Cancel
 					</Button>
-					<Button variant="primary" type="submit" form="modifier-form">
+					<Button variant="success" type="submit" form="modifier-form">
 						Roll!
 					</Button>
 				</Modal.Footer>

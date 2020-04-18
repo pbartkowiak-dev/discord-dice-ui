@@ -5,7 +5,7 @@ import { Field, reduxForm } from 'redux-form'
 function EnterModifier({input}:any) {
 	return (
 		<Form.Group controlId="formBasicPassword">
-			<Form.Label>Enter Modifier value</Form.Label>
+			<Form.Label>Enter Modifier value:</Form.Label>
 			<Form.Control type="text" placeholder="Modifier" {...input} />
 		</Form.Group>
 	);

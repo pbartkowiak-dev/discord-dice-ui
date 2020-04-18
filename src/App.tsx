@@ -1,15 +1,14 @@
 import React from 'react';
-import './App.css';
 import DiceModuleContainer from './components/DiceModule/DiceModuleContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
 import SettingsModalContainer from './components/SettingsModal/SettingsModalContainer';
 import ModifierModalContainer from './components/ModifierModal/ModifierModalContainer';
-import NotificationsContainer from './components/Notifications/NotificationsContainer';
+import ResultsModalContainer from './components/ResultsModal/ResultsModalContainer';
 
 function App() {
 	return (
 		<div className="App">
-			<NotificationsContainer />
+			<ResultsModalContainer />
 			<ModifierModalContainer />
 			<SettingsModalContainer />
 			<HeaderContainer />

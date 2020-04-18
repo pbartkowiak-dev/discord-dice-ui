@@ -51,7 +51,10 @@ function SettingsModal({
 					<Button variant="secondary" onClick={handleClose}>
 						Close
 					</Button>
-					<Button variant="primary" type="submit" form="user-settings-form">
+					<Button
+						variant="success"
+						type="submit"
+						form="user-settings-form">
 						Save Changes
 					</Button>
 				</Modal.Footer>

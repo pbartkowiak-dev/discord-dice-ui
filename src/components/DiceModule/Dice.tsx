@@ -35,8 +35,12 @@ function Dice({
 				<div className="dice__image" onClick={() => handleRollDice(diceTypeNum) }></div>
 			</Card.Body>
 			<Card.Footer>
-					<DropdownButton id="dropdown-basic-button" title={diceType} className="dice-button">
-						< DropdownContent />
+					<DropdownButton
+						id="dropdown-basic-button"
+						type="success"
+						title={diceType}
+						className="dice-button">
+							<DropdownContent/>
 				</DropdownButton>
 			</Card.Footer>
 		</Card>

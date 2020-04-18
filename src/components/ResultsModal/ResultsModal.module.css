@@ -1,0 +1,46 @@
+:root {
+	--header-bg: #3CB778;
+	--header-color: #fff;
+}
+
+.resultsModalHeader {
+	height: 125px;
+	background: var(--header-bg);
+	color: var(--header-color);
+	display: block;
+	text-align: center;
+	position: relative;
+}
+
+.resultsModalTitle {
+	text-align: center;
+	margin-bottom: 10px;
+	font-weight: bold;
+	color: var(--header-color);
+	margin: 10px 0 0;
+}
+
+.resultsList {
+	list-style: circle;
+	text-align: left;
+	margin-bottom: 0;
+	padding-left: 30px;
+}
+
+.resultsModalHeader :global(.close) {
+	color: var(--header-color);
+	position: absolute;
+    top: 10px;
+	right: 10px;
+}
+
+.resultsModalDiceIcon {
+	margin: 0 auto;
+	font-size: 52px;
+}
+
+@media only screen and (min-width: 480px) {
+	.resultsBody {
+		font-size: 1.1rem;
+	}
+}

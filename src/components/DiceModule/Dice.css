@@ -7,7 +7,6 @@
 	display: flex;
 	justify-content: center;
 	flex-direction: row;
-	overflow: hidden;
 }
 
 .dice .card-body {

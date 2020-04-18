@@ -6,7 +6,7 @@ import { Field, reduxForm } from 'redux-form'
 function myField({input}:any) {
 	return (
 		<Form.Group controlId="formBasicEmail">
-			<Form.Label>Discord hook url address</Form.Label>
+			<Form.Label>Discord hook url address:</Form.Label>
 			<Form.Control type="text" placeholder="Enter Hook Url" {...input} />
 			<Form.Text className="text-muted">Ask your Discord channel administrator</Form.Text>
 		</Form.Group>
@@ -16,7 +16,7 @@ function myField({input}:any) {
 function myField2({input}:any) {
 	return (
 		<Form.Group controlId="formBasicPassword">
-			<Form.Label>Username</Form.Label>
+			<Form.Label>Username:</Form.Label>
 			<Form.Control type="text" placeholder="Enter your username" {...input} />
 		</Form.Group>
 	);

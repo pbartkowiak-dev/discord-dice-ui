@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { hideMsg } from '../../actions';
-import Notifications from './Notifications';
+import ResultsModal from './ResultsModal';
 
 const mapStateToProps = (state:any) => {
 	return {
@@ -11,25 +11,23 @@ const mapStateToProps = (state:any) => {
 
 const mapDispatchToProps = { hideMsg };
 
-
-type ModifierModalContainerProps = {
-	hideMsg:Function,
+type ResultsModalContainerProps = {
+	hideMsg:Function
 	msgData:any
 }
 
-function ModifierModalContainer({
+function ResultsModalContainer({
 	hideMsg,
 	msgData
-}:ModifierModalContainerProps) {
+}:ResultsModalContainerProps) {
 	return (
 		<>
-			<Notifications
+			<ResultsModal
 				hideMsg={hideMsg}
 				msgData={msgData}
 			/>
 		</>
 	);
-
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ModifierModalContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(ResultsModalContainer);
