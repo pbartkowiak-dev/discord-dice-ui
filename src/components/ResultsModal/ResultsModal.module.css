@@ -21,10 +21,14 @@
 }
 
 .resultsList {
-	list-style: circle;
+	list-style: none;
 	text-align: left;
 	margin-bottom: 0;
-	padding-left: 30px;
+	padding-left: 15px;
+}
+
+:global(.modal-content) {
+	box-sizing: content-box;
 }
 
 .resultsModalHeader :global(.close) {

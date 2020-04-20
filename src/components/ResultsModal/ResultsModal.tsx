@@ -31,7 +31,11 @@ function ResultsModal({ hideMsg, msgData }:ResultsModalProps) {
 
 	return (
 		<>
-			<Modal show={msgData.showMsg} onHide={() => hideMsg()}>
+			<Modal
+				show={msgData.showMsg}
+				dialogClassName="test"
+			 	onHide={() => hideMsg()}
+			>
 				<Modal.Header closeButton className={styles.resultsModalHeader}>
 					<div>
 					{DiceIcon}

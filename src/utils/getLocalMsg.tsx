@@ -1,5 +1,14 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowAltCircleUp, faArrowAltCircleDown } from '@fortawesome/free-regular-svg-icons';
+import { faArrowAltCircleRight, faLevelUpAlt, faLevelDownAlt } from '@fortawesome/free-solid-svg-icons';
 import CodeSpan from '../components/CodeSpan/CodeSpan';
+
+const IconUp = <FontAwesomeIcon icon={faArrowAltCircleUp} />;
+const IconDown = <FontAwesomeIcon icon={faArrowAltCircleDown} />;
+const IconRight = <FontAwesomeIcon icon={faArrowAltCircleRight} />;
+const IconCocBonus = <FontAwesomeIcon icon={faLevelUpAlt} />;
+const IconCocPenalty = <FontAwesomeIcon icon={faLevelDownAlt} />;
 
 const getLocalMsg = (result:any, rollOptions:any) => {
 	const {
@@ -30,32 +39,32 @@ const getLocalMsg = (result:any, rollOptions:any) => {
 	if (rollOptions.sumResults) {
 		if (rollOptions.useModifier) {
 			fields.push(
-				<>Total (with {modifierWithSymbol} modifier): <CodeSpan>{totalWithModifier}</CodeSpan>.</>
+				<>{IconRight} Total (with {modifierWithSymbol} modifier): <CodeSpan>{totalWithModifier}</CodeSpan>.</>
 			);
 		} else {
 			fields.push(
-				<>Total: <CodeSpan>{totalWithoutModifier}</CodeSpan>.</>
+				<>{IconRight} Total: <CodeSpan>{totalWithoutModifier}</CodeSpan>.</>
 			);
 		}
 	}
 	if (rollOptions.keepHighest) {
 		fields.push(
-			<>Highest result: <CodeSpan>{highest}</CodeSpan>.</>
+			<>{IconUp} Highest result: <CodeSpan>{highest}</CodeSpan>.</>
 		);
 	}
 	if (rollOptions.keepLowest) {
 		fields.push(
-			<>Lowest result: <CodeSpan>{lowest}</CodeSpan>.</>
+			<>{IconDown} Lowest result: <CodeSpan>{lowest}</CodeSpan>.</>
 		);
 	}
 	if (rollOptions.cocBonus) {
 		fields.push(
-			<>Bonus Die result: <CodeSpan>{cocBonus}</CodeSpan>.</>
+			<>{IconCocBonus} Bonus Die result: <CodeSpan>{cocBonus}</CodeSpan>.</>
 		);
 	}
 	if (rollOptions.cocPenalty) {
 		fields.push(
-			<>Penalty Die result: <CodeSpan>{cocPenalty}</CodeSpan>.</>
+			<>{IconCocPenalty} Penalty Die result: <CodeSpan>{cocPenalty}</CodeSpan>.</>
 		);
 	}
 
