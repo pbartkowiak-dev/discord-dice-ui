@@ -29,6 +29,7 @@ function InfoTooltip() {
 const bonusDieLabel = (
 	<span>CoC 7e Bonus Die <InfoTooltip/></span>
 );
+
 const penaltyDieLabel = <span>CoC 7e Penalty Die <InfoTooltip/></span>
 
 // @ts-ignore
@@ -43,18 +44,48 @@ const createRenderer = render  => ({ input, meta, label, id }, ...rest) => {
 // @ts-ignore
 const RenderCheckbox = createRenderer((input, label, id) =>
 	<Form.Check type="checkbox" label={label} id={id} custom {...input} />
-)
+);
 
 function DiceModuleForm(props:any) {
 	const { handleSubmit, pristine, reset, submitting } = props
 	return (
 		<Form id ="roll-options-form" className="dice-module dice-form">
-			<Field name="keepHighest" id="keepHighest" label="Keep highest" component={RenderCheckbox} />
-			<Field name="keepLowest" id="keepLowest" label="Keep lowest" component={RenderCheckbox} />
-			<Field name="sumResults" id="sumResults" label="Sum results" component={RenderCheckbox} />
-			<Field name="useModifier" id="useModifier" label="Add modifier" component={RenderCheckbox} />
-			<Field name="cocBonus" id="cocBonus" label={bonusDieLabel} component={RenderCheckbox} />
-			<Field name="cocPenalty" id="cocPenalty" label={penaltyDieLabel} component={RenderCheckbox} />
+			<Field
+				name="keepHighest"
+				id="keepHighest"
+				label="Keep highest"
+				component={RenderCheckbox}
+			/>
+			<Field
+				name="keepLowest"
+				id="keepLowest"
+				label="Keep lowest"
+				component={RenderCheckbox}
+			/>
+			<Field
+				name="sumResults"
+				id="sumResults"
+				label="Sum results"
+				component={RenderCheckbox}
+			/>
+			<Field
+				name="useModifier"
+				id="useModifier"
+				label="Add modifier"
+				component={RenderCheckbox}
+			/>
+			<Field
+				name="cocBonus"
+				id="cocBonus"
+				label={bonusDieLabel}
+				component={RenderCheckbox}
+			/>
+			<Field
+				name="cocPenalty"
+				id="cocPenalty"
+				label={penaltyDieLabel}
+				component={RenderCheckbox}
+			/>
 		</Form>
 	);
 }
@@ -62,4 +93,4 @@ function DiceModuleForm(props:any) {
 
 export default reduxForm({
 	form: 'rollOptionsForm'
-})(DiceModuleForm)
+})(DiceModuleForm);

@@ -14,6 +14,10 @@ type SettingsModalProps = {
 	userSettings: any
 }
 
+type errorsProps = {
+	username?: string
+}
+
 function SettingsModal({
 	showSettingsModal,
 	closeSettingsModal,

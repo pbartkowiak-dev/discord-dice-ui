@@ -48,14 +48,28 @@ const getLocalMsg = (result:any, rollOptions:any) => {
 		}
 	}
 	if (rollOptions.keepHighest) {
-		fields.push(
-			<>{IconUp} Highest result: <CodeSpan>{highest}</CodeSpan>.</>
-		);
+		if (rollOptions.useModifier) {
+			fields.push(
+				<>{IconUp} Highest result (with {modifierWithSymbol} modifier): <CodeSpan>{highest}</CodeSpan>.</>
+			);
+		} else {
+			fields.push(
+				<>{IconUp} Highest result: <CodeSpan>{highest}</CodeSpan>.</>
+			);
+		}
+
 	}
 	if (rollOptions.keepLowest) {
-		fields.push(
-			<>{IconDown} Lowest result: <CodeSpan>{lowest}</CodeSpan>.</>
-		);
+		if (rollOptions.useModifier) {
+			fields.push(
+				<>{IconDown} Lowest result (with {modifierWithSymbol} modifier): <CodeSpan>{lowest}</CodeSpan>.</>
+			);
+		} else {
+			fields.push(
+				<>{IconDown} Lowest result: <CodeSpan>{lowest}</CodeSpan>.</>
+			);
+		}
+
 	}
 	if (rollOptions.cocBonus) {
 		fields.push(
