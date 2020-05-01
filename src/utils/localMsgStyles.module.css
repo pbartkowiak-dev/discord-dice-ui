@@ -1,0 +1,13 @@
+.successLevel {
+	color: white;
+	text-align: center;
+	padding: 5px;
+}
+
+.isSuccess {
+	background: #3cb778;
+}
+
+.isFailure {
+	background: red;
+}

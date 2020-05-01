@@ -1,0 +1,36 @@
+.skill-level-field {
+	display: flex;
+	justify-content: center;
+	text-align: center;
+}
+
+.skill-level-field .form-control {
+	width: 115px;
+	text-align: center;
+	margin: 0 auto;
+	font-size: 28px;
+}
+
+.skill-level-field .form-group {
+	margin-bottom: 1rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.percent-icon-container {
+	position: relative;
+}
+
+.percent-icon {
+	position: absolute;
+	right: -22px;
+	font-size: 18px;
+	top: 18px;
+	color: #6e6e6e;
+}
+
+.form-invalid .percent-icon{
+	color: #dc3545;
+}

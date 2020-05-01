@@ -7,17 +7,16 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faQuestionCircle } from '@fortawesome/free-regular-svg-icons';
 import './DiceModuleForm.css';
 
-function InfoTooltip() {
-	const placement = 'bottom';
+function CoCModTooltip() {
+	const key = 'CoCModTooltip';
 	return (
 		<>
 		<OverlayTrigger
-			key={placement}
-			placement={placement}
+			key={key}
+			placement="bottom"
 			overlay={
-				<Tooltip id={`tooltip-${placement}`}>
-					<span>Works only with <strong>d100</strong>.</span><br/>
-					<span>Will roll multiple dice with common units value.</span>
+				<Tooltip id={`tooltip-${key}`}>
+					<span>Will open modal with additional options on the <strong>d100</strong> roll.</span>
 				</Tooltip>
 			}
 		><FontAwesomeIcon icon={faQuestionCircle} className="icon-info" />
@@ -26,11 +25,9 @@ function InfoTooltip() {
 	);
 }
 
-const bonusDieLabel = (
-	<span>CoC 7e Bonus Die <InfoTooltip/></span>
+const cocModeLabel = (
+	<span>CoC 7e Mod <CoCModTooltip/></span>
 );
-
-const penaltyDieLabel = <span>CoC 7e Penalty Die <InfoTooltip/></span>
 
 // @ts-ignore
 const createRenderer = render  => ({ input, meta, label, id }, ...rest) => {
@@ -47,6 +44,7 @@ const RenderCheckbox = createRenderer((input, label, id) =>
 );
 
 function DiceModuleForm(props:any) {
+	console.log('all props', props)
 	const { handleSubmit, pristine, reset, submitting } = props
 	return (
 		<Form id ="roll-options-form" className="dice-module dice-form">
@@ -75,15 +73,9 @@ function DiceModuleForm(props:any) {
 				component={RenderCheckbox}
 			/>
 			<Field
-				name="cocBonus"
-				id="cocBonus"
-				label={bonusDieLabel}
-				component={RenderCheckbox}
-			/>
-			<Field
-				name="cocPenalty"
-				id="cocPenalty"
-				label={penaltyDieLabel}
+				name="cocMode"
+				id="cocMode"
+				label={cocModeLabel}
 				component={RenderCheckbox}
 			/>
 		</Form>

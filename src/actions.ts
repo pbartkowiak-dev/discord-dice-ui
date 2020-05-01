@@ -43,6 +43,24 @@ export function closeModifierModal() {
 	};
 }
 
+/* CoC MODAL *************************/
+
+export const OPEN_COC_MODAL = 'OPEN_COC_MODAL';
+export const CLOSE_COC_MODAL = 'CLOSE_COC_MODAL';
+
+
+export function openCoCModal() {
+	return {
+		type: OPEN_COC_MODAL
+	};
+}
+
+export function closeCoCModal() {
+	return {
+		type: CLOSE_COC_MODAL
+	};
+}
+
 /* MSG ************************************/
 
 export const SHOW_MSG = 'SHOW_MSG';

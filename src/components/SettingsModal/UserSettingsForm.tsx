@@ -3,16 +3,16 @@ import Form from 'react-bootstrap/Form';
 import { Field, reduxForm } from 'redux-form'
 
 // @ts-ignore
-const createRenderer = render => ({ input, label, id, textMuted, meta }, ...rest) => {
+const createRenderer = render => ({ input, label, id, textMuted, meta, placeholder }, ...rest) => {
 	return (
 		<>
-			{render(input, label, id, textMuted, meta, rest)}
+			{render(input, label, id, textMuted, meta, placeholder, rest)}
 		</>
 	)
 };
 
 // @ts-ignore
-const renderInput = createRenderer((input, label, id, textMuted, meta) => {
+const renderInput = createRenderer((input, label, id, textMuted, meta, placeholder) => {
 	const { submitFailed, touched, error } = meta;
 	const hasError = !!((submitFailed || touched) && error);
 	return (
@@ -20,9 +20,9 @@ const renderInput = createRenderer((input, label, id, textMuted, meta) => {
 			<Form.Label>{label}</Form.Label>
 			<Form.Control
 				type="text"
-				placeholder="Enter your username"
-				{...input}
+				placeholder={placeholder}
 				isInvalid ={hasError}
+				{...input}
 			/>
 			{ hasError && <Form.Control.Feedback type="invalid">{ error }</Form.Control.Feedback> }
 			{ textMuted && <Form.Text className="text-muted">{ textMuted }</Form.Text> }
@@ -62,9 +62,9 @@ const validate = (values:any) => {
 	const errors:errorsProps = {}
 	const { username } = values;
 	if (!username || !username.trim()) {
-		errors.username = 'Username cannot be empty'
+		errors.username = 'Username cannot be empty';
 	}
-	return errors
+	return errors;
 }
 
 export default reduxForm({

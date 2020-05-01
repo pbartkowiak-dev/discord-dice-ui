@@ -7,8 +7,6 @@ import CodeSpan from '../components/CodeSpan/CodeSpan';
 const IconUp = <FontAwesomeIcon icon={faArrowAltCircleUp} />;
 const IconDown = <FontAwesomeIcon icon={faArrowAltCircleDown} />;
 const IconRight = <FontAwesomeIcon icon={faArrowAltCircleRight} />;
-const IconCocBonus = <FontAwesomeIcon icon={faLevelUpAlt} />;
-const IconCocPenalty = <FontAwesomeIcon icon={faLevelDownAlt} />;
 
 const getLocalMsg = (result:any, rollOptions:any) => {
 	const {
@@ -20,9 +18,7 @@ const getLocalMsg = (result:any, rollOptions:any) => {
 		totalWithoutModifier,
 		totalWithModifier,
 		highest,
-		lowest,
-		cocBonus,
-		cocPenalty
+		lowest
 	} = result;
 	const rolledWord = diceAmount > 1 ? 'Results' : 'Result';
 	const rolled = `${diceAmount}d${diceType}`;
@@ -57,7 +53,6 @@ const getLocalMsg = (result:any, rollOptions:any) => {
 				<>{IconUp} Highest result: <CodeSpan>{highest}</CodeSpan>.</>
 			);
 		}
-
 	}
 	if (rollOptions.keepLowest) {
 		if (rollOptions.useModifier) {
@@ -71,17 +66,6 @@ const getLocalMsg = (result:any, rollOptions:any) => {
 		}
 
 	}
-	if (rollOptions.cocBonus) {
-		fields.push(
-			<>{IconCocBonus} Bonus Die result: <CodeSpan>{cocBonus}</CodeSpan>.</>
-		);
-	}
-	if (rollOptions.cocPenalty) {
-		fields.push(
-			<>{IconCocPenalty} Penalty Die result: <CodeSpan>{cocPenalty}</CodeSpan>.</>
-		);
-	}
-
 	return { title, fields };
 };
 

@@ -24,7 +24,7 @@
 	list-style: none;
 	text-align: left;
 	margin-bottom: 0;
-	padding-left: 15px;
+	padding-left: 0;
 }
 
 :global(.modal-content) {

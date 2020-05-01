@@ -1,6 +1,6 @@
 import getRandom from './getRandom';
 
-function getResultsArray(diceType:number = 6, diceAmount:number = 1, keepUnits:boolean) {
+function getResultsArray(diceType:number, diceAmount:number, keepUnits:boolean) {
 	const rollsArr = new Array(diceAmount).fill('');
 	if (keepUnits) {
 		// this setting will reroll only tens and will keep units untouched
@@ -11,9 +11,9 @@ function getResultsArray(diceType:number = 6, diceAmount:number = 1, keepUnits:b
 }
 
 type rollDiceProps = {
-	diceType:number,
-	modifier: number,
-	diceAmount: number,
+	diceType:number
+	modifier?: number
+	diceAmount?: number
 	rollOptions: any
 }
 
@@ -21,19 +21,41 @@ type rollDiceResult = {
 	results: Array<number>
 	diceAmount: number
 	diceType: number
+
 	modifier: number
 	modSymbol: string
+
 	totalWithModifier: number
 	totalWithoutModifier: number
+
 	highest: number
 	lowest: number
-	cocBonus: number
-	cocPenalty: number
+
+	cocBonusResult: number | undefined
+	cocPenaltyResult: number | undefined
+	cocBonus: boolean
+	cocPenalty: boolean
+	cocTwoBonus: boolean
+	cocTwoPenalty: boolean
+	skillLevel: number | undefined
 }
 
-const rollDice = ({ diceType, modifier = 0, diceAmount, rollOptions }:rollDiceProps) => {
-	const keepUnits = (rollOptions.cocBonus || rollOptions.cocPenalty) && Number(diceType) === 100;
+const rollDice = ({
+	diceType = 6,
+	modifier = 0,
+	diceAmount = 1,
+	rollOptions
+}:rollDiceProps) => {
+	console.log('rollOptions', rollOptions)
+	const { cocBonus, cocTwoBonus, cocPenalty, cocTwoPenalty, skillLevel } = rollOptions;
+	const keepUnits = (cocBonus || cocTwoBonus || cocPenalty || cocTwoPenalty);
 	const result = {} as rollDiceResult;
+
+	if (cocBonus || cocPenalty) {
+		diceAmount = 2;
+	} else if (cocTwoBonus || cocTwoPenalty) {
+		diceAmount = 3;
+	}
 
 	result.results = getResultsArray(diceType, diceAmount, keepUnits);
 	result.modifier = modifier;
@@ -43,8 +65,14 @@ const rollDice = ({ diceType, modifier = 0, diceAmount, rollOptions }:rollDicePr
 	result.totalWithoutModifier = result.totalWithModifier - Number(modifier);
 	result.highest = Math.max(...result.results) + Number(modifier);
 	result.lowest = Math.min(...result.results) + Number(modifier);
-	result.cocBonus = Math.max(...result.results);
-	result.cocPenalty = Math.min(...result.results);
+
+	result.cocBonusResult = (cocBonus || cocTwoBonus) ? Math.max(...result.results) : undefined;
+	result.cocPenaltyResult = (cocPenalty || cocTwoPenalty) ?  Math.min(...result.results) : undefined;
+	result.cocBonus = cocBonus;
+	result.cocPenalty = cocBonus;
+	result.cocTwoBonus = cocTwoBonus;
+	result.cocTwoPenalty = cocTwoPenalty;
+	result.skillLevel = skillLevel ? Number(skillLevel) : undefined;
 
 	if (modifier === 0) {
 		result.modSymbol = '';

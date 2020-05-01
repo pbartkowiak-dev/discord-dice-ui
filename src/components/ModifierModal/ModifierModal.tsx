@@ -54,7 +54,7 @@ function ModifierModal({
 					<Modal.Title>Add Modifier</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
-				<ModifierForm onSubmit={values => handleSubmit(values)} />
+					<ModifierForm onSubmit={values => handleSubmit(values)} />
 				</Modal.Body>
 				<Modal.Footer>
 					<Button variant="secondary" onClick={handleClose}>

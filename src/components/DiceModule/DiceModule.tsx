@@ -7,12 +7,12 @@ import { request } from '../../utils/request';
 import getRequestMsg from '../../utils/getRequestMsg';
 import getLocalMsg from '../../utils/getLocalMsg';
 import rollDice from '../../utils/rollDice';
-import CondeSpan from '../CodeSpan/CodeSpan';
 
 type DiceModuleProps = {
 	userSettings: any,
 	rollOptions: any,
 	showMsg: Function,
+	openCoCModal: Function,
 	openModifierModal: Function,
 	selectDice: Function
 };
@@ -22,6 +22,7 @@ function DiceModule ({
 	rollOptions,
 	showMsg,
 	openModifierModal,
+	openCoCModal,
 	selectDice
 }:DiceModuleProps
 ) {
@@ -40,6 +41,10 @@ function DiceModule ({
 	};
 
 	const handleRollDice = (diceType:number, diceAmount:number = 1) => {
+		if (rollOptions.cocMode) {
+			openCoCModal();
+			return;
+		}
 		if (rollOptions.useModifier) {
 			selectDice({ diceType, diceAmount });
 			openModifierModal();

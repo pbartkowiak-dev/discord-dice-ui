@@ -6,14 +6,16 @@ function EnterModifier({input}:any) {
 	return (
 		<Form.Group controlId="formBasicPassword">
 			<Form.Label>Enter Modifier value:</Form.Label>
-			<Form.Control type="text" placeholder="Modifier" {...input} />
+			<Form.Control
+				type="text"
+				placeholder="Modifier"
+				{...input}
+			/>
 		</Form.Group>
 	);
 }
 
-function ModifierForm(props:any) {
-	const { handleSubmit, pristine, reset, submitting } = props
-
+function ModifierForm( { handleSubmit }:any) {	
 	return (
 		<Form id="modifier-form"
 			onSubmit={handleSubmit}>
@@ -27,4 +29,4 @@ function ModifierForm(props:any) {
 
 export default reduxForm({
 	form: 'ModifierForm'
-})(ModifierForm)
+})(ModifierForm);
