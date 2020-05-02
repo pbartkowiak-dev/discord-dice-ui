@@ -1,4 +1,5 @@
 :root {
+	--header-bg-failure: #E25241;
 	--header-bg: #3CB778;
 	--header-color: #fff;
 }

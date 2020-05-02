@@ -1,0 +1,36 @@
+.ResultVsSkillRowPropTypes {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 10px;
+}
+
+.Cell {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 0 15px;
+}
+
+.isSuccess {
+	color: #155724;
+	background-color: #d4edda;
+	border-color: #c3e6cb;
+}
+
+.isFailure {
+	color: #721c24;
+	background-color: #f8d7da;
+	border-color: #f5c6cb;
+}
+
+
+.resultValue {
+	font-size: 18px;
+}
+
+@media only screen and (min-width: 480px) {
+	.resultValue {
+		font-size: 23px;
+	}
+}

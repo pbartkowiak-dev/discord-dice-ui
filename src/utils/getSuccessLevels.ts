@@ -1,32 +1,40 @@
-export default (skillLevel:number, finalDieResult:number) => {
+export type successLevelsType = {
+	isFumble: boolean
+	isRegularFailure: boolean
+	isSuccess: boolean
+	isFailure: boolean
+	isCriticalSuccess: boolean
+	isExtremeSuccess: boolean
+	isHardSuccess: boolean
+	isRegularSuccess: boolean
+}
+
+export default (skillLevel:number, finalDieResult:number) :successLevelsType => {
 	const critSuccessLevel = 1;
-	const fumbleMinLevel = skillLevel >= 50 ? 100 : 96;
-	const fumbleMaxLevel = 100;
 	const hardSuccessLevel = Math.floor(skillLevel / 2);
 	const extremeSuccessLevel = Math.floor(skillLevel / 5);
-	const isFumble = (finalDieResult >= fumbleMinLevel && finalDieResult <= fumbleMaxLevel);
+	const fumbleMinLevel = skillLevel >= 50 ? 100 : 96;
+	const fumbleMaxLevel = 100;
+	
 	const isSuccess = finalDieResult <= skillLevel;
-	const ifFailure = !isSuccess;
-	const isHardSuccess = finalDieResult <= hardSuccessLevel;
-	const isExtremeSuccess = finalDieResult <= extremeSuccessLevel;
+	const isFailure = !isSuccess;
+
+	const isFumble = (finalDieResult >= fumbleMinLevel && finalDieResult <= fumbleMaxLevel);
+	const isRegularFailure = !isFumble && isFailure;
+
 	const isCriticalSuccess = finalDieResult === critSuccessLevel;
+	const isExtremeSuccess = (!isCriticalSuccess) && (finalDieResult <= extremeSuccessLevel);
+	const isHardSuccess = (!isCriticalSuccess && !isExtremeSuccess ) && (finalDieResult <= hardSuccessLevel);
+	const isRegularSuccess = isSuccess && !isCriticalSuccess && !isExtremeSuccess && !isHardSuccess;
 
 	return {
 		isFumble,
+		isRegularFailure,
 		isSuccess,
-		ifFailure,
-		isHardSuccess,
+		isFailure,
+		isCriticalSuccess,
 		isExtremeSuccess,
-		isCriticalSuccess
+		isHardSuccess,
+		isRegularSuccess
 	};
-
-	/**
-	 *
-	 * Fumble: the roll is 100. If the roll required for success is less than 50, a roll of 96 or over is a fumble.
-	 * Failure: the roll is above the character’s skill or characteristic (but not a fumble).
-	 * Hard success: the roll is equal to or below a half of the character’s skill or characteristic.
-	 * Extreme success: the roll is equal to or below a fifth of the character’s skill or characteristic.
-	 * Critical success: a roll of 01.
-	 *
-	 **/
 };

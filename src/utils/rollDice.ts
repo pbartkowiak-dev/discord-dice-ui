@@ -46,7 +46,6 @@ const rollDice = ({
 	diceAmount = 1,
 	rollOptions
 }:rollDiceProps) => {
-	console.log('rollOptions', rollOptions)
 	const { cocBonus, cocTwoBonus, cocPenalty, cocTwoPenalty, skillLevel } = rollOptions;
 	const keepUnits = (cocBonus || cocTwoBonus || cocPenalty || cocTwoPenalty);
 	const result = {} as rollDiceResult;
@@ -66,8 +65,8 @@ const rollDice = ({
 	result.highest = Math.max(...result.results) + Number(modifier);
 	result.lowest = Math.min(...result.results) + Number(modifier);
 
-	result.cocBonusResult = (cocBonus || cocTwoBonus) ? Math.max(...result.results) : undefined;
-	result.cocPenaltyResult = (cocPenalty || cocTwoPenalty) ?  Math.min(...result.results) : undefined;
+	result.cocBonusResult = (cocBonus || cocTwoBonus) ? Math.min(...result.results) : undefined;
+	result.cocPenaltyResult = (cocPenalty || cocTwoPenalty) ?  Math.max(...result.results) : undefined;
 	result.cocBonus = cocBonus;
 	result.cocPenalty = cocBonus;
 	result.cocTwoBonus = cocTwoBonus;

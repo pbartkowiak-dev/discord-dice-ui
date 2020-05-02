@@ -44,7 +44,6 @@ const RenderCheckbox = createRenderer((input, label, id) =>
 );
 
 function DiceModuleForm(props:any) {
-	console.log('all props', props)
 	const { handleSubmit, pristine, reset, submitting } = props
 	return (
 		<Form id ="roll-options-form" className="dice-module dice-form">

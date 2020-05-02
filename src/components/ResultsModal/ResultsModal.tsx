@@ -43,7 +43,7 @@ function ResultsModal({ hideMsg, msgData }:ResultsModalProps) {
 					</div>
 				</Modal.Header>
 				<Modal.Body className={styles.resultsBody}>
-					<p>{ msg.title }</p>
+					{ msg.title && <p>{ msg.title }</p> }
 					{ modalBodyList }
 				</Modal.Body>
 				<Modal.Footer>

@@ -1,0 +1,45 @@
+.successLevelLadder {
+	text-align: center;
+}
+
+.successLevelLadder td {
+	padding: 5px;
+}
+
+.cellInactive {
+	background-color: #f8f8f8;
+	color: #7c7c7c;
+}
+
+.successActive {
+	color: #fff;
+background-color: #3cb778;
+	border-color: #3cb778;
+	font-weight: bold;
+}
+
+.failureActive {
+	color: #fff;
+	background-color: #E25241;
+	border-color: #E25241;
+	font-weight: bold;
+}
+
+.cellContainer {
+	position: relative;
+}
+
+.cellIcon {
+	display: none;
+}
+
+@media only screen and (min-width: 480px) {
+	.cellIcon {
+		position: absolute;
+		display: inline-block;
+		right: 5px;
+		top: 0;
+		bottom: 0;
+		margin: auto;
+	}
+}
