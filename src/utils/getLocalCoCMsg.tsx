@@ -4,7 +4,13 @@ import getSuccessLevels from './getSuccessLevels';
 import SuccessLevelLadder from '../components/SuccessLevelLadder/SuccessLevelLadder';
 import ResultVsSkillRow from '../components/ResultVsSkillRow/ResultVsSkillRow';
 
-const getLocalCoCMsg = (result:any, rollOptions:any) => {
+export type LocalMsgParamsType = {
+	title: any,
+	fields: Array<any>
+	isSuccess?: boolean
+}
+
+const getLocalCoCMsg = (result:any, rollOptions:any):LocalMsgParamsType => {
 	const {
 		results,
 		cocBonusResult,
@@ -46,7 +52,8 @@ const getLocalCoCMsg = (result:any, rollOptions:any) => {
 
 	return {
 		title,
-		fields
+		fields,
+		isSuccess: successLevels.isSuccess
 	};
 };
 

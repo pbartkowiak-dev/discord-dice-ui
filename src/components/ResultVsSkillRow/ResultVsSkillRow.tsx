@@ -14,12 +14,12 @@ function ResultVsSkillRow({ skillLevel, finalDieResult, isSuccess }: ResultVsSki
 		<div className={ styles.ResultVsSkillRowPropTypes }>
 			<div className={ styles.Cell }>
 				<CodeSpan className={resultCodeSpanStyles}>{ finalDieResult }</CodeSpan>
-				<span>Roll Result</span>
+				<span className={ styles.label }>Roll result</span>
 			</div>
 			<div className={ styles.Cell }><span>vs.</span></div>
 			<div className={ styles.Cell }>
-				<CodeSpan className={styles.resultValue}>{ skillLevel }</CodeSpan>
-				<span>Skill Level</span>
+				<CodeSpan className={ styles.resultValue }>{ skillLevel }</CodeSpan>
+				<span className={ styles.label }>Skill level</span>
 			</div>
 		</div>
 	);

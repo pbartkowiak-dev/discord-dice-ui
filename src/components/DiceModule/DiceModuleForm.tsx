@@ -26,7 +26,7 @@ function CoCModTooltip() {
 }
 
 const cocModeLabel = (
-	<span>CoC 7e Mod <CoCModTooltip/></span>
+	<span>Call of Cthulhu 7e Mode <CoCModTooltip/></span>
 );
 
 // @ts-ignore

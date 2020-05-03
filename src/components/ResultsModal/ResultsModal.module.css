@@ -21,6 +21,10 @@
 	margin: 10px 0 0;
 }
 
+.isFailure {
+	background: var(--header-bg-failure);
+}
+
 .resultsList {
 	list-style: none;
 	text-align: left;

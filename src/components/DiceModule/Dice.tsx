@@ -6,18 +6,23 @@ import Card from 'react-bootstrap/Card'
 
 function Dice({
 	handleRollDice,
-	diceType
+	diceType,
+	rollOptions
 } : DiceProps
 ) {
 
 	const diceTypeNum = diceType.replace(/\D/g,'');
 
-	const DropdownContent = () => {
+	const DropdownContent = ({ rollOptions }:any) => {
 		const maxDiceInOneRoll = 5;
 		const options =  new Array(maxDiceInOneRoll).fill('').map((_, index) => {
+			const isDisabled = rollOptions.cocMode && Number(diceTypeNum) === 100 && index > 0;
 			const dieWord = index === 0 ? 'die' : 'dice';
 			return (
-				<Dropdown.Item key={index} onClick={ () => handleRollDice(diceTypeNum, index + 1) }>
+				<Dropdown.Item
+					key={index}
+					disabled={isDisabled}
+					onClick={ () => handleRollDice(diceTypeNum, index + 1) }>
 					<span>Roll <strong>{index + 1}</strong> {dieWord}</span>
 				</Dropdown.Item>
 			);
@@ -40,7 +45,8 @@ function Dice({
 						type="success"
 						title={diceType}
 						className="dice-button">
-							<DropdownContent/>
+							<DropdownContent
+								rollOptions={rollOptions} />
 				</DropdownButton>
 			</Card.Footer>
 		</Card>
@@ -48,8 +54,9 @@ function Dice({
 }
 
 type DiceProps = {
-	handleRollDice: Function,
+	handleRollDice: Function
 	diceType: string
+	rollOptions: any
 }
 
 export default Dice;

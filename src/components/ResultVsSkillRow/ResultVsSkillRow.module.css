@@ -27,6 +27,12 @@
 
 .resultValue {
 	font-size: 18px;
+	min-width: 33px;
+	text-align: center;
+}
+
+.label {
+	font-size: .9rem;;
 }
 
 @media only screen and (min-width: 480px) {

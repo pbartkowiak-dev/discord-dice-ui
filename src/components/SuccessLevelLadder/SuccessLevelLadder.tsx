@@ -12,7 +12,7 @@ type LadderPropsType = {
 }
 
 type LevelSuccessTooltipProps = {
-	contentMsg: string
+	contentMsg: any 
 }
 
 function LevelSuccessTooltip({contentMsg}:LevelSuccessTooltipProps) {
@@ -43,7 +43,7 @@ function SuccessLevelLader({ successLevels }: LadderPropsType) {
 					<td className={ successLevels.isCriticalSuccess ? styles.successActive : styles.cellInactive }>
 						<div className={styles.cellContainer}>
 							<span>Critical success</span>
-							<LevelSuccessTooltip contentMsg="A roll of 01" />
+							<LevelSuccessTooltip contentMsg={ <span>A roll of <strong>01</strong>.</span> } />
 						</div>
 					</td>
 				</tr>
@@ -51,7 +51,7 @@ function SuccessLevelLader({ successLevels }: LadderPropsType) {
 					<td className={ successLevels.isExtremeSuccess ? styles.successActive : styles.cellInactive }>
 						<div className={styles.cellContainer}>
 							<span>Extreme success</span>
-							<LevelSuccessTooltip contentMsg="The roll is equal to or below a half of the character’s skill or characteristic" />
+							<LevelSuccessTooltip contentMsg={ <span>The roll is equal to or below <strong>a&nbsp;half</strong> of the character’s skill or characteristic.</span> } />
 						</div>
 					</td>
 				</tr>
@@ -59,7 +59,7 @@ function SuccessLevelLader({ successLevels }: LadderPropsType) {
 					<td className={ successLevels.isHardSuccess ? styles.successActive : styles.cellInactive }>
 						<div className={styles.cellContainer}>
 							<span>Hard success</span>
-							<LevelSuccessTooltip contentMsg="The roll is equal to or below a fifth of the character’s skill or characteristic." />
+							<LevelSuccessTooltip contentMsg={ <span>The roll is equal to or below <strong>a&nbsp;fifth</strong> of the character’s skill or characteristic.</span> } />
 						</div>
 					</td>
 				</tr>
@@ -67,7 +67,7 @@ function SuccessLevelLader({ successLevels }: LadderPropsType) {
 					<td className={ successLevels.isRegularSuccess ? styles.successActive : styles.cellInactive }>
 						<div className={styles.cellContainer}>
 							<span>Regular success</span>
-							<LevelSuccessTooltip contentMsg="The roll is belov the character’s skill or characteristic." />
+							<LevelSuccessTooltip contentMsg={ <span>The roll is <strong>below</strong> the character’s skill or characteristic.</span> } />
 						</div>
 					</td>
 				</tr>
@@ -75,7 +75,7 @@ function SuccessLevelLader({ successLevels }: LadderPropsType) {
 					<td className={ successLevels.isRegularFailure ? styles.failureActive : styles.cellInactive }>
 						<div className={styles.cellContainer}>
 							<span>Failure</span>
-							<LevelSuccessTooltip contentMsg="The roll is above the character’s skill or characteristic (but not a fumble)." />
+							<LevelSuccessTooltip contentMsg={ <span>The roll is <strong>above</strong> the character’s skill or characteristic (but not a fumble).</span> } />
 						</div>
 					</td>
 				</tr>
@@ -83,7 +83,7 @@ function SuccessLevelLader({ successLevels }: LadderPropsType) {
 					<td className={ successLevels.isFumble ? styles.failureActive : styles.cellInactive }>
 						<div className={styles.cellContainer}>
 							<span>Fumble</span>
-							<LevelSuccessTooltip contentMsg="The roll is 100. If the roll required for success is less than 50, a roll of 96 or over is a fumble." />
+							<LevelSuccessTooltip contentMsg={ <span>The roll is <strong>100</strong>. If the roll required for success is less than 50, a roll of <strong>96 or over</strong> is a fumble.</span> } />
 						</div>
 					</td>
 				</tr>

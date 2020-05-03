@@ -1,7 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowAltCircleUp, faArrowAltCircleDown } from '@fortawesome/free-regular-svg-icons';
-import { faArrowAltCircleRight, faLevelUpAlt, faLevelDownAlt } from '@fortawesome/free-solid-svg-icons';
+import { faArrowAltCircleRight } from '@fortawesome/free-solid-svg-icons';
 import CodeSpan from '../components/CodeSpan/CodeSpan';
 
 const IconUp = <FontAwesomeIcon icon={faArrowAltCircleUp} />;

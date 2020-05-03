@@ -59,13 +59,16 @@ function DiceModule ({
 				key={diceType}
 				diceType={diceType}
 				handleRollDice={handleRollDice}
+				rollOptions={rollOptions}
 			/>
 		);
 	});
 
 	return (
 		<div className="dice-module-container">
-			<DiceModuleOptions/>
+			<DiceModuleOptions
+				rollOptions={rollOptions}
+			/>
 			<div className="dice-module dice-list">
 				{diceSet}
 			</div>

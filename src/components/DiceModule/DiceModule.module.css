@@ -1,0 +1,14 @@
+.active {
+	color: #007bff;
+}
+
+.title {
+	position: relative;
+}
+
+.indicator {
+	font-size: 8px;
+	position: absolute;
+	right: -10px;
+	top: -2px;
+}
