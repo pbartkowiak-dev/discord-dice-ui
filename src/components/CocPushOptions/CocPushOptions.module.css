@@ -1,0 +1,52 @@
+.container {
+	padding-top: 10px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.orContainer {
+	width: 100%;
+	text-align: center;
+	position: relative;
+	font-size: .8rem;
+}
+
+.orContainer:before {
+	width: 100%;
+	content: '';
+	display: block;
+	position: absolute;
+	background: #bebebe;
+	height: 1px;
+	top: 0;
+	bottom: 0;
+	margin: auto;
+	left: 0;
+	right: 0;
+}
+
+.or {
+	display: inline-block;
+	text-transform: uppercase;
+	padding: 1px 6px;
+	background: #fff;
+	color: #444444;
+	position: relative;
+}
+
+.row {
+	width: 100%;
+	position: relative;
+	text-align: center;
+}
+
+.infoIcon {
+	position: absolute;
+	margin: auto;
+	top: 0;
+	bottom: 0;
+	right: 5px;
+	color: #7c7c7c
+}

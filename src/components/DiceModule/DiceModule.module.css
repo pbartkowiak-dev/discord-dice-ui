@@ -4,6 +4,7 @@
 
 .title {
 	position: relative;
+	transition: .1s
 }
 
 .indicator {
@@ -11,4 +12,14 @@
 	position: absolute;
 	right: -10px;
 	top: -2px;
+	transition: .1s;
+	color: #007bff;
+}
+
+.visible {
+	opacity: 1;
+}
+
+.invisible {
+	opacity: 0;
 }

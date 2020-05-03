@@ -2,6 +2,7 @@ import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import styles from './ResultsModal.module.css';
+import CocPushOptions from '../CocPushOptions/CocPushOptions';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDiceD20 } from '@fortawesome/free-solid-svg-icons';
 import { LocalMsgParamsType } from '../../utils/getCocLocalMsg';
@@ -21,15 +22,13 @@ function ResultsModal({ hideMsg, msgData }:ResultsModalProps) {
 	let modalBodyList = null;
 	if (msgParams.fields && msgParams.fields.length) {
 		modalBodyList = (
-			<Modal.Body className={styles.resultsBody}>
-				<ul className={styles.resultsList}>
-					{
-						msgParams.fields.map((field:JSX.Element, i:number) => (
-							<li key={i}>{ field }</li>
-						))
-					}
-				</ul>
-			</Modal.Body>
+			<ul className={styles.resultsList}>
+				{
+					msgParams.fields.map((field:JSX.Element, i:number) => (
+						<li key={i}>{ field }</li>
+					))
+				}
+			</ul>
 		);
 	}
 	const DiceIcon = <FontAwesomeIcon className={styles.resultsModalDiceIcon} icon={faDiceD20} />;
@@ -52,6 +51,11 @@ function ResultsModal({ hideMsg, msgData }:ResultsModalProps) {
 				<Modal.Body className={styles.resultsBody}>
 					{ msgParams.title && <p>{ msgParams.title }</p> }
 					{ modalBodyList }
+				{ msgParams.canPushRoll && <CocPushOptions
+							rollOptions={msgParams.rollOptions}
+							finalDieResult={msgParams.finalDieResult}
+							/>
+				}
 				</Modal.Body>
 				<Modal.Footer>
 				<Button
