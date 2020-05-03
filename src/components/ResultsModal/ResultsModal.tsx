@@ -4,7 +4,7 @@ import Button from 'react-bootstrap/Button';
 import styles from './ResultsModal.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDiceD20 } from '@fortawesome/free-solid-svg-icons';
-import { LocalMsgParamsType } from '../../utils/getLocalCoCMsg';
+import { LocalMsgParamsType } from '../../utils/getCocLocalMsg';
 
 type msgDataType = {
 	showMsg: boolean

@@ -3,8 +3,8 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import CoCModalForm from './CoCModalForm';
 import { request } from '../../utils/request';
-import getRequestMsg from '../../utils/getRequestMsg';
-import getLocalCoCMsg from '../../utils/getLocalCoCMsg';
+import getCocRequestMsg from '../../utils/getCocRequestMsg';
+import getCocLocalMsg from '../../utils/getCocLocalMsg';
 import rollDice from '../../utils/rollDice';
 
 type CoCModalProps = {
@@ -31,8 +31,8 @@ function CoCModal({
 			diceType: 100,
 			rollOptions
 		});
-		const requestMsg = getRequestMsg(result, rollOptions, userSettings);
-		const localMsg = getLocalCoCMsg(result, rollOptions);
+		const requestMsg = getCocRequestMsg(result, rollOptions, userSettings);
+		const localMsg = getCocLocalMsg(result, rollOptions);
 
 		showMsg(localMsg);
 		request(requestMsg);

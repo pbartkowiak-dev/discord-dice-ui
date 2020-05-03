@@ -10,15 +10,17 @@ export type LocalMsgParamsType = {
 	isSuccess?: boolean
 }
 
-const getLocalCoCMsg = (result:any, rollOptions:any):LocalMsgParamsType => {
+const getCocLocalMsg = (result:any, rollOptions:any):LocalMsgParamsType => {
 	const {
 		results,
 		cocBonusResult,
 		cocPenaltyResult,
 		skillLevel
 	} = result;
+	const skillLevelString = skillLevel <= 9 ? `0${skillLevel}` : `${skillLevel}`;
 	const fields = [];
 	let finalDieResult;
+	let finalDieResultString;
 	let title;
 
 	if (rollOptions.cocBonus || rollOptions.cocTwoBonus) {
@@ -33,14 +35,14 @@ const getLocalCoCMsg = (result:any, rollOptions:any):LocalMsgParamsType => {
 		title = null;
 		finalDieResult = results[0];
 	}
+	finalDieResultString = finalDieResult <= 9 ? `0${finalDieResult}` : `${finalDieResult}`;
 
 	const successLevels = getSuccessLevels(skillLevel, finalDieResult);
 
-
 	fields.push(
 		<ResultVsSkillRow
-			skillLevel={skillLevel}
-			finalDieResult={finalDieResult}
+			skillLevel={skillLevelString}
+			finalDieResult={finalDieResultString}
 			isSuccess={successLevels.isSuccess}
 		/>
 	);
@@ -57,4 +59,4 @@ const getLocalCoCMsg = (result:any, rollOptions:any):LocalMsgParamsType => {
 	};
 };
 
-export default getLocalCoCMsg;
+export default getCocLocalMsg;
