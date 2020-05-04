@@ -32,7 +32,7 @@ function CoCModal({
 			rollOptions
 		});
 		const requestMsg = getCocRequestMsg(result, rollOptions, userSettings);
-		const localMsg = getCocLocalMsg(result, rollOptions);
+		const localMsg = getCocLocalMsg(result, rollOptions, userSettings);
 
 		showMsg(localMsg);
 		request(requestMsg);

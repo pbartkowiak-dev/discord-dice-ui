@@ -2,7 +2,7 @@ import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import styles from './ResultsModal.module.css';
-import CocPushOptions from '../CocPushOptions/CocPushOptions';
+import CocPushOptionsContainer from '../CocPushOptions/CocPushOptionsContainer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDiceD20 } from '@fortawesome/free-solid-svg-icons';
 import { LocalMsgParamsType } from '../../utils/getCocLocalMsg';
@@ -51,9 +51,10 @@ function ResultsModal({ hideMsg, msgData }:ResultsModalProps) {
 				<Modal.Body className={styles.resultsBody}>
 					{ msgParams.title && <p>{ msgParams.title }</p> }
 					{ modalBodyList }
-				{ msgParams.canPushRoll && <CocPushOptions
+				{ msgParams.canPushRoll && <CocPushOptionsContainer
 							rollOptions={msgParams.rollOptions}
 							finalDieResult={msgParams.finalDieResult}
+							userSettings={msgParams.userSettings}
 							/>
 				}
 				</Modal.Body>

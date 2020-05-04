@@ -7,6 +7,7 @@ import { faQuestionCircle } from '@fortawesome/free-regular-svg-icons';
 import CodeSpan from '../CodeSpan/CodeSpan';
 import styles from './CocPushOptions.module.css';
 
+
 const pushInfo = 'Only skill and characteristic rolls can be pushed, not Luck, Sanity, or combat rolls, or rolls to determine an amount of damage or Sanity loss.';
 const luckInfo = 'Luck points may not be spent on Luck rolls, damage rolls, Sanity rolls, or rolls to determine the amount of Sanity points lost.';
 
@@ -33,15 +34,21 @@ function InfoTooltip({ text }:InfoTooltipPropType) {
 	);
 }
 
-function CocPushOptions({ rollOptions, finalDieResult }:any) {
+
+
+function CocPushOptions({ 
+	handlePushRoll,
+	luckRequired
+ }:any) {
 	// console.log('rollOptions', rollOptions);
 	// console.log('finalDieResult', finalDieResult);
-	const luckRequired = Number(finalDieResult) - Number(rollOptions.skillLevel);
 	return (
 		<>
 			<div className={styles.container}>
 				<div className={styles.row}>
-					<Button variant="outline-primary">Push the Roll</Button>
+					<Button variant="outline-primary"
+						onClick={ handlePushRoll }
+						>Push the Roll</Button>
 					<InfoTooltip text={pushInfo} />
 				</div>
 				<div className={styles.orContainer}>

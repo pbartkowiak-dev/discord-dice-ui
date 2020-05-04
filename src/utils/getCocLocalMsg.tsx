@@ -10,10 +10,11 @@ export type LocalMsgParamsType = {
 	isSuccess?: boolean
 	canPushRoll?: boolean
 	rollOptions?: any
-	finalDieResult?: number
+	finalDieResult?: number,
+	userSettings?: any
 }
 
-const getCocLocalMsg = (result:any, rollOptions:any):LocalMsgParamsType => {
+const getCocLocalMsg = (result:any, rollOptions:any, userSettings?:any):LocalMsgParamsType => {
 	const {
 		results,
 		cocBonusResult,
@@ -60,10 +61,11 @@ const getCocLocalMsg = (result:any, rollOptions:any):LocalMsgParamsType => {
 		fields,
 		isSuccess: successLevels.isSuccess,
 
-		canPushRoll: true,
+		canPushRoll: !rollOptions.isPushed,
 
 		finalDieResult,
-		rollOptions
+		rollOptions,
+		userSettings
 	};
 };
 
