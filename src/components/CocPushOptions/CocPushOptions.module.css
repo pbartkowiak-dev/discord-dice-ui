@@ -43,10 +43,17 @@
 }
 
 .infoIcon {
-	position: absolute;
-	margin: auto;
-	top: 0;
-	bottom: 0;
-	right: 5px;
-	color: #7c7c7c
+	display: none;
+}
+
+@media only screen and (min-width: 480px) {
+	.infoIcon {
+		position: absolute;
+		display: inline-block;
+		margin: auto;
+		top: 0;
+		bottom: 0;
+		right: 11px;
+		color: #7c7c7c
+	}
 }

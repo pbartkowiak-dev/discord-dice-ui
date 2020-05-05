@@ -40,8 +40,6 @@ function CocPushOptions({
 	handlePushRoll,
 	luckRequired
  }:any) {
-	// console.log('rollOptions', rollOptions);
-	// console.log('finalDieResult', finalDieResult);
 	return (
 		<>
 			<div className={styles.container}>

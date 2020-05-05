@@ -1,27 +1,27 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { showMsg, closeCoCModal } from '../../actions';
+import { showMsg, hideMsg } from '../../actions';
 import CoCPushOptions from './CocPushOptions';
 import getCocRequestMsg from '../../utils/getCocRequestMsg';
 import getCocLocalMsg from '../../utils/getCocLocalMsg';
 import rollDice from '../../utils/rollDice';
 import { request } from '../../utils/request';
 
-const mapDispatchToProps = { showMsg, closeCoCModal };
+const mapDispatchToProps = { showMsg, hideMsg };
 
 function CocPushOptionsContainer({
 	// props
-	rollOptions,
+	rollOptions ={},
 	finalDieResult,
 	userSettings,
 	// dispatch props
 	showMsg,
-	closeCoCModal
+	hideMsg
 }:any) {
 
 	const handlePushRoll = () => {
-		console.log('handlePushRoll')
-		closeCoCModal();
+		hideMsg();
+		rollOptions.isPushed = true;
 		setTimeout(() => {
 			const result = rollDice({
 				diceType: 100,
@@ -32,7 +32,7 @@ function CocPushOptionsContainer({
 		
 			showMsg(localMsg);
 			request(requestMsg);
-		}, 3000)
+		}, 500)
 
 	};
 

@@ -8,7 +8,6 @@ export type LocalMsgParamsType = {
 	title: any,
 	fields: Array<any>
 	isSuccess?: boolean
-	canPushRoll?: boolean
 	rollOptions?: any
 	finalDieResult?: number,
 	userSettings?: any
@@ -60,8 +59,6 @@ const getCocLocalMsg = (result:any, rollOptions:any, userSettings?:any):LocalMsg
 		title,
 		fields,
 		isSuccess: successLevels.isSuccess,
-
-		canPushRoll: !rollOptions.isPushed,
 
 		finalDieResult,
 		rollOptions,

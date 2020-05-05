@@ -19,7 +19,15 @@ type ResultsModalProps = {
 
 function ResultsModal({ hideMsg, msgData }:ResultsModalProps) {
 	const { msgParams } = msgData;
-	let modalBodyList = null;
+	const {
+		isSuccess,
+		rollOptions = {},
+		title,
+		finalDieResult,
+		userSettings = {}
+	} = msgParams;
+	let modalBodyList;
+
 	if (msgParams.fields && msgParams.fields.length) {
 		modalBodyList = (
 			<ul className={styles.resultsList}>
@@ -32,9 +40,13 @@ function ResultsModal({ hideMsg, msgData }:ResultsModalProps) {
 		);
 	}
 	const DiceIcon = <FontAwesomeIcon className={styles.resultsModalDiceIcon} icon={faDiceD20} />;
-	const headerClass = msgParams.isSuccess === false 
+	
+	const headerClass = isSuccess === false 
 		? `${styles.resultsModalHeader} ${styles.isFailure}`
-		: `${styles.resultsModalHeader}`
+		: `${styles.resultsModalHeader}`;
+	
+	const canPush = isSuccess === false && (rollOptions && !rollOptions.isPushed);
+
 	return (
 		<>
 			<Modal
@@ -49,12 +61,13 @@ function ResultsModal({ hideMsg, msgData }:ResultsModalProps) {
 					</div>
 				</Modal.Header>
 				<Modal.Body className={styles.resultsBody}>
-					{ msgParams.title && <p>{ msgParams.title }</p> }
+					{ rollOptions.isPushed && <div className={styles.pushedTitle}>Pushed roll</div> }
+					{ title && <p className={styles.rollResults}>{ title }</p> }
 					{ modalBodyList }
-				{ msgParams.canPushRoll && <CocPushOptionsContainer
-							rollOptions={msgParams.rollOptions}
-							finalDieResult={msgParams.finalDieResult}
-							userSettings={msgParams.userSettings}
+					{ canPush && <CocPushOptionsContainer
+							rollOptions={rollOptions}
+							finalDieResult={finalDieResult}
+							userSettings={userSettings}
 							/>
 				}
 				</Modal.Body>
