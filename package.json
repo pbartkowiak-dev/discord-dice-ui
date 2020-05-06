@@ -4,6 +4,10 @@
 	"subdomain": "/discord-ui",
 	"version": "2.3.0",
 	"private": true,
+	"engines": {
+		"node": "13.5.0",
+		"npm": "6.13.4"
+	},
 	"dependencies": {
 		"@fortawesome/fontawesome-free": "^5.13.0",
 		"@fortawesome/fontawesome-svg-core": "^1.2.28",
