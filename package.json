@@ -1,7 +1,5 @@
 {
 	"name": "discord-ui",
-	"homepage": "http://pbartkowiak.com/discord-ui",
-	"subdomain": "/discord-ui",
 	"version": "2.3.0",
 	"private": true,
 	"engines": {
