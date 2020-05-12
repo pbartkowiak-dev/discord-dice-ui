@@ -1,44 +1,65 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+<a href="http://fvcproductions.com"><img src="./public/logo192.png" title="Discord Dice Ui" alt="Discord Dice Ui"></a>
 
-## Available Scripts
+<!-- [![Discord Dice Ui](./public/logo192)](http://fvcproductions.com) -->
 
-In the project directory, you can run:
+# Discord Dice UI
 
-### `yarn start`
+The app is intended to use as a graphical interface dice roller for Discord. You can connect it with your Discord's server and use to roll some dice! 🎲🎲
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+> You can modify how the result is displayed by selecting different _Roll Options_:
+- Keep highest
+- Keep lowest
+- Sum results
+- Add modifier
+- Call of Cthulhu 7e Mode (read below)
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
 
-### `yarn test`
+#### App Interface
+[![App overview](./public/app.png)]()
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#### Sample results inside Discord's Chat
+[![Sample Chat Results](./public/chat-sample-results.png)]()
 
-### `yarn build`
+#### Sample results inside the App
+[![Sample App Results](./public/app-sample-results-1.png)]()
+[![Sample App Results](./public/app-sample-results-2.png)]()
+[![Sample App Results](./public/app-sample-results-3.png)]()
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+### Call of Cthulhu 7e Mode
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The app offers special support for Call of Cthulhu 7e RPG game. After selecting the mode in the _Roll Options_ a dedicated modal will be shown for rolling d100.
 
-### `yarn eject`
+[![Call of Cthulhu 7e Mode 1](./public/coc-mode-1.png)]()
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+[![Call of Cthulhu 7e Mode 2](./public/coc-mode-2.png)]()
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Setup
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+In order to get started, **Discord's server admin has to create a Webhook** and share it with other users. Read below how to do it.
 
-## Learn More
+1. As a server's admin open your chat's context menu.
+![how-to-1](./public/how-to-0.png)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+2. Select _Server Settings_ from the context menu.
+![how-to-2](./public/how-to-1.png)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+3. Select _Webhooks_ in the right side menu and then press the button _Create Webhook_.
+![how-to-3](./public/how-to-2.png)
+
+4. Name your Webhook and provide an icon (optionally). **Copy a link** to share the link with other users and press **Save** button to close the modal.
+![how-to-4](./public/how-to-3.png)
+🛑🚧🚧🚧🛑  
+**Never share your Webhook link publicly and keep it a secret. You don't want to allow strangers to publish messages in your chat.**  
+🛑🚧🚧🚧🛑  
+
+5. Every user has to enter the provided Webhook link url in the Settings modal inside the app. Entering the username is required as well.
+![how-to-5](./public/how-to-4.png)
+
+
+6. Saving the Webhook in the app will connect the app with the Discord's server.
+
+## Demo preview:
+
+![Demo](./public/app-demo.gif)
