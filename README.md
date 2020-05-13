@@ -4,9 +4,11 @@
 
 # Discord Dice UI
 
-The app is intended to use as a graphical interface dice roller for Discord. You can connect it with your Discord's server and use to roll some dice! 🎲🎲
+> They are plenty of Discord bots that allow you to roll dice in the chat. They're may by great, but I never felt like typing while playing an RPG game. So I created this connector in which you can just select and click a die you want to roll on Discord's chat.
 
-> You can modify how the result is displayed by selecting different _Roll Options_:
+The app is intended to use as a graphical interface dice roller for Discord. You can connect it with your Discord's server and use to roll some dice! 🎲🎲
+>
+ You can modify how the result is displayed by selecting different _Roll Options_:
 - Keep highest
 - Keep lowest
 - Sum results
@@ -45,7 +47,7 @@ In order to get started, **Discord's server admin has to create a Webhook** and 
 2. Select _Server Settings_ from the context menu.
 ![how-to-2](./public/how-to-1.png)
 
-3. Select _Webhooks_ in the right side menu and then press the button _Create Webhook_.
+3. Select _Webhooks_ in the left side menu and then press the button _Create Webhook_.
 ![how-to-3](./public/how-to-2.png)
 
 4. Name your Webhook and provide an icon (optionally). **Copy a link** to share the link with other users and press **Save** button to close the modal.
