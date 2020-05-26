@@ -59,6 +59,35 @@
 	font-size: 1rem;
 }
 
+.warhammerResult {
+	text-align: center;
+	font-weight: bold;
+}
+
+.warhammerResultSuccess {
+	color: var(--header-bg);
+}
+
+.warhammerResultFailure {
+	color: var(--header-bg-failure);
+}
+
+.slResult {
+	margin-top: 1px;
+	border-top: 1px solid #bebebe;
+	padding-top: 1px;
+	text-align: center;
+}
+
+.slResultLabel {
+	font-weight: bold;
+}
+
+.slResultSpan {
+	font-size: 28px;
+	min-width: 45px;
+}
+
 .rollResults {
 	border-bottom: 1px solid #bebebe;
 	padding-bottom: 10px;
@@ -72,5 +101,9 @@
 	.pushedTitle {
 		margin-bottom: 5px;
 		font-size: 1.3rem;
+	}
+	.slResult {
+		margin-top: 5px;
+		padding-top: 5px;
 	}
 }

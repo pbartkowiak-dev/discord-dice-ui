@@ -1,0 +1,35 @@
+.container {
+	margin-top: 20px;
+}
+
+.header {
+	text-align: center;
+	padding: 3px;
+}
+
+.body {
+	text-align: center;
+	position: relative;
+}
+
+.tooltip {
+	display: none;
+	position: absolute;
+	right: 0px;
+	top: 0;
+	bottom: 0;
+	margin: auto;
+}
+
+.tooltipBody {
+	text-align: left;
+}
+
+@media only screen and (min-width: 480px) {
+	.container {
+		margin-top: 10px;
+	}
+	.tooltip {
+		display: inline-block;
+	}
+}

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { showMsg, openModifierModal, openCoCModal, selectDice } from '../../actions';
+import { showMsg, openModifierModal, openCoCModal, openWarhammer4eModal, selectDice } from '../../actions';
 import DiceModule from './DiceModule';
 
 function mapStateToProps(state:any) {
@@ -10,13 +10,14 @@ function mapStateToProps(state:any) {
 	};
 }
 
-const mapDispatchToProps = { showMsg, openCoCModal, openModifierModal, selectDice };
+const mapDispatchToProps = { showMsg, openCoCModal, openWarhammer4eModal, openModifierModal, selectDice };
 
 function DiceModuleContainer({
 	userSettings,
 	rollOptionsForm,
 	showMsg,
 	openCoCModal,
+	openWarhammer4eModal,
 	openModifierModal,
 	selectDice
 }:any ) {
@@ -32,6 +33,7 @@ function DiceModuleContainer({
 				showMsg={showMsg}
 				openModifierModal={openModifierModal}
 				openCoCModal={openCoCModal}
+				openWarhammer4eModal={openWarhammer4eModal}
 				selectDice={selectDice}
 			/>
 		</>

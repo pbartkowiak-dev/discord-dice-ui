@@ -1,18 +1,20 @@
 import React from 'react';
 import './DiceModule.css';
-import { classic } from '../../consts/diceSets';
 import Dice from './Dice';
 import DiceModuleOptions from './DiceModuleOptions';
 import { request } from '../../utils/request';
 import getRequestMsg from '../../utils/getRequestMsg';
 import getLocalMsg from '../../utils/getLocalMsg';
 import rollDice from '../../utils/rollDice';
+import getDiceSet from '../../utils/getDiceSet';
+import getDieNumberVal from '../../utils/getDieNumberVal';
 
 type DiceModuleProps = {
 	userSettings: any,
 	rollOptions: any,
 	showMsg: Function,
 	openCoCModal: Function,
+	openWarhammer4eModal: Function,
 	openModifierModal: Function,
 	selectDice: Function
 };
@@ -23,6 +25,7 @@ function DiceModule ({
 	showMsg,
 	openModifierModal,
 	openCoCModal,
+	openWarhammer4eModal,
 	selectDice
 }:DiceModuleProps
 ) {
@@ -40,20 +43,30 @@ function DiceModule ({
 		request(requestMsg);
 	};
 
-	const handleRollDice = (diceType:number, diceAmount:number = 1) => {
-		if (rollOptions.cocMode && Number(diceType) === 100) {
+	const handleRollDice = (diceType:string, diceAmount:number = 1) => {
+		const diceTypeNum = getDieNumberVal(diceType);
+	
+		if (rollOptions.cocMode && diceType === 'd100') {
 			openCoCModal();
 			return;
 		}
+		if (diceType === 'd100SL') {
+			openWarhammer4eModal();
+			return;
+		}
 		if (rollOptions.useModifier) {
-			selectDice({ diceType, diceAmount });
+			selectDice({ diceTypeNum, diceAmount });
 			openModifierModal();
 		} else {
-			handleRoll(diceType, diceAmount);
+			handleRoll(diceTypeNum, diceAmount);
 		}
 	};
 
-	const diceSet = classic.map(diceType => {
+	const diceSetType = rollOptions.warhammer4eMode ? 'warhammer4e' : 'classic';
+
+	const diceSet = getDiceSet(diceSetType);
+
+	const diceSetElement = diceSet.map((diceType:any)  => {
 		return (
 			<Dice
 				key={diceType}
@@ -70,7 +83,7 @@ function DiceModule ({
 				rollOptions={rollOptions}
 			/>
 			<div className="dice-module dice-list">
-				{diceSet}
+				{diceSetElement}
 			</div>
 		</div>
 	);

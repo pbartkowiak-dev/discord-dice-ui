@@ -1,6 +1,6 @@
 import React from 'react';
 import CodeSpan from '../CodeSpan/CodeSpan';
-import styles from './ResultVsSkillRow.module.css'
+import styles from './ResultVsSkillRow.module.css';
 
 type ResultVsSkillRowPropTypes = {
 	skillLevel: number | string

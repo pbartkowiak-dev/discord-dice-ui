@@ -55,6 +55,8 @@ const getCocLocalMsg = (result:any, rollOptions:any, userSettings?:any):LocalMsg
 		<SuccessLevelLadder successLevels={successLevels} />
 	);
 
+	rollOptions.cocMode = true;
+
 	return {
 		title,
 		fields,

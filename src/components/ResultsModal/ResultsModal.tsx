@@ -28,6 +28,8 @@ function ResultsModal({ hideMsg, msgData }:ResultsModalProps) {
 	} = msgParams;
 	let modalBodyList;
 
+	console.log('rollOptions', rollOptions)
+
 	if (msgParams.fields && msgParams.fields.length) {
 		modalBodyList = (
 			<ul className={styles.resultsList}>
@@ -45,7 +47,7 @@ function ResultsModal({ hideMsg, msgData }:ResultsModalProps) {
 		? `${styles.resultsModalHeader} ${styles.isFailure}`
 		: `${styles.resultsModalHeader}`;
 	
-	const canPush = isSuccess === false && (rollOptions && !rollOptions.isPushed);
+	const canPush = isSuccess === false && (rollOptions && rollOptions.cocMode && !rollOptions.isPushed);
 
 	return (
 		<>

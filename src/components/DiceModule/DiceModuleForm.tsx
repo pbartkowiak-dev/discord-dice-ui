@@ -29,6 +29,10 @@ const cocModeLabel = (
 	<span>Call of Cthulhu 7e Mode <CoCModTooltip/></span>
 );
 
+const warhammer4eModeLabel = (
+	<span>Warhammer 4e Mode</span>
+);
+
 // @ts-ignore
 const createRenderer = render  => ({ input, meta, label, id }, ...rest) => {
 	return (
@@ -75,6 +79,12 @@ function DiceModuleForm(props:any) {
 				name="cocMode"
 				id="cocMode"
 				label={cocModeLabel}
+				component={RenderCheckbox}
+			/>
+			<Field
+				name="warhammer4eMode"
+				id="warhammer4eMode"
+				label={warhammer4eModeLabel}
 				component={RenderCheckbox}
 			/>
 		</Form>

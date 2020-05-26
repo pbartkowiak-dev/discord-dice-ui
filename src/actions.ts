@@ -61,6 +61,24 @@ export function closeCoCModal() {
 	};
 }
 
+/* Warhammer4e MODAL *************************/
+
+export const OPEN_WARHAMMER4E_MODAL = 'OPEN_WARHAMMER4E_MODAL';
+export const CLOSE_WARHAMMER4E_MODAL = 'CLOSE_WARHAMMER4E_MODAL';
+
+
+export function openWarhammer4eModal() {
+	return {
+		type: OPEN_WARHAMMER4E_MODAL
+	};
+}
+
+export function closeWarhammer4eModal() {
+	return {
+		type: CLOSE_WARHAMMER4E_MODAL
+	};
+}
+
 /* MSG ************************************/
 
 export const SHOW_MSG = 'SHOW_MSG';
