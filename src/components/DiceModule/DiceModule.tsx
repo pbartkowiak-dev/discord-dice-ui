@@ -41,7 +41,7 @@ function DiceModule ({
 	};
 
 	const handleRollDice = (diceType:number, diceAmount:number = 1) => {
-		if (rollOptions.cocMode) {
+		if (rollOptions.cocMode && Number(diceType) === 100) {
 			openCoCModal();
 			return;
 		}
