@@ -8,7 +8,7 @@ export const classicSet = [
 	'd4'
 ];
 
-export const warhammer4eSet = [
+export const warhammerSet = [
 	'd100SL',
 	'd100',
 	'd10',

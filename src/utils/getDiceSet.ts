@@ -1,8 +1,8 @@
-import { classicSet, warhammer4eSet } from '../consts/diceSets';
+import { classicSet, warhammerSet } from '../consts/diceSets';
 
 function getDiceSet(setType:string) {
-	if (setType === 'warhammer4e') {
-		return warhammer4eSet;
+	if (setType === 'warhammer') {
+		return warhammerSet;
 	}
 	return classicSet;
 }

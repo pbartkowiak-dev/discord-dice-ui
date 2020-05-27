@@ -62,7 +62,7 @@ function DiceModule ({
 		}
 	};
 
-	const diceSetType = rollOptions.warhammer4eMode ? 'warhammer4e' : 'classic';
+	const diceSetType = rollOptions.warhammer4eMode ? 'warhammer' : 'classic';
 
 	const diceSet = getDiceSet(diceSetType);
 

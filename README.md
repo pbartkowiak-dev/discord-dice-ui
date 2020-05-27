@@ -25,7 +25,6 @@ The app is intended to use as a graphical interface dice roller for Discord. You
 #### Sample results inside the App
 [![Sample App Results](./public/app-sample-results-1.png)]()
 [![Sample App Results](./public/app-sample-results-2.png)]()
-[![Sample App Results](./public/app-sample-results-3.png)]()
 
 
 ### Call of Cthulhu 7e Mode
@@ -35,6 +34,14 @@ The app offers special support for Call of Cthulhu 7e RPG game. After selecting 
 [![Call of Cthulhu 7e Mode 1](./public/coc-mode-1.png)]()
 
 [![Call of Cthulhu 7e Mode 2](./public/coc-mode-2.png)]()
+
+### Warhammer Mode
+
+The app offers special support for rolling Success Levels in Warhammer 4e/Dark Heresy.
+
+[![WFRP Mode - app](./public/wfrp-result-app.png)]()
+
+[![WFRP Mode - discord](./public/wfrp-result-discord.png)]()
 
 
 ## Setup
