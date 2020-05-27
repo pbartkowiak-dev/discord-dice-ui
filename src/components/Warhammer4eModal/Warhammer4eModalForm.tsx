@@ -70,7 +70,7 @@ function FastSLTooltip() {
 					<p>If a Test <strong className="tooltip-failed">fails</strong>, you calculate SL as normal, taking your rolled tens die from your tested Skill to determine your negative SL.</p>
 				</Tooltip>
 			}
-		><FontAwesomeIcon icon={faQuestionCircle} className="icon-info" />
+		><FontAwesomeIcon icon={faQuestionCircle} className="icon-info tooltip-fast-sl-icon" />
 		</OverlayTrigger>
 		</>
 	);

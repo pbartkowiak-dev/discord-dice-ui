@@ -34,8 +34,6 @@ function InfoTooltip({ text }:InfoTooltipPropType) {
 	);
 }
 
-
-
 function CocPushOptions({ 
 	handlePushRoll,
 	luckRequired

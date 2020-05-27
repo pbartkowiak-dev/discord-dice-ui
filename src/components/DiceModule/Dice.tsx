@@ -11,14 +11,7 @@ function Dice({
 	rollOptions
 } : DiceProps
 ) {
-
-	console.log('diceType', diceType);
-
 	const diceTypeNum = getDieNumberVal(diceType);
-
-	// if (!isNaN(diceTypeNum) {
-
-	// }
 
 	const DropdownContent = ({ rollOptions }:any) => {
 		const maxDiceInOneRoll = 5;

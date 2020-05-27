@@ -34,7 +34,6 @@ const getCocLocalMsg = (result:any, rollOptions:any, userSettings?:any):LocalMsg
 		finalDieResult,
 		!!rollOptions.fastSL
 	);
-	console.log('successLevels', successLevels);
 
 	fields.push(
 		<ResultVsSkillRow
@@ -69,6 +68,12 @@ const getCocLocalMsg = (result:any, rollOptions:any, userSettings?:any):LocalMsg
 			<div className={`${styles.warhammerResult}`}>Double</div>
 		);
 	}
+	if (rollOptions.rerolledTimes) {
+		const timesWord = rollOptions.rerolledTimes === 1 ? 'time' : 'times';
+		fields.push(
+			<div className={`${styles.warhammerResult}`}>Rerolled <CodeSpan>{rollOptions.rerolledTimes}</CodeSpan> {timesWord}</div>
+		);
+	}
 
 	const slString = successLevels.SL > 0 ? `+${successLevels.SL}` : `${successLevels.SL}`;
 
@@ -85,6 +90,8 @@ const getCocLocalMsg = (result:any, rollOptions:any, userSettings?:any):LocalMsg
 	fields.push(
 		<HitLocations result={reversedResult} hitLocation={hitLocation} />
 	);
+
+	rollOptions.warhammerMode = true;
 
 	return {
 		title,

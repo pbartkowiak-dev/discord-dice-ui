@@ -32,8 +32,7 @@ function CocPushOptionsContainer({
 		
 			showMsg(localMsg);
 			request(requestMsg);
-		}, 500)
-
+		}, 500);
 	};
 
 	const luckRequired = Number(finalDieResult) - Number(rollOptions.skillLevel);

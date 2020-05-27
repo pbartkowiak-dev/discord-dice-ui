@@ -3,6 +3,7 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import styles from './ResultsModal.module.css';
 import CocPushOptionsContainer from '../CocPushOptions/CocPushOptionsContainer';
+import WarhammerRerollContainer from '../WarhammerReroll/WarhammerRerollContainer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDiceD20 } from '@fortawesome/free-solid-svg-icons';
 import { LocalMsgParamsType } from '../../utils/getCocLocalMsg';
@@ -28,8 +29,6 @@ function ResultsModal({ hideMsg, msgData }:ResultsModalProps) {
 	} = msgParams;
 	let modalBodyList;
 
-	console.log('rollOptions', rollOptions)
-
 	if (msgParams.fields && msgParams.fields.length) {
 		modalBodyList = (
 			<ul className={styles.resultsList}>
@@ -47,7 +46,8 @@ function ResultsModal({ hideMsg, msgData }:ResultsModalProps) {
 		? `${styles.resultsModalHeader} ${styles.isFailure}`
 		: `${styles.resultsModalHeader}`;
 	
-	const canPush = isSuccess === false && (rollOptions && rollOptions.cocMode && !rollOptions.isPushed);
+	const canPush = isSuccess === false && rollOptions.cocMode && !rollOptions.isPushed;
+	const canReroll = rollOptions.warhammerMode;
 
 	return (
 		<>
@@ -67,11 +67,16 @@ function ResultsModal({ hideMsg, msgData }:ResultsModalProps) {
 					{ title && <p className={styles.rollResults}>{ title }</p> }
 					{ modalBodyList }
 					{ canPush && <CocPushOptionsContainer
-							rollOptions={rollOptions}
-							finalDieResult={finalDieResult}
-							userSettings={userSettings}
-							/>
-				}
+						rollOptions={rollOptions}
+						finalDieResult={finalDieResult}
+						userSettings={userSettings}
+						/>
+					}
+					{ canReroll && <WarhammerRerollContainer
+						rollOptions={rollOptions}
+						userSettings={userSettings}
+						/>
+					}
 				</Modal.Body>
 				<Modal.Footer>
 				<Button
