@@ -23,11 +23,9 @@ const getCocLocalMsg = (result:any, rollOptions:any, userSettings?:any):LocalMsg
 	} = result;
 	const skillLevelString = skillLevel <= 9 ? `0${skillLevel}` : `${skillLevel}`;
 	const fields = [];
-	const finalDieResult = results[0];;
+	const finalDieResult = results[0];
 	const finalDieResultString = finalDieResult <= 9 ? `0${finalDieResult}` : `${finalDieResult}`;
 	const title = rollOptions.fastSL ? 'Fast SL' : null;
-
-	console.log('rollOptions', rollOptions)
 
 	const successLevels = getWarhammer4eSuccessLevels(
 		skillLevel,

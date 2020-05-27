@@ -9,7 +9,7 @@ const getRequestMsg = (result:any, rollOptions:any, userSettings:any) => {
 		cocPenaltyResult,
 		skillLevel
 	} = result;
-	const username = userSettings.username || 'USERNAME_MISSING'
+	const username = userSettings.username || 'USERNAME_MISSING';
 	const fields = [];
 	const skillLevelString = skillLevel <= 9 ? `0${skillLevel}` : `${skillLevel}`;
 	let finalDieResultString;
@@ -35,8 +35,8 @@ const getRequestMsg = (result:any, rollOptions:any, userSettings:any) => {
 	const successLevelIcon = successLevels.isSuccess ? ':green_circle:' : ':red_circle:';
 
 	fields.push({
-		name: 'Success level:',
-		value: successLevelIcon + ' ' + getSuccessLevelString(successLevels)
+		name: successLevelIcon + ' Success level:',
+		value: getSuccessLevelString(successLevels)
 	});
 
 	description = `Roll: \`${finalDieResultString}\` vs. Skill level: \`${skillLevelString}\`.`;

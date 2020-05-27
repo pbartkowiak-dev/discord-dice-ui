@@ -35,7 +35,7 @@ function Warhammer4eModal({
 		const localMsg = getWarhammer4eLocalMsg(result, rollOptions, userSettings);
 
 		showMsg(localMsg);
-		// request(requestMsg);
+		request(requestMsg);
 		
 		closeWarhammer4eModal();
 	};
