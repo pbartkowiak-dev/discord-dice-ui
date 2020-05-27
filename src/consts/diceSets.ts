@@ -11,5 +11,6 @@ export const classicSet = [
 export const warhammer4eSet = [
 	'd100SL',
 	'd100',
-	'd10'
+	'd10',
+	'd5'
 ];

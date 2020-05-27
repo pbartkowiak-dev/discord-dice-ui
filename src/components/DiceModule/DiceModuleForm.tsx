@@ -25,12 +25,31 @@ function CoCModTooltip() {
 	);
 }
 
+function WarhammerTooltip() {
+	const key = 'WarhammerTooltip';
+	return (
+		<>
+		<OverlayTrigger
+			key={key}
+			placement="bottom"
+			overlay={
+				<Tooltip id={`tooltip-${key}`}>
+					<span>Supports rolling <strong>SL</strong> for Warhammer 4e</span>
+					{/* <span>Supports rolling <strong>SL</strong> for Warhammer 4e and Dark Heresy II.</span> */}
+				</Tooltip>
+			}
+		><FontAwesomeIcon icon={faQuestionCircle} className="icon-info" />
+		</OverlayTrigger>
+		</>
+	);
+}
+
 const cocModeLabel = (
 	<span>Call of Cthulhu 7e Mode <CoCModTooltip/></span>
 );
 
 const warhammer4eModeLabel = (
-	<span>Warhammer 4e Mode</span>
+	<span>Warhammer Mode <WarhammerTooltip/></span>
 );
 
 // @ts-ignore

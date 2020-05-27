@@ -16,7 +16,12 @@ function Dice({
 	const DropdownContent = ({ rollOptions }:any) => {
 		const maxDiceInOneRoll = 5;
 		const options =  new Array(maxDiceInOneRoll).fill('').map((_, index) => {
-			const isDisabled = (rollOptions.cocMode || rollOptions.warhammer4eMode) && diceTypeNum === 100 && index > 0;
+			const isDisabled = ((
+					(rollOptions.cocMode && diceTypeNum === 100) ||
+					(diceType === 'd100SL')
+				) &&
+				index > 0
+			);
 			const dieWord = index === 0 ? 'die' : 'dice';
 			return (
 				<Dropdown.Item
@@ -36,7 +41,12 @@ function Dice({
 
 	const buttonLabel = diceType === 'd100SL' ? 'd100 + SL' : diceType;
 
-	const extraMark =  diceType === 'd100SL' ? <span className="dice__extra-mark">SL</span> : null;
+	let extraMark = null; 
+	if (diceType === 'd100SL') {
+		extraMark = <span className="dice__extra-mark">SL</span>
+	} else if (diceType === 'd5') {
+		extraMark = <span className="dice__extra-mark">d5</span>
+	}
 
 	return (
 		<Card className={`dice dice--${diceType}`}>

@@ -51,7 +51,14 @@
 	opacity: 1;
 }
 
-.dice--d100SL .dice__image { background-image: url('../../img/d100.png') }
+.dice--d100SL .dice__image {
+	background-image: url('../../img/d100.png');
+	filter: hue-rotate(210deg) contrast(1.6);
+}
+.dice--d5 .dice__image {
+	background-image: url('../../img/d10.png');
+	filter: hue-rotate(75deg);
+}
 .dice--d100 .dice__image { background-image: url('../../img/d100.png') }
 .dice--d20 .dice__image { background-image: url('../../img/d20.png') }
 .dice--d12 .dice__image { background-image: url('../../img/d12.png') }

@@ -1,6 +1,6 @@
 {
 	"name": "discord-ui",
-	"version": "2.4.0",
+	"version": "2.4.1",
 	"private": true,
 	"engines": {
 		"node": "13.5.0",
@@ -24,6 +24,7 @@
 		"@types/redux-form": "^8.2.3",
 		"bootstrap": "^4.4.1",
 		"react": "^16.13.1",
+		"react-app-polyfill": "^1.0.6",
 		"react-bootstrap": "^1.0.0",
 		"react-dom": "^16.13.1",
 		"react-redux": "^7.2.0",
@@ -53,7 +54,9 @@
 		"development": [
 			"last 1 chrome version",
 			"last 1 firefox version",
-			"last 1 safari version"
+			"last 1 safari version",
+			"last 1 ie version",
+			"ie 11"
 		]
 	}
 }
