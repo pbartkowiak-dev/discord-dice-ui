@@ -47,8 +47,6 @@ const getRequestMsg = (result:any, rollOptions:any, userSettings:any) => {
 		value: getWarhammerSuccessLevelString(successLevels)
 	});
 
-	console.log('rollOptions', rollOptions)
-	console.log('successLevels', successLevels)
 
 	let slWord = '';
 	if (rollOptions.darkHeresySL) {

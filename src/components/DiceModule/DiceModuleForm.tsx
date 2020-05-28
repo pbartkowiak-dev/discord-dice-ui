@@ -75,7 +75,6 @@ const RenderCheckbox = createRenderer((input, label, id, disabled) =>
 
 function DiceModuleForm({ rollOptions }:any) {
 	const { warhammerMode, cocMode } = rollOptions;
-	console.log('DiceModuleForm rollOptions', rollOptions)
 	return (
 		<Form id ="roll-options-form" className="dice-module dice-form">
 			<Field
