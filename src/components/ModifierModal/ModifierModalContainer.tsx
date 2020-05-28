@@ -4,11 +4,12 @@ import { closeModifierModal, showMsg } from '../../actions';
 import ModifierModal from './ModifierModal';
 
 const mapStateToProps = (state:any) => {
+	console.log('state', state);
 	return {
 		showModifierModal: state.showModifierModal,
 		selectedDice: state.selectedDice,
 		userSettings: state.userSettings,
-		rollOptionsForm: state.form.rollOptionsForm
+		diceModuleForm: state.form.diceModuleForm
 	};
 };
 
@@ -16,7 +17,7 @@ const mapDispatchToProps = { closeModifierModal, showMsg };
 
 type ModifierModalContainerProps = {
 	userSettings: any,
-	rollOptionsForm: any,
+	diceModuleForm: any,
 	showModifierModal: boolean,
 	closeModifierModal: Function,
 	showMsg: Function,
@@ -25,15 +26,15 @@ type ModifierModalContainerProps = {
 
 function ModifierModalContainer({
 	userSettings,
-	rollOptionsForm,
+	diceModuleForm,
 	showModifierModal,
 	closeModifierModal,
 	selectedDice,
 	showMsg
 }:ModifierModalContainerProps) {
 	let rollOptions = {};
-	if (rollOptionsForm && rollOptionsForm.values) {
-		rollOptions = rollOptionsForm.values;
+	if (diceModuleForm && diceModuleForm.values) {
+		rollOptions = diceModuleForm.values;
 	}
 	return (
 		<>

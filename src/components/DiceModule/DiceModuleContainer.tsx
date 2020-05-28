@@ -1,29 +1,29 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { showMsg, openModifierModal, openCoCModal, openWarhammer4eModal, selectDice } from '../../actions';
+import { showMsg, openModifierModal, openCoCModal, openWarhammerModal, selectDice } from '../../actions';
 import DiceModule from './DiceModule';
 
 function mapStateToProps(state:any) {
 	return {
 		userSettings: state.userSettings,
-		rollOptionsForm: state.form.diceModuleForm
+		diceModuleForm: state.form.diceModuleForm
 	};
 }
 
-const mapDispatchToProps = { showMsg, openCoCModal, openWarhammer4eModal, openModifierModal, selectDice };
+const mapDispatchToProps = { showMsg, openCoCModal, openWarhammerModal, openModifierModal, selectDice };
 
 function DiceModuleContainer({
 	userSettings,
-	rollOptionsForm,
+	diceModuleForm,
 	showMsg,
 	openCoCModal,
-	openWarhammer4eModal,
+	openWarhammerModal,
 	openModifierModal,
 	selectDice
 }:any ) {
 	let rollOptions = {};
-	if (rollOptionsForm && rollOptionsForm.values) {
-		rollOptions = rollOptionsForm.values;
+	if (diceModuleForm && diceModuleForm.values) {
+		rollOptions = diceModuleForm.values;
 	}
 
 	return (
@@ -34,7 +34,7 @@ function DiceModuleContainer({
 				showMsg={showMsg}
 				openModifierModal={openModifierModal}
 				openCoCModal={openCoCModal}
-				openWarhammer4eModal={openWarhammer4eModal}
+				openWarhammerModal={openWarhammerModal}
 				selectDice={selectDice}
 			/>
 		</>

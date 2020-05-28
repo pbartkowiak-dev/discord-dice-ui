@@ -84,12 +84,12 @@ const getWarhammerLocalMsg = (result:any, rollOptions:any, userSettings?:any):Lo
 	let slWord = '';
 	if (rollOptions.darkHeresySL) {
 		if (successLevels.SL > 0) {
-			slWord = successLevels.SL === 1 ? 'Degree of Success:' : 'Degrees of Success';
+			slWord = successLevels.SL === 1 ? 'Degree of Success' : 'Degrees of Success';
 		} else {
-			slWord =  successLevels.SL === 1 ?'Degree of Failure:' : 'Degrees of Failure';
+			slWord =  successLevels.SL === 1 ?'Degree of Failure' : 'Degrees of Failure';
 		}
 	} else {
-		slWord = 'Success Level:';
+		slWord = 'Success Level';
 	}
 
 	let slString = '';
@@ -101,7 +101,7 @@ const getWarhammerLocalMsg = (result:any, rollOptions:any, userSettings?:any):Lo
 
 	fields.push(
 		<div className={styles.slResult}>
-			<div><span className={styles.slResultLabel}>{slWord}</span></div>
+			<div><span className={styles.slResultLabel}>{slWord}:</span></div>
 			<div><CodeSpan className={styles.slResultSpan}>{slString}</CodeSpan></div>
 		</div>
 	);

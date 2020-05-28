@@ -51,12 +51,12 @@ const getRequestMsg = (result:any, rollOptions:any, userSettings:any) => {
 	let slWord = '';
 	if (rollOptions.darkHeresySL) {
 		if (successLevels.SL > 0) {
-			slWord = successLevels.SL === 1 ? 'Degree of Success:' : 'Degrees of Success';
+			slWord = successLevels.SL === 1 ? 'Degree of Success' : 'Degrees of Success';
 		} else {
-			slWord =  successLevels.SL === 1 ?'Degree of Failure:' : 'Degrees of Failure';
+			slWord =  successLevels.SL === 1 ?'Degree of Failure' : 'Degrees of Failure';
 		}
 	} else {
-		slWord = 'Success Level:';
+		slWord = 'Success Level';
 	}
 	let slString = '';
 	if (rollOptions.darkHeresySL) {

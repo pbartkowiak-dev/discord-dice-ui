@@ -63,19 +63,19 @@ export function closeCoCModal() {
 
 /* Warhammer4e MODAL *************************/
 
-export const OPEN_WARHAMMER4E_MODAL = 'OPEN_WARHAMMER4E_MODAL';
-export const CLOSE_WARHAMMER4E_MODAL = 'CLOSE_WARHAMMER4E_MODAL';
+export const OPEN_WARHAMMER_MODAL = 'OPEN_WARHAMMER_MODAL';
+export const CLOSE_WARHAMMER_MODAL = 'CLOSE_WARHAMMER_MODAL';
 
 
-export function openWarhammer4eModal() {
+export function openWarhammerModal() {
 	return {
-		type: OPEN_WARHAMMER4E_MODAL
+		type: OPEN_WARHAMMER_MODAL
 	};
 }
 
-export function closeWarhammer4eModal() {
+export function closeWarhammerModal() {
 	return {
-		type: CLOSE_WARHAMMER4E_MODAL
+		type: CLOSE_WARHAMMER_MODAL
 	};
 }
 

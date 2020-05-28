@@ -14,7 +14,7 @@ type DiceModuleProps = {
 	rollOptions: any,
 	showMsg: Function,
 	openCoCModal: Function,
-	openWarhammer4eModal: Function,
+	openWarhammerModal: Function,
 	openModifierModal: Function,
 	selectDice: Function
 };
@@ -25,7 +25,7 @@ function DiceModule ({
 	showMsg,
 	openModifierModal,
 	openCoCModal,
-	openWarhammer4eModal,
+	openWarhammerModal,
 	selectDice
 }:DiceModuleProps
 ) {
@@ -51,11 +51,14 @@ function DiceModule ({
 			return;
 		}
 		if (diceType === 'd100SL') {
-			openWarhammer4eModal();
+			openWarhammerModal();
 			return;
 		}
 		if (rollOptions.useModifier) {
-			selectDice({ diceTypeNum, diceAmount });
+			selectDice({
+				diceType: diceTypeNum,
+				diceAmount
+			});
 			openModifierModal();
 		} else {
 			handleRoll(diceTypeNum, diceAmount);

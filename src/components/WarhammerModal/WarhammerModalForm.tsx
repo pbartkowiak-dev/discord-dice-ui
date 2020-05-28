@@ -7,7 +7,7 @@ import { Field, reduxForm, formValueSelector } from 'redux-form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faQuestionCircle } from '@fortawesome/free-regular-svg-icons';
 import { faPercent } from '@fortawesome/free-solid-svg-icons';
-import './Warhammer4eModalForm.css';
+import './WarhammerModalForm.css';
 
 const percentIcon = <span className="percent-icon"><FontAwesomeIcon icon={faPercent} /></span>;
 
@@ -99,7 +99,7 @@ function DarkHeresyTooltip() {
 const fastSLLabel = <span>Use Fast SL <FastSLTooltip/></span>;
 const darkHeresyLabel = <span>Use Dark Heresy II DoS <DarkHeresyTooltip/></span>;
 
-function Warhammer4eModalForm({
+function WarhammerModalForm({
 	invalid,
 	anyTouched,
 	submitFailed,
@@ -110,7 +110,7 @@ function Warhammer4eModalForm({
 	return (
 		<Form
 			className={ (invalid && (submitFailed || anyTouched)) ? 'form-invalid' : '' }
-			id="warhammer4e-mode-form"
+			id="warhammer-mode-form"
 			onSubmit={handleSubmit}>
 				<div className="specialSLContainer">
 					<Field
@@ -169,12 +169,12 @@ const validate = (values:any) => {
 	return errors;
 }
 
-const form = 'warhammer4eModalForm';
+const form = 'WarhammerModalForm';
 
 const FormElement = reduxForm({
 	form,
 	validate
-})(Warhammer4eModalForm);
+})(WarhammerModalForm);
 
 
 const selector = formValueSelector(form);

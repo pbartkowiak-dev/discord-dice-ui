@@ -7,13 +7,13 @@ import SettingsModalContainer from './components/SettingsModal/SettingsModalCont
 import ModifierModalContainer from './components/ModifierModal/ModifierModalContainer';
 import ResultsModalContainer from './components/ResultsModal/ResultsModalContainer';
 import CoCModalContainer from './components/CoCModal/CoCModalContainer';
-import Warhammer4eModalContainer from './components/Warhammer4eModal/Warhammer4eModalContainer';
+import WarhammerModalContainer from './components/WarhammerModal/WarhammerModalContainer';
 
 function App() {
 	return (
 		<div className="App">
 			<CoCModalContainer />
-			<Warhammer4eModalContainer />
+			<WarhammerModalContainer />
 			<ResultsModalContainer />
 			<ModifierModalContainer />
 			<SettingsModalContainer />

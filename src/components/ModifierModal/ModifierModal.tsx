@@ -29,9 +29,12 @@ function ModifierModal({
 		closeModifierModal();
 	};
 
+	console.log('modifier modal', rollOptions);
+
 	const handleSubmit = (values:any) => {
 		const { diceType, diceAmount } = selectedDice;
-		const modifier = values.modifier ? Number(values.modifier) : 0; 
+		console.log('diceType', diceType);
+		const modifier = values.modifier ? Number(values.modifier) : 0;
 		const result = rollDice({
 			diceType,
 			diceAmount,

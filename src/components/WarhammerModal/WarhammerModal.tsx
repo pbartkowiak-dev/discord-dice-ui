@@ -1,28 +1,28 @@
 import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import Warhammer4eModalForm from './Warhammer4eModalForm';
+import WarhammerModalForm from './WarhammerModalForm';
 import { request } from '../../utils/request';
 import getWarhammerRequestMsg from '../../utils/getWarhammerRequestMsg';
 import getWarhammerLocalMsg from '../../utils/getWarhammerLocalMsg';
 import rollDice from '../../utils/rollDice';
 
-type Warhammer4eModalProps = {
+type WarhammerModalProps = {
 	userSettings: any,
-	showWarhammer4eModal: boolean,
-	closeWarhammer4eModal: Function,
+	showWarhammerModal: boolean,
+	closeWarhammerModal: Function,
 	showMsg: Function
 }
 
-function Warhammer4eModal({
+function WarhammerModal({
 	userSettings,
-	showWarhammer4eModal,
-	closeWarhammer4eModal,
+	showWarhammerModal,
+	closeWarhammerModal,
 	showMsg
-}: Warhammer4eModalProps
+}: WarhammerModalProps
 ) {
 	const handleClose = () => {
-		closeWarhammer4eModal();
+		closeWarhammerModal();
 	};
 
 	const handleSubmit = (values:any) => {
@@ -37,17 +37,17 @@ function Warhammer4eModal({
 		showMsg(localMsg);
 		request(requestMsg);
 		
-		closeWarhammer4eModal();
+		closeWarhammerModal();
 	};
 
 	return (
 		<>
-			<Modal show={showWarhammer4eModal} onHide={handleClose}>
+			<Modal show={showWarhammerModal} onHide={handleClose}>
 				<Modal.Header closeButton>
-					<Modal.Title>Warhammer 4e Options</Modal.Title>
+					<Modal.Title>Warhammer Options</Modal.Title>
 				</Modal.Header>
 				<Modal.Body>
-					<Warhammer4eModalForm onSubmit={values => handleSubmit(values)} />
+					<WarhammerModalForm onSubmit={values => handleSubmit(values)} />
 				</Modal.Body>
 				<Modal.Footer>
 					<Button variant="secondary" onClick={handleClose}>
@@ -56,7 +56,7 @@ function Warhammer4eModal({
 					<Button
 						variant="success"
 						type="submit"
-						form="warhammer4e-mode-form">Roll!
+						form="warhammer-mode-form">Roll!
 					</Button>
 				</Modal.Footer>
 			</Modal>
@@ -64,4 +64,4 @@ function Warhammer4eModal({
 	);
 }
 
-export default Warhammer4eModal;
+export default WarhammerModal;
