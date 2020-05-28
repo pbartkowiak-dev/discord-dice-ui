@@ -111,7 +111,6 @@ const getWarhammerLocalMsg = (result:any, rollOptions:any, userSettings?:any):Lo
 		? getDarkHeresyIIHitLocation(reversedResult)
 		: getWarhammer4eHitLocation(reversedResult);
 
-		console.log('rollOptions.darkHeresySL', rollOptions.darkHeresySL)
 	fields.push(
 		<HitLocations
 			result={reversedResult}

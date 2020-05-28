@@ -27,7 +27,7 @@ function HitLocationTooltip({ isDarkHeresy }:any) {
 	const body = isDarkHeresy ? '31-70' : '45-79';
 	const leftLeg = isDarkHeresy ? '86-00' : '80-89';
 	const rightLeg = isDarkHeresy ? '71-85' : '90-00';
-	console.log('HitLocationTooltip isDarkHeresy', isDarkHeresy)
+
 	const tooltipBody = isDarkHeresy
 		? (
 			<>
@@ -98,7 +98,6 @@ function HitLocationTooltip({ isDarkHeresy }:any) {
 }
 
 function HitLocations({ result, hitLocation, isDarkHeresy }:HitLocationsPropsType) {
-	console.log('gitLocations isDarkHeresy', isDarkHeresy)
 	return (
 		<Accordion className={styles.container}>
 			<Card>
