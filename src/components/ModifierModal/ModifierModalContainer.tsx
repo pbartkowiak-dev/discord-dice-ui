@@ -4,7 +4,6 @@ import { closeModifierModal, showMsg } from '../../actions';
 import ModifierModal from './ModifierModal';
 
 const mapStateToProps = (state:any) => {
-	console.log('state', state);
 	return {
 		showModifierModal: state.showModifierModal,
 		selectedDice: state.selectedDice,
