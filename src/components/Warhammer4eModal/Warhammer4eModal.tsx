@@ -3,8 +3,8 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Warhammer4eModalForm from './Warhammer4eModalForm';
 import { request } from '../../utils/request';
-import getWarhammer4eRequestMsg from '../../utils/getWarhammer4eRequestMsg';
-import getWarhammer4eLocalMsg from '../../utils/getWarhammer4eLocalMsg';
+import getWarhammerRequestMsg from '../../utils/getWarhammerRequestMsg';
+import getWarhammerLocalMsg from '../../utils/getWarhammerLocalMsg';
 import rollDice from '../../utils/rollDice';
 
 type Warhammer4eModalProps = {
@@ -31,8 +31,8 @@ function Warhammer4eModal({
 			diceType: 100,
 			rollOptions
 		});
-		const requestMsg = getWarhammer4eRequestMsg(result, rollOptions, userSettings);
-		const localMsg = getWarhammer4eLocalMsg(result, rollOptions, userSettings);
+		const requestMsg = getWarhammerRequestMsg(result, rollOptions, userSettings);
+		const localMsg = getWarhammerLocalMsg(result, rollOptions, userSettings);
 
 		showMsg(localMsg);
 		request(requestMsg);

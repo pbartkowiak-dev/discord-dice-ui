@@ -76,27 +76,58 @@ function FastSLTooltip() {
 	);
 }
 
+function DarkHeresyTooltip() {
+	const key = 'DarkHeresyTooltip';
+	return (
+		<>
+		<OverlayTrigger
+			key={key}
+			placement="bottom"
+			overlay={
+				<Tooltip id={`tooltip-${key}`}
+					className="tooltip-fast-sl">
+						<p>If the roll is equal to or lower than the characteristic, the character has gained one <strong className="tooltip-success">degree of success (DoS)</strong>. He also gains additional degrees of success equal to the tens digit of the target value minus the tens digit of the roll.</p>
+						<p>If the roll is higher than the characteristic, the character has gained one <strong className="tooltip-failed">degree of failure (DoF)</strong>, and gains additional degrees of failure equal to the tens digit of the roll minus the tens digit of the target value.</p>
+				</Tooltip>
+			}
+		><FontAwesomeIcon icon={faQuestionCircle} className="icon-info tooltip-fast-sl-icon" />
+		</OverlayTrigger>
+		</>
+	);
+}
+
 const fastSLLabel = <span>Use Fast SL <FastSLTooltip/></span>;
+const darkHeresyLabel = <span>Use Dark Heresy II DoS <DarkHeresyTooltip/></span>;
 
 function Warhammer4eModalForm({
 	invalid,
 	anyTouched,
 	submitFailed,
 	handleSubmit,
-	specialDie
+	specialSL
 }: any) {
-	const { cocBonus, cocTwoBonus, cocPenalty, cocTwoPenalty } = specialDie;
+	const { fastSL, darkHeresySL } = specialSL;
 	return (
 		<Form
 			className={ (invalid && (submitFailed || anyTouched)) ? 'form-invalid' : '' }
 			id="warhammer4e-mode-form"
 			onSubmit={handleSubmit}>
-				<Field
-					name="fastSL"
-					id="fastSL"
-					label={fastSLLabel}
-					component={RenderCheckbox}
-				/>
+				<div className="specialSLContainer">
+					<Field
+						name="fastSL"
+						id="fastSL"
+						label={fastSLLabel}
+						component={RenderCheckbox}
+						disabled={ darkHeresySL }
+					/>
+					<Field
+						name="darkHeresySL"
+						id="darkHeresySL"
+						label={darkHeresyLabel}
+						component={RenderCheckbox}
+						disabled={ fastSL }
+					/>
+				</div>
 				<div className="skill-level-field">
 					<Field
 						id="skillLevel"
@@ -138,7 +169,7 @@ const validate = (values:any) => {
 	return errors;
 }
 
-const form = 'cocModeForm';
+const form = 'warhammer4eModalForm';
 
 const FormElement = reduxForm({
 	form,
@@ -149,5 +180,5 @@ const FormElement = reduxForm({
 const selector = formValueSelector(form);
 
 export default connect(state => ({
-	specialDie: selector(state, 'cocBonus', 'cocPenalty', 'cocTwoBonus', 'cocTwoPenalty')
+	specialSL: selector(state, 'fastSL', 'darkHeresySL')
 }))(FormElement);

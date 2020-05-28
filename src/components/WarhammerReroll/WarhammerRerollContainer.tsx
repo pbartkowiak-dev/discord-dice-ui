@@ -2,8 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { showMsg, hideMsg } from '../../actions';
 import WarhammerReroll from './WarhammerReroll';
-import getWarhammer4eRequestMsg from '../../utils/getWarhammer4eRequestMsg';
-import getWarhammer4eLocalMsg from '../../utils/getWarhammer4eLocalMsg';
+import getWarhammerRequestMsg from '../../utils/getWarhammerRequestMsg';
+import getWarhammerLocalMsg from '../../utils/getWarhammerLocalMsg';
 import rollDice from '../../utils/rollDice';
 import { request } from '../../utils/request';
 
@@ -26,8 +26,8 @@ function WarhammerRerollContainer({
 				diceType: 100,
 				rollOptions
 			});
-			const requestMsg = getWarhammer4eRequestMsg(result, rollOptions, userSettings);
-			const localMsg = getWarhammer4eLocalMsg(result, rollOptions, userSettings);
+			const requestMsg = getWarhammerRequestMsg(result, rollOptions, userSettings);
+			const localMsg = getWarhammerLocalMsg(result, rollOptions, userSettings);
 		
 			showMsg(localMsg);
 			request(requestMsg);

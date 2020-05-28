@@ -62,10 +62,11 @@ function DiceModule ({
 		}
 	};
 
-	const diceSetType = rollOptions.warhammer4eMode ? 'warhammer' : 'classic';
+	console.log('rollOptions before get dice set', rollOptions);
+	const diceSetType = rollOptions.warhammerMode ? 'warhammer' : 'classic';
 
 	const diceSet = getDiceSet(diceSetType);
-
+	console.log('diceSet', diceSet)
 	const diceSetElement = diceSet.map((diceType:any)  => {
 		return (
 			<Dice

@@ -9,11 +9,28 @@ export type successLevelsType = {
 
 const getTens = (num:number) => Math.floor(num / 10);
 
-export default (skillLevel:number, finalDieResult:number, useFastSL:boolean):successLevelsType => {
-	const autoFailureMin = 96;
-	const autoFailureMax = 100;
-	const autoSuccessMin = 1;
-	const autoSuccessMax = 5;
+export default (
+	skillLevel:number,
+	finalDieResult:number,
+	useFastSL:boolean,
+	useDarkHeresySL:boolean
+):successLevelsType => {
+	let autoFailureMin;
+	let autoFailureMax;
+	let autoSuccessMin; 
+	let autoSuccessMax; 
+
+	if (useDarkHeresySL) {
+		autoFailureMin = 100;
+		autoFailureMax = 100;
+		autoSuccessMin = 1;
+		autoSuccessMax = 1;
+	} else {
+		autoFailureMin = 96;
+		autoFailureMax = 100;
+		autoSuccessMin = 1;
+		autoSuccessMax = 5;
+	}
 
 	const isAutoFailure = (finalDieResult >= autoFailureMin && finalDieResult <= autoFailureMax);
 	const isAutoSuccess = (finalDieResult >= autoSuccessMin && finalDieResult <= autoSuccessMax);
@@ -31,6 +48,14 @@ export default (skillLevel:number, finalDieResult:number, useFastSL:boolean):suc
 		const rolledTens = getTens(finalDieResult);
 		const skillTens = getTens(skillLevel);
 		SL = skillTens - rolledTens;
+	}
+
+	if (!useFastSL && useDarkHeresySL) {
+		if (isSuccess || isAutoSuccess) {
+			SL = SL + 1;
+		} else if (isFailure || isAutoFailure) {
+			SL = SL -1;
+		}
 	}
 
 	return {

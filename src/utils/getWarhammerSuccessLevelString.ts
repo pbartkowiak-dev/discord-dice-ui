@@ -1,4 +1,4 @@
-import { successLevelsType } from './getWarhammer4eSuccessLevels';
+import { successLevelsType } from './getWarhammerSuccessLevels';
 
 export default (successLevels:successLevelsType) :string => {
 	if (successLevels.isAutoSuccess) {

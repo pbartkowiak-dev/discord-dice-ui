@@ -1,8 +1,9 @@
 import React from 'react';
 import CodeSpan from '../components/CodeSpan/CodeSpan';
-import getWarhammer4eSuccessLevels from './getWarhammer4eSuccessLevels';
+import getWarhammerSuccessLevels from './getWarhammerSuccessLevels';
 import getReversedResult from './getReversedResult';
 import getWarhammer4eHitLocation from './getWarhammer4eHitLocation';
+import getDarkHeresyIIHitLocation from './getDarkHeresyIIHitLocation';
 import ResultVsSkillRow from '../components/ResultVsSkillRow/ResultVsSkillRow';
 import HitLocations from '../components/HitLocations/HitLocations';
 import styles from '../components/ResultsModal/ResultsModal.module.css';
@@ -16,7 +17,7 @@ export type LocalMsgParamsType = {
 	userSettings?: any
 }
 
-const getCocLocalMsg = (result:any, rollOptions:any, userSettings?:any):LocalMsgParamsType => {
+const getWarhammerLocalMsg = (result:any, rollOptions:any, userSettings?:any):LocalMsgParamsType => {
 	const {
 		results,
 		skillLevel
@@ -25,12 +26,19 @@ const getCocLocalMsg = (result:any, rollOptions:any, userSettings?:any):LocalMsg
 	const fields = [];
 	const finalDieResult = results[0];
 	const finalDieResultString = finalDieResult <= 9 ? `0${finalDieResult}` : `${finalDieResult}`;
-	const title = rollOptions.fastSL ? 'Fast SL' : null;
+	let title = '';
 
-	const successLevels = getWarhammer4eSuccessLevels(
+	if (rollOptions.fastSL) {
+		title = 'Fast SL';
+	} else if (rollOptions.darkHeresySL) {
+		title = 'Dark Heresy II DoS';
+	}
+
+	const successLevels = getWarhammerSuccessLevels(
 		skillLevel,
 		finalDieResult,
-		!!rollOptions.fastSL
+		!!rollOptions.fastSL,
+		!!rollOptions.darkHeresySL
 	);
 
 	fields.push(
@@ -73,20 +81,43 @@ const getCocLocalMsg = (result:any, rollOptions:any, userSettings?:any):LocalMsg
 		);
 	}
 
-	const slString = successLevels.SL > 0 ? `+${successLevels.SL}` : `${successLevels.SL}`;
+	let slWord = '';
+	if (rollOptions.darkHeresySL) {
+		if (successLevels.SL > 0) {
+			slWord = successLevels.SL === 1 ? 'Degree of Success:' : 'Degrees of Success';
+		} else {
+			slWord =  successLevels.SL === 1 ?'Degree of Failure:' : 'Degrees of Failure';
+		}
+	} else {
+		slWord = 'Success Level:';
+	}
+
+	let slString = '';
+	if (rollOptions.darkHeresySL) {
+		slString = `${Math.abs(successLevels.SL)}`;
+	} else {
+		slString = successLevels.SL > 0 ? `+${successLevels.SL}` : `${successLevels.SL}`;
+	}
 
 	fields.push(
 		<div className={styles.slResult}>
-			<div><span className={styles.slResultLabel}>Success Level:</span></div>
+			<div><span className={styles.slResultLabel}>{slWord}</span></div>
 			<div><CodeSpan className={styles.slResultSpan}>{slString}</CodeSpan></div>
 		</div>
 	);
 
 	const reversedResult = getReversedResult(finalDieResultString);
-	const hitLocation = getWarhammer4eHitLocation(reversedResult);
+	const hitLocation = rollOptions.darkHeresySL
+		? getDarkHeresyIIHitLocation(reversedResult)
+		: getWarhammer4eHitLocation(reversedResult);
 
+		console.log('rollOptions.darkHeresySL', rollOptions.darkHeresySL)
 	fields.push(
-		<HitLocations result={reversedResult} hitLocation={hitLocation} />
+		<HitLocations
+			result={reversedResult}
+			hitLocation={hitLocation}
+			isDarkHeresy={!!rollOptions.darkHeresySL}
+		/>
 	);
 
 	rollOptions.warhammerMode = true;
@@ -102,4 +133,4 @@ const getCocLocalMsg = (result:any, rollOptions:any, userSettings?:any):LocalMsg
 	};
 };
 
-export default getCocLocalMsg;
+export default getWarhammerLocalMsg;

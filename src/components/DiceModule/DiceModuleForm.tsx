@@ -1,8 +1,9 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import Form from 'react-bootstrap/Form';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip'
-import { Field, reduxForm } from 'redux-form';
+import { Field, reduxForm, formValueSelector } from 'redux-form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faQuestionCircle } from '@fortawesome/free-regular-svg-icons';
 import './DiceModuleForm.css';
@@ -34,8 +35,7 @@ function WarhammerTooltip() {
 			placement="bottom"
 			overlay={
 				<Tooltip id={`tooltip-${key}`}>
-					<span>Supports rolling <strong>SL</strong> for Warhammer 4e</span>
-					{/* <span>Supports rolling <strong>SL</strong> for Warhammer 4e and Dark Heresy II.</span> */}
+					<span>Supports rolling <strong>SL</strong> for Warhammer 4e and <strong>DoS</strong> for Dark Heresy II.</span>
 				</Tooltip>
 			}
 		><FontAwesomeIcon icon={faQuestionCircle} className="icon-info" />
@@ -48,26 +48,34 @@ const cocModeLabel = (
 	<span>Call of Cthulhu 7e Mode <CoCModTooltip/></span>
 );
 
-const warhammer4eModeLabel = (
+const warhammerModeLabel = (
 	<span>Warhammer Mode <WarhammerTooltip/></span>
 );
 
 // @ts-ignore
-const createRenderer = render  => ({ input, meta, label, id }, ...rest) => {
+const createRenderer = render  => ({ input, meta, label, id, disabled }, ...rest) => {
 	return (
 		<>
-			{ render(input, label, id, rest )}
+			{ render(input, label, id, disabled, rest )}
 		</>
 	);
 };
 
 // @ts-ignore
-const RenderCheckbox = createRenderer((input, label, id) =>
-	<Form.Check type="checkbox" label={label} id={id} custom {...input} />
+const RenderCheckbox = createRenderer((input, label, id, disabled) =>
+	<Form.Check
+		type="checkbox"
+		label={label}
+		id={id}
+		custom
+		disabled={disabled}
+		{...input}
+	/>
 );
 
-function DiceModuleForm(props:any) {
-	const { handleSubmit, pristine, reset, submitting } = props
+function DiceModuleForm({ rollOptions }:any) {
+	const { warhammerMode, cocMode } = rollOptions;
+	console.log('DiceModuleForm rollOptions', rollOptions)
 	return (
 		<Form id ="roll-options-form" className="dice-module dice-form">
 			<Field
@@ -99,18 +107,28 @@ function DiceModuleForm(props:any) {
 				id="cocMode"
 				label={cocModeLabel}
 				component={RenderCheckbox}
+				disabled={warhammerMode}
 			/>
 			<Field
-				name="warhammer4eMode"
-				id="warhammer4eMode"
-				label={warhammer4eModeLabel}
+				name="warhammerMode"
+				id="warhammerMode"
+				label={warhammerModeLabel}
 				component={RenderCheckbox}
+				disabled={cocMode}
 			/>
 		</Form>
 	);
 }
 
+const form = 'diceModuleForm';
 
-export default reduxForm({
-	form: 'rollOptionsForm'
+const FormElement = reduxForm({
+	form
 })(DiceModuleForm);
+
+
+const selector = formValueSelector(form);
+
+export default connect(state => ({
+	rollOptions: selector(state, 'cocMode', 'warhammerMode')
+}))(FormElement);

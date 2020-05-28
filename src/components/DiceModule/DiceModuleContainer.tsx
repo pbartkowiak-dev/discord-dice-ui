@@ -4,9 +4,10 @@ import { showMsg, openModifierModal, openCoCModal, openWarhammer4eModal, selectD
 import DiceModule from './DiceModule';
 
 function mapStateToProps(state:any) {
+	console.log('state', state)
 	return {
 		userSettings: state.userSettings,
-		rollOptionsForm: state.form.rollOptionsForm
+		rollOptionsForm: state.form.diceModuleForm
 	};
 }
 
@@ -25,6 +26,8 @@ function DiceModuleContainer({
 	if (rollOptionsForm && rollOptionsForm.values) {
 		rollOptions = rollOptionsForm.values;
 	}
+
+	console.log('rollOptionsForm', rollOptionsForm);
 	return (
 		<>
 			<DiceModule
