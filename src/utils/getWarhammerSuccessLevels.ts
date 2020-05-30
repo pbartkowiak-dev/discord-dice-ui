@@ -13,7 +13,8 @@ export default (
 	skillLevel:number,
 	finalDieResult:number,
 	useFastSL:boolean,
-	useDarkHeresySL:boolean
+	useDarkHeresySL:boolean,
+	useWarhammer2eSL: boolean
 ):successLevelsType => {
 	let autoFailureMin;
 	let autoFailureMax;
@@ -32,8 +33,8 @@ export default (
 		autoSuccessMax = 5;
 	}
 
-	const isAutoFailure = (finalDieResult >= autoFailureMin && finalDieResult <= autoFailureMax);
-	const isAutoSuccess = (finalDieResult >= autoSuccessMin && finalDieResult <= autoSuccessMax);
+	const isAutoFailure = !useWarhammer2eSL && (finalDieResult >= autoFailureMin && finalDieResult <= autoFailureMax);
+	const isAutoSuccess = !useWarhammer2eSL && (finalDieResult >= autoSuccessMin && finalDieResult <= autoSuccessMax);
 
 	const isSuccess = (!isAutoFailure && (finalDieResult <= skillLevel)) || isAutoSuccess;
 	const isFailure = (!isAutoSuccess && !isSuccess) || isAutoFailure;
@@ -55,6 +56,17 @@ export default (
 			SL = SL + 1;
 		} else if (isFailure || isAutoFailure) {
 			SL = SL -1;
+		}
+	}
+
+	if (useWarhammer2eSL) {
+		if (isSuccess) {
+			SL = Math.floor((skillLevel - finalDieResult) / 10);
+		} else if (isFailure) {
+			SL = (Math.floor((finalDieResult - skillLevel) / 10));
+			if (SL !== 0) {
+				SL = SL * (-1);
+			}
 		}
 	}
 

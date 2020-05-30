@@ -12,23 +12,47 @@ type HitLocationsPropsType = {
 	result: string
 	hitLocation: string
 	isDarkHeresy: boolean
+	isWarhammer2e: boolean
 }
 
 type HitLocationTooltipProps = {
 	result: number
 }
 
-function HitLocationTooltip({ isDarkHeresy }:any) {
+function HitLocationTooltip({ isDarkHeresy, isWarhammer2e }:any) {
 	const key = 'HitLocationTooltip';
 	const classNameFull = `${styles.cellIcon} ${styles.tooltip}`;
-	const head = isDarkHeresy ? '01-10' : '01-09';
-	const leftArm = isDarkHeresy ? '21-30' : '10-24';
-	const rightArm = isDarkHeresy ? '11-20' : '25-44';
-	const body = isDarkHeresy ? '31-70' : '45-79';
-	const leftLeg = isDarkHeresy ? '86-00' : '80-89';
-	const rightLeg = isDarkHeresy ? '71-85' : '90-00';
+	let head;
+	let leftArm;
+	let rightArm;
+	let body;
+	let leftLeg;
+	let rightLeg;
 
-	const tooltipBody = isDarkHeresy
+	if (isDarkHeresy) {
+		head = '01-10';
+		rightArm = '11-20';
+		leftArm = '21-30';
+		body = '31-70';
+		rightLeg = '71-85';
+		leftLeg = '86-00';
+	} else if (isWarhammer2e) {
+		head = '01-15';
+		rightArm = '16-35';
+		leftArm = '36-55';
+		body = '56-80';
+		rightLeg = '81-90';
+		leftLeg = '91-00';
+	} else {
+		head = '01-09';
+		leftArm = '10-24';
+		rightArm = '25-44';
+		body = '45-79';
+		leftLeg = '80-89';
+		rightLeg = '90-00';
+	}
+
+	const tooltipBody = (isDarkHeresy || isWarhammer2e)
 		? (
 			<>
 				<div>
@@ -97,7 +121,7 @@ function HitLocationTooltip({ isDarkHeresy }:any) {
 	);
 }
 
-function HitLocations({ result, hitLocation, isDarkHeresy }:HitLocationsPropsType) {
+function HitLocations({ result, hitLocation, isDarkHeresy, isWarhammer2e }:HitLocationsPropsType) {
 	return (
 		<Accordion className={styles.container}>
 			<Card>
@@ -108,7 +132,9 @@ function HitLocations({ result, hitLocation, isDarkHeresy }:HitLocationsPropsTyp
 					<Card.Body>
 						<div className={styles.body}>
 							<span>{hitLocation}</span>
-							<HitLocationTooltip isDarkHeresy={isDarkHeresy} />
+							<HitLocationTooltip
+								isDarkHeresy={isDarkHeresy}
+								isWarhammer2e={isWarhammer2e} />
 						</div>
 					</Card.Body>
 				</Accordion.Collapse>

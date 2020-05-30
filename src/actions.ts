@@ -25,6 +25,17 @@ export function saveUserSettings(userSettings:any) {
 	};
 }
 
+/* WARHAMMER MODE *************************/
+
+export const SAVE_WARHAMMER_SL_MODE = 'SAVE_WARHAMMER_SL_MODE';
+
+export function saveWarhammerSlMode(warhammerSlMode:any) {
+	return {
+		type: SAVE_WARHAMMER_SL_MODE,
+		warhammerSlMode
+	};
+}
+
 
 /* MODIFIER MODAL *************************/
 

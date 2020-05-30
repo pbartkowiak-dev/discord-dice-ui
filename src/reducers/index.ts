@@ -4,6 +4,7 @@ import userSettingsReducer from './userSettingsReducer';
 import modifierModalReducer from './modifierModalReducer';
 import cocModalReducer from './cocModalReducer';
 import warhammerModalReducer from './warhammerModalReducer';
+import warhammerSlModeReducer from './warhammerSlModeReducer';
 import selectedDiceReducer from './selectedDiceReducer';
 import msgReducer from './msgReducer';
 import { reducer as formReducer } from 'redux-form'
@@ -13,6 +14,7 @@ export default combineReducers({
 	showModifierModal: modifierModalReducer,
 	showCoCModal: cocModalReducer,
 	showWarhammerModal: warhammerModalReducer,
+	warhammerSlMode: warhammerSlModeReducer,
 	userSettings: userSettingsReducer,
 	selectedDice: selectedDiceReducer,
 	form: formReducer,

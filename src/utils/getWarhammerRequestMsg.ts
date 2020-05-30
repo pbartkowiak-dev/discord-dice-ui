@@ -2,6 +2,7 @@ import { requestParams } from './request';
 import getWarhammerSuccessLevels from './getWarhammerSuccessLevels';
 import getWarhammerSuccessLevelString from './getWarhammerSuccessLevelString';
 import getReversedResult from './getReversedResult';
+import getWarhammer2eHitLocation from './getWarhammer2eHitLocation';
 import getWarhammer4eHitLocation from './getWarhammer4eHitLocation';
 import getDarkHeresyIIHitLocation from './getDarkHeresyIIHitLocation';
 
@@ -22,7 +23,8 @@ const getRequestMsg = (result:any, rollOptions:any, userSettings:any) => {
 		skillLevel,
 		finalDieResult,
 		!!rollOptions.fastSL,
-		!!rollOptions.darkHeresySL
+		!!rollOptions.darkHeresySL,
+		!!rollOptions.warhammer2eSL
 	);
 	const successLevelIcon = successLevels.isSuccess || successLevels.isAutoSuccess ? ':green_circle:' : ':red_circle:';
 
@@ -32,6 +34,10 @@ const getRequestMsg = (result:any, rollOptions:any, userSettings:any) => {
 		description += '\n**Fast SL** used.';
 	} else if (rollOptions.darkHeresySL) {
 		description += '\n**Dark Heresy II DoS** used.';
+	} else if (rollOptions.warhammer2eSL) {
+		description += '\n**Warhammer 2e DoS** used.';
+	} else {
+		description += '\n**Default Warhammer 4e SL** used.';
 	}
 
 	if (successLevels.isDouble) {
@@ -49,7 +55,7 @@ const getRequestMsg = (result:any, rollOptions:any, userSettings:any) => {
 
 
 	let slWord = '';
-	if (rollOptions.darkHeresySL) {
+	if (rollOptions.darkHeresySL || rollOptions.warhammer2eSL) {
 		if (successLevels.SL > 0) {
 			slWord = successLevels.SL === 1 ? 'Degree of Success' : 'Degrees of Success';
 		} else {
@@ -59,7 +65,7 @@ const getRequestMsg = (result:any, rollOptions:any, userSettings:any) => {
 		slWord = 'Success Level';
 	}
 	let slString = '';
-	if (rollOptions.darkHeresySL) {
+	if (rollOptions.darkHeresySL || rollOptions.warhammer2eSL) {
 		slString = `${Math.abs(successLevels.SL)}`;
 	} else {
 		slString = successLevels.SL > 0 ? `+${successLevels.SL}` : `${successLevels.SL}`;
@@ -70,9 +76,16 @@ const getRequestMsg = (result:any, rollOptions:any, userSettings:any) => {
 	});
 
 	const reversedResult = getReversedResult(finalDieResultString);
-	const hitLocation = rollOptions.darkHeresySL 
-		? getDarkHeresyIIHitLocation(reversedResult)
-		: getWarhammer4eHitLocation(reversedResult);
+	let hitLocation;
+
+	if (rollOptions.darkHeresySL) {
+		hitLocation = getDarkHeresyIIHitLocation(reversedResult)
+	} else if (rollOptions.warhammer2eSL) {
+		hitLocation = getWarhammer2eHitLocation(reversedResult);
+	} else {
+		hitLocation = getWarhammer4eHitLocation(reversedResult);
+	}
+
 	fields.push({
 		name: ':mens: Hit Location:',
 		value: `\`${reversedResult}\` - ${hitLocation}`

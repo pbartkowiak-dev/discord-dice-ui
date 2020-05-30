@@ -49,6 +49,7 @@ const RenderCheckbox = createRenderer((input, label, id, textMuted, meta, disabl
 	return (
 		<Form.Check
 			type="checkbox"
+			checked={input.value ? true : false}
 			label={label}
 			disabled={disabled}
 			id={id}
@@ -96,8 +97,48 @@ function DarkHeresyTooltip() {
 	);
 }
 
-const fastSLLabel = <span>Use Fast SL <FastSLTooltip/></span>;
+function Warhammer4eSLTooltip() {
+	const key = 'Warhammer4eSLTooltip';
+	return (
+		<>
+		<OverlayTrigger
+			key={key}
+			placement="bottom"
+			overlay={
+				<Tooltip id={`tooltip-${key}`}
+					className="tooltip-fast-sl">
+						<p>To determine the SL of a Test, subtract the 10s number of the rolled dice from the 10s number of the Characteristic or Skill being tested.</p>
+				</Tooltip>
+			}
+		><FontAwesomeIcon icon={faQuestionCircle} className="icon-info tooltip-fast-sl-icon" />
+		</OverlayTrigger>
+		</>
+	);
+}
+
+function Warhammer2eSLTooltip() {
+	const key = 'Warhammer2eSLTooltip';
+	return (
+		<>
+		<OverlayTrigger
+			key={key}
+			placement="bottom"
+			overlay={
+				<Tooltip id={`tooltip-${key}`}
+					className="tooltip-fast-sl">
+						<p>Compare the result of your Skill Test with your percentage chance. For each full 10% you beat your chance by, you achieve one degree of success.</p>
+				</Tooltip>
+			}
+		><FontAwesomeIcon icon={faQuestionCircle} className="icon-info tooltip-fast-sl-icon" />
+		</OverlayTrigger>
+		</>
+	);
+}
+
+const warhammer4eSLLabel = <span>Use default Warhammer 4e SL <Warhammer4eSLTooltip/></span>;
+const fastSLLabel = <span>Use Warhammer 4e Fast SL <FastSLTooltip/></span>;
 const darkHeresyLabel = <span>Use Dark Heresy II DoS <DarkHeresyTooltip/></span>;
+const warhammer2eSLLabel = <span>Use Warhammer 2e DoS <Warhammer2eSLTooltip/></span>;
 
 function WarhammerModalForm({
 	invalid,
@@ -106,7 +147,7 @@ function WarhammerModalForm({
 	handleSubmit,
 	specialSL
 }: any) {
-	const { fastSL, darkHeresySL } = specialSL;
+	const { fastSL, darkHeresySL, warhammer4eSL, warhammer2eSL } = specialSL;
 	return (
 		<Form
 			className={ (invalid && (submitFailed || anyTouched)) ? 'form-invalid' : '' }
@@ -114,18 +155,32 @@ function WarhammerModalForm({
 			onSubmit={handleSubmit}>
 				<div className="specialSLContainer">
 					<Field
+						name="warhammer4eSL"
+						id="warhammer4eSL"
+						label={warhammer4eSLLabel}
+						component={RenderCheckbox}
+						disabled={ fastSL || darkHeresySL || warhammer2eSL }
+					/>
+					<Field
 						name="fastSL"
 						id="fastSL"
 						label={fastSLLabel}
 						component={RenderCheckbox}
-						disabled={ darkHeresySL }
+						disabled={ warhammer4eSL || darkHeresySL || warhammer2eSL }
+					/>
+					<Field
+						name="warhammer2eSL"
+						id="warhammer2eSL"
+						label={warhammer2eSLLabel}
+						component={RenderCheckbox}
+						disabled={ fastSL || darkHeresySL || warhammer4eSL }
 					/>
 					<Field
 						name="darkHeresySL"
 						id="darkHeresySL"
 						label={darkHeresyLabel}
 						component={RenderCheckbox}
-						disabled={ fastSL }
+						disabled={ fastSL || warhammer4eSL || warhammer2eSL }
 					/>
 				</div>
 				<div className="skill-level-field">
@@ -173,12 +228,12 @@ const form = 'WarhammerModalForm';
 
 const FormElement = reduxForm({
 	form,
-	validate
+	validate,
 })(WarhammerModalForm);
 
 
 const selector = formValueSelector(form);
 
 export default connect(state => ({
-	specialSL: selector(state, 'fastSL', 'darkHeresySL')
+	specialSL: selector(state, 'fastSL', 'darkHeresySL', 'warhammer4eSL', 'warhammer2eSL')
 }))(FormElement);

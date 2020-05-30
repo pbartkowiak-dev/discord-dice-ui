@@ -14,7 +14,7 @@ const localStorageUserSettingsManager = {
 			try {
 				return JSON.parse(userSettings)
 			} catch {
-				throw new Error ('Local Storage User Settings Format is incorrect. Clear Local Storage entry and try again.');
+				throw new Error ('Local Storage User Settings format is incorrect. Clear Local Storage entry and try again.');
 			}
 		}
 	},

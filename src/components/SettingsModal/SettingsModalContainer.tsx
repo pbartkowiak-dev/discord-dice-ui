@@ -4,7 +4,6 @@ import { openSettingsModal, closeSettingsModal, saveUserSettings } from '../../a
 import SettingsModal from './SettingsModal';
 import localStorageUserSettingsManager from '../../utils/localStorageUserSettingsManager';
 
-
 const mapStateToProps = (state:any) => {
 	return {
 		showSettingsModal: state.showSettingsModal,
