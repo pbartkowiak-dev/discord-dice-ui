@@ -3,6 +3,9 @@ import { connect } from 'react-redux';
 import { openSettingsModal, closeSettingsModal, saveUserSettings } from '../../actions';
 import SettingsModal from './SettingsModal';
 import localStorageUserSettingsManager from '../../utils/localStorageUserSettingsManager';
+import queryParamsManager from '../../utils/queryParamsManager';
+import getRandomUserColor from '../../utils/getRandomUserColor';
+import { DISCORD_DICE_URL } from '../../consts/urls';
 
 const mapStateToProps = (state:any) => {
 	return {
@@ -27,11 +30,25 @@ function SettingsModalContainer({
 }:any) {
 
 	useEffect(() => {
-		const localStorageUserSettings = localStorageUserSettingsManager.load();
+		const queryHookUrl = queryParamsManager.get('q');
+		const queryUsername = queryParamsManager.get('username');
+		const localStorageUserSettings = localStorageUserSettingsManager.load() || {};
+
+		if (queryHookUrl) {
+			const userSettings = {
+				hookUrl: DISCORD_DICE_URL + queryHookUrl,
+				username: queryUsername || localStorageUserSettings.username,
+				userColor: localStorageUserSettings.userColor || getRandomUserColor()
+			}
+			saveUserSettings(userSettings);
+			if (!userSettings.username) openSettingsModal();
+			return;
+		}
+
 		if (localStorageUserSettings && localStorageUserSettings.hookUrl) {
 			saveUserSettings(localStorageUserSettings);
+			if (!localStorageUserSettings.username) openSettingsModal();
 		} else {
-			// open popup on start if there are no user settings stored
 			openSettingsModal();
 		}
 	}, []);

@@ -1,0 +1,1 @@
+export const DISCORD_DICE_URL = 'https://discordapp.com/api/webhooks/';
