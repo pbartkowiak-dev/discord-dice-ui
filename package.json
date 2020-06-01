@@ -1,6 +1,6 @@
 {
 	"name": "discord-ui",
-	"version": "2.7.3",
+	"version": "2.7.4",
 	"private": true,
 	"engines": {
 		"node": "13.5.0",
@@ -9,6 +9,7 @@
 	"dependencies": {
 		"@fortawesome/fontawesome-free": "^5.13.0",
 		"@fortawesome/fontawesome-svg-core": "^1.2.28",
+		"@fortawesome/free-brands-svg-icons": "^5.13.0",
 		"@fortawesome/free-regular-svg-icons": "^5.13.0",
 		"@fortawesome/free-solid-svg-icons": "^5.13.0",
 		"@fortawesome/react-fontawesome": "^0.1.9",

@@ -3,6 +3,8 @@ import Navbar from 'react-bootstrap/Navbar';
 import logo from '../../img/logo.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCog } from '@fortawesome/free-solid-svg-icons';
+import { faGithub } from '@fortawesome/free-brands-svg-icons';
+import { GITHUB_PAGE } from '../../consts/urls';
 import './Header.css'
 
 type HeaderProps = {
@@ -20,6 +22,12 @@ function Header({ openSettingsModal }: HeaderProps) {
 				/>
 			</Navbar.Brand>
 			<Navbar.Collapse className="justify-content-end"></Navbar.Collapse>
+			<a href={GITHUB_PAGE}>
+				<FontAwesomeIcon
+					className="pointer icon-settings"
+					icon={faGithub}
+				/>
+			</a>
 			<FontAwesomeIcon
 				onClick={() => openSettingsModal() }
 				className="pointer icon-settings"
