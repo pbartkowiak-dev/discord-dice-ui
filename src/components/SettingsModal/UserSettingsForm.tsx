@@ -1,6 +1,7 @@
 import React from 'react';
 import Form from 'react-bootstrap/Form';
-import { Field, reduxForm } from 'redux-form'
+import { Field, reduxForm } from 'redux-form';
+import { DISCORD_WEBHOOK_URL } from '../../consts/urls' ;
 
 // @ts-ignore
 const createRenderer = render => ({ input, label, id, textMuted, meta, placeholder }, ...rest) => {
@@ -31,14 +32,16 @@ const renderInput = createRenderer((input, label, id, textMuted, meta, placehold
 });
 
 function UserSettingsForm({ handleSubmit, pristine, reset, submitting }: any) {
+	const webhookPlaceholder = DISCORD_WEBHOOK_URL + 'xxxxxxxxx';
+
 	return (
 		<Form id="user-settings-form"
 			onSubmit={handleSubmit}>
 			<Field
 				id="hookUrl"
 				name="hookUrl"
-				label="Discord hook url address:"
-				placeholder="Enter Hook Url"
+				label="Discord Webhook url address:"
+				placeholder={webhookPlaceholder}
 				textMuted="Ask your Discord channel administrator"
 				component={renderInput}
 			/>
@@ -46,7 +49,7 @@ function UserSettingsForm({ handleSubmit, pristine, reset, submitting }: any) {
 				id="username"
 				name="username"
 				label="Username:"
-				placeholder="Enter your username"
+				placeholder="Your username"
 				component={renderInput}
 				required
 			/>

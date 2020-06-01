@@ -4,9 +4,9 @@
 
 # Discord Dice UI
 
-> They are plenty of Discord bots that allow you to roll dice in the chat. They're may by great, but I never felt like typing while playing an RPG game. So I created this connector in which you can just select and click a die you want to roll on Discord's chat.
+> They are plenty of Discord bots that allow you to roll dice in the chat. They may by great, but I never felt like typing while playing an RPG game. So I created this connector in which you can just select and click a die you want to roll on Discord's chat.
 
-The app is intended to use as a graphical interface dice roller for Discord. You can connect it with your Discord's server and use to roll some dice! 🎲🎲
+The app is intended to use as a graphical interface dice roller for Discord. You can connect it with your Discord chat and use to roll some dice! 🎲🎲
 >
  You can modify how the result is displayed by selecting different _Roll Options_:
 - Keep highest
@@ -14,7 +14,7 @@ The app is intended to use as a graphical interface dice roller for Discord. You
 - Sum results
 - Add modifier
 - Call of Cthulhu 7e Mode (read below)
-
+- Warhammer Mode (read below)
 
 #### App Interface
 [![App overview](./public/app.png)]()
@@ -37,7 +37,9 @@ The app offers special support for Call of Cthulhu 7e RPG game. After selecting 
 
 ### Warhammer Mode
 
-The app offers special support for rolling Success Levels in Warhammer 4e/Dark Heresy.
+The app offers special support for rolling Success Levels in Warhammer 2e, Warhammer 4e and Dark Heresy II.
+
+[![WFRP Mode - modalp](./public/wfrp-modal.png)]()
 
 [![WFRP Mode - app](./public/wfrp-result-app.png)]()
 
@@ -46,7 +48,7 @@ The app offers special support for rolling Success Levels in Warhammer 4e/Dark H
 
 ## Setup
 
-In order to get started, **Discord's server admin has to create a Webhook** and share it with other users. Read below how to do it.
+In order to get started, **Discord's server admin has to create a Webhook** and share a special link with other users. Read below how to do it.
 
 1. As a server's admin open your chat's context menu.
 ![how-to-1](./public/how-to-0.png)
@@ -57,17 +59,24 @@ In order to get started, **Discord's server admin has to create a Webhook** and 
 3. Select _Webhooks_ in the left side menu and then press the button _Create Webhook_.
 ![how-to-3](./public/how-to-2.png)
 
-4. Name your Webhook and provide an icon (optionally). **Copy a link** to share the link with other users and press **Save** button to close the modal.
+4. Name your Webhook and provide an icon (optionally). **Copy a link** to obtain your unique Webhook url and press **Save** button to close the modal.
 ![how-to-4](./public/how-to-3.png)
 🛑🚧🚧🚧🛑  
 **Never share your Webhook link publicly and keep it a secret. You don't want to allow strangers to publish messages in your chat.**  
 🛑🚧🚧🚧🛑  
 
-5. Every user has to enter the provided Webhook link url in the Settings modal inside the app. Entering the username is required as well.
-![how-to-5](./public/how-to-4.png)
+5. Now you can share the Webhook url with other players in two ways:
+    1. **Via link param**.  
+    Provide your players a link to an app which looks like this:
+    ```
+    https://discord-dice-ui.herokuapp.com/?q=UNIQUE_CODE_FROM_YOUR_DICORD_WEBHOOK
+    ```
 
+    2. **Manually**.  
+    Alternatively, every user has to enter the provided Webhook link url in the Settings modal inside the app. Entering the username is required as well.
+    ![how-to-5](./public/how-to-4.png)
 
-6. Saving the Webhook in the app will connect the app with the Discord's server.
+6. Saving the Webhook in the app will connect the app with the Discord server.
 
 ## Demo preview:
 
