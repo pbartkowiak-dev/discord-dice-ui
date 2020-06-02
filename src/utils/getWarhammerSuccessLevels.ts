@@ -42,13 +42,18 @@ export default (
 	const isDouble = finalDieResult % 11 === 0;
 
 	let SL;
-
 	if (useFastSL && isSuccess) {
 		SL = getTens(finalDieResult);
 	} else {
 		const rolledTens = getTens(finalDieResult);
 		const skillTens = getTens(skillLevel);
 		SL = skillTens - rolledTens;
+
+		if (isAutoSuccess) {
+			SL = SL > 1 ? SL : 1;
+		} else if (isAutoFailure) {
+			SL = SL < -1 ? SL : -1;
+		}
 	}
 
 	if (!useFastSL && useDarkHeresySL) {
