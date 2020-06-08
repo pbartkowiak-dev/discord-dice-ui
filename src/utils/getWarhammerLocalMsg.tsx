@@ -27,13 +27,17 @@ const getWarhammerLocalMsg = (result:any, rollOptions:any, userSettings?:any):Lo
 	const fields = [];
 	const finalDieResult = results[0];
 	const finalDieResultString = finalDieResult <= 9 ? `0${finalDieResult}` : `${finalDieResult}`;
+
+	const useFastSL = rollOptions.warhammerSlMode === 'fastSL';
+	const useDarkHeresySL = rollOptions.warhammerSlMode === 'darkHeresySL';
+	const useWarhammer2eSL = rollOptions.warhammerSlMode === 'warhammer2eSL';
 	let title = '';
 
-	if (rollOptions.fastSL) {
+	if (useFastSL) {
 		title = 'Fast SL';
-	} else if (rollOptions.darkHeresySL) {
+	} else if (useDarkHeresySL) {
 		title = 'Dark Heresy II DoS';
-	} else if (rollOptions.warhammer2eSL) {
+	} else if (useWarhammer2eSL) {
 		title = 'Warhammer 2e DoS';
 	} else {
 		title = 'Warhammer 4e SL';
@@ -42,9 +46,9 @@ const getWarhammerLocalMsg = (result:any, rollOptions:any, userSettings?:any):Lo
 	const successLevels = getWarhammerSuccessLevels(
 		skillLevel,
 		finalDieResult,
-		!!rollOptions.fastSL,
-		!!rollOptions.darkHeresySL,
-		!!rollOptions.warhammer2eSL
+		useFastSL,
+		useDarkHeresySL,
+		useWarhammer2eSL
 	);
 
 	fields.push(
@@ -88,7 +92,7 @@ const getWarhammerLocalMsg = (result:any, rollOptions:any, userSettings?:any):Lo
 	}
 
 	let slWord = '';
-	if (rollOptions.darkHeresySL || rollOptions.warhammer2eSL) {
+	if (useDarkHeresySL || useWarhammer2eSL) {
 		if (successLevels.isSuccess || successLevels.isAutoSuccess) {
 			slWord = 'Degrees of Success';
 		} else {
@@ -99,7 +103,7 @@ const getWarhammerLocalMsg = (result:any, rollOptions:any, userSettings?:any):Lo
 	}
 
 	let slString = '';
-	if (rollOptions.darkHeresySL || rollOptions.warhammer2eSL) {
+	if (useDarkHeresySL || useWarhammer2eSL) {
 		slString = `${Math.abs(successLevels.SL)}`;
 	} else {
 		slString = successLevels.SL > 0 ? `+${successLevels.SL}` : `${successLevels.SL}`;
@@ -115,9 +119,9 @@ const getWarhammerLocalMsg = (result:any, rollOptions:any, userSettings?:any):Lo
 	const reversedResult = getReversedResult(finalDieResultString);
 	let hitLocation;
 
-	if (rollOptions.darkHeresySL) {
+	if (useDarkHeresySL) {
 		hitLocation = getDarkHeresyIIHitLocation(reversedResult)
-	} else if (rollOptions.warhammer2eSL) {
+	} else if (useWarhammer2eSL) {
 		hitLocation = getWarhammer2eHitLocation(reversedResult);
 	} else {
 		hitLocation = getWarhammer4eHitLocation(reversedResult);
@@ -127,8 +131,8 @@ const getWarhammerLocalMsg = (result:any, rollOptions:any, userSettings?:any):Lo
 		<HitLocations
 			result={reversedResult}
 			hitLocation={hitLocation}
-			isDarkHeresy={!!rollOptions.darkHeresySL}
-			isWarhammer2e={!!rollOptions.warhammer2eSL}
+			isDarkHeresy={!!useDarkHeresySL}
+			isWarhammer2e={!!useWarhammer2eSL}
 		/>
 	);
 

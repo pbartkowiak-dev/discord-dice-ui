@@ -54,3 +54,12 @@
 .specialSLContainer {
 	margin-bottom: 15px;
 }
+
+.specialSLContainer input {
+	margin-right: 10px;
+}
+
+.specialSLContainer label {
+	display: block;
+	margin-bottom: 0;
+}

@@ -2,7 +2,7 @@ import React, { useLayoutEffect } from 'react';
 import { connect } from 'react-redux';
 import { closeWarhammerModal, showMsg, saveWarhammerSlMode } from '../../actions';
 import WarhammerModal from './WarhammerModal';
-import localStorageWarhammerSlModeManager, { warhammerSlModeType } from '../../utils/localStorageWarhammerSlModeManager';
+import localStorageWarhammerSlModeManager from '../../utils/localStorageWarhammerSlModeManager';
 
 const mapStateToProps = (state:any) => {
 	return {
@@ -24,7 +24,7 @@ type WarhammerModalContainerProps = {
 	closeWarhammerModal: Function
 	showMsg: Function
 	saveWarhammerSlMode: Function
-	warhammerSlMode: warhammerSlModeType
+	warhammerSlMode: string
 }
 
 function WarhammerModalContainer({

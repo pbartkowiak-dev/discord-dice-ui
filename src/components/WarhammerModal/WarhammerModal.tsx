@@ -6,14 +6,14 @@ import { request } from '../../utils/request';
 import getWarhammerRequestMsg from '../../utils/getWarhammerRequestMsg';
 import getWarhammerLocalMsg from '../../utils/getWarhammerLocalMsg';
 import rollDice from '../../utils/rollDice';
-import localStorageWarhammerSlModeManager, { warhammerSlModeType } from '../../utils/localStorageWarhammerSlModeManager';
+import localStorageWarhammerSlModeManager from '../../utils/localStorageWarhammerSlModeManager';
 
 type WarhammerModalProps = {
 	userSettings: any
 	showWarhammerModal: boolean
 	closeWarhammerModal: Function
 	showMsg: Function
-	warhammerSlMode: warhammerSlModeType
+	warhammerSlMode: string
 }
 
 function WarhammerModal({
@@ -28,8 +28,13 @@ function WarhammerModal({
 		closeWarhammerModal();
 	};
 
+	const initialValues = {
+		warhammerSlMode
+	};
+
 	const handleSubmit = (values:any) => {
 		const rollOptions = { ...values };
+		const { warhammerSlMode } = rollOptions;
 		const result = rollDice({
 			diceType: 100,
 			rollOptions
@@ -40,12 +45,7 @@ function WarhammerModal({
 		showMsg(localMsg);
 		request(requestMsg);
 
-		const warhammerSlMode:warhammerSlModeType = {
-			fastSL: !!rollOptions.fastSL,
-			darkHeresySL: !!rollOptions.darkHeresySL,
-			warhammer4eSL: !!rollOptions.warhammer4eSL,
-			warhammer2eSL: !!rollOptions.warhammer2eSL
-		};
+
 		localStorageWarhammerSlModeManager.save(warhammerSlMode);
 
 		closeWarhammerModal();
@@ -60,7 +60,7 @@ function WarhammerModal({
 				<Modal.Body>
 					<WarhammerModalForm
 						onSubmit={values => handleSubmit(values)}
-						initialValues={warhammerSlMode}
+						initialValues={initialValues}
 						/>
 				</Modal.Body>
 				<Modal.Footer>

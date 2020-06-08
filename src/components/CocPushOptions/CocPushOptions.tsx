@@ -7,7 +7,6 @@ import { faQuestionCircle } from '@fortawesome/free-regular-svg-icons';
 import CodeSpan from '../CodeSpan/CodeSpan';
 import styles from './CocPushOptions.module.css';
 
-
 const pushInfo = 'Only skill and characteristic rolls can be pushed, not Luck, Sanity, or combat rolls, or rolls to determine an amount of damage or Sanity loss.';
 const luckInfo = 'Luck points may not be spent on Luck rolls, damage rolls, Sanity rolls, or rolls to determine the amount of Sanity points lost.';
 

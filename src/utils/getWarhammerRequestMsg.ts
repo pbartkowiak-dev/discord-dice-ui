@@ -17,24 +17,29 @@ const getRequestMsg = (result:any, rollOptions:any, userSettings:any) => {
 	const finalDieResult = results[0];
 	const finalDieResultString = finalDieResult <= 9 ? `0${finalDieResult}` : `${finalDieResult}`;
 	const msgTitle = `${username} rolled **\`1d100\`**. Result: \`${results[0]}\`.`;
+
+	const useFastSL = rollOptions.warhammerSlMode === 'fastSL';
+	const useDarkHeresySL = rollOptions.warhammerSlMode === 'darkHeresySL';
+	const useWarhammer2eSL = rollOptions.warhammerSlMode === 'warhammer2eSL';
+
 	let description;
 
 	const successLevels = getWarhammerSuccessLevels(
 		skillLevel,
 		finalDieResult,
-		!!rollOptions.fastSL,
-		!!rollOptions.darkHeresySL,
-		!!rollOptions.warhammer2eSL
+		useFastSL,
+		useDarkHeresySL,
+		useWarhammer2eSL
 	);
 	const successLevelIcon = successLevels.isSuccess || successLevels.isAutoSuccess ? ':green_circle:' : ':red_circle:';
 
 	description = `Roll: \`${finalDieResultString}\` vs. Skill level: \`${skillLevelString}\`.`;
 
-	if (rollOptions.fastSL) {
+	if (useFastSL) {
 		description += '\n**Fast SL** used.';
-	} else if (rollOptions.darkHeresySL) {
+	} else if (useDarkHeresySL) {
 		description += '\n**Dark Heresy II DoS** used.';
-	} else if (rollOptions.warhammer2eSL) {
+	} else if (useWarhammer2eSL) {
 		description += '\n**Warhammer 2e DoS** used.';
 	} else {
 		description += '\n**Default Warhammer 4e SL** used.';
@@ -55,7 +60,7 @@ const getRequestMsg = (result:any, rollOptions:any, userSettings:any) => {
 
 
 	let slWord = '';
-	if (rollOptions.darkHeresySL || rollOptions.warhammer2eSL) {
+	if (useDarkHeresySL || useWarhammer2eSL) {
 		if (successLevels.isSuccess || successLevels.isAutoSuccess) {
 			slWord = 'Degrees of Success';
 		} else {
@@ -65,7 +70,7 @@ const getRequestMsg = (result:any, rollOptions:any, userSettings:any) => {
 		slWord = 'Success Level';
 	}
 	let slString = '';
-	if (rollOptions.darkHeresySL || rollOptions.warhammer2eSL) {
+	if (useDarkHeresySL || useWarhammer2eSL) {
 		slString = `${Math.abs(successLevels.SL)}`;
 	} else {
 		slString = successLevels.SL > 0 ? `+${successLevels.SL}` : `${successLevels.SL}`;
@@ -78,9 +83,9 @@ const getRequestMsg = (result:any, rollOptions:any, userSettings:any) => {
 	const reversedResult = getReversedResult(finalDieResultString);
 	let hitLocation;
 
-	if (rollOptions.darkHeresySL) {
+	if (useDarkHeresySL) {
 		hitLocation = getDarkHeresyIIHitLocation(reversedResult)
-	} else if (rollOptions.warhammer2eSL) {
+	} else if (useWarhammer2eSL) {
 		hitLocation = getWarhammer2eHitLocation(reversedResult);
 	} else {
 		hitLocation = getWarhammer4eHitLocation(reversedResult);

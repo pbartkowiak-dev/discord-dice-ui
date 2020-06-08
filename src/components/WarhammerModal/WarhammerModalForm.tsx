@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from 'react';
 import { connect } from 'react-redux';
 import Form from 'react-bootstrap/Form';
@@ -9,13 +10,14 @@ import { faQuestionCircle } from '@fortawesome/free-regular-svg-icons';
 import { faPercent } from '@fortawesome/free-solid-svg-icons';
 import './WarhammerModalForm.css';
 
+
 const percentIcon = <span className="percent-icon"><FontAwesomeIcon icon={faPercent} /></span>;
 
 // @ts-ignore
-const createRenderer = render => ({ input, label, id, textMuted, meta, disabled }, ...rest) => {
+const createRenderer = render => ({ input, label, id, inputValue, textMuted, meta, disabled }, ...rest) => {
 	return (
 		<>
-			{render(input, label, id, textMuted, meta, disabled, rest)}
+			{render(input, label, id, inputValue, textMuted, meta, disabled, rest)}
 		</>
 	)
 };
@@ -45,15 +47,17 @@ const renderInput = createRenderer((input, label, id, textMuted, meta, disabled)
 });
 
 // @ts-ignore
-const RenderCheckbox = createRenderer((input, label, id, textMuted, meta, disabled) => {
+const RenderRadio = createRenderer((input, label, id, inputValue, textMuted, meta, disabled) => {
+
 	return (
 		<Form.Check
-			type="checkbox"
-			checked={input.value ? true : false}
+			{...input}
+			type="radio"
 			label={label}
-			disabled={disabled}
 			id={id}
-			custom {...input} />
+			name={id}
+			value={inputValue}
+			custom  />
 	);
 });
 
@@ -137,51 +141,59 @@ function Warhammer2eSLTooltip() {
 
 const warhammer4eSLLabel = <span>Use default Warhammer 4e SL <Warhammer4eSLTooltip/></span>;
 const fastSLLabel = <span>Use Warhammer 4e Fast SL <FastSLTooltip/></span>;
-const darkHeresyLabel = <span>Use Dark Heresy II DoS <DarkHeresyTooltip/></span>;
 const warhammer2eSLLabel = <span>Use Warhammer 2e DoS <Warhammer2eSLTooltip/></span>;
+const darkHeresyLabel = <span>Use Dark Heresy II DoS <DarkHeresyTooltip/></span>;
 
 function WarhammerModalForm({
 	invalid,
 	anyTouched,
 	submitFailed,
 	handleSubmit,
-	specialSL
+	formValues = {}
 }: any) {
-	const { fastSL, darkHeresySL, warhammer4eSL, warhammer2eSL } = specialSL;
+	const { warhammerSlMode } = formValues;
 	return (
 		<Form
 			className={ (invalid && (submitFailed || anyTouched)) ? 'form-invalid' : '' }
 			id="warhammer-mode-form"
 			onSubmit={handleSubmit}>
 				<div className="specialSLContainer">
-					<Field
-						name="warhammer4eSL"
-						id="warhammer4eSL"
-						label={warhammer4eSLLabel}
-						component={RenderCheckbox}
-						disabled={ fastSL || darkHeresySL || warhammer2eSL }
-					/>
-					<Field
-						name="fastSL"
-						id="fastSL"
-						label={fastSLLabel}
-						component={RenderCheckbox}
-						disabled={ warhammer4eSL || darkHeresySL || warhammer2eSL }
-					/>
-					<Field
-						name="warhammer2eSL"
-						id="warhammer2eSL"
-						label={warhammer2eSLLabel}
-						component={RenderCheckbox}
-						disabled={ fastSL || darkHeresySL || warhammer4eSL }
-					/>
-					<Field
-						name="darkHeresySL"
-						id="darkHeresySL"
-						label={darkHeresyLabel}
-						component={RenderCheckbox}
-						disabled={ fastSL || warhammer4eSL || warhammer2eSL }
-					/>
+					<label>
+						<Field
+							name="warhammerSlMode"
+							value="warhammer4eSL"
+							component="input"
+							type="radio"
+						/>
+						{warhammer4eSLLabel}
+					</label>
+					<label>
+						<Field
+							name="warhammerSlMode"
+							value="fastSL"
+							component="input"
+							type="radio"
+						/>
+						{fastSLLabel}
+					</label>
+					<label>
+						<Field
+							name="warhammerSlMode"
+							value="warhammer2eSL"
+							component="input"
+							type="radio"
+						/>
+						{warhammer2eSLLabel}
+					</label>
+					<label>
+						<Field
+							name="warhammerSlMode"
+							value="darkHeresySL"
+							component="input"
+							type="radio"
+						/>
+						{darkHeresyLabel}
+					</label>
 				</div>
 				<div className="skill-level-field">
 					<Field
@@ -235,5 +247,5 @@ const FormElement = reduxForm({
 const selector = formValueSelector(form);
 
 export default connect(state => ({
-	specialSL: selector(state, 'fastSL', 'darkHeresySL', 'warhammer4eSL', 'warhammer2eSL')
+	formValues: selector(state, 'fastSL', 'darkHeresySL', 'warhammer4eSL', 'warhammer2eSL', 'warhammerSlMode')
 }))(FormElement);
