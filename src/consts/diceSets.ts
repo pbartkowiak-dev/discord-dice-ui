@@ -14,3 +14,10 @@ export const warhammerSet = [
 	'd10',
 	'd5'
 ];
+
+export const conanSet = [
+	'd20conan-test',
+	'd20conan',
+	'd20conan-hl',
+	'd6conan',
+];

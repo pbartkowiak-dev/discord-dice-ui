@@ -16,6 +16,7 @@ type DiceModuleProps = {
 	openCoCModal: Function,
 	openWarhammerModal: Function,
 	openModifierModal: Function,
+	openConanModal: Function,
 	selectDice: Function
 };
 
@@ -26,6 +27,7 @@ function DiceModule ({
 	openModifierModal,
 	openCoCModal,
 	openWarhammerModal,
+	openConanModal,
 	selectDice
 }:DiceModuleProps
 ) {
@@ -54,6 +56,10 @@ function DiceModule ({
 			openWarhammerModal();
 			return;
 		}
+		if (diceType === 'd20conan-test') {
+			openConanModal();
+			return;
+		}
 		if (rollOptions.useModifier) {
 			selectDice({
 				diceType: diceTypeNum,
@@ -65,7 +71,15 @@ function DiceModule ({
 		}
 	};
 
-	const diceSetType = rollOptions.warhammerMode ? 'warhammer' : 'classic';
+	let diceSetType;
+	if (rollOptions.warhammerMode) {
+		diceSetType = 'warhammer';
+	} else if(rollOptions.conanMode) {
+			diceSetType = 'conan';
+	} else {
+		diceSetType = 'classic'
+	}
+
 	const diceSet = getDiceSet(diceSetType);
 	const diceSetElement = diceSet.map((diceType:any)  => {
 		return (

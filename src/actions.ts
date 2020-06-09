@@ -72,7 +72,7 @@ export function closeCoCModal() {
 	};
 }
 
-/* Warhammer4e MODAL *************************/
+/* Warhammer MODAL *************************/
 
 export const OPEN_WARHAMMER_MODAL = 'OPEN_WARHAMMER_MODAL';
 export const CLOSE_WARHAMMER_MODAL = 'CLOSE_WARHAMMER_MODAL';
@@ -87,6 +87,24 @@ export function openWarhammerModal() {
 export function closeWarhammerModal() {
 	return {
 		type: CLOSE_WARHAMMER_MODAL
+	};
+}
+
+/* CONAN MODAL *************************/
+
+export const OPEN_CONAN_MODAL = 'OPEN_CONAN_MODAL';
+export const CLOSE_CONAN_MODAL = 'CLOSE_CONAN_MODAL';
+
+
+export function openConanModal() {
+	return {
+		type: OPEN_CONAN_MODAL
+	};
+}
+
+export function closeConanModal() {
+	return {
+		type: CLOSE_CONAN_MODAL
 	};
 }
 

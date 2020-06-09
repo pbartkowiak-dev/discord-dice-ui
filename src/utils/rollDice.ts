@@ -46,6 +46,8 @@ const rollDice = ({
 	diceAmount = 1,
 	rollOptions
 }:rollDiceProps) => {
+	// @TODO DETECT CONAN COMBAT DIE
+	console.log('rollOptions', rollOptions)
 	const { cocBonus, cocTwoBonus, cocPenalty, cocTwoPenalty, skillLevel } = rollOptions;
 	const keepUnits = (cocBonus || cocTwoBonus || cocPenalty || cocTwoPenalty);
 	const result = {} as rollDiceResult;

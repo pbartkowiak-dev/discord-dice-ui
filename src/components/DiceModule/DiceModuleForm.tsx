@@ -44,12 +44,34 @@ function WarhammerTooltip() {
 	);
 }
 
+function ConanTooltip() {
+	const key = 'ConanTooltip';
+	return (
+		<>
+		<OverlayTrigger
+			key={key}
+			placement="bottom"
+			overlay={
+				<Tooltip id={`tooltip-${key}`}>
+					<span>Supports  <strong>d20 Conan Dice</strong> and <strong>d6 Combat Dice</strong>.</span>
+				</Tooltip>
+			}
+		><FontAwesomeIcon icon={faQuestionCircle} className="icon-info" />
+		</OverlayTrigger>
+		</>
+	);
+}
+
 const cocModeLabel = (
 	<span>Call of Cthulhu 7e Mode <CoCModTooltip/></span>
 );
 
 const warhammerModeLabel = (
 	<span>Warhammer Mode <WarhammerTooltip/></span>
+);
+
+const conanModeLabel = (
+	<span>Conan 2d20 Mode <ConanTooltip/></span>
 );
 
 // @ts-ignore
@@ -74,7 +96,7 @@ const RenderCheckbox = createRenderer((input, label, id, disabled) =>
 );
 
 function DiceModuleForm({ rollOptions }:any) {
-	const { warhammerMode, cocMode } = rollOptions;
+	const { warhammerMode, cocMode, conanMode } = rollOptions;
 	return (
 		<Form id ="roll-options-form" className="dice-module dice-form">
 			<Field
@@ -106,14 +128,21 @@ function DiceModuleForm({ rollOptions }:any) {
 				id="cocMode"
 				label={cocModeLabel}
 				component={RenderCheckbox}
-				disabled={warhammerMode}
+				disabled={warhammerMode || conanMode}
 			/>
 			<Field
 				name="warhammerMode"
 				id="warhammerMode"
 				label={warhammerModeLabel}
 				component={RenderCheckbox}
-				disabled={cocMode}
+				disabled={cocMode || conanMode}
+			/>
+			<Field
+				name="conanMode"
+				id="conanMode"
+				label={conanModeLabel}
+				component={RenderCheckbox}
+				disabled={cocMode || warhammerMode}
 			/>
 		</Form>
 	);
@@ -129,5 +158,5 @@ const FormElement = reduxForm({
 const selector = formValueSelector(form);
 
 export default connect(state => ({
-	rollOptions: selector(state, 'cocMode', 'warhammerMode')
+	rollOptions: selector(state, 'cocMode', 'warhammerMode', 'conanMode')
 }))(FormElement);

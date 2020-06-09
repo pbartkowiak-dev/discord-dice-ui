@@ -8,12 +8,14 @@ import ModifierModalContainer from './components/ModifierModal/ModifierModalCont
 import ResultsModalContainer from './components/ResultsModal/ResultsModalContainer';
 import CoCModalContainer from './components/CoCModal/CoCModalContainer';
 import WarhammerModalContainer from './components/WarhammerModal/WarhammerModalContainer';
+import ConanModalContainer from './components/ConanModal/ConanModalContainer';
 
 function App() {
 	return (
 		<div className="App">
 			<CoCModalContainer />
 			<WarhammerModalContainer />
+			<ConanModalContainer />
 			<ResultsModalContainer />
 			<ModifierModalContainer />
 			<SettingsModalContainer />

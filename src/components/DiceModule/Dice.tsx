@@ -5,6 +5,25 @@ import Dropdown from 'react-bootstrap/Dropdown';
 import Card from 'react-bootstrap/Card'
 import getDieNumberVal from '../../utils/getDieNumberVal';
 
+function getButtonLabel(diceType:string) {
+	if (diceType === 'd100SL') {
+		return 'd100 + SL';
+	}
+	if (diceType === 'd6conan') {
+		return 'd6 Combat Die';
+	}
+	if (diceType === 'd20conan-hl') {
+		return 'Hit Location';
+	}
+	if (diceType === 'd20conan') {
+		return 'd20';
+	}
+	if (diceType === 'd20conan-test') {
+		return 'Skill Test';
+	}
+	return diceType;
+}
+
 function Dice({
 	handleRollDice,
 	diceType,
@@ -14,7 +33,7 @@ function Dice({
 	const diceTypeNum = getDieNumberVal(diceType);
 
 	const DropdownContent = ({ rollOptions }:any) => {
-		const maxDiceInOneRoll = 5;
+		const maxDiceInOneRoll = 8;
 		const options =  new Array(maxDiceInOneRoll).fill('').map((_, index) => {
 			const isDisabled = ((
 					(rollOptions.cocMode && diceTypeNum === 100) ||
@@ -39,7 +58,7 @@ function Dice({
 		)
 	};
 
-	const buttonLabel = diceType === 'd100SL' ? 'd100 + SL' : diceType;
+	const buttonLabel = getButtonLabel(diceType);
 
 	let extraMark = null; 
 	if (diceType === 'd100SL') {
@@ -55,13 +74,13 @@ function Dice({
 				<div className="dice__image" onClick={() => handleRollDice(diceType) }></div>
 			</Card.Body>
 			<Card.Footer>
-					<DropdownButton
-						id="dropdown-basic-button"
-						type="success"
-						title={buttonLabel}
-						className="dice-button">
-							<DropdownContent
-								rollOptions={rollOptions} />
+				<DropdownButton
+					id="dropdown-basic-button"
+					variant="primary"
+					title={buttonLabel}
+					className="dice-button">
+						<DropdownContent
+							rollOptions={rollOptions} />
 				</DropdownButton>
 			</Card.Footer>
 		</Card>

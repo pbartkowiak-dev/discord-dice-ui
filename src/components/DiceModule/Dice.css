@@ -67,6 +67,11 @@
 .dice--d6 .dice__image {  background-image: url('../../img/d6.png') }
 .dice--d4 .dice__image {  background-image: url('../../img/d4.png') }
 
+.dice--d20conan .dice__image,
+.dice--d20conan-test .dice__image { background-image: url('../../img/d20conan.png') }
+.dice--d20conan-hl .dice__image { background-image: url('../../img/d20conan-hl.png') }
+.dice--d6conan .dice__image {  background-image: url('../../img/d6conan.png') }
+
 @media only screen and (min-width: 480px) {
 	.dice {
 		flex-direction: column;

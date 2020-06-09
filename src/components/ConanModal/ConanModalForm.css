@@ -1,0 +1,110 @@
+.conan-skill-level-field {
+	justify-content: space-evenly;
+}
+
+.conan-skill-level-field label {
+	margin-bottom: 1px;
+}
+
+.conan-field-icon {
+	display: none;
+	font-size: 1rem;
+	color: #7c7c7c
+}
+
+.conan-radio-fields {
+	display: flex;
+}
+
+.conan-radio-fields input {
+	margin-right: 5px;
+}
+
+.conan-radio-fields label {
+	margin-right: 10px;
+}
+
+.fortune {
+	padding-top: 5px;
+	margin-top: 10px;
+	border-top: 1px solid #bebebe;
+}
+
+.fortune-title {
+	margin-bottom: 0;
+	margin-top: 0;
+	font-size: 18px;
+}
+
+.dice {
+	margin-bottom: 10px;
+}
+
+.dice-title {
+	margin-bottom: 0;
+	margin-top: 10px;
+	font-size: 25px;
+}
+
+.dice-row {
+	display: flex;
+	justify-content: space-around;
+	width: 60%;
+	margin: 0 auto 15px;
+}
+
+.dice-icon {
+	font-size: 40px;
+	color: #7e7e7e;
+	cursor: pointer;
+	opacity: .8;
+}
+
+.die-container {
+	display: inline-block;
+	position: relative;
+}
+
+.dice-icon.active {
+	color: #28a745;
+	opacity: 1;
+}
+
+.dice-icon.hovered {
+	color: #bebebe;
+	opacity: 1;
+}
+
+.dice-icon.active.hovered {
+	color: #1ad345;
+	opacity: 1;
+}
+
+.die-fortune-point {
+	font-size: 21px;
+    position: absolute;
+    top: 8px;
+    margin: 0 auto;
+    right: 7px;
+    font-weight: bold;
+    display: inline-block;
+    background: white;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    line-height: 25px;
+	color: darkolivegreen;
+	pointer-events: none;
+}
+
+@media only screen and (min-width: 480px) {
+	.conan-field-icon {
+		display: inline-block;
+	}
+
+	.conan-radio-fields {
+	
+	}
+	
+}
