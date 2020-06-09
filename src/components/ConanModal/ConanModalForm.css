@@ -1,3 +1,7 @@
+#conan-mode-form {
+	text-align: center;
+}
+
 .conan-skill-level-field {
 	justify-content: space-evenly;
 }
@@ -14,6 +18,7 @@
 
 .conan-radio-fields {
 	display: flex;
+	justify-content: center;;
 }
 
 .conan-radio-fields input {
@@ -34,6 +39,7 @@
 	margin-bottom: 0;
 	margin-top: 0;
 	font-size: 18px;
+	text-align: center;
 }
 
 .dice {
@@ -44,17 +50,18 @@
 	margin-bottom: 0;
 	margin-top: 10px;
 	font-size: 25px;
+	text-align: center;
 }
 
 .dice-row {
 	display: flex;
 	justify-content: space-around;
-	width: 60%;
+	width: 70%;
 	margin: 0 auto 15px;
 }
 
 .dice-icon {
-	font-size: 40px;
+	font-size: 50px;
 	color: #7e7e7e;
 	cursor: pointer;
 	opacity: .8;
@@ -81,21 +88,26 @@
 }
 
 .die-fortune-point {
-	font-size: 21px;
-    position: absolute;
-    top: 8px;
-    margin: 0 auto;
-    right: 7px;
-    font-weight: bold;
-    display: inline-block;
-    background: white;
-    border-radius: 50%;
-    width: 25px;
-    height: 25px;
-    text-align: center;
-    line-height: 25px;
+	font-size: 23px;
+	position: absolute;
+	top: 9px;
+	margin: 0 auto;
+	right: 8px;
+	font-weight: bold;
+	display: inline-block;
+	background: white;
+	border-radius: 50%;
+	width: 32px;
+	height: 32px;
+	text-align: center;
+	line-height: 31px;
 	color: darkolivegreen;
 	pointer-events: none;
+	display: none;
+}
+
+.die-fortune-point.show {
+	display: inline-block;
 }
 
 @media only screen and (min-width: 480px) {

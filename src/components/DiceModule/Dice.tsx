@@ -1,5 +1,6 @@
 import React from 'react';
 import './Dice.css';
+import Button from 'react-bootstrap/Button';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Card from 'react-bootstrap/Card'
@@ -10,7 +11,7 @@ function getButtonLabel(diceType:string) {
 		return 'd100 + SL';
 	}
 	if (diceType === 'd6conan') {
-		return 'd6 Combat Die';
+		return 'Combat Die';
 	}
 	if (diceType === 'd20conan-hl') {
 		return 'Hit Location';
@@ -30,22 +31,13 @@ function Dice({
 	rollOptions
 } : DiceProps
 ) {
-	const diceTypeNum = getDieNumberVal(diceType);
-
 	const DropdownContent = ({ rollOptions }:any) => {
 		const maxDiceInOneRoll = 8;
 		const options =  new Array(maxDiceInOneRoll).fill('').map((_, index) => {
-			const isDisabled = ((
-					(rollOptions.cocMode && diceTypeNum === 100) ||
-					(diceType === 'd100SL')
-				) &&
-				index > 0
-			);
 			const dieWord = index === 0 ? 'die' : 'dice';
 			return (
 				<Dropdown.Item
 					key={index}
-					disabled={isDisabled}
 					onClick={ () => handleRollDice(diceType, index + 1) }>
 					<span>Roll <strong>{index + 1}</strong> {dieWord}</span>
 				</Dropdown.Item>
@@ -57,6 +49,18 @@ function Dice({
 			</>
 		)
 	};
+
+	const shouldUseButton = (diceType:string, rollOptions:any) => {
+		if (
+			diceType === 'd100SL' ||
+			diceType=== 'd20conan-hl' ||
+			diceType=== 'd20conan-test' ||
+			(diceType=== 'd100' && rollOptions.cocMode)
+		) {
+			return true;
+		}
+		return false;
+	}
 
 	const buttonLabel = getButtonLabel(diceType);
 
@@ -74,14 +78,21 @@ function Dice({
 				<div className="dice__image" onClick={() => handleRollDice(diceType) }></div>
 			</Card.Body>
 			<Card.Footer>
-				<DropdownButton
-					id="dropdown-basic-button"
-					variant="primary"
-					title={buttonLabel}
-					className="dice-button">
+				{
+					shouldUseButton(diceType, rollOptions) 
+					? <Button
+						onClick={ () => handleRollDice(diceType, 1) }
+						variant="primary">{buttonLabel}</Button>
+					: <DropdownButton
+							id="dropdown-basic-button"
+							variant="primary"
+							title={buttonLabel}
+							className="dice-button">
 						<DropdownContent
 							rollOptions={rollOptions} />
-				</DropdownButton>
+					</DropdownButton>
+				}
+
 			</Card.Footer>
 		</Card>
 	);

@@ -22,7 +22,7 @@ const createRenderer = render => ({ input, label, id, textMuted, meta, disabled 
 
 const tnInfo = <span>The skill’s <strong>Target Number</strong> (TN) is equal to the attribute for that skill, plus any ranks in Expertise the character possesses for that skill.</span>;
 const focusInfo = <span>Each d20 result equal to or less than the character’s <strong>Focus</strong> for that skill scores two successes instead of one.</span>;
-const untrainedTestInfo = <span>If the character has no ranks in Expertise or Focus makes an <strong>untrained formValues</strong>.</span>;
+const untrainedTestInfo = <span>If the character has no ranks in Expertise or Focus makes an <strong>untrained test</strong>.</span>;
 const fortuneInfo = <span>Adds "pre-rolled" bonus d20 with a score of 1 to a test.</span>
 
 function TnTooltip() {
@@ -168,7 +168,7 @@ function DiceRow({ dice, change, setHover, hover, fortune }:any ) {
 			<div className="die-container">
 				<FontAwesomeIcon className={classNames({
 					'dice-icon': true,
-					active: (Number(dice) >= 3) || Number(fortune) >= 1,
+					active: ((Number(dice) >= 3) || Number(fortune) >= 1),
 					hovered: hover >= 3
 					})}
 					icon={faDiceD20}
@@ -176,12 +176,15 @@ function DiceRow({ dice, change, setHover, hover, fortune }:any ) {
 					onMouseLeave={() => setHover(0)}
 					onClick={() => handleDieClick('3')}
 				/>
-				<span className="die-fortune-point">1</span>
+				<span className={classNames({
+					'die-fortune-point': true,
+					show: Number(fortune) >= 1
+					})}>1</span>
 			</div>
 			<div className="die-container">
 				<FontAwesomeIcon className={classNames({
 					'dice-icon': true,
-					active: Number(dice) >= 4,
+					active: ((Number(dice) >= 4) || Number(fortune) >= 2),
 					hovered: hover >= 4
 					})}
 					icon={faDiceD20}
@@ -189,12 +192,15 @@ function DiceRow({ dice, change, setHover, hover, fortune }:any ) {
 					onMouseLeave={() => setHover(0)}
 					onClick={() => handleDieClick('4')}
 				/>
-				<span className="die-fortune-point">1</span>
+				<span className={classNames({
+					'die-fortune-point': true,
+					show: Number(fortune) >= 2
+					})}>1</span>
 			</div>
 			<div className="die-container">
 				<FontAwesomeIcon className={classNames({
 					'dice-icon': true,
-					active: Number(dice) >= 5,
+					active: ((Number(dice) >= 5) || Number(fortune) >= 3),
 					hovered: hover >= 5
 					})}
 					icon={faDiceD20}
@@ -202,7 +208,10 @@ function DiceRow({ dice, change, setHover, hover, fortune }:any ) {
 					onMouseLeave={() => setHover(0)}
 					onClick={() => handleDieClick('5')}
 				/>
-				<span className="die-fortune-point">1</span>
+				<span className={classNames({
+					'die-fortune-point': true,
+					show: Number(fortune) >= 3
+					})}>1</span>
 			</div>
 		</div>
 	);
@@ -319,6 +328,7 @@ function ConanModalForm({
 								component="input"
 								type="radio"
 								value="1"
+								onChange={ () => Number(dice) < 3 ? change('dice', '3') : null}
 							/>
 							One
 						</label>
@@ -328,6 +338,7 @@ function ConanModalForm({
 								component="input"
 								type="radio"
 								value="2"
+								onChange={ () => Number(dice) < 4 ? change('dice', '4') : null }
 							/>
 							Two
 						</label>
@@ -337,6 +348,7 @@ function ConanModalForm({
 								component="input"
 								type="radio"
 								value="3"
+								onChange={ () => Number(dice) < 5 ? change('dice', '5') : null }
 							/>
 							Three
 						</label>
@@ -385,5 +397,5 @@ const FormElement = reduxForm({
 const selector = formValueSelector(form);
 
 export default connect(state => ({
-	formValues: selector(state, 'untrainedTest', 'focus', 'tn', 'dice')
+	formValues: selector(state, 'untrainedTest', 'focus', 'tn', 'dice', 'fortune')
 }))(FormElement);
