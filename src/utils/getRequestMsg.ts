@@ -1,4 +1,5 @@
 import { requestParams } from './request';
+import { getColor } from './getColor';
 
 const getRequestMsg = (result:any, rollOptions:any, userSettings:any) => {
 	const {
@@ -59,7 +60,7 @@ const getRequestMsg = (result:any, rollOptions:any, userSettings:any) => {
 	const msgParams:requestParams = {
 		hookUrl: userSettings.hookUrl,
 		msgTitle,
-		color: userSettings.userColor,
+		color: getColor(),
 		fields,
 		description
 	};

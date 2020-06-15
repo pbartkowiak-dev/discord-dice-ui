@@ -1,6 +1,7 @@
 import { requestParams } from './request';
 import getSuccessLevels from './getSuccessLevels';
 import getSuccessLevelString from './getSuccessLevelString';
+import { SUCCESS, FAILURE, getColor } from './getColor';
 
 const getRequestMsg = (result:any, rollOptions:any, userSettings:any) => {
 	const {
@@ -44,7 +45,7 @@ const getRequestMsg = (result:any, rollOptions:any, userSettings:any) => {
 	const msgParams:requestParams = {
 		hookUrl: userSettings.hookUrl,
 		msgTitle,
-		color: userSettings.userColor,
+		color: successLevels.isSuccess ? getColor(SUCCESS) : getColor(FAILURE),
 		fields,
 		description
 	};

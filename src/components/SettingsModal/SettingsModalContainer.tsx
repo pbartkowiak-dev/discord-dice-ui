@@ -4,7 +4,6 @@ import { openSettingsModal, closeSettingsModal, saveUserSettings } from '../../a
 import SettingsModal from './SettingsModal';
 import localStorageUserSettingsManager from '../../utils/localStorageUserSettingsManager';
 import queryParamsManager from '../../utils/queryParamsManager';
-import getRandomUserColor from '../../utils/getRandomUserColor';
 import { DISCORD_WEBHOOK_URL } from '../../consts/urls';
 
 const mapStateToProps = (state:any) => {
@@ -37,9 +36,8 @@ function SettingsModalContainer({
 
 		const userSettings = {
 			hookUrl: queryDiscordUrl || localStorageUserSettings.hookUrl,
-			username: queryUsername || localStorageUserSettings.username,
-			userColor: localStorageUserSettings.userColor || getRandomUserColor()
-		}
+			username: queryUsername || localStorageUserSettings.username
+		};
 	
 		saveUserSettings(userSettings);
 

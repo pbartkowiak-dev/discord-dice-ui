@@ -3,7 +3,6 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import UserSettingsForm from './UserSettingsForm';
 import localStorageUserSettingsManager from '../../utils/localStorageUserSettingsManager';
-import getRandomUserColor from '../../utils/getRandomUserColor';
 import './SettingsModal.css';
 import { version } from '../../../package.json';
 
@@ -12,10 +11,6 @@ type SettingsModalProps = {
 	closeSettingsModal: Function,
 	saveUserSettings: Function,
 	userSettings: any
-}
-
-type errorsProps = {
-	username?: string
 }
 
 function SettingsModal({
@@ -30,12 +25,8 @@ function SettingsModal({
 	};
 
 	const handleSubmit = (values:any) => {
-		const valuesWithColor = {
-			...values,
-			userColor: getRandomUserColor()
-		};
-		saveUserSettings(valuesWithColor);
-		localStorageUserSettingsManager.save(valuesWithColor);
+		saveUserSettings(values);
+		localStorageUserSettingsManager.save(values);
 		closeSettingsModal();
 	};
 

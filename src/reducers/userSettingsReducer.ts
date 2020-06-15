@@ -2,14 +2,12 @@ import { SAVE_USER_SETTINGS } from '../actions';
 
 type userSettingsType = {
 	username: string,
-	hookUrl: string,
-	userColor: number
+	hookUrl: string
 }
 
 const initialState:userSettingsType = {
 	username: '',
-	hookUrl: '',
-	userColor: 3559404
+	hookUrl: ''
 };
 
 function userSettingsReducer(state = initialState, action:any) {
