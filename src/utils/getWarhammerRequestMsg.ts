@@ -5,6 +5,7 @@ import getReversedResult from './getReversedResult';
 import getWarhammer2eHitLocation from './getWarhammer2eHitLocation';
 import getWarhammer4eHitLocation from './getWarhammer4eHitLocation';
 import getDarkHeresyIIHitLocation from './getDarkHeresyIIHitLocation';
+import { SUCCESS, FAILURE, getColor } from './getColor';
 
 const getRequestMsg = (result:any, rollOptions:any, userSettings:any) => {
 	const {
@@ -99,7 +100,7 @@ const getRequestMsg = (result:any, rollOptions:any, userSettings:any) => {
 	const msgParams:requestParams = {
 		hookUrl: userSettings.hookUrl,
 		msgTitle,
-		color: userSettings.userColor,
+		color: successLevels.isSuccess || successLevels.isAutoSuccess ? getColor(SUCCESS) : getColor(FAILURE),
 		fields,
 		description
 	};
