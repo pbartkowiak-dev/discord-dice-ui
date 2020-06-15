@@ -6,8 +6,12 @@
 	justify-content: space-evenly;
 }
 
-.conan-skill-level-field label {
+#conan-mode-form label {
 	margin-bottom: 1px;
+}
+
+.conan-skill-level-field {
+	margin-bottom: 0;
 }
 
 .conan-field-icon {

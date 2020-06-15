@@ -1,11 +1,7 @@
 import React from 'react';
 import CodeSpan from '../components/CodeSpan/CodeSpan';
-import getWarhammerSuccessLevels from './getWarhammerSuccessLevels';
-import getReversedResult from './getReversedResult';
-import getWarhammer2eHitLocation from './getWarhammer2eHitLocation';
-import getWarhammer4eHitLocation from './getWarhammer4eHitLocation';
-import getDarkHeresyIIHitLocation from './getDarkHeresyIIHitLocation';
-import ResultVsSkillRow from '../components/ResultVsSkillRow/ResultVsSkillRow';
+import getConanSuccessLevels from './getConanSuccessLevel';
+
 import HitLocations from '../components/HitLocations/HitLocations';
 import styles from '../components/ResultsModal/ResultsModal.module.css';
 
@@ -18,7 +14,7 @@ export type LocalMsgParamsType = {
 	userSettings?: any
 }
 
-const getWarhammerLocalMsg = (result:any, rollOptions:any, userSettings?:any):LocalMsgParamsType => {
+const getConanLocalMsg = (result:any, rollOptions:any, userSettings?:any):LocalMsgParamsType => {
 	const {
 		results,
 		skillLevel
@@ -29,115 +25,45 @@ const getWarhammerLocalMsg = (result:any, rollOptions:any, userSettings?:any):Lo
 	const finalDieResultString = finalDieResult <= 9 ? `0${finalDieResult}` : `${finalDieResult}`;
 	let title = '';
 
-	if (rollOptions.fastSL) {
-		title = 'Fast SL';
-	} else if (rollOptions.darkHeresySL) {
-		title = 'Dark Heresy II DoS';
-	} else if (rollOptions.warhammer2eSL) {
-		title = 'Warhammer 2e DoS';
-	} else {
-		title = 'Warhammer 4e SL';
-	}
 
-	const successLevels = getWarhammerSuccessLevels(
-		skillLevel,
-		finalDieResult,
-		!!rollOptions.fastSL,
-		!!rollOptions.darkHeresySL,
-		!!rollOptions.warhammer2eSL
-	);
+	const successLevels = {};
+	// const successLevels = getConanSuccessLevels(
+	// 	skillLevel,
+	// 	finalDieResult
+	// );
 
-	fields.push(
-		<ResultVsSkillRow
-			skillLevel={skillLevelString}
-			finalDieResult={finalDieResultString}
-			isSuccess={successLevels.isSuccess}
-		/>
-	);
 
-	if (successLevels.isSuccess && !successLevels.isAutoSuccess) {
-		fields.push(
-			<div className={`${styles.warhammerResult} ${styles.warhammerResultSuccess}`}>Success</div>
-		);
-	}
-	if (successLevels.isAutoSuccess) {
-		fields.push(
-			<div className={`${styles.warhammerResult} ${styles.warhammerResultSuccess}`}>Automatic Success</div>
-		);
-	}
-	if (successLevels.isFailure && !successLevels.isAutoFailure) {
-		fields.push(
-			<div className={`${styles.warhammerResult} ${styles.warhammerResultFailure}`}>Failure</div>
-		);
-	}
-	if (successLevels.isAutoFailure) {
-		fields.push(
-			<div className={`${styles.warhammerResult} ${styles.warhammerResultFailure}`}>Automatic Failure</div>
-		);
-	}
-	if (successLevels.isDouble) {
-		fields.push(
-			<div className={`${styles.warhammerResult}`}>Double</div>
-		);
-	}
-	if (rollOptions.rerolledTimes) {
-		const timesWord = rollOptions.rerolledTimes === 1 ? 'time' : 'times';
-		fields.push(
-			<div className={`${styles.warhammerResult}`}>Rerolled <CodeSpan>{rollOptions.rerolledTimes}</CodeSpan> {timesWord}</div>
-		);
-	}
+	// if (successLevels.isSuccess && !successLevels.isAutoSuccess) {
+	// 	fields.push(
+	// 		<div className={`${styles.ConanResult} ${styles.ConanResultSuccess}`}>Success</div>
+	// 	);
+	// }
+	// if (successLevels.isAutoSuccess) {
+	// 	fields.push(
+	// 		<div className={`${styles.ConanResult} ${styles.ConanResultSuccess}`}>Automatic Success</div>
+	// 	);
+	// }
 
-	let slWord = '';
-	if (rollOptions.darkHeresySL || rollOptions.warhammer2eSL) {
-		if (successLevels.isSuccess || successLevels.isAutoSuccess) {
-			slWord = 'Degrees of Success';
-		} else {
-			slWord = 'Degrees of Failure';
-		}
-	} else {
-		slWord = 'Success Level';
-	}
-
-	let slString = '';
-	if (rollOptions.darkHeresySL || rollOptions.warhammer2eSL) {
-		slString = `${Math.abs(successLevels.SL)}`;
-	} else {
-		slString = successLevels.SL > 0 ? `+${successLevels.SL}` : `${successLevels.SL}`;
-	}
+	// if (rollOptions.rerolledTimes) {
+	// 	const timesWord = rollOptions.rerolledTimes === 1 ? 'time' : 'times';
+	// 	fields.push(
+	// 		<div className={`${styles.ConanResult}`}>Rerolled <CodeSpan>{rollOptions.rerolledTimes}</CodeSpan> {timesWord}</div>
+	// 	);
+	// }
 
 	fields.push(
 		<div className={styles.slResult}>
-			<div><span className={styles.slResultLabel}>{slWord}:</span></div>
-			<div><CodeSpan className={styles.slResultSpan}>{slString}</CodeSpan></div>
+			<div><span className={styles.slResultLabel}>{}:</span></div>
+			<div><CodeSpan className={styles.slResultSpan}>{}</CodeSpan></div>
 		</div>
 	);
 
-	const reversedResult = getReversedResult(finalDieResultString);
-	let hitLocation;
-
-	if (rollOptions.darkHeresySL) {
-		hitLocation = getDarkHeresyIIHitLocation(reversedResult)
-	} else if (rollOptions.warhammer2eSL) {
-		hitLocation = getWarhammer2eHitLocation(reversedResult);
-	} else {
-		hitLocation = getWarhammer4eHitLocation(reversedResult);
-	}
-
-	fields.push(
-		<HitLocations
-			result={reversedResult}
-			hitLocation={hitLocation}
-			isDarkHeresy={!!rollOptions.darkHeresySL}
-			isWarhammer2e={!!rollOptions.warhammer2eSL}
-		/>
-	);
-
-	rollOptions.warhammerMode = true;
+	rollOptions.ConanMode = true;
 
 	return {
 		title,
 		fields,
-		isSuccess: successLevels.isSuccess,
+		// isSuccess: successLevels.isSuccess,
 
 		finalDieResult,
 		rollOptions,
@@ -145,4 +71,4 @@ const getWarhammerLocalMsg = (result:any, rollOptions:any, userSettings?:any):Lo
 	};
 };
 
-export default getWarhammerLocalMsg;
+export default getConanLocalMsg;

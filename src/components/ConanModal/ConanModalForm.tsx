@@ -118,6 +118,11 @@ const renderInput = createRenderer((input, label, id, textMuted, meta, disabled)
 				/>
 			{ hasError && <Form.Control.Feedback type="invalid">{ error }</Form.Control.Feedback> }
 			{ textMuted && <Form.Text className="text-muted">{ textMuted }</Form.Text> }
+			<Form.Control type="range" 
+				min="0"
+				max="5"
+				step="1"
+			custom />
 		</Form.Group>
 	);
 });
@@ -253,6 +258,17 @@ function ConanModalForm({
 							component={renderInput}
 						/>
 					
+					</div>
+				</div>
+				vs.
+				<div className="skill-level-field conan-skill-level-field">
+					<div className="conan-field">
+						<Field
+							id="difficulty"
+							name="difficulty"
+							label={<span>Test Difficulty</span>}
+							component={renderInput}
+						/>
 					</div>
 				</div>
 				<div className="dice">
