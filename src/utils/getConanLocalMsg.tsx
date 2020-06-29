@@ -19,10 +19,11 @@ const getConanLocalMsg = (result:any, rollOptions:any, userSettings?:any):LocalM
 		results,
 		skillLevel
 	} = result;
+	const { dice, difficulty, focus, fortune, tn,	untrainedTest } = rollOptions;
+	
 	const skillLevelString = skillLevel <= 9 ? `0${skillLevel}` : `${skillLevel}`;
 	const fields = [];
-	const finalDieResult = results[0];
-	const finalDieResultString = finalDieResult <= 9 ? `0${finalDieResult}` : `${finalDieResult}`;
+
 	let title = '';
 
 
@@ -58,7 +59,7 @@ const getConanLocalMsg = (result:any, rollOptions:any, userSettings?:any):LocalM
 		</div>
 	);
 
-	rollOptions.ConanMode = true;
+	rollOptions.conanMode = true;
 
 	return {
 		title,

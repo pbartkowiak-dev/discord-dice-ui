@@ -31,13 +31,13 @@ type rollDiceResult = {
 	highest: number
 	lowest: number
 
-	cocBonusResult: number | undefined
-	cocPenaltyResult: number | undefined
-	cocBonus: boolean
-	cocPenalty: boolean
-	cocTwoBonus: boolean
-	cocTwoPenalty: boolean
-	skillLevel: number | undefined
+	cocBonusResult?: number | undefined
+	cocPenaltyResult?: number | undefined
+	cocBonus?: boolean
+	cocPenalty?: boolean
+	cocTwoBonus?: boolean
+	cocTwoPenalty?: boolean
+	skillLevel?: number | undefined
 }
 
 const rollDice = ({
@@ -52,10 +52,12 @@ const rollDice = ({
 	const keepUnits = (cocBonus || cocTwoBonus || cocPenalty || cocTwoPenalty);
 	const result = {} as rollDiceResult;
 
-	if (cocBonus || cocPenalty) {
-		diceAmount = 2;
-	} else if (cocTwoBonus || cocTwoPenalty) {
-		diceAmount = 3;
+	if (rollOptions.cocMode) {
+		if (cocBonus || cocPenalty) {
+			diceAmount = 2;
+		} else if (cocTwoBonus || cocTwoPenalty) {
+			diceAmount = 3;
+		}
 	}
 
 	result.results = getResultsArray(diceType, diceAmount, keepUnits);
@@ -67,13 +69,15 @@ const rollDice = ({
 	result.highest = Math.max(...result.results) + Number(modifier);
 	result.lowest = Math.min(...result.results) + Number(modifier);
 
-	result.cocBonusResult = (cocBonus || cocTwoBonus) ? Math.min(...result.results) : undefined;
-	result.cocPenaltyResult = (cocPenalty || cocTwoPenalty) ?  Math.max(...result.results) : undefined;
-	result.cocBonus = cocBonus;
-	result.cocPenalty = cocBonus;
-	result.cocTwoBonus = cocTwoBonus;
-	result.cocTwoPenalty = cocTwoPenalty;
-	result.skillLevel = skillLevel ? Number(skillLevel) : undefined;
+	if (rollOptions.cocMode) {
+		result.cocBonusResult = (cocBonus || cocTwoBonus) ? Math.min(...result.results) : undefined;
+		result.cocPenaltyResult = (cocPenalty || cocTwoPenalty) ?  Math.max(...result.results) : undefined;
+		result.cocBonus = cocBonus;
+		result.cocPenalty = cocBonus;
+		result.cocTwoBonus = cocTwoBonus;
+		result.cocTwoPenalty = cocTwoPenalty;
+		result.skillLevel = skillLevel ? Number(skillLevel) : undefined;
+	}
 
 	if (modifier === 0) {
 		result.modSymbol = '';
