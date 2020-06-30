@@ -10,7 +10,7 @@ export type LocalMsgParamsType = {
 	fields: Array<any>
 	isSuccess?: boolean
 	rollOptions?: any
-	finalDieResult?: number,
+	// finalDieResult?: number,
 	userSettings?: any
 }
 
@@ -66,7 +66,7 @@ const getConanLocalMsg = (result:any, rollOptions:any, userSettings?:any):LocalM
 		fields,
 		// isSuccess: successLevels.isSuccess,
 
-		finalDieResult,
+		// finalDieResult,
 		rollOptions,
 		userSettings
 	};

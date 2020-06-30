@@ -36,13 +36,23 @@
 .fortune {
 	padding-top: 5px;
 	margin-top: 10px;
+	padding-bottom: 5px;
+	margin-bottom: 10px;
 	border-top: 1px solid #bebebe;
+	border-bottom: 1px solid #bebebe;
 }
 
 .fortune-title {
 	margin-bottom: 0;
 	margin-top: 0;
 	font-size: 18px;
+	text-align: center;
+}
+
+.assistance-title {
+	margin-bottom: 8px;
+	margin-top: 0;
+	font-size: 16px;
 	text-align: center;
 }
 
@@ -88,6 +98,26 @@
 
 .dice-icon.active.hovered {
 	color: #1ad345;
+	opacity: 1;
+}
+
+/* assistance-dice-row */
+.assistance-dice-row.dice-row {
+	width: 50%;
+}
+.assistance-dice-row .dice-icon {
+	font-size: 38px;
+}
+.assistance-dice-row .dice-icon.active {
+	color: #b8551c;
+	opacity: 1;
+}
+.assistance-dice-row .dice-icon.active.hovered {
+	color: #da8e2c;
+	opacity: 1;
+}
+.assistance-dice-row .dice-icon.hovered {
+	color: #bebebe;
 	opacity: 1;
 }
 
