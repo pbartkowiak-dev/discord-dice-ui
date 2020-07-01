@@ -21,8 +21,6 @@ const getConanLocalMsg = (results:Array<number>, rollOptions:any, userSettings?:
 	const { dice, difficulty, focus, fortune, tn, untrainedTest } = rollOptions;
 
 	const fields = [];
-	let title = '';
-
 
 	const successLevel:conanSuccessLevelType = getConanSuccessLevel(
 		results,
@@ -41,9 +39,18 @@ const getConanLocalMsg = (results:Array<number>, rollOptions:any, userSettings?:
 		return <span><CodeSpan>{result}</CodeSpan>,&nbsp;</span>
 	});
 
-	fields.push(
-		<div>{rollResults}</div>
-	);
+	const fortuneUsed = (fortune && Number(fortune) > 0)
+		? <p>Fortune points used: <CodeSpan>{fortune}</CodeSpan></p>
+		: null;
+
+	const title = (
+		<div>
+			<p>You rolled <CodeSpan>{dice}d20</CodeSpan></p>
+			{ fortuneUsed }
+			<p>Results:</p>
+			<p>{rollResults}</p>
+		</div>
+	)
 
 	fields.push(
 		<ResultVsSkillRow

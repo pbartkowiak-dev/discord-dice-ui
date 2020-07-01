@@ -26,7 +26,10 @@ function ConanModal({
 	};
 
 	const handleSubmit = (values:any) => {
-		const rollOptions = { ...values };
+		const rollOptions = {
+			...values,
+			conanMode: true
+		};
 		const result = rollDice({
 			diceType: 20,
 			diceAmount: Number(rollOptions.dice),

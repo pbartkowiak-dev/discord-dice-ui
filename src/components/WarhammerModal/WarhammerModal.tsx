@@ -33,7 +33,10 @@ function WarhammerModal({
 	};
 
 	const handleSubmit = (values:any) => {
-		const rollOptions = { ...values };
+		const rollOptions = {
+			...values,
+			warhammerMode: true
+		};
 		const { warhammerSlMode } = rollOptions;
 		const result = rollDice({
 			diceType: 100,

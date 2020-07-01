@@ -26,7 +26,10 @@ function CoCModal({
 	};
 
 	const handleSubmit = (values:any) => {
-		const rollOptions = { ...values };
+		const rollOptions = {
+			...values,
+			cocMode: true
+		};
 		const result = rollDice({
 			diceType: 100,
 			rollOptions

@@ -51,6 +51,7 @@ const rollDice = ({
 	const { cocBonus, cocTwoBonus, cocPenalty, cocTwoPenalty, skillLevel, fortune } = rollOptions;
 	const keepUnits = (cocBonus || cocTwoBonus || cocPenalty || cocTwoPenalty);
 	const result = {} as rollDiceResult;
+	const fortuneNum = Number(fortune);
 
 	if (rollOptions.cocMode) {
 		if (cocBonus || cocPenalty) {
@@ -60,13 +61,17 @@ const rollDice = ({
 		}
 	}
 
+	if (fortune && fortuneNum > 0) {
+		diceAmount = diceAmount - fortuneNum;
+	}
+
 	result.results = getResultsArray(diceType, diceAmount, keepUnits);
 	result.modifier = modifier;
 	result.diceAmount = diceAmount;
 	result.diceType = diceType;
 
-	if (fortune) {
-		for (let i = 0; i < Number(fortune); i++) {
+	if (fortune && fortuneNum) {
+		for (let i = 0; i < fortuneNum; i++) {
 			result.results.push(1);
 		}
 	}
@@ -83,6 +88,9 @@ const rollDice = ({
 		result.cocPenalty = cocBonus;
 		result.cocTwoBonus = cocTwoBonus;
 		result.cocTwoPenalty = cocTwoPenalty;
+	}
+
+	if (rollOptions.cocMode || rollOptions.warhammerMode) {
 		result.skillLevel = skillLevel ? Number(skillLevel) : undefined;
 	}
 

@@ -18,6 +18,8 @@ const getRequestMsg = (result:any, rollOptions:any, userSettings:any) => {
 	let description;
 	let msgTitle;
 
+	console.log('skillLevel', skillLevel)
+
 	if (rollOptions.cocBonus || rollOptions.cocTwoBonus) {
 		const dieWord = rollOptions.cocBonus ? 'one Bonus Die' : 'two Bonus Dice'
 		msgTitle = `${username} rolled **${dieWord}**. Results: \`${results.join(', ')}\`.`;
