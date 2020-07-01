@@ -34,13 +34,12 @@ function ConanModal({
 		});
 		console.log('result', result)
 		console.log('rollOptions', rollOptions)
-		const requestMsg = getConanRequestMsg(result, rollOptions, userSettings);
-		const localMsg = getConanLocalMsg(result, rollOptions, userSettings);
+		// const requestMsg = getConanRequestMsg(result.results, rollOptions, userSettings);
+		const localMsg = getConanLocalMsg(result.results, rollOptions, userSettings);
 
-		console.log('handleSubmit values', values);
-		console.log('handleSubmit result', result);
+		console.log('localMsg', localMsg);
 
-		// showMsg(localMsg);
+		showMsg(localMsg);
 		// request(requestMsg);
 
 		closeConanModal();

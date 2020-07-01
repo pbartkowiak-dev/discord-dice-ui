@@ -48,7 +48,7 @@ const rollDice = ({
 }:rollDiceProps) => {
 	// @TODO DETECT CONAN COMBAT DIE
 	console.log('rollOptions', rollOptions)
-	const { cocBonus, cocTwoBonus, cocPenalty, cocTwoPenalty, skillLevel } = rollOptions;
+	const { cocBonus, cocTwoBonus, cocPenalty, cocTwoPenalty, skillLevel, fortune } = rollOptions;
 	const keepUnits = (cocBonus || cocTwoBonus || cocPenalty || cocTwoPenalty);
 	const result = {} as rollDiceResult;
 
@@ -64,6 +64,13 @@ const rollDice = ({
 	result.modifier = modifier;
 	result.diceAmount = diceAmount;
 	result.diceType = diceType;
+
+	if (fortune) {
+		for (let i = 0; i < Number(fortune); i++) {
+			result.results.push(1);
+		}
+	}
+
 	result.totalWithModifier = result.results.reduce((a, b) => Number(a) + Number(b), Number(modifier));
 	result.totalWithoutModifier = result.totalWithModifier - Number(modifier);
 	result.highest = Math.max(...result.results) + Number(modifier);

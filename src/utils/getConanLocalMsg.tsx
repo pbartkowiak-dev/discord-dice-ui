@@ -1,6 +1,8 @@
 import React from 'react';
+import classNames from 'classnames';
 import CodeSpan from '../components/CodeSpan/CodeSpan';
-import getConanSuccessLevels from './getConanSuccessLevel';
+import getConanSuccessLevel, { conanSuccessLevelType } from './getConanSuccessLevel';
+import ResultVsSkillRow from '../components/ResultVsSkillRow/ResultVsSkillRow';
 
 import HitLocations from '../components/HitLocations/HitLocations';
 import styles from '../components/ResultsModal/ResultsModal.module.css';
@@ -8,42 +10,58 @@ import styles from '../components/ResultsModal/ResultsModal.module.css';
 export type LocalMsgParamsType = {
 	title: any,
 	fields: Array<any>
-	isSuccess?: boolean
+	isSuccess: boolean
+	isFailure: boolean
 	rollOptions?: any
-	// finalDieResult?: number,
 	userSettings?: any
 }
 
-const getConanLocalMsg = (result:any, rollOptions:any, userSettings?:any):LocalMsgParamsType => {
-	const {
-		results,
-		skillLevel
-	} = result;
-	const { dice, difficulty, focus, fortune, tn,	untrainedTest } = rollOptions;
-	
-	const skillLevelString = skillLevel <= 9 ? `0${skillLevel}` : `${skillLevel}`;
-	const fields = [];
+const getConanLocalMsg = (results:Array<number>, rollOptions:any, userSettings?:any):LocalMsgParamsType => {
+	const cx = classNames.bind(styles);
+	const { dice, difficulty, focus, fortune, tn, untrainedTest } = rollOptions;
 
+	const fields = [];
 	let title = '';
 
 
-	const successLevels = {};
-	// const successLevels = getConanSuccessLevels(
-	// 	skillLevel,
-	// 	finalDieResult
-	// );
+	const successLevel:conanSuccessLevelType = getConanSuccessLevel(
+		results,
+		Number(tn),
+		Number(focus),
+		Number(difficulty),
+		untrainedTest
+	);
 
+	console.log('successLevel', successLevel);
 
-	// if (successLevels.isSuccess && !successLevels.isAutoSuccess) {
-	// 	fields.push(
-	// 		<div className={`${styles.ConanResult} ${styles.ConanResultSuccess}`}>Success</div>
-	// 	);
-	// }
-	// if (successLevels.isAutoSuccess) {
-	// 	fields.push(
-	// 		<div className={`${styles.ConanResult} ${styles.ConanResultSuccess}`}>Automatic Success</div>
-	// 	);
-	// }
+	const rollResults = results.map((result, index) => {
+		if (index === results.length - 1) {
+			return <span><CodeSpan>{result}</CodeSpan></span>
+		}
+		return <span><CodeSpan>{result}</CodeSpan>,&nbsp;</span>
+	});
+
+	fields.push(
+		<div>{rollResults}</div>
+	);
+
+	fields.push(
+		<ResultVsSkillRow
+			skillLevel={difficulty}
+			finalDieResult={successLevel.successLevel}
+			isSuccess={successLevel.isSuccess}
+		/>
+	);
+
+	if (successLevel.isSuccess) {
+		fields.push(
+			<div className={cx({ConanResult: true, ConanResultSuccess: true})}>Success</div>
+		);
+	} else {
+		fields.push(
+			<div className={cx({ConanResult: true, ConanResultFailure : true})}>Failure</div>
+		);
+	}
 
 	// if (rollOptions.rerolledTimes) {
 	// 	const timesWord = rollOptions.rerolledTimes === 1 ? 'time' : 'times';
@@ -54,19 +72,28 @@ const getConanLocalMsg = (result:any, rollOptions:any, userSettings?:any):LocalM
 
 	fields.push(
 		<div className={styles.slResult}>
-			<div><span className={styles.slResultLabel}>{}:</span></div>
-			<div><CodeSpan className={styles.slResultSpan}>{}</CodeSpan></div>
+			<div><span className={styles.slResultLabel}>Momentum generated:</span></div>
+			<div><CodeSpan className={styles.slResultSpan}>{successLevel.momentum}</CodeSpan></div>
 		</div>
 	);
+
+	// const hitLocation = getWarhammer4eHitLocation(x);
+	// fields.push(
+	// 	<HitLocations
+	// 		result={reversedResult}
+	// 		hitLocation={hitLocation}
+	// 		isDarkHeresy={!!useDarkHeresySL}
+	// 		isWarhammer2e={!!useWarhammer2eSL}
+	// 	/>
+	// );
 
 	rollOptions.conanMode = true;
 
 	return {
 		title,
 		fields,
-		// isSuccess: successLevels.isSuccess,
-
-		// finalDieResult,
+		isSuccess: successLevel.isSuccess,
+		isFailure: successLevel.isFailure,
 		rollOptions,
 		userSettings
 	};

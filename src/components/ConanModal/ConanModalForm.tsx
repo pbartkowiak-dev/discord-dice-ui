@@ -258,7 +258,6 @@ function ConanModalForm({
 	handleSubmit,
 	formValues
 }: any) {
-	console.log('formValues', formValues)
 	const { focus, dice, fortune, assistanceDice } = formValues;
 	const [hover, setHover] = useState(0);
 	const [assistanceHover, setAssistanceHover] = useState(0);
@@ -292,7 +291,6 @@ function ConanModalForm({
 	};
 
 	const handleFocusChange = (focusValue:string) => {
-		console.log('handleFocusChange', focusValue)
 		if (focusValue) {
 			const focusNum = Number(focusValue);
 			if (focusNum > 0) {
@@ -442,7 +440,7 @@ const validate = (values:any) => {
 	const errors:errorsProps = {}
 	const { tn } = values;
 	const tnNumber = parseInt(tn, 10);
-	console.log('tn', tn)
+
 	if (!tn || !tn.trim()) {
 		errors.tn = 'Target Number cannot be empty';
 		return errors;

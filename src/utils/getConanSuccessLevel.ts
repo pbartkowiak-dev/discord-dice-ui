@@ -1,30 +1,42 @@
-// export type successLevelsType = {
-// 	isSuccess: boolean
-// 	isFailure: boolean
-// 	isAutoFailure: boolean
-// 	isAutoSuccess: boolean
-// 	isDouble: boolean,
-// 	SL: number
-// }
+export type conanSuccessLevelType = {
+	isSuccess: boolean
+	isFailure: boolean
+	successLevel: number
+	compilations: number
+	momentum: number
+}
 
 export default (
-	skillLevel:number,
-	finalDieResult:number,
-	useFastSL:boolean,
-	useDarkHeresySL:boolean,
-	useWarhammer2eSL: boolean
+	results: Array<number>,
+	tn: number,
+	focus: number,
+	difficulty: number,
+	untrainedTest:boolean
 ):any => {
+	const compilationMinVal = untrainedTest ? 19 : 20;
+	const compilationMaxVal = 20;
+	let successLevel = 0;
+	let compilations = 0;
 
-	// const complicationMin = isUntrainedTest ? 19 : 20;
-	const complicationMax = 20;
+	results.forEach(result => {
+		if (result <= tn) {
+			if (result <= focus) {
+				successLevel += 2;
+			} else if (result > focus) {
+				successLevel += 1
+			}
+		}
 
+		if (result >= compilationMinVal && result <= compilationMaxVal) {
+			compilations += 1;
+		}
+	});
 
-	// const isSuccess = (!isAutoFailure && (finalDieResult <= skillLevel)) || isAutoSuccess;
-	// const isFailure = (!isAutoSuccess && !isSuccess) || isAutoFailure;
-
-	// return {
-		// isSuccess,
-		// isFailure,
-		// momentumGenerated
-	// };
+	return {
+		isSuccess: successLevel >= difficulty,
+		isFailure: successLevel < difficulty,
+		successLevel,
+		compilations,
+		momentum: successLevel > difficulty ? successLevel - difficulty : 0
+	};
 };
