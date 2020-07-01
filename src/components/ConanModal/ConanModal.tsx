@@ -48,6 +48,7 @@ function ConanModal({
 
 	const initialValues = {
 		dice: '2',
+		assistanceDice: '0',
 		fortune: '0',
 		untrainedTest: false
 	};

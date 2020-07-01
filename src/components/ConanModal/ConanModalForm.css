@@ -20,6 +20,16 @@
 	color: #7c7c7c
 }
 
+.conan-field-icon-times {
+	font-size: 24px;
+	opacity: .8;
+}
+
+.conan-field-icon-times:hover {
+	color: #bebebe;
+	opacity: 1;
+}
+
 .conan-radio-fields {
 	display: flex;
 	justify-content: center;;
@@ -84,6 +94,9 @@
 .die-container {
 	display: inline-block;
 	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .dice-icon.active {

@@ -8,7 +8,7 @@ import Tooltip from 'react-bootstrap/Tooltip';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faQuestionCircle } from '@fortawesome/free-regular-svg-icons';
-import { faDiceD20 } from '@fortawesome/free-solid-svg-icons';
+import { faDiceD20, faTimes } from '@fortawesome/free-solid-svg-icons';
 import './ConanModalForm.css';
 
 // @ts-ignore
@@ -24,7 +24,7 @@ const tnInfo = <span>The skill’s <strong>Target Number</strong> (TN) is equal 
 const focusInfo = <span>Each d20 result equal to or less than the character’s <strong>Focus</strong> for that skill scores two successes instead of one.</span>;
 const untrainedTestInfo = <span>If the character has no ranks in Expertise or Focus makes an <strong>untrained test</strong>.</span>;
 const fortuneInfo = <span>Adds "pre-rolled" bonus d20 with a score of 1 to a test.</span>;
-const assistanceInfo = <span>This will be used mostly by DM when using Minions. Adds additional d20s to the roll.</span>;
+const assistanceInfo = <span>This will be used mostly by DM when using <strong>Minion Groups</strong>. Adds additional d20s to the roll.</span>;
 
 function TnTooltip() {
 	const key = 'TnTooltip';
@@ -93,7 +93,7 @@ function FortuneTooltip() {
 			delay={100}
 			overlay={
 				<Tooltip id={`tooltip-${key}`}>
-					{ assistanceInfo }
+					{ fortuneInfo }
 				</Tooltip>
 			}
 		><FontAwesomeIcon className="conan-field-icon" icon={faQuestionCircle} />
@@ -112,7 +112,7 @@ function AssistanceTooltip() {
 			delay={100}
 			overlay={
 				<Tooltip id={`tooltip-${key}`}>
-					{ fortuneInfo }
+					{ assistanceInfo }
 				</Tooltip>
 			}
 		><FontAwesomeIcon className="conan-field-icon" icon={faQuestionCircle} />
@@ -162,6 +162,17 @@ function DiceRow({ dice, isAssistance = false, handleDiceChange, setHover, hover
 	});
 	return (
 		<div className={diceRowClass}>
+			{
+				isAssistance && (
+					<div className="die-container">
+						<FontAwesomeIcon
+							className="conan-field-icon conan-field-icon-times pointer"
+							icon={faTimes}
+							onClick={() => handleDiceChange('0', true)}
+						/>
+					</div>
+				)
+			}
 			<div className="die-container">
 				<FontAwesomeIcon className={classNames({
 					'dice-icon': true,
@@ -280,6 +291,16 @@ function ConanModalForm({
 		}
 	};
 
+	const handleFocusChange = (focusValue:string) => {
+		console.log('handleFocusChange', focusValue)
+		if (focusValue) {
+			const focusNum = Number(focusValue);
+			if (focusNum > 0) {
+				change('untrainedTest', false);
+			}
+		}
+	};
+
 	const diceRadios = new Array(diceMax).fill('x').map((_, index) => {
 		const diceAmount = index + 1;
 		return (
@@ -307,6 +328,7 @@ function ConanModalForm({
 							id="focus"
 							name="focus"
 							label={<span>Foc <FocusTooltip /></span>}
+							onChange={(evt => handleFocusChange(evt.currentTarget.value) )}
 							component={renderInput}
 						/>
 						
@@ -350,7 +372,7 @@ function ConanModalForm({
 					id="untrainedTest"
 					label={<span>Untrained Test <UntrainedTestTooltip /></span>}
 					component={RenderCheckbox}
-					disabled={ focus }
+					disabled={ focus && Number(focus) > 0 }
 				/>
 				<div className="fortune">
 					<h5 className="fortune-title">Use Fortune Die <FortuneTooltip/></h5>
