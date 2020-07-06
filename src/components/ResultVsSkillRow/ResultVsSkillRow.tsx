@@ -2,24 +2,47 @@ import React from 'react';
 import CodeSpan from '../CodeSpan/CodeSpan';
 import styles from './ResultVsSkillRow.module.css';
 
+export type labelsType = {
+	result: string
+	vs: string
+}
+
 type ResultVsSkillRowPropTypes = {
 	skillLevel: number | string
 	finalDieResult: number | string
 	isSuccess: boolean
+	labels?: labelsType
 }
 
-function ResultVsSkillRow({ skillLevel, finalDieResult, isSuccess }: ResultVsSkillRowPropTypes) {
+function ResultVsSkillRow({
+	skillLevel,
+	finalDieResult,
+	isSuccess,
+	labels
+}: ResultVsSkillRowPropTypes) {
 	const resultCodeSpanStyles = `${styles.resultValue} ${isSuccess ? styles.isSuccess : styles.isFailure}`;
+	let resultLabel;
+	let vsLabel;
+
+	console.log('labels', labels);
+	if (labels) {
+		resultLabel = labels.result;
+		vsLabel = labels.vs;
+	} else {
+		resultLabel = 'Roll result'
+		vsLabel = 'Skill level';
+	}
+
 	return (
 		<div className={ styles.ResultVsSkillRowPropTypes }>
 			<div className={ styles.Cell }>
 				<CodeSpan className={resultCodeSpanStyles}>{ finalDieResult }</CodeSpan>
-				<span className={ styles.label }>Roll result</span>
+				<span className={ styles.label }>{ resultLabel }</span>
 			</div>
 			<div className={ styles.Cell }><span>vs.</span></div>
 			<div className={ styles.Cell }>
 				<CodeSpan className={ styles.resultValue }>{ skillLevel }</CodeSpan>
-				<span className={ styles.label }>Skill level</span>
+				<span className={ styles.label }>{ vsLabel }</span>
 			</div>
 		</div>
 	);

@@ -35,12 +35,8 @@ function ConanModal({
 			diceAmount: Number(rollOptions.dice),
 			rollOptions
 		});
-		console.log('result', result)
-		console.log('rollOptions', rollOptions)
 		// const requestMsg = getConanRequestMsg(result.results, rollOptions, userSettings);
 		const localMsg = getConanLocalMsg(result.results, rollOptions, userSettings);
-
-		console.log('localMsg', localMsg);
 
 		showMsg(localMsg);
 		// request(requestMsg);

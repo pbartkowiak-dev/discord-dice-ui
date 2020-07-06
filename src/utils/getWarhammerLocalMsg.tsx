@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames/bind';
 import CodeSpan from '../components/CodeSpan/CodeSpan';
 import getWarhammerSuccessLevels from './getWarhammerSuccessLevels';
 import getReversedResult from './getReversedResult';
@@ -19,6 +20,7 @@ export type LocalMsgParamsType = {
 }
 
 const getWarhammerLocalMsg = (result:any, rollOptions:any, userSettings?:any):LocalMsgParamsType => {
+	const cx = classNames.bind(styles);
 	const {
 		results,
 		skillLevel
@@ -61,33 +63,33 @@ const getWarhammerLocalMsg = (result:any, rollOptions:any, userSettings?:any):Lo
 
 	if (successLevels.isSuccess && !successLevels.isAutoSuccess) {
 		fields.push(
-			<div className={`${styles.warhammerResult} ${styles.warhammerResultSuccess}`}>Success</div>
+			<div className={cx({generalResult: true, generalResultSuccess: true})}>Success</div>
 		);
 	}
 	if (successLevels.isAutoSuccess) {
 		fields.push(
-			<div className={`${styles.warhammerResult} ${styles.warhammerResultSuccess}`}>Automatic Success</div>
+			<div className={cx({generalResult: true, generalResultSuccess: true})}>Automatic Success</div>
 		);
 	}
 	if (successLevels.isFailure && !successLevels.isAutoFailure) {
 		fields.push(
-			<div className={`${styles.warhammerResult} ${styles.warhammerResultFailure}`}>Failure</div>
+			<div className={cx({generalResult: true, generalResultFailure: true})}>Failure</div>
 		);
 	}
 	if (successLevels.isAutoFailure) {
 		fields.push(
-			<div className={`${styles.warhammerResult} ${styles.warhammerResultFailure}`}>Automatic Failure</div>
+			<div className={cx({generalResult: true, generalResultFailure: true})}>Automatic Failure</div>
 		);
 	}
 	if (successLevels.isDouble) {
 		fields.push(
-			<div className={`${styles.warhammerResult}`}>Double</div>
+			<div className={styles.generalResult}>Double</div>
 		);
 	}
 	if (rollOptions.rerolledTimes) {
 		const timesWord = rollOptions.rerolledTimes === 1 ? 'time' : 'times';
 		fields.push(
-			<div className={`${styles.warhammerResult}`}>Rerolled <CodeSpan>{rollOptions.rerolledTimes}</CodeSpan> {timesWord}</div>
+			<div className={styles.generalResult}>Rerolled <CodeSpan>{rollOptions.rerolledTimes}</CodeSpan> {timesWord}</div>
 		);
 	}
 

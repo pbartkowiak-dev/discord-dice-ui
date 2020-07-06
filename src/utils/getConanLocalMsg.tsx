@@ -1,8 +1,8 @@
 import React from 'react';
-import classNames from 'classnames';
+import classNames from 'classnames/bind';
 import CodeSpan from '../components/CodeSpan/CodeSpan';
 import getConanSuccessLevel, { conanSuccessLevelType } from './getConanSuccessLevel';
-import ResultVsSkillRow from '../components/ResultVsSkillRow/ResultVsSkillRow';
+import ResultVsSkillRow, { labelsType } from '../components/ResultVsSkillRow/ResultVsSkillRow';
 
 import HitLocations from '../components/HitLocations/HitLocations';
 import styles from '../components/ResultsModal/ResultsModal.module.css';
@@ -34,46 +34,57 @@ const getConanLocalMsg = (results:Array<number>, rollOptions:any, userSettings?:
 
 	const rollResults = results.map((result, index) => {
 		if (index === results.length - 1) {
-			return <span><CodeSpan>{result}</CodeSpan></span>
+			return <span><CodeSpan>{result}</CodeSpan></span>;
 		}
-		return <span><CodeSpan>{result}</CodeSpan>,&nbsp;</span>
+		return <span><CodeSpan>{result}</CodeSpan>,&nbsp;</span>;
 	});
+
+	const yourFocus = <p>Focus: <CodeSpan>{focus}</CodeSpan></p>;
+	const yourTn = <p>TN: <CodeSpan>{tn}</CodeSpan></p>;
+	const wasUntrainedTest = untrainedTest ? <p>Untrained Test</p> : null;
 
 	const fortuneUsed = (fortune && Number(fortune) > 0)
 		? <p>Fortune points used: <CodeSpan>{fortune}</CodeSpan></p>
 		: null;
 
 	const title = (
-		<div>
+		<div className={styles.conanResultsDetauls}>
 			<p>You rolled <CodeSpan>{dice}d20</CodeSpan></p>
+			{ yourFocus }
+			{ yourTn }
+			{ wasUntrainedTest }
 			{ fortuneUsed }
-			<p>Results:</p>
-			<p>{rollResults}</p>
 		</div>
-	)
+	);
+
+	const labels:labelsType = {
+		result: 'Successes',
+		vs: 'Difficulty'
+	}
 
 	fields.push(
 		<ResultVsSkillRow
 			skillLevel={difficulty}
 			finalDieResult={successLevel.successLevel}
 			isSuccess={successLevel.isSuccess}
+			labels={labels}
 		/>
 	);
 
 	if (successLevel.isSuccess) {
 		fields.push(
-			<div className={cx({ConanResult: true, ConanResultSuccess: true})}>Success</div>
+			<div className={cx({generalResult: true, generalResultSuccess: true})}>Success</div>
 		);
 	} else {
 		fields.push(
-			<div className={cx({ConanResult: true, ConanResultFailure : true})}>Failure</div>
+			<div className={cx({generalResult: true, generalResultFailure : true})}>Failure</div>
 		);
 	}
 
 	// if (rollOptions.rerolledTimes) {
 	// 	const timesWord = rollOptions.rerolledTimes === 1 ? 'time' : 'times';
 	// 	fields.push(
-	// 		<div className={`${styles.ConanResult}`}>Rerolled <CodeSpan>{rollOptions.rerolledTimes}</CodeSpan> {timesWord}</div>
+	// 		<div className={`${styles.generalResult}`}>Rerolled <CodeSpan>{rollOptions.rerolledTimes}</CodeSpan> {timesWord}</div>
 	// 	);
 	// }
 
@@ -93,6 +104,13 @@ const getConanLocalMsg = (results:Array<number>, rollOptions:any, userSettings?:
 	// 		isWarhammer2e={!!useWarhammer2eSL}
 	// 	/>
 	// );
+
+	fields.push(
+		<div className={cx({slResult: true, conanRollResults: true})}>
+			<p>Results:</p>
+			<p>{rollResults}</p>
+		</div>
+	);
 
 	rollOptions.conanMode = true;
 

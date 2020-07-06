@@ -59,16 +59,16 @@
 	font-size: 1rem;
 }
 
-.warhammerResult {
+.generalResult {
 	text-align: center;
 	font-weight: bold;
 }
 
-.warhammerResultSuccess {
+.generalResultSuccess {
 	color: var(--header-bg);
 }
 
-.warhammerResultFailure {
+.generalResultFailure {
 	color: var(--header-bg-failure);
 }
 
@@ -92,6 +92,20 @@
 	border-bottom: 1px solid #bebebe;
 	padding-bottom: 10px;
 	margin-bottom: 10px;
+}
+
+.conanRollResults {
+	text-align: center;
+}
+
+.conanResultsDetauls p {
+	margin-bottom: 0;
+}
+
+.conanRollResults span {
+	font-size: 19px !important;
+	width: 25px;
+	text-align: center;
 }
 
 @media only screen and (min-width: 480px) {

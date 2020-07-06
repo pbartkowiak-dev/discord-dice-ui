@@ -3,7 +3,7 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import styles from './ResultsModal.module.css';
 import CocPushOptionsContainer from '../CocPushOptions/CocPushOptionsContainer';
-import WarhammerRerollContainer from '../WarhammerReroll/WarhammerRerollContainer';
+import RerollContainer from '../Reroll/RerollContainer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDiceD20 } from '@fortawesome/free-solid-svg-icons';
 import { LocalMsgParamsType } from '../../utils/getCocLocalMsg';
@@ -46,8 +46,9 @@ function ResultsModal({ hideMsg, msgData }:ResultsModalProps) {
 		? `${styles.resultsModalHeader} ${styles.isFailure}`
 		: `${styles.resultsModalHeader}`;
 	
+		console.log('rollOptions', rollOptions);
 	const canPush = isSuccess === false && rollOptions.cocMode && !rollOptions.isPushed;
-	const canReroll = rollOptions.warhammerMode;
+	const canReroll = (rollOptions.warhammerMode || rollOptions.conanMode);
 
 	return (
 		<>
@@ -72,7 +73,7 @@ function ResultsModal({ hideMsg, msgData }:ResultsModalProps) {
 						userSettings={userSettings}
 						/>
 					}
-					{ canReroll && <WarhammerRerollContainer
+					{ canReroll && <RerollContainer
 						rollOptions={rollOptions}
 						userSettings={userSettings}
 						/>

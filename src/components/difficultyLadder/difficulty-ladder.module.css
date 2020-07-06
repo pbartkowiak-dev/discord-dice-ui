@@ -2,7 +2,7 @@
 	text-align: center;
 	width: 315px;
 	border-radius: .3rem;
-	margin-bottom: 0;;
+	margin-bottom: 0;
 }
 
 .td {
@@ -12,14 +12,14 @@
 
 .label {
 	width: 100%;
-	margin: 0;
+	margin: 0 !important;
 	cursor: pointer;
 	transition: .1s;
-	padding: 5px;
+	padding: 3px;
 }
 
 .input {
-	margin-right: 8px;
+	display: none;
 }
 
 .simple {
