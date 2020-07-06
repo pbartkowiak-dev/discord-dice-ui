@@ -26,6 +26,11 @@ p {
 	opacity: 1;
 }
 
+button:disabled,
+button.disabled {
+	cursor: not-allowed;
+}
+
 .custom-control-input:disabled~.custom-control-label,
 .custom-control-input[disabled]~.custom-control-label {
 	cursor: not-allowed;

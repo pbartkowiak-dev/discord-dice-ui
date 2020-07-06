@@ -14,6 +14,7 @@ export type LocalMsgParamsType = {
 	isFailure: boolean
 	rollOptions?: any
 	userSettings?: any
+	results?: any
 }
 
 const getConanLocalMsg = (results:Array<number>, rollOptions:any, userSettings?:any):LocalMsgParamsType => {
@@ -29,16 +30,6 @@ const getConanLocalMsg = (results:Array<number>, rollOptions:any, userSettings?:
 		Number(difficulty),
 		untrainedTest
 	);
-
-	console.log('successLevel', successLevel);
-
-	const rollResults = results.map((result, index) => {
-		if (index === results.length - 1) {
-			return <span><CodeSpan>{result}</CodeSpan></span>;
-		}
-		return <span><CodeSpan>{result}</CodeSpan>,&nbsp;</span>;
-	});
-
 	const yourFocus = <p>Focus: <CodeSpan>{focus}</CodeSpan></p>;
 	const yourTn = <p>TN: <CodeSpan>{tn}</CodeSpan></p>;
 	const wasUntrainedTest = untrainedTest ? <p>Untrained Test</p> : null;
@@ -56,6 +47,13 @@ const getConanLocalMsg = (results:Array<number>, rollOptions:any, userSettings?:
 			{ fortuneUsed }
 		</div>
 	);
+
+	if (rollOptions.rerolledTimes) {
+		const timesWord = rollOptions.rerolledTimes === 1 ? 'time' : 'times';
+		fields.push(
+			<div className={`${styles.generalResult}`}>Rerolled <CodeSpan>{rollOptions.rerolledTimes}</CodeSpan> {timesWord}</div>
+		);
+	}
 
 	const labels:labelsType = {
 		result: 'Successes',
@@ -81,34 +79,10 @@ const getConanLocalMsg = (results:Array<number>, rollOptions:any, userSettings?:
 		);
 	}
 
-	// if (rollOptions.rerolledTimes) {
-	// 	const timesWord = rollOptions.rerolledTimes === 1 ? 'time' : 'times';
-	// 	fields.push(
-	// 		<div className={`${styles.generalResult}`}>Rerolled <CodeSpan>{rollOptions.rerolledTimes}</CodeSpan> {timesWord}</div>
-	// 	);
-	// }
-
 	fields.push(
 		<div className={styles.slResult}>
 			<div><span className={styles.slResultLabel}>Momentum generated:</span></div>
 			<div><CodeSpan className={styles.slResultSpan}>{successLevel.momentum}</CodeSpan></div>
-		</div>
-	);
-
-	// const hitLocation = getWarhammer4eHitLocation(x);
-	// fields.push(
-	// 	<HitLocations
-	// 		result={reversedResult}
-	// 		hitLocation={hitLocation}
-	// 		isDarkHeresy={!!useDarkHeresySL}
-	// 		isWarhammer2e={!!useWarhammer2eSL}
-	// 	/>
-	// );
-
-	fields.push(
-		<div className={cx({slResult: true, conanRollResults: true})}>
-			<p>Results:</p>
-			<p>{rollResults}</p>
 		</div>
 	);
 
@@ -120,7 +94,8 @@ const getConanLocalMsg = (results:Array<number>, rollOptions:any, userSettings?:
 		isSuccess: successLevel.isSuccess,
 		isFailure: successLevel.isFailure,
 		rollOptions,
-		userSettings
+		userSettings,
+		results
 	};
 };
 

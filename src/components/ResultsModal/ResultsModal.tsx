@@ -25,7 +25,8 @@ function ResultsModal({ hideMsg, msgData }:ResultsModalProps) {
 		rollOptions = {},
 		title,
 		finalDieResult,
-		userSettings = {}
+		userSettings = {},
+		results = []
 	} = msgParams;
 	let modalBodyList;
 
@@ -76,6 +77,7 @@ function ResultsModal({ hideMsg, msgData }:ResultsModalProps) {
 					{ canReroll && <RerollContainer
 						rollOptions={rollOptions}
 						userSettings={userSettings}
+						results={results}
 						/>
 					}
 				</Modal.Body>

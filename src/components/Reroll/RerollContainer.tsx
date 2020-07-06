@@ -12,12 +12,13 @@ import { request } from '../../utils/request';
 const mapDispatchToProps = { showMsg, hideMsg };
 
 function RerollContainer({
-	rollOptions ={},
+	rollOptions = {},
 	userSettings,
 	showMsg,
-	hideMsg
+	hideMsg,
+	results
 }:any) {
-	let reroll = () => {};
+	let reroll = (itemsToStay:Array<number>) => {};
 
 	if (rollOptions.warhammerMode) {
 		reroll = () => {
@@ -32,11 +33,13 @@ function RerollContainer({
 			request(requestMsg);
 		}
 	} else if (rollOptions.conanMode) {
-		reroll = () => {
+		reroll = (itemsToStay:Array<number>) => {
+			rollOptions.fortune = 0;
 			const result = rollDice({
 				diceType: 20,
 				diceAmount: Number(rollOptions.dice),
-				rollOptions
+				rollOptions,
+				itemsToStay
 			});
 			// const requestMsg = getConanRequestMsg(result.results, rollOptions, userSettings);
 			const localMsg = getConanLocalMsg(result.results, rollOptions, userSettings);
@@ -46,14 +49,18 @@ function RerollContainer({
 		}
 	}
 
-	const handleReroll = () => {
+	const handleReroll = (itemsToStay:Array<number>) => {
 		hideMsg();
 		rollOptions.rerolledTimes = !rollOptions.rerolledTimes ? 1 : rollOptions.rerolledTimes + 1;
-		setTimeout(reroll, 500);
+		setTimeout(() => reroll(itemsToStay), 500);
 	};
 
 	return (
-		<Reroll handleReroll={handleReroll} />
+		<Reroll
+			handleReroll={handleReroll}
+			rollOptions={rollOptions}
+			results={results}
+		/>
 	);
 }
 

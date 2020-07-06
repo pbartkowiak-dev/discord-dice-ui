@@ -11,6 +11,7 @@ export type LocalMsgParamsType = {
 	rollOptions?: any
 	finalDieResult?: number,
 	userSettings?: any
+	results?: any
 }
 
 const getCocLocalMsg = (result:any, rollOptions:any, userSettings?:any):LocalMsgParamsType => {

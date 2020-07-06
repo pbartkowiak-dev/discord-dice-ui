@@ -11,10 +11,11 @@ function getResultsArray(diceType:number, diceAmount:number, keepUnits:boolean) 
 }
 
 type rollDiceProps = {
-	diceType:number
+	diceType: number
 	modifier?: number
 	diceAmount?: number
 	rollOptions: any
+	itemsToStay?: Array<number>
 }
 
 type rollDiceResult = {
@@ -44,7 +45,8 @@ const rollDice = ({
 	diceType = 6,
 	modifier = 0,
 	diceAmount = 1,
-	rollOptions
+	rollOptions,
+	itemsToStay = []
 }:rollDiceProps) => {
 	// @TODO DETECT CONAN COMBAT DIE
 	console.log('rollOptions', rollOptions)
@@ -65,6 +67,10 @@ const rollDice = ({
 		diceAmount = diceAmount - fortuneNum;
 	}
 
+	if (itemsToStay && itemsToStay.length) {
+		diceAmount = diceAmount - itemsToStay.length;
+	}
+
 	result.results = getResultsArray(diceType, diceAmount, keepUnits);
 	result.modifier = modifier;
 	result.diceAmount = diceAmount;
@@ -73,6 +79,12 @@ const rollDice = ({
 	if (fortune && fortuneNum) {
 		for (let i = 0; i < fortuneNum; i++) {
 			result.results.push(1);
+		}
+	}
+
+	if (itemsToStay && itemsToStay.length) {
+		for (let i = 0; i < itemsToStay.length; i++) {
+			result.results.push(itemsToStay[i]);
 		}
 	}
 
