@@ -1,0 +1,78 @@
+.table {
+	text-align: center;
+	width: 315px;
+	border-radius: .3rem;
+	margin-bottom: 0;;
+}
+
+.td {
+	padding: 0 !important;
+	font-weight: bold;
+}
+
+.label {
+	width: 100%;
+	margin: 0;
+	cursor: pointer;
+	transition: .1s;
+	padding: 5px;
+}
+
+.input {
+	margin-right: 8px;
+}
+
+.simple {
+	color: #3cb778;
+}
+.simple:hover,
+.simple.active {
+	background: #3cb778;
+	color: #fff;
+}
+
+.average {
+	color: #7DB150;
+}
+.average:hover,
+.average.active {
+	background: #7DB150;
+	color: #fff;
+}
+
+.challenging {
+	color: #BEAB28;
+}
+.challenging:hover,
+.challenging.active {
+	background: #BEAB28;
+	color: #fff;
+}
+
+.daunting {
+	color: #ffa500;
+}
+.daunting:hover,
+.daunting.active {
+	background: #ffa500;
+	color: #fff;
+}
+
+.dire {
+	color: #F17C21;
+}
+.dire:hover,
+.dire.active {
+	background: #F17C21;
+	color: #fff;
+}
+
+.epic {
+	color: #E25241;	
+}
+.epic:hover,
+.epic.active {
+	background: #E25241;	
+	color: #fff;
+}
+

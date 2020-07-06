@@ -52,6 +52,7 @@ function ConanModal({
 		dice: '2',
 		assistanceDice: '0',
 		fortune: '0',
+		difficulty: '2',
 		untrainedTest: false
 	};
 

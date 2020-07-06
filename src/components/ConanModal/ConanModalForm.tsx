@@ -9,6 +9,7 @@ import { Field, reduxForm, formValueSelector } from 'redux-form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faQuestionCircle } from '@fortawesome/free-regular-svg-icons';
 import { faDiceD20, faTimes } from '@fortawesome/free-solid-svg-icons';
+import DifficultyLadder from '../difficultyLadder/DifficultyLadder';
 import './ConanModalForm.css';
 
 // @ts-ignore
@@ -258,7 +259,7 @@ function ConanModalForm({
 	handleSubmit,
 	formValues
 }: any) {
-	const { focus, dice, fortune, assistanceDice } = formValues;
+	const { focus, dice, fortune, assistanceDice, difficulty } = formValues;
 	const [hover, setHover] = useState(0);
 	const [assistanceHover, setAssistanceHover] = useState(0);
 	const diceMax = 5;
@@ -343,14 +344,11 @@ function ConanModalForm({
 				</div>
 				vs.
 				<div className="skill-level-field conan-skill-level-field">
-					<div className="conan-field">
-						<Field
-							id="difficulty"
-							name="difficulty"
-							label={<span>Test Difficulty</span>}
-							component={renderInput}
-						/>
-					</div>
+					<Field
+						id="difficulty"
+						name="difficulty"
+						component={DifficultyLadder}
+					/>
 				</div>
 				<div className="dice">
 					<h5 className="dice-title">How many dice?</h5>
@@ -471,5 +469,5 @@ const FormElement = reduxForm({
 const selector = formValueSelector(form);
 
 export default connect(state => ({
-	formValues: selector(state, 'untrainedTest', 'focus', 'tn', 'dice', 'fortune', 'assistanceDice')
+	formValues: selector(state, 'difficulty', 'untrainedTest', 'focus', 'tn', 'dice', 'fortune', 'assistanceDice')
 }))(FormElement);
