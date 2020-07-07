@@ -16,7 +16,8 @@ function CocPushOptionsContainer({
 	userSettings,
 	// dispatch props
 	showMsg,
-	hideMsg
+	hideMsg,
+	canPush
 }:any) {
 
 	const handlePushRoll = () => {
@@ -35,12 +36,18 @@ function CocPushOptionsContainer({
 		}, 500);
 	};
 
-	const luckRequired = Number(finalDieResult) - Number(rollOptions.skillLevel);
+	const luckRequiredForSuccess = Number(finalDieResult) - Number(rollOptions.skillLevel);
+	const luckRequiredForHardSuccess = Number(finalDieResult) - Math.floor( Number(rollOptions.skillLevel) / 2 );
+	const luckRequiredForExtremeSuccess = Number(finalDieResult) - Math.floor( Number(rollOptions.skillLevel) / 5 );
 
 	return (
 		<CoCPushOptions
 			handlePushRoll={handlePushRoll}
-			luckRequired={luckRequired}
+			isPushed={rollOptions.isPushed}
+			canPush={canPush}
+			luckRequiredForSuccess={luckRequiredForSuccess}
+			luckRequiredForHardSuccess={luckRequiredForHardSuccess}
+			luckRequiredForExtremeSuccess={luckRequiredForExtremeSuccess}
 		/>
 	);
 }

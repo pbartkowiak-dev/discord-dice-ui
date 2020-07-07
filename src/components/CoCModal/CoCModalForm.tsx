@@ -55,9 +55,9 @@ const RenderCheckbox = createRenderer((input, label, id, textMuted, meta, disabl
 });
 
 const bonusDieLabel = <span>Apply <strong>one</strong> Bonus Die</span>;
-const bonusTwoDiceLabel = <span>Apply <strong>two</strong> Bonus Die</span>;
+const bonusTwoDiceLabel = <span>Apply <strong>two</strong> Bonus Dice</span>;
 const penaltyDieLabel = <span>Apply <strong>one</strong> Penalty Die</span>;
-const penaltyTwoDiceLabel = <span>Apply <strong>two</strong> Penalty Die</span>;
+const penaltyTwoDiceLabel = <span>Apply <strong>two</strong> Penalty Dice</span>;
 
 
 function CoCModalForm({
