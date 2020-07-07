@@ -35,24 +35,49 @@ function InfoTooltip({ text }:InfoTooltipPropType) {
 
 function CocPushOptions({ 
 	handlePushRoll,
-	luckRequired
+	isPushed,
+	canPush,
+	luckRequiredForSuccess,
+	luckRequiredForHardSuccess,
+	luckRequiredForExtremeSuccess
  }:any) {
+
+	const LuckSpends = ({
+		luckRequiredForSuccess,
+		luckRequiredForHardSuccess,
+		luckRequiredForExtremeSuccess
+	}:any) => (
+		<div className={styles.row}>
+			{ (luckRequiredForSuccess > 0) && <div>Spend <CodeSpan>{ luckRequiredForSuccess }</CodeSpan> Luck Points for <strong>Success</strong></div> }
+			{ (luckRequiredForHardSuccess > 0) && <div>Spend <CodeSpan>{ luckRequiredForHardSuccess }</CodeSpan> Luck Points for <strong>Hard Success</strong></div> }
+			{ (luckRequiredForExtremeSuccess > 0) && <div>Spend <CodeSpan>{ luckRequiredForExtremeSuccess }</CodeSpan> Luck Points for <strong>Extreme Success</strong></div> }
+			<InfoTooltip text={luckInfo} />
+		</div>
+	);
+
 	return (
 		<>
 			<div className={styles.container}>
-				<div className={styles.row}>
-					<Button variant="outline-primary"
-						onClick={ handlePushRoll }
-						>Push the Roll</Button>
-					<InfoTooltip text={pushInfo} />
-				</div>
-				<div className={styles.orContainer}>
-					<span className={styles.or}>or</span>
-				</div>
-				<div className={styles.row}>
-					<span>Spend <CodeSpan>{ luckRequired }</CodeSpan> Luck Points</span>
-					<InfoTooltip text={luckInfo} />
-				</div>
+				{
+					canPush && <>
+						<div className={styles.row}>
+							<Button variant="outline-primary"
+								onClick={ handlePushRoll }
+								>Push the Roll</Button>
+							<InfoTooltip text={pushInfo} />
+						</div>
+						<div className={styles.orContainer}>
+							<span className={styles.or}>or</span>
+						</div>
+					</>
+				}
+				{	
+					!isPushed && <LuckSpends
+						luckRequiredForSuccess={luckRequiredForSuccess}
+						luckRequiredForHardSuccess={luckRequiredForHardSuccess}
+						luckRequiredForExtremeSuccess={luckRequiredForExtremeSuccess}
+					/>
+				}
 			</div>
 		</>
 	);

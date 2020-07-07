@@ -66,12 +66,12 @@ function ResultsModal({ hideMsg, msgData }:ResultsModalProps) {
 					{ rollOptions.isPushed && <div className={styles.pushedTitle}>Pushed roll</div> }
 					{ title && <p className={styles.rollResults}>{ title }</p> }
 					{ modalBodyList }
-					{ canPush && <CocPushOptionsContainer
+					<CocPushOptionsContainer
 						rollOptions={rollOptions}
 						finalDieResult={finalDieResult}
 						userSettings={userSettings}
-						/>
-					}
+						canPush={canPush}
+					/>
 					{ canReroll && <WarhammerRerollContainer
 						rollOptions={rollOptions}
 						userSettings={userSettings}
