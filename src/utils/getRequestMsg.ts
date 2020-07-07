@@ -12,7 +12,9 @@ const getRequestMsg = (result:any, rollOptions:any, userSettings:any) => {
 		highest,
 		lowest,
 		cocBonus,
-		cocPenalty
+		cocPenalty,
+		dmg,
+		effects
 	} = result;
 	const rolledWord = diceAmount > 1 ? 'Results' : 'Result';
 	const rolled = `${diceAmount}d${diceType}`;
@@ -55,6 +57,12 @@ const getRequestMsg = (result:any, rollOptions:any, userSettings:any) => {
 		fields.push({
 			name: ':arrow_heading_down: Penalty Die',
 			value: `Penalty Die result: \`${cocPenalty}\`.`
+		});
+	}
+	if (rollOptions.combatDie) {
+		fields.push({
+			name: `:crossed_swords: Combat Die Results:`,
+			value: `Damage: \`${dmg}\`. Effects: \`${effects}\`.`
 		});
 	}
 	const msgParams:requestParams = {

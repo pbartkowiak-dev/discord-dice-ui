@@ -60,6 +60,10 @@ function DiceModule ({
 			openConanModal();
 			return;
 		}
+		if (diceType === 'd6conan') {
+			rollOptions.combatDie = true;
+			rollOptions.useModifier = false;
+		}
 		if (rollOptions.useModifier) {
 			selectDice({
 				diceType: diceTypeNum,
