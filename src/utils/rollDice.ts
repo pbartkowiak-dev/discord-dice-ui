@@ -1,13 +1,15 @@
 import getRandom from './getRandom';
 
-function getResultsArray(diceType:number, diceAmount:number, keepUnits:boolean) {
+function getResultsArraySorted(diceType:number, diceAmount:number, keepUnits:boolean) {
 	const rollsArr = new Array(diceAmount).fill('');
 	if (keepUnits) {
 		// this setting will reroll only tens and will keep units untouched
 		const units = getRandom(10);
 		return rollsArr.map(_ => ((getRandom(10)-1) * 10 + units));
 	}
-	return rollsArr.map(_ => getRandom(diceType));
+	return rollsArr
+		.map(_ => getRandom(diceType))
+		.sort((a:number, b:number) => a - b);
 }
 
 type rollDiceProps = {
@@ -53,7 +55,16 @@ const rollDice = ({
 	rollOptions = {},
 	itemsToStay = []
 }:rollDiceProps) => {
-	const { cocMode, cocBonus, cocTwoBonus, cocPenalty, cocTwoPenalty, skillLevel, fortune, combatDie } = rollOptions;
+	const {
+		cocMode,
+		cocBonus,
+		cocTwoBonus,
+		cocPenalty,
+		cocTwoPenalty,
+		skillLevel,
+		fortune,
+		combatDie
+	} = rollOptions;
 	const keepUnits = (cocBonus || cocTwoBonus || cocPenalty || cocTwoPenalty);
 	const result = {} as rollDiceResult;
 	const fortuneNum = Number(fortune);
@@ -74,7 +85,7 @@ const rollDice = ({
 		diceAmount = diceAmount - itemsToStay.length;
 	}
 
-	result.results = getResultsArray(diceType, diceAmount, keepUnits);
+	result.results = getResultsArraySorted(diceType, diceAmount, keepUnits);
 	result.modifier = modifier;
 	result.diceAmount = diceAmount;
 	result.diceType = diceType;

@@ -1,5 +1,6 @@
 import { requestParams } from './request';
 import { getColor } from './getColor';
+import joinAsBlocks from './joinAsBlocks';
 
 const getRequestMsg = (result:any, rollOptions:any, userSettings:any) => {
 	const {
@@ -18,8 +19,9 @@ const getRequestMsg = (result:any, rollOptions:any, userSettings:any) => {
 	} = result;
 	const rolledWord = diceAmount > 1 ? 'Results' : 'Result';
 	const rolled = `${diceAmount}d${diceType}`;
-	const username = userSettings.username || 'USERNAME_MISSING'
-	const msgTitle = `${username} rolled \`${rolled}\`. ${rolledWord}: \`${results.join(', ')}\`.`
+	const username = userSettings.username || 'USERNAME_MISSING';
+	const resultsJoined = joinAsBlocks(results, null, true);
+	const msgTitle = `${username} rolled \`${rolled}\`. ${rolledWord}: ${resultsJoined}.`
 	const fields = [];
 	let description = '';
 
@@ -28,7 +30,8 @@ const getRequestMsg = (result:any, rollOptions:any, userSettings:any) => {
 	}
 
 	if (rollOptions.sumResults) {
-		let name = `:arrow_right: Sum of \`${results.join('+')}\``;
+		const sumJoined = joinAsBlocks(results, '+', true);
+		let name = `:arrow_right: Sum of ${sumJoined}`;
 		if (0 !== Number(modifier)) name += ` ${modSymbol} \`${Math.abs(modifier)}\` (modifier)`;
 		fields.push({
 			name,
@@ -61,8 +64,8 @@ const getRequestMsg = (result:any, rollOptions:any, userSettings:any) => {
 	}
 	if (rollOptions.combatDie) {
 		fields.push({
-			name: `:crossed_swords: Combat Die Results:`,
-			value: `Damage: \`${dmg}\`. Effects: \`${effects}\`.`
+			name: `Combat Die Results:`,
+			value: `:skull: Damage: \`${dmg}\`.\n:boom: Effects: \`${effects}\`.`
 		});
 	}
 	const msgParams:requestParams = {

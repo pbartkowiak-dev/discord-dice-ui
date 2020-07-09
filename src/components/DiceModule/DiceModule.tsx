@@ -31,7 +31,11 @@ function DiceModule ({
 	selectDice
 }:DiceModuleProps
 ) {
-	const handleRoll = (diceType:number, diceAmount:number) => {
+	const handleRoll = (diceType:number, diceAmount:number, diceTypeRaw:string) => {
+		rollOptions.diceTypeRaw = diceTypeRaw;
+		rollOptions.diceType = diceType;
+		rollOptions.diceAmount = diceAmount;
+
 		const result = rollDice({
 			diceType,
 			diceAmount,
@@ -47,7 +51,7 @@ function DiceModule ({
 
 	const handleRollDice = (diceType:string, diceAmount:number = 1) => {
 		const diceTypeNum = getDieNumberVal(diceType);
-	
+
 		if (rollOptions.cocMode && diceType === 'd100') {
 			openCoCModal();
 			return;
@@ -63,6 +67,8 @@ function DiceModule ({
 		if (diceType === 'd6conan') {
 			rollOptions.combatDie = true;
 			rollOptions.useModifier = false;
+		} else {
+			rollOptions.combatDie = false;
 		}
 		if (rollOptions.useModifier) {
 			selectDice({
@@ -71,7 +77,7 @@ function DiceModule ({
 			});
 			openModifierModal();
 		} else {
-			handleRoll(diceTypeNum, diceAmount);
+			handleRoll(diceTypeNum, diceAmount, diceType);
 		}
 	};
 

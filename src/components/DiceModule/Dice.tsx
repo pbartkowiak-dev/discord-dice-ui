@@ -4,7 +4,6 @@ import Button from 'react-bootstrap/Button';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Card from 'react-bootstrap/Card'
-import getDieNumberVal from '../../utils/getDieNumberVal';
 
 function getButtonLabel(diceType:string) {
 	if (diceType === 'd100SL') {
@@ -31,8 +30,8 @@ function Dice({
 	rollOptions
 } : DiceProps
 ) {
-	const DropdownContent = ({ rollOptions }:any) => {
-		const maxDiceInOneRoll = 8;
+	const DropdownContent = () => {
+		const maxDiceInOneRoll = diceType === 'd6conan' ? 12: 8;
 		const options =  new Array(maxDiceInOneRoll).fill('').map((_, index) => {
 			const dieWord = index === 0 ? 'die' : 'dice';
 			return (
@@ -47,7 +46,7 @@ function Dice({
 			<>
 				{options}
 			</>
-		)
+		);
 	};
 
 	const shouldUseButton = (diceType:string, rollOptions:any) => {
@@ -66,9 +65,9 @@ function Dice({
 
 	let extraMark = null; 
 	if (diceType === 'd100SL') {
-		extraMark = <span className="dice__extra-mark">SL</span>
+		extraMark = <span className="dice__extra-mark">SL</span>;
 	} else if (diceType === 'd5') {
-		extraMark = <span className="dice__extra-mark">d5</span>
+		extraMark = <span className="dice__extra-mark">d5</span>;
 	}
 
 	return (
@@ -88,8 +87,7 @@ function Dice({
 							variant="primary"
 							title={buttonLabel}
 							className="dice-button">
-						<DropdownContent
-							rollOptions={rollOptions} />
+						<DropdownContent />
 					</DropdownButton>
 				}
 

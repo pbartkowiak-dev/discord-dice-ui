@@ -28,6 +28,9 @@ function ResultsModal({ hideMsg, msgData }:ResultsModalProps) {
 		userSettings = {},
 		results = []
 	} = msgParams;
+
+	let pushElement;
+	let rerollElement;
 	let modalBodyList;
 
 	if (msgParams.fields && msgParams.fields.length) {
@@ -47,16 +50,42 @@ function ResultsModal({ hideMsg, msgData }:ResultsModalProps) {
 		? `${styles.resultsModalHeader} ${styles.isFailure}`
 		: `${styles.resultsModalHeader}`;
 	
-		console.log('rollOptions', rollOptions);
-	const canPush = isSuccess === false && rollOptions.cocMode && !rollOptions.isPushed;
-	const canReroll = (rollOptions.warhammerMode || rollOptions.conanMode);
 
+
+	if (rollOptions.cocMode) {
+		const canPush = isSuccess === false && !rollOptions.isPushed;
+		pushElement = (
+			<CocPushOptionsContainer
+				rollOptions={rollOptions}
+				finalDieResult={finalDieResult}
+				userSettings={userSettings}
+				canPush={canPush}
+			/>
+		);
+	} else {
+		pushElement = null;
+	}
+
+	if (rollOptions.warhammerMode || rollOptions.conanMode || rollOptions.combatDie) {
+		rerollElement = (
+			<RerollContainer
+				rollOptions={rollOptions}
+				userSettings={userSettings}
+				results={results}
+			/>
+		);
+	} else {
+		rerollElement = null;
+	}
+
+
+	console.log('resultsModal - rollOptions', rollOptions);
 	return (
 		<>
 			<Modal
 				show={msgData.showMsg}
 				dialogClassName="test"
-			 	onHide={() => hideMsg()}
+			 	onHide={ () => hideMsg() }
 			>
 				<Modal.Header closeButton className={headerClass}>
 					<div>
@@ -68,18 +97,8 @@ function ResultsModal({ hideMsg, msgData }:ResultsModalProps) {
 					{ rollOptions.isPushed && <div className={styles.pushedTitle}>Pushed roll</div> }
 					{ title && <p className={styles.rollResults}>{ title }</p> }
 					{ modalBodyList }
-					<CocPushOptionsContainer
-						rollOptions={rollOptions}
-						finalDieResult={finalDieResult}
-						userSettings={userSettings}
-						canPush={canPush}
-					/>
-					{ canReroll && <RerollContainer
-						rollOptions={rollOptions}
-						userSettings={userSettings}
-						results={results}
-						/>
-					}
+					{ pushElement }
+					{ rerollElement }
 				</Modal.Body>
 				<Modal.Footer>
 				<Button

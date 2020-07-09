@@ -40,3 +40,7 @@ button.disabled {
 	display: block;
 }
 
+.dropdown-item {
+	padding: 0.2rem 1.5rem;
+	font-size: 15px;
+}

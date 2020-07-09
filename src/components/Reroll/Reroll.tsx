@@ -24,7 +24,6 @@ function Reroll({ handleReroll, rollOptions, results }:any) {
 	
 	if (conanMode && results.length) {
 		resultsElement = results
-			.sort((a:number, b:number) => a - b)
 			.map((result:number, index:number) => {
 				if (index === results.length - 1) {
 					return <span onClick={ () => addItemIndex(index) }>
