@@ -51,16 +51,18 @@ function Reroll({ handleReroll, rollOptions, results }:any) {
 		handleReroll(itemsToStay)
 	}
 
+	const title = conanMode ? <div>Select roll results you want to reroll:</div> : null;
+
 	return (
 		<>
 			<div className={styles.container}>
 				<div className={cx({row: true, selectItems: true})}>
-					<div>Select roll results you want to reroll:</div>
+					{ title }
 					<div>{ resultsElement }</div>
 				</div>
 				<div className={styles.row}>
 					<Button
-						disabled={!itemIndexes.length}
+						disabled={ (conanMode && !itemIndexes.length) }
 						variant="outline-primary"
 						onClick={handleClick}
 					>Reroll</Button>

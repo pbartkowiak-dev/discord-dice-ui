@@ -24,7 +24,6 @@ function ResultVsSkillRow({
 	let resultLabel;
 	let vsLabel;
 
-	console.log('labels', labels);
 	if (labels) {
 		resultLabel = labels.result;
 		vsLabel = labels.vs;

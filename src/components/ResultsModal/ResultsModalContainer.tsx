@@ -20,7 +20,6 @@ function ResultsModalContainer({
 	hideMsg,
 	msgData
 }:ResultsModalContainerProps) {
-	console.log('msgData', msgData)
 	return (
 		<>
 			<ResultsModal

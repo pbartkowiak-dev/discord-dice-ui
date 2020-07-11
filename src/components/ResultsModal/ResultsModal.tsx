@@ -66,7 +66,11 @@ function ResultsModal({ hideMsg, msgData }:ResultsModalProps) {
 		pushElement = null;
 	}
 
-	if (rollOptions.warhammerMode || rollOptions.conanMode || rollOptions.combatDie) {
+	if (
+		(rollOptions.warhammerMode && isSuccess === false) ||
+		rollOptions.conanMode ||
+		rollOptions.combatDie
+	) {
 		rerollElement = (
 			<RerollContainer
 				rollOptions={rollOptions}
@@ -78,8 +82,6 @@ function ResultsModal({ hideMsg, msgData }:ResultsModalProps) {
 		rerollElement = null;
 	}
 
-
-	console.log('resultsModal - rollOptions', rollOptions);
 	return (
 		<>
 			<Modal

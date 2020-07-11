@@ -1,15 +1,17 @@
 import getRandom from './getRandom';
 
-function getResultsArraySorted(diceType:number, diceAmount:number, keepUnits:boolean) {
+function resultsSorter(a:number, b:number) {
+	return a - b;
+}
+
+function getResultsArray(diceType:number, diceAmount:number, keepUnits:boolean) {
 	const rollsArr = new Array(diceAmount).fill('');
 	if (keepUnits) {
 		// this setting will reroll only tens and will keep units untouched
 		const units = getRandom(10);
 		return rollsArr.map(_ => ((getRandom(10)-1) * 10 + units));
 	}
-	return rollsArr
-		.map(_ => getRandom(diceType))
-		.sort((a:number, b:number) => a - b);
+	return rollsArr.map(_ => getRandom(diceType));
 }
 
 type rollDiceProps = {
@@ -85,7 +87,12 @@ const rollDice = ({
 		diceAmount = diceAmount - itemsToStay.length;
 	}
 
-	result.results = getResultsArraySorted(diceType, diceAmount, keepUnits);
+	result.results = getResultsArray(diceType, diceAmount, keepUnits);
+
+	if (itemsToStay && itemsToStay.length) {
+		diceAmount = diceAmount + itemsToStay.length;
+	}
+
 	result.modifier = modifier;
 	result.diceAmount = diceAmount;
 	result.diceType = diceType;
@@ -101,6 +108,9 @@ const rollDice = ({
 			result.results.push(itemsToStay[i]);
 		}
 	}
+
+	// Sort results
+	result.results = result.results.sort(resultsSorter);
 
 	result.totalWithModifier = result.results.reduce((a, b) => Number(a) + Number(b), Number(modifier));
 	result.totalWithoutModifier = result.totalWithModifier - Number(modifier);

@@ -2,7 +2,7 @@ import React from 'react';
 import CodeSpan from '../components/CodeSpan/CodeSpan';
 
 export default function joinAsBlocks(
-	results: Array<number>,
+	results: Array<number> = [],
 	joinerProp?: string | null,
 	shouldGetMd?: boolean
 ) {

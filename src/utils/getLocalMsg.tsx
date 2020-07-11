@@ -77,7 +77,7 @@ const getLocalMsg = (result:any, rollOptions:any,  userSettings?:any) => {
 		}
 
 	}
-	console.log('rollOptions getLocal', rollOptions);
+
 	if (rollOptions.combatDie) {
 		fields.push(
 			<strong>Combat Die Results:</strong>
