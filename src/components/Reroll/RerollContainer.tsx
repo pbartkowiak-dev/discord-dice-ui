@@ -10,6 +10,7 @@ import getRequestMsg from '../../utils/getRequestMsg';
 import getLocalMsg from '../../utils/getLocalMsg';
 import rollDice from '../../utils/rollDice';
 import { request } from '../../utils/request';
+import { D6_CONAN } from '../../consts/conanConstants';
 
 const mapDispatchToProps = { showMsg, hideMsg };
 
@@ -34,7 +35,7 @@ function RerollContainer({
 			showMsg(localMsg);
 			request(requestMsg);
 		}
-	} else if (rollOptions.conanMode && !(rollOptions.diceTypeRaw === 'd6conan')) {
+	} else if (rollOptions.conanMode && !(rollOptions.diceTypeRaw === D6_CONAN)) {
 		reroll = (itemsToStay:Array<number>) => {
 			rollOptions.fortune = 0;
 
@@ -50,11 +51,10 @@ function RerollContainer({
 			showMsg(localMsg);
 			// request(requestMsg);
 		}
-	} else if (rollOptions.diceTypeRaw === 'd6conan') {
+	} else if (rollOptions.diceTypeRaw === D6_CONAN) {
 		reroll = (itemsToStay:Array<number>) => {
-			const diceAmount = Number(rollOptions.diceAmount);
 			const result = rollDice({
-				diceType: 6,
+				diceType: rollOptions.diceType,
 				diceAmount: Number(rollOptions.diceAmount),
 				rollOptions,
 				itemsToStay

@@ -8,6 +8,9 @@ import getLocalMsg from '../../utils/getLocalMsg';
 import rollDice from '../../utils/rollDice';
 import getDiceSet from '../../utils/getDiceSet';
 import getDieNumberVal from '../../utils/getDieNumberVal';
+import { D6_CONAN, D20_CONAN_TEST, CONAN } from '../../consts/conanConstants';
+import { D100_SL, WARHAMMER } from '../../consts/warhammerConstants';
+import { CLASSIC, D100 } from '../../consts/diceConstants';
 
 type DiceModuleProps = {
 	userSettings: any,
@@ -52,19 +55,19 @@ function DiceModule ({
 	const handleRollDice = (diceType:string, diceAmount:number = 1) => {
 		const diceTypeNum = getDieNumberVal(diceType);
 
-		if (rollOptions.cocMode && diceType === 'd100') {
+		if (rollOptions.cocMode && diceType === D100) {
 			openCoCModal();
 			return;
 		}
-		if (diceType === 'd100SL') {
+		if (diceType === D100_SL) {
 			openWarhammerModal();
 			return;
 		}
-		if (diceType === 'd20conan-test') {
+		if (diceType === D20_CONAN_TEST) {
 			openConanModal();
 			return;
 		}
-		if (diceType === 'd6conan') {
+		if (diceType === D6_CONAN) {
 			rollOptions.combatDie = true;
 			rollOptions.useModifier = false;
 		} else {
@@ -83,11 +86,11 @@ function DiceModule ({
 
 	let diceSetType;
 	if (rollOptions.warhammerMode) {
-		diceSetType = 'warhammer';
+		diceSetType = WARHAMMER;
 	} else if(rollOptions.conanMode) {
-			diceSetType = 'conan';
+			diceSetType = CONAN;
 	} else {
-		diceSetType = 'classic'
+		diceSetType = CLASSIC;
 	}
 
 	const diceSet = getDiceSet(diceSetType);

@@ -1,23 +1,36 @@
+import { D6_CONAN, D20_CONAN_TEST, D20_CONAN, D20_CONAN_HL } from './conanConstants';
+import { D100_SL } from './warhammerConstants';
+import {
+	D100,
+	D20,
+	D12,
+	D10,
+	D8,
+	D6,
+	D5,
+	D4
+} from './diceConstants';
+
 export const classicSet = [
-	'd100',
-	'd20',
-	'd12',
-	'd10',
-	'd8',
-	'd6',
-	'd4'
+	D100,
+	D20,
+	D12,
+	D10,
+	D8,
+	D6,
+	D4
 ];
 
 export const warhammerSet = [
-	'd100SL',
-	'd100',
-	'd10',
-	'd5'
+	D100_SL,
+	D100,
+	D10,
+	D5
 ];
 
 export const conanSet = [
-	'd20conan-test',
-	'd20conan',
-	'd20conan-hl',
-	'd6conan',
+	D20_CONAN_TEST,
+	D20_CONAN,
+	D20_CONAN_HL,
+	D6_CONAN
 ];

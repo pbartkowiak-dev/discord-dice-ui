@@ -3,12 +3,14 @@ import React, { useState } from 'react';
 import classNames from 'classnames/bind';
 import Button from 'react-bootstrap/Button';
 import CodeSpan from '../CodeSpan/CodeSpan';
+import { D6_CONAN, D20_CONAN_TEST } from '../../consts/conanConstants';
 import styles from './Reroll.module.css';
 
 function Reroll({ handleReroll, rollOptions, results }:any) {
 	const cx = classNames.bind(styles);
-	const { conanMode } = rollOptions;
-	const [itemIndexes, setItemIndexes] = useState([]);
+	const { diceTypeRaw } = rollOptions;
+	const [ itemIndexes, setItemIndexes ] = useState([]);
+	const isSelectToReroll = (diceTypeRaw === D6_CONAN || diceTypeRaw === D20_CONAN_TEST);
 
 	const addItemIndex = (itemIndex:number) => {
 		if (itemIndexes.indexOf(itemIndex) === -1) {
@@ -20,10 +22,10 @@ function Reroll({ handleReroll, rollOptions, results }:any) {
 		}
 	};
 
-	let resultsElement;
+	let selectToRerollElement;
 	
-	if (conanMode && results.length) {
-		resultsElement = results
+	if (isSelectToReroll && results.length) {
+		const resultsElement = results
 			.map((result:number, index:number) => {
 				if (index === results.length - 1) {
 					return <span onClick={ () => addItemIndex(index) }>
@@ -38,8 +40,15 @@ function Reroll({ handleReroll, rollOptions, results }:any) {
 						active: itemIndexes.indexOf(index) >= 0
 					})}>{result}</CodeSpan>,&nbsp;</span>;
 			});
+
+			selectToRerollElement = (
+				<div className={cx({row: true, selectItems: true})}>
+					<div>Select roll results you want to reroll:</div>
+					<div>{ resultsElement }</div>
+				</div>
+			);
 	} else {
-		resultsElement = null;
+		selectToRerollElement = null;
 	}
 
 	const handleClick = () => {
@@ -49,20 +58,15 @@ function Reroll({ handleReroll, rollOptions, results }:any) {
 		));
 		// handle reroll;
 		handleReroll(itemsToStay)
-	}
-
-	const title = conanMode ? <div>Select roll results you want to reroll:</div> : null;
+	};
 
 	return (
 		<>
 			<div className={styles.container}>
-				<div className={cx({row: true, selectItems: true})}>
-					{ title }
-					<div>{ resultsElement }</div>
-				</div>
+				{ selectToRerollElement }
 				<div className={styles.row}>
 					<Button
-						disabled={ (conanMode && !itemIndexes.length) }
+						disabled={ (isSelectToReroll && !itemIndexes.length) }
 						variant="outline-primary"
 						onClick={handleClick}
 					>Reroll</Button>

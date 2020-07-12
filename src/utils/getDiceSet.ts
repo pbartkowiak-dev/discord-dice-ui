@@ -1,10 +1,12 @@
 import { classicSet, warhammerSet, conanSet } from '../consts/diceSets';
+import { CONAN } from '../consts/conanConstants';
+import { WARHAMMER } from '../consts/warhammerConstants';
 
 function getDiceSet(setType:string) {
-	if (setType === 'warhammer') {
+	if (setType === WARHAMMER) {
 		return warhammerSet;
 	}
-	if (setType === 'conan') {
+	if (setType === CONAN) {
 		return conanSet;
 	}
 	return classicSet;

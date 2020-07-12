@@ -3,23 +3,34 @@ import './Dice.css';
 import Button from 'react-bootstrap/Button';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
-import Card from 'react-bootstrap/Card'
+import Card from 'react-bootstrap/Card';
+import {
+	D6_CONAN,
+	D20_CONAN,
+	D20_CONAN_TEST,
+	D20_CONAN_HL,
+	COMBAT_DIE,
+	HIT_LOCATION,
+	SKILL_TEST
+} from '../../consts/conanConstants';
+import { D100_SL, SL } from '../../consts/warhammerConstants';
+import { D100, D20, D5 } from '../../consts/diceConstants';
 
 function getButtonLabel(diceType:string) {
-	if (diceType === 'd100SL') {
-		return 'd100 + SL';
+	if (diceType === D100_SL) {
+		return D100 + SL;
 	}
-	if (diceType === 'd6conan') {
-		return 'Combat Die';
+	if (diceType === D6_CONAN) {
+		return COMBAT_DIE;
 	}
-	if (diceType === 'd20conan-hl') {
-		return 'Hit Location';
+	if (diceType === D20_CONAN_HL) {
+		return HIT_LOCATION;
 	}
-	if (diceType === 'd20conan') {
-		return 'd20';
+	if (diceType === D20_CONAN) {
+		return D20;
 	}
-	if (diceType === 'd20conan-test') {
-		return 'Skill Test';
+	if (diceType === D20_CONAN_TEST) {
+		return SKILL_TEST;
 	}
 	return diceType;
 }
@@ -31,7 +42,7 @@ function Dice({
 } : DiceProps
 ) {
 	const DropdownContent = () => {
-		const maxDiceInOneRoll = diceType === 'd6conan' ? 12: 8;
+		const maxDiceInOneRoll = diceType === D6_CONAN ? 12: 8;
 		const options =  new Array(maxDiceInOneRoll).fill('').map((_, index) => {
 			const dieWord = index === 0 ? 'die' : 'dice';
 			return (
@@ -51,10 +62,10 @@ function Dice({
 
 	const shouldUseButton = (diceType:string, rollOptions:any) => {
 		if (
-			diceType === 'd100SL' ||
-			diceType=== 'd20conan-hl' ||
-			diceType=== 'd20conan-test' ||
-			(diceType=== 'd100' && rollOptions.cocMode)
+			diceType === D100_SL ||
+			diceType=== D20_CONAN_HL ||
+			diceType=== D20_CONAN_TEST ||
+			(diceType=== D100 && rollOptions.cocMode)
 		) {
 			return true;
 		}
@@ -64,9 +75,9 @@ function Dice({
 	const buttonLabel = getButtonLabel(diceType);
 
 	let extraMark = null; 
-	if (diceType === 'd100SL') {
+	if (diceType === D100_SL) {
 		extraMark = <span className="dice__extra-mark">SL</span>;
-	} else if (diceType === 'd5') {
+	} else if (diceType === D5) {
 		extraMark = <span className="dice__extra-mark">d5</span>;
 	}
 
