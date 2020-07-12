@@ -29,6 +29,7 @@ function RerollContainer({
 				diceType : 100,
 				rollOptions
 			});
+			console.log('userSettings 4', userSettings);
 			const requestMsg = getWarhammerRequestMsg(result, rollOptions, userSettings);
 			const localMsg = getWarhammerLocalMsg(result, rollOptions, userSettings);
 		
@@ -51,7 +52,7 @@ function RerollContainer({
 			showMsg(localMsg);
 			// request(requestMsg);
 		}
-	} else  {
+	} else {
 		reroll = (itemsToStay:Array<number>) => {
 			const result = rollDice({
 				diceType: rollOptions.diceType,
@@ -59,11 +60,12 @@ function RerollContainer({
 				rollOptions,
 				itemsToStay
 			});
-			// const requestMsg = getRequestMsg(result.results, rollOptions, userSettings);
+			const requestMsg = getRequestMsg(result, rollOptions, userSettings);
 			// @TODO getLocalMsg first param should be the same as other getLocalMsgs
 			const localMsg = getLocalMsg(result, rollOptions, userSettings);
+
 			showMsg(localMsg);
-			// request(requestMsg);
+			request(requestMsg);
 		}
 	}
 

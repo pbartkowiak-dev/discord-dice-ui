@@ -49,9 +49,10 @@ const getRequestMsg = (result:any, rollOptions:any, userSettings:any) => {
 	if (successLevels.isDouble) {
 		description += '\nRolled **Double**.';
 	}
+
 	if (rollOptions.rerolledTimes) {
 		const timesWord = rollOptions.rerolledTimes === 1 ? 'time' : 'times';
-		description += `\nRerolled \`${rollOptions.rerolledTimes}\` ${timesWord}.`
+		description += `\nRerolled \`${rollOptions.rerolledTimes}\` ${timesWord}.`;
 	}
 
 	fields.push({

@@ -22,6 +22,7 @@ function DiceModuleContainer({
 	openModifierModal,
 	selectDice
 }:any ) {
+	// @TODO rollOPTIONS separater from form values preferences
 	let rollOptions = {};
 	if (diceModuleForm && diceModuleForm.values) {
 		rollOptions = diceModuleForm.values;

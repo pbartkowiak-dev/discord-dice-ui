@@ -1,4 +1,4 @@
-function getConanHitLocation(result:number | string) {
+function getConanHitLocation(result:number | string, type:string = 'human') {
 	const resultNum = Number(result);
 	let hitLocation = '';
 		switch(true) {

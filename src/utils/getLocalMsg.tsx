@@ -5,6 +5,8 @@ import { faArrowAltCircleRight, faSkull, faSun } from '@fortawesome/free-solid-s
 import joinAsBlocks from './joinAsBlocks';
 import CodeSpan from '../components/CodeSpan/CodeSpan';
 import { D6_CONAN, D20_CONAN_HL } from '../consts/conanConstants';
+import HitLocations from '../components/HitLocations/HitLocations';
+import getConanHitLocation from '../utils/getConanHitLocations';
 import styles from '../components/ResultsModal/ResultsModal.module.css';
 
 const IconUp = <FontAwesomeIcon icon={faArrowAltCircleUp} />;
@@ -33,7 +35,7 @@ const getLocalMsg = (result:any, rollOptions:any,  userSettings?:any) => {
 	const modifierWithSymbol = <CodeSpan>{modSymbol}{Math.abs(modifier)}</CodeSpan>;
 	const fields = [];
 	const isCombatDie = rollOptions.diceTypeRaw === D6_CONAN;
-	const isConanHitLocation = rollOptions.diceTypeRaw === D20_CONAN_HL;
+	const isConanHitLocationDie = rollOptions.diceTypeRaw === D20_CONAN_HL;
 	let title;
 
 	if (isCombatDie) {
@@ -79,7 +81,6 @@ const getLocalMsg = (result:any, rollOptions:any,  userSettings?:any) => {
 				<>{IconDown} Lowest result: <CodeSpan>{lowest}</CodeSpan>.</>
 			);
 		}
-
 	}
 
 	if (rollOptions.rerolledTimes) {
@@ -100,6 +101,23 @@ const getLocalMsg = (result:any, rollOptions:any,  userSettings?:any) => {
 			<>{IconSun} Effects: <CodeSpan>{effects}</CodeSpan>.</>
 		);
 	}
+
+	if (isConanHitLocationDie) {
+		const hitResult = results[0];
+		const hitLocation = getConanHitLocation(hitResult);
+
+		fields.push(
+			<HitLocations
+				result={hitResult}
+				hitLocation={hitLocation}
+				isDarkHeresy={false}
+				isWarhammer2e={false}
+				isConan={true}
+				alwaysExpanded={true}
+			/>
+		);
+	}
+
 	return {
 		title,
 		fields,

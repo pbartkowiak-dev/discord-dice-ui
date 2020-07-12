@@ -47,7 +47,7 @@ function DiceModule ({
 			modifier: 0
 		});
 		const requestMsg = getRequestMsg(result, rollOptions, userSettings);
-		const localMsg = getLocalMsg(result, rollOptions);
+		const localMsg = getLocalMsg(result, rollOptions, userSettings);
 
 		showMsg(localMsg);
 		request(requestMsg);

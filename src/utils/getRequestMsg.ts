@@ -1,8 +1,8 @@
 import { requestParams } from './request';
 import { getColor } from './getColor';
 import joinAsBlocks from './joinAsBlocks';
+import getConanHitLocation from '../utils/getConanHitLocations';
 import { D6_CONAN, D20_CONAN_HL } from '../consts/conanConstants';
-
 
 const getRequestMsg = (result:any, rollOptions:any, userSettings:any) => {
 	const {
@@ -25,11 +25,17 @@ const getRequestMsg = (result:any, rollOptions:any, userSettings:any) => {
 	const resultsJoined = joinAsBlocks(results, null, true);
 	const msgTitle = `${username} rolled \`${rolled}\`. ${rolledWord}: ${resultsJoined}.`;
 	const isCombatDie = rollOptions.diceTypeRaw === D6_CONAN;
+	const isConanHitLocationDie = rollOptions.diceTypeRaw === D20_CONAN_HL;
 	const fields = [];
 	let description = '';
 
 	if (rollOptions.useModifier) {
 		description = `**Modifier**: \`${modSymbol}${Math.abs(modifier)}\`.`;
+	}
+
+	if (rollOptions.rerolledTimes) {
+		const timesWord = rollOptions.rerolledTimes === 1 ? 'time' : 'times';
+		description += `\nRerolled \`${rollOptions.rerolledTimes}\` ${timesWord}.`;
 	}
 
 	if (rollOptions.sumResults) {
@@ -71,6 +77,17 @@ const getRequestMsg = (result:any, rollOptions:any, userSettings:any) => {
 			value: `:skull: Damage: \`${dmg}\`.\n:boom: Effects: \`${effects}\`.`
 		});
 	}
+
+	if (isConanHitLocationDie) {
+		const hitResult = results[0];
+		const hitLocation = getConanHitLocation(hitResult);
+
+		fields.push({
+			name: ':mens: Hit Location:',
+			value: `\`${hitResult}\` - ${hitLocation}`
+		});
+	}
+
 	const msgParams:requestParams = {
 		hookUrl: userSettings.hookUrl,
 		msgTitle,

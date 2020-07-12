@@ -1,5 +1,6 @@
 import React from 'react';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
+import classNames from 'classnames';
 import Tooltip from 'react-bootstrap/Tooltip';
 import Accordion from 'react-bootstrap/Accordion';
 import Card from 'react-bootstrap/Card';
@@ -11,23 +12,26 @@ import styles from './HitLocations.module.css';
 type HitLocationsPropsType = {
 	result: string
 	hitLocation: string
-	isDarkHeresy: boolean
-	isWarhammer2e: boolean
+	isDarkHeresy?: boolean
+	isWarhammer2e?: boolean
+	isConan?: boolean
+	alwaysExpanded?: boolean
 }
 
-type HitLocationTooltipProps = {
-	result: number
-}
 
-function HitLocationTooltip({ isDarkHeresy, isWarhammer2e }:any) {
+function HitLocationTooltip({ isDarkHeresy, isWarhammer2e, isConan }:any) {
 	const key = 'HitLocationTooltip';
-	const classNameFull = `${styles.cellIcon} ${styles.tooltip}`;
+	const classNameFull = classNames({
+		[styles.cellIcon] : true,
+		[styles.tooltip] : true
+	});
 	let head;
 	let leftArm;
 	let rightArm;
 	let body;
 	let leftLeg;
 	let rightLeg;
+	let tooltipBody;
 
 	if (isDarkHeresy) {
 		head = '01-10';
@@ -43,6 +47,13 @@ function HitLocationTooltip({ isDarkHeresy, isWarhammer2e }:any) {
 		body = '56-80';
 		rightLeg = '81-90';
 		leftLeg = '91-00';
+	} else if (isConan) {
+		head = '01-02';
+		rightArm = '03-05';
+		leftArm = '06-08';
+		body = '09-14';
+		rightLeg = '15-17';
+		leftLeg = '18-20';
 	} else {
 		head = '01-09';
 		leftArm = '10-24';
@@ -52,8 +63,9 @@ function HitLocationTooltip({ isDarkHeresy, isWarhammer2e }:any) {
 		rightLeg = '90-00';
 	}
 
-	const tooltipBody = (isDarkHeresy || isWarhammer2e)
-		? (
+
+	if (isDarkHeresy || isWarhammer2e) {
+		tooltipBody = (
 			<>
 				<div>
 					<strong>{head}</strong> - <span>Head</span>
@@ -75,7 +87,32 @@ function HitLocationTooltip({ isDarkHeresy, isWarhammer2e }:any) {
 				</div>
 			</>
 		)
-		: (
+	} else if (isConan) {
+		tooltipBody = (
+			<>
+				<div>
+					<strong>{head}</strong> - <span>Head</span>
+				</div>
+				<div>
+					<strong>{rightArm}</strong> - <span>Right Arm</span>
+				</div>
+				<div>
+					<strong>{leftArm}</strong> - <span>Left Arm</span>
+				</div>
+				<div>
+					<strong>{body}</strong> - <span>Torso</span>
+				</div>
+				<div>
+					<strong>{rightLeg}</strong> - <span>Right Leg</span>
+				</div>
+				<div>
+					<strong>{leftLeg}</strong> - <span>Left Leg</span>
+				</div>
+			</>
+		);
+	} else {
+		// default to Warhammer 4e
+		tooltipBody = (
 			<>
 				<div>
 					<strong>{head}</strong> - <span>Head</span>
@@ -97,6 +134,8 @@ function HitLocationTooltip({ isDarkHeresy, isWarhammer2e }:any) {
 				</div>
 			</>
 		);
+	}
+
 	return (
 		<>
 			<OverlayTrigger
@@ -121,20 +160,39 @@ function HitLocationTooltip({ isDarkHeresy, isWarhammer2e }:any) {
 	);
 }
 
-function HitLocations({ result, hitLocation, isDarkHeresy, isWarhammer2e }:HitLocationsPropsType) {
+function HitLocations({ result, hitLocation, isDarkHeresy, isWarhammer2e, isConan, alwaysExpanded }:HitLocationsPropsType) {
+	let header;
+
+	if (alwaysExpanded) {
+		header = (
+			<Card.Header className={styles.header}>
+				<span>Hit Location <FontAwesomeIcon icon={faMale} /></span>
+			</Card.Header>
+		);
+	} else {
+		header = (
+			<Accordion.Toggle as={Card.Header} className={ classNames({pointer: true, [styles.header]: true }) } eventKey="0">
+				<span>Hit Location <FontAwesomeIcon icon={faMale} /></span>
+			</Accordion.Toggle>
+		);
+	}
+
 	return (
-		<Accordion className={styles.container}>
+		<Accordion
+			className={styles.container}
+			defaultActiveKey={(alwaysExpanded) ? "0" : "666"} 
+		>
 			<Card>
-				<Accordion.Toggle as={Card.Header} className={`pointer ${styles.header}`} eventKey="0">
-					<span>Hit Location <FontAwesomeIcon icon={faMale} /></span>
-				</Accordion.Toggle>
+				{ header }
 				<Accordion.Collapse eventKey="0">
 					<Card.Body>
 						<div className={styles.body}>
 							<span>{hitLocation}</span>
 							<HitLocationTooltip
 								isDarkHeresy={isDarkHeresy}
-								isWarhammer2e={isWarhammer2e} />
+								isWarhammer2e={isWarhammer2e}
+								isConan={isConan}
+							/>
 						</div>
 					</Card.Body>
 				</Accordion.Collapse>
