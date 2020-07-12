@@ -16,7 +16,7 @@ export default function joinAsBlocks(
 function getJsx(results: Array<number>, joiner:string) {
 	return results.map((result: number, index: number) => {
 		if (index === results.length - 1) {
-			return <span><CodeSpan>{result}</CodeSpan></span>;
+			return <span key={index}><CodeSpan>{result}</CodeSpan></span>;
 		}
 		return <span><CodeSpan>{result}</CodeSpan>{joiner}</span>;
 	});

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import ConanModalForm from './ConanModalForm';
+import { D20_CONAN_TEST } from '../../consts/conanConstants';
 import { request } from '../../utils/request';
 import getConanRequestMsg from '../../utils/getConanRequestMsg';
 import getConanLocalMsg from '../../utils/getConanLocalMsg';
@@ -28,7 +29,7 @@ function ConanModal({
 	const handleSubmit = (values:any) => {
 		const rollOptions = {
 			...values,
-			conanMode: true
+			diceTypeRaw: D20_CONAN_TEST
 		};
 		const result = rollDice({
 			diceType: 20,

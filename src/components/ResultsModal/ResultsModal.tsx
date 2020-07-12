@@ -7,7 +7,7 @@ import RerollContainer from '../Reroll/RerollContainer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDiceD20 } from '@fortawesome/free-solid-svg-icons';
 import { LocalMsgParamsType } from '../../utils/getCocLocalMsg';
-import { D6_CONAN, D20_CONAN_TEST, D20_CONAN_HL } from '../../consts/conanConstants';
+import { D6_CONAN, D20_CONAN_TEST } from '../../consts/conanConstants';
 
 type msgDataType = {
 	showMsg: boolean
@@ -66,12 +66,11 @@ function ResultsModal({ hideMsg, msgData }:ResultsModalProps) {
 	} else {
 		pushElement = null;
 	}
-	console.log('rollOptions', rollOptions)
+	console.log('rollOptions.diceTypeRaw', rollOptions.diceTypeRaw);
 	if (
 		(rollOptions.warhammerMode && isSuccess === false) ||
 		rollOptions.diceTypeRaw === D6_CONAN ||
-		rollOptions.diceTypeRaw === D20_CONAN_TEST ||
-		rollOptions.diceTypeRaw === D20_CONAN_HL
+		rollOptions.diceTypeRaw === D20_CONAN_TEST
 	) {
 		rerollElement = (
 			<RerollContainer

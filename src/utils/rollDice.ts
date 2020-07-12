@@ -1,3 +1,4 @@
+import { D6_CONAN, D20_CONAN_HL } from '../consts/conanConstants';
 import getRandom from './getRandom';
 
 function resultsSorter(a:number, b:number) {
@@ -64,9 +65,9 @@ const rollDice = ({
 		cocPenalty,
 		cocTwoPenalty,
 		skillLevel,
-		fortune,
-		combatDie
+		fortune
 	} = rollOptions;
+	const isCombatDie = rollOptions.diceTypeRaw === D6_CONAN;
 	const keepUnits = (cocBonus || cocTwoBonus || cocPenalty || cocTwoPenalty);
 	const result = {} as rollDiceResult;
 	const fortuneNum = Number(fortune);
@@ -117,7 +118,7 @@ const rollDice = ({
 	result.highest = Math.max(...result.results) + Number(modifier);
 	result.lowest = Math.min(...result.results) + Number(modifier);
 
-	if (combatDie) {
+	if (isCombatDie) {
 		const combatDieResults = result.results.reduce((total, current) => {
 			if (current >= 5) {
 				total.dmg = total.dmg + 1;

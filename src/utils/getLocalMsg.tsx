@@ -4,6 +4,8 @@ import { faArrowAltCircleUp, faArrowAltCircleDown } from '@fortawesome/free-regu
 import { faArrowAltCircleRight, faSkull, faSun } from '@fortawesome/free-solid-svg-icons';
 import joinAsBlocks from './joinAsBlocks';
 import CodeSpan from '../components/CodeSpan/CodeSpan';
+import { D6_CONAN, D20_CONAN_HL } from '../consts/conanConstants';
+import styles from '../components/ResultsModal/ResultsModal.module.css';
 
 const IconUp = <FontAwesomeIcon icon={faArrowAltCircleUp} />;
 const IconDown = <FontAwesomeIcon icon={faArrowAltCircleDown} />;
@@ -30,9 +32,11 @@ const getLocalMsg = (result:any, rollOptions:any,  userSettings?:any) => {
 	const resultsJoined = joinAsBlocks(results);
 	const modifierWithSymbol = <CodeSpan>{modSymbol}{Math.abs(modifier)}</CodeSpan>;
 	const fields = [];
+	const isCombatDie = rollOptions.diceTypeRaw === D6_CONAN;
+	const isConanHitLocation = rollOptions.diceTypeRaw === D20_CONAN_HL;
 	let title;
 
-	if (rollOptions.combatDie) {
+	if (isCombatDie) {
 		title = <>You rolled <CodeSpan>{rolled}</CodeSpan>.</>;
 	} else {
 		title = <>You rolled <CodeSpan>{rolled}</CodeSpan>. {rolledWord}: {resultsJoined}.</>;
@@ -78,7 +82,14 @@ const getLocalMsg = (result:any, rollOptions:any,  userSettings?:any) => {
 
 	}
 
-	if (rollOptions.combatDie) {
+	if (rollOptions.rerolledTimes) {
+		const timesWord = rollOptions.rerolledTimes === 1 ? 'time' : 'times';
+		fields.push(
+			<div className={`${styles.generalResult}`}>Rerolled <CodeSpan>{rollOptions.rerolledTimes}</CodeSpan> {timesWord}</div>
+		);
+	}
+
+	if (isCombatDie) {
 		fields.push(
 			<strong>Combat Die Results:</strong>
 		);

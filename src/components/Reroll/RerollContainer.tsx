@@ -51,11 +51,11 @@ function RerollContainer({
 			showMsg(localMsg);
 			// request(requestMsg);
 		}
-	} else if (rollOptions.diceTypeRaw === D6_CONAN) {
+	} else  {
 		reroll = (itemsToStay:Array<number>) => {
 			const result = rollDice({
 				diceType: rollOptions.diceType,
-				diceAmount: Number(rollOptions.diceAmount),
+				diceAmount: Number(rollOptions.diceAmount) || 1,
 				rollOptions,
 				itemsToStay
 			});

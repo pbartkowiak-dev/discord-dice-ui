@@ -1,6 +1,8 @@
 import { requestParams } from './request';
 import { getColor } from './getColor';
 import joinAsBlocks from './joinAsBlocks';
+import { D6_CONAN, D20_CONAN_HL } from '../consts/conanConstants';
+
 
 const getRequestMsg = (result:any, rollOptions:any, userSettings:any) => {
 	const {
@@ -21,12 +23,13 @@ const getRequestMsg = (result:any, rollOptions:any, userSettings:any) => {
 	const rolled = `${diceAmount}d${diceType}`;
 	const username = userSettings.username || 'USERNAME_MISSING';
 	const resultsJoined = joinAsBlocks(results, null, true);
-	const msgTitle = `${username} rolled \`${rolled}\`. ${rolledWord}: ${resultsJoined}.`
+	const msgTitle = `${username} rolled \`${rolled}\`. ${rolledWord}: ${resultsJoined}.`;
+	const isCombatDie = rollOptions.diceTypeRaw === D6_CONAN;
 	const fields = [];
 	let description = '';
 
 	if (rollOptions.useModifier) {
-		description = `**Modifier**: \`${modSymbol}${Math.abs(modifier)}\`.`
+		description = `**Modifier**: \`${modSymbol}${Math.abs(modifier)}\`.`;
 	}
 
 	if (rollOptions.sumResults) {
@@ -62,7 +65,7 @@ const getRequestMsg = (result:any, rollOptions:any, userSettings:any) => {
 			value: `Penalty Die result: \`${cocPenalty}\`.`
 		});
 	}
-	if (rollOptions.combatDie) {
+	if (isCombatDie) {
 		fields.push({
 			name: `Combat Die Results:`,
 			value: `:skull: Damage: \`${dmg}\`.\n:boom: Effects: \`${effects}\`.`

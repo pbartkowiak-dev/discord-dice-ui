@@ -3,7 +3,6 @@ import classNames from 'classnames/bind';
 import CodeSpan from '../components/CodeSpan/CodeSpan';
 import getConanSuccessLevel, { conanSuccessLevelType } from './getConanSuccessLevel';
 import ResultVsSkillRow, { labelsType } from '../components/ResultVsSkillRow/ResultVsSkillRow';
-
 import HitLocations from '../components/HitLocations/HitLocations';
 import styles from '../components/ResultsModal/ResultsModal.module.css';
 

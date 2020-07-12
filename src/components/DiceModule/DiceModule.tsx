@@ -8,7 +8,7 @@ import getLocalMsg from '../../utils/getLocalMsg';
 import rollDice from '../../utils/rollDice';
 import getDiceSet from '../../utils/getDiceSet';
 import getDieNumberVal from '../../utils/getDieNumberVal';
-import { D6_CONAN, D20_CONAN_TEST, CONAN } from '../../consts/conanConstants';
+import { D6_CONAN, D20_CONAN_TEST, D20_CONAN_HL, CONAN } from '../../consts/conanConstants';
 import { D100_SL, WARHAMMER } from '../../consts/warhammerConstants';
 import { CLASSIC, D100 } from '../../consts/diceConstants';
 
@@ -35,6 +35,7 @@ function DiceModule ({
 }:DiceModuleProps
 ) {
 	const handleRoll = (diceType:number, diceAmount:number, diceTypeRaw:string) => {
+		rollOptions.rerolledTimes = 0;
 		rollOptions.diceTypeRaw = diceTypeRaw;
 		rollOptions.diceType = diceType;
 		rollOptions.diceAmount = diceAmount;
@@ -67,12 +68,10 @@ function DiceModule ({
 			openConanModal();
 			return;
 		}
-		if (diceType === D6_CONAN) {
-			rollOptions.combatDie = true;
+		if (diceType === D6_CONAN || diceType === D20_CONAN_HL) {
 			rollOptions.useModifier = false;
-		} else {
-			rollOptions.combatDie = false;
 		}
+
 		if (rollOptions.useModifier) {
 			selectDice({
 				diceType: diceTypeNum,

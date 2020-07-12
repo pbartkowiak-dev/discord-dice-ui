@@ -52,12 +52,14 @@ function Reroll({ handleReroll, rollOptions, results }:any) {
 	}
 
 	const handleClick = () => {
-		// get items from indexes
-		const itemsToStay = results.filter((item:number, index:number) => (
-			itemIndexes.indexOf(index) === -1
-		));
-		// handle reroll;
-		handleReroll(itemsToStay)
+		let itemsToStay = [];
+		if (itemIndexes && itemIndexes.length) {
+			// get items from indexes
+			itemsToStay = results.filter((item:number, index:number) => (
+				itemIndexes.indexOf(index) === -1
+			));
+		}
+		handleReroll(itemsToStay);
 	};
 
 	return (
