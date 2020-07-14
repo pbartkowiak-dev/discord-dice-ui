@@ -88,6 +88,11 @@
 	min-width: 45px;
 }
 
+.momentumResults {
+	display: flex;
+	justify-content: space-evenly;
+}
+
 .rollResults {
 	border-bottom: 1px solid #bebebe;
 	padding-bottom: 10px;

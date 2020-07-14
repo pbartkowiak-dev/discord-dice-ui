@@ -29,7 +29,6 @@ function RerollContainer({
 				diceType : 100,
 				rollOptions
 			});
-			console.log('userSettings 4', userSettings);
 			const requestMsg = getWarhammerRequestMsg(result, rollOptions, userSettings);
 			const localMsg = getWarhammerLocalMsg(result, rollOptions, userSettings);
 		

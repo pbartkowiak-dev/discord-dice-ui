@@ -85,9 +85,32 @@ const getConanLocalMsg = (results:Array<number>, rollOptions:any, userSettings?:
 	}
 
 	fields.push(
-		<div className={styles.slResult}>
-			<div><span className={styles.slResultLabel}>Momentum generated:</span></div>
-			<div><CodeSpan className={styles.slResultSpan}>{successLevel.momentum}</CodeSpan></div>
+		<div className={cx({ slResult: true, momentumResults: true })}>
+			<div>
+				{/* COMPLICATIONS */}
+				<div>
+					<span className={styles.slResultLabel}>Complications:</span>
+					</div>
+				<div>
+					<CodeSpan
+						className={styles.slResultSpan}
+						type ={successLevel.complications > 0 ? 'failure' : 'inactive'}
+				>{successLevel.complications}</CodeSpan>
+					</div>
+			</div>
+			<div>
+				{/* MOMENTUM */}
+				<div>
+					<span className={styles.slResultLabel}>Momentum:</span>
+					</div>
+				<div>
+					<CodeSpan
+						className={styles.slResultSpan}
+						type={successLevel.momentum > 0 ? 'success' : 'inactive'}
+					>{successLevel.momentum}</CodeSpan>
+				</div>
+			</div>
+
 		</div>
 	);
 

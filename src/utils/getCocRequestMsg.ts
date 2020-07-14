@@ -2,6 +2,7 @@ import { requestParams } from './request';
 import getSuccessLevels from './getSuccessLevels';
 import getSuccessLevelString from './getSuccessLevelString';
 import { SUCCESS, FAILURE, getColor } from './getColor';
+import joinAsBlocks from './joinAsBlocks';
 
 const getRequestMsg = (result:any, rollOptions:any, userSettings:any) => {
 	const {
@@ -13,6 +14,7 @@ const getRequestMsg = (result:any, rollOptions:any, userSettings:any) => {
 	const username = userSettings.username || 'USERNAME_MISSING';
 	const fields = [];
 	const skillLevelString = skillLevel <= 9 ? `0${skillLevel}` : `${skillLevel}`;
+	const resultsJoined = joinAsBlocks(results, null, true);
 	let finalDieResultString;
 	let finalDieResult;
 	let description;
@@ -20,11 +22,11 @@ const getRequestMsg = (result:any, rollOptions:any, userSettings:any) => {
 
 	if (rollOptions.cocBonus || rollOptions.cocTwoBonus) {
 		const dieWord = rollOptions.cocBonus ? 'one Bonus Die' : 'two Bonus Dice'
-		msgTitle = `${username} rolled **${dieWord}**. Results: \`${results.join(', ')}\`.`;
+		msgTitle = `${username} rolled **${dieWord}**. Results: ${resultsJoined}.`;
 		finalDieResult = cocBonusResult;
 	} else if (rollOptions.cocPenalty || rollOptions.cocTwoPenalty) {
 		const dieWord = rollOptions.cocPenalty ? 'one Penalty Die' : 'two Penalty Dice'
-		msgTitle = `${username} rolled **${dieWord}**. Results: \`${results.join(', ')}\`.`;
+		msgTitle = `${username} rolled **${dieWord}**. Results: ${resultsJoined}.`;
 		finalDieResult = cocPenaltyResult;
 	} else {
 		msgTitle = `${username} rolled **\`1d100\`**. Result: \`${results[0]}\`.`;

@@ -20,7 +20,7 @@ function ResultVsSkillRow({
 	isSuccess,
 	labels
 }: ResultVsSkillRowPropTypes) {
-	const resultCodeSpanStyles = `${styles.resultValue} ${isSuccess ? styles.isSuccess : styles.isFailure}`;
+	const codeSpanType = isSuccess ? 'success' : 'failure';
 	let resultLabel;
 	let vsLabel;
 
@@ -35,7 +35,7 @@ function ResultVsSkillRow({
 	return (
 		<div className={ styles.ResultVsSkillRowPropTypes }>
 			<div className={ styles.Cell }>
-				<CodeSpan className={resultCodeSpanStyles}>{ finalDieResult }</CodeSpan>
+				<CodeSpan className={styles.resultValue} type={codeSpanType}>{ finalDieResult }</CodeSpan>
 				<span className={ styles.label }>{ resultLabel }</span>
 			</div>
 			<div className={ styles.Cell }><span>vs.</span></div>

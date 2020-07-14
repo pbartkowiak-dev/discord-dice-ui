@@ -66,7 +66,7 @@ function ResultsModal({ hideMsg, msgData }:ResultsModalProps) {
 	} else {
 		pushElement = null;
 	}
-	console.log('rollOptions.diceTypeRaw', rollOptions.diceTypeRaw);
+
 	if (
 		(rollOptions.warhammerMode && isSuccess === false) ||
 		rollOptions.diceTypeRaw === D6_CONAN ||

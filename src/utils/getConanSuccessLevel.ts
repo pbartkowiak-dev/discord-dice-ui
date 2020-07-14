@@ -15,14 +15,15 @@ export default (
 ):any => {
 	const compilationMinVal = untrainedTest ? 19 : 20;
 	const compilationMaxVal = 20;
+	const focusNum = focus ? Number(focus) : 0;
 	let successLevel = 0;
 	let complications = 0;
 
 	results.forEach(result => {
 		if (result <= tn) {
-			if (result <= focus) {
+			if (result <= focusNum) {
 				successLevel += 2;
-			} else if (result > focus) {
+			} else if (result > focusNum) {
 				successLevel += 1
 			}
 		}

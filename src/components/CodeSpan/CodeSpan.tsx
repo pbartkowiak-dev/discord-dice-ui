@@ -1,10 +1,24 @@
 import React from 'react';
+import classNames from 'classnames';
 import styles from './CodeSpan.module.css';
 
-export default function CodeSpan(props:any) {
-	const { className } = props;
-	const fullClassName = `${className || ''} ${styles.codeSpan}`
+const FAILURE = 'failure';
+const SUCCESS = 'success';
+const INACTIVE = 'inactive';
+
+export default function CodeSpan({
+	className,
+	type,
+	children
+}:any) {
+	const fullClassName = classNames({
+		[styles.codeSpan]: true,
+		[className]: !!className,
+		[styles.failure]: type === FAILURE,
+		[styles.success]: type === SUCCESS,
+		[styles.inactive]: type === INACTIVE
+	});
 	return (
-		<span className={fullClassName}>{ props.children }</span>
+		<span className={fullClassName}>{ children }</span>
 	);
 }
