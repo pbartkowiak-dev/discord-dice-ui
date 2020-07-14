@@ -3,7 +3,6 @@ import classNames from 'classnames/bind';
 import CodeSpan from '../components/CodeSpan/CodeSpan';
 import getConanSuccessLevel, { conanSuccessLevelType } from './getConanSuccessLevel';
 import ResultVsSkillRow, { labelsType } from '../components/ResultVsSkillRow/ResultVsSkillRow';
-import HitLocations from '../components/HitLocations/HitLocations';
 import styles from '../components/ResultsModal/ResultsModal.module.css';
 
 export type LocalMsgParamsType = {
@@ -18,7 +17,14 @@ export type LocalMsgParamsType = {
 
 const getConanLocalMsg = (results:Array<number>, rollOptions:any, userSettings?:any):LocalMsgParamsType => {
 	const cx = classNames.bind(styles);
-	const { dice, difficulty, focus, fortune, tn, untrainedTest } = rollOptions;
+	const {
+		dice,
+		difficulty,
+		focus,
+		fortune,
+		tn,
+		untrainedTest
+	} = rollOptions;
 
 	const fields = [];
 
@@ -29,7 +35,7 @@ const getConanLocalMsg = (results:Array<number>, rollOptions:any, userSettings?:
 		Number(difficulty),
 		untrainedTest
 	);
-	const yourFocus = <p>Focus: <CodeSpan>{focus}</CodeSpan></p>;
+	const yourFocus = <p>Focus: <CodeSpan>{focus || 0}</CodeSpan></p>;
 	const yourTn = <p>TN: <CodeSpan>{tn}</CodeSpan></p>;
 	const wasUntrainedTest = untrainedTest ? <p>Untrained Test</p> : null;
 
@@ -57,7 +63,7 @@ const getConanLocalMsg = (results:Array<number>, rollOptions:any, userSettings?:
 	const labels:labelsType = {
 		result: 'Successes',
 		vs: 'Difficulty'
-	}
+	};
 
 	fields.push(
 		<ResultVsSkillRow

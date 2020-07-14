@@ -36,11 +36,11 @@ function ConanModal({
 			diceAmount: Number(rollOptions.dice),
 			rollOptions
 		});
-		// const requestMsg = getConanRequestMsg(result.results, rollOptions, userSettings);
+		const requestMsg = getConanRequestMsg(result.results, rollOptions, userSettings);
 		const localMsg = getConanLocalMsg(result.results, rollOptions, userSettings);
 
 		showMsg(localMsg);
-		// request(requestMsg);
+		request(requestMsg);
 
 		closeConanModal();
 	};

@@ -41,6 +41,9 @@ const getRequestMsg = (result:any, rollOptions:any, userSettings:any) => {
 	});
 
 	description = `Roll: \`${finalDieResultString}\` vs. Skill level: \`${skillLevelString}\`.`;
+	if (rollOptions.isPushed) {
+		description += `\nRoll **pushed**.`;
+	}
 
 	const msgParams:requestParams = {
 		hookUrl: userSettings.hookUrl,

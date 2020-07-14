@@ -52,14 +52,17 @@ const getRequestMsg = (result:any, rollOptions:any, userSettings:any) => {
 
 	if (rollOptions.rerolledTimes) {
 		const timesWord = rollOptions.rerolledTimes === 1 ? 'time' : 'times';
-		description += `\nRerolled \`${rollOptions.rerolledTimes}\` ${timesWord}.`;
+
+		fields.push({
+			name: `:game_die: Rerolled`,
+			value: `Rerolled \`${rollOptions.rerolledTimes}\` ${timesWord}.`
+		});
 	}
 
 	fields.push({
 		name: successLevelIcon + ' Roll result:',
 		value: getWarhammerSuccessLevelString(successLevels)
 	});
-
 
 	let slWord = '';
 	if (useDarkHeresySL || useWarhammer2eSL) {

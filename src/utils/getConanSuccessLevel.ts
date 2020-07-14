@@ -2,7 +2,7 @@ export type conanSuccessLevelType = {
 	isSuccess: boolean
 	isFailure: boolean
 	successLevel: number
-	compilations: number
+	complications: number
 	momentum: number
 }
 
@@ -16,7 +16,7 @@ export default (
 	const compilationMinVal = untrainedTest ? 19 : 20;
 	const compilationMaxVal = 20;
 	let successLevel = 0;
-	let compilations = 0;
+	let complications = 0;
 
 	results.forEach(result => {
 		if (result <= tn) {
@@ -26,9 +26,8 @@ export default (
 				successLevel += 1
 			}
 		}
-
 		if (result >= compilationMinVal && result <= compilationMaxVal) {
-			compilations += 1;
+			complications += 1;
 		}
 	});
 
@@ -36,7 +35,7 @@ export default (
 		isSuccess: successLevel >= difficulty,
 		isFailure: successLevel < difficulty,
 		successLevel,
-		compilations,
+		complications,
 		momentum: successLevel > difficulty ? successLevel - difficulty : 0
 	};
 };

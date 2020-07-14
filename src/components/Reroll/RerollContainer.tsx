@@ -46,11 +46,11 @@ function RerollContainer({
 				rollOptions,
 				itemsToStay
 			});
-			// const requestMsg = getConanRequestMsg(result.results, rollOptions, userSettings);
+			const requestMsg = getConanRequestMsg(result.results, rollOptions, userSettings);
 			const localMsg = getConanLocalMsg(result.results, rollOptions, userSettings);
 		
 			showMsg(localMsg);
-			// request(requestMsg);
+			request(requestMsg);
 		}
 	} else {
 		reroll = (itemsToStay:Array<number>) => {
