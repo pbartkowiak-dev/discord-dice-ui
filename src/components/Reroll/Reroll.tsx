@@ -28,13 +28,13 @@ function Reroll({ handleReroll, rollOptions, results }:any) {
 		const resultsElement = results
 			.map((result:number, index:number) => {
 				if (index === results.length - 1) {
-					return <span onClick={ () => addItemIndex(index) }>
+					return <span key={index} onClick={ () => addItemIndex(index) }>
 						<CodeSpan className={cx({
 							rollItem: true,
 							active: itemIndexes.indexOf(index) >= 0
 						})}>{result}</CodeSpan></span>;
 				}
-				return <span onClick={ () => addItemIndex(index) }>
+				return <span key={index} onClick={ () => addItemIndex(index) }>
 					<CodeSpan className={cx({
 						rollItem: true,
 						active: itemIndexes.indexOf(index) >= 0
@@ -55,9 +55,7 @@ function Reroll({ handleReroll, rollOptions, results }:any) {
 		let itemsToStay = [];
 		if (itemIndexes && itemIndexes.length) {
 			// get items from indexes
-			itemsToStay = results.filter((item:number, index:number) => (
-				itemIndexes.indexOf(index) === -1
-			));
+			itemsToStay = results.filter((_:number, i:number) => itemIndexes.indexOf(i) === -1);
 		}
 		handleReroll(itemsToStay);
 	};

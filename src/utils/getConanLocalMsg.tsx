@@ -29,7 +29,7 @@ const getConanLocalMsg = (result:any, rollOptions:any, userSettings?:any):LocalM
 	} = rollOptions;
 
 	const fields = [];
-	let assistanceSuccessLevel;
+	let assistanceSuccessLevel:any = {};
 
 	if (rollOptions.assistanceDice && assistanceDiceResults) {
 		assistanceSuccessLevel = getConanSuccessLevel(
@@ -74,7 +74,7 @@ const getConanLocalMsg = (result:any, rollOptions:any, userSettings?:any):LocalM
 		);
 	}
 
-	if (rollOptions.assistanceDice && assistanceDiceResults) {
+	if (rollOptions.assistanceDice && assistanceDiceResults && assistanceDiceResults.length) {
 		const assistanceDiceResultsJoined = joinAsBlocks(assistanceDiceResults);
 		const assistanceComplications = assistanceSuccessLevel.complications
 			? <p className={styles.assistanceResultRow}>Complications: <CodeSpan>{assistanceSuccessLevel.complications}</CodeSpan></p>

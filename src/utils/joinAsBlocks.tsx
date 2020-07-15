@@ -14,17 +14,17 @@ export default function joinAsBlocks(
 }
 
 function getJsx(results: Array<number>, joiner:string) {
-	return results.map((result: number, index: number) => {
-		if (index === results.length - 1) {
-			return <span key={index}><CodeSpan>{result}</CodeSpan></span>;
+	return results.map((result: number, i: number) => {
+		if (i === results.length - 1) {
+			return <span key={i}><CodeSpan>{result}</CodeSpan></span>;
 		}
-		return <span><CodeSpan>{result}</CodeSpan>{joiner}</span>;
+		return <span key={i}><CodeSpan>{result}</CodeSpan>{joiner}</span>;
 	});
 }
 
 function getMd(results: Array<number>, joiner:string) {
-	const arr = results.map((result: number, index: number) => {
-		if (index === results.length - 1) {
+	const arr = results.map((result: number, i: number) => {
+		if (i === results.length - 1) {
 			return `\`${result}\``;
 		}
 		return `\`${result}\`${joiner}`;

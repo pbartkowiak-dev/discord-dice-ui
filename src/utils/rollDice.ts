@@ -146,12 +146,15 @@ const rollDice = ({
 		result.skillLevel = skillLevel ? Number(skillLevel) : undefined;
 	}
 
-	if (rollOptions.assistanceDice) {
+	if (rollOptions.assistanceDiceResults) {
+		result.assistanceDiceResults = rollOptions.assistanceDiceResults;
+	} else if (rollOptions.assistanceDice) {
 		result.assistanceDiceResults = getResultsArray(
 			20,
 			Number(rollOptions.assistanceDice),
 			false
 		);
+		rollOptions.assistanceDiceResults = result.assistanceDiceResults;
 	}
 
 	if (modifier === 0) {

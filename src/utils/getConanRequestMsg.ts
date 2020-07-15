@@ -17,7 +17,7 @@ const getConanRequestMsg = (result:any, rollOptions:any, userSettings:any) => {
 	const fields = [];
 	const resultsJoined = joinAsBlocks(results, null, true);
 	const msgTitle = `${username} rolled **\`${dice}d20\`**. Results: ${resultsJoined}.`;
-	let assistanceSuccessLevel;
+	let assistanceSuccessLevel:any = {};
 	let description;
 
 	if (rollOptions.assistanceDice && assistanceDiceResults) {
@@ -40,7 +40,7 @@ const getConanRequestMsg = (result:any, rollOptions:any, userSettings:any) => {
 	);
 	const successLevelIcon = successLevel.isSuccess ? ':green_circle:' : ':red_circle:';
 
-	description = `Successes: \`${successLevel.successLevel}\` vs. Difficulty: \`${difficulty}\`.`;
+	description = `Successes: \`${successLevel.successLevel}\` vs. Difficulty: \`${difficulty}\``;
 	description += `\nFocus: \`${focus || 0}\``;
 	description += `\nTN: \`${tn}\``;
 
@@ -52,7 +52,7 @@ const getConanRequestMsg = (result:any, rollOptions:any, userSettings:any) => {
 		description += `\nUntrained Test`;
 	}
 
-	if (rollOptions.assistanceDice && assistanceDiceResults) {
+	if (rollOptions.assistanceDice && assistanceDiceResults && assistanceDiceResults.length) {
 		const assistanceDiceResultsJoined = joinAsBlocks(assistanceDiceResults, null, true);
 		let value = `:game_die: Rolled: ${assistanceDiceResultsJoined}\n:boom: Successes: \`${assistanceSuccessLevel.successLevel}\``;
 		if (assistanceSuccessLevel.complications) {
@@ -64,18 +64,12 @@ const getConanRequestMsg = (result:any, rollOptions:any, userSettings:any) => {
 		});
 	}
 
-	fields.push({
-		name: successLevelIcon + ' Roll result:',
-		value: successLevel.isSuccess ? 'SUCCESS' : 'FAILURE'
-	});
-
-	
 	if (rollOptions.rerolledTimes) {
 		const timesWord = rollOptions.rerolledTimes === 1 ? 'time' : 'times';
 
 		fields.push({
-			name: `:game_die: Rerolled`,
-			value: `Rerolled \`${rollOptions.rerolledTimes}\` ${timesWord}.`
+			name: `:game_die: Rerolled:`,
+			value: `Rerolled \`${rollOptions.rerolledTimes}\` ${timesWord}`
 		});
 	}
 
@@ -85,6 +79,11 @@ const getConanRequestMsg = (result:any, rollOptions:any, userSettings:any) => {
 			value: `\`${successLevel.complications}\``
 		});
 	}
+
+	fields.push({
+		name: successLevelIcon + ' Roll result:',
+		value: successLevel.isSuccess ? 'SUCCESS' : 'FAILURE'
+	});
 
 	fields.push({
 		name: `:crossed_swords: Momentum generated:`,
