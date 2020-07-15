@@ -3,6 +3,7 @@ import classNames from 'classnames/bind';
 import CodeSpan from '../components/CodeSpan/CodeSpan';
 import getConanSuccessLevel, { conanSuccessLevelType } from './getConanSuccessLevel';
 import ResultVsSkillRow, { labelsType } from '../components/ResultVsSkillRow/ResultVsSkillRow';
+import joinAsBlocks from './joinAsBlocks';
 import styles from '../components/ResultsModal/ResultsModal.module.css';
 
 export type LocalMsgParamsType = {
@@ -15,7 +16,8 @@ export type LocalMsgParamsType = {
 	results?: any
 }
 
-const getConanLocalMsg = (results:Array<number>, rollOptions:any, userSettings?:any):LocalMsgParamsType => {
+const getConanLocalMsg = (result:any, rollOptions:any, userSettings?:any):LocalMsgParamsType => {
+	const { results, assistanceDiceResults } = result;
 	const cx = classNames.bind(styles);
 	const {
 		dice,
@@ -27,25 +29,37 @@ const getConanLocalMsg = (results:Array<number>, rollOptions:any, userSettings?:
 	} = rollOptions;
 
 	const fields = [];
+	let assistanceSuccessLevel;
+
+	if (rollOptions.assistanceDice && assistanceDiceResults) {
+		assistanceSuccessLevel = getConanSuccessLevel(
+			assistanceDiceResults,
+			Number(tn),
+			Number(focus),
+			Number(difficulty),
+			untrainedTest
+		);
+	}
 
 	const successLevel:conanSuccessLevelType = getConanSuccessLevel(
 		results,
 		Number(tn),
 		Number(focus),
 		Number(difficulty),
-		untrainedTest
+		untrainedTest,
+		assistanceSuccessLevel.successLevel
 	);
-	const yourFocus = <p>Focus: <CodeSpan>{focus || 0}</CodeSpan></p>;
-	const yourTn = <p>TN: <CodeSpan>{tn}</CodeSpan></p>;
-	const wasUntrainedTest = untrainedTest ? <p>Untrained Test</p> : null;
+	const yourFocus = <p className={styles.resultDetailsRow}>Focus: <CodeSpan>{focus || 0}</CodeSpan></p>;
+	const yourTn = <p className={styles.resultDetailsRow}>TN: <CodeSpan>{tn}</CodeSpan></p>;
+	const wasUntrainedTest = untrainedTest ? <p className={styles.resultDetailsRow}>Untrained Test</p> : null;
 
 	const fortuneUsed = (fortune && Number(fortune) > 0)
-		? <p>Fortune points used: <CodeSpan>{fortune}</CodeSpan></p>
+		? <p className={styles.resultDetailsRow}>Fortune points used: <CodeSpan>{fortune}</CodeSpan></p>
 		: null;
 
 	const title = (
-		<div className={styles.conanResultsDetauls}>
-			<p>You rolled <CodeSpan>{dice}d20</CodeSpan></p>
+		<div className={styles.conanResultDetails}>
+			<p className={styles.resultDetailsRow}>You rolled <CodeSpan>{dice}d20</CodeSpan></p>
 			{ yourFocus }
 			{ yourTn }
 			{ wasUntrainedTest }
@@ -57,6 +71,22 @@ const getConanLocalMsg = (results:Array<number>, rollOptions:any, userSettings?:
 		const timesWord = rollOptions.rerolledTimes === 1 ? 'time' : 'times';
 		fields.push(
 			<div className={`${styles.generalResult}`}>Rerolled <CodeSpan>{rollOptions.rerolledTimes}</CodeSpan> {timesWord}</div>
+		);
+	}
+
+	if (rollOptions.assistanceDice && assistanceDiceResults) {
+		const assistanceDiceResultsJoined = joinAsBlocks(assistanceDiceResults);
+		const assistanceComplications = assistanceSuccessLevel.complications
+			? <p className={styles.assistanceResultRow}>Complications: <CodeSpan>{assistanceSuccessLevel.complications}</CodeSpan></p>
+			: null;
+
+		fields.push(
+			<div className={styles.assistanceResult}>
+				<p className={styles.assistanceResultRow}><strong>Assistance Roll:</strong></p>
+				<p className={styles.assistanceResultRow}>Rolled: {assistanceDiceResultsJoined}</p>
+				<p className={styles.assistanceResultRow}>Successes: <CodeSpan>{assistanceSuccessLevel.successLevel}</CodeSpan></p>
+				{ assistanceComplications }
+			</div>
 		);
 	}
 

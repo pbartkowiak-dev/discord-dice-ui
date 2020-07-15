@@ -103,8 +103,25 @@
 	text-align: center;
 }
 
-.conanResultsDetauls p {
-	margin-bottom: 0;
+.conanResultDetails {
+	font-size: 0.9rem;
+	line-height: 17px;
+}
+
+.resultDetailsRow {
+	margin: 0;
+}
+
+.assistanceResult {
+	margin: 0 0 10px;
+	padding-bottom: 10px;
+	font-size: 0.9rem;
+	border-bottom: 1px solid #bebebe;
+	line-height: 17px;
+}
+
+.assistanceResultRow {
+	margin: 0;
 }
 
 @media only screen and (min-width: 480px) {

@@ -55,14 +55,16 @@ function ResultsModal({ hideMsg, msgData }:ResultsModalProps) {
 
 	if (rollOptions.cocMode) {
 		const canPush = isSuccess === false && !rollOptions.isPushed;
-		pushElement = (
-			<CocPushOptionsContainer
-				rollOptions={rollOptions}
-				finalDieResult={finalDieResult}
-				userSettings={userSettings}
-				canPush={canPush}
-			/>
-		);
+		if (canPush) {
+			pushElement = (
+				<CocPushOptionsContainer
+					rollOptions={rollOptions}
+					finalDieResult={finalDieResult}
+					userSettings={userSettings}
+					canPush={canPush}
+				/>
+			);
+		}
 	} else {
 		pushElement = null;
 	}

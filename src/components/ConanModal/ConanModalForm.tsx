@@ -25,7 +25,7 @@ const tnInfo = <span>The skill’s <strong>Target Number</strong> (TN) is equal 
 const focusInfo = <span>Each d20 result equal to or less than the character’s <strong>Focus</strong> for that skill scores two successes instead of one.</span>;
 const untrainedTestInfo = <span>If the character has no ranks in Expertise or Focus makes an <strong>untrained test</strong>.</span>;
 const fortuneInfo = <span>Adds "pre-rolled" bonus d20 with a score of 1 to a test.</span>;
-const assistanceInfo = <span>This will be used mostly by DM when using <strong>Minion Groups</strong>. Adds additional d20s to the roll.</span>;
+const assistanceInfo = <span>This will be used mostly by DM when using <strong>Groups</strong>. Adds additional d20s to the roll.</span>;
 
 function TnTooltip() {
 	const key = 'TnTooltip';
@@ -230,22 +230,27 @@ function DiceRow({ dice, isAssistance = false, handleDiceChange, setHover, hover
 					show: Number(fortune) >= 2
 					})}>1</span>
 			</div>
-			<div className="die-container">
-				<FontAwesomeIcon className={classNames({
-					'dice-icon': true,
-					active: ((Number(dice) >= 5) || Number(fortune) >= 3),
-					hovered: hover >= 5
-					})}
-					icon={faDiceD20}
-					onMouseEnter={() => setHover(5)}
-					onMouseLeave={() => setHover(0)}
-					onClick={() => handleDiceChange('5', isAssistance)}
-				/>
-				<span className={classNames({
-					'die-fortune-point': true,
-					show: Number(fortune) >= 3
-					})}>1</span>
-			</div>
+			{
+				// Because maximum group size is 5 - one leader and 4 assisting creatures
+				!isAssistance && (
+					<div className="die-container">
+						<FontAwesomeIcon className={classNames({
+							'dice-icon': true,
+							active: ((Number(dice) >= 5) || Number(fortune) >= 3),
+							hovered: hover >= 5
+							})}
+							icon={faDiceD20}
+							onMouseEnter={() => setHover(5)}
+							onMouseLeave={() => setHover(0)}
+							onClick={() => handleDiceChange('5', isAssistance)}
+						/>
+						<span className={classNames({
+							'die-fortune-point': true,
+							show: Number(fortune) >= 3
+							})}>1</span>
+					</div>
+				)
+			}
 		</div>
 	);
 }

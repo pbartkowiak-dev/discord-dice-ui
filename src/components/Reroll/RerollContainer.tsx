@@ -45,8 +45,8 @@ function RerollContainer({
 				rollOptions,
 				itemsToStay
 			});
-			const requestMsg = getConanRequestMsg(result.results, rollOptions, userSettings);
-			const localMsg = getConanLocalMsg(result.results, rollOptions, userSettings);
+			const requestMsg = getConanRequestMsg(result, rollOptions, userSettings);
+			const localMsg = getConanLocalMsg(result, rollOptions, userSettings);
 		
 			showMsg(localMsg);
 			request(requestMsg);
@@ -60,7 +60,6 @@ function RerollContainer({
 				itemsToStay
 			});
 			const requestMsg = getRequestMsg(result, rollOptions, userSettings);
-			// @TODO getLocalMsg first param should be the same as other getLocalMsgs
 			const localMsg = getLocalMsg(result, rollOptions, userSettings);
 
 			showMsg(localMsg);

@@ -31,13 +31,14 @@ function ConanModal({
 			...values,
 			diceTypeRaw: D20_CONAN_TEST
 		};
+
 		const result = rollDice({
 			diceType: 20,
 			diceAmount: Number(rollOptions.dice),
 			rollOptions
 		});
-		const requestMsg = getConanRequestMsg(result.results, rollOptions, userSettings);
-		const localMsg = getConanLocalMsg(result.results, rollOptions, userSettings);
+		const requestMsg = getConanRequestMsg(result, rollOptions, userSettings);
+		const localMsg = getConanLocalMsg(result, rollOptions, userSettings);
 
 		showMsg(localMsg);
 		request(requestMsg);

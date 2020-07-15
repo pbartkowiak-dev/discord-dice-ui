@@ -49,6 +49,7 @@ type rollDiceResult = {
 	// Conan results
 	effects?: number | undefined
 	dmg?: number | undefined
+	assistanceDiceResults?: Array<number>
 }
 
 const rollDice = ({
@@ -143,6 +144,14 @@ const rollDice = ({
 
 	if (cocMode || rollOptions.warhammerMode) {
 		result.skillLevel = skillLevel ? Number(skillLevel) : undefined;
+	}
+
+	if (rollOptions.assistanceDice) {
+		result.assistanceDiceResults = getResultsArray(
+			20,
+			Number(rollOptions.assistanceDice),
+			false
+		);
 	}
 
 	if (modifier === 0) {

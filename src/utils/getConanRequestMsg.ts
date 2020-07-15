@@ -3,7 +3,8 @@ import getConanSuccessLevel, { conanSuccessLevelType } from './getConanSuccessLe
 import joinAsBlocks from './joinAsBlocks';
 import { SUCCESS, FAILURE, getColor } from './getColor';
 
-const getConanRequestMsg = (results:Array<number>, rollOptions:any, userSettings:any) => {
+const getConanRequestMsg = (result:any, rollOptions:any, userSettings:any) => {
+	const { results, assistanceDiceResults } = result;
 	const {
 		dice,
 		difficulty,
@@ -16,14 +17,26 @@ const getConanRequestMsg = (results:Array<number>, rollOptions:any, userSettings
 	const fields = [];
 	const resultsJoined = joinAsBlocks(results, null, true);
 	const msgTitle = `${username} rolled **\`${dice}d20\`**. Results: ${resultsJoined}.`;
+	let assistanceSuccessLevel;
 	let description;
+
+	if (rollOptions.assistanceDice && assistanceDiceResults) {
+		assistanceSuccessLevel = getConanSuccessLevel(
+			assistanceDiceResults,
+			Number(tn),
+			Number(focus),
+			Number(difficulty),
+			untrainedTest
+		);
+	}
 
 	const successLevel:conanSuccessLevelType = getConanSuccessLevel(
 		results,
 		Number(tn),
 		Number(focus),
 		Number(difficulty),
-		untrainedTest
+		untrainedTest,
+		assistanceSuccessLevel.successLevel
 	);
 	const successLevelIcon = successLevel.isSuccess ? ':green_circle:' : ':red_circle:';
 
@@ -37,6 +50,18 @@ const getConanRequestMsg = (results:Array<number>, rollOptions:any, userSettings
 	
 	if (untrainedTest) {
 		description += `\nUntrained Test`;
+	}
+
+	if (rollOptions.assistanceDice && assistanceDiceResults) {
+		const assistanceDiceResultsJoined = joinAsBlocks(assistanceDiceResults, null, true);
+		let value = `:game_die: Rolled: ${assistanceDiceResultsJoined}\n:boom: Successes: \`${assistanceSuccessLevel.successLevel}\``;
+		if (assistanceSuccessLevel.complications) {
+			value = value + `\n:black_circle: Complications: \`${assistanceSuccessLevel.complications}\``;
+		}
+		fields.push({
+			name: `:busts_in_silhouette: Assistance roll:`,
+			value
+		});
 	}
 
 	fields.push({
