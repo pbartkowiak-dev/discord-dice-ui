@@ -1,5 +1,5 @@
 .container {
-	padding-top: 10px;
+	padding-top: 8px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -40,6 +40,10 @@
 	width: 100%;
 	position: relative;
 	text-align: center;
+}
+
+.luckSpends {
+	font-size: 15px;
 }
 
 .infoIcon {

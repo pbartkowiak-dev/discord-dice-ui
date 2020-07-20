@@ -1,8 +1,7 @@
 .table {
+	margin: 6px 0 8px;
 	text-align: center;
 	width: 315px;
-	border-radius: .3rem;
-	margin-bottom: 0;
 }
 
 .td {
@@ -15,7 +14,9 @@
 	margin: 0 !important;
 	cursor: pointer;
 	transition: .1s;
-	padding: 3px;
+	padding: 2px;
+	font-size: 15px;
+	font-weight: 600;
 }
 
 .input {

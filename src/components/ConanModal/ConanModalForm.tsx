@@ -131,7 +131,7 @@ const renderInput = createRenderer((input, label, id, textMuted, meta, disabled)
 			<Form.Label>{label}</Form.Label>
 				<Form.Control
 					type="text"
-					size="lg"
+					size="sm"
 					placeholder="00"
 					autocomplete="off"
 					isInvalid ={hasError}
@@ -167,7 +167,7 @@ function DiceRow({ dice, isAssistance = false, handleDiceChange, setHover, hover
 				isAssistance && (
 					<div className="die-container">
 						<FontAwesomeIcon
-							className="conan-field-icon conan-field-icon-times pointer"
+							className="conan-field-icon conan-field-icon-times"
 							icon={faTimes}
 							onClick={() => handleDiceChange('0', true)}
 						/>
@@ -308,7 +308,7 @@ function ConanModalForm({
 	const diceRadios = new Array(diceMax).fill('x').map((_, index) => {
 		const diceAmount = index + 1;
 		return (
-			<label>
+			<label className="dice-row-label">
 			<Field
 				name="dice"
 				component="input"
@@ -347,7 +347,6 @@ function ConanModalForm({
 					
 					</div>
 				</div>
-				vs.
 				<div className="skill-level-field conan-skill-level-field">
 					<Field
 						id="difficulty"
@@ -356,7 +355,6 @@ function ConanModalForm({
 					/>
 				</div>
 				<div className="dice">
-					<h5 className="dice-title">How many dice?</h5>
 					<div className="conan-radio-fields">
 						{diceRadios}
 					</div>
@@ -376,9 +374,9 @@ function ConanModalForm({
 					disabled={ focus && Number(focus) > 0 }
 				/>
 				<div className="fortune">
-					<h5 className="fortune-title">Use Fortune Die <FortuneTooltip/></h5>
+					<h5 className="fortune-title">Fortune <FortuneTooltip/></h5>
 					<div className="conan-radio-fields">
-						<label>
+						<label className="dice-row-label">
 							<Field
 								name="fortune"
 								component="input"
@@ -387,7 +385,7 @@ function ConanModalForm({
 							/>
 							None
 						</label>
-						<label>
+						<label className="dice-row-label">
 							<Field
 								name="fortune"
 								component="input"
@@ -397,7 +395,7 @@ function ConanModalForm({
 							/>
 							One
 						</label>
-						<label>
+						<label className="dice-row-label">
 							<Field
 								name="fortune"
 								component="input"
@@ -407,7 +405,7 @@ function ConanModalForm({
 							/>
 							Two
 						</label>
-						<label>
+						<label className="dice-row-label">
 							<Field
 								name="fortune"
 								component="input"
@@ -420,7 +418,7 @@ function ConanModalForm({
 					</div>
 				</div>
 				<div className="assistance">
-					<h5 className="assistance-title">Add assistance <AssistanceTooltip/></h5>
+					<h5 className="assistance-title">Assistance <AssistanceTooltip/></h5>
 					<div className="conan-radio-fields">
 						<DiceRow
 							isAssistance={true}

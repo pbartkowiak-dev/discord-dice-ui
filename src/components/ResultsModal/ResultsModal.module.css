@@ -5,7 +5,7 @@
 }
 
 .resultsModalHeader {
-	height: 110px;
+	height: 100px;
 	background: var(--header-bg);
 	color: var(--header-color);
 	display: block;
@@ -17,7 +17,7 @@
 	text-align: center;
 	font-weight: bold;
 	color: var(--header-color);
-	margin: 5px 0 0;
+	margin: 2px 0 0;
 }
 
 .isFailure {
@@ -81,6 +81,7 @@
 
 .slResultLabel {
 	font-weight: bold;
+	font-size: 16px;
 }
 
 .inactive {
@@ -97,8 +98,8 @@
 }
 
 .slResultSpan {
-	font-size: 28px;
-	min-width: 45px;
+	font-size: 18px;
+	min-width: 33px;
 }
 
 .momentumResults {
@@ -108,8 +109,8 @@
 
 .rollResults {
 	border-bottom: 1px solid #bebebe;
-	padding-bottom: 10px;
-	margin-bottom: 10px;
+	padding-bottom: 5px;
+	margin-bottom: 5px;
 }
 
 .conanRollResults {
@@ -118,7 +119,7 @@
 
 .conanResultDetails {
 	font-size: 0.9rem;
-	line-height: 17px;
+	line-height: 15px;
 }
 
 .resultDetailsRow {
@@ -126,8 +127,8 @@
 }
 
 .assistanceResult {
-	margin: 0 0 10px;
-	padding-bottom: 10px;
+	margin: 0 0 5px;
+	padding-bottom: 4px;
 	font-size: 0.9rem;
 	border-bottom: 1px solid #bebebe;
 	line-height: 17px;

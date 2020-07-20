@@ -33,7 +33,7 @@ function ResultVsSkillRow({
 	}
 
 	return (
-		<div className={ styles.ResultVsSkillRowPropTypes }>
+		<div className={ styles.ResultVsSkillRow }>
 			<div className={ styles.Cell }>
 				<CodeSpan className={styles.resultValue} type={codeSpanType}>{ finalDieResult }</CodeSpan>
 				<span className={ styles.label }>{ resultLabel }</span>

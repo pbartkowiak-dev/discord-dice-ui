@@ -43,7 +43,7 @@ function Reroll({ handleReroll, rollOptions, results }:any) {
 
 			selectToRerollElement = (
 				<div className={cx({row: true, selectItems: true})}>
-					<div>Select roll results you want to reroll:</div>
+					<div className={styles.rerollInfo}>Select roll results you want to reroll:</div>
 					<div>{ resultsElement }</div>
 				</div>
 			);

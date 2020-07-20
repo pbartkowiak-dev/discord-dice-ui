@@ -6,10 +6,6 @@
 	justify-content: space-evenly;
 }
 
-#conan-mode-form label {
-	margin-bottom: 1px;
-}
-
 .conan-skill-level-field {
 	margin-bottom: 0;
 }
@@ -17,7 +13,8 @@
 .conan-field-icon {
 	display: none;
 	font-size: 1rem;
-	color: #7c7c7c
+	color: #7c7c7c;
+	cursor: pointer;
 }
 
 .conan-field-icon-times {
@@ -44,10 +41,8 @@
 }
 
 .fortune {
-	padding-top: 5px;
-	margin-top: 10px;
-	padding-bottom: 5px;
-	margin-bottom: 10px;
+	padding: 2px 0;
+	margin: 3px 0;
 	border-top: 1px solid #bebebe;
 	border-bottom: 1px solid #bebebe;
 }
@@ -55,37 +50,49 @@
 .fortune-title {
 	margin-bottom: 0;
 	margin-top: 0;
-	font-size: 18px;
-	text-align: center;
-}
-
-.assistance-title {
-	margin-bottom: 8px;
-	margin-top: 0;
 	font-size: 16px;
 	text-align: center;
 }
 
+#conan-mode-form .skill-level-field .form-control{
+	font-size: 18px;
+	height: 34px;
+}
+
+#conan-mode-form .skill-level-field .form-group {
+	margin-bottom: 0;
+}
+
+#conan-mode-form label {
+	margin-bottom: 0;
+}
+
 .dice {
-	margin-bottom: 10px;
+	margin-bottom: 2px;
 }
 
 .dice-title {
 	margin-bottom: 0;
-	margin-top: 10px;
-	font-size: 25px;
+	margin-top: 4px;
+	font-size: 17px;
+	font-weight: bold;
 	text-align: center;
 }
 
 .dice-row {
 	display: flex;
 	justify-content: space-around;
-	width: 70%;
-	margin: 0 auto 15px;
+	width: 260px;
+	margin: 0 auto 8px;
+}
+
+.dice-row-label {
+	cursor: pointer;
+	font-size: 15px;
 }
 
 .dice-icon {
-	font-size: 50px;
+	font-size: 44px;
 	color: #7e7e7e;
 	cursor: pointer;
 	opacity: .8;
@@ -115,11 +122,19 @@
 }
 
 /* assistance-dice-row */
+.assistance-title {
+	margin-bottom: 6px;
+	margin-top: 0;
+	font-size: 16px;
+	text-align: center;
+}
+
 .assistance-dice-row.dice-row {
-	width: 50%;
+	width: 200px;
+	margin: 0;
 }
 .assistance-dice-row .dice-icon {
-	font-size: 38px;
+	font-size: 35px;
 }
 .assistance-dice-row .dice-icon.active {
 	color: #b8551c;
@@ -135,17 +150,17 @@
 }
 
 .die-fortune-point {
-	font-size: 23px;
+	font-size: 21px;
 	position: absolute;
 	top: 9px;
 	margin: 0 auto;
-	right: 8px;
+	right: 6px;
 	font-weight: bold;
 	display: inline-block;
 	background: white;
 	border-radius: 50%;
-	width: 32px;
-	height: 32px;
+	width: 30px;
+	height: 30px;
 	text-align: center;
 	line-height: 31px;
 	color: darkolivegreen;

@@ -1,9 +1,11 @@
 .successLevelLadder {
 	text-align: center;
+	margin-top: 5px;
+	margin-bottom: 0;
 }
 
 .successLevelLadder td {
-	padding: 4px;
+	padding: 3px;
 }
 
 .cellInactive {

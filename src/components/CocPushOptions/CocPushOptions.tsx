@@ -1,10 +1,11 @@
 import React from 'react';
-import Button from 'react-bootstrap/Button'
+import Button from 'react-bootstrap/Button';
 import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import Tooltip from 'react-bootstrap/Tooltip';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faQuestionCircle } from '@fortawesome/free-regular-svg-icons';
 import CodeSpan from '../CodeSpan/CodeSpan';
+import classNames from 'classnames';
 import styles from './CocPushOptions.module.css';
 
 const pushInfo = 'Only skill and characteristic rolls can be pushed, not Luck, Sanity, or combat rolls, or rolls to determine an amount of damage or Sanity loss.';
@@ -47,7 +48,7 @@ function CocPushOptions({
 		luckRequiredForHardSuccess,
 		luckRequiredForExtremeSuccess
 	}:any) => (
-		<div className={styles.row}>
+		<div className={classNames({ [styles.row]: true, [styles.luckSpends]: true })}>
 			{ (luckRequiredForSuccess > 0) && <div>Spend <CodeSpan>{ luckRequiredForSuccess }</CodeSpan> Luck Points for <strong>Success</strong></div> }
 			{ (luckRequiredForHardSuccess > 0) && <div>Spend <CodeSpan>{ luckRequiredForHardSuccess }</CodeSpan> Luck Points for <strong>Hard Success</strong></div> }
 			{ (luckRequiredForExtremeSuccess > 0) && <div>Spend <CodeSpan>{ luckRequiredForExtremeSuccess }</CodeSpan> Luck Points for <strong>Extreme Success</strong></div> }

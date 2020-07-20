@@ -19,7 +19,7 @@ p {
 .pointer {
 	cursor: pointer;
 	opacity: .8;
-	transition: .2s;
+	transition: .1s;
 }
 
 .pointer:hover {
@@ -43,4 +43,16 @@ button.disabled {
 .dropdown-item {
 	padding: 0.2rem 1.5rem;
 	font-size: 15px;
+}
+
+.modal-header {
+	padding: 0.6rem 1rem;
+}
+
+.modal-body {
+	padding: .8rem 1rem;
+}
+
+.modal-footer {
+	padding: .65rem .75rem;
 }

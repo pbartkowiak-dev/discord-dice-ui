@@ -1,7 +1,7 @@
-.ResultVsSkillRowPropTypes {
+.ResultVsSkillRow {
 	display: flex;
 	justify-content: center;
-	margin-bottom: 5px;
+	margin-bottom: 0;
 }
 
 .Cell {
