@@ -32,21 +32,21 @@
 }
 
 .average {
-	color: #7DB150;
+	color: #33804e;
 }
 .average:hover,
 .average.active {
-	background: #7DB150;
+	background: #33804e;
 	color: #fff;
 }
 
 .challenging {
-	color: #BEAB28;
+	color: #FFD700;
 }
 .challenging:hover,
 .challenging.active {
-	background: #BEAB28;
-	color: #fff;
+	background: #fff700;
+	color: #333;
 }
 
 .daunting {

@@ -83,6 +83,19 @@
 	font-weight: bold;
 }
 
+.inactive {
+	opacity: .6;
+}
+
+.assistanceIcon {
+	position: absolute;
+	right: 10px;
+	margin: auto;
+	top: 0;
+	bottom: 0;
+	color: #7c7c7c;
+}
+
 .slResultSpan {
 	font-size: 28px;
 	min-width: 45px;
@@ -118,6 +131,7 @@
 	font-size: 0.9rem;
 	border-bottom: 1px solid #bebebe;
 	line-height: 17px;
+	position: relative;
 }
 
 .assistanceResultRow {

@@ -29,11 +29,11 @@ const getCocLocalMsg = (result:any, rollOptions:any, userSettings?:any):LocalMsg
 	let title;
 
 	if (rollOptions.cocBonus || rollOptions.cocTwoBonus) {
-		const dieWord = rollOptions.cocBonus ? 'one Bonus Die' : 'two Bonus Dice'
+		const dieWord = rollOptions.cocBonus ? 'one Bonus Die' : 'two Bonus Dice';
 		title = <>You rolled <strong>{dieWord}</strong>. Results: {resultsJoined}.</>;
 		finalDieResult = cocBonusResult;
 	} else if (rollOptions.cocPenalty || rollOptions.cocTwoPenalty) {
-		const dieWord = rollOptions.cocPenalty ? 'one Penalty Die' : 'two Penalty Dice'
+		const dieWord = rollOptions.cocPenalty ? 'one Penalty Die' : 'two Penalty Dice';
 		title = <>You rolled <strong>{dieWord}</strong>. Results: {resultsJoined}.</>;
 		finalDieResult = cocPenaltyResult;
 	} else {
@@ -52,8 +52,6 @@ const getCocLocalMsg = (result:any, rollOptions:any, userSettings?:any):LocalMsg
 		/>
 	);
 
-	// @TODO
-	// ADD COMPLICATIONS
 	fields.push(
 		<SuccessLevelLadder successLevels={successLevels} />
 	);
