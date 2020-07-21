@@ -67,7 +67,7 @@ function SuccessLevelLader({ successLevels }: LadderPropsType) {
 					<td className={ successLevels.isRegularSuccess ? styles.successActive : styles.cellInactive }>
 						<div className={styles.cellContainer}>
 							<span>Regular success</span>
-							<LevelSuccessTooltip contentMsg={ <span>The roll is <strong>below</strong> the character’s skill or characteristic.</span> } />
+							<LevelSuccessTooltip contentMsg={ <span>The roll is <strong>equal or below</strong> the character’s skill or characteristic.</span> } />
 						</div>
 					</td>
 				</tr>
