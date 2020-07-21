@@ -13,9 +13,10 @@ const luckInfo = 'Luck points may not be spent on Luck rolls, damage rolls, Sani
 
 type InfoTooltipPropType = {
 	text: string
+	className?: string
 }
 
-function InfoTooltip({ text }:InfoTooltipPropType) {
+function InfoTooltip({ text, className='' }:InfoTooltipPropType) {
 	const key = 'InfoTooltip';
 	return (
 		<>
@@ -28,7 +29,11 @@ function InfoTooltip({ text }:InfoTooltipPropType) {
 					<span>{ text }</span>
 				</Tooltip>
 			}
-		><FontAwesomeIcon className={styles.infoIcon} icon={faQuestionCircle} />
+		><FontAwesomeIcon className={classNames({
+			[styles.infoIcon]: true,
+			[className]: !!className
+		})}
+			icon={faQuestionCircle} />
 		</OverlayTrigger>
 		</>
 	);
@@ -52,7 +57,7 @@ function CocPushOptions({
 			{ (luckRequiredForSuccess > 0) && <div>Spend <CodeSpan>{ luckRequiredForSuccess }</CodeSpan> Luck Points for <strong>Success</strong></div> }
 			{ (luckRequiredForHardSuccess > 0) && <div>Spend <CodeSpan>{ luckRequiredForHardSuccess }</CodeSpan> Luck Points for <strong>Hard Success</strong></div> }
 			{ (luckRequiredForExtremeSuccess > 0) && <div>Spend <CodeSpan>{ luckRequiredForExtremeSuccess }</CodeSpan> Luck Points for <strong>Extreme Success</strong></div> }
-			<InfoTooltip text={luckInfo} />
+			<InfoTooltip className={styles.luckSpendsIcon} text={luckInfo} />
 		</div>
 	);
 
