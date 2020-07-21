@@ -19,7 +19,8 @@ const getRequestMsg = (result:any, rollOptions:any, userSettings:any) => {
 		dmg,
 		effects
 	} = result;
-	const rolledWord = diceAmount > 1 ? 'Results' : 'Result';
+	const hasMultipleDice = diceAmount > 1;
+	const rolledWord = hasMultipleDice ? 'Results' : 'Result';
 	const rolled = `${diceAmount}d${diceType}`;
 	const username = userSettings.username || 'USERNAME_MISSING';
 	const resultsJoined = joinAsBlocks(results, null, true);
@@ -38,25 +39,25 @@ const getRequestMsg = (result:any, rollOptions:any, userSettings:any) => {
 		description += `\nRerolled \`${rollOptions.rerolledTimes}\` ${timesWord}.`;
 	}
 
-	if (rollOptions.sumResults) {
+	if (hasMultipleDice || modifier) {
 		const sumJoined = joinAsBlocks(results, '+', true);
 		let name = `:arrow_right: Sum of ${sumJoined}`;
-		if (0 !== Number(modifier)) name += ` ${modSymbol} \`${Math.abs(modifier)}\` (modifier)`;
+		if (Number(modifier)) name += ` ${modSymbol} \`${Math.abs(modifier)}\` (modifier)`;
 		fields.push({
 			name,
 			value: `Total: \`${totalWithModifier}\`.`
 		});
 	}
-	if (rollOptions.keepHighest) {
+	if (hasMultipleDice) {
 		fields.push({
 			name: ':arrow_up: Highest',
-			value: `Highest result: \`${highest}\`.`
+			value: `Highest result rolled: \`${highest}\`.`
 		});
 	}
-	if (rollOptions.keepLowest) {
+	if (hasMultipleDice) {
 		fields.push({
 			name: ':arrow_down: Lowest',
-			value: `Lowest result: \`${lowest}\`.`
+			value: `Lowest result rolled: \`${lowest}\`.`
 		});
 	}
 	if (rollOptions.cocBonus) {

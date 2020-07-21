@@ -46,21 +46,6 @@ const renderInput = createRenderer((input, label, id, textMuted, meta, disabled)
 	);
 });
 
-// @ts-ignore
-const RenderRadio = createRenderer((input, label, id, inputValue, textMuted, meta, disabled) => {
-
-	return (
-		<Form.Check
-			{...input}
-			type="radio"
-			label={label}
-			id={id}
-			name={id}
-			value={inputValue}
-			custom  />
-	);
-});
-
 function FastSLTooltip() {
 	const key = 'FastSLTooltip';
 	return (
@@ -151,7 +136,6 @@ function WarhammerModalForm({
 	handleSubmit,
 	formValues = {}
 }: any) {
-	const { warhammerSlMode } = formValues;
 	return (
 		<Form
 			className={ (invalid && (submitFailed || anyTouched)) ? 'form-invalid' : '' }

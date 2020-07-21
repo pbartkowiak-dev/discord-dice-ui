@@ -29,7 +29,8 @@ const getLocalMsg = (result:any, rollOptions:any,  userSettings?:any) => {
 		dmg,
 		effects
 	} = result;
-	const rolledWord = diceAmount > 1 ? 'Results' : 'Result';
+	const hasMultipleDice = diceAmount > 1;
+	const rolledWord = hasMultipleDice ? 'Results' : 'Result';
 	const rolled = `${diceAmount}d${diceType}`;
 	const resultsJoined = joinAsBlocks(results);
 	const modifierWithSymbol = <CodeSpan>{modSymbol}{Math.abs(modifier)}</CodeSpan>;
@@ -49,7 +50,7 @@ const getLocalMsg = (result:any, rollOptions:any,  userSettings?:any) => {
 			<>Modifier: {modifierWithSymbol}.</>
 		);
 	}
-	if (rollOptions.sumResults) {
+	if (hasMultipleDice || rollOptions.useModifier) {
 		if (rollOptions.useModifier) {
 			fields.push(
 				<>{IconRight} Total (with {modifierWithSymbol} modifier): <CodeSpan>{totalWithModifier}</CodeSpan>.</>
@@ -60,27 +61,15 @@ const getLocalMsg = (result:any, rollOptions:any,  userSettings?:any) => {
 			);
 		}
 	}
-	if (rollOptions.keepHighest) {
-		if (rollOptions.useModifier) {
-			fields.push(
-				<>{IconUp} Highest result (with {modifierWithSymbol} modifier): <CodeSpan>{highest}</CodeSpan>.</>
-			);
-		} else {
-			fields.push(
-				<>{IconUp} Highest result: <CodeSpan>{highest}</CodeSpan>.</>
-			);
-		}
+	if (hasMultipleDice) {
+		fields.push(
+			<>{IconUp} Highest result rolled: <CodeSpan>{highest}</CodeSpan>.</>
+		);
 	}
-	if (rollOptions.keepLowest) {
-		if (rollOptions.useModifier) {
-			fields.push(
-				<>{IconDown} Lowest result (with {modifierWithSymbol} modifier): <CodeSpan>{lowest}</CodeSpan>.</>
-			);
-		} else {
-			fields.push(
-				<>{IconDown} Lowest result: <CodeSpan>{lowest}</CodeSpan>.</>
-			);
-		}
+	if (hasMultipleDice) {
+		fields.push(
+			<>{IconDown} Lowest result rolled: <CodeSpan>{lowest}</CodeSpan>.</>
+		);
 	}
 
 	if (rollOptions.rerolledTimes) {

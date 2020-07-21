@@ -1,4 +1,4 @@
-import { D6_CONAN, D20_CONAN_HL } from '../consts/conanConstants';
+import { D6_CONAN } from '../consts/conanConstants';
 import getRandom from './getRandom';
 
 function resultsSorter(a:number, b:number) {
@@ -116,8 +116,8 @@ const rollDice = ({
 
 	result.totalWithModifier = result.results.reduce((a, b) => Number(a) + Number(b), Number(modifier));
 	result.totalWithoutModifier = result.totalWithModifier - Number(modifier);
-	result.highest = Math.max(...result.results) + Number(modifier);
-	result.lowest = Math.min(...result.results) + Number(modifier);
+	result.highest = Math.max(...result.results);
+	result.lowest = Math.min(...result.results);
 
 	if (isCombatDie) {
 		const combatDieResults = result.results.reduce((total, current) => {

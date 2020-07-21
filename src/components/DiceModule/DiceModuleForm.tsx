@@ -100,24 +100,6 @@ function DiceModuleForm({ rollOptions }:any) {
 	return (
 		<Form id ="roll-options-form" className="dice-module dice-form">
 			<Field
-				name="keepHighest"
-				id="keepHighest"
-				label="Keep highest"
-				component={RenderCheckbox}
-			/>
-			<Field
-				name="keepLowest"
-				id="keepLowest"
-				label="Keep lowest"
-				component={RenderCheckbox}
-			/>
-			<Field
-				name="sumResults"
-				id="sumResults"
-				label="Sum results"
-				component={RenderCheckbox}
-			/>
-			<Field
 				name="useModifier"
 				id="useModifier"
 				label="Add modifier"

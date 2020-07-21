@@ -264,7 +264,7 @@ function ConanModalForm({
 	handleSubmit,
 	formValues
 }: any) {
-	const { focus, dice, fortune, assistanceDice, difficulty } = formValues;
+	const { focus, dice, fortune, assistanceDice } = formValues;
 	const [hover, setHover] = useState(0);
 	const [assistanceHover, setAssistanceHover] = useState(0);
 	const diceMax = 5;
