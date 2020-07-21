@@ -50,7 +50,8 @@ const getLocalMsg = (result:any, rollOptions:any,  userSettings?:any) => {
 			<>Modifier: {modifierWithSymbol}.</>
 		);
 	}
-	if (hasMultipleDice || rollOptions.useModifier) {
+
+	if ((hasMultipleDice || rollOptions.useModifier) && !isCombatDie) {
 		if (rollOptions.useModifier) {
 			fields.push(
 				<>{IconRight} Total (with {modifierWithSymbol} modifier): <CodeSpan>{totalWithModifier}</CodeSpan>.</>
@@ -61,12 +62,12 @@ const getLocalMsg = (result:any, rollOptions:any,  userSettings?:any) => {
 			);
 		}
 	}
-	if (hasMultipleDice) {
+	if (hasMultipleDice && !isCombatDie) {
 		fields.push(
 			<>{IconUp} Highest result rolled: <CodeSpan>{highest}</CodeSpan>.</>
 		);
 	}
-	if (hasMultipleDice) {
+	if (hasMultipleDice && !isCombatDie) {
 		fields.push(
 			<>{IconDown} Lowest result rolled: <CodeSpan>{lowest}</CodeSpan>.</>
 		);

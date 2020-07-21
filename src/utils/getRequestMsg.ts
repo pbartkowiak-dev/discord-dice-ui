@@ -39,7 +39,7 @@ const getRequestMsg = (result:any, rollOptions:any, userSettings:any) => {
 		description += `\nRerolled \`${rollOptions.rerolledTimes}\` ${timesWord}.`;
 	}
 
-	if (hasMultipleDice || modifier) {
+	if ((hasMultipleDice || modifier) && !isCombatDie) {
 		const sumJoined = joinAsBlocks(results, '+', true);
 		let name = `:arrow_right: Sum of ${sumJoined}`;
 		if (Number(modifier)) name += ` ${modSymbol} \`${Math.abs(modifier)}\` (modifier)`;
@@ -48,13 +48,13 @@ const getRequestMsg = (result:any, rollOptions:any, userSettings:any) => {
 			value: `Total: \`${totalWithModifier}\`.`
 		});
 	}
-	if (hasMultipleDice) {
+	if (hasMultipleDice && !isCombatDie) {
 		fields.push({
 			name: ':arrow_up: Highest',
 			value: `Highest result rolled: \`${highest}\`.`
 		});
 	}
-	if (hasMultipleDice) {
+	if (hasMultipleDice && !isCombatDie) {
 		fields.push({
 			name: ':arrow_down: Lowest',
 			value: `Lowest result rolled: \`${lowest}\`.`
