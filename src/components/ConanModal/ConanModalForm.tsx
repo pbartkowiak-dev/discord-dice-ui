@@ -40,7 +40,7 @@ function TnTooltip() {
 					{ tnInfo }
 				</Tooltip>
 			}
-		><FontAwesomeIcon className="conan-field-icon" icon={faQuestionCircle} />
+		><FontAwesomeIcon className="conan-field-icon icon-info" icon={faQuestionCircle} />
 		</OverlayTrigger>
 		</>
 	);
@@ -59,7 +59,7 @@ function FocusTooltip() {
 					{ focusInfo }
 				</Tooltip>
 			}
-		><FontAwesomeIcon className="conan-field-icon" icon={faQuestionCircle} />
+		><FontAwesomeIcon className="conan-field-icon icon-info" icon={faQuestionCircle} />
 		</OverlayTrigger>
 		</>
 	);
@@ -78,7 +78,7 @@ function UntrainedTestTooltip() {
 					{ untrainedTestInfo }
 				</Tooltip>
 			}
-		><FontAwesomeIcon className="conan-field-icon" icon={faQuestionCircle} />
+		><FontAwesomeIcon className="conan-field-icon icon-info" icon={faQuestionCircle} />
 		</OverlayTrigger>
 		</>
 	);
@@ -97,7 +97,7 @@ function FortuneTooltip() {
 					{ fortuneInfo }
 				</Tooltip>
 			}
-		><FontAwesomeIcon className="conan-field-icon" icon={faQuestionCircle} />
+		><FontAwesomeIcon className="conan-field-icon icon-info" icon={faQuestionCircle} />
 		</OverlayTrigger>
 		</>
 	);
@@ -116,7 +116,7 @@ function AssistanceTooltip() {
 					{ assistanceInfo }
 				</Tooltip>
 			}
-		><FontAwesomeIcon className="conan-field-icon" icon={faQuestionCircle} />
+		><FontAwesomeIcon className="conan-field-icon icon-info" icon={faQuestionCircle} />
 		</OverlayTrigger>
 		</>
 	);
@@ -435,31 +435,35 @@ function ConanModalForm({
 
 type errorsProps = {
 	tn?: string
+	focus?: string
 }
 
 const validate = (values:any) => {
 	const errors:errorsProps = {}
-	const { tn } = values;
+	const { tn, focus } = values;
 	const tnNumber = parseInt(tn, 10);
+	const focusNumber = parseInt(focus, 10);
 
 	if (!tn || !tn.trim()) {
 		errors.tn = 'Target Number cannot be empty';
-		return errors;
 	}
 	if (tnNumber < 0) {
 		errors.tn = 'Target Number must be equal or greater than 0';
-		return errors;
 	}
 	if (tnNumber > 20) {
 		errors.tn = 'Target Number must be less than 20';
-		return errors;
 	}
 	if (isNaN(tnNumber)) {
 		errors.tn = 'Target Number must be a valid number';
-		return errors;
+	}
+	if (focus && isNaN(focusNumber)) {
+		errors.focus = 'Focus must be a valid number';
+	}
+	if (focus && focusNumber > 5) {
+		errors.focus = 'Focus must be less than 5';
 	}
 	return errors;
-}
+};
 
 const form = 'ConanModalForm';
 

@@ -11,7 +11,6 @@
 }
 
 .conan-field-icon {
-	display: none;
 	font-size: 1rem;
 	color: #7c7c7c;
 	cursor: pointer;
@@ -170,15 +169,4 @@
 
 .die-fortune-point.show {
 	display: inline-block;
-}
-
-@media only screen and (min-width: 480px) {
-	.conan-field-icon {
-		display: inline-block;
-	}
-
-	.conan-radio-fields {
-	
-	}
-	
 }

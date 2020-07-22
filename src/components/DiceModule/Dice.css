@@ -16,11 +16,11 @@
 
 .dice .card-footer {
 	border-top: 0;
-	width: 145px;
+	width: 165px;
 }
 
-.dice .btn.dropdown-toggle {
-	min-width: 76px;
+.dice .btn {
+	min-width: 123px;
 }
 
 .dice__extra-mark {
@@ -38,7 +38,7 @@
 
 .dice__image {
 	width: 100%;
-	height: var(--dice-size-mobile);
+	height: 100%;
 	background-size: var(--dice-size-mobile);
 	background-position: center center;
 	background-repeat: no-repeat;
@@ -67,8 +67,8 @@
 .dice--d6 .dice__image {  background-image: url('../../img/d6.png') }
 .dice--d4 .dice__image {  background-image: url('../../img/d4.png') }
 
-.dice--d20conan .dice__image,
-.dice--d20conan-test .dice__image { background-image: url('../../img/d20conan.png') }
+.dice--d20conan .dice__image { background-image: url('../../img/d20conan.png') }
+.dice--d20conan-test .dice__image { background-image: url('../../img/d20conan-test.png') }
 .dice--d20conan-hl .dice__image { background-image: url('../../img/d20conan-hl.png') }
 .dice--d6conan .dice__image {  background-image: url('../../img/d6conan.png') }
 

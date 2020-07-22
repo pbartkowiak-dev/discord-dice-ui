@@ -93,7 +93,10 @@ const getConanLocalMsg = (result:any, rollOptions:any, userSettings?:any):LocalM
 							<span>{ text }</span>
 						</Tooltip>
 					}
-				><FontAwesomeIcon className={styles.assistanceIcon} icon={faQuestionCircle} />
+				><FontAwesomeIcon className={classNames({
+					[styles.assistanceIcon]: true,
+					'icon-info': true
+				})} icon={faQuestionCircle} />
 				</OverlayTrigger>
 				</>
 			);
