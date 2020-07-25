@@ -10,15 +10,11 @@
 	margin-bottom: 0;
 }
 
-.conan-field-icon {
-	font-size: 1rem;
-	color: #7c7c7c;
-	cursor: pointer;
-}
-
 .conan-field-icon-times {
 	font-size: 24px;
 	opacity: .8;
+	color: #7c7c7c;
+	cursor: pointer;
 }
 
 .conan-field-icon-times:hover {

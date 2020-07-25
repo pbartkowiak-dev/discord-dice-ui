@@ -3,14 +3,13 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import classNames from 'classnames';
 import Form from 'react-bootstrap/Form';
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
-import Tooltip from 'react-bootstrap/Tooltip';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faQuestionCircle } from '@fortawesome/free-regular-svg-icons';
 import { faDiceD20, faTimes } from '@fortawesome/free-solid-svg-icons';
-import DifficultyLadder from '../difficultyLadder/DifficultyLadder';
+import DifficultyLadder from '../DifficultyLadder/DifficultyLadder';
 import './ConanModalForm.css';
+import InfoTooltip from '../InfoTooltip/InfoTooltip';
+import tooltip from '../../locale/tooltip';
 
 // @ts-ignore
 const createRenderer = render => ({ input, label, id, textMuted, meta, disabled }, ...rest) => {
@@ -20,107 +19,6 @@ const createRenderer = render => ({ input, label, id, textMuted, meta, disabled 
 		</>
 	)
 };
-
-const tnInfo = <span>The skill’s <strong>Target Number</strong> (TN) is equal to the attribute for that skill, plus any ranks in Expertise the character possesses for that skill.</span>;
-const focusInfo = <span>Each d20 result equal to or less than the character’s <strong>Focus</strong> for that skill scores two successes instead of one.</span>;
-const untrainedTestInfo = <span>If the character has no ranks in Expertise or Focus makes an <strong>untrained test</strong>.</span>;
-const fortuneInfo = <span>Adds "pre-rolled" bonus d20 with a score of 1 to a test.</span>;
-const assistanceInfo = <span>This will be used mostly by DM when using <strong>Groups</strong>. Adds additional d20s to the roll.</span>;
-
-function TnTooltip() {
-	const key = 'TnTooltip';
-	return (
-		<>
-		<OverlayTrigger
-			key={key}
-			placement="top"
-			delay={100}
-			overlay={
-				<Tooltip id={`tooltip-${key}`}>
-					{ tnInfo }
-				</Tooltip>
-			}
-		><FontAwesomeIcon className="conan-field-icon icon-info" icon={faQuestionCircle} />
-		</OverlayTrigger>
-		</>
-	);
-}
-
-function FocusTooltip() {
-	const key = 'FocusTooltip';
-	return (
-		<>
-		<OverlayTrigger
-			key={key}
-			placement="top"
-			delay={100}
-			overlay={
-				<Tooltip id={`tooltip-${key}`}>
-					{ focusInfo }
-				</Tooltip>
-			}
-		><FontAwesomeIcon className="conan-field-icon icon-info" icon={faQuestionCircle} />
-		</OverlayTrigger>
-		</>
-	);
-}
-
-function UntrainedTestTooltip() {
-	const key = 'UntrainedTestTooltip';
-	return (
-		<>
-		<OverlayTrigger
-			key={key}
-			placement="top"
-			delay={100}
-			overlay={
-				<Tooltip id={`tooltip-${key}`}>
-					{ untrainedTestInfo }
-				</Tooltip>
-			}
-		><FontAwesomeIcon className="conan-field-icon icon-info" icon={faQuestionCircle} />
-		</OverlayTrigger>
-		</>
-	);
-}
-
-function FortuneTooltip() {
-	const key = 'FortuneTooltip';
-	return (
-		<>
-		<OverlayTrigger
-			key={key}
-			placement="top"
-			delay={100}
-			overlay={
-				<Tooltip id={`tooltip-${key}`}>
-					{ fortuneInfo }
-				</Tooltip>
-			}
-		><FontAwesomeIcon className="conan-field-icon icon-info" icon={faQuestionCircle} />
-		</OverlayTrigger>
-		</>
-	);
-}
-
-function AssistanceTooltip() {
-	const key = 'AssistanceTooltip';
-	return (
-		<>
-		<OverlayTrigger
-			key={key}
-			placement="top"
-			delay={100}
-			overlay={
-				<Tooltip id={`tooltip-${key}`}>
-					{ assistanceInfo }
-				</Tooltip>
-			}
-		><FontAwesomeIcon className="conan-field-icon icon-info" icon={faQuestionCircle} />
-		</OverlayTrigger>
-		</>
-	);
-}
 
 // @ts-ignore
 const renderInput = createRenderer((input, label, id, textMuted, meta, disabled) => {
@@ -133,7 +31,7 @@ const renderInput = createRenderer((input, label, id, textMuted, meta, disabled)
 					type="text"
 					size="sm"
 					placeholder="00"
-					autocomplete="off"
+					autoComplete="off"
 					isInvalid ={hasError}
 					{...input}
 				/>
@@ -167,7 +65,7 @@ function DiceRow({ dice, isAssistance = false, handleDiceChange, setHover, hover
 				isAssistance && (
 					<div className="die-container">
 						<FontAwesomeIcon
-							className="conan-field-icon conan-field-icon-times"
+							className="conan-field-icon-times"
 							icon={faTimes}
 							onClick={() => handleDiceChange('0', true)}
 						/>
@@ -321,6 +219,10 @@ function ConanModalForm({
 		);
 	});
 
+	const focusLabel = <span>Foc <InfoTooltip placement="bottom" content={tooltip.tnInfo}/></span>;
+	const tnLabel = <span>TN <InfoTooltip placement="bottom" content={tooltip.focusInfo} /></span>;
+	const untrainedTestLabel= <span>Untrained Test <InfoTooltip placement="bottom" content={tooltip.untrainedTestInfo} /></span>;
+
 	return (
 		<Form
 			className={ (invalid && (submitFailed || anyTouched)) ? 'form-invalid' : '' }
@@ -331,7 +233,7 @@ function ConanModalForm({
 						<Field
 							id="focus"
 							name="focus"
-							label={<span>Foc <FocusTooltip /></span>}
+							label={focusLabel}
 							onChange={(evt => handleFocusChange(evt.currentTarget.value) )}
 							component={renderInput}
 						/>
@@ -341,7 +243,7 @@ function ConanModalForm({
 						<Field
 							id="tn"
 							name="tn"
-							label={<span>TN <TnTooltip /></span>}
+							label={tnLabel}
 							component={renderInput}
 						/>
 					
@@ -369,12 +271,12 @@ function ConanModalForm({
 				<Field
 					name="untrainedTest"
 					id="untrainedTest"
-					label={<span>Untrained Test <UntrainedTestTooltip /></span>}
+					label={untrainedTestLabel}
 					component={RenderCheckbox}
 					disabled={ focus && Number(focus) > 0 }
 				/>
 				<div className="fortune">
-					<h5 className="fortune-title">Fortune <FortuneTooltip/></h5>
+					<h5 className="fortune-title">Fortune <InfoTooltip content={tooltip.fortuneInfo} /></h5>
 					<div className="conan-radio-fields">
 						<label className="dice-row-label">
 							<Field
@@ -418,7 +320,7 @@ function ConanModalForm({
 					</div>
 				</div>
 				<div className="assistance">
-					<h5 className="assistance-title">Assistance <AssistanceTooltip/></h5>
+					<h5 className="assistance-title">Assistance <InfoTooltip content={tooltip.assistanceInfo} /></h5>
 					<div className="conan-radio-fields">
 						<DiceRow
 							isAssistance={true}

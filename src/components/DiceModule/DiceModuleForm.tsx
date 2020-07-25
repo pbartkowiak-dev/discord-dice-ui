@@ -1,77 +1,21 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Form from 'react-bootstrap/Form';
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
-import Tooltip from 'react-bootstrap/Tooltip'
 import { Field, reduxForm, formValueSelector } from 'redux-form';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faQuestionCircle } from '@fortawesome/free-regular-svg-icons';
+import tooltip from '../../locale/tooltip';
 import './DiceModuleForm.css';
-
-function CoCModTooltip() {
-	const key = 'CoCModTooltip';
-	return (
-		<>
-		<OverlayTrigger
-			key={key}
-			placement="bottom"
-			overlay={
-				<Tooltip id={`tooltip-${key}`}>
-					<span>Will open modal with additional options on the <strong>d100</strong> roll.</span>
-				</Tooltip>
-			}
-		><FontAwesomeIcon icon={faQuestionCircle} className="icon-info" />
-		</OverlayTrigger>
-		</>
-	);
-}
-
-function WarhammerTooltip() {
-	const key = 'WarhammerTooltip';
-	return (
-		<>
-		<OverlayTrigger
-			key={key}
-			placement="bottom"
-			overlay={
-				<Tooltip id={`tooltip-${key}`}>
-					<span>Supports rolling <strong>SL</strong> for Warhammer 4e and <strong>DoS</strong> for Dark Heresy II.</span>
-				</Tooltip>
-			}
-		><FontAwesomeIcon icon={faQuestionCircle} className="icon-info" />
-		</OverlayTrigger>
-		</>
-	);
-}
-
-function ConanTooltip() {
-	const key = 'ConanTooltip';
-	return (
-		<>
-		<OverlayTrigger
-			key={key}
-			placement="bottom"
-			overlay={
-				<Tooltip id={`tooltip-${key}`}>
-					<span>Supports  <strong>d20 Conan Dice</strong> and <strong>d6 Combat Dice</strong>.</span>
-				</Tooltip>
-			}
-		><FontAwesomeIcon icon={faQuestionCircle} className="icon-info" />
-		</OverlayTrigger>
-		</>
-	);
-}
+import InfoTooltip from '../InfoTooltip/InfoTooltip';
 
 const cocModeLabel = (
-	<span>Call of Cthulhu 7e Mode <CoCModTooltip/></span>
+	<span>Call of Cthulhu 7e Mode <InfoTooltip content={tooltip.coCModTooltip} /></span>
 );
 
 const warhammerModeLabel = (
-	<span>Warhammer Mode <WarhammerTooltip/></span>
+	<span>Warhammer Mode <InfoTooltip content={tooltip.warhammerTooltip} /></span>
 );
 
 const conanModeLabel = (
-	<span>Conan 2d20 Mode <ConanTooltip/></span>
+	<span>Conan 2d20 Mode <InfoTooltip content={tooltip.conanTooltip} /></span>
 );
 
 // @ts-ignore

@@ -42,10 +42,6 @@
 	text-align: center;
 }
 
-.infoIcon {
-	display: none;
-}
-
 .rollItem {
 	font-size: 19px !important;
 	width: 32px;
@@ -72,16 +68,4 @@
 .selectItems {
 	margin-bottom: 7px;
 	border-top: 1px solid #bebebe;
-}
-
-@media only screen and (min-width: 480px) {
-	.infoIcon {
-		position: absolute;
-		display: inline-block;
-		margin: auto;
-		top: 0;
-		bottom: 0;
-		right: 11px;
-		color: #7c7c7c
-	}
 }

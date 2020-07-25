@@ -1,13 +1,11 @@
 import React from 'react';
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
 import classNames from 'classnames';
-import Tooltip from 'react-bootstrap/Tooltip';
 import Accordion from 'react-bootstrap/Accordion';
 import Card from 'react-bootstrap/Card';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMale } from '@fortawesome/free-solid-svg-icons';
-import { faQuestionCircle } from '@fortawesome/free-regular-svg-icons';
 import styles from './HitLocations.module.css';
+import InfoTooltip from '../InfoTooltip/InfoTooltip';
 
 type HitLocationsPropsType = {
 	result: string
@@ -18,13 +16,7 @@ type HitLocationsPropsType = {
 	alwaysExpanded?: boolean
 }
 
-
 function HitLocationTooltip({ isDarkHeresy, isWarhammer2e, isConan }:any) {
-	const key = 'HitLocationTooltip';
-	const classNameFull = classNames({
-		[styles.cellIcon] : true,
-		[styles.tooltip] : true
-	});
 	let head;
 	let leftArm;
 	let rightArm;
@@ -63,104 +55,100 @@ function HitLocationTooltip({ isDarkHeresy, isWarhammer2e, isConan }:any) {
 		rightLeg = '90-00';
 	}
 
-
 	if (isDarkHeresy || isWarhammer2e) {
-		tooltipBody = (
-			<>
-				<div>
-					<strong>{head}</strong> - <span>Head</span>
-				</div>
-				<div>
-					<strong>{rightArm}</strong> - <span>Right Arm</span>
-				</div>
-				<div>
-					<strong>{leftArm}</strong> - <span>Left Arm</span>
-				</div>
-				<div>
-					<strong>{body}</strong> - <span>Body</span>
-				</div>
-				<div>
-					<strong>{rightLeg}</strong> - <span>Right Leg</span>
-				</div>
-				<div>
-					<strong>{leftLeg}</strong> - <span>Left Leg</span>
-				</div>
-			</>
-		)
+		tooltipBody = <>
+			<div>
+				<strong>{head}</strong> - <span>Head</span>
+			</div>
+			<div>
+				<strong>{rightArm}</strong> - <span>Right Arm</span>
+			</div>
+			<div>
+				<strong>{leftArm}</strong> - <span>Left Arm</span>
+			</div>
+			<div>
+				<strong>{body}</strong> - <span>Body</span>
+			</div>
+			<div>
+				<strong>{rightLeg}</strong> - <span>Right Leg</span>
+			</div>
+			<div>
+				<strong>{leftLeg}</strong> - <span>Left Leg</span>
+			</div>
+		</>
 	} else if (isConan) {
-		tooltipBody = (
-			<>
-				<div>
-					<strong>{head}</strong> - <span>Head</span>
-				</div>
-				<div>
-					<strong>{rightArm}</strong> - <span>Right Arm</span>
-				</div>
-				<div>
-					<strong>{leftArm}</strong> - <span>Left Arm</span>
-				</div>
-				<div>
-					<strong>{body}</strong> - <span>Torso</span>
-				</div>
-				<div>
-					<strong>{rightLeg}</strong> - <span>Right Leg</span>
-				</div>
-				<div>
-					<strong>{leftLeg}</strong> - <span>Left Leg</span>
-				</div>
-			</>
-		);
+		tooltipBody = <>
+			<div>
+				<strong>{head}</strong> - <span>Head</span>
+			</div>
+			<div>
+				<strong>{rightArm}</strong> - <span>Right Arm</span>
+			</div>
+			<div>
+				<strong>{leftArm}</strong> - <span>Left Arm</span>
+			</div>
+			<div>
+				<strong>{body}</strong> - <span>Torso</span>
+			</div>
+			<div>
+				<strong>{rightLeg}</strong> - <span>Right Leg</span>
+			</div>
+			<div>
+				<strong>{leftLeg}</strong> - <span>Left Leg</span>
+			</div>
+		</>
 	} else {
 		// default to Warhammer 4e
-		tooltipBody = (
-			<>
-				<div>
-					<strong>{head}</strong> - <span>Head</span>
-				</div>
-				<div>
-					<strong>{leftArm}</strong> - <span>Secondary Arm</span>
-				</div>
-				<div>
-					<strong>{rightArm}</strong> - <span>Primary Arm</span>
-				</div>
-				<div>
-					<strong>{body}</strong> - <span>Body</span>
-				</div>
-				<div>
-					<strong>{leftLeg}</strong> - <span>Left Leg</span>
-				</div>
-				<div>
-					<strong>{rightLeg}</strong> - <span>Right Leg</span>
-				</div>
-			</>
-		);
+		tooltipBody = <>
+			<div>
+				<strong>{head}</strong> - <span>Head</span>
+			</div>
+			<div>
+				<strong>{leftArm}</strong> - <span>Secondary Arm</span>
+			</div>
+			<div>
+				<strong>{rightArm}</strong> - <span>Primary Arm</span>
+			</div>
+			<div>
+				<strong>{body}</strong> - <span>Body</span>
+			</div>
+			<div>
+				<strong>{leftLeg}</strong> - <span>Left Leg</span>
+			</div>
+			<div>
+				<strong>{rightLeg}</strong> - <span>Right Leg</span>
+			</div>
+		</>
 	}
 
-	return (
-		<>
-			<OverlayTrigger
-				key={key}
-				placement="top"
-				delay={100}
-				overlay={
-					<Tooltip id={`tooltip-${key}`}>
-						<div className={styles.hitLocationsTable}>
-							<div>
-								<strong>Hit Locations</strong>
-							</div>
-							<div className={styles.tooltipBody}>
-								{ tooltipBody }
-							</div>
-						</div>
-					</Tooltip>
-				}
-			><FontAwesomeIcon className={classNameFull} icon={faQuestionCircle} />
-			</OverlayTrigger>
-		</>
+	const tooltipContent = (
+		<div className={styles.hitLocationsTable}>
+			<div>
+				<strong>Hit Locations</strong>
+			</div>
+			<div className={styles.tooltipBody}>
+				{ tooltipBody }
+			</div>
+		</div>
 	);
+
+	return <InfoTooltip
+		content={tooltipContent}
+		className={classNames({
+			[styles.cellIcon] : true,
+			[styles.tooltip] : true
+		})}
+	/>;
 }
 
-function HitLocations({ result, hitLocation, isDarkHeresy, isWarhammer2e, isConan, alwaysExpanded }:HitLocationsPropsType) {
+function HitLocations({
+	result,
+	hitLocation,
+	isDarkHeresy,
+	isWarhammer2e,
+	isConan,
+	alwaysExpanded
+}:HitLocationsPropsType) {
 	let header;
 
 	if (alwaysExpanded) {

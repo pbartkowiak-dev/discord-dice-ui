@@ -2,14 +2,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Form from 'react-bootstrap/Form';
-import OverlayTrigger from 'react-bootstrap/OverlayTrigger';
-import Tooltip from 'react-bootstrap/Tooltip'
 import { Field, reduxForm, formValueSelector } from 'redux-form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faQuestionCircle } from '@fortawesome/free-regular-svg-icons';
 import { faPercent } from '@fortawesome/free-solid-svg-icons';
+import InfoTooltip from '../InfoTooltip/InfoTooltip';
+import tooltip from '../../locale/tooltip';
 import './WarhammerModalForm.css';
-
 
 const percentIcon = <span className="percent-icon"><FontAwesomeIcon icon={faPercent} /></span>;
 
@@ -34,7 +32,7 @@ const renderInput = createRenderer((input, label, id, textMuted, meta, disabled)
 					type="text"
 					size="lg"
 					placeholder="00"
-					autocomplete="off"
+					autoComplete="off"
 					isInvalid ={hasError}
 					{...input}
 				/>
@@ -46,88 +44,45 @@ const renderInput = createRenderer((input, label, id, textMuted, meta, disabled)
 	);
 });
 
-function FastSLTooltip() {
-	const key = 'FastSLTooltip';
-	return (
-		<>
-		<OverlayTrigger
-			key={key}
+const warhammer4eSLLabel = (
+	<span
+		>Use default Warhammer 4e SL <InfoTooltip
+			content={tooltip.warhammer4eSL}
+			className="tooltip-fast-sl-icon"
 			placement="bottom"
-			overlay={
-				<Tooltip id={`tooltip-${key}`}
-					className="tooltip-fast-sl">
-					<p>When you <strong className="tooltip-success">pass</strong> a Test, use the result of the tens die as your SL.</p>
-					<p>If a Test <strong className="tooltip-failed">fails</strong>, you calculate SL as normal, taking your rolled tens die from your tested Skill to determine your negative SL.</p>
-				</Tooltip>
-			}
-		><FontAwesomeIcon icon={faQuestionCircle} className="icon-info tooltip-fast-sl-icon" />
-		</OverlayTrigger>
-		</>
-	);
-}
+		/>
+	</span>
+);
 
-function DarkHeresyTooltip() {
-	const key = 'DarkHeresyTooltip';
-	return (
-		<>
-		<OverlayTrigger
-			key={key}
+const fastSLLabel = (
+	<span
+		>Use Warhammer 4e Fast SL <InfoTooltip
+			content={tooltip.fastSL}
+			className="tooltip-fast-sl-icon"
 			placement="bottom"
-			overlay={
-				<Tooltip id={`tooltip-${key}`}
-					className="tooltip-fast-sl">
-						<p>If the roll is equal to or lower than the characteristic, the character has gained one <strong className="tooltip-success">degree of success (DoS)</strong>. He also gains additional degrees of success equal to the tens digit of the target value minus the tens digit of the roll.</p>
-						<p>If the roll is higher than the characteristic, the character has gained one <strong className="tooltip-failed">degree of failure (DoF)</strong>, and gains additional degrees of failure equal to the tens digit of the roll minus the tens digit of the target value.</p>
-				</Tooltip>
-			}
-		><FontAwesomeIcon icon={faQuestionCircle} className="icon-info tooltip-fast-sl-icon" />
-		</OverlayTrigger>
-		</>
-	);
-}
+		/>
+	</span>
+);
 
-function Warhammer4eSLTooltip() {
-	const key = 'Warhammer4eSLTooltip';
-	return (
-		<>
-		<OverlayTrigger
-			key={key}
+const warhammer2eSLLabel = (
+	<span
+		>Use Warhammer 2e DoS <InfoTooltip
+			content={tooltip.warhammer2eSL}
+			className="tooltip-fast-sl-icon"
 			placement="bottom"
-			overlay={
-				<Tooltip id={`tooltip-${key}`}
-					className="tooltip-fast-sl">
-						<p>To determine the SL of a Test, subtract the 10s number of the rolled dice from the 10s number of the Characteristic or Skill being tested.</p>
-				</Tooltip>
-			}
-		><FontAwesomeIcon icon={faQuestionCircle} className="icon-info tooltip-fast-sl-icon" />
-		</OverlayTrigger>
-		</>
-	);
-}
+		/>
+	</span>
+);
 
-function Warhammer2eSLTooltip() {
-	const key = 'Warhammer2eSLTooltip';
-	return (
-		<>
-		<OverlayTrigger
-			key={key}
+const darkHeresyLabel = (
+	<span
+		>Use Dark Heresy II DoS <InfoTooltip
+			content={tooltip.darkHeresy}
+			className="tooltip-fast-sl-icon"
 			placement="bottom"
-			overlay={
-				<Tooltip id={`tooltip-${key}`}
-					className="tooltip-fast-sl">
-						<p>Compare the result of your Skill Test with your percentage chance. For each full 10% you beat your chance by, you achieve one degree of success.</p>
-				</Tooltip>
-			}
-		><FontAwesomeIcon icon={faQuestionCircle} className="icon-info tooltip-fast-sl-icon" />
-		</OverlayTrigger>
-		</>
-	);
-}
-
-const warhammer4eSLLabel = <span>Use default Warhammer 4e SL <Warhammer4eSLTooltip/></span>;
-const fastSLLabel = <span>Use Warhammer 4e Fast SL <FastSLTooltip/></span>;
-const warhammer2eSLLabel = <span>Use Warhammer 2e DoS <Warhammer2eSLTooltip/></span>;
-const darkHeresyLabel = <span>Use Dark Heresy II DoS <DarkHeresyTooltip/></span>;
+		/>
+	</span>
+);
 
 function WarhammerModalForm({
 	invalid,

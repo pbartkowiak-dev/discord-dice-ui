@@ -30,7 +30,7 @@ const renderInput = createRenderer((input, label, id, textMuted, meta, disabled)
 					type="text"
 					size="lg"
 					placeholder="00"
-					autocomplete="off"
+					autoComplete="off"
 					isInvalid ={hasError}
 					{...input}
 				/>
