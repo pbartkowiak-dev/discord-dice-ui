@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import WarhammerModalForm from './WarhammerModalForm';
@@ -10,17 +10,17 @@ import localStorageWarhammerSlModeManager from '../../utils/localStorageWarhamme
 
 type WarhammerModalProps = {
 	userSettings: any
-	showWarhammerModal: boolean
+	showModal: boolean
 	closeWarhammerModal: Function
-	showMsg: Function
+	showMsgModal: Function
 	warhammerSlMode: string
 }
 
 function WarhammerModal({
 	userSettings,
-	showWarhammerModal,
+	showModal,
 	closeWarhammerModal,
-	showMsg,
+	showMsgModal,
 	warhammerSlMode
 }: WarhammerModalProps
 ) {
@@ -45,9 +45,8 @@ function WarhammerModal({
 		const requestMsg = getWarhammerRequestMsg(result, rollOptions, userSettings);
 		const localMsg = getWarhammerLocalMsg(result, rollOptions, userSettings);
 
-		showMsg(localMsg);
+		showMsgModal(localMsg);
 		request(requestMsg);
-
 
 		localStorageWarhammerSlModeManager.save(warhammerSlMode);
 
@@ -56,7 +55,7 @@ function WarhammerModal({
 
 	return (
 		<>
-			<Modal show={showWarhammerModal} onHide={handleClose}>
+			<Modal show={showModal} onHide={handleClose}>
 				<Modal.Header closeButton>
 					<Modal.Title>Warhammer Options</Modal.Title>
 				</Modal.Header>

@@ -10,16 +10,16 @@ import rollDice from '../../utils/rollDice';
 
 type ConanModalProps = {
 	userSettings: any
-	showConanModal: boolean
 	closeConanModal: Function
-	showMsg: Function
+	showMsgModal: Function
+	showModal: boolean
 }
 
 function ConanModal({
 	userSettings,
-	showConanModal,
 	closeConanModal,
-	showMsg
+	showMsgModal,
+	showModal
 }: ConanModalProps
 ) {
 	const handleClose = () => {
@@ -40,7 +40,7 @@ function ConanModal({
 		const requestMsg = getConanRequestMsg(result, rollOptions, userSettings);
 		const localMsg = getConanLocalMsg(result, rollOptions, userSettings);
 
-		showMsg(localMsg);
+		showMsgModal(localMsg);
 		request(requestMsg);
 
 		closeConanModal();
@@ -56,7 +56,7 @@ function ConanModal({
 
 	return (
 		<>
-			<Modal show={showConanModal} onHide={handleClose}>
+			<Modal show={showModal} onHide={handleClose}>
 				<Modal.Header closeButton>
 					<Modal.Title>Conan Options</Modal.Title>
 				</Modal.Header>

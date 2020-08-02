@@ -1,17 +1,17 @@
-import { SHOW_MSG, HIDE_MSG } from '../actions';
+import { OPEN_MSG_MODAL, CLOSE_MSG_MODAL } from '../actions/modals';
 
 function msgReducer(state = {
 	showMsg: false,
 	msgParams: {}
 }, action:any) {
 	switch (action.type) {
-		case SHOW_MSG:
+		case OPEN_MSG_MODAL:
 			return {
 				...state,
 				msgParams: action.msgParams,
 				showMsg: true
 			};
-		case HIDE_MSG:
+		case CLOSE_MSG_MODAL:
 			return {
 				msgParams: {},
 				showMsg: false

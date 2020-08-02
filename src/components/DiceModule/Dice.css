@@ -21,6 +21,9 @@
 
 .dice .btn {
 	min-width: 123px;
+	min-height: 38px;
+	line-height: 14px;
+	white-space: normal;
 }
 
 .dice__extra-mark {
@@ -93,6 +96,9 @@
 		left: auto;
 		font-size: 20px;
 	}
+	.dice .btn {
+		min-width: 82px;
+	}
 }
 
 @media only screen and (min-width: 960px) {
@@ -108,5 +114,8 @@
 	.dice__image {
 		height: var(--dice-size);
 		background-size: var(--dice-size);
+	}
+	.dice .btn {
+		min-width: 123px;
 	}
 }

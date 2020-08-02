@@ -16,7 +16,6 @@ type infoTooltipPropType = {
 }
 
 function InfoTooltip({ content, type, placement='top', className='' }:infoTooltipPropType) {
-	console.log('styles, styles', styles);
 	const id = `tooltip-${getRandom(999)}`;
 	let icon;
 

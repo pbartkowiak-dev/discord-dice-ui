@@ -15,7 +15,7 @@ import { CLASSIC, D100 } from '../../consts/diceConstants';
 type DiceModuleProps = {
 	userSettings: any,
 	rollOptions: any,
-	showMsg: Function,
+	showMsgModal: Function,
 	openCoCModal: Function,
 	openWarhammerModal: Function,
 	openModifierModal: Function,
@@ -26,7 +26,7 @@ type DiceModuleProps = {
 function DiceModule ({
 	userSettings,
 	rollOptions,
-	showMsg,
+	showMsgModal,
 	openModifierModal,
 	openCoCModal,
 	openWarhammerModal,
@@ -49,7 +49,7 @@ function DiceModule ({
 		const requestMsg = getRequestMsg(result, rollOptions, userSettings);
 		const localMsg = getLocalMsg(result, rollOptions, userSettings);
 
-		showMsg(localMsg);
+		showMsgModal(localMsg);
 		request(requestMsg);
 	};
 

@@ -1,13 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { showMsg, hideMsg } from '../../actions';
+import { showMsgModal, hideMsg } from '../../actions/modals';
 import CoCPushOptions from './CocPushOptions';
 import getCocRequestMsg from '../../utils/getCocRequestMsg';
 import getCocLocalMsg from '../../utils/getCocLocalMsg';
 import rollDice from '../../utils/rollDice';
 import { request } from '../../utils/request';
 
-const mapDispatchToProps = { showMsg, hideMsg };
+const mapDispatchToProps = { showMsgModal, hideMsg };
 
 function CocPushOptionsContainer({
 	// props
@@ -15,7 +15,7 @@ function CocPushOptionsContainer({
 	finalDieResult,
 	userSettings,
 	// dispatch props
-	showMsg,
+	showMsgModal,
 	hideMsg,
 	canPush
 }:any) {
@@ -31,7 +31,7 @@ function CocPushOptionsContainer({
 			const requestMsg = getCocRequestMsg(result, rollOptions, userSettings);
 			const localMsg = getCocLocalMsg(result, rollOptions);
 		
-			showMsg(localMsg);
+			showMsgModal(localMsg);
 			request(requestMsg);
 		}, 500);
 	};

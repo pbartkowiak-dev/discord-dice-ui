@@ -50,7 +50,5 @@ export default {
 	warhammer4eSL,
 	fastSL,
 	warhammer2eSL,
-	darkHeresy,
-
-
+	darkHeresy
 };

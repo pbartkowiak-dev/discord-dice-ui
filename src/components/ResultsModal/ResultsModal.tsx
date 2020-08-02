@@ -10,16 +10,16 @@ import { LocalMsgParamsType } from '../../utils/getCocLocalMsg';
 import { D6_CONAN, D20_CONAN_TEST } from '../../consts/conanConstants';
 
 type msgDataType = {
-	showMsg: boolean
 	msgParams: LocalMsgParamsType
 }
 
 type ResultsModalProps = {
-	hideMsg:Function
-	msgData:msgDataType
+	hideMsg: Function
+	msgData: msgDataType
+	showModal: boolean
 }
 
-function ResultsModal({ hideMsg, msgData }:ResultsModalProps) {
+function ResultsModal({ hideMsg, msgData, showModal }:ResultsModalProps) {
 	const { msgParams } = msgData;
 	const {
 		isSuccess,
@@ -49,8 +49,7 @@ function ResultsModal({ hideMsg, msgData }:ResultsModalProps) {
 	
 	const headerClass = isSuccess === false 
 		? `${styles.resultsModalHeader} ${styles.isFailure}`
-		: `${styles.resultsModalHeader}`;
-	
+		: `${styles.resultsModalHeader}`;	
 
 
 	if (rollOptions.cocMode) {
@@ -88,7 +87,7 @@ function ResultsModal({ hideMsg, msgData }:ResultsModalProps) {
 	return (
 		<>
 			<Modal
-				show={msgData.showMsg}
+				show={showModal}
 				dialogClassName="test"
 			 	onHide={ () => hideMsg() }
 			>
@@ -100,7 +99,7 @@ function ResultsModal({ hideMsg, msgData }:ResultsModalProps) {
 				</Modal.Header>
 				<Modal.Body className={styles.resultsBody}>
 					{ rollOptions.isPushed && <div className={styles.pushedTitle}>Pushed roll</div> }
-					{ title && <p className={styles.rollResults}>{ title }</p> }
+					{ title && <div className={styles.rollResults}>{ title }</div> }
 					{ modalBodyList }
 					{ pushElement }
 					{ rerollElement }

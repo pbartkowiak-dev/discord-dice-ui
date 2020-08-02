@@ -10,18 +10,18 @@ import rollDice from '../../utils/rollDice';
 type ModifierModalProps = {
 	userSettings: any,
 	rollOptions: any,
-	showModifierModal: boolean,
 	closeModifierModal: Function,
-	showMsg: Function,
+	showMsgModal: Function,
 	selectedDice: any
+	showModal: boolean
 }
 
 function ModifierModal({
 	userSettings,
 	rollOptions,
-	showModifierModal,
 	closeModifierModal,
-	showMsg,
+	showMsgModal,
+	showModal,
 	selectedDice
 }: ModifierModalProps
 ) {
@@ -41,7 +41,7 @@ function ModifierModal({
 		const requestMsg = getRequestMsg(result, rollOptions, userSettings);
 		const localMsg = getLocalMsg(result, rollOptions);
 
-		showMsg(localMsg);
+		showMsgModal(localMsg);
 		request(requestMsg);
 		
 		closeModifierModal();
@@ -49,7 +49,7 @@ function ModifierModal({
 
 	return (
 		<>
-			<Modal show={showModifierModal} onHide={handleClose}>
+			<Modal show={showModal} onHide={handleClose}>
 				<Modal.Header closeButton>
 					<Modal.Title>Add Modifier</Modal.Title>
 				</Modal.Header>

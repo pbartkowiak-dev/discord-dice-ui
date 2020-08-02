@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { closeModifierModal, showMsg } from '../../actions';
+import { closeModifierModal, showMsgModal } from '../../actions/modals';
 import ModifierModal from './ModifierModal';
 
 const mapStateToProps = (state:any) => {
@@ -12,24 +12,24 @@ const mapStateToProps = (state:any) => {
 	};
 };
 
-const mapDispatchToProps = { closeModifierModal, showMsg };
+const mapDispatchToProps = { closeModifierModal, showMsgModal };
 
 type ModifierModalContainerProps = {
 	userSettings: any,
 	diceModuleForm: any,
-	showModifierModal: boolean,
 	closeModifierModal: Function,
-	showMsg: Function,
+	showMsgModal: Function,
 	selectedDice: any
+	showModal: boolean
 }
 
 function ModifierModalContainer({
 	userSettings,
 	diceModuleForm,
-	showModifierModal,
 	closeModifierModal,
 	selectedDice,
-	showMsg
+	showModal,
+	showMsgModal
 }:ModifierModalContainerProps) {
 	let rollOptions = {};
 	if (diceModuleForm && diceModuleForm.values) {
@@ -40,10 +40,10 @@ function ModifierModalContainer({
 			<ModifierModal
 				userSettings={userSettings}
 				rollOptions={rollOptions}
-				showModifierModal={showModifierModal}
 				closeModifierModal={closeModifierModal}
 				selectedDice={selectedDice}
-				showMsg={showMsg}
+				showMsgModal={showMsgModal}
+				showModal={showModal}
 			/>
 		</>
 	);

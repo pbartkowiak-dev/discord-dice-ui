@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { openSettingsModal, closeSettingsModal, saveUserSettings } from '../../actions';
+import { saveUserSettings } from '../../actions';
+import { openSettingsModal, closeSettingsModal } from '../../actions/modals';
 import SettingsModal from './SettingsModal';
 import localStorageUserSettingsManager from '../../utils/localStorageUserSettingsManager';
 import queryParamsManager from '../../utils/queryParamsManager';
@@ -44,7 +45,7 @@ function SettingsModalContainer({
 		if (!userSettings.username || !userSettings.hookUrl) {
 			openSettingsModal();
 		}
-	}, []);
+	}, [saveUserSettings]);
 
 	return (
 		<>

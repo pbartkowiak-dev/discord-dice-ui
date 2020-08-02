@@ -1,12 +1,12 @@
 import React, { useLayoutEffect } from 'react';
 import { connect } from 'react-redux';
-import { closeWarhammerModal, showMsg, saveWarhammerSlMode } from '../../actions';
+import { saveWarhammerSlMode } from '../../actions';
+import { closeWarhammerModal, showMsgModal } from '../../actions/modals';
 import WarhammerModal from './WarhammerModal';
 import localStorageWarhammerSlModeManager from '../../utils/localStorageWarhammerSlModeManager';
 
 const mapStateToProps = (state:any) => {
 	return {
-		showWarhammerModal: state.showWarhammerModal,
 		userSettings: state.userSettings,
 		warhammerSlMode: state.warhammerSlMode
 	};
@@ -14,24 +14,24 @@ const mapStateToProps = (state:any) => {
 
 const mapDispatchToProps = {
 	closeWarhammerModal,
-	showMsg,
+	showMsgModal,
 	saveWarhammerSlMode
 };
 
 type WarhammerModalContainerProps = {
 	userSettings: any
-	showWarhammerModal: boolean
+	showModal: boolean
 	closeWarhammerModal: Function
-	showMsg: Function
+	showMsgModal: Function
 	saveWarhammerSlMode: Function
 	warhammerSlMode: string
 }
 
 function WarhammerModalContainer({
 	userSettings,
-	showWarhammerModal,
+	showModal,
 	closeWarhammerModal,
-	showMsg,
+	showMsgModal,
 	saveWarhammerSlMode,
 	warhammerSlMode
 }:WarhammerModalContainerProps) {
@@ -40,15 +40,15 @@ function WarhammerModalContainer({
 		if (localStorageWarhammerSlMode) {
 			saveWarhammerSlMode(localStorageWarhammerSlMode);
 		}
-	}, [showWarhammerModal]);
-
+	}, [showModal, saveWarhammerSlMode]);
+	console.log('warhammerSlMode', warhammerSlMode);
 	return (
 		<>
 			<WarhammerModal
 				userSettings={userSettings}
-				showWarhammerModal={showWarhammerModal}
+				showModal={showModal}
 				closeWarhammerModal={closeWarhammerModal}
-				showMsg={showMsg}
+				showMsgModal={showMsgModal}
 				warhammerSlMode={warhammerSlMode}
 			/>
 		</>

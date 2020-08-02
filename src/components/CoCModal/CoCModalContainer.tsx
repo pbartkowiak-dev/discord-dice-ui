@@ -1,37 +1,36 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { closeCoCModal, showMsg } from '../../actions';
+import { closeCoCModal, showMsgModal } from '../../actions/modals';
 import CoCModal from './CoCModal';
 
 const mapStateToProps = (state:any) => {
 	return {
-		showCoCModal: state.showCoCModal,
 		userSettings: state.userSettings,
 	};
 };
 
-const mapDispatchToProps = { closeCoCModal, showMsg };
+const mapDispatchToProps = { closeCoCModal, showMsgModal };
 
 type CoCModalContainerProps = {
 	userSettings: any,
-	showCoCModal: boolean,
 	closeCoCModal: Function,
-	showMsg: Function
+	showMsgModal: Function
+	showModal: boolean,
 }
 
 function CoCModalContainer({
 	userSettings,
-	showCoCModal,
 	closeCoCModal,
-	showMsg
+	showMsgModal,
+	showModal
 }:CoCModalContainerProps) {
 	return (
 		<>
 			<CoCModal
 				userSettings={userSettings}
-				showCoCModal={showCoCModal}
 				closeCoCModal={closeCoCModal}
-				showMsg={showMsg}
+				showMsgModal={showMsgModal}
+				showModal={showModal}
 			/>
 		</>
 	);

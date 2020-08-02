@@ -9,16 +9,16 @@ import rollDice from '../../utils/rollDice';
 
 type CoCModalProps = {
 	userSettings: any,
-	showCoCModal: boolean,
+	showModal: boolean,
 	closeCoCModal: Function,
-	showMsg: Function
+	showMsgModal: Function
 }
 
 function CoCModal({
 	userSettings,
-	showCoCModal,
+	showModal,
 	closeCoCModal,
-	showMsg
+	showMsgModal
 }: CoCModalProps
 ) {
 	const handleClose = () => {
@@ -37,7 +37,7 @@ function CoCModal({
 		const requestMsg = getCocRequestMsg(result, rollOptions, userSettings);
 		const localMsg = getCocLocalMsg(result, rollOptions, userSettings);
 
-		showMsg(localMsg);
+		showMsgModal(localMsg);
 		request(requestMsg);
 		
 		closeCoCModal();
@@ -45,7 +45,7 @@ function CoCModal({
 
 	return (
 		<>
-			<Modal show={showCoCModal} onHide={handleClose}>
+			<Modal show={showModal} onHide={handleClose}>
 				<Modal.Header closeButton>
 					<Modal.Title>Call of Cthulhu 7e Options</Modal.Title>
 				</Modal.Header>

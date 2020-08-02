@@ -206,7 +206,7 @@ function ConanModalForm({
 	const diceRadios = new Array(diceMax).fill('x').map((_, index) => {
 		const diceAmount = index + 1;
 		return (
-			<label className="dice-row-label">
+			<label className="dice-row-label" key={`dice-row-label-${index}`}>
 			<Field
 				name="dice"
 				component="input"

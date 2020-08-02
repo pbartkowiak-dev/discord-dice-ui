@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { hideMsg } from '../../actions';
+import { hideMsg } from '../../actions/modals';
 import ResultsModal from './ResultsModal';
 
 const mapStateToProps = (state:any) => {
@@ -25,6 +25,7 @@ function ResultsModalContainer({
 			<ResultsModal
 				hideMsg={hideMsg}
 				msgData={msgData}
+				showModal={msgData.showMsg}
 			/>
 		</>
 	);

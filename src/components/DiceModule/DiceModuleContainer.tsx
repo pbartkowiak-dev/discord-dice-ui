@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { showMsg, openModifierModal, openCoCModal, openWarhammerModal, openConanModal, selectDice } from '../../actions';
+import { selectDice } from '../../actions';
+import { openModifierModal, openCoCModal, openWarhammerModal, openConanModal, showMsgModal } from '../../actions/modals';
 import DiceModule from './DiceModule';
 
 function mapStateToProps(state:any) {
@@ -10,12 +11,12 @@ function mapStateToProps(state:any) {
 	};
 }
 
-const mapDispatchToProps = { showMsg, openCoCModal, openWarhammerModal, openConanModal, openModifierModal, selectDice };
+const mapDispatchToProps = { showMsgModal, openCoCModal, openWarhammerModal, openConanModal, openModifierModal, selectDice };
 
 function DiceModuleContainer({
 	userSettings,
 	diceModuleForm,
-	showMsg,
+	showMsgModal,
 	openCoCModal,
 	openWarhammerModal,
 	openConanModal,
@@ -29,18 +30,16 @@ function DiceModuleContainer({
 	}
 
 	return (
-		<>
-			<DiceModule
-				userSettings={userSettings}
-				rollOptions={rollOptions}
-				showMsg={showMsg}
-				openModifierModal={openModifierModal}
-				openCoCModal={openCoCModal}
-				openWarhammerModal={openWarhammerModal}
-				openConanModal={openConanModal}
-				selectDice={selectDice}
-			/>
-		</>
+		<DiceModule
+			userSettings={userSettings}
+			rollOptions={rollOptions}
+			showMsgModal={showMsgModal}
+			openModifierModal={openModifierModal}
+			openCoCModal={openCoCModal}
+			openWarhammerModal={openWarhammerModal}
+			openConanModal={openConanModal}
+			selectDice={selectDice}
+		/>
 	);
 }
 

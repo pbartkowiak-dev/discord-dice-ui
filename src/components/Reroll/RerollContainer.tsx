@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { showMsg, hideMsg } from '../../actions';
+import { showMsgModal, hideMsg } from '../../actions/modals';
 import Reroll from './Reroll';
 import getWarhammerRequestMsg from '../../utils/getWarhammerRequestMsg';
 import getWarhammerLocalMsg from '../../utils/getWarhammerLocalMsg';
@@ -12,12 +12,12 @@ import rollDice from '../../utils/rollDice';
 import { request } from '../../utils/request';
 import { D6_CONAN } from '../../consts/conanConstants';
 
-const mapDispatchToProps = { showMsg, hideMsg };
+const mapDispatchToProps = { showMsgModal, hideMsg };
 
 function RerollContainer({
 	rollOptions = {},
 	userSettings,
-	showMsg,
+	showMsgModal,
 	hideMsg,
 	results
 }:any) {
@@ -32,7 +32,7 @@ function RerollContainer({
 			const requestMsg = getWarhammerRequestMsg(result, rollOptions, userSettings);
 			const localMsg = getWarhammerLocalMsg(result, rollOptions, userSettings);
 		
-			showMsg(localMsg);
+			showMsgModal(localMsg);
 			request(requestMsg);
 		}
 	} else if (rollOptions.conanMode && !(rollOptions.diceTypeRaw === D6_CONAN)) {
@@ -48,7 +48,7 @@ function RerollContainer({
 			const requestMsg = getConanRequestMsg(result, rollOptions, userSettings);
 			const localMsg = getConanLocalMsg(result, rollOptions, userSettings);
 		
-			showMsg(localMsg);
+			showMsgModal(localMsg);
 			request(requestMsg);
 		}
 	} else {
@@ -62,7 +62,7 @@ function RerollContainer({
 			const requestMsg = getRequestMsg(result, rollOptions, userSettings);
 			const localMsg = getLocalMsg(result, rollOptions, userSettings);
 
-			showMsg(localMsg);
+			showMsgModal(localMsg);
 			request(requestMsg);
 		}
 	}
