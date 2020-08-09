@@ -45,7 +45,7 @@ function SettingsModalContainer({
 		if (!userSettings.username || !userSettings.hookUrl) {
 			openSettingsModal();
 		}
-	}, [saveUserSettings]);
+	}, [saveUserSettings, openSettingsModal]);
 
 	return (
 		<>
