@@ -6,7 +6,7 @@ import Form from 'react-bootstrap/Form';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDiceD20, faTimes } from '@fortawesome/free-solid-svg-icons';
-import DifficultyLadder from '../DifficultyLadder/DifficultyLadder';
+import DifficultyLadder from './../DifficultyLadder/DifficultyLadder';
 import './ConanModalForm.css';
 import InfoTooltip from '../InfoTooltip/InfoTooltip';
 import tooltip from '../../locale/tooltip';
