@@ -4,7 +4,7 @@ import classNames from 'classnames/bind';
 import Table from 'react-bootstrap/Table';
 import styles from './difficulty-ladder.module.css';
 
-function DifficultyLadder( { input }:any) {
+function DiffLadder( { input }:any) {
 	const { value } = input;
 	const cx = classNames.bind(styles);
 
@@ -130,4 +130,4 @@ function DifficultyLadder( { input }:any) {
 	);
 }
 
-export default DifficultyLadder;
+export default DiffLadder;
