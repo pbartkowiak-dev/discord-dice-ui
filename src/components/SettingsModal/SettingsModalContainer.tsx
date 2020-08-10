@@ -9,7 +9,6 @@ import { DISCORD_WEBHOOK_URL } from '../../consts/urls';
 
 const mapStateToProps = (state:any) => {
 	return {
-		showSettingsModal: state.showSettingsModal,
 		userSettings: state.userSettings,
 	};
 };
@@ -23,7 +22,7 @@ const mapDispatchToProps = {
 
 function SettingsModalContainer({
 	openSettingsModal,
-	showSettingsModal,
+	showModal,
 	closeSettingsModal,
 	saveUserSettings,
 	userSettings
@@ -50,7 +49,7 @@ function SettingsModalContainer({
 	return (
 		<>
 			<SettingsModal
-				showSettingsModal={showSettingsModal}
+				showModal={showModal}
 				closeSettingsModal={closeSettingsModal}
 				saveUserSettings={saveUserSettings}
 				userSettings={userSettings}

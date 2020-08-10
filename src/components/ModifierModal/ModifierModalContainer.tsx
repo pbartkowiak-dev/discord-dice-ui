@@ -5,7 +5,6 @@ import ModifierModal from './ModifierModal';
 
 const mapStateToProps = (state:any) => {
 	return {
-		showModifierModal: state.showModifierModal,
 		selectedDice: state.selectedDice,
 		userSettings: state.userSettings,
 		diceModuleForm: state.form.diceModuleForm

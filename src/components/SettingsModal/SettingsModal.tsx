@@ -7,14 +7,14 @@ import './SettingsModal.css';
 import { version } from '../../../package.json';
 
 type SettingsModalProps = {
-	showSettingsModal: boolean,
+	showModal: boolean,
 	closeSettingsModal: Function,
 	saveUserSettings: Function,
 	userSettings: any
 }
 
 function SettingsModal({
-	showSettingsModal,
+	showModal,
 	closeSettingsModal,
 	saveUserSettings,
 	userSettings
@@ -32,7 +32,7 @@ function SettingsModal({
 
 	return (
 		<>
-			<Modal show={showSettingsModal} onHide={handleClose}>
+			<Modal show={showModal} onHide={handleClose}>
 				<Modal.Header closeButton>
 					<Modal.Title>Settings<p className="version-subtitle">v. {version}</p></Modal.Title>
 				</Modal.Header>
