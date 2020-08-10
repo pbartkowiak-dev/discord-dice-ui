@@ -1,8 +1,8 @@
 import React from 'react';
+import { Field } from 'redux-form';
 import classNames from 'classnames/bind';
 import Table from 'react-bootstrap/Table';
 import styles from './difficulty-ladder.module.css';
-import { Field } from 'redux-form';
 
 function DifficultyLadder( { input }:any) {
 	const { value } = input;
