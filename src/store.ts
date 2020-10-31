@@ -1,15 +1,17 @@
 import { createStore, applyMiddleware } from 'redux';
 import handleRoll from './middleware/handleRoll.middleware';
 import roll from './middleware/roll.middleware';
-import requestMsg from './middleware/requestMsg.middleware';
-import localMsg from './middleware/localMsg.middleware';
+import getRequestMsg from './middleware/getRequestMsg.middleware';
+import getLocalMsg from './middleware/getLocalMsg.middleware';
+import sendRequestMsg from './middleware/sendRequestMsg.middleware';
 import reducers from './reducers/index';
 
 const rollMiddleware = [
 	handleRoll,
 	roll,
-	requestMsg,
-	localMsg
+	getRequestMsg,
+	getLocalMsg,
+	sendRequestMsg
 ];
 
 export default createStore(

@@ -1,4 +1,4 @@
-import { OPEN_MSG_MODAL, CLOSE_MSG_MODAL } from '../actions/modals';
+import { CLOSE_MSG_MODAL } from '../actions/modals';
 import { LOCAL_MSG_READY } from '../actions/roll.actions';
 
 function msgReducer(

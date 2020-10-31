@@ -50,19 +50,6 @@ const handleRoll = (store:any) => (next:any) => (action:any) => {
 					rollOptions,
 					modifier: 0
 				}));
-
-				const result = rollDice({
-					diceType,
-					diceAmount,
-					rollOptions,
-					modifier: 0
-				});
-				
-				// const requestMsg = getRequestMsg(result, rollOptions, userSettings);
-				// const localMsg = getLocalMsg(result, rollOptions, userSettings);
-		
-				// showMsgModal(localMsg);
-				// request(requestMsg);
 			}
 		}
 	} else {

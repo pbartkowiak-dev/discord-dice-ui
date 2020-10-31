@@ -1,11 +1,10 @@
-import { requestParams } from '../utils/request';
 import { getColor } from '../utils/getColor';
 import joinAsBlocks from '../utils/joinAsBlocks';
 import getConanHitLocation from '../utils/getConanHitLocations';
 import { D6_CONAN, D20_CONAN_HL } from '../consts/conanConstants';
 import { DICE_ROLLED, requestMsgReady } from '../actions/roll.actions';
 
-const getRequestMsg = (store:any) => (next:any) => (action:any) => {
+export default (store:any) => (next:any) => (action:any) => {
 	if (action.type === DICE_ROLLED) {
 		const state = store.getState();
 		const { userSettings } = state;
@@ -105,5 +104,3 @@ const getRequestMsg = (store:any) => (next:any) => (action:any) => {
 	}
 	next(action);
 };
-
-export default getRequestMsg;
