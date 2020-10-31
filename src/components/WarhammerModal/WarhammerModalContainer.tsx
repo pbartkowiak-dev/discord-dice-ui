@@ -41,7 +41,7 @@ function WarhammerModalContainer({
 			saveWarhammerSlMode(localStorageWarhammerSlMode);
 		}
 	}, [showModal, saveWarhammerSlMode]);
-	console.log('warhammerSlMode', warhammerSlMode);
+
 	return (
 		<>
 			<WarhammerModal

@@ -7,7 +7,7 @@ import getWarhammer4eHitLocation from './getWarhammer4eHitLocation';
 import getDarkHeresyIIHitLocation from './getDarkHeresyIIHitLocation';
 import { SUCCESS, FAILURE, getColor } from './getColor';
 
-const getRequestMsg = (result:any, rollOptions:any, userSettings:any) => {
+const getWarhammerRequestMsg = (result:any, rollOptions:any, userSettings:any) => {
 	const {
 		results,
 		skillLevel
@@ -111,4 +111,4 @@ const getRequestMsg = (result:any, rollOptions:any, userSettings:any) => {
 	return msgParams;
 };
 
-export default getRequestMsg;
+export default getWarhammerRequestMsg;

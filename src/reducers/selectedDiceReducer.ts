@@ -10,7 +10,7 @@ const initialState:userSettingsType = {
 	diceAmount: 1
 };
 
-function selectDiceReducer(state = initialState, action:any) {
+function storeSelectedDiceReducer(state = initialState, action:any) {
 	switch (action.type) {
 		case SELECT_DICE:
 			return {
@@ -21,4 +21,4 @@ function selectDiceReducer(state = initialState, action:any) {
 	return state;
 }
 
-export default selectDiceReducer;
+export default storeSelectedDiceReducer;

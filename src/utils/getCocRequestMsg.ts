@@ -4,7 +4,7 @@ import getSuccessLevelString from './getSuccessLevelString';
 import { SUCCESS, FAILURE, getColor } from './getColor';
 import joinAsBlocks from './joinAsBlocks';
 
-const getRequestMsg = (result:any, rollOptions:any, userSettings:any) => {
+const getCocRequestMsg = (result:any, rollOptions:any, userSettings:any) => {
 	const {
 		results,
 		cocBonusResult,
@@ -57,4 +57,4 @@ const getRequestMsg = (result:any, rollOptions:any, userSettings:any) => {
 	return msgParams;
 };
 
-export default getRequestMsg;
+export default getCocRequestMsg;

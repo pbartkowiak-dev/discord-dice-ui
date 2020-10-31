@@ -89,3 +89,14 @@ In order to get started, **Discord's server admin has to create a Webhook** and 
     ![how-to-5](./public/how-to-4.png)
 
 6. Saving the Webhook in the app will connect the app with the Discord server.
+
+## Developers' info
+
+### Production build
+
+1. `npm run build`.
+2. `npm run start` (`serve -s build` command is required by Heroku).
+
+### Development build
+
+1. `npm run dev`.

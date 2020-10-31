@@ -2,85 +2,26 @@ import React from 'react';
 import './DiceModule.css';
 import Dice from './Dice';
 import DiceModuleOptions from './DiceModuleOptions';
-import { request } from '../../utils/request';
-import getRequestMsg from '../../utils/getRequestMsg';
-import getLocalMsg from '../../utils/getLocalMsg';
-import rollDice from '../../utils/rollDice';
 import getDiceSet from '../../utils/getDiceSet';
-import getDieNumberVal from '../../utils/getDieNumberVal';
-import { D6_CONAN, D20_CONAN_TEST, D20_CONAN_HL, CONAN } from '../../consts/conanConstants';
-import { D100_SL, WARHAMMER } from '../../consts/warhammerConstants';
-import { CLASSIC, D100 } from '../../consts/diceConstants';
+import { CONAN } from '../../consts/conanConstants';
+import { WARHAMMER } from '../../consts/warhammerConstants';
+import { CLASSIC } from '../../consts/diceConstants';
 
-type DiceModuleProps = {
-	userSettings: any,
-	rollOptions: any,
-	showMsgModal: Function,
-	openCoCModal: Function,
-	openWarhammerModal: Function,
-	openModifierModal: Function,
-	openConanModal: Function,
-	selectDice: Function
+interface DiceModuleProps {
+	rollOptions: any;
+	submitRoll: Function;
 };
 
 function DiceModule ({
-	userSettings,
 	rollOptions,
-	showMsgModal,
-	openModifierModal,
-	openCoCModal,
-	openWarhammerModal,
-	openConanModal,
-	selectDice
+	submitRoll
 }:DiceModuleProps
 ) {
-	const handleRoll = (diceType:number, diceAmount:number, diceTypeRaw:string) => {
-		rollOptions.rerolledTimes = 0;
-		rollOptions.diceTypeRaw = diceTypeRaw;
-		rollOptions.diceType = diceType;
-		rollOptions.diceAmount = diceAmount;
-
-		const result = rollDice({
-			diceType,
-			diceAmount,
-			rollOptions,
-			modifier: 0
-		});
-		const requestMsg = getRequestMsg(result, rollOptions, userSettings);
-		const localMsg = getLocalMsg(result, rollOptions, userSettings);
-
-		showMsgModal(localMsg);
-		request(requestMsg);
-	};
-
 	const handleRollDice = (diceType:string, diceAmount:number = 1) => {
-		const diceTypeNum = getDieNumberVal(diceType);
-
-		if (rollOptions.cocMode && diceType === D100) {
-			openCoCModal();
-			return;
-		}
-		if (diceType === D100_SL) {
-			openWarhammerModal();
-			return;
-		}
-		if (diceType === D20_CONAN_TEST) {
-			openConanModal();
-			return;
-		}
-		if (diceType === D6_CONAN || diceType === D20_CONAN_HL) {
-			rollOptions.useModifier = false;
-		}
-
-		if (rollOptions.useModifier) {
-			selectDice({
-				diceType: diceTypeNum,
-				diceAmount
-			});
-			openModifierModal();
-		} else {
-			handleRoll(diceTypeNum, diceAmount, diceType);
-		}
+		submitRoll({
+			diceType,
+			diceAmount
+		})
 	};
 
 	let diceSetType;

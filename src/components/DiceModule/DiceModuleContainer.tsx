@@ -1,27 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { selectDice } from '../../actions';
-import { openModifierModal, openCoCModal, openWarhammerModal, openConanModal, showMsgModal } from '../../actions/modals';
+import { submitRoll } from '../../actions/roll.actions';
 import DiceModule from './DiceModule';
 
 function mapStateToProps(state:any) {
-	return {
-		userSettings: state.userSettings,
-		diceModuleForm: state.form.diceModuleForm
-	};
+	return {};
 }
 
-const mapDispatchToProps = { showMsgModal, openCoCModal, openWarhammerModal, openConanModal, openModifierModal, selectDice };
+const mapDispatchToProps = { submitRoll };
 
 function DiceModuleContainer({
-	userSettings,
 	diceModuleForm,
-	showMsgModal,
-	openCoCModal,
-	openWarhammerModal,
-	openConanModal,
-	openModifierModal,
-	selectDice
+	submitRoll
 }:any ) {
 	// @TODO rollOPTIONS separater from form values preferences
 	let rollOptions = {};
@@ -31,14 +21,8 @@ function DiceModuleContainer({
 
 	return (
 		<DiceModule
-			userSettings={userSettings}
 			rollOptions={rollOptions}
-			showMsgModal={showMsgModal}
-			openModifierModal={openModifierModal}
-			openCoCModal={openCoCModal}
-			openWarhammerModal={openWarhammerModal}
-			openConanModal={openConanModal}
-			selectDice={selectDice}
+			submitRoll={submitRoll}
 		/>
 	);
 }
