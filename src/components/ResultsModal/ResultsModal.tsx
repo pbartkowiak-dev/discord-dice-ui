@@ -6,8 +6,17 @@ import CocPushOptionsContainer from '../CocPushOptions/CocPushOptionsContainer';
 import RerollContainer from '../Reroll/RerollContainer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDiceD20 } from '@fortawesome/free-solid-svg-icons';
-import { LocalMsgParamsType } from '../../utils/getCocLocalMsg';
 import { D6_CONAN, D20_CONAN_TEST } from '../../consts/conanConstants';
+
+type LocalMsgParamsType = {
+	title: any,
+	fields: Array<any>
+	isSuccess?: boolean
+	rollOptions?: any
+	finalDieResult?: number,
+	userSettings?: any
+	results?: any
+}
 
 type msgDataType = {
 	msgParams: LocalMsgParamsType

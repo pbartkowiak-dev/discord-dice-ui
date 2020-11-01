@@ -27,15 +27,6 @@ function CocPushOptionsContainer({
 				diceType: 100,
 				...rollOptions
 			});
-			// const result = rollDice({
-			// 	diceType: 100,
-			// 	rollOptions
-			// });
-			// const requestMsg = getCocRequestMsg(result, rollOptions, userSettings);
-			// const localMsg = getCocLocalMsg(result, rollOptions);
-		
-			// showMsgModal(localMsg);
-			// request(requestMsg);
 		}, 500);
 	};
 
