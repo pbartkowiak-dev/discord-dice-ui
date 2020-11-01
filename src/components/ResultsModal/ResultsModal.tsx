@@ -20,6 +20,7 @@ type ResultsModalProps = {
 }
 
 function ResultsModal({ hideMsg, msgData, showModal }:ResultsModalProps) {
+	console.log('ResultsModal - msgData', msgData);
 	const { msgParams } = msgData;
 	const {
 		isSuccess,
@@ -51,6 +52,7 @@ function ResultsModal({ hideMsg, msgData, showModal }:ResultsModalProps) {
 		? `${styles.resultsModalHeader} ${styles.isFailure}`
 		: `${styles.resultsModalHeader}`;	
 
+	console.log('ResultsModal - rollOptions', rollOptions);
 
 	if (rollOptions.cocMode) {
 		const canPush = isSuccess === false && !rollOptions.isPushed;

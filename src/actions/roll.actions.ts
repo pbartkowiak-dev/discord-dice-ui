@@ -5,44 +5,44 @@ export const DICE_ROLL = 'DICE_ROLL';
 export const DICE_ROLLED = 'DICE_ROLLED';
 export const LOCAL_MSG_READY = 'LOCAL_MSG_READY';
 export const REQUEST_MSG_READY = 'REQUEST_MSG_READY';
+export const COC_DICE_ROLLED = 'COC_DICE_ROLLED';
 
-export function submitRoll({ diceType, diceAmount }:any) {
+export function submitRoll(payload: any) {
 	return {
 		type: ROLL_SUBMITTED,
-		payload: {
-			diceType,
-			diceAmount
-		}
+		payload
 	};
 }
 
-export function requestDiceRoll({ diceType, diceAmount, rollOptions, modifier }:any ) {
+export function requestDiceRoll(payload: any ) {
 	return {
 		type: DICE_ROLL_REQUESTED,
-		payload: {
-			diceType,
-			diceAmount,
-			rollOptions,
-			modifier
-		}
+		payload
 	};
 }
 
-export function diceRolled(payload:any) {
+export function diceRolled(payload: any) {
 	return {
 		type: DICE_ROLLED, 
 		payload
 	};
 }
 
-export function localMsgReady(payload:any) {
+export function cocDiceRolled(payload: any) {
+	return {
+		type: COC_DICE_ROLLED,
+		payload
+	}
+}
+
+export function localMsgReady(payload: any) {
 	return {
 		type: LOCAL_MSG_READY, 
 		payload
 	};
 }
 
-export function requestMsgReady(payload:any) {
+export function requestMsgReady(payload: any) {
 	return {
 		type: REQUEST_MSG_READY, 
 		payload

@@ -10,6 +10,7 @@ import getConanHitLocation from '../utils/getConanHitLocations';
 import styles from '../components/ResultsModal/ResultsModal.module.css';
 
 import { DICE_ROLLED, localMsgReady } from '../actions/roll.actions';
+import { formValues } from 'redux-form';
 
 const IconUp = <FontAwesomeIcon icon={faArrowAltCircleUp} />;
 const IconDown = <FontAwesomeIcon icon={faArrowAltCircleDown} />;
@@ -18,8 +19,11 @@ const IconScull = <FontAwesomeIcon icon={faSkull} />;
 const IconSun = <FontAwesomeIcon icon={faSun} />;
 
 const getLocalMsg = (store:any) => (next:any) => (action:any) => {
-	console.log('getLocalMsg action', action);
 	if (action.type === DICE_ROLLED) {
+		const state = store.getState();
+		const { form : { diceModuleForm } } = state;
+		const formValues = diceModuleForm?.values || {};
+
 		const { payload } = action;
 		const { result, rollOptions } = payload; 
 		const {
@@ -113,11 +117,16 @@ const getLocalMsg = (store:any) => (next:any) => (action:any) => {
 				/>
 			);
 		}
+
+		const rollDetails = {
+			...rollOptions,
+			...formValues,
+		}
 	
 		store.dispatch(localMsgReady({
 			title,
 			fields,
-			rollOptions,
+			rollOptions: rollDetails,
 			results
 		}));
 	}

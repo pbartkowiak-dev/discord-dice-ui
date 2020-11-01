@@ -2,20 +2,18 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { showMsgModal, hideMsg } from '../../actions/modals';
 import CoCPushOptions from './CocPushOptions';
-import getCocRequestMsg from '../../utils/getCocRequestMsg';
-import getCocLocalMsg from '../../utils/getCocLocalMsg';
-import rollDice from '../../utils/rollDice';
-import { request } from '../../utils/request';
+import { requestDiceRoll } from '../../actions/roll.actions';
 
-const mapDispatchToProps = { showMsgModal, hideMsg };
+const mapDispatchToProps = {
+	showMsgModal,
+	hideMsg,
+	requestDiceRoll
+};
 
 function CocPushOptionsContainer({
-	// props
 	rollOptions ={},
 	finalDieResult,
-	userSettings,
-	// dispatch props
-	showMsgModal,
+	requestDiceRoll,
 	hideMsg,
 	canPush
 }:any) {
@@ -23,16 +21,21 @@ function CocPushOptionsContainer({
 	const handlePushRoll = () => {
 		hideMsg();
 		rollOptions.isPushed = true;
+		console.log('push roll - rollOptions', rollOptions);
 		setTimeout(() => {
-			const result = rollDice({
+			requestDiceRoll({
 				diceType: 100,
-				rollOptions
+				...rollOptions
 			});
-			const requestMsg = getCocRequestMsg(result, rollOptions, userSettings);
-			const localMsg = getCocLocalMsg(result, rollOptions);
+			// const result = rollDice({
+			// 	diceType: 100,
+			// 	rollOptions
+			// });
+			// const requestMsg = getCocRequestMsg(result, rollOptions, userSettings);
+			// const localMsg = getCocLocalMsg(result, rollOptions);
 		
-			showMsgModal(localMsg);
-			request(requestMsg);
+			// showMsgModal(localMsg);
+			// request(requestMsg);
 		}, 500);
 	};
 

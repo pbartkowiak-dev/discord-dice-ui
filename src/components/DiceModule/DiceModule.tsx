@@ -21,14 +21,14 @@ function DiceModule ({
 		submitRoll({
 			diceType,
 			diceAmount
-		})
+		});
 	};
 
 	let diceSetType;
 	if (rollOptions.warhammerMode) {
 		diceSetType = WARHAMMER;
 	} else if(rollOptions.conanMode) {
-			diceSetType = CONAN;
+		diceSetType = CONAN;
 	} else {
 		diceSetType = CLASSIC;
 	}

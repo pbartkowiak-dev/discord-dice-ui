@@ -1,5 +1,6 @@
-import { requestDiceRoll, DICE_ROLL_REQUESTED, diceRolled } from '../actions/roll.actions';
+import { DICE_ROLL_REQUESTED, diceRolled, cocDiceRolled } from '../actions/roll.actions';
 import { D6_CONAN } from '../consts/conanConstants';
+import getDieNumberVal from '../utils/getDieNumberVal';
 import getResultsArray from '../utils/getResultsArray';
 
 function resultsSorter(a:number, b:number) {
@@ -44,32 +45,38 @@ interface rollDiceResult {
 	assistanceDiceResults?: Array<number>;
 }
 
-
 const roll = (store:any) => (next:any) => (action:any) => {
 	if (action.type === DICE_ROLL_REQUESTED) {
-		console.log('DICE_ROLL_REQUESTED', action.payload);
+		const state = store.getState();
+		const { form : { diceModuleForm } } = state;
+		const formValues = diceModuleForm?.values || {};
+		console.log('DICE_ROLL_REQUESTED', action.payload, diceModuleForm);
+
 		let {
+			diceType,
 			modifier = 0,
 			diceAmount = 1,
 			rollOptions = {},
-			itemsToStay = []
-		} = action.payload;
-		const {
-			diceTypeNum = 6,
-			cocMode,
+			itemsToStay = [],
+			skillLevel,
 			cocBonus,
 			cocTwoBonus,
 			cocPenalty,
-			cocTwoPenalty,
-			skillLevel,
+			cocTwoPenalty
+		} = action.payload;
+
+		const {
 			fortune
 		} = rollOptions;
-		const isCombatDie = rollOptions.diceTypeRaw === D6_CONAN;
+
+		console.log('diceType', diceType);
+		const diceTypeNum = getDieNumberVal(diceType);
+		const isCombatDie = diceType === D6_CONAN;
 		const keepUnits = (cocBonus || cocTwoBonus || cocPenalty || cocTwoPenalty);
 		const result = {} as rollDiceResult;
 		const fortuneNum = Number(fortune);
 
-		if (cocMode) {
+		if (formValues.cocMode) {
 			if (cocBonus || cocPenalty) {
 				diceAmount = 2;
 			} else if (cocTwoBonus || cocTwoPenalty) {
@@ -93,7 +100,7 @@ const roll = (store:any) => (next:any) => (action:any) => {
 	
 		result.modifier = modifier;
 		result.diceAmount = diceAmount;
-		result.diceType = diceTypeNum;
+		result.diceType = diceType;
 		result.diceTypeNum = diceTypeNum;
 	
 		if (fortune && fortuneNum) {
@@ -130,7 +137,7 @@ const roll = (store:any) => (next:any) => (action:any) => {
 			result.effects = combatDieResults.effects;
 		}
 	
-		if (cocMode) {
+		if (formValues.cocMode) {
 			result.cocBonusResult = (cocBonus || cocTwoBonus) ? Math.min(...result.results) : undefined;
 			result.cocPenaltyResult = (cocPenalty || cocTwoPenalty) ?  Math.max(...result.results) : undefined;
 			result.cocBonus = cocBonus;
@@ -139,7 +146,7 @@ const roll = (store:any) => (next:any) => (action:any) => {
 			result.cocTwoPenalty = cocTwoPenalty;
 		}
 	
-		if (cocMode || rollOptions.warhammerMode) {
+		if (formValues.cocMode || formValues.warhammerMode) {
 			result.skillLevel = skillLevel ? Number(skillLevel) : undefined;
 		}
 	
@@ -162,10 +169,32 @@ const roll = (store:any) => (next:any) => (action:any) => {
 			result.modSymbol = '-';
 		}
 
-		store.dispatch(diceRolled({
-			result,
-			rollOptions
-		}));
+		if (formValues.cocMode) {
+			store.dispatch(cocDiceRolled({
+				result,
+				rollOptions: {
+					...action.payload,
+					...formValues
+				}
+			}));
+		} else if (formValues.warhammerMode) {
+			// console.log('warhammer mode')
+			// store.dispatch(warhammerDiceRolled({
+			// 	result,
+			// 	rollOptions: {
+			// 		...action.payload,
+			//		...formValues
+			// 	}
+			// }));
+		} else {
+			store.dispatch(diceRolled({
+				result,
+				rollOptions: {
+					...action.payload,
+					...formValues
+				}
+			}));
+		}
 
 	} else {
 		next(action);

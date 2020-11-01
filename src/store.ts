@@ -3,6 +3,7 @@ import handleRoll from './middleware/handleRoll.middleware';
 import roll from './middleware/roll.middleware';
 import getRequestMsg from './middleware/getRequestMsg.middleware';
 import getLocalMsg from './middleware/getLocalMsg.middleware';
+import getCoCLocalMsg from './middleware/getCoCLocalMsg.middleware';
 import sendRequestMsg from './middleware/sendRequestMsg.middleware';
 import reducers from './reducers/index';
 
@@ -11,6 +12,7 @@ const rollMiddleware = [
 	roll,
 	getRequestMsg,
 	getLocalMsg,
+	getCoCLocalMsg,
 	sendRequestMsg
 ];
 

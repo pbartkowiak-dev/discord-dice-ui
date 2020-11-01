@@ -1,40 +1,32 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { closeCoCModal, showMsgModal } from '../../actions/modals';
+import { closeCoCModal } from '../../actions/modals';
+import { requestDiceRoll } from '../../actions/roll.actions';
 import CoCModal from './CoCModal';
 
-const mapStateToProps = (state:any) => {
-	return {
-		userSettings: state.userSettings,
-	};
+const mapDispatchToProps = {
+	closeCoCModal,
+	requestDiceRoll
 };
 
-const mapDispatchToProps = { closeCoCModal, showMsgModal };
-
-type CoCModalContainerProps = {
-	userSettings: any,
-	closeCoCModal: Function,
-	showMsgModal: Function
-	showModal: boolean,
+interface CoCModalContainerProps {
+	closeCoCModal: (event?: React.MouseEvent<HTMLElement>) => void;
+	requestDiceRoll: Function;
+	showModal: boolean;
 }
 
 function CoCModalContainer({
-	userSettings,
 	closeCoCModal,
-	showMsgModal,
+	requestDiceRoll,
 	showModal
 }:CoCModalContainerProps) {
 	return (
-		<>
-			<CoCModal
-				userSettings={userSettings}
-				closeCoCModal={closeCoCModal}
-				showMsgModal={showMsgModal}
-				showModal={showModal}
-			/>
-		</>
+		<CoCModal
+			closeCoCModal={closeCoCModal}
+			requestDiceRoll={requestDiceRoll}
+			showModal={showModal}
+		/>
 	);
-
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CoCModalContainer);
+export default connect(undefined, mapDispatchToProps)(CoCModalContainer);
