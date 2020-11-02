@@ -17,13 +17,13 @@ function DiceModule ({
 	submitRoll
 }:DiceModuleProps
 ) {
-	const handleRollDice = (diceType:string, diceAmount:number = 1) => {
+	const handleRollDice = (diceType: string, diceAmount: number = 1) => {
 		submitRoll({
 			diceType,
 			diceAmount
 		});
 	};
-
+	console.log('Dice Module - rollOptions', rollOptions);
 	let diceSetType;
 	if (rollOptions.warhammerMode) {
 		diceSetType = WARHAMMER;

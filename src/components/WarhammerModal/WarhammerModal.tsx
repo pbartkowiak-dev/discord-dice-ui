@@ -2,81 +2,72 @@ import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import WarhammerModalForm from './WarhammerModalForm';
-import { request } from '../../utils/request';
-import getWarhammerRequestMsg from '../../utils/getWarhammerRequestMsg';
-import getWarhammerLocalMsg from '../../utils/getWarhammerLocalMsg';
-import rollDice from '../../utils/rollDice';
 import localStorageWarhammerSlModeManager from '../../utils/localStorageWarhammerSlModeManager';
 
-type WarhammerModalProps = {
-	userSettings: any
-	showModal: boolean
-	closeWarhammerModal: Function
-	showMsgModal: Function
-	warhammerSlMode: string
+interface WarhammerModalProps {
+	showModal: boolean;
+	closeWarhammerModal: () => void;
+	warhammerSlMode: string;
+	requestDiceRoll: Function
 }
 
+type WarhammerSlTypes =
+	| 'fastSL'
+	| 'darkHeresySL'
+	| 'warhammer4eSL'
+	| 'warhammer2eSL'
+
+interface WarhammerFormValues {
+	skillLevel: string;
+	warhammerSlMode: WarhammerSlTypes
+}
+
+
 function WarhammerModal({
-	userSettings,
 	showModal,
 	closeWarhammerModal,
-	showMsgModal,
-	warhammerSlMode
+	warhammerSlMode,
+	requestDiceRoll
 }: WarhammerModalProps
 ) {
-	const handleClose = () => {
-		closeWarhammerModal();
-	};
-
 	const initialValues = {
 		warhammerSlMode
 	};
 
-	const handleSubmit = (values:any) => {
-		const rollOptions = {
-			...values,
-			warhammerMode: true
-		};
-		const { warhammerSlMode } = rollOptions;
-		const result = rollDice({
+	const handleSubmit = (values: WarhammerFormValues) => {
+		console.log('warhammer form values', values);
+		requestDiceRoll({
 			diceType: 100,
-			rollOptions
+			...values
 		});
-		const requestMsg = getWarhammerRequestMsg(result, rollOptions, userSettings);
-		const localMsg = getWarhammerLocalMsg(result, rollOptions, userSettings);
 
-		showMsgModal(localMsg);
-		request(requestMsg);
-
-		localStorageWarhammerSlModeManager.save(warhammerSlMode);
+		localStorageWarhammerSlModeManager.save(values.warhammerSlMode);
 
 		closeWarhammerModal();
 	};
 
 	return (
-		<>
-			<Modal show={showModal} onHide={handleClose}>
-				<Modal.Header closeButton>
-					<Modal.Title>Warhammer Options</Modal.Title>
-				</Modal.Header>
-				<Modal.Body>
-					<WarhammerModalForm
-						onSubmit={values => handleSubmit(values)}
-						initialValues={initialValues}
-						/>
-				</Modal.Body>
-				<Modal.Footer>
-					<Button variant="secondary" onClick={handleClose}>
-						Cancel
-					</Button>
-					<Button
-						variant="success"
-						type="submit"
-						form="warhammer-mode-form">Roll!
-					</Button>
-				</Modal.Footer>
-			</Modal>
-		</>
+		<Modal show={showModal} onHide={closeWarhammerModal}>
+			<Modal.Header closeButton>
+				<Modal.Title>Warhammer Options</Modal.Title>
+			</Modal.Header>
+			<Modal.Body>
+				<WarhammerModalForm
+					onSubmit={values => handleSubmit(values)}
+					initialValues={initialValues}
+					/>
+			</Modal.Body>
+			<Modal.Footer>
+				<Button variant="secondary" onClick={closeWarhammerModal}>
+					Cancel
+				</Button>
+				<Button
+					variant="success"
+					type="submit"
+					form="warhammer-mode-form">Roll!
+				</Button>
+			</Modal.Footer>
+		</Modal>
 	);
 }
 

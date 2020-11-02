@@ -1,41 +1,39 @@
-import React, { useLayoutEffect } from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { saveWarhammerSlMode } from '../../actions';
-import { closeWarhammerModal, showMsgModal } from '../../actions/modals';
+import { closeWarhammerModal } from '../../actions/modals';
 import WarhammerModal from './WarhammerModal';
+import { requestDiceRoll } from '../../actions/roll.actions';
 import localStorageWarhammerSlModeManager from '../../utils/localStorageWarhammerSlModeManager';
 
-const mapStateToProps = (state:any) => {
+const mapStateToProps = (state: any) => {
 	return {
-		userSettings: state.userSettings,
 		warhammerSlMode: state.warhammerSlMode
 	};
 };
 
 const mapDispatchToProps = {
 	closeWarhammerModal,
-	showMsgModal,
-	saveWarhammerSlMode
+	saveWarhammerSlMode,
+	requestDiceRoll
 };
 
-type WarhammerModalContainerProps = {
-	userSettings: any
-	showModal: boolean
-	closeWarhammerModal: Function
-	showMsgModal: Function
-	saveWarhammerSlMode: Function
-	warhammerSlMode: string
+interface WarhammerModalContainerProps {
+	showModal: boolean;
+	closeWarhammerModal: () => void;
+	saveWarhammerSlMode: Function;
+	warhammerSlMode: string;
+	requestDiceRoll: Function;
 }
 
 function WarhammerModalContainer({
-	userSettings,
 	showModal,
 	closeWarhammerModal,
-	showMsgModal,
 	saveWarhammerSlMode,
-	warhammerSlMode
+	warhammerSlMode,
+	requestDiceRoll
 }:WarhammerModalContainerProps) {
-	useLayoutEffect(() => {
+	useEffect(() => {
 		const localStorageWarhammerSlMode = localStorageWarhammerSlModeManager.load();
 		if (localStorageWarhammerSlMode) {
 			saveWarhammerSlMode(localStorageWarhammerSlMode);
@@ -43,15 +41,12 @@ function WarhammerModalContainer({
 	}, [showModal, saveWarhammerSlMode]);
 
 	return (
-		<>
-			<WarhammerModal
-				userSettings={userSettings}
-				showModal={showModal}
-				closeWarhammerModal={closeWarhammerModal}
-				showMsgModal={showMsgModal}
-				warhammerSlMode={warhammerSlMode}
-			/>
-		</>
+		<WarhammerModal
+			closeWarhammerModal={closeWarhammerModal}
+			warhammerSlMode={warhammerSlMode}
+			requestDiceRoll={requestDiceRoll}
+			showModal={showModal}
+		/>
 	);
 
 }

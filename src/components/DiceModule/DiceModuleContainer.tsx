@@ -4,7 +4,9 @@ import { submitRoll } from '../../actions/roll.actions';
 import DiceModule from './DiceModule';
 
 function mapStateToProps(state:any) {
-	return {};
+	return {
+		diceModuleForm: state.form.diceModuleForm
+	};
 }
 
 const mapDispatchToProps = { submitRoll };
@@ -13,7 +15,8 @@ function DiceModuleContainer({
 	diceModuleForm,
 	submitRoll
 }:any ) {
-	// @TODO rollOPTIONS separater from form values preferences
+	// @TODO rollOPTIONS separate from form values preferences
+	// @TODO set default values
 	let rollOptions = {};
 	if (diceModuleForm && diceModuleForm.values) {
 		rollOptions = diceModuleForm.values;

@@ -10,7 +10,7 @@ const mapDispatchToProps = {
 };
 
 interface CoCModalContainerProps {
-	closeCoCModal: (event?: React.MouseEvent<HTMLElement>) => void;
+	closeCoCModal: () => void;
 	requestDiceRoll: Function;
 	showModal: boolean;
 }

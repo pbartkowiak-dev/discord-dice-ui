@@ -2,15 +2,13 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowAltCircleUp, faArrowAltCircleDown } from '@fortawesome/free-regular-svg-icons';
 import { faArrowAltCircleRight, faSkull, faSun } from '@fortawesome/free-solid-svg-icons';
-import joinAsBlocks from '../utils/joinAsBlocks';
-import CodeSpan from '../components/CodeSpan/CodeSpan';
-import { D6_CONAN, D20_CONAN_HL } from '../consts/conanConstants';
-import HitLocations from '../components/HitLocations/HitLocations';
-import getConanHitLocation from '../utils/getConanHitLocations';
-import styles from '../components/ResultsModal/ResultsModal.module.css';
-
-import { DICE_ROLLED, localMsgReady } from '../actions/roll.actions';
-import { formValues } from 'redux-form';
+import joinAsBlocks from '../../utils/joinAsBlocks';
+import CodeSpan from '../../components/CodeSpan/CodeSpan';
+import { D6_CONAN, D20_CONAN_HL } from '../../consts/conanConstants';
+import HitLocations from '../../components/HitLocations/HitLocations';
+import getConanHitLocation from '../../utils/getConanHitLocations';
+import styles from '../../components/ResultsModal/ResultsModal.module.css';
+import { DICE_ROLLED, localMsgReady } from '../../actions/roll.actions';
 
 const IconUp = <FontAwesomeIcon icon={faArrowAltCircleUp} />;
 const IconDown = <FontAwesomeIcon icon={faArrowAltCircleDown} />;

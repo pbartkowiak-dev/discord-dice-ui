@@ -6,6 +6,8 @@ export const DICE_ROLLED = 'DICE_ROLLED';
 export const LOCAL_MSG_READY = 'LOCAL_MSG_READY';
 export const REQUEST_MSG_READY = 'REQUEST_MSG_READY';
 export const COC_DICE_ROLLED = 'COC_DICE_ROLLED';
+export const WARHAMMER_DICE_ROLLED = 'WARHAMMER_DICE_ROLLED';
+export const CONAN_DICE_ROLLED = 'CONAN_DICE_ROLLED';
 
 export function submitRoll(payload: any) {
 	return {
@@ -31,6 +33,20 @@ export function diceRolled(payload: any) {
 export function cocDiceRolled(payload: any) {
 	return {
 		type: COC_DICE_ROLLED,
+		payload
+	}
+}
+
+export function warhammerDiceRolled(payload: any) {
+	return {
+		type: WARHAMMER_DICE_ROLLED,
+		payload
+	}
+}
+
+export function conanDiceRolled(payload: any) {
+	return {
+		type: CONAN_DICE_ROLLED,
 		payload
 	}
 }

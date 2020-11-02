@@ -1,8 +1,8 @@
-import getSuccessLevels from '../utils/getSuccessLevels';
-import getSuccessLevelString from '../utils/getSuccessLevelString';
-import { SUCCESS, FAILURE, getColor } from '../utils/getColor';
-import joinAsBlocks from '../utils/joinAsBlocks';
-import { COC_DICE_ROLLED, requestMsgReady  } from '../actions/roll.actions';
+import getSuccessLevels from '../../utils/getSuccessLevels';
+import getSuccessLevelString from '../../utils/getSuccessLevelString';
+import { SUCCESS, FAILURE, getColor } from '../../utils/getColor';
+import joinAsBlocks from '../../utils/joinAsBlocks';
+import { COC_DICE_ROLLED, requestMsgReady  } from '../../actions/roll.actions';
 
 type fieldEmbedded = {
 	name: string,
@@ -20,6 +20,8 @@ export type requestParams = {
 export default (store:any) => (next:any) => (action:any) => {
 	if (action.type === COC_DICE_ROLLED) {
 		console.log('COC_DICE_ROLLED - action', action);
+		const state = store.getState();
+		const { userSettings } = state;
 		const { payload: { result } } = action;
 		const { payload: { rollOptions } } = action;
 		const {
@@ -28,9 +30,6 @@ export default (store:any) => (next:any) => (action:any) => {
 			cocPenaltyResult,
 			skillLevel
 		} = result;
-
-		const state = store.getState();
-		const { userSettings } = state;
 		const username = userSettings.username || 'USERNAME_MISSING';
 		const fields = [];
 		const skillLevelString = skillLevel <= 9 ? `0${skillLevel}` : `${skillLevel}`;

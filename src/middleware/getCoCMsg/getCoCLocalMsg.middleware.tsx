@@ -1,9 +1,9 @@
 import React from 'react';
-import joinAsBlocks from '../utils/joinAsBlocks';
-import getSuccessLevels from '../utils/getSuccessLevels';
-import SuccessLevelLadder from '../components/SuccessLevelLadder/SuccessLevelLadder';
-import ResultVsSkillRow from '../components/ResultVsSkillRow/ResultVsSkillRow';
-import { COC_DICE_ROLLED, localMsgReady } from '../actions/roll.actions';
+import joinAsBlocks from '../../utils/joinAsBlocks';
+import getSuccessLevels from '../../utils/getSuccessLevels';
+import SuccessLevelLadder from '../../components/SuccessLevelLadder/SuccessLevelLadder';
+import ResultVsSkillRow from '../../components/ResultVsSkillRow/ResultVsSkillRow';
+import { COC_DICE_ROLLED, localMsgReady } from '../../actions/roll.actions';
 
 export default (store:any) => (next:any) => (action:any) => {
 	if (action.type === COC_DICE_ROLLED) {

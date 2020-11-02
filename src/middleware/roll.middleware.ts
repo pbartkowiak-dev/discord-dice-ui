@@ -1,11 +1,7 @@
-import { DICE_ROLL_REQUESTED, diceRolled, cocDiceRolled } from '../actions/roll.actions';
+import { DICE_ROLL_REQUESTED, diceRolled, cocDiceRolled, conanDiceRolled, warhammerDiceRolled } from '../actions/roll.actions';
 import { D6_CONAN } from '../consts/conanConstants';
 import getDieNumberVal from '../utils/getDieNumberVal';
 import getResultsArray from '../utils/getResultsArray';
-
-function resultsSorter(a:number, b:number) {
-	return a - b;
-}
 
 interface rollDiceProps {
 	diceType: number;
@@ -38,6 +34,7 @@ interface rollDiceResult {
 	cocTwoBonus?: boolean;
 	cocTwoPenalty?: boolean;
 	skillLevel?: number | undefined;
+
 
 	// Conan results
 	effects?: number | undefined;
@@ -116,7 +113,7 @@ const roll = (store:any) => (next:any) => (action:any) => {
 		}
 	
 		// Sort results
-		result.results = result.results.sort(resultsSorter);
+		result.results = result.results.sort((a:number, b:number) => a - b);
 	
 		result.totalWithModifier = result.results.reduce((a, b) => Number(a) + Number(b), Number(modifier));
 		result.totalWithoutModifier = result.totalWithModifier - Number(modifier);
@@ -178,14 +175,21 @@ const roll = (store:any) => (next:any) => (action:any) => {
 				}
 			}));
 		} else if (formValues.warhammerMode) {
-			// console.log('warhammer mode')
-			// store.dispatch(warhammerDiceRolled({
-			// 	result,
-			// 	rollOptions: {
-			// 		...action.payload,
-			//		...formValues
-			// 	}
-			// }));
+			store.dispatch(warhammerDiceRolled({
+				result,
+				rollOptions: {
+					...action.payload,
+					...formValues
+				}
+			}));
+		} else if (formValues.conanMode) {
+			store.dispatch(conanDiceRolled({
+				result,
+				rollOptions: {
+					...action.payload,
+					...formValues
+				}
+			}));
 		} else {
 			store.dispatch(diceRolled({
 				result,

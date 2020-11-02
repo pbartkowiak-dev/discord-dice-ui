@@ -3,10 +3,10 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import CoCModalForm from './CoCModalForm';
 
-type CoCModalProps = {
-	showModal: boolean,
-	closeCoCModal: (event?: React.MouseEvent<HTMLElement> ) => void,
-	requestDiceRoll: Function
+interface CoCModalProps {
+	showModal: boolean;
+	closeCoCModal: () => void;
+	requestDiceRoll: Function;
 }
 
 interface CoCFormValues {
@@ -22,7 +22,6 @@ function CoCModal({
 }: CoCModalProps
 ) {
 	const handleSubmit = (values: CoCFormValues) => {
-		console.log('values', values);
 		requestDiceRoll({
 			diceType: 100,
 			...values
