@@ -14,8 +14,10 @@ type modalsPropTypes = {
 	modalsState: modalsStateTypes
 }
 
-const mapStateToProps = (state:any) => {
-	return { modalsState: state.modalsState };
+const mapStateToProps = (state: any) => {
+	return {
+		modalsState: state.modalsState
+	};
 }
 
 function Modals({ modalsState }: modalsPropTypes

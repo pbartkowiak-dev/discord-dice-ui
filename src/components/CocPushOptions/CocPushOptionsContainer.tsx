@@ -2,18 +2,18 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { showMsgModal, hideMsg } from '../../actions/modals';
 import CoCPushOptions from './CocPushOptions';
-import { requestDiceRoll } from '../../actions/roll.actions';
+import { requestRoll } from '../../actions/roll.actions';
 
 const mapDispatchToProps = {
 	showMsgModal,
 	hideMsg,
-	requestDiceRoll
+	requestRoll
 };
 
 function CocPushOptionsContainer({
 	rollOptions ={},
 	finalDieResult,
-	requestDiceRoll,
+	requestRoll,
 	hideMsg,
 	canPush
 }:any) {
@@ -23,7 +23,7 @@ function CocPushOptionsContainer({
 		rollOptions.isPushed = true;
 		console.log('push roll - rollOptions', rollOptions);
 		setTimeout(() => {
-			requestDiceRoll({
+			requestRoll({
 				diceType: 100,
 				...rollOptions
 			});

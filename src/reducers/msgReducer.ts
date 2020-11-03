@@ -1,16 +1,14 @@
 import { CLOSE_MSG_MODAL } from '../actions/modals';
 import { LOCAL_MSG_READY } from '../actions/roll.actions';
 
-function msgReducer(
-	state = {
-		showMsg: false,
-		msgParams: {}
-	},
-	action: any
-) {
+const initialState = {
+	showMsg: false,
+	msgParams: {}
+};
+
+export default (state = initialState, action: any) => {
 	switch (action.type) {
 		case LOCAL_MSG_READY:
-		console.log('msgReducer', action);
 			return {
 				...state,
 				msgParams: action.payload,
@@ -24,6 +22,4 @@ function msgReducer(
 	}
 	return state;
 
-}
-
-export default msgReducer;
+};

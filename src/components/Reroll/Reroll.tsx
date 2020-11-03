@@ -4,21 +4,28 @@ import classNames from 'classnames/bind';
 import Button from 'react-bootstrap/Button';
 import CodeSpan from '../CodeSpan/CodeSpan';
 import { D6_CONAN, D20_CONAN_TEST } from '../../consts/conanConstants';
+import { SelectedDiceType } from '../../reducers/diceSelectedReducer';
 import styles from './Reroll.module.css';
 
-function Reroll({ handleReroll, rollOptions, results }:any) {
-	const cx = classNames.bind(styles);
-	const { diceTypeRaw } = rollOptions;
-	const [ itemIndexes, setItemIndexes ] = useState([]);
-	const isSelectToReroll = (diceTypeRaw === D6_CONAN || diceTypeRaw === D20_CONAN_TEST);
+interface RerollPropTypes {
+	handleReroll: (itemsToStay: Array<number>) => void;
+	results: Array<any>;
+	diceSelected: SelectedDiceType;
+}
 
-	const addItemIndex = (itemIndex:number) => {
+function Reroll({ handleReroll, results, diceSelected }: RerollPropTypes) {
+	const cx = classNames.bind(styles);
+	const { diceType } = diceSelected;
+	const [ itemIndexes, setItemIndexes ] = useState([]);
+	const isSelectToReroll = (diceType === D6_CONAN || diceType === D20_CONAN_TEST);
+
+	const addItemIndex = (itemIndex: number) => {
 		if (itemIndexes.indexOf(itemIndex) === -1) {
 			// add item index
 			setItemIndexes([ ...itemIndexes, itemIndex ]);
 		} else {
 			// remove item index
-			setItemIndexes(itemIndexes.filter((i:number) => i !== itemIndex));
+			setItemIndexes(itemIndexes.filter((i: number) => i !== itemIndex));
 		}
 	};
 
@@ -26,7 +33,7 @@ function Reroll({ handleReroll, rollOptions, results }:any) {
 	
 	if (isSelectToReroll && results.length) {
 		const resultsElement = results
-			.map((result:number, index:number) => {
+			.map((result: number, index: number) => {
 				if (index === results.length - 1) {
 					return <span key={index} onClick={ () => addItemIndex(index) }>
 						<CodeSpan className={cx({
@@ -55,24 +62,22 @@ function Reroll({ handleReroll, rollOptions, results }:any) {
 		let itemsToStay = [];
 		if (itemIndexes && itemIndexes.length) {
 			// get items from indexes
-			itemsToStay = results.filter((_:number, i:number) => itemIndexes.indexOf(i) === -1);
+			itemsToStay = results.filter((_: number, i: number) => itemIndexes.indexOf(i) === -1);
 		}
 		handleReroll(itemsToStay);
 	};
 
 	return (
-		<>
-			<div className={styles.container}>
-				{ selectToRerollElement }
-				<div className={styles.row}>
-					<Button
-						disabled={ (isSelectToReroll && !itemIndexes.length) }
-						variant="outline-primary"
-						onClick={handleClick}
-					>Reroll</Button>
-				</div>
+		<div className={styles.container}>
+			{ selectToRerollElement }
+			<div className={styles.row}>
+				<Button
+					disabled={ (isSelectToReroll && !itemIndexes.length) }
+					variant="outline-primary"
+					onClick={handleClick}
+				>Reroll</Button>
 			</div>
-		</>
+		</div>
 	);
 }
 

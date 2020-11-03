@@ -3,7 +3,7 @@ import { D100_SL } from '../consts/warhammerConstants';
 import {  D100 } from '../consts/diceConstants';
 import { openWarhammerModal, openCoCModal, openConanModal, openModifierModal } from '../actions/modals';
 import { storeSelectedDice } from '../actions';
-import { requestDiceRoll, ROLL_SUBMITTED } from '../actions/roll.actions';
+import { requestRoll, ROLL_SUBMITTED } from '../actions/roll.actions';
 
 const handleRoll = (store:any) => (next:any) => (action:any) => {
 	if (action.type === ROLL_SUBMITTED) {
@@ -20,7 +20,6 @@ const handleRoll = (store:any) => (next:any) => (action:any) => {
 				diceAmount
 			}));
 
-			console.log('diceType, diceAmount', diceType, 'x', diceAmount);
 
 			if (formValues.cocMode && diceType === D100) {
 				store.dispatch(openCoCModal());
@@ -34,14 +33,10 @@ const handleRoll = (store:any) => (next:any) => (action:any) => {
 			} else if (formValues.useModifier) {
 				store.dispatch(openModifierModal());
 			} else {
-
-				formValues.rerolledTimes = 0;
-		
-				store.dispatch(requestDiceRoll({
+				store.dispatch(requestRoll({
 					diceType,
 					diceAmount,
-					modifier: 0,
-					rerolledTimes: 0
+					modifier: 0
 				}));
 			}
 		}

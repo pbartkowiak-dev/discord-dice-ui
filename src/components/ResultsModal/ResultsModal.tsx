@@ -7,6 +7,7 @@ import RerollContainer from '../Reroll/RerollContainer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDiceD20 } from '@fortawesome/free-solid-svg-icons';
 import { D6_CONAN, D20_CONAN_TEST } from '../../consts/conanConstants';
+import { SelectedDiceType } from '../../reducers/diceSelectedReducer';
 
 type LocalMsgParamsType = {
 	title: any,
@@ -22,13 +23,19 @@ type msgDataType = {
 	msgParams: LocalMsgParamsType
 }
 
-type ResultsModalProps = {
-	hideMsg: Function
-	msgData: msgDataType
-	showModal: boolean
+interface ResultsModalProps {
+	hideMsg: () => void;
+	msgData: msgDataType;
+	showModal: boolean;
+	diceSelected: SelectedDiceType;
 }
 
-function ResultsModal({ hideMsg, msgData, showModal }:ResultsModalProps) {
+function ResultsModal({
+	hideMsg,
+	msgData,
+	showModal,
+	diceSelected
+}: ResultsModalProps) {
 	console.log('ResultsModal - msgData', msgData);
 	const { msgParams } = msgData;
 	const {
@@ -59,7 +66,7 @@ function ResultsModal({ hideMsg, msgData, showModal }:ResultsModalProps) {
 	
 	const headerClass = isSuccess === false 
 		? `${styles.resultsModalHeader} ${styles.isFailure}`
-		: `${styles.resultsModalHeader}`;	
+		: `${styles.resultsModalHeader}`;
 
 	console.log('ResultsModal - rollOptions', rollOptions);
 
@@ -81,8 +88,8 @@ function ResultsModal({ hideMsg, msgData, showModal }:ResultsModalProps) {
 
 	if (
 		(rollOptions.warhammerMode && isSuccess === false) ||
-		rollOptions.diceTypeRaw === D6_CONAN ||
-		rollOptions.diceTypeRaw === D20_CONAN_TEST
+		diceSelected.diceType === D6_CONAN ||
+		diceSelected.diceType === D20_CONAN_TEST
 	) {
 		rerollElement = (
 			<RerollContainer
@@ -99,8 +106,7 @@ function ResultsModal({ hideMsg, msgData, showModal }:ResultsModalProps) {
 		<>
 			<Modal
 				show={showModal}
-				dialogClassName="test"
-			 	onHide={ () => hideMsg() }
+			 	onHide={hideMsg}
 			>
 				<Modal.Header closeButton className={headerClass}>
 					<div>
@@ -119,7 +125,7 @@ function ResultsModal({ hideMsg, msgData, showModal }:ResultsModalProps) {
 				<Button
 					block
 					variant="outline-secondary"
-					onClick={() => hideMsg()}>Close</Button>
+					onClick={hideMsg}>Close</Button>
 				</Modal.Footer>
 			</Modal>
 		</>

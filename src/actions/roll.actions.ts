@@ -8,6 +8,7 @@ export const REQUEST_MSG_READY = 'REQUEST_MSG_READY';
 export const COC_DICE_ROLLED = 'COC_DICE_ROLLED';
 export const WARHAMMER_DICE_ROLLED = 'WARHAMMER_DICE_ROLLED';
 export const CONAN_DICE_ROLLED = 'CONAN_DICE_ROLLED';
+export const REROLL_REQUESTED = 'REROLL_REQUESTED';
 
 export function submitRoll(payload: any) {
 	return {
@@ -16,9 +17,16 @@ export function submitRoll(payload: any) {
 	};
 }
 
-export function requestDiceRoll(payload: any ) {
+export function requestRoll(payload: any ) {
 	return {
 		type: DICE_ROLL_REQUESTED,
+		payload
+	};
+}
+
+export function requestReroll(payload: any ) {
+	return {
+		type: REROLL_REQUESTED,
 		payload
 	};
 }

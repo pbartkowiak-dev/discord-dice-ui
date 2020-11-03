@@ -35,16 +35,17 @@ const getLocalMsg = (store:any) => (next:any) => (action:any) => {
 			highest,
 			lowest,
 			dmg,
-			effects
+			effects,
+			diceTypeNum
 		} = result;
 		const hasMultipleDice = diceAmount > 1;
 		const rolledWord = hasMultipleDice ? 'Results' : 'Result';
-		const rolled = `${diceAmount}d${diceType}`;
+		const rolled = `${diceAmount}d${diceTypeNum}`;
 		const resultsJoined = joinAsBlocks(results);
 		const modifierWithSymbol = <CodeSpan>{modSymbol}{Math.abs(modifier)}</CodeSpan>;
 		const fields = [];
-		const isCombatDie = rollOptions.diceTypeRaw === D6_CONAN;
-		const isConanHitLocationDie = rollOptions.diceTypeRaw === D20_CONAN_HL;
+		const isCombatDie = rollOptions.diceType === D6_CONAN;
+		const isConanHitLocationDie = rollOptions.diceType === D20_CONAN_HL;
 		let title;
 
 		if (isCombatDie) {

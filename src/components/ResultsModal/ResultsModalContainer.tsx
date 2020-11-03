@@ -2,30 +2,37 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { hideMsg } from '../../actions/modals';
 import ResultsModal from './ResultsModal';
+import { SelectedDiceType } from '../../reducers/diceSelectedReducer';
 
-const mapStateToProps = (state:any) => {
+const mapStateToProps = ({ msg, diceSelected }:any) => {
 	return {
-		msgData: state.msg
+		msgData: msg,
+		diceSelected
 	};
 };
 
-const mapDispatchToProps = { hideMsg };
+const mapDispatchToProps = {
+	hideMsg
+};
 
-type ResultsModalContainerProps = {
-	hideMsg:Function
-	msgData:any
+interface ResultsModalContainerProps {
+	hideMsg: () => void;
+	msgData: any;
+	diceSelected: SelectedDiceType;
 }
 
 function ResultsModalContainer({
 	hideMsg,
-	msgData
-}:ResultsModalContainerProps) {
+	msgData,
+	diceSelected
+}: ResultsModalContainerProps) {
 	return (
 		<>
 			<ResultsModal
 				hideMsg={hideMsg}
 				msgData={msgData}
 				showModal={msgData.showMsg}
+				diceSelected={diceSelected}
 			/>
 		</>
 	);

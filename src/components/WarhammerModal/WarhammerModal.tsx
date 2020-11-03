@@ -3,12 +3,13 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import WarhammerModalForm from './WarhammerModalForm';
 import localStorageWarhammerSlModeManager from '../../utils/localStorageWarhammerSlModeManager';
+import { D100_SL } from '../../consts/warhammerConstants';
 
 interface WarhammerModalProps {
 	showModal: boolean;
 	closeWarhammerModal: () => void;
 	warhammerSlMode: string;
-	requestDiceRoll: Function
+	requestRoll: Function
 }
 
 type WarhammerSlTypes =
@@ -27,7 +28,7 @@ function WarhammerModal({
 	showModal,
 	closeWarhammerModal,
 	warhammerSlMode,
-	requestDiceRoll
+	requestRoll
 }: WarhammerModalProps
 ) {
 	const initialValues = {
@@ -36,8 +37,8 @@ function WarhammerModal({
 
 	const handleSubmit = (values: WarhammerFormValues) => {
 		console.log('warhammer form values', values);
-		requestDiceRoll({
-			diceType: 100,
+		requestRoll({
+			diceType: D100_SL,
 			...values
 		});
 

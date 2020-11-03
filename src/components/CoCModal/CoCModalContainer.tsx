@@ -1,29 +1,29 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { closeCoCModal } from '../../actions/modals';
-import { requestDiceRoll } from '../../actions/roll.actions';
+import { requestRoll } from '../../actions/roll.actions';
 import CoCModal from './CoCModal';
 
 const mapDispatchToProps = {
 	closeCoCModal,
-	requestDiceRoll
+	requestRoll
 };
 
 interface CoCModalContainerProps {
 	closeCoCModal: () => void;
-	requestDiceRoll: Function;
+	requestRoll: Function;
 	showModal: boolean;
 }
 
 function CoCModalContainer({
 	closeCoCModal,
-	requestDiceRoll,
+	requestRoll,
 	showModal
 }:CoCModalContainerProps) {
 	return (
 		<CoCModal
 			closeCoCModal={closeCoCModal}
-			requestDiceRoll={requestDiceRoll}
+			requestRoll={requestRoll}
 			showModal={showModal}
 		/>
 	);

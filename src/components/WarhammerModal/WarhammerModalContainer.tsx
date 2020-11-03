@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { saveWarhammerSlMode } from '../../actions';
 import { closeWarhammerModal } from '../../actions/modals';
 import WarhammerModal from './WarhammerModal';
-import { requestDiceRoll } from '../../actions/roll.actions';
+import { requestRoll } from '../../actions/roll.actions';
 import localStorageWarhammerSlModeManager from '../../utils/localStorageWarhammerSlModeManager';
 
 const mapStateToProps = (state: any) => {
@@ -15,7 +15,7 @@ const mapStateToProps = (state: any) => {
 const mapDispatchToProps = {
 	closeWarhammerModal,
 	saveWarhammerSlMode,
-	requestDiceRoll
+	requestRoll
 };
 
 interface WarhammerModalContainerProps {
@@ -23,7 +23,7 @@ interface WarhammerModalContainerProps {
 	closeWarhammerModal: () => void;
 	saveWarhammerSlMode: Function;
 	warhammerSlMode: string;
-	requestDiceRoll: Function;
+	requestRoll: Function;
 }
 
 function WarhammerModalContainer({
@@ -31,7 +31,7 @@ function WarhammerModalContainer({
 	closeWarhammerModal,
 	saveWarhammerSlMode,
 	warhammerSlMode,
-	requestDiceRoll
+	requestRoll
 }:WarhammerModalContainerProps) {
 	useEffect(() => {
 		const localStorageWarhammerSlMode = localStorageWarhammerSlModeManager.load();
@@ -44,7 +44,7 @@ function WarhammerModalContainer({
 		<WarhammerModal
 			closeWarhammerModal={closeWarhammerModal}
 			warhammerSlMode={warhammerSlMode}
-			requestDiceRoll={requestDiceRoll}
+			requestRoll={requestRoll}
 			showModal={showModal}
 		/>
 	);

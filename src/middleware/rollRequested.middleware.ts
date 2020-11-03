@@ -1,5 +1,7 @@
 import { DICE_ROLL_REQUESTED, diceRolled, cocDiceRolled, conanDiceRolled, warhammerDiceRolled } from '../actions/roll.actions';
 import { D6_CONAN } from '../consts/conanConstants';
+import { D100 } from '../consts/diceConstants';
+import { D100_SL } from '../consts/warhammerConstants';
 import getDieNumberVal from '../utils/getDieNumberVal';
 import getResultsArray from '../utils/getResultsArray';
 
@@ -166,7 +168,9 @@ const roll = (store:any) => (next:any) => (action:any) => {
 			result.modSymbol = '-';
 		}
 
-		if (formValues.cocMode) {
+		debugger
+
+		if (formValues.cocMode && diceType === D100) {
 			store.dispatch(cocDiceRolled({
 				result,
 				rollOptions: {
@@ -174,7 +178,7 @@ const roll = (store:any) => (next:any) => (action:any) => {
 					...formValues
 				}
 			}));
-		} else if (formValues.warhammerMode) {
+		} else if (formValues.warhammerMode && diceType === D100_SL) {
 			store.dispatch(warhammerDiceRolled({
 				result,
 				rollOptions: {

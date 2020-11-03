@@ -6,7 +6,7 @@ import CoCModalForm from './CoCModalForm';
 interface CoCModalProps {
 	showModal: boolean;
 	closeCoCModal: () => void;
-	requestDiceRoll: Function;
+	requestRoll: Function;
 }
 
 interface CoCFormValues {
@@ -18,11 +18,11 @@ interface CoCFormValues {
 function CoCModal({
 	showModal,
 	closeCoCModal,
-	requestDiceRoll
+	requestRoll
 }: CoCModalProps
 ) {
 	const handleSubmit = (values: CoCFormValues) => {
-		requestDiceRoll({
+		requestRoll({
 			diceType: 100,
 			...values
 		});
