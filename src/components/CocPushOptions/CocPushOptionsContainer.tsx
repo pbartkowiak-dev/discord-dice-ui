@@ -21,6 +21,9 @@ function CocPushOptionsContainer({
 	const handlePushRoll = () => {
 		hideMsg();
 		rollOptions.isPushed = true;
+		// @TODO flaten rolloptions
+		// @TODO Change diceType
+		// @TODO does it even?
 		console.log('push roll - rollOptions', rollOptions);
 		setTimeout(() => {
 			requestRoll({

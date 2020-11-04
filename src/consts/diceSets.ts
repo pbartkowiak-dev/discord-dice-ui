@@ -21,6 +21,16 @@ export const classicSet = [
 	D4
 ];
 
+export const CoCSet = [
+	D100_SL,
+	D20,
+	D12,
+	D10,
+	D8,
+	D6,
+	D4
+]
+
 export const warhammerSet = [
 	D100_SL,
 	D100,

@@ -1,6 +1,5 @@
 import { D6_CONAN, D20_CONAN_TEST, D20_CONAN_HL } from '../consts/conanConstants';
 import { D100_SL } from '../consts/warhammerConstants';
-import {  D100 } from '../consts/diceConstants';
 import { openWarhammerModal, openCoCModal, openConanModal, openModifierModal } from '../actions/modals';
 import { storeSelectedDice } from '../actions';
 import { requestRoll, ROLL_SUBMITTED } from '../actions/roll.actions';
@@ -21,9 +20,9 @@ const handleRoll = (store:any) => (next:any) => (action:any) => {
 			}));
 
 
-			if (formValues.cocMode && diceType === D100) {
+			if (formValues.cocMode && diceType === D100_SL) {
 				store.dispatch(openCoCModal());
-			} else if (diceType === D100_SL) {
+			} else if (formValues.warhammerMode && diceType === D100_SL) {
 				openWarhammerModal();
 				store.dispatch(openWarhammerModal())
 			} else if (diceType === D20_CONAN_TEST) {

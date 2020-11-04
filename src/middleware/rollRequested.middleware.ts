@@ -1,6 +1,5 @@
 import { DICE_ROLL_REQUESTED, diceRolled, cocDiceRolled, conanDiceRolled, warhammerDiceRolled } from '../actions/roll.actions';
 import { D6_CONAN } from '../consts/conanConstants';
-import { D100 } from '../consts/diceConstants';
 import { D100_SL } from '../consts/warhammerConstants';
 import getDieNumberVal from '../utils/getDieNumberVal';
 import getResultsArray from '../utils/getResultsArray';
@@ -68,7 +67,6 @@ const roll = (store:any) => (next:any) => (action:any) => {
 			fortune
 		} = rollOptions;
 
-		console.log('diceType', diceType);
 		const diceTypeNum = getDieNumberVal(diceType);
 		const isCombatDie = diceType === D6_CONAN;
 		const keepUnits = (cocBonus || cocTwoBonus || cocPenalty || cocTwoPenalty);
@@ -168,9 +166,7 @@ const roll = (store:any) => (next:any) => (action:any) => {
 			result.modSymbol = '-';
 		}
 
-		debugger
-
-		if (formValues.cocMode && diceType === D100) {
+		if (formValues.cocMode && diceType === D100_SL) {
 			store.dispatch(cocDiceRolled({
 				result,
 				rollOptions: {
@@ -203,10 +199,8 @@ const roll = (store:any) => (next:any) => (action:any) => {
 				}
 			}));
 		}
-
-	} else {
-		next(action);
 	}
+	next(action);
 };
 
 export default roll;

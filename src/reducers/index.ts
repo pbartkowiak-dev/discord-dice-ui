@@ -5,7 +5,7 @@ import warhammerSlModeReducer from './warhammerSlModeReducer';
 import modalsReducer from './modalsReducer';
 import msgReducer from './msgReducer';
 import { reducer as formReducer } from 'redux-form'
-import rollReducer from './rollReducer';
+import lastRollOptions from './lastRollOptionsReducer';
 
 export default combineReducers({
 	userSettings: userSettingsReducer,
@@ -14,6 +14,5 @@ export default combineReducers({
 	modalsState: modalsReducer,
 	form: formReducer,
 	msg: msgReducer,
-
-	roll: rollReducer
+	lastRollOptions
 });

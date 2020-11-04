@@ -2,10 +2,11 @@ import React from 'react';
 import './DiceModule.css';
 import Dice from './Dice';
 import DiceModuleOptions from './DiceModuleOptions';
-import getDiceSet from '../../utils/getDiceSet';
+import getDiceSet, { SetTypes } from '../../utils/getDiceSet';
 import { CONAN } from '../../consts/conanConstants';
 import { WARHAMMER } from '../../consts/warhammerConstants';
 import { CLASSIC } from '../../consts/diceConstants';
+import { COC } from '../../consts/CoCConstants';
 
 interface DiceModuleProps {
 	rollOptions: any;
@@ -15,7 +16,7 @@ interface DiceModuleProps {
 function DiceModule ({
 	rollOptions,
 	submitRoll
-}:DiceModuleProps
+}: DiceModuleProps
 ) {
 	const handleRollDice = (diceType: string, diceAmount: number = 1) => {
 		submitRoll({
@@ -24,26 +25,25 @@ function DiceModule ({
 		});
 	};
 	console.log('Dice Module - rollOptions', rollOptions);
-	let diceSetType;
+	let diceSetType: SetTypes;
 	if (rollOptions.warhammerMode) {
 		diceSetType = WARHAMMER;
 	} else if(rollOptions.conanMode) {
 		diceSetType = CONAN;
+	} else if (rollOptions.cocMode) {
+		diceSetType = COC;
 	} else {
 		diceSetType = CLASSIC;
 	}
 
 	const diceSet = getDiceSet(diceSetType);
-	const diceSetElement = diceSet.map((diceType:any)  => {
-		return (
-			<Dice
-				key={diceType}
-				diceType={diceType}
-				handleRollDice={handleRollDice}
-				rollOptions={rollOptions}
-			/>
-		);
-	});
+	const diceSetElement = diceSet.map((diceType: string)  => (
+		<Dice
+			key={diceType}
+			diceType={diceType}
+			handleRollDice={handleRollDice}
+		/>
+	));
 
 	return (
 		<div className="dice-module-container">
