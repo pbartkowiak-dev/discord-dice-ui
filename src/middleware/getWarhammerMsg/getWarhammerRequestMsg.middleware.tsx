@@ -24,6 +24,7 @@ export default (store:any) => (next:any) => (action:any) => {
 	if (action.type === WARHAMMER_DICE_ROLLED) {
 		console.log('WARHAMMER_DICE_ROLLED - action', action);
 		const state = store.getState();
+		const { rerollCount } = state;
 		const { userSettings } = state;
 		const { payload: { result } } = action;
 		const { payload: { rollOptions } } = action;
@@ -69,12 +70,12 @@ export default (store:any) => (next:any) => (action:any) => {
 			description += '\nRolled **Double**.';
 		}
 	
-		if (rollOptions.rerolledTimes) {
-			const timesWord = rollOptions.rerolledTimes === 1 ? 'time' : 'times';
+		if (rerollCount) {
+			const timesWord = rerollCount === 1 ? 'time' : 'times';
 	
 			fields.push({
 				name: `:game_die: Rerolled`,
-				value: `Rerolled \`${rollOptions.rerolledTimes}\` ${timesWord}.`
+				value: `Rerolled \`${rerollCount}\` ${timesWord}.`
 			});
 		}
 	

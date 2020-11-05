@@ -1,6 +1,4 @@
-import { REROLL_REQUESTED, requestRoll } from '../actions/roll.actions';
-import { D6_CONAN, D20_CONAN } from '../consts/conanConstants';
-import { D100_SL } from '../consts/warhammerConstants';
+import { REROLL_REQUESTED, requestRoll, updateRollCounter } from '../actions/roll.actions';
 
 const rerollRequested = (store:any) => (next:any) => (action:any) => {
 	if (action.type === REROLL_REQUESTED) {
@@ -10,7 +8,9 @@ const rerollRequested = (store:any) => (next:any) => (action:any) => {
 		const formValues = diceModuleForm?.values || {};
 		const { lastRollOptions } = state;
 
+		store.dispatch(updateRollCounter());
 
+		console.log('REROLL_REQUESTED middleware');
 		store.dispatch(requestRoll({
 			...lastRollOptions,
 			itemsToStay

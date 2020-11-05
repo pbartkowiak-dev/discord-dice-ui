@@ -14,9 +14,10 @@ import { WARHAMMER_DICE_ROLLED, localMsgReady } from '../../actions/roll.actions
 export default (store:any) => (next:any) => (action:any) => {
 	if (action.type === WARHAMMER_DICE_ROLLED) {
 		console.log('WARHAMMER_DICE_ROLLED - action', action);
+		const state = store.getState();
+		const { rerollCount } = state;
 		const { payload: { result } } = action;
 		const { payload: { rollOptions } } = action;
-
 		const cx = classNames.bind(styles);
 		const {
 			results,
@@ -83,10 +84,10 @@ export default (store:any) => (next:any) => (action:any) => {
 				<div className={styles.generalResult}>Double</div>
 			);
 		}
-		if (rollOptions.rerolledTimes) {
-			const timesWord = rollOptions.rerolledTimes === 1 ? 'time' : 'times';
+		if (rerollCount) {
+			const timesWord = rerollCount === 1 ? 'time' : 'times';
 			fields.push(
-				<div className={styles.generalResult}>Rerolled <CodeSpan>{rollOptions.rerolledTimes}</CodeSpan> {timesWord}</div>
+				<div className={styles.generalResult}>Rerolled <CodeSpan>{rerollCount}</CodeSpan> {timesWord}</div>
 			);
 		}
 	

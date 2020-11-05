@@ -20,6 +20,7 @@ const getLocalMsg = (store:any) => (next:any) => (action:any) => {
 	if (action.type === DICE_ROLLED) {
 		const state = store.getState();
 		const { form : { diceModuleForm } } = state;
+		const { rerollCount } = state;
 		const formValues = diceModuleForm?.values || {};
 
 		const { payload } = action;
@@ -27,7 +28,6 @@ const getLocalMsg = (store:any) => (next:any) => (action:any) => {
 		const {
 			results,
 			diceAmount,
-			diceType,
 			modifier,
 			modSymbol,
 			totalWithoutModifier,
@@ -47,6 +47,8 @@ const getLocalMsg = (store:any) => (next:any) => (action:any) => {
 		const isCombatDie = rollOptions.diceType === D6_CONAN;
 		const isConanHitLocationDie = rollOptions.diceType === D20_CONAN_HL;
 		let title;
+
+		console.log('rerollCount', rerollCount);
 
 		if (isCombatDie) {
 			title = <>You rolled <CodeSpan>{rolled}</CodeSpan>.</>;
@@ -82,10 +84,10 @@ const getLocalMsg = (store:any) => (next:any) => (action:any) => {
 			);
 		}
 	
-		if (rollOptions.rerolledTimes) {
-			const timesWord = rollOptions.rerolledTimes === 1 ? 'time' : 'times';
+		if (rerollCount) {
+			const timesWord = rerollCount === 1 ? 'time' : 'times';
 			fields.push(
-				<div className={`${styles.generalResult}`}>Rerolled <CodeSpan>{rollOptions.rerolledTimes}</CodeSpan> {timesWord}</div>
+				<div className={`${styles.generalResult}`}>Rerolled <CodeSpan>{rerollCount}</CodeSpan> {timesWord}</div>
 			);
 		}
 	

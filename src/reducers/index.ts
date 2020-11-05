@@ -1,18 +1,20 @@
 import { combineReducers } from 'redux';
-import userSettingsReducer from './userSettingsReducer';
-import diceSelectedReducer from './diceSelectedReducer';
-import warhammerSlModeReducer from './warhammerSlModeReducer';
-import modalsReducer from './modalsReducer';
-import msgReducer from './msgReducer';
+import userSettings from './userSettingsReducer';
+import diceSelected from './diceSelectedReducer';
+import warhammerSlMode from './warhammerSlModeReducer';
+import modalsState from './modalsReducer';
+import msg from './msgReducer';
 import { reducer as formReducer } from 'redux-form'
 import lastRollOptions from './lastRollOptionsReducer';
+import rerollCount from './rerollCountReducer';
 
 export default combineReducers({
-	userSettings: userSettingsReducer,
-	diceSelected: diceSelectedReducer,
-	warhammerSlMode: warhammerSlModeReducer,
-	modalsState: modalsReducer,
+	userSettings,
+	diceSelected,
+	warhammerSlMode,
+	modalsState,
 	form: formReducer,
-	msg: msgReducer,
-	lastRollOptions
+	msg,
+	lastRollOptions,
+	rerollCount
 });

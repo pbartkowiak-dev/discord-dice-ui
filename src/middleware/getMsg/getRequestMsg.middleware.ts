@@ -8,6 +8,7 @@ export default (store:any) => (next:any) => (action:any) => {
 	if (action.type === DICE_ROLLED) {
 		const state = store.getState();
 		const { userSettings } = state;
+		const { rerollCount } = state;
 		const { payload } = action;
 		const { result, rollOptions } = payload;
 		const {
@@ -39,9 +40,9 @@ export default (store:any) => (next:any) => (action:any) => {
 			description = `**Modifier**: \`${modSymbol}${Math.abs(modifier)}\`.`;
 		}
 	
-		if (rollOptions.rerolledTimes) {
-			const timesWord = rollOptions.rerolledTimes === 1 ? 'time' : 'times';
-			description += `\nRerolled \`${rollOptions.rerolledTimes}\` ${timesWord}.`;
+		if (rerollCount) {
+			const timesWord = rerollCount === 1 ? 'time' : 'times';
+			description += `\nRerolled \`${rerollCount}\` ${timesWord}.`;
 		}
 	
 		if ((hasMultipleDice || modifier) && !isCombatDie) {

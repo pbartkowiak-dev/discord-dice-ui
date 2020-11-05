@@ -36,19 +36,20 @@ interface rollDiceResult {
 	cocTwoPenalty?: boolean;
 	skillLevel?: number | undefined;
 
-
 	// Conan results
 	effects?: number | undefined;
 	dmg?: number | undefined;
 	assistanceDiceResults?: Array<number>;
 }
 
-const roll = (store:any) => (next:any) => (action:any) => {
+const roll = (store: any) => (next: any) => (action: any) => {
 	if (action.type === DICE_ROLL_REQUESTED) {
 		const state = store.getState();
 		const { form : { diceModuleForm } } = state;
 		const formValues = diceModuleForm?.values || {};
+
 		console.log('DICE_ROLL_REQUESTED', action.payload, diceModuleForm);
+		console.log('REROLL_REQUESTED - DICE_ROLL_REQUESTED - rerollCount', store.rerollCount);
 
 		let {
 			diceType,
@@ -113,7 +114,7 @@ const roll = (store:any) => (next:any) => (action:any) => {
 		}
 	
 		// Sort results
-		result.results = result.results.sort((a:number, b:number) => a - b);
+		result.results = result.results.sort((a: number, b: number) => a - b);
 	
 		result.totalWithModifier = result.results.reduce((a, b) => Number(a) + Number(b), Number(modifier));
 		result.totalWithoutModifier = result.totalWithModifier - Number(modifier);
