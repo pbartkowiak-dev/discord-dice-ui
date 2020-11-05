@@ -68,8 +68,6 @@ function ResultsModal({
 		? `${styles.resultsModalHeader} ${styles.isFailure}`
 		: `${styles.resultsModalHeader}`;
 
-	console.log('ResultsModal - rollOptions', rollOptions);
-
 	if (rollOptions.cocMode) {
 		const canPush = isSuccess === false && !rollOptions.isPushed;
 		if (canPush) {

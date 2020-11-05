@@ -10,6 +10,7 @@ export const WARHAMMER_DICE_ROLLED = 'WARHAMMER_DICE_ROLLED';
 export const CONAN_DICE_ROLLED = 'CONAN_DICE_ROLLED';
 export const REROLL_REQUESTED = 'REROLL_REQUESTED';
 export const ROLL_COUNTER_UPDATED = 'ROLL_COUNTER_UPDATED';
+export const ROLL_COUNTER_RESET = 'ROLL_COUNTER_RESET';
 
 export function submitRoll(payload: any) {
 	return {
@@ -77,5 +78,11 @@ export function requestMsgReady(payload: any) {
 export function updateRollCounter() {
 	return {
 		type: ROLL_COUNTER_UPDATED
+	};
+}
+
+export function resetRollCounter() {
+	return {
+		type: ROLL_COUNTER_RESET
 	};
 }
