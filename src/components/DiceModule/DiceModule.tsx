@@ -24,7 +24,7 @@ function DiceModule ({
 			diceAmount
 		});
 	};
-	console.log('Dice Module - rollOptions', rollOptions);
+
 	let diceSetType: SetTypes;
 	if (rollOptions.warhammerMode) {
 		diceSetType = WARHAMMER;

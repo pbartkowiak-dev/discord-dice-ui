@@ -1,52 +1,37 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { closeModifierModal, showMsgModal } from '../../actions/modals';
+import { requestRoll } from '../../actions/roll.actions';
 import ModifierModal from './ModifierModal';
+import { ModifierModalPropTypes } from './ModifierModalTypes';
 
-const mapStateToProps = (state:any) => {
+const mapStateToProps = (state: any) => {
+	console.log('state', state)
 	return {
-		selectedDice: state.selectedDice,
-		userSettings: state.userSettings,
-		diceModuleForm: state.form.diceModuleForm
+		diceSelected: state.diceSelected
 	};
 };
 
-const mapDispatchToProps = { closeModifierModal, showMsgModal };
-
-type ModifierModalContainerProps = {
-	userSettings: any,
-	diceModuleForm: any,
-	closeModifierModal: Function,
-	showMsgModal: Function,
-	selectedDice: any
-	showModal: boolean
-}
+const mapDispatchToProps = {
+	closeModifierModal,
+	requestRoll,
+	showMsgModal
+};
 
 function ModifierModalContainer({
-	userSettings,
-	diceModuleForm,
 	closeModifierModal,
-	selectedDice,
+	requestRoll,
+	diceSelected,
 	showModal,
-	showMsgModal
-}:ModifierModalContainerProps) {
-	let rollOptions = {};
-	if (diceModuleForm && diceModuleForm.values) {
-		rollOptions = diceModuleForm.values;
-	}
+}: ModifierModalPropTypes) {
 	return (
-		<>
-			<ModifierModal
-				userSettings={userSettings}
-				rollOptions={rollOptions}
-				closeModifierModal={closeModifierModal}
-				selectedDice={selectedDice}
-				showMsgModal={showMsgModal}
-				showModal={showModal}
-			/>
-		</>
+		<ModifierModal
+			closeModifierModal={closeModifierModal}
+			requestRoll={requestRoll}
+			diceSelected={diceSelected}
+			showModal={showModal}
+		/>
 	);
-
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(ModifierModalContainer);

@@ -25,22 +25,3 @@ function diceSelectedReducer(state = initialState, action: any) {
 }
 
 export default diceSelectedReducer;
-
-
-// import { CLOSE_MSG_MODAL } from '../actions/modals';
-// import { REROLL_REQUESTED } from '../actions/roll.actions';
-
-// // Remembers last selected die type
-// export default(state = '', action: any) => {
-// 	switch (action.type) {
-// 		case REROLL_REQUESTED:
-// 			if (action.payload) {
-// 				return action.payload;
-// 			} else {
-// 				return '';
-// 			}			
-// 		case CLOSE_MSG_MODAL:
-// 			return '';
-// 	}
-// 	return state;
-// };

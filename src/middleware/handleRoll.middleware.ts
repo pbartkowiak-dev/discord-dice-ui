@@ -13,7 +13,6 @@ const handleRoll = (store:any) => (next:any) => (action:any) => {
 		const { form : { diceModuleForm } } = state;
 
 		if (diceModuleForm) {
-			console.log('diceModuleForm.values', diceModuleForm.values)
 			const formValues = diceModuleForm.values || {}
 			const { diceType, diceAmount } = action.payload;
 
