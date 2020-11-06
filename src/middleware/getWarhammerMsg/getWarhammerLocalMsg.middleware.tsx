@@ -13,7 +13,6 @@ import { WARHAMMER_DICE_ROLLED, localMsgReady } from '../../actions/roll.actions
 
 export default (store:any) => (next:any) => (action:any) => {
 	if (action.type === WARHAMMER_DICE_ROLLED) {
-		console.log('WARHAMMER_DICE_ROLLED - action', action);
 		const state = store.getState();
 		const { rerollCount } = state;
 		const { payload: { result } } = action;
@@ -135,8 +134,6 @@ export default (store:any) => (next:any) => (action:any) => {
 				isWarhammer2e={!!useWarhammer2eSL}
 			/>
 		);
-	
-		rollOptions.warhammerMode = true;
 
 		store.dispatch(localMsgReady({
 			title,

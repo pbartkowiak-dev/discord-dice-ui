@@ -15,7 +15,7 @@ type infoTooltipPropType = {
 	className?: string
 }
 
-function InfoTooltip({ content, type, placement='top', className='' }:infoTooltipPropType) {
+function InfoTooltip({ content, type, placement='top', className='' }: infoTooltipPropType) {
 	const id = `tooltip-${getRandom(999)}`;
 	let icon;
 
@@ -25,7 +25,6 @@ function InfoTooltip({ content, type, placement='top', className='' }:infoToolti
 	}
 
 	return (
-		<>
 		<OverlayTrigger
 			key={id}
 			placement={placement}
@@ -35,13 +34,13 @@ function InfoTooltip({ content, type, placement='top', className='' }:infoToolti
 					<>{ content }</>
 				</Tooltip>
 			}
-		><FontAwesomeIcon className={classNames({
-			[styles.icon]: true,
-			[className]: !!className
-		})}
+		>
+			<FontAwesomeIcon className={classNames({
+				[styles.icon]: true,
+				[className]: !!className
+			})}
 			icon={icon} />
 		</OverlayTrigger>
-		</>
 	);
 }
 

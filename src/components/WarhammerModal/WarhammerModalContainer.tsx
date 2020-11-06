@@ -5,6 +5,7 @@ import { closeWarhammerModal } from '../../actions/modals';
 import WarhammerModal from './WarhammerModal';
 import { requestRoll } from '../../actions/roll.actions';
 import localStorageWarhammerSlModeManager from '../../utils/localStorageWarhammerSlModeManager';
+import { WarhammerModalContainerPropTypes } from './WarhammerModalTypes';
 
 const mapStateToProps = (state: any) => {
 	return {
@@ -18,23 +19,15 @@ const mapDispatchToProps = {
 	requestRoll
 };
 
-interface WarhammerModalContainerProps {
-	showModal: boolean;
-	closeWarhammerModal: () => void;
-	saveWarhammerSlMode: Function;
-	warhammerSlMode: string;
-	requestRoll: Function;
-}
-
 function WarhammerModalContainer({
 	showModal,
 	closeWarhammerModal,
 	saveWarhammerSlMode,
 	warhammerSlMode,
 	requestRoll
-}:WarhammerModalContainerProps) {
+}: WarhammerModalContainerPropTypes) {
 	useEffect(() => {
-		const localStorageWarhammerSlMode = localStorageWarhammerSlModeManager.load();
+		const localStorageWarhammerSlMode = localStorageWarhammerSlModeManager.load()
 		if (localStorageWarhammerSlMode) {
 			saveWarhammerSlMode(localStorageWarhammerSlMode);
 		}

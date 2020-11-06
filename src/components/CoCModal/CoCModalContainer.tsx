@@ -3,23 +3,18 @@ import { connect } from 'react-redux';
 import { closeCoCModal } from '../../actions/modals';
 import { requestRoll } from '../../actions/roll.actions';
 import CoCModal from './CoCModal';
+import { CoCModalPropTypes } from './CoCModalTypes';
 
 const mapDispatchToProps = {
 	closeCoCModal,
 	requestRoll
 };
 
-interface CoCModalContainerProps {
-	closeCoCModal: () => void;
-	requestRoll: Function;
-	showModal: boolean;
-}
-
 function CoCModalContainer({
 	closeCoCModal,
 	requestRoll,
 	showModal
-}:CoCModalContainerProps) {
+}: CoCModalPropTypes) {
 	return (
 		<CoCModal
 			closeCoCModal={closeCoCModal}

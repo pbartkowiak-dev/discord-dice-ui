@@ -19,7 +19,6 @@ export type requestParams = {
 
 export default (store:any) => (next:any) => (action:any) => {
 	if (action.type === COC_DICE_ROLLED) {
-		console.log('COC_DICE_ROLLED - action', action);
 		const state = store.getState();
 		const { userSettings } = state;
 		const { payload: { result } } = action;

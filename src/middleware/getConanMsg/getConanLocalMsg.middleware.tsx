@@ -1,33 +1,156 @@
+import React from 'react';
+import classNames from 'classnames/bind';
+import joinAsBlocks from '../../utils/joinAsBlocks';
+import getConanSuccessLevel, { conanSuccessLevelType } from '../../utils/getConanSuccessLevel';
+import ResultVsSkillRow, { labelsType } from '../../components/ResultVsSkillRow/ResultVsSkillRow';
+import styles from '../../components/ResultsModal/ResultsModal.module.css';
+import InfoTooltip from '../../components/InfoTooltip/InfoTooltip';
+import CodeSpan from '../../components/CodeSpan/CodeSpan';
+import tooltip from '../../locale/tooltip';
 import { CONAN_DICE_ROLLED, localMsgReady } from "../../actions/roll.actions";
-import joinAsBlocks from "../../utils/joinAsBlocks";
 
-export default (store:any) => (next:any) => (action:any) => {
+export default (store: any) => (next: any) => (action: any) => {
 	if (action.type === CONAN_DICE_ROLLED) {
 		console.log('CONAN_DICE_ROLLED - action', action);
-		// const { payload: { result } } = action;
-		// const { payload: { rollOptions } } = action;
-		// const {
-		// 	results,
-		// 	cocBonusResult,
-		// 	cocPenaltyResult,
-		// 	skillLevel
-		// } = result;
-		// const skillLevelString = skillLevel <= 9 ? `0${skillLevel}` : `${skillLevel}`;
-		// const fields = [];
-		// const resultsJoined = joinAsBlocks(results);
-		// let finalDieResult;
-		// let finalDieResultString;
-		// let title;
+		const cx = classNames.bind(styles);
+		const { payload: { result } } = action;
+		const { payload: { rollOptions } } = action;
+		const { results, assistanceDiceResults } = result;
+		const {
+			dice,
+			difficulty,
+			focus,
+			fortune,
+			tn,
+			untrainedTest,
+			assistanceDice
+		} = rollOptions;
 	
+		const fields = [];
+		let assistanceSuccessLevel: any = {};
+	
+		if (assistanceDice && assistanceDiceResults) {
+			assistanceSuccessLevel = getConanSuccessLevel(
+				assistanceDiceResults,
+				Number(tn),
+				Number(focus),
+				Number(difficulty),
+				untrainedTest
+			);
+		}
+	
+		const successLevel: conanSuccessLevelType = getConanSuccessLevel(
+			results,
+			tn,
+			focus,
+			difficulty,
+			untrainedTest,
+			assistanceSuccessLevel.successLevel
+		);
+		const yourFocus = <p className={styles.resultDetailsRow}>Focus: <CodeSpan>{focus || 0}</CodeSpan></p>;
+		const yourTn = <p className={styles.resultDetailsRow}>TN: <CodeSpan>{tn}</CodeSpan></p>;
+		const wasUntrainedTest = untrainedTest ? <p className={styles.resultDetailsRow}>Untrained Test</p> : null;
+	
+		const fortuneUsed = !!fortune
+			? <p className={styles.resultDetailsRow}>Fortune points used: <CodeSpan>{fortune}</CodeSpan></p>
+			: null;
+	
+		const title = (
+			<div className={styles.conanResultDetails}>
+				<p className={styles.resultDetailsRow}>You rolled <CodeSpan>{dice}d20</CodeSpan></p>
+				{ yourFocus }
+				{ yourTn }
+				{ wasUntrainedTest }
+				{ fortuneUsed }
+			</div>
+		);
+	
+		if (rollOptions.rerolledTimes) {
+			const timesWord = rollOptions.rerolledTimes === 1 ? 'time' : 'times';
+			fields.push(
+				<div className={`${styles.generalResult}`}>Rerolled <CodeSpan>{rollOptions.rerolledTimes}</CodeSpan> {timesWord}</div>
+			);
+		}
+	
+		if (assistanceDice && assistanceDiceResults?.length) {
+			const assistanceDiceResultsJoined = joinAsBlocks(assistanceDiceResults);
+			const assistanceComplications = assistanceSuccessLevel.complications
+				? <p className={styles.assistanceResultRow}>Complications: <CodeSpan>{assistanceSuccessLevel.complications}</CodeSpan></p>
+				: null;
+	
+			fields.push(
+				<div className={styles.assistanceResult}>
+					<p className={styles.assistanceResultRow}><strong>Assistance Roll:</strong></p>
+					<p className={styles.assistanceResultRow}>Rolled: {assistanceDiceResultsJoined}</p>
+					<p className={styles.assistanceResultRow}>Successes: <CodeSpan>{assistanceSuccessLevel.successLevel}</CodeSpan></p>
+					{ assistanceComplications }
+					<InfoTooltip content={tooltip.assistance} className={styles.assistanceIcon} />
+				</div>
+			);
+		}
+	
+		const labels: labelsType = {
+			result: 'Successes',
+			vs: 'Difficulty'
+		};
+	
+		fields.push(
+			<ResultVsSkillRow
+				skillLevel={difficulty}
+				finalDieResult={successLevel.successLevel}
+				isSuccess={successLevel.isSuccess}
+				labels={labels}
+			/>
+		);
+	
+		if (successLevel.isSuccess) {
+			fields.push(
+				<div className={cx({ generalResult: true, generalResultSuccess: true })}>Success</div>
+			);
+		} else {
+			fields.push(
+				<div className={cx({ generalResult: true, generalResultFailure : true })}>Failure</div>
+			);
+		}
+	
+		fields.push(
+			<div className={cx({ slResult: true, momentumResults: true })}>
+				<div>
+					{/* COMPLICATIONS */}
+					<div>
+						<span className={cx({ slResultLabel: true, inactive: successLevel.complications === 0 })}>Complications:</span>
+						</div>
+					<div>
+						<CodeSpan
+							className={styles.slResultSpan}
+							type ={successLevel.complications > 0 ? 'failure' : 'inactive'}
+					>{successLevel.complications}</CodeSpan>
+						</div>
+				</div>
+				<div>
+					{/* MOMENTUM */}
+					<div>
+						<span className={cx({ slResultLabel: true, inactive: successLevel.momentum === 0 })}>Momentum:</span>
+						</div>
+					<div>
+						<CodeSpan
+							className={styles.slResultSpan}
+							type={successLevel.momentum > 0 ? 'success' : 'inactive'}
+						>{successLevel.momentum}</CodeSpan>
+					</div>
+				</div>
+	
+			</div>
+		);	
 
-		// store.dispatch(localMsgReady({
-		// 	title,
-		// 	fields,
-		// 	isSuccess: successLevels.isSuccess,
-		// 	finalDieResult,
-		// 	rollOptions
-
-		// }));
+		store.dispatch(localMsgReady({
+			title,
+			fields,
+			isSuccess: successLevel.isSuccess,
+			isFailure: successLevel.isFailure,
+			rollOptions,
+			results
+		}));
 	}
 	next(action);
 };

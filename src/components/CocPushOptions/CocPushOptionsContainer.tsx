@@ -1,34 +1,30 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { showMsgModal, hideMsg } from '../../actions/modals';
+import { hideMsg } from '../../actions/modals';
 import CoCPushOptions from './CocPushOptions';
 import { requestRoll } from '../../actions/roll.actions';
+import { D100_SL } from '../../consts/warhammerConstants';
 
 const mapDispatchToProps = {
-	showMsgModal,
 	hideMsg,
 	requestRoll
 };
 
 function CocPushOptionsContainer({
-	rollOptions ={},
+	rollOptions = {},
 	finalDieResult,
 	requestRoll,
-	hideMsg,
-	canPush
-}:any) {
+	hideMsg
+}: any) {
 
 	const handlePushRoll = () => {
 		hideMsg();
-		rollOptions.isPushed = true;
-		// @TODO flaten rolloptions
-		// @TODO Change diceType
-		// @TODO does it even?
-		console.log('push roll - rollOptions', rollOptions);
+
 		setTimeout(() => {
 			requestRoll({
-				diceType: 100,
-				...rollOptions
+				diceType: D100_SL,
+				...rollOptions,
+				isPushed: true
 			});
 		}, 500);
 	};
@@ -41,7 +37,6 @@ function CocPushOptionsContainer({
 		<CoCPushOptions
 			handlePushRoll={handlePushRoll}
 			isPushed={rollOptions.isPushed}
-			canPush={canPush}
 			luckRequiredForSuccess={luckRequiredForSuccess}
 			luckRequiredForHardSuccess={luckRequiredForHardSuccess}
 			luckRequiredForExtremeSuccess={luckRequiredForExtremeSuccess}

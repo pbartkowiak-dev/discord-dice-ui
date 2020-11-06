@@ -28,7 +28,7 @@ const handleRoll = (store:any) => (next:any) => (action:any) => {
 				openWarhammerModal();
 				store.dispatch(openWarhammerModal())
 			} else if (diceType === D20_CONAN_TEST) {
-				openConanModal();
+				store.dispatch(openConanModal());
 			} else if (diceType === D6_CONAN || diceType === D20_CONAN_HL) {
 				formValues.useModifier = false;
 			} else if (formValues.useModifier) {

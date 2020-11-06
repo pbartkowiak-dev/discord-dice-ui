@@ -1,5 +1,3 @@
-import { requestParams } from '../utils/request';
-
 export const OPEN_SETTINGS_MODAL = 'OPEN_SETTINGS_MODAL';
 export const CLOSE_SETTINGS_MODAL = 'CLOSE_SETTINGS_MODAL';
 
@@ -17,6 +15,19 @@ export const CLOSE_CONAN_MODAL = 'CLOSE_CONAN_MODAL';
 
 export const OPEN_MSG_MODAL = 'OPEN_MSG_MODAL';
 export const CLOSE_MSG_MODAL = 'CLOSE_MSG_MODAL';
+
+interface fieldEmbedded {
+	name: string;
+	value: string;
+}
+// @TODO move it to a proper place
+interface requestParams {
+	hookUrl: string;
+	msgTitle: string;
+	color: number;
+	fields: Array<fieldEmbedded>;
+	description: string;
+}
 
 export function openSettingsModal() {
 	return {

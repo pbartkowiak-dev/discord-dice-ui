@@ -22,7 +22,6 @@ export type requestParams = {
 
 export default (store:any) => (next:any) => (action:any) => {
 	if (action.type === WARHAMMER_DICE_ROLLED) {
-		console.log('WARHAMMER_DICE_ROLLED - action', action);
 		const state = store.getState();
 		const { rerollCount } = state;
 		const { userSettings } = state;

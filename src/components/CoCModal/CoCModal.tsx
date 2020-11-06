@@ -3,26 +3,15 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import CoCModalForm from './CoCModalForm';
 import { D100_SL } from '../../consts/warhammerConstants';
-
-interface CoCModalProps {
-	showModal: boolean;
-	closeCoCModal: () => void;
-	requestRoll: Function;
-}
-
-interface CoCFormValues {
-	cocTwoBonus?: boolean;
-	cocTwoPenalty?: boolean;
-	skillLevel: string;
-}
+import { CoCFormValuesTypes, CoCModalPropTypes } from './CoCModalTypes';
 
 function CoCModal({
 	showModal,
 	closeCoCModal,
 	requestRoll
-}: CoCModalProps
+}: CoCModalPropTypes
 ) {
-	const handleSubmit = (values: CoCFormValues) => {
+	const handleSubmit = (values: CoCFormValuesTypes) => {
 		requestRoll({
 			diceType: D100_SL,
 			...values

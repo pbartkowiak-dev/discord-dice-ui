@@ -1,44 +1,26 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { closeConanModal, showMsgModal } from '../../actions/modals';
+import { closeConanModal } from '../../actions/modals';
+import { requestRoll } from '../../actions/roll.actions';
 import ConanModal from './ConanModal';
-
-const mapStateToProps = (state:any) => {
-	return {
-		userSettings: state.userSettings,
-	};
-};
+import { ConanModalPropTypes } from './ConanModalTypes';
 
 const mapDispatchToProps = {
 	closeConanModal,
-	showMsgModal
+	requestRoll
 };
 
-type ConanModalContainerProps = {
-	userSettings: any
-	closeConanModal: Function
-	showMsgModal: Function,
-	showModal: boolean
-}
 
-function ConanModalContainer({
-	userSettings,
+const ConanModalContainer = ({
 	closeConanModal,
-	showMsgModal,
-	showModal
-}:ConanModalContainerProps) {
+	showModal,
+	requestRoll
+}: ConanModalPropTypes) => (
+	<ConanModal
+		closeConanModal={closeConanModal}
+		showModal={showModal}
+		requestRoll={requestRoll}
+	/>
+);
 
-	return (
-		<>
-			<ConanModal
-				userSettings={userSettings}
-				closeConanModal={closeConanModal}
-				showMsgModal={showMsgModal}
-				showModal={showModal}
-			/>
-		</>
-	);
-
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(ConanModalContainer);
+export default connect(undefined, mapDispatchToProps)(ConanModalContainer);

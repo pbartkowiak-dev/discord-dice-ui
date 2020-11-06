@@ -1,5 +1,5 @@
 import { DICE_ROLL_REQUESTED, diceRolled, cocDiceRolled, conanDiceRolled, warhammerDiceRolled } from '../actions/roll.actions';
-import { D6_CONAN } from '../consts/conanConstants';
+import { D20_CONAN, D6_CONAN } from '../consts/conanConstants';
 import { D100_SL } from '../consts/warhammerConstants';
 import getDieNumberVal from '../utils/getDieNumberVal';
 import getResultsArray from '../utils/getResultsArray';
@@ -48,9 +48,6 @@ const roll = (store: any) => (next: any) => (action: any) => {
 		const { form : { diceModuleForm } } = state;
 		const formValues = diceModuleForm?.values || {};
 
-		console.log('DICE_ROLL_REQUESTED', action.payload, diceModuleForm);
-		console.log('REROLL_REQUESTED - DICE_ROLL_REQUESTED - rerollCount', store.rerollCount);
-
 		let {
 			diceType,
 			modifier = 0,
@@ -58,21 +55,22 @@ const roll = (store: any) => (next: any) => (action: any) => {
 			rollOptions = {},
 			itemsToStay = [],
 			skillLevel,
+
 			cocBonus,
 			cocTwoBonus,
 			cocPenalty,
-			cocTwoPenalty
+			cocTwoPenalty,
+
+			fortune,
+			assistanceDice
 		} = action.payload;
 
-		const {
-			fortune
-		} = rollOptions;
-
 		const diceTypeNum = getDieNumberVal(diceType);
-		const isCombatDie = diceType === D6_CONAN;
 		const keepUnits = (cocBonus || cocTwoBonus || cocPenalty || cocTwoPenalty);
 		const result = {} as rollDiceResult;
-		const fortuneNum = Number(fortune);
+
+		// Conan
+		let assistanceDiceResults;
 
 		if (formValues.cocMode) {
 			if (cocBonus || cocPenalty) {
@@ -82,17 +80,17 @@ const roll = (store: any) => (next: any) => (action: any) => {
 			}
 		}
 	
-		if (fortune && fortuneNum > 0) {
-			diceAmount = diceAmount - fortuneNum;
+		if (fortune) {
+			diceAmount = diceAmount - fortune;
 		}
 	
-		if (itemsToStay && itemsToStay.length) {
+		if (itemsToStay?.length) {
 			diceAmount = diceAmount - itemsToStay.length;
 		}
 	
 		result.results = getResultsArray(diceTypeNum, diceAmount, keepUnits);
 	
-		if (itemsToStay && itemsToStay.length) {
+		if (itemsToStay?.length) {
 			diceAmount = diceAmount + itemsToStay.length;
 		}
 	
@@ -101,13 +99,13 @@ const roll = (store: any) => (next: any) => (action: any) => {
 		result.diceType = diceType;
 		result.diceTypeNum = diceTypeNum;
 	
-		if (fortune && fortuneNum) {
-			for (let i = 0; i < fortuneNum; i++) {
+		if (fortune) {
+			for (let i = 0; i < fortune; i++) {
 				result.results.push(1);
 			}
 		}
 	
-		if (itemsToStay && itemsToStay.length) {
+		if (itemsToStay?.length) {
 			for (let i = 0; i < itemsToStay.length; i++) {
 				result.results.push(itemsToStay[i]);
 			}
@@ -121,7 +119,7 @@ const roll = (store: any) => (next: any) => (action: any) => {
 		result.highest = Math.max(...result.results);
 		result.lowest = Math.min(...result.results);
 	
-		if (isCombatDie) {
+		if (diceType === D6_CONAN) {
 			const combatDieResults = result.results.reduce((total, current) => {
 				if (current >= 5) {
 					total.dmg = total.dmg + 1;
@@ -130,7 +128,7 @@ const roll = (store: any) => (next: any) => (action: any) => {
 					total.dmg = total.dmg + current;
 				}
 				return total;
-			}, {dmg: 0, effects: 0});	
+			}, { dmg: 0, effects: 0 });
 			result.dmg = combatDieResults.dmg;
 			result.effects = combatDieResults.effects;
 		}
@@ -150,13 +148,13 @@ const roll = (store: any) => (next: any) => (action: any) => {
 	
 		if (rollOptions.assistanceDiceResults) {
 			result.assistanceDiceResults = rollOptions.assistanceDiceResults;
-		} else if (rollOptions.assistanceDice) {
-			result.assistanceDiceResults = getResultsArray(
+		} else if (assistanceDice) {
+			assistanceDiceResults = getResultsArray(
 				20,
-				Number(rollOptions.assistanceDice),
+				Number(assistanceDice),
 				false
 			);
-			rollOptions.assistanceDiceResults = result.assistanceDiceResults;
+			result.assistanceDiceResults = assistanceDiceResults;
 		}
 	
 		if (modifier === 0) {
@@ -183,12 +181,13 @@ const roll = (store: any) => (next: any) => (action: any) => {
 					...formValues
 				}
 			}));
-		} else if (formValues.conanMode) {
+		} else if (formValues.conanMode && diceType !== D20_CONAN) {
 			store.dispatch(conanDiceRolled({
 				result,
 				rollOptions: {
 					...action.payload,
-					...formValues
+					...formValues,
+					assistanceDiceResults
 				}
 			}));
 		} else {

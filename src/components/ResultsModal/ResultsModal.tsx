@@ -7,43 +7,22 @@ import RerollContainer from '../Reroll/RerollContainer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDiceD20 } from '@fortawesome/free-solid-svg-icons';
 import { D6_CONAN, D20_CONAN_TEST } from '../../consts/conanConstants';
+import { D100_SL } from '../../consts/warhammerConstants';
 import { SelectedDiceType } from '../../reducers/diceSelectedReducer';
-
-type LocalMsgParamsType = {
-	title: any,
-	fields: Array<any>
-	isSuccess?: boolean
-	rollOptions?: any
-	finalDieResult?: number,
-	userSettings?: any
-	results?: any
-}
-
-type msgDataType = {
-	msgParams: LocalMsgParamsType
-}
-
-interface ResultsModalProps {
-	hideMsg: () => void;
-	msgData: msgDataType;
-	showModal: boolean;
-	diceSelected: SelectedDiceType;
-}
+import { ResultsModalPropTypes } from './ResultsModalTypes';
 
 function ResultsModal({
 	hideMsg,
 	msgData,
 	showModal,
 	diceSelected
-}: ResultsModalProps) {
-	console.log('ResultsModal - msgData', msgData);
+}: ResultsModalPropTypes) {
 	const { msgParams } = msgData;
 	const {
 		isSuccess,
 		rollOptions = {},
 		title,
 		finalDieResult,
-		userSettings = {},
 		results = []
 	} = msgParams;
 
@@ -75,8 +54,6 @@ function ResultsModal({
 				<CocPushOptionsContainer
 					rollOptions={rollOptions}
 					finalDieResult={finalDieResult}
-					userSettings={userSettings}
-					canPush={canPush}
 				/>
 			);
 		}
@@ -85,48 +62,44 @@ function ResultsModal({
 	}
 
 	if (
-		(rollOptions.warhammerMode && isSuccess === false) ||
-		diceSelected.diceType === D6_CONAN ||
-		diceSelected.diceType === D20_CONAN_TEST
+		(rollOptions.warhammerMode && isSuccess) ||
+		(rollOptions.cocMode && diceSelected.diceType === D100_SL)
 	) {
+		rerollElement = null;
+	} else {
 		rerollElement = (
 			<RerollContainer
 				rollOptions={rollOptions}
-				userSettings={userSettings}
 				results={results}
 			/>
 		);
-	} else {
-		rerollElement = null;
 	}
 
 	return (
-		<>
-			<Modal
-				show={showModal}
-			 	onHide={hideMsg}
-			>
-				<Modal.Header closeButton className={headerClass}>
-					<div>
-						{DiceIcon}
-						<Modal.Title className={styles.resultsModalTitle}>Roll Results</Modal.Title>
-					</div>
-				</Modal.Header>
-				<Modal.Body className={styles.resultsBody}>
-					{ rollOptions.isPushed && <div className={styles.pushedTitle}>Pushed roll</div> }
-					{ title && <div className={styles.rollResults}>{ title }</div> }
-					{ modalBodyList }
-					{ pushElement }
-					{ rerollElement }
-				</Modal.Body>
-				<Modal.Footer>
-				<Button
-					block
-					variant="outline-secondary"
-					onClick={hideMsg}>Close</Button>
-				</Modal.Footer>
-			</Modal>
-		</>
+		<Modal
+			show={showModal}
+			onHide={hideMsg}
+		>
+			<Modal.Header closeButton className={headerClass}>
+				<div>
+					{DiceIcon}
+					<Modal.Title className={styles.resultsModalTitle}>Roll Results</Modal.Title>
+				</div>
+			</Modal.Header>
+			<Modal.Body className={styles.resultsBody}>
+				{ rollOptions.isPushed && <div className={styles.pushedTitle}>Pushed roll</div> }
+				{ title && <div className={styles.rollResults}>{ title }</div> }
+				{ modalBodyList }
+				{ pushElement }
+				{ rerollElement }
+			</Modal.Body>
+			<Modal.Footer>
+			<Button
+				block
+				variant="outline-secondary"
+				onClick={hideMsg}>Close</Button>
+			</Modal.Footer>
+		</Modal>
 	);
 }
 

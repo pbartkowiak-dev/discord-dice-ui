@@ -48,8 +48,6 @@ const getLocalMsg = (store:any) => (next:any) => (action:any) => {
 		const isConanHitLocationDie = rollOptions.diceType === D20_CONAN_HL;
 		let title;
 
-		console.log('rerollCount', rerollCount);
-
 		if (isCombatDie) {
 			title = <>You rolled <CodeSpan>{rolled}</CodeSpan>.</>;
 		} else {

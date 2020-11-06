@@ -47,14 +47,12 @@ function SettingsModalContainer({
 	}, [saveUserSettings, openSettingsModal]);
 
 	return (
-		<>
-			<SettingsModal
-				showModal={showModal}
-				closeSettingsModal={closeSettingsModal}
-				saveUserSettings={saveUserSettings}
-				userSettings={userSettings}
-			/>
-		</>
+		<SettingsModal
+			showModal={showModal}
+			closeSettingsModal={closeSettingsModal}
+			saveUserSettings={saveUserSettings}
+			userSettings={userSettings}
+		/>
 	);
 
 }

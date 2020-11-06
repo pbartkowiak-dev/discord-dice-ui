@@ -10,7 +10,6 @@ const rerollRequested = (store:any) => (next:any) => (action:any) => {
 
 		store.dispatch(updateRollCounter());
 
-		console.log('REROLL_REQUESTED middleware');
 		store.dispatch(requestRoll({
 			...lastRollOptions,
 			itemsToStay

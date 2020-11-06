@@ -7,7 +7,6 @@ import { COC_DICE_ROLLED, localMsgReady } from '../../actions/roll.actions';
 
 export default (store:any) => (next:any) => (action:any) => {
 	if (action.type === COC_DICE_ROLLED) {
-		console.log('COC_DICE_ROLLED - action', action);
 		const { payload: { result } } = action;
 		const { payload: { rollOptions } } = action;
 		const {
@@ -57,7 +56,6 @@ export default (store:any) => (next:any) => (action:any) => {
 			isSuccess: successLevels.isSuccess,
 			finalDieResult,
 			rollOptions
-
 		}));
 	}
 	next(action);

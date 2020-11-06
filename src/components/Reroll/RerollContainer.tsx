@@ -28,8 +28,6 @@ function RerollContainer({
 		}, 500);
 	};
 
-	console.log('RerollContainer - diceSelected', diceSelected);
-
 	return (
 		<Reroll
 			handleReroll={handleReroll}

@@ -6,7 +6,6 @@ import ModifierModal from './ModifierModal';
 import { ModifierModalPropTypes } from './ModifierModalTypes';
 
 const mapStateToProps = (state: any) => {
-	console.log('state', state)
 	return {
 		diceSelected: state.diceSelected
 	};

@@ -1,4 +1,3 @@
-import { requestParams } from './request';
 import getConanSuccessLevel, { conanSuccessLevelType } from './getConanSuccessLevel';
 import joinAsBlocks from './joinAsBlocks';
 import { SUCCESS, FAILURE, getColor } from './getColor';
@@ -90,7 +89,9 @@ const getConanRequestMsg = (result:any, rollOptions:any, userSettings:any) => {
 		value: `\`${successLevel.momentum}\``
 	});
 
-	const msgParams:requestParams = {
+	console.log('test1')
+
+	const msgParams:any = {
 		hookUrl: userSettings.hookUrl,
 		msgTitle,
 		color: successLevel.isSuccess ? getColor(SUCCESS) : getColor(FAILURE),

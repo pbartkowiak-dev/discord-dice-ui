@@ -31,30 +31,28 @@ function SettingsModal({
 	};
 
 	return (
-		<>
-			<Modal show={showModal} onHide={handleClose}>
-				<Modal.Header closeButton>
-					<Modal.Title>Settings<p className="version-subtitle">v. {version}</p></Modal.Title>
-				</Modal.Header>
-				<Modal.Body>
-				<UserSettingsForm
-					onSubmit={values => handleSubmit(values)}
-					initialValues={userSettings}
-				/>
-				</Modal.Body>
-				<Modal.Footer>
-					<Button variant="secondary" onClick={handleClose}>
-						Close
-					</Button>
-					<Button
-						variant="success"
-						type="submit"
-						form="user-settings-form">
-						Save Changes
-					</Button>
-				</Modal.Footer>
-			</Modal>
-		</>
+		<Modal show={showModal} onHide={handleClose}>
+			<Modal.Header closeButton>
+				<Modal.Title>Settings<p className="version-subtitle">v. {version}</p></Modal.Title>
+			</Modal.Header>
+			<Modal.Body>
+			<UserSettingsForm
+				onSubmit={values => handleSubmit(values)}
+				initialValues={userSettings}
+			/>
+			</Modal.Body>
+			<Modal.Footer>
+				<Button variant="secondary" onClick={handleClose}>
+					Close
+				</Button>
+				<Button
+					variant="success"
+					type="submit"
+					form="user-settings-form">
+					Save Changes
+				</Button>
+			</Modal.Footer>
+		</Modal>
 	);
 }
 
