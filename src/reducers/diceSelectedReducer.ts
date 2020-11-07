@@ -1,5 +1,4 @@
-import { DICE_SELECTED } from '../actions';
-import { CLOSE_MSG_MODAL } from '../actions/modals';
+import { DICE_SELECTED, DICE_SELECTED_RESET } from '../actions/roll.actions';
 
 export interface SelectedDiceType {
 	diceType: string;
@@ -15,7 +14,7 @@ function diceSelectedReducer(state = initialState, action: any) {
 	switch (action.type) {
 		case DICE_SELECTED:
 			return action.payload;
-		case CLOSE_MSG_MODAL:
+		case DICE_SELECTED_RESET:
 				return {
 					diceType: '',
 					diceAmount: 0

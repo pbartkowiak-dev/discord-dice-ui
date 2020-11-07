@@ -11,13 +11,14 @@ import { CONAN_DICE_ROLLED, localMsgReady } from "../../actions/roll.actions";
 
 export default (store: any) => (next: any) => (action: any) => {
 	if (action.type === CONAN_DICE_ROLLED) {
-		console.log('CONAN_DICE_ROLLED - action', action);
 		const cx = classNames.bind(styles);
+		const state = store.getState();
+		const { rerollCount } = state;
 		const { payload: { result } } = action;
 		const { payload: { rollOptions } } = action;
 		const { results, assistanceDiceResults } = result;
 		const {
-			dice,
+			diceAmount,
 			difficulty,
 			focus,
 			fortune,
@@ -57,7 +58,7 @@ export default (store: any) => (next: any) => (action: any) => {
 	
 		const title = (
 			<div className={styles.conanResultDetails}>
-				<p className={styles.resultDetailsRow}>You rolled <CodeSpan>{dice}d20</CodeSpan></p>
+				<p className={styles.resultDetailsRow}>You rolled <CodeSpan>{diceAmount}d20</CodeSpan></p>
 				{ yourFocus }
 				{ yourTn }
 				{ wasUntrainedTest }
@@ -65,10 +66,10 @@ export default (store: any) => (next: any) => (action: any) => {
 			</div>
 		);
 	
-		if (rollOptions.rerolledTimes) {
-			const timesWord = rollOptions.rerolledTimes === 1 ? 'time' : 'times';
+		if (rerollCount) {
+			const timesWord = rerollCount === 1 ? 'time' : 'times';
 			fields.push(
-				<div className={`${styles.generalResult}`}>Rerolled <CodeSpan>{rollOptions.rerolledTimes}</CodeSpan> {timesWord}</div>
+				<div className={`${styles.generalResult}`}>Rerolled <CodeSpan>{rerollCount}</CodeSpan> {timesWord}</div>
 			);
 		}
 	

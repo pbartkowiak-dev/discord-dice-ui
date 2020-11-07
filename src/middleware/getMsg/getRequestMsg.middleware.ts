@@ -9,12 +9,12 @@ export default (store:any) => (next:any) => (action:any) => {
 		const state = store.getState();
 		const { userSettings } = state;
 		const { rerollCount } = state;
+		
 		const { payload } = action;
 		const { result, rollOptions } = payload;
 		const {
 			results,
 			diceAmount,
-			diceType,
 			modifier,
 			modSymbol,
 			totalWithModifier,
@@ -23,20 +23,21 @@ export default (store:any) => (next:any) => (action:any) => {
 			cocBonus,
 			cocPenalty,
 			dmg,
-			effects
+			effects,
+			diceTypeNum
 		} = result;
 		const hasMultipleDice = diceAmount > 1;
 		const rolledWord = hasMultipleDice ? 'Results' : 'Result';
-		const rolled = `${diceAmount}d${diceType}`;
+		const rolled = `${diceAmount}d${diceTypeNum}`;
 		const username = userSettings.username || 'USERNAME_MISSING';
 		const resultsJoined = joinAsBlocks(results, null, true);
 		const msgTitle = `${username} rolled \`${rolled}\`. ${rolledWord}: ${resultsJoined}.`;
-		const isCombatDie = rollOptions.diceTypeRaw === D6_CONAN;
-		const isConanHitLocationDie = rollOptions.diceTypeRaw === D20_CONAN_HL;
+		const isCombatDie = rollOptions.diceType === D6_CONAN;
+		const isConanHitLocationDie = rollOptions.diceType === D20_CONAN_HL;
 		const fields = [];
 		let description = '';
 		
-		if (rollOptions.useModifier) {
+		if (rollOptions.useModifier && (!isCombatDie && !isConanHitLocationDie)) {
 			description = `**Modifier**: \`${modSymbol}${Math.abs(modifier)}\`.`;
 		}
 	
@@ -45,7 +46,7 @@ export default (store:any) => (next:any) => (action:any) => {
 			description += `\nRerolled \`${rerollCount}\` ${timesWord}.`;
 		}
 	
-		if ((hasMultipleDice || modifier) && !isCombatDie) {
+		if ((hasMultipleDice || modifier) && (!isCombatDie && !isConanHitLocationDie)) {
 			const sumJoined = joinAsBlocks(results, '+', true);
 			let name = `:arrow_right: Sum of ${sumJoined}`;
 			if (Number(modifier)) name += ` ${modSymbol} \`${Math.abs(modifier)}\` (modifier)`;
@@ -54,13 +55,13 @@ export default (store:any) => (next:any) => (action:any) => {
 				value: `Total: \`${totalWithModifier}\`.`
 			});
 		}
-		if (hasMultipleDice && !isCombatDie) {
+		if (hasMultipleDice && (!isCombatDie && !isConanHitLocationDie)) {
 			fields.push({
 				name: ':arrow_up: Highest',
 				value: `Highest result rolled: \`${highest}\`.`
 			});
 		}
-		if (hasMultipleDice && !isCombatDie) {
+		if (hasMultipleDice && (!isCombatDie && !isConanHitLocationDie)) {
 			fields.push({
 				name: ':arrow_down: Lowest',
 				value: `Lowest result rolled: \`${lowest}\`.`
@@ -96,7 +97,6 @@ export default (store:any) => (next:any) => (action:any) => {
 		}
 	
 		store.dispatch(requestMsgReady({
-			hookUrl: userSettings.hookUrl,
 			msgTitle,
 			color: getColor(),
 			fields,

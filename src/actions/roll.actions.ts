@@ -11,6 +11,8 @@ export const CONAN_DICE_ROLLED = 'CONAN_DICE_ROLLED';
 export const REROLL_REQUESTED = 'REROLL_REQUESTED';
 export const ROLL_COUNTER_UPDATED = 'ROLL_COUNTER_UPDATED';
 export const ROLL_COUNTER_RESET = 'ROLL_COUNTER_RESET';
+export const DICE_SELECTED = 'DICE_SELECTED';
+export const DICE_SELECTED_RESET = 'DICE_SELECTED_RESET';
 
 export function submitRoll(payload: any) {
 	return {
@@ -84,5 +86,18 @@ export function updateRollCounter() {
 export function resetRollCounter() {
 	return {
 		type: ROLL_COUNTER_RESET
+	};
+}
+
+export function storeSelectedDice(payload: any) {
+	return {
+		type: DICE_SELECTED,
+		payload
+	};
+}
+
+export function resetSelectedDice() {
+	return {
+		type: DICE_SELECTED_RESET
 	};
 }

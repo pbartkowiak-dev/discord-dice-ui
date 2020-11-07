@@ -1,5 +1,5 @@
 import { DICE_ROLL_REQUESTED, diceRolled, cocDiceRolled, conanDiceRolled, warhammerDiceRolled } from '../actions/roll.actions';
-import { D20_CONAN, D6_CONAN } from '../consts/conanConstants';
+import { D20_CONAN_TEST, D6_CONAN } from '../consts/conanConstants';
 import { D100_SL } from '../consts/warhammerConstants';
 import getDieNumberVal from '../utils/getDieNumberVal';
 import getResultsArray from '../utils/getResultsArray';
@@ -142,7 +142,7 @@ const roll = (store: any) => (next: any) => (action: any) => {
 			result.cocTwoPenalty = cocTwoPenalty;
 		}
 	
-		if (formValues.cocMode || formValues.warhammerMode) {
+		if (diceType === D100_SL && (formValues.cocMode || formValues.warhammerMode)) {
 			result.skillLevel = skillLevel ? Number(skillLevel) : undefined;
 		}
 	
@@ -181,7 +181,7 @@ const roll = (store: any) => (next: any) => (action: any) => {
 					...formValues
 				}
 			}));
-		} else if (formValues.conanMode && diceType !== D20_CONAN) {
+		} else if (formValues.conanMode && diceType === D20_CONAN_TEST) {
 			store.dispatch(conanDiceRolled({
 				result,
 				rollOptions: {

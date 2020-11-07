@@ -19,7 +19,6 @@ function DiceModule ({
 }: DiceModuleProps
 ) {
 	const handleRollDice = (diceType: string, diceAmount: number = 1) => {
-		console.log('handleRollDice', diceType)
 		submitRoll({
 			diceType,
 			diceAmount

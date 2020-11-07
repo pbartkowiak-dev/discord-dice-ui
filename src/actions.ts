@@ -1,6 +1,5 @@
 
 export const SAVE_WARHAMMER_SL_MODE = 'SAVE_WARHAMMER_SL_MODE';
-export const DICE_SELECTED = 'DICE_SELECTED';
 export const SAVE_USER_SETTINGS = 'SAVE_USER_SETTINGS';
 
 export function saveWarhammerSlMode(warhammerSlMode:any) {
@@ -8,13 +7,6 @@ export function saveWarhammerSlMode(warhammerSlMode:any) {
 		type: SAVE_WARHAMMER_SL_MODE,
 		warhammerSlMode
 		// payload: warhammerSlMode
-	};
-}
-
-export function storeSelectedDice(payload: any) {
-	return {
-		type: DICE_SELECTED,
-		payload
 	};
 }
 

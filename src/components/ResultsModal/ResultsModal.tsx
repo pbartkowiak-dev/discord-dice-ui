@@ -6,9 +6,7 @@ import CocPushOptionsContainer from '../CocPushOptions/CocPushOptionsContainer';
 import RerollContainer from '../Reroll/RerollContainer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDiceD20 } from '@fortawesome/free-solid-svg-icons';
-import { D6_CONAN, D20_CONAN_TEST } from '../../consts/conanConstants';
 import { D100_SL } from '../../consts/warhammerConstants';
-import { SelectedDiceType } from '../../reducers/diceSelectedReducer';
 import { ResultsModalPropTypes } from './ResultsModalTypes';
 
 function ResultsModal({
@@ -34,7 +32,7 @@ function ResultsModal({
 		modalBodyList = (
 			<ul className={styles.resultsList}>
 				{
-					msgParams.fields.map((field:JSX.Element, i:number) => (
+					msgParams.fields.map((field:JSX.Element, i: number) => (
 						<li key={i}>{ field }</li>
 					))
 				}

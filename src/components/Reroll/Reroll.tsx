@@ -17,7 +17,7 @@ function Reroll({ handleReroll, results, diceSelected }: RerollPropTypes) {
 	const cx = classNames.bind(styles);
 	const { diceType } = diceSelected;
 	const [ itemIndexes, setItemIndexes ] = useState([]);
-	const isSelectToReroll = (diceType === D6_CONAN || diceType === D20_CONAN_TEST);
+	const shouldSelectToReroll = (diceType === D6_CONAN || diceType === D20_CONAN_TEST);
 
 	const addItemIndex = (itemIndex: number) => {
 		if (itemIndexes.indexOf(itemIndex) === -1) {
@@ -31,7 +31,7 @@ function Reroll({ handleReroll, results, diceSelected }: RerollPropTypes) {
 
 	let selectToRerollElement;
 	
-	if (isSelectToReroll && results.length) {
+	if (shouldSelectToReroll && results.length) {
 		const resultsElement = results
 			.map((result: number, index: number) => {
 				if (index === results.length - 1) {
@@ -72,7 +72,7 @@ function Reroll({ handleReroll, results, diceSelected }: RerollPropTypes) {
 			{ selectToRerollElement }
 			<div className={styles.row}>
 				<Button
-					disabled={ (isSelectToReroll && !itemIndexes.length) }
+					disabled={ (shouldSelectToReroll && !itemIndexes.length) }
 					variant="outline-primary"
 					onClick={handleClick}
 				>Reroll</Button>

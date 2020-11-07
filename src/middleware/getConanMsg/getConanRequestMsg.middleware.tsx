@@ -1,63 +1,111 @@
 import { CONAN_DICE_ROLLED, requestMsgReady } from "../../actions/roll.actions";
-import { getColor } from "../../utils/getColor";
+import getConanSuccessLevel, { conanSuccessLevelType } from '../../utils/getConanSuccessLevel';
+import joinAsBlocks from '../../utils/joinAsBlocks';
+import { SUCCESS, FAILURE, getColor } from "../../utils/getColor";
 
 export default (store:any) => (next:any) => (action:any) => {
 	if (action.type === CONAN_DICE_ROLLED) {
-		console.log('CONAN_DICE_ROLLED - action', action);
-	// 	const { payload: { result } } = action;
-	// 	const { payload: { rollOptions } } = action;
-	// 	const {
-	// 		results,
-	// 		cocBonusResult,
-	// 		cocPenaltyResult,
-	// 		skillLevel
-	// 	} = result;
+		const { payload: { result } } = action;
+		const { payload: { rollOptions } } = action;
+		const state = store.getState();
+		const { rerollCount } = state;
+		const { userSettings } = state;
+		const {
+			results,
+			assistanceDiceResults
+		} = result;
+		const {
+			diceAmount,
+			difficulty,
+			focus,
+			fortune,
+			tn,
+			assistanceDice,
+			untrainedTest
+		} = rollOptions;
+		const username = userSettings.username || 'USERNAME_MISSING'
+		const fields = [];
+		const resultsJoined = joinAsBlocks(results, null, true);
+		const msgTitle = `${username} rolled **\`${diceAmount}d20\`**. Results: ${resultsJoined}.`;
+		let assistanceSuccessLevel:any = {};
+		let description;
 
-	// 	const state = store.getState();
-	// 	const { userSettings } = state;
-	// 	const username = userSettings.username || 'USERNAME_MISSING';
-	// 	const fields = [];
-	// 	const skillLevelString = skillLevel <= 9 ? `0${skillLevel}` : `${skillLevel}`;
-	// 	const resultsJoined = joinAsBlocks(results, null, true);
-	// 	let finalDieResultString;
-	// 	let finalDieResult;
-	// 	let description;
-	// 	let msgTitle;
-	
-	// 	if (rollOptions.cocBonus || rollOptions.cocTwoBonus) {
-	// 		const dieWord = rollOptions.cocBonus ? 'one Bonus Die' : 'two Bonus Dice'
-	// 		msgTitle = `${username} rolled **${dieWord}**. Results: ${resultsJoined}.`;
-	// 		finalDieResult = cocBonusResult;
-	// 	} else if (rollOptions.cocPenalty || rollOptions.cocTwoPenalty) {
-	// 		const dieWord = rollOptions.cocPenalty ? 'one Penalty Die' : 'two Penalty Dice'
-	// 		msgTitle = `${username} rolled **${dieWord}**. Results: ${resultsJoined}.`;
-	// 		finalDieResult = cocPenaltyResult;
-	// 	} else {
-	// 		msgTitle = `${username} rolled **\`1d100\`**. Result: \`${results[0]}\`.`;
-	// 		finalDieResult = results[0];
-	// 	}
-	// 	finalDieResultString = finalDieResult <= 9 ? `0${finalDieResult}` : `${finalDieResult}`;
+		if (assistanceDice && assistanceDiceResults) {
+			assistanceSuccessLevel = getConanSuccessLevel(
+				assistanceDiceResults,
+				Number(tn),
+				Number(focus),
+				Number(difficulty),
+				untrainedTest
+			);
+		}
+
+		const successLevel:conanSuccessLevelType = getConanSuccessLevel(
+			results,
+			tn,
+			focus,
+			difficulty,
+			untrainedTest,
+			assistanceSuccessLevel.successLevel
+		);
+		const successLevelIcon = successLevel.isSuccess ? ':green_circle:' : ':red_circle:';
+
+		description = `Successes: \`${successLevel.successLevel}\` vs. Difficulty: \`${difficulty}\``;
+		description += `\nFocus: \`${focus || 0}\``;
+		description += `\nTN: \`${tn}\``;
+
+		if (fortune && Number(fortune) > 0) {
+			description += `\nFortune points used: \`${fortune}\``;
+		}
 		
-	// 	const successLevels = getSuccessLevels(skillLevel, finalDieResult);
-	// 	const successLevelIcon = successLevels.isSuccess ? ':green_circle:' : ':red_circle:';
+		if (untrainedTest) {
+			description += `\nUntrained Test`;
+		}
+
+		if (assistanceDice && assistanceDiceResults?.length) {
+			const assistanceDiceResultsJoined = joinAsBlocks(assistanceDiceResults, null, true);
+			let value = `:game_die: Rolled: ${assistanceDiceResultsJoined}\n:high_brightness: Successes: \`${assistanceSuccessLevel.successLevel}\``;
+			if (assistanceSuccessLevel.complications) {
+				value = value + `\n:black_circle: Complications: \`${assistanceSuccessLevel.complications}\``;
+			}
+			fields.push({
+				name: `:busts_in_silhouette: Assistance roll:`,
+				value
+			});
+		}
+
+		if (rerollCount) {
+			const timesWord = rerollCount === 1 ? 'time' : 'times';
+
+			fields.push({
+				name: `:game_die: Rerolled:`,
+				value: `Rerolled \`${rerollCount}\` ${timesWord}`
+			});
+		}
+
+		if (successLevel.complications) {
+			fields.push({
+				name: `:black_circle: Complications:`,
+				value: `\`${successLevel.complications}\``
+			});
+		}
+
+		fields.push({
+			name: successLevelIcon + ' Roll result:',
+			value: successLevel.isSuccess ? 'SUCCESS' : 'FAILURE'
+		});
+
+		fields.push({
+			name: `:boom: Momentum generated:`,
+			value: `\`${successLevel.momentum}\``
+		});
 	
-	// 	fields.push({
-	// 		name: successLevelIcon + ' Success level:',
-	// 		value: getSuccessLevelString(successLevels)
-	// 	});
-	
-	// 	description = `Roll: \`${finalDieResultString}\` vs. Skill level: \`${skillLevelString}\`.`;
-	// 	if (rollOptions.isPushed) {
-	// 		description += `\nRoll **pushed**.`;
-	// 	}
-	
-	// 	store.dispatch(requestMsgReady({
-	// 		hookUrl: userSettings.hookUrl,
-	// 		msgTitle,
-	// 		color: successLevels.isSuccess ? getColor(SUCCESS) : getColor(FAILURE),
-	// 		fields,
-	// 		description
-	// 	}));
+		store.dispatch(requestMsgReady({
+			msgTitle,
+			color: successLevel.isSuccess ? getColor(SUCCESS) : getColor(FAILURE),
+			fields,
+			description
+		}));
 	}
 	next(action);
 };

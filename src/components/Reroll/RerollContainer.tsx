@@ -24,7 +24,9 @@ function RerollContainer({
 	const handleReroll = (itemsToStay: Array<number>) => {
 		hideMsg();
 		setTimeout(() => {
-			requestReroll({ itemsToStay });
+			requestReroll({
+				itemsToStay,
+			});
 		}, 500);
 	};
 

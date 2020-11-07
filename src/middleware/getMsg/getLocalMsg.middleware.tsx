@@ -44,7 +44,7 @@ const getLocalMsg = (store:any) => (next:any) => (action:any) => {
 		const resultsJoined = joinAsBlocks(results);
 		const modifierWithSymbol = <CodeSpan>{modSymbol}{Math.abs(modifier)}</CodeSpan>;
 		const fields = [];
-		const isCombatDie = rollOptions.diceType === D6_CONAN;
+		const isCombatDie = rollOptions.diceType === D6_CONAN;		
 		const isConanHitLocationDie = rollOptions.diceType === D20_CONAN_HL;
 		let title;
 
@@ -54,13 +54,13 @@ const getLocalMsg = (store:any) => (next:any) => (action:any) => {
 			title = <>You rolled <CodeSpan>{rolled}</CodeSpan>. {rolledWord}: {resultsJoined}.</>;
 		}
 	
-		if (rollOptions.useModifier) {
+		if (rollOptions.useModifier && (!isCombatDie && !isConanHitLocationDie)) {
 			fields.push(
 				<>Modifier: {modifierWithSymbol}.</>
 			);
 		}
 	
-		if ((hasMultipleDice || rollOptions.useModifier) && !isCombatDie) {
+		if ((hasMultipleDice || rollOptions.useModifier) && (!isCombatDie && !isConanHitLocationDie)) {
 			if (rollOptions.useModifier) {
 				fields.push(
 					<>{IconRight} Total (with {modifierWithSymbol} modifier): <CodeSpan>{totalWithModifier}</CodeSpan>.</>
@@ -71,12 +71,12 @@ const getLocalMsg = (store:any) => (next:any) => (action:any) => {
 				);
 			}
 		}
-		if (hasMultipleDice && !isCombatDie) {
+		if (hasMultipleDice && (!isCombatDie && !isConanHitLocationDie)) {
 			fields.push(
 				<>{IconUp} Highest result rolled: <CodeSpan>{highest}</CodeSpan>.</>
 			);
 		}
-		if (hasMultipleDice && !isCombatDie) {
+		if (hasMultipleDice && (!isCombatDie && !isConanHitLocationDie)) {
 			fields.push(
 				<>{IconDown} Lowest result rolled: <CodeSpan>{lowest}</CodeSpan>.</>
 			);

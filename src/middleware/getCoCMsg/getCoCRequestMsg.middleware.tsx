@@ -66,7 +66,6 @@ export default (store:any) => (next:any) => (action:any) => {
 		}
 	
 		store.dispatch(requestMsgReady({
-			hookUrl: userSettings.hookUrl,
 			msgTitle,
 			color: successLevels.isSuccess ? getColor(SUCCESS) : getColor(FAILURE),
 			fields,
