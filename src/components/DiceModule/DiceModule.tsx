@@ -2,16 +2,12 @@ import React from 'react';
 import './DiceModule.css';
 import Dice from './Dice';
 import DiceModuleOptions from './DiceModuleOptions';
-import getDiceSet, { SetTypes } from '../../utils/getDiceSet';
-import { CONAN } from '../../consts/conanConstants';
-import { WARHAMMER } from '../../consts/warhammerConstants';
+import getDiceSet from '../../utils/getDiceSet';
+import { CONAN } from '../../consts/consts';
+import { WARHAMMER } from '../../consts/consts';
 import { CLASSIC } from '../../consts/diceConstants';
-import { COC } from '../../consts/CoCConstants';
-
-interface DiceModuleProps {
-	rollOptions: any;
-	submitRoll: Function;
-};
+import { COC } from '../../consts/consts';
+import { DiceModuleProps, SetTypes } from './DiceTypes';
 
 function DiceModule ({
 	rollOptions,
@@ -25,6 +21,7 @@ function DiceModule ({
 		});
 	};
 
+	// @TODO MOVE TO ONE DICE SET GETTER
 	let diceSetType: SetTypes;
 	if (rollOptions.warhammerMode) {
 		diceSetType = WARHAMMER;
@@ -37,10 +34,14 @@ function DiceModule ({
 	}
 
 	const diceSet = getDiceSet(diceSetType);
-	const diceSetElement = diceSet.map((diceType: string)  => (
+
+	const diceSetElement = diceSet.map(({ diceType, label, extraMark, imageFilename }) => (
 		<Dice
 			key={diceType}
 			diceType={diceType}
+			label={label}
+			imageFilename={imageFilename}
+			extraMark={extraMark}
 			handleRollDice={handleRollDice}
 		/>
 	));
@@ -51,7 +52,7 @@ function DiceModule ({
 				rollOptions={rollOptions}
 			/>
 			<div className="dice-module dice-list">
-				{diceSetElement}
+				{ diceSetElement }
 			</div>
 		</div>
 	);

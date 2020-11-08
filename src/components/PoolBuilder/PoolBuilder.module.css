@@ -1,0 +1,40 @@
+.diceContainer {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-gap: 20px 15px;
+	justify-items: center;
+}
+
+.dieCard {
+	max-width: 170px;
+}
+
+.dieBody {
+	display: flex;
+	flex-direction: column;
+	padding: 10px;
+}
+
+.dieImage {
+	width: 65px;
+	height: auto;
+	margin-top: 10px;
+	align-self: center;
+}
+
+.dieFooter {
+	padding: 0;
+	background: transparent;
+}
+
+.input {
+	text-align: center;
+}
+
+.counterBtnLeft {
+	border-top-left-radius: 0;
+}
+
+.counterBtnRight {
+	border-top-right-radius: 0;
+}

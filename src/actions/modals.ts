@@ -16,6 +16,9 @@ export const CLOSE_CONAN_MODAL = 'CLOSE_CONAN_MODAL';
 export const OPEN_MSG_MODAL = 'OPEN_MSG_MODAL';
 export const CLOSE_MSG_MODAL = 'CLOSE_MSG_MODAL';
 
+export const OPEN_POOL_BUILDER_MODAL = 'OPEN_POOL_BUILDER_MODAL';
+export const CLOSE_POOL_BUILDER_MODAL = 'CLOSE_POOL_BUILDER_MODAL';
+
 interface fieldEmbedded {
 	name: string;
 	value: string;
@@ -100,5 +103,17 @@ export function showMsgModal(msgParams:requestParams) {
 export function hideMsg() {
 	return {
 		type: CLOSE_MSG_MODAL
+	};
+}
+
+export function openPoolBuilderModal() {
+	return {
+		type: OPEN_POOL_BUILDER_MODAL
+	};
+}
+
+export function closePoolBuilderModal() {
+	return {
+		type: CLOSE_POOL_BUILDER_MODAL
 	};
 }

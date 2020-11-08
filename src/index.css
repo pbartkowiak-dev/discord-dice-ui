@@ -64,6 +64,17 @@ button.disabled {
 	color: #7c7c7c;
 }
 
+.mb-3.input-group {
+	margin-bottom: 0 !important;
+}
+
+@media (min-width: 576px) {
+	.modal-lg {
+		width: 90%;
+		max-width: 1080px;
+	}
+}
+
 @media only screen and (min-width: 480px) {
 	.icon-info {
 		display: inline-block;

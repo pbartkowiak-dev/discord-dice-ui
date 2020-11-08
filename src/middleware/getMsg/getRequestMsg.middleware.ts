@@ -1,7 +1,7 @@
 import { getColor } from '../../utils/getColor';
 import joinAsBlocks from '../../utils/joinAsBlocks';
 import getConanHitLocation from '../../utils/getConanHitLocations';
-import { D6_CONAN, D20_CONAN_HL } from '../../consts/conanConstants';
+import { D6_CONAN, D20_CONAN_HL } from '../../consts/consts';
 import { DICE_ROLLED, requestMsgReady } from '../../actions/roll.actions';
 
 export default (store:any) => (next:any) => (action:any) => {

@@ -2,7 +2,7 @@ import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import ConanModalForm from './ConanModalForm';
-import { D20_CONAN_TEST } from '../../consts/conanConstants';
+import { D20_CONAN_TEST } from '../../consts/consts';
 import { ConanFormValuesTypes, ConanModalPropTypes } from './ConanModalTypes';
 
 function ConanModal({

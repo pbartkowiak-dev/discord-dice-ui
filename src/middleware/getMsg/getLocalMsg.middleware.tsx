@@ -4,7 +4,7 @@ import { faArrowAltCircleUp, faArrowAltCircleDown } from '@fortawesome/free-regu
 import { faArrowAltCircleRight, faSkull, faSun } from '@fortawesome/free-solid-svg-icons';
 import joinAsBlocks from '../../utils/joinAsBlocks';
 import CodeSpan from '../../components/CodeSpan/CodeSpan';
-import { D6_CONAN, D20_CONAN_HL } from '../../consts/conanConstants';
+import { D6_CONAN, D20_CONAN_HL } from '../../consts/consts';
 import HitLocations from '../../components/HitLocations/HitLocations';
 import getConanHitLocation from '../../utils/getConanHitLocations';
 import styles from '../../components/ResultsModal/ResultsModal.module.css';

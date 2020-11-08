@@ -8,19 +8,17 @@ import {
 	D6_CONAN,
 	D20_CONAN_TEST,
 	D20_CONAN_HL	
-} from '../../consts/conanConstants';
-import { D100_SL } from '../../consts/warhammerConstants';
-import { D5 } from '../../consts/diceConstants';
-import getButtonLabel from '../../utils/getButtonLabel';
-
-interface DicePropTypes {
-	handleRollDice: Function;
-	diceType: string;
-}
+} from '../../consts/consts';
+import { D100_SL } from '../../consts/consts';
+import { DicePropTypes } from './DiceTypes';
+import { POOL } from '../../consts/diceConstants';
 
 function Dice({
 	handleRollDice,
-	diceType
+	diceType,
+	imageFilename,
+	label,
+	extraMark
 }: DicePropTypes
 ) {
 	const DropdownContent = () => {
@@ -42,31 +40,38 @@ function Dice({
 		);
 	};
 
-	const shouldUseButton = (dt:string) => dt === D100_SL || dt=== D20_CONAN_HL || dt=== D20_CONAN_TEST;
+	const shouldUseButton = (dt:string) => {
+		return (
+			dt === D100_SL ||
+			dt === D20_CONAN_HL ||
+			dt === D20_CONAN_TEST ||
+			dt === POOL
+		);
+	};
 
-	const buttonLabel = getButtonLabel(diceType);
-
-	let extraMark = null; 
-	if (diceType === D5) {
-		extraMark = <span className="dice__extra-mark">d5</span>;
-	}
+	const imageUrl = require(`../../img/${imageFilename}`);
 
 	return (
 		<Card className={`dice dice--${diceType}`}>
 			<Card.Body>
-				{ extraMark }
-				<div className="dice__image" onClick={() => handleRollDice(diceType) }></div>
+				{ extraMark && <span className="dice__extra-mark">{ extraMark }</span> }
+				<div
+					className="dice__image"
+					style={{
+						backgroundImage: `url(${imageUrl})`
+					}}
+					onClick={() => handleRollDice(diceType) }></div>
 			</Card.Body>
 			<Card.Footer>
 				{
 					shouldUseButton(diceType) 
 					? <Button
 						onClick={ () => handleRollDice(diceType, 1) }
-						variant="primary">{buttonLabel}</Button>
+						variant="primary">{label}</Button>
 					: <DropdownButton
 							id="dropdown-basic-button"
 							variant="primary"
-							title={buttonLabel}
+							title={label}
 							className="dice-button">
 						<DropdownContent />
 					</DropdownButton>

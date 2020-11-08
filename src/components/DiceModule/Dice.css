@@ -55,27 +55,11 @@
 }
 
 .dice--d100SL .dice__image {
-	background-image: url('../../img/d100.png');
 	filter: hue-rotate(210deg) contrast(1.6);
 }
 .dice--d5 .dice__image {
-	background-image: url('../../img/d10.png');
 	filter: hue-rotate(75deg);
 }
-.dice--d100 .dice__image { background-image: url('../../img/d100.png') }
-.dice--d20 .dice__image { background-image: url('../../img/d20.png') }
-.dice--d12 .dice__image { background-image: url('../../img/d12.png') }
-.dice--d10 .dice__image { background-image: url('../../img/d10.png') }
-.dice--d8 .dice__image {  background-image: url('../../img/d8.png') }
-.dice--d6 .dice__image {  background-image: url('../../img/d6.png') }
-.dice--d4 .dice__image {  background-image: url('../../img/d4.png') }
-
-.dice--d20conan .dice__image { background-image: url('../../img/d20conan.png') }
-.dice--d20conan-test .dice__image { background-image: url('../../img/d20conan-test.png') }
-.dice--d20conan-hl .dice__image { background-image: url('../../img/d20conan-hl.png') }
-.dice--d6conan .dice__image {  background-image: url('../../img/d6conan.png') }
-
-.dice--pool .dice__image {  background-image: url('../../img/pool.png') }
 
 @media only screen and (min-width: 480px) {
 	.dice {

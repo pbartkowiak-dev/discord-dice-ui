@@ -8,15 +8,18 @@ import {
 	OPEN_WARHAMMER_MODAL,
 	CLOSE_WARHAMMER_MODAL,
 	OPEN_SETTINGS_MODAL,
-	CLOSE_SETTINGS_MODAL
+	CLOSE_SETTINGS_MODAL,
+	OPEN_POOL_BUILDER_MODAL,
+	CLOSE_POOL_BUILDER_MODAL
 } from '../actions/modals';
 
-export type modalsStateTypes = {
-	isCoCModalOpen: boolean
-	isConanModalOpen: boolean
-	isWarhammerModalOpen: boolean
-	isModifierModalOpen: boolean
-	isSettingsModalOpen: boolean
+export interface ModalsStateTypes {
+	isCoCModalOpen: boolean;
+	isConanModalOpen: boolean;
+	isWarhammerModalOpen: boolean;
+	isModifierModalOpen: boolean;
+	isSettingsModalOpen: boolean;
+	isPoolBuilderModalOpen: boolean;
 }
 
 const modalsState = {
@@ -24,10 +27,11 @@ const modalsState = {
 	isConanModalOpen: false,
 	isWarhammerModalOpen: false,
 	isModifierModalOpen: false,
-	isSettingsModalOpen: false
+	isSettingsModalOpen: false,
+	isPoolBuilderModalOpen: false
 };
 
-function modalsReducer(state:modalsStateTypes = modalsState, action: any) {
+function modalsReducer(state: ModalsStateTypes = modalsState, action: any) {
 	switch (action.type) {
 		case CLOSE_COC_MODAL:
 			return {
@@ -78,6 +82,16 @@ function modalsReducer(state:modalsStateTypes = modalsState, action: any) {
 			return {
 				...state,
 				isConanModalOpen: true
+			};
+		case OPEN_POOL_BUILDER_MODAL:
+			return {
+				...state,
+				isPoolBuilderModalOpen: true
+			};
+		case CLOSE_POOL_BUILDER_MODAL:
+			return {
+				...state,
+				isPoolBuilderModalOpen: false
 			};
 	}
 	return state;

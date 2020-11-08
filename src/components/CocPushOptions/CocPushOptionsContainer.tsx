@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { hideMsg } from '../../actions/modals';
 import CoCPushOptions from './CocPushOptions';
 import { requestRoll } from '../../actions/roll.actions';
-import { D100_SL } from '../../consts/warhammerConstants';
+import { D100_SL } from '../../consts/consts';
 
 const mapDispatchToProps = {
 	hideMsg,

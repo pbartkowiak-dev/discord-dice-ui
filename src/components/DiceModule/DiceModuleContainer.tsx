@@ -14,14 +14,8 @@ const mapDispatchToProps = { submitRoll };
 function DiceModuleContainer({
 	diceModuleForm,
 	submitRoll
-}:any ) {
-	// @TODO rollOPTIONS separate from form values preferences
-	// @TODO set default values
-	let rollOptions = {};
-	if (diceModuleForm && diceModuleForm.values) {
-		rollOptions = diceModuleForm.values;
-	}
-
+}: any ) {
+	const rollOptions = diceModuleForm?.values || {};
 	return (
 		<DiceModule
 			rollOptions={rollOptions}

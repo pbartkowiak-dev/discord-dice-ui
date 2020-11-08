@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import classNames from 'classnames/bind';
 import Button from 'react-bootstrap/Button';
 import CodeSpan from '../CodeSpan/CodeSpan';
-import { D6_CONAN, D20_CONAN_TEST } from '../../consts/conanConstants';
+import { D6_CONAN, D20_CONAN_TEST } from '../../consts/consts';
 import { SelectedDiceType } from '../../reducers/diceSelectedReducer';
 import styles from './Reroll.module.css';
 

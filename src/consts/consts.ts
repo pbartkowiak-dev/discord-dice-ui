@@ -1,3 +1,9 @@
+export const COC = 'coc';
+
+export const WARHAMMER = 'warhammer';
+export const D100_SL = 'd100SL';
+export const SL = 'SL';
+
 export const CONAN = 'conan';
 export const D6_CONAN = 'd6conan';
 export const D20_CONAN_TEST = 'd20conan-test';

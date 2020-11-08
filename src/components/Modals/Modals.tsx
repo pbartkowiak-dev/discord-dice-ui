@@ -7,11 +7,12 @@ import ResultsModalContainer from '../ResultsModal/ResultsModalContainer';
 import CoCModalContainer from '../CoCModal/CoCModalContainer';
 import WarhammerModalContainer from '../WarhammerModal/WarhammerModalContainer';
 import ConanModalContainer from '../ConanModal/ConanModalContainer';
+import PoolBuilderModalContainer from '../PoolBuilderModal/PoolBuilderModalContainer';
 
-import { modalsStateTypes } from '../../reducers/modalsReducer';
+import { ModalsStateTypes } from '../../reducers/modalsReducer';
 
 type modalsPropTypes = {
-	modalsState: modalsStateTypes
+	modalsState: ModalsStateTypes
 }
 
 const mapStateToProps = (state: any) => {
@@ -29,6 +30,7 @@ function Modals({ modalsState }: modalsPropTypes
 			<CoCModalContainer showModal={modalsState.isCoCModalOpen} />
 			<WarhammerModalContainer showModal={modalsState.isWarhammerModalOpen} />
 			<ConanModalContainer showModal={modalsState.isConanModalOpen} />
+			<PoolBuilderModalContainer showModal={modalsState.isPoolBuilderModalOpen} />
 			<ResultsModalContainer />
 		</>
 	);

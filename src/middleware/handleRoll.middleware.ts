@@ -1,6 +1,13 @@
-import { D6_CONAN, D20_CONAN_TEST, D20_CONAN_HL } from '../consts/conanConstants';
-import { D100_SL } from '../consts/warhammerConstants';
-import { openWarhammerModal, openCoCModal, openConanModal, openModifierModal } from '../actions/modals';
+import { POOL } from '../consts/diceConstants';
+import { D6_CONAN, D20_CONAN_TEST, D20_CONAN_HL } from '../consts/consts';
+import { D100_SL } from '../consts/consts';
+import {
+	openWarhammerModal,
+	openCoCModal,
+	openConanModal,
+	openModifierModal,
+	openPoolBuilderModal
+} from '../actions/modals';
 import {
 	requestRoll,
 	resetRollCounter,
@@ -41,6 +48,8 @@ const handleRoll = (store:any) => (next:any) => (action:any) => {
 					diceAmount,
 					modifier: 0
 				}));
+			} else if (diceType === POOL) {
+				store.dispatch(openPoolBuilderModal());
 			} else if (formValues.useModifier) {
 				store.dispatch(openModifierModal());
 			} else {

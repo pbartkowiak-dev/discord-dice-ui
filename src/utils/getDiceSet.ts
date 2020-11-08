@@ -1,11 +1,10 @@
 import { classicSet, warhammerSet, conanSet, CoCSet } from '../consts/diceSets';
-import { CONAN } from '../consts/conanConstants';
-import { WARHAMMER } from '../consts/warhammerConstants';
-import { COC } from '../consts/CoCConstants';
+import { CONAN } from '../consts/consts';
+import { WARHAMMER } from '../consts/consts';
+import { COC } from '../consts/consts';
+import { SetTypes, diceSet } from '../components/DiceModule/DiceTypes';
 
-export type SetTypes = 'coc' | 'warhammer' | 'conan' | 'classic';
-
-export default (setType: SetTypes) => {
+export default (setType: SetTypes): diceSet => {
 	if (setType === WARHAMMER) {
 		return warhammerSet;
 	} else if (setType === CONAN) {
