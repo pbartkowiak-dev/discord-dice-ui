@@ -1,4 +1,4 @@
-import { DICE_POOL_ROLL_REQUESTED, diceRolled} from '../actions/roll.actions';
+import { DICE_POOL_ROLL_REQUESTED, dicePoolRolled} from '../actions/roll.actions';
 import getDieNumberVal from '../utils/getDieNumberVal';
 import getResultsArray from '../utils/getResultsArray';
 
@@ -21,13 +21,7 @@ export default (store: any) => (next: any) => (action: any) => {
 
 		console.log('DICE_POOL_ROLL_REQUESTED', pool)
 
-		// store.dispatch(diceRolled({
-		// 	result,
-		// 	rollOptions: {
-		// 		...action.payload,
-		// 		...formValues
-		// 	}
-		// }));
+		store.dispatch(dicePoolRolled({ results }));
 
 	}
 	next(action);

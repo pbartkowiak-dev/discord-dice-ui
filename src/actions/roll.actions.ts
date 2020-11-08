@@ -1,6 +1,7 @@
 export const DIE_CLICKED = 'DIE_CLICKED';
 export const ROLL_SUBMITTED = 'ROLL_SUBMITTED';
 export const DICE_POOL_ROLL_REQUESTED = 'DICE_POOL_ROLL_REQUESTED';
+export const DICE_POOL_ROLLED = 'DICE_POOL_ROLLED';
 export const DICE_ROLL_REQUESTED = 'DICE_ROLL_REQUESTED';
 export const DICE_ROLL = 'DICE_ROLL';
 export const DICE_ROLLED = 'DICE_ROLLED';
@@ -46,6 +47,13 @@ export function requestReroll(payload: any ) {
 export function diceRolled(payload: any) {
 	return {
 		type: DICE_ROLLED, 
+		payload
+	};
+}
+
+export function dicePoolRolled(payload: any) {
+	return {
+		type: DICE_POOL_ROLLED, 
 		payload
 	};
 }
