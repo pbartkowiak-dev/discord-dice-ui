@@ -19,6 +19,7 @@ function PoolBuilderDie({
 				<Card.Img
 					variant="top"
 					className={styles.dieImage}
+					onClick={() => onIncrease(diceType)}
 					src={require(`../../img/${imageFilename}`)} />
 			</Card.Body>
 			<Card.Footer className={styles.dieFooter}>
