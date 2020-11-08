@@ -8,6 +8,7 @@ function PoolBuilderDie({
 	title,
 	imageFilename,
 	value,
+	onChange,
 	onIncrease,
 	onDecrease
 }: any) {
@@ -26,6 +27,7 @@ function PoolBuilderDie({
 				<PoolBuilderCounter
 					value={value}
 					diceType={diceType}
+					onChange={onChange}
 					onIncrease={onIncrease}
 					onDecrease={onDecrease}
 				/>

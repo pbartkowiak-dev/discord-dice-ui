@@ -30,15 +30,38 @@ function PoolBuilder({
 		return diceType !== POOL;
 	});
 
+	const isValid = (num: number) => {
+		const maxAmount = 15;
+		const minAmount = 0
+		return !isNaN(num) && num >= minAmount && num <= maxAmount;
+	};
+
+	const onChange = (diceType: string, event: any) => {
+		const { value } = event.target;
+		if (value) {
+			const numVal = Number(value);
+			if (isValid(numVal)) {
+				setState({
+					...poolState,
+				// @ts-ignore
+					[diceType]: numVal
+				});
+			}
+		}
+	};
+
 	const onIncrease = (diceType: string) => {
-		console.log('onIncrease, diceType', diceType);
 		// @ts-ignore
 		if (poolState[diceType]) {
-			setState({
-				...poolState,
 			// @ts-ignore
-				[diceType]: Number(poolState[diceType]) + 1
-			});
+			const newVal = Number(poolState[diceType]) + 1;
+			if (isValid(newVal)) {
+				setState({
+					...poolState,
+				// @ts-ignore
+					[diceType]: newVal
+				});
+			}
 		} else {
 			setState({
 				...poolState,
@@ -50,11 +73,15 @@ function PoolBuilder({
 	const onDecrease = (diceType: string) => {
 		// @ts-ignore
 		if (poolState[diceType]) {
-			setState({
-				...poolState,
 			// @ts-ignore
-				[diceType]: Number(poolState[diceType]) - 1
-			});
+			const newVal = Number(poolState[diceType]) - 1;
+			if (isValid(newVal)) {
+				setState({
+					...poolState,
+				// @ts-ignore
+					[diceType]: newVal
+				});
+			}
 		} else {
 			setState({
 				...poolState,
@@ -71,6 +98,7 @@ function PoolBuilder({
 			imageFilename={imageFilename}
 			// @ts-ignore
 			value={poolState[diceType] || ''}
+			onChange={onChange}
 			onIncrease={onIncrease}
 			onDecrease={onDecrease}
 		/>
@@ -81,7 +109,7 @@ function PoolBuilder({
 		<form
 			id="pool-builder-form"
 			className={styles.diceContainer}
-			onSubmit={handleSubmit}>
+			onSubmit={(event) => handleSubmit(event, poolState)}>
 				{ PoolBuilderDice }
 		</form>
 	);

@@ -11,6 +11,7 @@ const Minus = <FontAwesomeIcon icon={faMinus} />;
 
 function PoolBuilderCounter({
 	diceType,
+	onChange,
 	onIncrease,
 	onDecrease,
 	value
@@ -20,14 +21,15 @@ function PoolBuilderCounter({
 		<InputGroup.Prepend>
 			<Button
 				variant="primary"
-				onClick={() => onDecrease(diceType)}
+				onClick={(event) => onDecrease(diceType)}
 				className={styles.counterBtnLeft}
 			>{Minus}</Button>
 		</InputGroup.Prepend>
 		<FormControl
 			className={styles.input}
 			value={value}
-			onChange={() => {}}
+			placeholder="0"
+			onChange={(event) => onChange(diceType, event)}
 		/>
 		<InputGroup.Append>
 			<Button

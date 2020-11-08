@@ -10,7 +10,10 @@ function PoolBuilderModal({
 	requestRoll
 }: PoolBuilderModalPropTypes
 ) {
-	const handleSubmit = (values: any) => {
+	const handleSubmit = (event: React.FormEvent, values: any) => {
+		event.preventDefault();
+		console.log('values', values);
+
 		// requestRoll({
 		// 	diceType: D100_SL,
 		// 	...values
@@ -24,7 +27,7 @@ function PoolBuilderModal({
 				<Modal.Title>Pool Builder</Modal.Title>
 			</Modal.Header>
 			<Modal.Body>
-				<PoolBuilderContainer onSubmit={(values:any) => handleSubmit(values)} />
+				<PoolBuilderContainer handleSubmit={handleSubmit} />
 			</Modal.Body>
 			<Modal.Footer>
 				<Button variant="secondary" onClick={closePoolBuilderModal}>

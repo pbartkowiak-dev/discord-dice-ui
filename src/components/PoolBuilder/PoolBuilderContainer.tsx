@@ -9,12 +9,14 @@ function mapStateToProps(state:any) {
 }
 
 function PoolBuilderContainer({
+	handleSubmit,
 	diceModuleForm
 }: any) {
 	const rollOptions = diceModuleForm?.values || {};
 	return (
 		<PoolBuilder
 			rollOptions={rollOptions}
+			handleSubmit={handleSubmit}
 		/>
 	);
 }
