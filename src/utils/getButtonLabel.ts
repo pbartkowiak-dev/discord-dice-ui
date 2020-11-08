@@ -1,5 +1,5 @@
 import { COMBAT_DIE, D20_CONAN, D20_CONAN_HL, D20_CONAN_TEST, D6_CONAN, HIT_LOCATION } from "../consts/conanConstants";
-import { D20, SKILL_TEST } from "../consts/diceConstants";
+import { D20, SKILL_TEST, POOL, POOL_BUILDER } from "../consts/diceConstants";
 import { D100_SL } from "../consts/warhammerConstants";
 
 export default (diceType: string) => {
@@ -13,6 +13,8 @@ export default (diceType: string) => {
 		return D20;
 	} else if (diceType === D20_CONAN_TEST) {
 		return SKILL_TEST;
+	} else if (diceType === POOL) {
+		return POOL_BUILDER;
 	}
 	return diceType;
 };

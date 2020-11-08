@@ -8,7 +8,8 @@ import {
 	D8,
 	D6,
 	D5,
-	D4
+	D4,
+	POOL
 } from './diceConstants';
 
 export const classicSet = [
@@ -18,7 +19,8 @@ export const classicSet = [
 	D10,
 	D8,
 	D6,
-	D4
+	D4,
+	POOL
 ];
 
 export const CoCSet = [

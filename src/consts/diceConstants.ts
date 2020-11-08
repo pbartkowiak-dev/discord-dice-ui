@@ -8,3 +8,5 @@ export const D6 = 'd6';
 export const D5 = 'd5';
 export const D4 = 'd4';
 export const SKILL_TEST = 'Skill Test';
+export const POOL_BUILDER = 'Pool Builder';
+export const POOL = 'pool';

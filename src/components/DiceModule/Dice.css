@@ -75,6 +75,8 @@
 .dice--d20conan-hl .dice__image { background-image: url('../../img/d20conan-hl.png') }
 .dice--d6conan .dice__image {  background-image: url('../../img/d6conan.png') }
 
+.dice--pool .dice__image {  background-image: url('../../img/pool.png') }
+
 @media only screen and (min-width: 480px) {
 	.dice {
 		flex-direction: column;
