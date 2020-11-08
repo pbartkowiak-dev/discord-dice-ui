@@ -1,23 +1,18 @@
 import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import { PoolBuilderModalPropTypes } from './PoolBuilderModalTypes';
+import { PoolBuilderModalPropTypes, PoolType } from './PoolBuilderModalTypes';
 import PoolBuilderContainer from '../PoolBuilder/PoolBuilderContainer';
 
 function PoolBuilderModal({
 	showModal,
 	closePoolBuilderModal,
-	requestRoll
+	submitRoll
 }: PoolBuilderModalPropTypes
 ) {
-	const handleSubmit = (event: React.FormEvent, values: any) => {
+	const handleSubmit = (event: React.FormEvent, pool: PoolType) => {
 		event.preventDefault();
-		console.log('values', values);
-
-		// requestRoll({
-		// 	diceType: D100_SL,
-		// 	...values
-		// });
+		submitRoll({ pool });
 		closePoolBuilderModal();
 	};
 

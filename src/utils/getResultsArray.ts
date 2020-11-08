@@ -3,7 +3,7 @@ import getRandom from './getRandom';
 export default (
 	diceType: number,
 	diceAmount: number,
-	keepUnits: boolean
+	keepUnits?: boolean
 ) => {
 	const rollsArr = new Array(diceAmount).fill('');
 

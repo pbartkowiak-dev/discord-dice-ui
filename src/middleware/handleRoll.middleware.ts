@@ -13,7 +13,8 @@ import {
 	resetRollCounter,
 	ROLL_SUBMITTED,
 	resetSelectedDice,
-	storeSelectedDice
+	storeSelectedDice,
+	requestPoolRoll
 } from '../actions/roll.actions';
 
 const handleRoll = (store:any) => (next:any) => (action:any) => {
@@ -34,8 +35,11 @@ const handleRoll = (store:any) => (next:any) => (action:any) => {
 				diceAmount
 			}));
 
-
-			if (formValues.cocMode && diceType === D100_SL) {
+			if (action?.payload?.pool) {
+				store.dispatch(requestPoolRoll({
+					...action.payload
+				}));
+			} else if (formValues.cocMode && diceType === D100_SL) {
 				store.dispatch(openCoCModal());
 			} else if (formValues.warhammerMode && diceType === D100_SL) {
 				openWarhammerModal();

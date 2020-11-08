@@ -1,24 +1,24 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { closePoolBuilderModal } from '../../actions/modals';
-import { requestRoll } from '../../actions/roll.actions';
+import { submitRoll } from '../../actions/roll.actions';
 import PoolBuilderModal from './PoolBuilderModal';
 import { PoolBuilderModalPropTypes } from './PoolBuilderModalTypes';
 
 const mapDispatchToProps = {
 	closePoolBuilderModal,
-	requestRoll
+	submitRoll
 };
 
 function PoolBuilderModalContainer({
 	closePoolBuilderModal,
-	requestRoll,
+	submitRoll,
 	showModal
 }: any) {
 	return (
 		<PoolBuilderModal
 			closePoolBuilderModal={closePoolBuilderModal}
-			requestRoll={requestRoll}
+			submitRoll={submitRoll}
 			showModal={showModal}
 		/>
 	);

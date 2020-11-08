@@ -42,7 +42,7 @@ interface rollDiceResult {
 	assistanceDiceResults?: Array<number>;
 }
 
-const roll = (store: any) => (next: any) => (action: any) => {
+export default (store: any) => (next: any) => (action: any) => {
 	if (action.type === DICE_ROLL_REQUESTED) {
 		const state = store.getState();
 		const { form : { diceModuleForm } } = state;
@@ -202,5 +202,3 @@ const roll = (store: any) => (next: any) => (action: any) => {
 	}
 	next(action);
 };
-
-export default roll;
