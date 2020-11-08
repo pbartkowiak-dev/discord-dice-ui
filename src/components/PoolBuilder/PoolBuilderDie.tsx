@@ -4,22 +4,30 @@ import PoolBuilderCounter from './PoolBuilderCounter';
 import styles from './PoolBuilder.module.css';
 
 function PoolBuilderDie({
+	diceType,
 	title,
-	imageFilename
+	imageFilename,
+	value,
+	onIncrease,
+	onDecrease
 }: any) {
+	
 	return (
 		<Card className={styles.dieCard}>
 			<Card.Body className={styles.dieBody}>
 				<Card.Subtitle className="text-center text-muted">{ title }</Card.Subtitle>
-				{/* <div className="dice__image"></div> */}
-				{/* <Card.Img variant="top" src={d4} /> */}
 				<Card.Img
 					variant="top"
 					className={styles.dieImage}
 					src={require(`../../img/${imageFilename}`)} />
 			</Card.Body>
 			<Card.Footer className={styles.dieFooter}>
-				<PoolBuilderCounter />
+				<PoolBuilderCounter
+					value={value}
+					diceType={diceType}
+					onIncrease={onIncrease}
+					onDecrease={onDecrease}
+				/>
 			</Card.Footer>
 		</Card>
 	);

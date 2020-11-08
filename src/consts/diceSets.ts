@@ -43,7 +43,7 @@ export const classicSet = [{
 }, {
 	diceType: POOL,
 	imageFilename: 'pool.png',
-	label: 'Pool builder'
+	label: 'Pool Builder'
 }];
 
 export const CoCSet = [{

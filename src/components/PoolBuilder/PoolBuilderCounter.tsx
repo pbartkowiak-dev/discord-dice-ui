@@ -9,17 +9,32 @@ import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 const Plus = <FontAwesomeIcon icon={faPlus} />;
 const Minus = <FontAwesomeIcon icon={faMinus} />;
 
-function PoolBuilderCounter() {
+function PoolBuilderCounter({
+	diceType,
+	onIncrease,
+	onDecrease,
+	value
+}: any) {
 	return (
 		<InputGroup className="mb-3">
 		<InputGroup.Prepend>
-			<Button variant="primary" className={styles.counterBtnLeft}>{Minus}</Button>
+			<Button
+				variant="primary"
+				onClick={() => onDecrease(diceType)}
+				className={styles.counterBtnLeft}
+			>{Minus}</Button>
 		</InputGroup.Prepend>
 		<FormControl
 			className={styles.input}
+			value={value}
+			onChange={() => {}}
 		/>
 		<InputGroup.Append>
-			<Button variant="primary" className={styles.counterBtnRight}>{Plus}</Button>
+			<Button
+				variant="primary"
+				onClick={() => onIncrease(diceType)}
+				className={styles.counterBtnRight}
+			>{Plus}</Button>
 		</InputGroup.Append>
 	  </InputGroup>
 	);
