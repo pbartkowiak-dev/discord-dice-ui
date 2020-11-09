@@ -14,7 +14,8 @@ import {
 	ROLL_SUBMITTED,
 	resetSelectedDice,
 	storeSelectedDice,
-	requestPoolRoll
+	requestPoolRoll,
+	resetSelectedPool
 } from '../actions/roll.actions';
 
 const handleRoll = (store:any) => (next:any) => (action:any) => {
@@ -34,6 +35,8 @@ const handleRoll = (store:any) => (next:any) => (action:any) => {
 				diceType,
 				diceAmount
 			}));
+
+			store.dispatch(resetSelectedPool())
 
 			if (action?.payload?.pool) {
 				store.dispatch(requestPoolRoll({

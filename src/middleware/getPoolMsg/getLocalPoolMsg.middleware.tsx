@@ -1,17 +1,13 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowAltCircleUp, faArrowAltCircleDown } from '@fortawesome/free-regular-svg-icons';
-import { faArrowAltCircleRight, faSkull, faSun } from '@fortawesome/free-solid-svg-icons';
+import { faArrowAltCircleRight, faDiceD6 } from '@fortawesome/free-solid-svg-icons';
 import joinAsBlocks from '../../utils/joinAsBlocks';
 import CodeSpan from '../../components/CodeSpan/CodeSpan';
 import styles from '../../components/ResultsModal/ResultsModal.module.css';
 import { DICE_POOL_ROLLED, localMsgReady } from '../../actions/roll.actions';
 
-const IconUp = <FontAwesomeIcon icon={faArrowAltCircleUp} />;
-const IconDown = <FontAwesomeIcon icon={faArrowAltCircleDown} />;
 const IconRight = <FontAwesomeIcon icon={faArrowAltCircleRight} />;
-const IconScull = <FontAwesomeIcon icon={faSkull} />;
-const IconSun = <FontAwesomeIcon icon={faSun} />;
+const IconD6 = <FontAwesomeIcon icon={faDiceD6} />;
 
 const getLocalMsg = (store:any) => (next:any) => (action:any) => {
 	if (action.type === DICE_POOL_ROLLED) {
@@ -20,20 +16,42 @@ const getLocalMsg = (store:any) => (next:any) => (action:any) => {
 		const { rerollCount } = state;
 		const formValues = diceModuleForm?.values || {};
 		const { results } = action.payload;
+		const allResults: Array<number> = [];
 		const fields = [];
 
+		if (rerollCount) {
+			const timesWord = rerollCount === 1 ? 'time' : 'times';
+			fields.push(
+				<div className={styles.generalResult}>Rerolled <CodeSpan>{rerollCount}</CodeSpan> {timesWord}</div>
+			);
+		}
+		
 		Object.keys(results).forEach((diceType: string) => {
+			const resultsForDiceType: Array<number> = results[diceType];
+			fields.push(
+				<div className={styles.poolResultsBlock}>
+					<div>{IconD6} <strong>{resultsForDiceType.length}{diceType}:</strong></div>
+					<div className={styles.poolResultsRow}>{joinAsBlocks(resultsForDiceType)}</div>
+				</div>
+			);
 
+			resultsForDiceType.forEach((result: number) => {
+				allResults.push(result);
+			});
 		});
 
-		console.log('DICE_POOL_ROLLED results', results)
+		const sumJoined = joinAsBlocks(allResults, '+');
+		fields.push(
+			<div>
+				<div>{IconRight} <strong>Sum of</strong> {sumJoined}<strong>:</strong></div>
+				<div className={styles.poolResultsRow}>Total: <CodeSpan>{allResults.reduce((a, b) => a + b, 0)}</CodeSpan></div>
+			</div>
+		);
 		
-		// store.dispatch(localMsgReady({
-		// 	title,
-		// 	fields,
-		// 	rollOptions: rollDetails,
-		// 	results
-		// }));
+		store.dispatch(localMsgReady({
+			fields,
+			results
+		}));
 	}
 	next(action);
 };

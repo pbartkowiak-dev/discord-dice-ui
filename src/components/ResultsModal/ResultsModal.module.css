@@ -139,6 +139,16 @@
 	margin: 0;
 }
 
+.poolResultsBlock {
+	border-bottom: 1px solid #bebebe;
+	padding-bottom: 5px;
+	margin-bottom: 5px;
+}
+
+.poolResultsRow {
+	padding-left: 15px;
+}
+
 @media only screen and (min-width: 480px) {
 	.resultsBody {
 		font-size: 1.1rem;

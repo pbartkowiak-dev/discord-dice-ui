@@ -85,7 +85,7 @@ const getLocalMsg = (store:any) => (next:any) => (action:any) => {
 		if (rerollCount) {
 			const timesWord = rerollCount === 1 ? 'time' : 'times';
 			fields.push(
-				<div className={`${styles.generalResult}`}>Rerolled <CodeSpan>{rerollCount}</CodeSpan> {timesWord}</div>
+				<div className={styles.generalResult}>Rerolled <CodeSpan>{rerollCount}</CodeSpan> {timesWord}</div>
 			);
 		}
 	
@@ -116,16 +116,14 @@ const getLocalMsg = (store:any) => (next:any) => (action:any) => {
 				/>
 			);
 		}
-
-		const rollDetails = {
-			...rollOptions,
-			...formValues,
-		}
 	
 		store.dispatch(localMsgReady({
 			title,
 			fields,
-			rollOptions: rollDetails,
+			rollOptions: {
+				...rollOptions,
+				...formValues,
+			},
 			results
 		}));
 	}

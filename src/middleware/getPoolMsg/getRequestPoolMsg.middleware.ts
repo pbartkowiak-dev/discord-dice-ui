@@ -1,9 +1,6 @@
 import { getColor } from '../../utils/getColor';
 import joinAsBlocks from '../../utils/joinAsBlocks';
-import getConanHitLocation from '../../utils/getConanHitLocations';
-import { D6_CONAN, D20_CONAN_HL } from '../../consts/consts';
 import { DICE_POOL_ROLLED, requestMsgReady } from '../../actions/roll.actions';
-import { ReactElement } from 'react';
 
 export default (store:any) => (next:any) => (action:any) => {
 	if (action.type === DICE_POOL_ROLLED) {
@@ -22,7 +19,6 @@ export default (store:any) => (next:any) => (action:any) => {
 		}
 		
 		Object.keys(results).forEach((diceType: string) => {
-
 			const resultsForDiceType: Array<number> = results[diceType];
 			fields.push({
 				name: `:game_die: \`${resultsForDiceType.length}${diceType}\`:`,
@@ -32,16 +28,13 @@ export default (store:any) => (next:any) => (action:any) => {
 			resultsForDiceType.forEach((result: number) => {
 				allResults.push(result);
 			});
-
 		});
 
 		const sumJoined = joinAsBlocks(allResults, '+', true);
-		let name = `:arrow_right: Sum of ${sumJoined}`;
 		fields.push({
-			name,
+			name: `:arrow_right: Sum of ${sumJoined}`,
 			value: `Total: \`${allResults.reduce((a, b) => a + b, 0)}\`.`
 		});
-
 	
 		store.dispatch(requestMsgReady({
 			msgTitle: `${username} rolled the dice. Results:`,
