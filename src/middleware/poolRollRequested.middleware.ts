@@ -10,7 +10,7 @@ export default (store: any) => (next: any) => (action: any) => {
 		const { pool } = action.payload;
 		const results = {};
 
-		store.dispatch(storeSelectedPool({ pool }));
+		store.dispatch(storeSelectedPool(pool));
 
 		Object.keys(pool).forEach((diceType: string) => {
 			const diceTypeNum = getDieNumberVal(diceType);
