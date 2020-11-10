@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import Card from 'react-bootstrap/Card';
 import PoolBuilderCounter from './PoolBuilderCounter';
 import styles from './PoolBuilder.module.css';
@@ -16,7 +17,11 @@ function PoolBuilderDie({
 	return (
 		<Card className={styles.dieCard}>
 			<Card.Body className={styles.dieBody}>
-				<Card.Subtitle className="text-center text-muted">{ title }</Card.Subtitle>
+				<Card.Subtitle className={classNames({
+					'text-center': true,
+					'text-muted': true,
+					[styles.dieCardTitle]: true
+				})}>{ title }</Card.Subtitle>
 				<Card.Img
 					variant="top"
 					className={styles.dieImage}

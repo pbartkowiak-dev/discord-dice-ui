@@ -1,4 +1,5 @@
 import React from 'react';
+import classNames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import FormControl from 'react-bootstrap/FormControl';
 import InputGroup from 'react-bootstrap/InputGroup';
@@ -22,7 +23,10 @@ function PoolBuilderCounter({
 			<Button
 				variant="primary"
 				onClick={(event) => onDecrease(diceType)}
-				className={styles.counterBtnLeft}
+				className={classNames({
+					[styles.counterBtnLeft]: true,
+					[styles.btn]: true
+				})}
 			>{Minus}</Button>
 		</InputGroup.Prepend>
 		<FormControl
@@ -35,7 +39,10 @@ function PoolBuilderCounter({
 			<Button
 				variant="primary"
 				onClick={() => onIncrease(diceType)}
-				className={styles.counterBtnRight}
+				className={classNames({
+					[styles.counterBtnRight]: true,
+					[styles.btn]: true
+				})}
 			>{Plus}</Button>
 		</InputGroup.Append>
 	  </InputGroup>

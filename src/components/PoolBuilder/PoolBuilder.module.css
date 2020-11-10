@@ -1,27 +1,94 @@
 .diceContainer {
 	display: grid;
-	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    grid-gap: 20px 15px;
+	grid-template-columns: 1fr;
+	grid-gap: 20px 15px;
 	justify-items: center;
 }
 
-.dieCard {
-	max-width: 170px;
+.dieCardTitle {
+	padding: 5px 0 1px;
+	background-color: #f1f1f1;
+	border-bottom: 1px solid #ced4da;
+}
+
+.dieImage {
+	width: 40px;
+	height: auto;
+	margin-top: 4px;
+	margin-bottom: 4px;
+	align-self: center;
+	cursor: pointer;
 }
 
 .dieBody {
 	display: flex;
 	flex-direction: column;
-	padding: 10px;
+	padding: 0;
+	overflow: hidden;
+	background: #f5f5f5;
 }
 
-.dieImage {
-	width: 65px;
-	height: auto;
-	margin-top: 10px;
-	align-self: center;
-	cursor: pointer;
+.input {
+	border: 0;
+	text-align: center;
+	font-size: 36px;
+	height: 55px;
 }
+
+.btn {
+	height: 55px;
+	width: 56px;
+	font-size: 26px;
+}
+
+@media only screen and (min-width: 480px) {
+	.diceContainer {
+		grid-template-columns: 1fr 1fr;
+	}
+	.dieCardTitle {
+		padding: 7px 0 2px;
+	}
+	.dieCard {
+		max-width: 170px;
+	}
+	.dieBody {
+		background: transparent;
+	}
+	
+	.dieImage {
+		margin-top: 10px;
+		margin-bottom: 10px;
+	}
+	.input {
+		text-align: center;
+		height: calc(1.5em + .75rem + 2px);
+		font-size: 1rem;
+		border: 1px solid #ced4da;
+	}
+	.btn {
+		width: auto;
+		height: auto;
+		font-size: inherit;
+		line-height: 1.5;
+	}
+	.dieImage {
+		width: 65px;
+	}
+}
+
+@media only screen and (min-width: 640px) {
+	.diceContainer {
+		grid-template-columns: 1fr 1fr 1fr;
+	}
+}
+
+@media only screen and (min-width: 960px) {
+	.diceContainer {
+		grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	}
+}
+
+
 
 .dieFooter {
 	padding: 0;
