@@ -64,6 +64,10 @@ button.disabled {
 	color: #7c7c7c;
 }
 
+.fade {
+	padding: 0 !important;
+}
+
 .mb-3.input-group {
 	margin-bottom: 0 !important;
 }
@@ -76,6 +80,9 @@ button.disabled {
 }
 
 @media only screen and (min-width: 480px) {
+	.fade {
+		padding: auto;
+	}
 	.icon-info {
 		display: inline-block;
 	}
