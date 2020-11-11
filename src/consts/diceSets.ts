@@ -9,7 +9,8 @@ import {
 	D6,
 	D5,
 	D4,
-	POOL
+	POOL,
+	MODIFIER
 } from './diceConstants';
 
 export const classicSet = [{
@@ -44,6 +45,40 @@ export const classicSet = [{
 	diceType: POOL,
 	imageFilename: 'pool.png',
 	label: 'Pool Builder'
+}];
+
+export const poolSet = [{
+	diceType: D100,
+	imageFilename: 'd100.png',
+	label: 'd100'
+}, {
+	diceType: D20,
+	imageFilename: 'd20.png',
+	label: 'd20'
+}, {
+	diceType: D12,
+	imageFilename: 'd12.png',
+	label: 'd12'
+}, {
+	diceType: D10,
+	imageFilename: 'd10.png',
+	label: 'd10'
+}, {
+	diceType: D8,
+	imageFilename: 'd8.png',
+	label: 'd8'
+}, {
+	diceType: D6,
+	imageFilename: 'd6.png',
+	label: 'd6'
+}, {
+	diceType: D4,
+	imageFilename: 'd4.png',
+	label: 'd4'
+}, {
+	diceType: MODIFIER,
+	imageFilename: 'modifier.png',
+	label: 'Apply Modifier'
 }];
 
 export const CoCSet = [{

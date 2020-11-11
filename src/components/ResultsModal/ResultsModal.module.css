@@ -149,6 +149,12 @@
 	padding-left: 15px;
 }
 
+.poolModifierResult {
+	padding-bottom: 3px;
+	margin-bottom: 5px;
+	border-bottom: 1px solid #bebebe;
+}
+
 @media only screen and (min-width: 480px) {
 	.resultsBody {
 		font-size: 1.1rem;

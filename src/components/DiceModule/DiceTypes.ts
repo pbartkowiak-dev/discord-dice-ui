@@ -20,5 +20,5 @@ interface diceSetElement {
 
 export type diceSet = Array<diceSetElement>
 
-export type SetTypes = 'coc' | 'warhammer' | 'conan' | 'classic';
+export type SetTypes = 'coc' | 'warhammer' | 'conan' | 'classic' | 'POOL';
 

@@ -9,6 +9,7 @@ function PoolBuilderDie({
 	title,
 	imageFilename,
 	value,
+	modifierValue,
 	onChange,
 	onIncrease,
 	onDecrease
@@ -31,6 +32,7 @@ function PoolBuilderDie({
 			<Card.Footer className={styles.dieFooter}>
 				<PoolBuilderCounter
 					value={value}
+					modifierValue={modifierValue}
 					diceType={diceType}
 					onChange={onChange}
 					onIncrease={onIncrease}

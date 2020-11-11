@@ -1,92 +1,136 @@
 import React, { useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import PoolBuilderDie from './PoolBuilderDie'
 import styles from './PoolBuilder.module.css';
-import { SetTypes } from '../DiceModule/DiceTypes';
-import { COC, CONAN, WARHAMMER } from '../../consts/consts';
-import { CLASSIC, POOL } from '../../consts/diceConstants';
+import { MODIFIER, POOL } from '../../consts/diceConstants';
 import getDiceSet from '../../utils/getDiceSet';
 
 function PoolBuilder({
 	rollOptions,
-	handleSubmit,
-	specialDie
+	handleSubmit
 }: any) {
-	const [poolState, setState] = useState({});
+	const [poolState, setPoolState] = useState({});
+	const [modifierState, setModifierState] = useState('0');
 
-	// @TODO MOVE TO ONE DICE SET GETTER
-	let diceSetType: SetTypes;
-	if (rollOptions.warhammerMode) {
-		diceSetType = WARHAMMER;
-	} else if(rollOptions.conanMode) {
-		diceSetType = CONAN;
-	} else if (rollOptions.cocMode) {
-		diceSetType = COC;
-	} else {
-		diceSetType = CLASSIC;
-	}
+	const diceSetType = POOL;
+	const diceSet = getDiceSet(diceSetType);
 
-	const diceSet = getDiceSet(diceSetType).filter(( { diceType }) => {
-		return diceType !== POOL;
-	});
-
-	const isValid = (num: number) => {
+	const isPoolValueValid = (num: number) => {
 		const maxAmount = 15;
-		const minAmount = 0
+		const minAmount = 0;
 		return !isNaN(num) && num >= minAmount && num <= maxAmount;
 	};
 
-	const onChange = (diceType: string, event: any) => {
-		const { value } = event.target;
+	const isModifierValueValid = (val: string | number) => {
+		const num = Number(val);
+		const maxAmount = 100;
+		const minAmount = -100;
+
+		if (val === '-') {
+			return true;
+		} else if (!isNaN(num) && num >= minAmount && num <= maxAmount) {
+			return true;
+		}
+		return false
+	};
+
+	const handlePoolChange = (diceType: string, value: number) => {
 		if (value) {
-			const numVal = Number(value);
-			if (isValid(numVal)) {
-				setState({
+			if (isPoolValueValid(value)) {
+				setPoolState({
 					...poolState,
 				// @ts-ignore
-					[diceType]: numVal
+					[diceType]: value
 				});
 			}
 		}
 	};
 
-	const onIncrease = (diceType: string) => {
+	const handlePoolIncrease =(diceType: string) => {
 		// @ts-ignore
 		if (poolState[diceType]) {
 			// @ts-ignore
 			const newVal = Number(poolState[diceType]) + 1;
-			if (isValid(newVal)) {
-				setState({
+			if (isPoolValueValid(newVal)) {
+				setPoolState({
 					...poolState,
 				// @ts-ignore
 					[diceType]: newVal
 				});
 			}
 		} else {
-			setState({
+			setPoolState({
 				...poolState,
 				[diceType]: 1
 			});
 		}
 	};
 
-	const onDecrease = (diceType: string) => {
+	const handlePoolDecrease =(diceType: string) => {
 		// @ts-ignore
 		if (poolState[diceType]) {
 			// @ts-ignore
 			const newVal = Number(poolState[diceType]) - 1;
-			if (isValid(newVal)) {
-				setState({
+			if (isPoolValueValid(newVal)) {
+				setPoolState({
 					...poolState,
 				// @ts-ignore
 					[diceType]: newVal
 				});
 			}
 		} else {
-			setState({
+			setPoolState({
 				...poolState,
 				[diceType]: 0
 			});
+		}
+	};
+
+	const handleModifierChange = (value: string) => {
+		if (value) {
+			if (isModifierValueValid(value)) {
+				setModifierState(String(value));
+			}
+		}
+	};
+
+	const handleModifierIncrease = () => {
+		const newVal = Number(modifierState) + 1;
+		if (isModifierValueValid(newVal)) {
+			setModifierState(String(newVal));
+		}
+	};
+
+	const handleModifierDecrease = () => {
+		const newVal = Number(modifierState) - 1;
+		if (isModifierValueValid(newVal)) {
+			setModifierState(String(newVal));
+		}
+	};
+	
+	const onIncrease = (diceType: string) => {
+		if (diceType === MODIFIER) {
+			handleModifierIncrease();
+		} else {
+			handlePoolIncrease(diceType);
+		}
+	};
+
+	const onDecrease = (diceType: string) => {
+		if (diceType === MODIFIER) {
+			handleModifierDecrease();
+		} else {
+			handlePoolDecrease(diceType);
+		}
+	};
+
+	const onChange = (diceType: string, event: any) => {
+		const { value } = event.target;
+		const numValue = Number(value)
+
+		if (diceType === MODIFIER) {
+			handleModifierChange(value);
+		} else {
+			handlePoolChange(diceType, numValue);
 		}
 	};
 
@@ -98,6 +142,7 @@ function PoolBuilder({
 			imageFilename={imageFilename}
 			// @ts-ignore
 			value={poolState[diceType] || ''}
+			modifierValue={modifierState}
 			onChange={onChange}
 			onIncrease={onIncrease}
 			onDecrease={onDecrease}
@@ -109,7 +154,7 @@ function PoolBuilder({
 		<form
 			id="pool-builder-form"
 			className={styles.diceContainer}
-			onSubmit={(event) => handleSubmit(event, poolState)}>
+			onSubmit={(event) => handleSubmit(event, poolState, modifierState)}>
 				{ PoolBuilderDice }
 		</form>
 	);

@@ -6,6 +6,7 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import Button from 'react-bootstrap/Button';
 import styles from './PoolBuilder.module.css';
 import { faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
+import { MODIFIER } from '../../consts/diceConstants';
 
 const Plus = <FontAwesomeIcon icon={faPlus} />;
 const Minus = <FontAwesomeIcon icon={faMinus} />;
@@ -15,6 +16,7 @@ function PoolBuilderCounter({
 	onChange,
 	onIncrease,
 	onDecrease,
+	modifierValue,
 	value
 }: any) {
 	return (
@@ -22,7 +24,7 @@ function PoolBuilderCounter({
 		<InputGroup.Prepend>
 			<Button
 				variant="primary"
-				onClick={(event) => onDecrease(diceType)}
+				onClick={() => onDecrease(diceType)}
 				className={classNames({
 					[styles.counterBtnLeft]: true,
 					[styles.btn]: true
@@ -31,7 +33,7 @@ function PoolBuilderCounter({
 		</InputGroup.Prepend>
 		<FormControl
 			className={styles.input}
-			value={value}
+			value={diceType === MODIFIER ? modifierValue : value}
 			placeholder="0"
 			onChange={(event) => onChange(diceType, event)}
 		/>

@@ -9,15 +9,16 @@ import { DICE_POOL_ROLLED, localMsgReady } from '../../actions/roll.actions';
 const IconRight = <FontAwesomeIcon icon={faArrowAltCircleRight} />;
 const IconD6 = <FontAwesomeIcon icon={faDiceD6} />;
 
-const getLocalMsg = (store:any) => (next:any) => (action:any) => {
+export default (store:any) => (next:any) => (action:any) => {
 	if (action.type === DICE_POOL_ROLLED) {
 		const state = store.getState();
 		const { form : { diceModuleForm } } = state;
 		const { rerollCount } = state;
 		const formValues = diceModuleForm?.values || {};
-		const { results } = action.payload;
+		const { results, modifier } = action.payload;
 		const allResults: Array<number> = [];
 		const fields = [];
+		let withModifier = null;
 
 		if (rerollCount) {
 			const timesWord = rerollCount === 1 ? 'time' : 'times';
@@ -40,11 +41,22 @@ const getLocalMsg = (store:any) => (next:any) => (action:any) => {
 			});
 		});
 
+		if (modifier && modifier !== '0') {
+			const modSymbol = Number(modifier) > 0 ? '+'  : '-';
+			const modWithSymbol = `${modSymbol}${Math.abs(modifier)}`;
+			fields.push(
+				<div className={styles.poolModifierResult}>Modifier: <CodeSpan>{modWithSymbol}</CodeSpan></div>
+			);
+			withModifier = <> (with <CodeSpan>{modWithSymbol}</CodeSpan>modifier)</>;
+		}
+
 		const sumJoined = joinAsBlocks(allResults, '+');
+		const total = allResults.reduce((a, b) => a + b, 0);
+
 		fields.push(
 			<div>
-				<div>{IconRight} <strong>Sum of</strong> {sumJoined}<strong>:</strong></div>
-				<div className={styles.poolResultsRow}>Total: <CodeSpan>{allResults.reduce((a, b) => a + b, 0)}</CodeSpan></div>
+				<div>{IconRight} <strong>Sum of</strong> {sumJoined}<strong>{withModifier}:</strong></div>
+				<div className={styles.poolResultsRow}>Total: <CodeSpan>{modifier ? total + Number(modifier) : total}</CodeSpan></div>
 			</div>
 		);
 		
@@ -55,5 +67,3 @@ const getLocalMsg = (store:any) => (next:any) => (action:any) => {
 	}
 	next(action);
 };
-
-export default getLocalMsg;

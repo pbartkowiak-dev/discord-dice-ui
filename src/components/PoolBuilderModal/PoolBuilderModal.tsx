@@ -10,9 +10,12 @@ function PoolBuilderModal({
 	submitRoll
 }: PoolBuilderModalPropTypes
 ) {
-	const handleSubmit = (event: React.FormEvent, pool: PoolType) => {
+	const handleSubmit = (event: React.FormEvent, pool: PoolType, modifier: number) => {
 		event.preventDefault();
-		submitRoll({ pool });
+		submitRoll({
+			pool,
+			modifier
+		});
 		closePoolBuilderModal();
 	};
 

@@ -7,7 +7,7 @@ export default (store: any) => (next: any) => (action: any) => {
 		const state = store.getState();
 		const { form : { diceModuleForm } } = state;
 		const formValues = diceModuleForm?.values || {};
-		const { pool } = action.payload;
+		const { pool, modifier } = action.payload;	
 		const results = {};
 
 		store.dispatch(storeSelectedPool(pool));
@@ -23,7 +23,7 @@ export default (store: any) => (next: any) => (action: any) => {
 		});
 
 		if (Object.keys(results).length) {
-			store.dispatch(dicePoolRolled({ results }));
+			store.dispatch(dicePoolRolled({ results, modifier }));
 		}
 	}
 	next(action);

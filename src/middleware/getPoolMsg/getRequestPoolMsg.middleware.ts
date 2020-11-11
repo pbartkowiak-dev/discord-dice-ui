@@ -7,15 +7,23 @@ export default (store:any) => (next:any) => (action:any) => {
 		const state = store.getState();
 		const { rerollCount } = state;
 		const { userSettings } = state;
-		const { results } = action.payload;
+		const { results, modifier } = action.payload;
 		const username = userSettings.username || 'USERNAME_MISSING';
 		const fields: Array<{ name: string, value: any }> = [];
 		const allResults: Array<number> = [];
 		let description = '';
+		let withModifier = '';
 
 		if (rerollCount) {
 			const timesWord = rerollCount === 1 ? 'time' : 'times';
 			description += `\nRerolled \`${rerollCount}\` ${timesWord}.`;
+		}
+
+		if (modifier && modifier !== '0') {
+			const modSymbol = Number(modifier) > 0 ? '+'  : '-';
+			const modWithSymbol = `\`${modSymbol}${Math.abs(modifier)}\``;
+			description += `\n**Modifier**: \`${modWithSymbol}\`.`;
+			withModifier = ` (with ${modWithSymbol}modifier)`;
 		}
 		
 		Object.keys(results).forEach((diceType: string) => {
@@ -31,9 +39,11 @@ export default (store:any) => (next:any) => (action:any) => {
 		});
 
 		const sumJoined = joinAsBlocks(allResults, '+', true);
+		const total = allResults.reduce((a, b) => a + b, 0);
+
 		fields.push({
-			name: `:arrow_right: Sum of ${sumJoined}`,
-			value: `Total: \`${allResults.reduce((a, b) => a + b, 0)}\`.`
+			name: `:arrow_right: Sum of ${sumJoined}${withModifier}:`,
+			value: `Total: \`${modifier ? total + Number(modifier) : total}\`.`
 		});
 	
 		store.dispatch(requestMsgReady({
