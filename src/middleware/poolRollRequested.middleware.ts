@@ -1,4 +1,4 @@
-import { DICE_POOL_ROLL_REQUESTED, dicePoolRolled, storeSelectedPool} from '../actions/roll.actions';
+import { DICE_POOL_ROLL_REQUESTED, dicePoolRolled } from '../actions/roll.actions';
 import getDieNumberVal from '../utils/getDieNumberVal';
 import getResultsArray from '../utils/getResultsArray';
 
@@ -9,8 +9,6 @@ export default (store: any) => (next: any) => (action: any) => {
 		const formValues = diceModuleForm?.values || {};
 		const { pool, modifier } = action.payload;	
 		const results = {};
-
-		store.dispatch(storeSelectedPool(pool));
 
 		Object.keys(pool).forEach((diceType: string) => {
 			const diceTypeNum = getDieNumberVal(diceType);

@@ -15,8 +15,6 @@ export const ROLL_COUNTER_UPDATED = 'ROLL_COUNTER_UPDATED';
 export const ROLL_COUNTER_RESET = 'ROLL_COUNTER_RESET';
 export const DICE_SELECTED = 'DICE_SELECTED';
 export const DICE_SELECTED_RESET = 'DICE_SELECTED_RESET';
-export const POOL_SELECTED = 'POOL_SELECTED';
-export const POOL_SELECTED_RESET = 'POOL_SELECTED_RESET';
 
 export function submitRoll(payload: any) {
 	return {
@@ -117,18 +115,5 @@ export function storeSelectedDice(payload: any) {
 export function resetSelectedDice() {
 	return {
 		type: DICE_SELECTED_RESET
-	};
-}
-
-export function storeSelectedPool(payload: any) {
-	return {
-		type: POOL_SELECTED,
-		payload
-	};
-}
-
-export function resetSelectedPool() {
-	return {
-		type: POOL_SELECTED_RESET
 	};
 }

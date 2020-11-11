@@ -12,7 +12,7 @@ export default (store:any) => (next:any) => (action:any) => {
 		const fields: Array<{ name: string, value: any }> = [];
 		const allResults: Array<number> = [];
 		let description = '';
-		let withModifier = '';
+		let andModifier = '';
 
 		if (rerollCount) {
 			const timesWord = rerollCount === 1 ? 'time' : 'times';
@@ -23,7 +23,7 @@ export default (store:any) => (next:any) => (action:any) => {
 			const modSymbol = Number(modifier) > 0 ? '+'  : '-';
 			const modWithSymbol = `\`${modSymbol}${Math.abs(modifier)}\``;
 			description += `\n**Modifier**: \`${modWithSymbol}\`.`;
-			withModifier = ` (with ${modWithSymbol}modifier)`;
+			andModifier = ` (and ${modWithSymbol}modifier)`;
 		}
 		
 		Object.keys(results).forEach((diceType: string) => {
@@ -42,7 +42,7 @@ export default (store:any) => (next:any) => (action:any) => {
 		const total = allResults.reduce((a, b) => a + b, 0);
 
 		fields.push({
-			name: `:arrow_right: Sum of ${sumJoined}${withModifier}:`,
+			name: `:arrow_right: Sum of ${sumJoined}${andModifier}:`,
 			value: `Total: \`${modifier ? total + Number(modifier) : total}\`.`
 		});
 	

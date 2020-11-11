@@ -18,7 +18,7 @@ export default (store:any) => (next:any) => (action:any) => {
 		const { results, modifier } = action.payload;
 		const allResults: Array<number> = [];
 		const fields = [];
-		let withModifier = null;
+		let andModifier = null;
 
 		if (rerollCount) {
 			const timesWord = rerollCount === 1 ? 'time' : 'times';
@@ -47,7 +47,7 @@ export default (store:any) => (next:any) => (action:any) => {
 			fields.push(
 				<div className={styles.poolModifierResult}>Modifier: <CodeSpan>{modWithSymbol}</CodeSpan></div>
 			);
-			withModifier = <> (with <CodeSpan>{modWithSymbol}</CodeSpan>modifier)</>;
+			andModifier = <> (and <CodeSpan>{modWithSymbol}</CodeSpan>modifier)</>;
 		}
 
 		const sumJoined = joinAsBlocks(allResults, '+');
@@ -55,7 +55,7 @@ export default (store:any) => (next:any) => (action:any) => {
 
 		fields.push(
 			<div>
-				<div>{IconRight} <strong>Sum of</strong> {sumJoined}<strong>{withModifier}:</strong></div>
+				<div>{IconRight} <strong>Sum of</strong> {sumJoined}<strong>{andModifier}:</strong></div>
 				<div className={styles.poolResultsRow}>Total: <CodeSpan>{modifier ? total + Number(modifier) : total}</CodeSpan></div>
 			</div>
 		);

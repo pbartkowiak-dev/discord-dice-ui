@@ -9,13 +9,14 @@ const rerollRequested = (store:any) => (next:any) => (action:any) => {
 	if (action.type === REROLL_REQUESTED) {
 		const state = store.getState();
 		const { itemsToStay } = action.payload
-		const { lastRollOptions, poolSelected : pool} = state;
+		const { lastRollOptions } = state;
 
 		store.dispatch(updateRollCounter());
 
-		if (pool && Object.keys(pool).length) {
+		if (lastRollOptions.pool && Object.keys(lastRollOptions.pool).length) {
 			store.dispatch(requestPoolRoll({
-				pool
+				pool: lastRollOptions.pool,
+				modifier: lastRollOptions.modifier
 			}));
 		} else {
 			store.dispatch(requestRoll({
