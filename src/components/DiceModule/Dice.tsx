@@ -49,18 +49,16 @@ function Dice({
 		);
 	};
 
-	const imageUrl = require(`../../img/${imageFilename}`);
-
 	return (
 		<Card className={`dice dice--${diceType}`}>
 			<Card.Body>
 				{ extraMark && <span className="dice__extra-mark">{ extraMark }</span> }
-				<div
+				<Card.Img
+					variant="top"
 					className="dice__image"
-					style={{
-						backgroundImage: `url(${imageUrl})`
-					}}
-					onClick={() => handleRollDice(diceType) }></div>
+					onClick={() => handleRollDice(diceType) }
+					src={require(`../../img/${imageFilename}`)}
+				/>
 			</Card.Body>
 			<Card.Footer>
 				{

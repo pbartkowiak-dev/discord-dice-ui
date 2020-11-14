@@ -40,11 +40,8 @@
 }
 
 .dice__image {
-	width: 100%;
-	height: 100%;
-	background-size: var(--dice-size-mobile);
-	background-position: center center;
-	background-repeat: no-repeat;
+	width: var(--dice-size-mobile);
+	height: var(--dice-size-mobile);
 	cursor: pointer;
 	opacity: .8;
 	transition: .2s;
@@ -74,7 +71,7 @@
 	}
 	.dice__image {
 		height: var(--dice-size);
-		background-size: var(--dice-size);
+		width: var(--dice-size);
 	}
 	.dice__extra-mark {
 		top: 14px;
@@ -99,7 +96,7 @@
 	}
 	.dice__image {
 		height: var(--dice-size);
-		background-size: var(--dice-size);
+		width: var(--dice-size);
 	}
 	.dice .btn {
 		min-width: 123px;
