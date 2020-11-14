@@ -11,3 +11,11 @@ export const SKILL_TEST = 'SKILL_TEST';
 export const POOL_BUILDER = 'POOL_BUILDER';
 export const POOL = 'POOL';
 export const MODIFIER = 'MODIFIER';
+
+export const BOOST = 'boost';
+export const DIFFICULTY  = 'difficulty';
+export const ABILITY = 'ability';
+export const CHALLENGE = 'challenge';
+export const FORCE = 'force';
+export const PROFICIENCY = 'proficiency';
+export const SETBACK = 'setback';

@@ -1,7 +1,6 @@
 import React from 'react';
 import './DiceModule.css';
 import Dice from './Dice';
-import DiceModuleOptions from './DiceModuleOptions';
 import getDiceSet from '../../utils/getDiceSet';
 import { CONAN } from '../../consts/consts';
 import { WARHAMMER } from '../../consts/consts';
@@ -47,13 +46,8 @@ function DiceModule ({
 	));
 
 	return (
-		<div className="dice-module-container">
-			<DiceModuleOptions
-				rollOptions={rollOptions}
-			/>
-			<div className="dice-module dice-list">
-				{ diceSetElement }
-			</div>
+		<div className="dice-module dice-list">
+			{ diceSetElement }
 		</div>
 	);
 }

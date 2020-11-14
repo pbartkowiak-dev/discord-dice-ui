@@ -4,7 +4,7 @@ import Card from 'react-bootstrap/Card';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWrench, faCircle } from '@fortawesome/free-solid-svg-icons';
 import DiceModuleForm from './DiceModuleForm';
-import styles from './DiceModule.module.css';
+import styles from '../DiceModule/DiceModule.module.css';
 
 function DiceModuleOptions({ rollOptions }:any) {
 	const hasAnyOptionActive = !!Object.values(rollOptions).filter(value => value).length;

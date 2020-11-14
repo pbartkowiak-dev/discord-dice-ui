@@ -1,14 +1,29 @@
 import React from 'react';
-import DiceModuleContainer from './components/DiceModule/DiceModuleContainer';
 import HeaderContainer from './components/Header/HeaderContainer';
+import DiceModuleOptions from './components/DiceModuleOptions/DiceModuleOptions';
+import DiceModuleContainer from './components/DiceModule/DiceModuleContainer';
+import EotePoolBuilderContainer from './components/EotePoolBuilder/EotePoolBuilderContainer';
 import Modals from './components/Modals/Modals';
 
-function App() {
+function App({ rollOptions }: any) {
+	let diceModule;
+
+	console.log('app rollOptions', rollOptions);
+
+	if (rollOptions?.eoteMode) {
+		diceModule = <EotePoolBuilderContainer />
+	} else {
+		diceModule = <DiceModuleContainer />;
+	}
+
 	return (
 		<div className="App">
 			<Modals />
 			<HeaderContainer />
-			<DiceModuleContainer />
+			<div className="dice-module-container">
+				<DiceModuleOptions rollOptions={rollOptions} />
+				{ diceModule }
+			</div>
 		</div>
 	);
 }

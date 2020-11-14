@@ -10,7 +10,14 @@ import {
 	D5,
 	D4,
 	POOL,
-	MODIFIER
+	MODIFIER,
+	BOOST,
+	DIFFICULTY,
+	ABILITY,
+	CHALLENGE,
+	FORCE,
+	PROFICIENCY,
+	SETBACK
 } from './diceConstants';
 
 export const classicSet = [{
@@ -146,4 +153,34 @@ export const conanSet = [{
 	diceType: D6_CONAN,
 	imageFilename: 'd6conan.png',
 	label: 'Combat Die'
+}];
+
+export const eoteSet = [{
+	diceType: BOOST,
+	imageFilename: 'boost.png',
+	label: 'Boost Die'
+}, {
+	diceType: DIFFICULTY,
+	imageFilename: 'difficulty.png',
+	label: 'Difficulty Die'
+}, {
+	diceType: ABILITY,
+	imageFilename: 'ability.png',
+	label: 'Ability Die'
+}, {
+	diceType: CHALLENGE,
+	imageFilename: 'challenge.png',
+	label: 'Challenge Die'
+}, {
+	diceType: FORCE,
+	imageFilename: 'force.png',
+	label: 'Force Die'
+}, {
+	diceType: PROFICIENCY,
+	imageFilename: 'proficiency.png',
+	label: 'Proficiency Die'
+}, {
+	diceType: SETBACK,
+	imageFilename: 'setback.png',
+	label: 'Setback Die'
 }];
