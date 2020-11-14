@@ -118,7 +118,6 @@
 }
 
 .conanResultDetails {
-	font-size: 0.9rem;
 	line-height: 15px;
 }
 
@@ -145,8 +144,26 @@
 	margin-bottom: 5px;
 }
 
-.poolResultsRow {
-	padding-left: 15px;
+.resultsBlock {
+	display: flex;
+}
+
+.resultsBlockImage {
+	width: 40px;
+	height: auto;
+}
+
+.resultsBlockImageContainer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding-right: 5px;
+}
+
+.resultsBlockContentContainer {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 }
 
 .poolModifierResult {
@@ -166,5 +183,8 @@
 	.slResult {
 		margin-top: 5px;
 		padding-top: 5px;
+	}
+	.resultsBlockImage {
+		width: 45px;
 	}
 }

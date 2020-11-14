@@ -44,15 +44,25 @@ const getLocalMsg = (store:any) => (next:any) => (action:any) => {
 		const resultsJoined = joinAsBlocks(results);
 		const modifierWithSymbol = <CodeSpan>{modSymbol}{Math.abs(modifier)}</CodeSpan>;
 		const fields = [];
-		const isCombatDie = rollOptions.diceType === D6_CONAN;		
+		const isCombatDie = rollOptions.diceType === D6_CONAN;
 		const isConanHitLocationDie = rollOptions.diceType === D20_CONAN_HL;
-		let title;
 
-		if (isCombatDie) {
-			title = <>You rolled <CodeSpan>{rolled}</CodeSpan>.</>;
-		} else {
-			title = <>You rolled <CodeSpan>{rolled}</CodeSpan>. {rolledWord}: {resultsJoined}.</>;
-		}
+		const title = (
+			<div className={styles.resultsBlock}>
+				<div className={styles.resultsBlockImageContainer}>
+					<img
+						className={styles.resultsBlockImage}
+						src={require(`../../img/${rollOptions.diceType}.png`)}
+						alt={rollOptions.diceType}
+					/>
+				</div>
+				<div className={styles.resultsBlockContentContainer}>
+					<div><strong>You rolled</strong> <CodeSpan>{rolled}</CodeSpan><strong>. {rolledWord}:</strong></div>
+					<div>{resultsJoined}.</div>
+				</div>
+			</div>
+		);
+
 	
 		if (rollOptions.useModifier && (!isCombatDie && !isConanHitLocationDie)) {
 			fields.push(
