@@ -55,6 +55,11 @@ And the results in Discord Chat:
 
 [![Conan 2d20 Mode Discord Chat](./public/conan-mode-4.png)]()
 
+## Pool Builder
+
+Allows to roll diffrent die types at once.
+
+[![Conan 2d20 Mode Discord Chat](./public/pool-builder.png)]()
 
 ## Setup
 
