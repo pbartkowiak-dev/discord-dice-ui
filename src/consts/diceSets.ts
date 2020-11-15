@@ -20,167 +20,138 @@ import {
 	SETBACK
 } from './diceConstants';
 
+/*******************************************
+ *
+ * image file name
+ * ================
+ *
+ * die image has to be named {diceType}.png
+ *
+ ***************************************** */
+
 export const classicSet = [{
 	diceType: D100,
-	imageFilename: 'd100.png',
 	label: 'd100'
 }, {
 	diceType: D20,
-	imageFilename: 'd20.png',
 	label: 'd20'
 }, {
 	diceType: D12,
-	imageFilename: 'd12.png',
 	label: 'd12'
 }, {
 	diceType: D10,
-	imageFilename: 'd10.png',
 	label: 'd10'
 }, {
 	diceType: D8,
-	imageFilename: 'd8.png',
 	label: 'd8'
 }, {
 	diceType: D6,
-	imageFilename: 'd6.png',
 	label: 'd6'
 }, {
 	diceType: D4,
-	imageFilename: 'd4.png',
 	label: 'd4'
 }, {
 	diceType: POOL,
-	imageFilename: 'pool.png',
 	label: 'Pool Builder'
 }];
 
 export const poolSet = [{
 	diceType: D100,
-	imageFilename: 'd100.png',
 	label: 'd100'
 }, {
 	diceType: D20,
-	imageFilename: 'd20.png',
 	label: 'd20'
 }, {
 	diceType: D12,
-	imageFilename: 'd12.png',
 	label: 'd12'
 }, {
 	diceType: D10,
-	imageFilename: 'd10.png',
 	label: 'd10'
 }, {
 	diceType: D8,
-	imageFilename: 'd8.png',
 	label: 'd8'
 }, {
 	diceType: D6,
-	imageFilename: 'd6.png',
 	label: 'd6'
 }, {
 	diceType: D4,
-	imageFilename: 'd4.png',
 	label: 'd4'
 }, {
 	diceType: MODIFIER,
-	imageFilename: 'modifier.png',
 	label: 'Apply Modifier'
 }];
 
 export const CoCSet = [{
 	diceType: D100_SL,
-	imageFilename: 'd100.png',
 	label: 'Skill test'
 }, {
 	diceType: D20,
-	imageFilename: 'd20.png',
 	label: 'd20'
 }, {
 	diceType: D12,
-	imageFilename: 'd12.png',
 	label: 'd12'
 }, {
 	diceType: D10,
-	imageFilename: 'd10.png',
 	label: 'd10'
 }, {
 	diceType: D8,
-	imageFilename: 'd8.png',
 	label: 'd8'
 }, {
 	diceType: D6,
-	imageFilename: 'd6.png',
 	label: 'd6'
 }, {
 	diceType: D4,
-	imageFilename: 'd4.png',
 	label: 'd4'
 }];
 
 export const warhammerSet = [{
 	diceType: D100_SL,
-	imageFilename: 'd100.png',
 	label: 'Skill test'
 }, {
 	diceType: D100,
-	imageFilename: 'd100.png',
 	label: 'd100'
 }, {
 	diceType: D10,
-	imageFilename: 'd10.png',
 	label: 'd10'
 }, {
 	diceType: D5,
-	imageFilename: 'd10.png',
 	label: 'd5',
 	extraMark: 'd5'
 }];
 
 export const conanSet = [{
 	diceType: D20_CONAN_TEST,
-	imageFilename: 'd20conan-test.png',
 	label: 'Skill Test'
 }, {
 	diceType: D20_CONAN,
-	imageFilename: 'd20conan.png',
 	label: 'd20'
 }, {
 	diceType: D20_CONAN_HL,
-	imageFilename: 'd20conan-hl.png',
 	label: 'Hit Location'
 }, {
 	diceType: D6_CONAN,
-	imageFilename: 'd6conan.png',
 	label: 'Combat Die'
 }];
 
-export const eoteSet = [{
-	diceType: BOOST,
-	imageFilename: 'boost.png',
-	label: 'Boost Die'
-}, {
-	diceType: DIFFICULTY,
-	imageFilename: 'difficulty.png',
-	label: 'Difficulty Die'
-}, {
+export const narrativeDiceSet = [{
 	diceType: ABILITY,
-	imageFilename: 'ability.png',
 	label: 'Ability Die'
 }, {
-	diceType: CHALLENGE,
-	imageFilename: 'challenge.png',
-	label: 'Challenge Die'
-}, {
-	diceType: FORCE,
-	imageFilename: 'force.png',
-	label: 'Force Die'
-}, {
 	diceType: PROFICIENCY,
-	imageFilename: 'proficiency.png',
 	label: 'Proficiency Die'
 }, {
+	diceType: DIFFICULTY,
+	label: 'Difficulty Die'
+}, {
+	diceType: CHALLENGE,
+	label: 'Challenge Die'
+}, {
+	diceType: BOOST,
+	label: 'Boost Die'
+}, {
 	diceType: SETBACK,
-	imageFilename: 'setback.png',
 	label: 'Setback Die'
+}, {
+	diceType: FORCE,
+	label: 'Force Die'
 }];

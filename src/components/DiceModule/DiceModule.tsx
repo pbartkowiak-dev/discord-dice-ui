@@ -6,7 +6,7 @@ import { CONAN } from '../../consts/consts';
 import { WARHAMMER } from '../../consts/consts';
 import { CLASSIC } from '../../consts/diceConstants';
 import { COC } from '../../consts/consts';
-import { DiceModuleProps, SetTypes } from './DiceTypes';
+import { DiceModuleProps, DiceSetType } from './DiceTypes';
 
 function DiceModule ({
 	rollOptions,
@@ -21,7 +21,7 @@ function DiceModule ({
 	};
 
 	// @TODO MOVE TO ONE DICE SET GETTER
-	let diceSetType: SetTypes;
+	let diceSetType;
 	if (rollOptions.warhammerMode) {
 		diceSetType = WARHAMMER;
 	} else if(rollOptions.conanMode) {
@@ -34,12 +34,11 @@ function DiceModule ({
 
 	const diceSet = getDiceSet(diceSetType);
 
-	const diceSetElement = diceSet.map(({ diceType, label, extraMark, imageFilename }) => (
+	const diceSetElement = diceSet.map(({ diceType, label, extraMark }) => (
 		<Dice
 			key={diceType}
 			diceType={diceType}
 			label={label}
-			imageFilename={imageFilename}
 			extraMark={extraMark}
 			handleRollDice={handleRollDice}
 		/>

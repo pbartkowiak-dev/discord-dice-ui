@@ -9,9 +9,10 @@ export const D5 = 'd5';
 export const D4 = 'd4';
 export const SKILL_TEST = 'SKILL_TEST';
 export const POOL_BUILDER = 'POOL_BUILDER';
-export const POOL = 'POOL';
-export const MODIFIER = 'MODIFIER';
+export const POOL = 'pool';
+export const MODIFIER = 'modifier';
 
+export const NARRATIVE_DICE = 'NARRATIVE_DICE';
 export const BOOST = 'boost';
 export const DIFFICULTY  = 'difficulty';
 export const ABILITY = 'ability';

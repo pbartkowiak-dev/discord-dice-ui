@@ -2,7 +2,7 @@ import React from 'react';
 import HeaderContainer from './components/Header/HeaderContainer';
 import DiceModuleOptions from './components/DiceModuleOptions/DiceModuleOptions';
 import DiceModuleContainer from './components/DiceModule/DiceModuleContainer';
-import EotePoolBuilderContainer from './components/EotePoolBuilder/EotePoolBuilderContainer';
+import NarrativeDicePoolBuilderContainer from './components/NarrativeDicePoolBuilder/NarrativeDicePoolBuilderContainer';
 import Modals from './components/Modals/Modals';
 
 function App({ rollOptions }: any) {
@@ -10,8 +10,8 @@ function App({ rollOptions }: any) {
 
 	console.log('app rollOptions', rollOptions);
 
-	if (rollOptions?.eoteMode) {
-		diceModule = <EotePoolBuilderContainer />
+	if (rollOptions?.narrativeDice) {
+		diceModule = <NarrativeDicePoolBuilderContainer />
 	} else {
 		diceModule = <DiceModuleContainer />;
 	}

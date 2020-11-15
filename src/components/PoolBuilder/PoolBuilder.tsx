@@ -1,18 +1,16 @@
 import React, { useState } from 'react';
 import PoolBuilderDie from './PoolBuilderDie'
 import styles from './PoolBuilder.module.css';
-import { MODIFIER, POOL } from '../../consts/diceConstants';
-import getDiceSet from '../../utils/getDiceSet';
+import { MODIFIER } from '../../consts/diceConstants';
+import { PoolBuilderPropTypes } from './PoolBuilderTypes';
 
 function PoolBuilder({
-	rollOptions,
-	handleSubmit
-}: any) {
+	handleSubmit,
+	diceSet,
+	formName
+}: PoolBuilderPropTypes) {
 	const [poolState, setPoolState] = useState({});
 	const [modifierState, setModifierState] = useState('0');
-
-	const diceSetType = POOL;
-	const diceSet = getDiceSet(diceSetType);
 
 	const isPoolValueValid = (num: number) => {
 		const maxAmount = 15;
@@ -134,12 +132,11 @@ function PoolBuilder({
 		}
 	};
 
-	const PoolBuilderDice = diceSet.map(({ diceType, label, imageFilename }) => (
+	const PoolBuilderDice = diceSet.map(({ diceType, label }) => (
 		<PoolBuilderDie
 			key={`pool-builder-die-${diceType}`}
 			title={label}
 			diceType={diceType}
-			imageFilename={imageFilename}
 			// @ts-ignore
 			value={poolState[diceType] || ''}
 			modifierValue={modifierState}
@@ -152,7 +149,7 @@ function PoolBuilder({
 
 	return (
 		<form
-			id="pool-builder-form"
+			id={formName}
 			className={styles.diceContainer}
 			onSubmit={(event) => handleSubmit(event, poolState, modifierState)}>
 				{ PoolBuilderDice }

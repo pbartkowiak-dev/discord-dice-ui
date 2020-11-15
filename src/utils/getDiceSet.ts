@@ -1,9 +1,9 @@
-import { classicSet, warhammerSet, conanSet, CoCSet, poolSet } from '../consts/diceSets';
+import { classicSet, warhammerSet, conanSet, CoCSet, poolSet, narrativeDiceSet} from '../consts/diceSets';
 import { WARHAMMER, CONAN, COC } from '../consts/consts';
-import { SetTypes, diceSet } from '../components/DiceModule/DiceTypes';
-import { POOL } from '../consts/diceConstants';
+import { DiceSetType } from '../components/DiceModule/DiceTypes';
+import { POOL, NARRATIVE_DICE } from '../consts/diceConstants';
 
-export default (setType: SetTypes): diceSet => {
+export default (setType: string): DiceSetType => {
 	if (setType === WARHAMMER) {
 		return warhammerSet;
 	} else if (setType === CONAN) {
@@ -12,6 +12,8 @@ export default (setType: SetTypes): diceSet => {
 		return CoCSet;
 	} else if (setType === POOL) {
 		return poolSet;
+	} else if (setType === NARRATIVE_DICE) {
+		return narrativeDiceSet;
 	}
 	return classicSet;
 };

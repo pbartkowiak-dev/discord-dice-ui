@@ -19,13 +19,18 @@ function PoolBuilderModal({
 		closePoolBuilderModal();
 	};
 
+	const formName = 'pool-builder-form';
+
 	return (
 		<Modal show={showModal} onHide={closePoolBuilderModal} size="lg">
 			<Modal.Header closeButton>
 				<Modal.Title>Pool Builder</Modal.Title>
 			</Modal.Header>
 			<Modal.Body>
-				<PoolBuilderContainer handleSubmit={handleSubmit} />
+				<PoolBuilderContainer
+					handleSubmit={handleSubmit}
+					formName={formName}
+				/>
 			</Modal.Body>
 			<Modal.Footer>
 				<Button variant="secondary" onClick={closePoolBuilderModal}>
@@ -34,7 +39,7 @@ function PoolBuilderModal({
 				<Button
 					variant="success"
 					type="submit"
-					form="pool-builder-form">Roll!
+					form={formName}>Roll!
 				</Button>
 			</Modal.Footer>
 		</Modal>

@@ -1,21 +1,21 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { submitRoll } from '../../actions/roll.actions';
-import EotePoolBuilder from './EotePoolBuilder';
+import NarrativeDicePoolBuilder from './NarrativeDicePoolBuilder';
 
 const mapDispatchToProps = { submitRoll };
 
-function EotePoolBuilderContainer({
+function NarrativeDicePoolBuilderContainer({
 	diceModuleForm,
 	submitRoll
 }: any ) {
 	const rollOptions = diceModuleForm?.values || {};
 	return (
-		<EotePoolBuilder
+		<NarrativeDicePoolBuilder
 			rollOptions={rollOptions}
 			submitRoll={submitRoll}
 		/>
 	);
 }
 
-export default connect(undefined, mapDispatchToProps)(EotePoolBuilderContainer);
+export default connect(undefined, mapDispatchToProps)(NarrativeDicePoolBuilderContainer);

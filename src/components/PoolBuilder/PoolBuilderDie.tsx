@@ -7,7 +7,6 @@ import styles from './PoolBuilder.module.css';
 function PoolBuilderDie({
 	diceType,
 	title,
-	imageFilename,
 	value,
 	modifierValue,
 	onChange,
@@ -27,7 +26,7 @@ function PoolBuilderDie({
 					variant="top"
 					className={styles.dieImage}
 					onClick={() => onIncrease(diceType)}
-					src={require(`../../img/${imageFilename}`)} />
+					src={require(`../../img/${diceType}.png`)} />
 			</Card.Body>
 			<Card.Footer className={styles.dieFooter}>
 				<PoolBuilderCounter

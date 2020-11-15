@@ -1,6 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import PoolBuilder from './PoolBuilder'
+import getDiceSet from '../../utils/getDiceSet';
+import { POOL, NARRATIVE_DICE } from '../../consts/diceConstants';
+import PoolBuilder from './PoolBuilder';
 
 function mapStateToProps(state:any) {
 	return {
@@ -10,13 +12,24 @@ function mapStateToProps(state:any) {
 
 function PoolBuilderContainer({
 	handleSubmit,
-	diceModuleForm
+	diceModuleForm,
+	formName
 }: any) {
 	const rollOptions = diceModuleForm?.values || {};
+
+	let diceSetType;
+	if( rollOptions?.narrativeDice) {
+		diceSetType = NARRATIVE_DICE;
+	} else {
+		diceSetType = POOL;
+	}
+	const diceSet = getDiceSet(diceSetType);
+
 	return (
 		<PoolBuilder
-			rollOptions={rollOptions}
 			handleSubmit={handleSubmit}
+			diceSet={diceSet}
+			formName={formName}
 		/>
 	);
 }

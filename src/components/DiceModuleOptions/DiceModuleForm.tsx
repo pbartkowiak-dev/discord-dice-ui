@@ -19,7 +19,7 @@ const conanModeLabel = (
 );
 
 const eoteModeLabel = (
-	<span>EotE Mode</span>
+	<span>Narrative Dice</span>
 );
 
 
@@ -45,7 +45,7 @@ const RenderCheckbox = createRenderer((input, label, id, disabled) =>
 );
 
 function DiceModuleForm({ rollOptions }:any) {
-	const { warhammerMode, cocMode, conanMode, eoteMode } = rollOptions;
+	const { warhammerMode, cocMode, conanMode, narrativeDice } = rollOptions;
 	return (
 		<Form id ="roll-options-form" className="dice-module dice-form">
 			<Field
@@ -59,25 +59,25 @@ function DiceModuleForm({ rollOptions }:any) {
 				id="cocMode"
 				label={cocModeLabel}
 				component={RenderCheckbox}
-				disabled={warhammerMode || conanMode || eoteMode}
+				disabled={warhammerMode || conanMode || narrativeDice}
 			/>
 			<Field
 				name="warhammerMode"
 				id="warhammerMode"
 				label={warhammerModeLabel}
 				component={RenderCheckbox}
-				disabled={cocMode || conanMode || eoteMode}
+				disabled={cocMode || conanMode || narrativeDice}
 			/>
 			<Field
 				name="conanMode"
 				id="conanMode"
 				label={conanModeLabel}
 				component={RenderCheckbox}
-				disabled={cocMode || warhammerMode || eoteMode}
+				disabled={cocMode || warhammerMode || narrativeDice}
 			/>
 			<Field
-				name="eoteMode"
-				id="eoteMode"
+				name="narrativeDice"
+				id="narrativeDice"
 				label={eoteModeLabel}
 				component={RenderCheckbox}
 				disabled={cocMode || conanMode || warhammerMode}
@@ -96,5 +96,5 @@ const FormElement = reduxForm({
 const selector = formValueSelector(form);
 
 export default connect(state => ({
-	rollOptions: selector(state, 'cocMode', 'warhammerMode', 'conanMode', 'eoteMode')
+	rollOptions: selector(state, 'cocMode', 'warhammerMode', 'conanMode', 'narrativeDice')
 }))(FormElement);

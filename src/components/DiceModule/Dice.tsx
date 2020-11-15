@@ -16,7 +16,6 @@ import { POOL } from '../../consts/diceConstants';
 function Dice({
 	handleRollDice,
 	diceType,
-	imageFilename,
 	label,
 	extraMark
 }: DicePropTypes
@@ -57,7 +56,7 @@ function Dice({
 					variant="top"
 					className="dice__image"
 					onClick={() => handleRollDice(diceType) }
-					src={require(`../../img/${imageFilename}`)}
+					src={require(`../../img/${diceType}.png`)}
 				/>
 			</Card.Body>
 			<Card.Footer>
