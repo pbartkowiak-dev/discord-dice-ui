@@ -34,10 +34,11 @@ function DiceModule ({
 
 	const diceSet = getDiceSet(diceSetType);
 
-	const diceSetElement = diceSet.map(({ diceType, label, extraMark }) => (
+	const diceSetElement = diceSet.map(({ diceType, label, extraMark, diceImg }) => (
 		<Dice
 			key={diceType}
 			diceType={diceType}
+			diceImg={diceImg}
 			label={label}
 			extraMark={extraMark}
 			handleRollDice={handleRollDice}

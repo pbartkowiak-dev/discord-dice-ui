@@ -19,13 +19,15 @@ import {
 	PROFICIENCY,
 	SETBACK
 } from './diceConstants';
+import narrativeDice from './narrativeDice';
 
 /*******************************************
  *
  * image file name
  * ================
  *
- * die image has to be named {diceType}.png
+ * die image has to be named {diceType}.png 
+ * or described in `diceImg` property
  *
  ***************************************** */
 
@@ -83,6 +85,7 @@ export const poolSet = [{
 
 export const CoCSet = [{
 	diceType: D100_SL,
+	diceImg: 'd100.png',
 	label: 'Skill test'
 }, {
 	diceType: D20,
@@ -106,6 +109,7 @@ export const CoCSet = [{
 
 export const warhammerSet = [{
 	diceType: D100_SL,
+	diceImg: 'd100.png',
 	label: 'Skill test'
 }, {
 	diceType: D100,
@@ -115,6 +119,7 @@ export const warhammerSet = [{
 	label: 'd10'
 }, {
 	diceType: D5,
+	diceImg: 'd10.png',
 	label: 'd5',
 	extraMark: 'd5'
 }];
@@ -133,28 +138,12 @@ export const conanSet = [{
 	label: 'Combat Die'
 }];
 
-export const narrativeDiceSet = [{
-	diceType: ABILITY,
-	label: 'Ability Die'
-}, {
-	diceType: PROFICIENCY,
-	label: 'Proficiency Die'
-}, {
-	diceType: DIFFICULTY,
-	label: 'Difficulty Die'
-}, {
-	diceType: CHALLENGE,
-	label: 'Challenge Die'
-}, {
-	diceType: BOOST,
-	label: 'Boost Die'
-}, {
-	diceType: SETBACK,
-	label: 'Setback Die'
-}, {
-	diceType: FORCE,
-	label: 'Force Die'
-},{
-	diceType: D100,
-	label: 'Percentile Dice'
-}];
+export const narrativeDiceSet = [
+	narrativeDice[BOOST],
+	narrativeDice[DIFFICULTY],
+	narrativeDice[ABILITY],
+	narrativeDice[CHALLENGE],
+	narrativeDice[FORCE],
+	narrativeDice[PROFICIENCY],
+	narrativeDice[SETBACK]
+];

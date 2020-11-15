@@ -1,8 +1,10 @@
 import React from 'react';
 import CodeSpan from '../components/CodeSpan/CodeSpan';
 
+type ResultsType = Array<number | string>;
+
 export default function joinAsBlocks(
-	results: Array<number> = [],
+	results: ResultsType = [],
 	joinerProp?: string | null,
 	shouldGetMd?: boolean
 ) {
@@ -13,8 +15,8 @@ export default function joinAsBlocks(
 	return getJsx(results, joiner);
 }
 
-function getJsx(results: Array<number>, joiner:string) {
-	return results.map((result: number, i: number) => {
+function getJsx(results: ResultsType, joiner: string) {
+	return results.map((result, i) => {
 		if (i === results.length - 1) {
 			return <span key={i}><CodeSpan>{result}</CodeSpan></span>;
 		}
@@ -22,8 +24,8 @@ function getJsx(results: Array<number>, joiner:string) {
 	});
 }
 
-function getMd(results: Array<number>, joiner:string) {
-	const arr = results.map((result: number, i: number) => {
+function getMd(results: ResultsType, joiner: string) {
+	const arr = results.map((result, i) => {
 		if (i === results.length - 1) {
 			return `\`${result}\``;
 		}

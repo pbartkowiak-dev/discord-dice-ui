@@ -1,6 +1,7 @@
 import { NARRATIVE_DICE_POOL_ROLL_REQUESTED, narrativeDicePoolRolled } from '../actions/roll.actions';
 import getDieNumberVal from '../utils/getDieNumberVal';
 import getResultsArray from '../utils/getResultsArray';
+import mapValueToNarrative from '../utils/narrativeDice/mapValueToNarrative';
 
 export default (store: any) => (next: any) => (action: any) => {
 	if (action.type === NARRATIVE_DICE_POOL_ROLL_REQUESTED) {
@@ -17,8 +18,11 @@ export default (store: any) => (next: any) => (action: any) => {
 			const diceAmount: number = pool[diceType];
 			const resultsArray = getResultsArray(diceTypeNum, diceAmount);
 			if (resultsArray.length) {
+				const mappedResults = resultsArray.map((value: number) => {
+					return mapValueToNarrative(diceType, value);
+				});
 				// @ts-ignore
-				results[diceType] = resultsArray;
+				results[diceType] = mappedResults;
 			}
 		});
 

@@ -7,15 +7,15 @@ import './DiceModuleForm.css';
 import InfoTooltip from '../InfoTooltip/InfoTooltip';
 
 const cocModeLabel = (
-	<span>Call of Cthulhu 7e Mode <InfoTooltip content={tooltip.coCModTooltip} /></span>
+	<span>Call of Cthulhu 7e <InfoTooltip content={tooltip.coCModTooltip} /></span>
 );
 
 const warhammerModeLabel = (
-	<span>Warhammer Mode <InfoTooltip content={tooltip.warhammerTooltip} /></span>
+	<span>Warhammer <InfoTooltip content={tooltip.warhammerTooltip} /></span>
 );
 
 const conanModeLabel = (
-	<span>Conan 2d20 Mode <InfoTooltip content={tooltip.conanTooltip} /></span>
+	<span>Conan 2d20 <InfoTooltip content={tooltip.conanTooltip} /></span>
 );
 
 const eoteModeLabel = (

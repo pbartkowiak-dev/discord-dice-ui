@@ -6,7 +6,7 @@ import {
 	FORCE,
 	PROFICIENCY,
 	SETBACK
-} from '../consts/diceConstants';
+} from '../../consts/diceConstants';
 
 export default (diceType: string, value: number): string => {
 	// handle narrative dice
@@ -136,5 +136,5 @@ export default (diceType: string, value: number): string => {
 				return 'light,light';
 		}
 	}
-	return '';
+	return `${value}`;
 };

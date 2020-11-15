@@ -17,7 +17,8 @@ function Dice({
 	handleRollDice,
 	diceType,
 	label,
-	extraMark
+	extraMark,
+	diceImg
 }: DicePropTypes
 ) {
 	const DropdownContent = () => {
@@ -48,6 +49,8 @@ function Dice({
 		);
 	};
 
+	const diceImgFileName = diceImg || `${diceType}.png`;
+
 	return (
 		<Card className={`dice dice--${diceType}`}>
 			<Card.Body>
@@ -56,7 +59,7 @@ function Dice({
 					variant="top"
 					className="dice__image"
 					onClick={() => handleRollDice(diceType) }
-					src={require(`../../img/${diceType}.png`)}
+					src={require(`../../img/${diceImgFileName}`)}
 				/>
 			</Card.Body>
 			<Card.Footer>
