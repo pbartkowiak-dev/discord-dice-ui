@@ -5,7 +5,7 @@ export interface PoolStateType {
 }
 
 export interface PoolBuilderPropTypes {
-	handleSubmit: (event: React.FormEvent<HTMLFormElement>, poolState: PoolStateType, modifierState: string) => void;
+	handleSubmit: (poolState: PoolStateType, modifierState: string) => void;
 	diceSet: DiceSetType;
 	formName: string;
 }

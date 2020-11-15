@@ -154,4 +154,7 @@ export const narrativeDiceSet = [{
 }, {
 	diceType: FORCE,
 	label: 'Force Die'
+},{
+	diceType: D100,
+	label: 'Percentile Dice'
 }];

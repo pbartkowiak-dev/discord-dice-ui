@@ -14,10 +14,11 @@ import {
 	ROLL_SUBMITTED,
 	resetSelectedDice,
 	storeSelectedDice,
-	requestPoolRoll
+	requestPoolRoll,
+	requestNarrativeDicePoolRoll
 } from '../actions/roll.actions';
 
-const handleRoll = (store:any) => (next:any) => (action:any) => {
+export default (store:any) => (next:any) => (action:any) => {
 	if (action.type === ROLL_SUBMITTED) {
 
 		store.dispatch(resetRollCounter());
@@ -35,7 +36,11 @@ const handleRoll = (store:any) => (next:any) => (action:any) => {
 				diceAmount
 			}));
 
-			if (action?.payload?.pool) {
+			if (action?.payload?.pool && formValues?.narrativeDice) {
+				store.dispatch(requestNarrativeDicePoolRoll({
+					...action.payload
+				}));
+			} else if (action?.payload?.pool) {
 				store.dispatch(requestPoolRoll({
 					...action.payload
 				}));
@@ -68,5 +73,3 @@ const handleRoll = (store:any) => (next:any) => (action:any) => {
 		next(action);
 	}
 };
-
-export default handleRoll;

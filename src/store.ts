@@ -3,6 +3,8 @@ import handleRoll from './middleware/handleRoll.middleware';
 import rollRequested from './middleware/rollRequested.middleware';
 import poolRollRequested from './middleware/poolRollRequested.middleware';
 import rerollRequested from './middleware/rerollRequested.middleware';
+// Narrative Dice Pool
+import narrativeDicePoolRollRequested from './middleware/narrativeDicePoolRollRequested.middleware';
 // General
 import getRequestMsg from './middleware/getMsg/getRequestMsg.middleware';
 import getLocalMsg from './middleware/getMsg/getLocalMsg.middleware';
@@ -26,6 +28,7 @@ const rollMiddleware = [
 	handleRoll,
 	rollRequested,
 	poolRollRequested,
+	narrativeDicePoolRollRequested,
 	rerollRequested,
 	getRequestMsg,
 	getLocalMsg,

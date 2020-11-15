@@ -43,7 +43,7 @@ function PoolBuilder({
 		}
 	};
 
-	const handlePoolIncrease =(diceType: string) => {
+	const handlePoolIncrease = (diceType: string) => {
 		// @ts-ignore
 		if (poolState[diceType]) {
 			// @ts-ignore
@@ -63,7 +63,7 @@ function PoolBuilder({
 		}
 	};
 
-	const handlePoolDecrease =(diceType: string) => {
+	const handlePoolDecrease = (diceType: string) => {
 		// @ts-ignore
 		if (poolState[diceType]) {
 			// @ts-ignore
@@ -146,12 +146,25 @@ function PoolBuilder({
 		/>
 	));
 
+	const onSubmit = (event: React.FormEvent) => {
+		event.preventDefault();
+		// check if any value is selected
+		const totalSelected = Object.values(poolState).reduce((a, b) => {
+			// @ts-ignore
+			return a + b;
+		}, 0);
+		if (totalSelected) {
+			handleSubmit(poolState, modifierState);
+			setPoolState({});
+		}
+	};
+
 
 	return (
 		<form
 			id={formName}
 			className={styles.diceContainer}
-			onSubmit={(event) => handleSubmit(event, poolState, modifierState)}>
+			onSubmit={onSubmit}>
 				{ PoolBuilderDice }
 		</form>
 	);

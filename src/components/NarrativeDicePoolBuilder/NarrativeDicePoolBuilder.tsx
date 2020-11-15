@@ -7,8 +7,8 @@ import styles from './NarrativeDicePoolBuilder.module.css';
 function NarrativeDicePoolBuilder({
 	submitRoll
 }: any ) {
-	const handleSubmit = (event: React.FormEvent, pool: PoolType) => {
-		event.preventDefault();
+	const handleSubmit = (pool: PoolType) => {
+		console.log('handleSubmit', pool)
 		submitRoll({
 			pool
 		});
