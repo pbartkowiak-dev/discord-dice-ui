@@ -1,7 +1,7 @@
 import React from 'react';
 import CodeSpan from '../components/CodeSpan/CodeSpan';
 
-type ResultsType = Array<number | string>;
+type ResultsType = Array<number | string | JSX.Element>;
 
 export default function joinAsBlocks(
 	results: ResultsType = [],

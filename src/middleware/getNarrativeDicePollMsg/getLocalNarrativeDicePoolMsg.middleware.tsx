@@ -16,16 +16,14 @@ export default (store:any) => (next:any) => (action:any) => {
 		const state = store.getState();
 		const { form : { diceModuleForm } } = state;
 		const formValues = diceModuleForm?.values || {};
-		const { results, modifier } = action.payload;
-		const allResults: Array<number> = [];
+		const { results, allResults } = action.payload;
 		const fields: Array<JSX.Element> = [];
-		let andModifier = null;
-
 		
 		Object.keys(results).forEach((diceType: string) => {
 			const resultsForDiceType: Array<string> = results[diceType];
 			// @ts-ignore
 			const diceLabel: string = narrativeDice[diceType]?.label;
+
 			fields.push(
 				<div className={classNames({
 					[styles.poolResultsBlock]: true,
@@ -42,30 +40,17 @@ export default (store:any) => (next:any) => (action:any) => {
 						<div><strong>{resultsForDiceType.length}x {diceLabel}:</strong></div>
 						<div>
 							{
-							resultsForDiceType.map((result, index) => (
-								<div key={index}>{joinAsImages(result)}</div>
-							))
+							joinAsBlocks(resultsForDiceType.map((result, index) => (
+								<span key={index}>{joinAsImages(result)}</span>
+							)))
 							}
 						</div>
 					</div>
 				</div>
 			);
-
-			// resultsForDiceType.forEach((result: number) => {
-			// 	allResults.push(result);
-			// });
 		});
 
-
-		// const sumJoined = joinAsBlocks(allResults, '+');
-		// const total = allResults.reduce((a, b) => a + b, 0);
-
-		// fields.push(
-		// 	<div>
-		// 		<div>{IconRight} <strong>Sum of</strong> {sumJoined}<strong>{andModifier}:</strong></div>
-		// 		<div>Total: <CodeSpan>{modifier ? total + Number(modifier) : total}</CodeSpan></div>
-		// 	</div>
-		// );
+		console.log('allResults', allResults);
 		
 		store.dispatch(localMsgReady({
 			fields,

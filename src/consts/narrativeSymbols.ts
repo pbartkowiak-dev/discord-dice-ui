@@ -1,3 +1,4 @@
+export const ADVANTAGE = 'advantage';
 export const FAILURE = 'failure';
 export const SUCCESS = 'success';
 export const TRIUMPH = 'triumph';
@@ -5,8 +6,13 @@ export const THREAT = 'threat';
 export const DESPAIR = 'despair';
 export const DARK = 'dark';
 export const LIGHT = 'light';
+export const BLANK = 'blank';
 
 export default {
+	[ADVANTAGE]: {
+		symbolType: ADVANTAGE,
+		label: 'Advantage'
+	},
 	[FAILURE]: {
 		symbolType: FAILURE,
 		label: 'Failure'
@@ -34,5 +40,9 @@ export default {
 	[LIGHT]: {
 		symbolType: LIGHT,
 		label: 'Light'
+	},
+	[BLANK]: {
+		symbolType: BLANK,
+		label: 'Blank'
 	}
 };

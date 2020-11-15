@@ -8,7 +8,8 @@ export default (store: any) => (next: any) => (action: any) => {
 		const state = store.getState();
 		const { form : { diceModuleForm } } = state;
 		const formValues = diceModuleForm?.values || {};
-		const { pool, modifier } = action.payload;	
+		const { pool, modifier } = action.payload;
+		const allResults: Array<string> = [];
 		const results = {};
 
 		console.log('pool', pool)
@@ -23,13 +24,22 @@ export default (store: any) => (next: any) => (action: any) => {
 				});
 				// @ts-ignore
 				results[diceType] = mappedResults;
+
+				mappedResults.forEach((rs: string) => {
+					rs.split(',').forEach((r: string) => {
+						allResults.push(r);
+					});
+				});
 			}
 		});
 
 		console.log('results', results);
 
 		if (Object.keys(results).length) {
-			store.dispatch(narrativeDicePoolRolled({ results, modifier }));
+			store.dispatch(narrativeDicePoolRolled({
+				results,
+				allResults			
+			}));
 		}
 	}
 	next(action);
