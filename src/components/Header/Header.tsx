@@ -1,6 +1,7 @@
 import React from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import logo from '../../img/logo.png';
+import TooltipWrapper from '../InfoTooltip/TooltipWrapper';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCopyright } from '@fortawesome/free-regular-svg-icons';
 import { faCog } from '@fortawesome/free-solid-svg-icons';
@@ -27,24 +28,31 @@ function Header({
 				/>
 			</Navbar.Brand>
 			<Navbar.Collapse className="justify-content-end"></Navbar.Collapse>
-			<FontAwesomeIcon
-				onClick={openCopyrightModal}
-				className="pointer icon-settings"
-				icon={faCopyright}
-			/>
-			<a href={GITHUB_PAGE}>
+			<TooltipWrapper content="View Copyright Info" placement="left">
 				<FontAwesomeIcon
+					onClick={openCopyrightModal}
 					className="pointer icon-settings"
-					icon={faGithub}
+					icon={faCopyright}
 				/>
+			</TooltipWrapper>
+			<a href={GITHUB_PAGE}>
+				<TooltipWrapper content="Go to Github Repo" placement="left">
+					<FontAwesomeIcon
+						className="pointer icon-settings"
+						icon={faGithub}
+					/>
+				</TooltipWrapper>
 			</a>
-			<FontAwesomeIcon
-				onClick={openSettingsModal}
-				className="pointer icon-settings"
-				icon={faCog}
-			/>
+			<TooltipWrapper content="Open Settings" placement="left">
+				<FontAwesomeIcon
+					onClick={openSettingsModal}
+					className="pointer icon-settings"
+					icon={faCog}
+				/>
+			</TooltipWrapper>
 		</Navbar>
 	);
 }
 
 export default Header;
+;

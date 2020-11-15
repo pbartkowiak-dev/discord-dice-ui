@@ -24,7 +24,6 @@ function InfoTooltip({ content, type, className='' }:infoTooltipPropType) {
 	}
 
 	return (
-		<>
 		<OverlayTrigger
 			key={id}
 			placement="top"
@@ -40,7 +39,6 @@ function InfoTooltip({ content, type, className='' }:infoTooltipPropType) {
 		})}
 			icon={icon} />
 		</OverlayTrigger>
-		</>
 	);
 }
 
