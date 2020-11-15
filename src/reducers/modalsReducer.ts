@@ -10,7 +10,9 @@ import {
 	OPEN_SETTINGS_MODAL,
 	CLOSE_SETTINGS_MODAL,
 	OPEN_POOL_BUILDER_MODAL,
-	CLOSE_POOL_BUILDER_MODAL
+	CLOSE_POOL_BUILDER_MODAL,
+	CLOSE_INFO_MODAL,
+	OPEN_INFO_MODAL
 } from '../actions/modals';
 
 export interface ModalsStateTypes {
@@ -20,6 +22,7 @@ export interface ModalsStateTypes {
 	isModifierModalOpen: boolean;
 	isSettingsModalOpen: boolean;
 	isPoolBuilderModalOpen: boolean;
+	isCopyrightModalOpen: boolean;
 }
 
 const modalsState = {
@@ -28,9 +31,11 @@ const modalsState = {
 	isWarhammerModalOpen: false,
 	isModifierModalOpen: false,
 	isSettingsModalOpen: false,
-	isPoolBuilderModalOpen: false
+	isPoolBuilderModalOpen: false,
+	isCopyrightModalOpen: false
 };
 
+// @TODO UNIFY REDUCER CASES
 function modalsReducer(state: ModalsStateTypes = modalsState, action: any) {
 	switch (action.type) {
 		case CLOSE_COC_MODAL:
@@ -92,6 +97,16 @@ function modalsReducer(state: ModalsStateTypes = modalsState, action: any) {
 			return {
 				...state,
 				isPoolBuilderModalOpen: false
+			};
+		case OPEN_INFO_MODAL:
+			return {
+				...state,
+				isCopyrightModalOpen: true
+			};
+		case CLOSE_INFO_MODAL:
+			return {
+				...state,
+				isCopyrightModalOpen: false
 			};
 	}
 	return state;

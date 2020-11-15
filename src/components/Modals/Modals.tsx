@@ -8,6 +8,7 @@ import CoCModalContainer from '../CoCModal/CoCModalContainer';
 import WarhammerModalContainer from '../WarhammerModal/WarhammerModalContainer';
 import ConanModalContainer from '../ConanModal/ConanModalContainer';
 import PoolBuilderModalContainer from '../PoolBuilderModal/PoolBuilderModalContainer';
+import CopyrightModalContainer from '../CopyrightModal/CopyrightModalContainer';
 
 import { ModalsStateTypes } from '../../reducers/modalsReducer';
 
@@ -31,6 +32,7 @@ function Modals({ modalsState }: modalsPropTypes
 			<WarhammerModalContainer showModal={modalsState.isWarhammerModalOpen} />
 			<ConanModalContainer showModal={modalsState.isConanModalOpen} />
 			<PoolBuilderModalContainer showModal={modalsState.isPoolBuilderModalOpen} />
+			<CopyrightModalContainer showModal={modalsState.isCopyrightModalOpen} />
 			<ResultsModalContainer />
 		</>
 	);

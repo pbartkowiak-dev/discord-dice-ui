@@ -1,13 +1,17 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
 import PoolBuilderContainer from '../PoolBuilder/PoolBuilderContainer';
+import { PoolType } from '../PoolBuilderModal/PoolBuilderModalTypes';
 import styles from './NarrativeDicePoolBuilder.module.css';
 
 function NarrativeDicePoolBuilder({
 	submitRoll
 }: any ) {
-	const handleSubmit = () => {
-		console.log('handle EotE submit!');
+	const handleSubmit = (event: React.FormEvent, pool: PoolType) => {
+		event.preventDefault();
+		submitRoll({
+			pool
+		});
 	}
 
 	const formName = 'narrative-pool-builder-form';

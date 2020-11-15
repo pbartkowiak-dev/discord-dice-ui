@@ -1,12 +1,28 @@
 import React from 'react';
 import Header from './Header';
 import { connect } from 'react-redux';
-import { openSettingsModal, closeSettingsModal } from '../../actions/modals';
+import {
+	openSettingsModal,
+	closeSettingsModal,
+	openCopyrightModal
+} from '../../actions/modals';
 
-const mapDispatchToProps = { openSettingsModal, closeSettingsModal };
+const mapDispatchToProps = {
+	openSettingsModal,
+	closeSettingsModal,
+	openCopyrightModal
+};
 
-function HeaderContainer({ openSettingsModal }:any) {
-	return <Header openSettingsModal={openSettingsModal} />;
+function HeaderContainer({
+	openSettingsModal,
+	openCopyrightModal
+}:any) {
+	return (
+		<Header
+			openSettingsModal={openSettingsModal}
+			openCopyrightModal={openCopyrightModal}
+		/>
+	);
 }
 
 export default connect(undefined, mapDispatchToProps)(HeaderContainer);

@@ -1,4 +1,6 @@
 .poolBuilderBtnContainer {
 	display: flex;
 	justify-content: flex-end;
+	margin-top: 15px;
+	margin-bottom: 15px;
 }

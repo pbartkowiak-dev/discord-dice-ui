@@ -1,3 +1,6 @@
+export const OPEN_INFO_MODAL = 'OPEN_INFO_MODAL';
+export const CLOSE_INFO_MODAL = 'CLOSE_INFO_MODAL';
+
 export const OPEN_SETTINGS_MODAL = 'OPEN_SETTINGS_MODAL';
 export const CLOSE_SETTINGS_MODAL = 'CLOSE_SETTINGS_MODAL';
 
@@ -30,6 +33,18 @@ interface requestParams {
 	color: number;
 	fields: Array<fieldEmbedded>;
 	description: string;
+}
+
+export function openCopyrightModal() {
+	return {
+		type: OPEN_INFO_MODAL
+	};
+}
+
+export function closeCopyrightModal() {
+	return {
+		type: CLOSE_INFO_MODAL
+	};
 }
 
 export function openSettingsModal() {
