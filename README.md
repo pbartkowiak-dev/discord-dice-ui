@@ -10,6 +10,7 @@ The app offers special support for following games:
 - Call of Cthulhu 7e
 - Warhammer (Dark Heresy II, WFRP 2e/4e)
 - Conan 2d20
+- Narrative Dice (EotE SW)
 
 [![App interface](./public/app.png)]()
 
@@ -19,6 +20,7 @@ The app offers special support for following games:
 ### Sample results inside the App
 [![Sample App Results](./public/app-sample-results-1.png)]()
 
+-----------------------------
 ## Call of Cthulhu 7e Mode
 
 After selecting the mode in the _Roll Options_ a dedicated modal will be shown for rolling d100 skill tests - with option to Push the roll and guidelines for optional spending luck.
@@ -27,6 +29,7 @@ After selecting the mode in the _Roll Options_ a dedicated modal will be shown f
 
 [![Call of Cthulhu 7e Mode 2](./public/coc-mode-2.png)]()
 
+-----------------------------
 ## Warhammer Mode
 
 The app offers special support for rolling Success Levels in Warhammer 2e, Warhammer 4e and Dark Heresy II.
@@ -37,6 +40,7 @@ The app offers special support for rolling Success Levels in Warhammer 2e, Warha
 
 [![WFRP Mode - discord](./public/wfrp-result-discord.png)]()
 
+-----------------------------
 ## Conan 2d20 Mode
 
 This mode adds special modal for testing abilities, generating Hit Location and rolling Combat Dice:
@@ -55,12 +59,23 @@ And the results in Discord Chat:
 
 [![Conan 2d20 Mode Discord Chat](./public/conan-mode-4.png)]()
 
+-----------------------------
 ## Pool Builder
 
-Allows to roll diffrent die types at once.
+Allows to roll different die types at once.
 
-[![Conan 2d20 Mode Discord Chat](./public/pool-builder.png)]()
+[![Pool Builder](./public/pool-builder.png)]()
 
+-----------------------------
+## Narrative Dice
+
+Allows to build a custom dice pull from popular space opera RPG series.
+
+[![Narrative Dice Pool Builder](./public/narrative-dice-1.png)]()
+
+[![Narrative Dice Results ](./public/narrative-dice-2.png)]()
+
+-----------------------------
 ## Setup
 
 In order to get started, **Discord's server admin has to create a Webhook** and share a special link with other users. Read below how to do it.
@@ -95,6 +110,7 @@ In order to get started, **Discord's server admin has to create a Webhook** and 
 
 6. Saving the Webhook in the app will connect the app with the Discord server.
 
+-----------------------------
 ## Developers' info
 
 ### Production build
