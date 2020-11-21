@@ -6,9 +6,6 @@ import getNarrativeDiceDerivedResults from './utils/getNarrativeDiceDerivedResul
 
 export default (store: any) => (next: any) => (action: any) => {
 	if (action.type === NARRATIVE_DICE_POOL_ROLL_REQUESTED) {
-		const state = store.getState();
-		const { form : { diceModuleForm } } = state;
-		const formValues = diceModuleForm?.values || {};
 		const { pool } = action.payload;
 		const allResults: Array<string> = [];
 		const results = {};

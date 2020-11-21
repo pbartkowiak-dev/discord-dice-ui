@@ -9,6 +9,7 @@ import { ResultsDerivedType } from '../../components/PoolBuilder/PoolBuilderType
 import TooltipWrapper from '../../components/InfoTooltip/TooltipWrapper';
 import narrativeSymbols from '../../consts/narrativeSymbols';
 import CodeSpan from '../../components/CodeSpan/CodeSpan';
+import narrativeDiceSorter from '../utils/narrativeDiceSorter';
 
 export default (store:any) => (next:any) => (action:any) => {
 	if (action.type === NARRATIVE_DICE_POOL_ROLLED) {
@@ -23,36 +24,38 @@ export default (store:any) => (next:any) => (action:any) => {
 				<div className={styles.generalResult}>Rerolled <CodeSpan>{rerollCount}</CodeSpan> {timesWord}</div>
 			);
 		}
-		
-		Object.keys(results).forEach((diceType: string) => {
-			const resultsForDiceType: Array<string> = results[diceType];
-			// @ts-ignore
-			const diceLabel: string = narrativeDice[diceType]?.label;
 
-			fields.push(
-				<div className={classNames({
-					[styles.poolResultsBlock]: true,
-					[styles.resultsBlock]: true}
-				)}>
-					<div className={styles.resultsBlockImageContainer}>
-						<img
-							className={styles.resultsBlockImage}
-							src={require(`../../img/${diceType}.png`)}
-							alt={diceType}
-						/>
-					</div>
-					<div className={styles.resultsBlockContentContainer}>
-						<div>{resultsForDiceType.length}x {diceLabel}:</div>
-						<div>
-							{
-							joinAsBlocks(resultsForDiceType.map((result, index) => (
-								<span key={index}>{joinAsImages(result)}</span>
-							)))
-							}
+		Object.keys(results)
+			.sort(narrativeDiceSorter)
+			.forEach((diceType: string) => {
+				const resultsForDiceType: Array<string> = results[diceType];
+				// @ts-ignore
+				const diceLabel: string = narrativeDice[diceType]?.label;
+
+				fields.push(
+					<div className={classNames({
+						[styles.poolResultsBlock]: true,
+						[styles.resultsBlock]: true}
+					)}>
+						<div className={styles.resultsBlockImageContainer}>
+							<img
+								className={styles.resultsBlockImage}
+								src={require(`../../img/${diceType}.png`)}
+								alt={diceType}
+							/>
+						</div>
+						<div className={styles.resultsBlockContentContainer}>
+							<div>{resultsForDiceType.length}x {diceLabel}:</div>
+							<div>
+								{
+								joinAsBlocks(resultsForDiceType.map((result, index) => (
+									<span key={index}>{joinAsImages(result, diceType)}</span>
+								)))
+								}
+							</div>
 						</div>
 					</div>
-				</div>
-			);
+				);
 		});
 
 		const derivedResultsList = Object.entries(resultsDerived as ResultsDerivedType)
@@ -85,15 +88,18 @@ export default (store:any) => (next:any) => (action:any) => {
 				);
 			});
 
-		fields.push(
-			<div className={styles.derivedResultsContainer}>
-				<p>Results Summary:</p>
-				<div className={styles.derivedResultsList}>
-					{ derivedResultsList }
+		// Possible when only d100 was rolled
+		if (derivedResultsList.length) {
+			fields.push(
+				<div className={styles.derivedResultsContainer}>
+					<p>Results Summary:</p>
+					<div className={styles.derivedResultsList}>
+						{ derivedResultsList }
+					</div>
 				</div>
-			</div>
-		);
-		
+			);
+		}
+
 		store.dispatch(localMsgReady({
 			fields,
 			results

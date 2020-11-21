@@ -72,6 +72,10 @@ button.disabled {
 	margin-bottom: 0 !important;
 }
 
+.cursor--default {
+	cursor: default;
+}
+
 @media (min-width: 576px) {
 	.modal-lg {
 		width: 90%;

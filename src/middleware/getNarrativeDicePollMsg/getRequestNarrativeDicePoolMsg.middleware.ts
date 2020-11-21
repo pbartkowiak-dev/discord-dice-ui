@@ -4,6 +4,8 @@ import { NARRATIVE_DICE_POOL_ROLLED, requestMsgReady } from '../../actions/roll.
 import { ResultsDerivedType } from '../../components/PoolBuilder/PoolBuilderTypes';
 import narrativeSymbols from '../../consts/narrativeSymbols';
 import narrativeDice from '../../consts/narrativeDice';
+import { D100 } from '../../consts/diceConstants';
+import narrativeDiceSorter from '../utils/narrativeDiceSorter';
 
 export default (store:any) => (next:any) => (action:any) => {
 	if (action.type === NARRATIVE_DICE_POOL_ROLLED) {
@@ -20,13 +22,15 @@ export default (store:any) => (next:any) => (action:any) => {
 			const timesWord = rerollCount === 1 ? 'time' : 'times';
 			description += `\nRerolled \`${rerollCount}\` ${timesWord}.`;
 		}
-		
-		Object.keys(results).forEach((diceType: string) => {
-			const diceAmount: Array<string> = results[diceType].length;
-			// @ts-ignore
-			const diceLabel: string = narrativeDice[diceType]?.label;
-			diceRolled.push(`${diceAmount}x ${diceLabel}`);
-		});
+
+		Object.keys(results)
+			.sort(narrativeDiceSorter)
+			.forEach((diceType: string) => {
+				const diceAmount: Array<string> = results[diceType].length;
+				// @ts-ignore
+				const diceLabel: string = narrativeDice[diceType]?.label;
+				diceRolled.push(`${diceAmount}x ${diceLabel}`);
+			});
 
 		fields.push({
 			name: `:game_die: Dice rolled:`,
@@ -49,6 +53,13 @@ export default (store:any) => (next:any) => (action:any) => {
 					value: `\`${symbolCount}\``
 				});
 			});
+
+		if (D100 in results) {
+			fields.push({
+				name: `:100: ${narrativeDice[D100].label} Results:`,
+				value: `${joinAsBlocks(results[D100], '', true)}.`
+			});
+		}
 	
 		store.dispatch(requestMsgReady({
 			msgTitle: `${username} rolled the dice. Results Summary:`,

@@ -145,5 +145,6 @@ export const narrativeDiceSet = [
 	narrativeDice[SETBACK],
 	narrativeDice[DIFFICULTY],
 	narrativeDice[CHALLENGE],
-	narrativeDice[FORCE]
+	narrativeDice[FORCE],
+	narrativeDice[D100]
 ];

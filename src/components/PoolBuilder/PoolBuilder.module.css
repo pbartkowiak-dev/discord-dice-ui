@@ -18,6 +18,12 @@
 	margin-bottom: 4px;
 	align-self: center;
 	cursor: pointer;
+	opacity: .9;
+	transition: .2s;
+}
+
+.dieImage:hover {
+	opacity: 1;
 }
 
 .dieBody {
