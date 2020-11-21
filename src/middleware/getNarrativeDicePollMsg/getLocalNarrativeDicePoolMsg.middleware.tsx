@@ -53,13 +53,13 @@ export default (store:any) => (next:any) => (action:any) => {
 			.map((resultsTuple: [string, number]) => {
 				// transform into JSX elements
 				const symbolType = resultsTuple[0];
-				const symbolTCount = resultsTuple[1];
+				const symbolCount = resultsTuple[1];
 				// @ts-ignore
 				const symbolLabel = narrativeSymbols[symbolType]?.label;
 
 				return (
 					<div className={styles.derivedResultsItem}>
-						<TooltipWrapper content={`${symbolLabel || symbolType} (${symbolTCount})`}>
+						<TooltipWrapper content={`${symbolLabel || symbolType} (${symbolCount})`}>
 							<div>
 								<img
 									className={styles.derivedResultsImage}
@@ -67,7 +67,7 @@ export default (store:any) => (next:any) => (action:any) => {
 									alt={symbolType}
 								/>
 								<div className={styles.derivedResultsCounter}>
-									<span>{symbolTCount}</span>
+									<span>{symbolCount}</span>
 								</div>
 							</div>
 						</TooltipWrapper>
