@@ -58,7 +58,7 @@ function ResultsModal({
 	} else {
 		pushElement = null;
 	}
-	console.log('rollOptions', rollOptions)
+
 	if (
 		(rollOptions.warhammerMode && isSuccess) ||
 		(rollOptions.cocMode && diceSelected.diceType === D100_SL)

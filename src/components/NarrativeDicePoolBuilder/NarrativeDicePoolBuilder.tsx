@@ -8,7 +8,6 @@ function NarrativeDicePoolBuilder({
 	submitRoll
 }: any ) {
 	const handleSubmit = (pool: PoolType) => {
-		console.log('handleSubmit', pool)
 		submitRoll({
 			pool
 		});

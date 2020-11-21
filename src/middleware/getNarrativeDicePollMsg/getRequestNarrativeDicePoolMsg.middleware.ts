@@ -25,9 +25,7 @@ export default (store:any) => (next:any) => (action:any) => {
 			const diceAmount: Array<string> = results[diceType].length;
 			// @ts-ignore
 			const diceLabel: string = narrativeDice[diceType]?.label;
-			console.log('diceLabel', diceLabel)
 			diceRolled.push(`${diceAmount}x ${diceLabel}`);
-
 		});
 
 		fields.push({

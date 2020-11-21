@@ -8,11 +8,21 @@ import joinAsImages from './../utils/joinAsImages';
 import { ResultsDerivedType } from '../../components/PoolBuilder/PoolBuilderTypes';
 import TooltipWrapper from '../../components/InfoTooltip/TooltipWrapper';
 import narrativeSymbols from '../../consts/narrativeSymbols';
+import CodeSpan from '../../components/CodeSpan/CodeSpan';
 
 export default (store:any) => (next:any) => (action:any) => {
 	if (action.type === NARRATIVE_DICE_POOL_ROLLED) {
+		const state = store.getState();
 		const { results, resultsDerived } = action.payload;
+		const { rerollCount } = state;
 		const fields: Array<JSX.Element> = [];
+
+		if (rerollCount) {
+			const timesWord = rerollCount === 1 ? 'time' : 'times';
+			fields.push(
+				<div className={styles.generalResult}>Rerolled <CodeSpan>{rerollCount}</CodeSpan> {timesWord}</div>
+			);
+		}
 		
 		Object.keys(results).forEach((diceType: string) => {
 			const resultsForDiceType: Array<string> = results[diceType];
@@ -58,7 +68,7 @@ export default (store:any) => (next:any) => (action:any) => {
 				const symbolLabel = narrativeSymbols[symbolType]?.label;
 
 				return (
-					<div className={styles.derivedResultsItem}>
+					<div className={styles.derivedResultsItem} key={`${symbolCount}_${symbolType}`}>
 						<TooltipWrapper content={`${symbolLabel || symbolType} (${symbolCount})`}>
 							<div>
 								<img

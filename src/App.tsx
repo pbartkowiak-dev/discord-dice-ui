@@ -8,8 +8,6 @@ import Modals from './components/Modals/Modals';
 function App({ rollOptions }: any) {
 	let diceModule;
 
-	console.log('app rollOptions', rollOptions);
-
 	if (rollOptions?.narrativeDice) {
 		diceModule = <NarrativeDicePoolBuilderContainer />
 	} else {

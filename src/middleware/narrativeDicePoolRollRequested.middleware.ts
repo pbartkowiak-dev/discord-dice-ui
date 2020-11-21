@@ -9,12 +9,10 @@ export default (store: any) => (next: any) => (action: any) => {
 		const state = store.getState();
 		const { form : { diceModuleForm } } = state;
 		const formValues = diceModuleForm?.values || {};
-		const { pool, modifier } = action.payload;
+		const { pool } = action.payload;
 		const allResults: Array<string> = [];
 		const results = {};
 		let resultsDerived;
-
-		console.log('pool', pool)
 
 		Object.keys(pool).forEach((diceType: string) => {
 			const diceTypeNum = getDieNumberVal(diceType);
@@ -38,8 +36,6 @@ export default (store: any) => (next: any) => (action: any) => {
 		});
 
 		resultsDerived = getNarrativeDiceDerivedResults(allResults);
-		console.log('results', results);
-		console.log('resultsDerived', resultsDerived);
 
 		if (Object.keys(results).length) {
 			store.dispatch(narrativeDicePoolRolled({
