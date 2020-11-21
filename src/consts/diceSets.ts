@@ -140,10 +140,10 @@ export const conanSet = [{
 
 export const narrativeDiceSet = [
 	narrativeDice[BOOST],
-	narrativeDice[DIFFICULTY],
 	narrativeDice[ABILITY],
-	narrativeDice[CHALLENGE],
-	narrativeDice[FORCE],
 	narrativeDice[PROFICIENCY],
-	narrativeDice[SETBACK]
+	narrativeDice[SETBACK],
+	narrativeDice[DIFFICULTY],
+	narrativeDice[CHALLENGE],
+	narrativeDice[FORCE]
 ];

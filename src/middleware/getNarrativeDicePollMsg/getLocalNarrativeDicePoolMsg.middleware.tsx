@@ -7,7 +7,7 @@ import narrativeDice from '../../consts/narrativeDice';
 import CodeSpan from '../../components/CodeSpan/CodeSpan';
 import styles from '../../components/ResultsModal/ResultsModal.module.css';
 import { NARRATIVE_DICE_POOL_ROLLED, localMsgReady } from '../../actions/roll.actions';
-import joinAsImages from '../../utils/narrativeDice/joinAsImages';
+import joinAsImages from './../utils/joinAsImages';
 
 const IconRight = <FontAwesomeIcon icon={faArrowAltCircleRight} />;
 
