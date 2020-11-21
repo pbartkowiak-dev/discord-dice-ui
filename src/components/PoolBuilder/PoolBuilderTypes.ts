@@ -9,3 +9,16 @@ export interface PoolBuilderPropTypes {
 	diceSet: DiceSetType;
 	formName: string;
 }
+
+export type allResultsType = Array<string>;
+
+export interface ResultsDerivedType {
+	success: number;
+	threat: number;
+	failure: number;
+	advantage: number;
+	triumph: number;
+	despair: number;
+	dark: number;
+	light: number;
+}

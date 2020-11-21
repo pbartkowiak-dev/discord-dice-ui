@@ -44,7 +44,6 @@ export default (store: any) => (next: any) => (action: any) => {
 		if (Object.keys(results).length) {
 			store.dispatch(narrativeDicePoolRolled({
 				results,
-				allResults,
 				resultsDerived
 			}));
 		}

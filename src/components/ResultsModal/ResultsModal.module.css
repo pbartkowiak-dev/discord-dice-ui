@@ -140,8 +140,8 @@
 
 .poolResultsBlock {
 	border-bottom: 1px solid #bebebe;
-	padding-bottom: 1px;
-	margin-bottom: 2px;
+	padding-bottom: 2px;
+	margin-bottom: 1px;
 }
 
 .resultsBlock {
@@ -175,6 +175,46 @@
 .narrativeImageResult {
 	width: 24px;
 	height: auto;
+}
+
+.derivedResultsContainer {
+	padding-top: 10px;
+	margin-bottom: 10px;
+	text-align: center;
+}
+
+.derivedResultsList {
+	display: grid;
+	justify-content: center;
+	grid-gap: 10px;
+	grid-template-columns: repeat(auto-fit, 79px);
+}
+
+.derivedResultsItem {
+	position: relative;
+	border: 1px solid #bebebe;
+}
+
+.derivedResultsImage {
+	width: 100%;
+	height: auto;
+}
+
+.derivedResultsCounter {
+	position: absolute;
+	right: -1px;
+	bottom: -1px;
+	width: 27px;
+	height: 26px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 1px solid #bebebe;
+	background: #f4f4f4;
+	color: black;
+	font-weight: bold;
+	font-family: consolas, monospace;
+	font-size: 19px;
 }
 
 @media only screen and (min-width: 480px) {

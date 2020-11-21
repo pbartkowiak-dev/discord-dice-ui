@@ -1,22 +1,17 @@
 import React from 'react';
 import classNames from 'classnames';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowAltCircleRight } from '@fortawesome/free-solid-svg-icons';
 import joinAsBlocks from '../../utils/joinAsBlocks';
 import narrativeDice from '../../consts/narrativeDice';
-import CodeSpan from '../../components/CodeSpan/CodeSpan';
 import styles from '../../components/ResultsModal/ResultsModal.module.css';
 import { NARRATIVE_DICE_POOL_ROLLED, localMsgReady } from '../../actions/roll.actions';
 import joinAsImages from './../utils/joinAsImages';
-
-const IconRight = <FontAwesomeIcon icon={faArrowAltCircleRight} />;
+import { ResultsDerivedType } from '../../components/PoolBuilder/PoolBuilderTypes';
+import TooltipWrapper from '../../components/InfoTooltip/TooltipWrapper';
+import narrativeSymbols from '../../consts/narrativeSymbols';
 
 export default (store:any) => (next:any) => (action:any) => {
 	if (action.type === NARRATIVE_DICE_POOL_ROLLED) {
-		const state = store.getState();
-		const { form : { diceModuleForm } } = state;
-		const formValues = diceModuleForm?.values || {};
-		const { results, allResults } = action.payload;
+		const { results, resultsDerived } = action.payload;
 		const fields: Array<JSX.Element> = [];
 		
 		Object.keys(results).forEach((diceType: string) => {
@@ -37,7 +32,7 @@ export default (store:any) => (next:any) => (action:any) => {
 						/>
 					</div>
 					<div className={styles.resultsBlockContentContainer}>
-						<div><strong>{resultsForDiceType.length}x {diceLabel}:</strong></div>
+						<div>{resultsForDiceType.length}x {diceLabel}:</div>
 						<div>
 							{
 							joinAsBlocks(resultsForDiceType.map((result, index) => (
@@ -50,7 +45,44 @@ export default (store:any) => (next:any) => (action:any) => {
 			);
 		});
 
-		console.log('allResults', allResults);
+		const derivedResultsList = Object.entries(resultsDerived as ResultsDerivedType)
+			.filter((resultsTuple: [string, number]) => {
+				// return non-zero results;
+				return resultsTuple[1];
+			})
+			.map((resultsTuple: [string, number]) => {
+				// transform into JSX elements
+				const symbolType = resultsTuple[0];
+				const symbolTCount = resultsTuple[1];
+				// @ts-ignore
+				const symbolLabel = narrativeSymbols[symbolType]?.label;
+
+				return (
+					<div className={styles.derivedResultsItem}>
+						<TooltipWrapper content={`${symbolLabel || symbolType} (${symbolTCount})`}>
+							<div>
+								<img
+									className={styles.derivedResultsImage}
+									src={require(`../../img/${symbolType}.png`)}
+									alt={symbolType}
+								/>
+								<div className={styles.derivedResultsCounter}>
+									<span>{symbolTCount}</span>
+								</div>
+							</div>
+						</TooltipWrapper>
+					</div>
+				);
+			});
+
+		fields.push(
+			<div className={styles.derivedResultsContainer}>
+				<p>Results Summary:</p>
+				<div className={styles.derivedResultsList}>
+					{ derivedResultsList }
+				</div>
+			</div>
+		);
 		
 		store.dispatch(localMsgReady({
 			fields,

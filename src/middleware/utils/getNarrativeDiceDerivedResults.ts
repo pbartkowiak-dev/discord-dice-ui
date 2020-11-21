@@ -1,17 +1,10 @@
-type allResultsType = Array<string>;
+import {
+	allResultsType,
+	ResultsDerivedType
+} from '../../components/PoolBuilder/PoolBuilderTypes';
 
-interface resultsDerived {
-	success: number;
-	threat: number;
-	failure: number;
-	advantage: number;
-	triumph: number;
-	despair: number;
-	dark: number;
-	light: number;
-}
 
-export default (allResults: allResultsType): resultsDerived => {
+export default (allResults: allResultsType): ResultsDerivedType => {
 	const resultsDerived = {
 		success: 0,
 		threat: 0,
