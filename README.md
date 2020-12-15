@@ -1,6 +1,4 @@
-<a href="http://fvcproductions.com"><img src="./public/logo192.png" title="Discord Dice Ui" alt="Discord Dice Ui"></a>
-
-<!-- [![Discord Dice Ui](./public/logo192)](http://fvcproductions.com) -->
+<img src="./public/logo192.png" title="Discord Dice Ui" alt="Discord Dice Ui">
 
 # Discord Dice UI
 
