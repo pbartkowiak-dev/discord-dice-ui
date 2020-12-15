@@ -1,4 +1,4 @@
-<a href="#"<img src="./public/logo192.png" title="Discord Dice Ui" alt="Discord Dice Ui"></a>
+<a href="#"><img src="./public/logo192.png" title="Discord Dice Ui" alt="Discord Dice Ui"></a>
 
 # Discord Dice UI
 
