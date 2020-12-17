@@ -1,13 +1,8 @@
 export const COC = 'coc';
-
 export const WARHAMMER = 'warhammer';
-export const D100_SL = 'd100SL';
+export const CONAN = 'conan';
 export const SL = 'SL';
 
-export const CONAN = 'conan';
-export const D6_CONAN = 'd6conan';
-export const D20_CONAN_TEST = 'd20conan-test';
-export const D20_CONAN = 'd20conan';
-export const D20_CONAN_HL = 'd20conan-hl';
-export const COMBAT_DIE = 'Combat Die';
-export const HIT_LOCATION  = 'Hit Location';
+export const ROLLED_DIE = 'ROLLED_DIE';
+export const ADDITIONAL_DIE = 'ADDITIONAL_DIE';
+export const KEPT_DIE = 'KEPT_DIE';

@@ -40,6 +40,8 @@ export default {
 	},
 	[D100]: {
 		diceType: D100,
-		label: 'Percentile Dice'
+		label: 'Percentile Dice',
+		isExcludedFromPool: true,
+		noDropdown: true
 	}
 };

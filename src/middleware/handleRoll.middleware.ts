@@ -1,6 +1,11 @@
-import { POOL } from '../consts/diceConstants';
-import { D6_CONAN, D20_CONAN_TEST, D20_CONAN_HL } from '../consts/consts';
-import { D100_SL } from '../consts/consts';
+
+import {
+	POOL,
+	D100_SL,
+	D6_CONAN,
+	D20_CONAN_TEST,
+	D20_CONAN_HL
+} from '../consts/diceConstants';
 import {
 	openWarhammerModal,
 	openCoCModal,
@@ -17,6 +22,7 @@ import {
 	requestPoolRoll,
 	requestNarrativeDicePoolRoll
 } from '../actions/roll.actions';
+import { requestL5rRoll } from '../actions/l5r.actions';
 
 export default (store:any) => (next:any) => (action:any) => {
 	if (action.type === ROLL_SUBMITTED) {
@@ -36,7 +42,13 @@ export default (store:any) => (next:any) => (action:any) => {
 				diceAmount
 			}));
 
-			if (action?.payload?.pool && formValues?.narrativeDice) {
+
+
+			if (action?.payload?.pool && formValues?.l5rMode) {
+				store.dispatch(requestL5rRoll({
+					...action.payload
+				}));
+			} else if (action?.payload?.pool && formValues?.narrativeDice) {
 				store.dispatch(requestNarrativeDicePoolRoll({
 					...action.payload
 				}));

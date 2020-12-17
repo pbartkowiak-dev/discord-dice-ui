@@ -1,6 +1,9 @@
-import { D6_CONAN, D20_CONAN_TEST, D20_CONAN, D20_CONAN_HL } from './consts';
-import { D100_SL } from './consts';
 import {
+	D6_CONAN,
+	D20_CONAN_TEST,
+	D20_CONAN,
+	D20_CONAN_HL,
+	D100_SL,
 	D100,
 	D20,
 	D12,
@@ -17,9 +20,13 @@ import {
 	CHALLENGE,
 	FORCE,
 	PROFICIENCY,
-	SETBACK
+	SETBACK,
+	RING_DIE,
+	SKILL_DIE
 } from './diceConstants';
+
 import narrativeDice from './narrativeDice';
+import l5rDice from './l5rDice';
 
 /*******************************************
  *
@@ -54,7 +61,8 @@ export const classicSet = [{
 	label: 'd4'
 }, {
 	diceType: POOL,
-	label: 'Pool Builder'
+	label: 'Pool Builder',
+	noDropdown: true
 }];
 
 export const poolSet = [{
@@ -86,7 +94,11 @@ export const poolSet = [{
 export const CoCSet = [{
 	diceType: D100_SL,
 	diceImg: 'd100.png',
-	label: 'Skill test'
+	label: 'Skill test',
+	noDropdown: true
+}, {
+	diceType: D100,
+	label: 'd100'
 }, {
 	diceType: D20,
 	label: 'd20'
@@ -110,7 +122,9 @@ export const CoCSet = [{
 export const warhammerSet = [{
 	diceType: D100_SL,
 	diceImg: 'd100.png',
-	label: 'Skill test'
+	label: 'Skill test',
+	noDropdown: true
+
 }, {
 	diceType: D100,
 	label: 'd100'
@@ -126,13 +140,15 @@ export const warhammerSet = [{
 
 export const conanSet = [{
 	diceType: D20_CONAN_TEST,
-	label: 'Skill Test'
+	label: 'Skill Test',
+	noDropdown: true
 }, {
 	diceType: D20_CONAN,
 	label: 'd20'
 }, {
 	diceType: D20_CONAN_HL,
-	label: 'Hit Location'
+	label: 'Hit Location',
+	noDropdown: true
 }, {
 	diceType: D6_CONAN,
 	label: 'Combat Die'
@@ -147,4 +163,15 @@ export const narrativeDiceSet = [
 	narrativeDice[CHALLENGE],
 	narrativeDice[FORCE],
 	narrativeDice[D100]
+];
+
+export const l5rDiceSet = [
+	l5rDice[RING_DIE],
+	l5rDice[SKILL_DIE],
+	{
+		diceType: D10,
+		label: 'd10',
+		isExcludedFromPool: true,
+		noDropdown: true
+	}
 ];

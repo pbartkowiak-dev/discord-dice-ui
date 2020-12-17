@@ -3,12 +3,14 @@ import { connect } from 'react-redux';
 
 import SettingsModalContainer from '../SettingsModal/SettingsModalContainer';
 import ModifierModalContainer from '../ModifierModal/ModifierModalContainer';
-import ResultsModalContainer from '../ResultsModal/ResultsModalContainer';
 import CoCModalContainer from '../CoCModal/CoCModalContainer';
 import WarhammerModalContainer from '../WarhammerModal/WarhammerModalContainer';
 import ConanModalContainer from '../ConanModal/ConanModalContainer';
 import PoolBuilderModalContainer from '../PoolBuilderModal/PoolBuilderModalContainer';
 import CopyrightModalContainer from '../CopyrightModal/CopyrightModalContainer';
+
+import ResultsModalContainer from '../ResultsModal/ResultsModalContainer';
+import L5eResultsModalContainer from '../ResultsModal/L5rResultsModalContainer';
 
 import { ModalsStateTypes } from '../../reducers/modalsReducer';
 
@@ -22,8 +24,7 @@ const mapStateToProps = (state: any) => {
 	};
 }
 
-function Modals({ modalsState }: modalsPropTypes
-) {
+function Modals({ modalsState }: modalsPropTypes) {
 	return (
 		<>
 			<SettingsModalContainer showModal={modalsState.isSettingsModalOpen} />
@@ -34,6 +35,7 @@ function Modals({ modalsState }: modalsPropTypes
 			<PoolBuilderModalContainer showModal={modalsState.isPoolBuilderModalOpen} />
 			<CopyrightModalContainer showModal={modalsState.isCopyrightModalOpen} />
 			<ResultsModalContainer />
+			<L5eResultsModalContainer />
 		</>
 	);
 }

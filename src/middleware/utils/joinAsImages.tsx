@@ -9,13 +9,9 @@ export default (results: string, diceType?: string) => {
 	const resultsArr = results.split(',');
 	
 	return resultsArr.map((result, i) => {
-		let joiner = ', ';
 		let content: string;
 		let body: JSX.Element;
 
-		if (i === resultsArr.length - 1) {
-			joiner = '';
-		}
 
 		if (diceType === D100) {
 			content = `${narrativeDice[D100].label} (${result}%)`;

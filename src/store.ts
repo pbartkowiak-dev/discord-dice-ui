@@ -22,6 +22,15 @@ import getConanRequestMsg from './middleware/getConanMsg/getConanRequestMsg.midd
 // Pool
 import getLocalPoolMsg from './middleware/getPoolMsg/getLocalPoolMsg.middleware';
 import getRequestPoolMsg from './middleware/getPoolMsg/getRequestPoolMsg.middleware';
+// L5R
+import l5rRollRequested from './middleware/l5rRollRequested.middleware';
+import l5rRerollRequested from './middleware/l5rRerollRequested.middleware';
+import l5rKeepDice from './middleware/l5rKeepDice.middleware';
+import l5rAlterDie from './middleware/l5rAlterDie.middleware';
+import l5rRollAdditionalDie from './middleware/l5rRollAdditionalDie.middleware';
+import l5rKeepAdditionalDie from './middleware/l5rKeepAdditionalDie.middleware';
+import l5rAddDie from './middleware/l5rAddDie.middleware';
+import l5rSendState from './middleware/l5rSendState.middleware';
 
 import sendRequestMsg from './middleware/sendRequestMsg.middleware';
 import reducers from './reducers/index';
@@ -35,6 +44,15 @@ const rollMiddleware = [
 	narrativeDicePoolRollRequested,
 	getLocalNarrativeDicePoolMsg,
 	getRequestNarrativeDicePoolMsg,
+
+	l5rRollRequested,
+	l5rRerollRequested,
+	l5rKeepDice,
+	l5rAlterDie,
+	l5rRollAdditionalDie,
+	l5rKeepAdditionalDie,
+	l5rAddDie,
+	l5rSendState,
 
 	getRequestMsg,
 	getLocalMsg,

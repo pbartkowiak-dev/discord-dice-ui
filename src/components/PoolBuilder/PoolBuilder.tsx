@@ -3,17 +3,21 @@ import PoolBuilderDie from './PoolBuilderDie'
 import styles from './PoolBuilder.module.css';
 import { MODIFIER } from '../../consts/diceConstants';
 import { PoolBuilderPropTypes } from './PoolBuilderTypes';
+import Dice from '../DiceModule/Dice';
 
 function PoolBuilder({
 	handleSubmit,
 	diceSet,
-	formName
+	formName,
+	isDiceImgLarge,
+	maxDicePool,
+	submitRoll
 }: PoolBuilderPropTypes) {
 	const [poolState, setPoolState] = useState({});
 	const [modifierState, setModifierState] = useState('0');
 
 	const isPoolValueValid = (num: number) => {
-		const maxAmount = 15;
+		const maxAmount = maxDicePool || 15;
 		const minAmount = 0;
 		return !isNaN(num) && num >= minAmount && num <= maxAmount;
 	};
@@ -28,7 +32,7 @@ function PoolBuilder({
 		} else if (!isNaN(num) && num >= minAmount && num <= maxAmount) {
 			return true;
 		}
-		return false
+		return false;
 	};
 
 	const handlePoolChange = (diceType: string, value: number) => {
@@ -132,19 +136,43 @@ function PoolBuilder({
 		}
 	};
 
-	const PoolBuilderDice = diceSet.map(({ diceType, label }) => (
-		<PoolBuilderDie
-			key={`pool-builder-die-${diceType}`}
-			title={label}
-			diceType={diceType}
-			// @ts-ignore
-			value={poolState[diceType] || ''}
-			modifierValue={modifierState}
-			onChange={onChange}
-			onIncrease={onIncrease}
-			onDecrease={onDecrease}
-		/>
-	));
+	const handleRollDice = (diceType: string, diceAmount: number = 1) => {
+		submitRoll({
+			diceType,
+			diceAmount
+		});
+	};
+
+	const PoolBuilderDice = diceSet.map(({ diceType, label, diceImg, extraMark, isExcludedFromPool, noDropdown }) => {
+		if (isExcludedFromPool) {
+			return (
+				<Dice
+					key={diceType}
+					diceType={diceType}
+					diceImg={diceImg}
+					label={label}
+					extraMark={extraMark}
+					handleRollDice={handleRollDice}
+					noDropdown={noDropdown}
+				/>
+			);
+		}
+		return (
+			<PoolBuilderDie
+				key={`pool-builder-die-${diceType}`}
+				title={label}
+				diceType={diceType}
+				diceImg={diceImg}
+				// @ts-ignore
+				value={poolState[diceType] || ''}
+				modifierValue={modifierState}
+				onChange={onChange}
+				onIncrease={onIncrease}
+				onDecrease={onDecrease}
+				isDiceImgLarge={isDiceImgLarge}
+			/>
+		);
+	});
 
 	const onSubmit = (event: React.FormEvent) => {
 		event.preventDefault();

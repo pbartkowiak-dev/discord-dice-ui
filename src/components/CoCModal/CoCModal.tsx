@@ -2,7 +2,7 @@ import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import CoCModalForm from './CoCModalForm';
-import { D100_SL } from '../../consts/consts';
+import { D100_SL } from '../../consts/diceConstants';
 import { CoCFormValuesTypes, CoCModalPropTypes } from './CoCModalTypes';
 
 function CoCModal({

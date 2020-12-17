@@ -6,7 +6,7 @@ import CocPushOptionsContainer from '../CocPushOptions/CocPushOptionsContainer';
 import RerollContainer from '../Reroll/RerollContainer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDiceD20 } from '@fortawesome/free-solid-svg-icons';
-import { D100_SL } from '../../consts/consts';
+import { D100_SL } from '../../consts/diceConstants';
 import { ResultsModalPropTypes } from './ResultsModalTypes';
 
 function ResultsModal({

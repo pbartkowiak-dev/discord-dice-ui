@@ -6,7 +6,7 @@ import { CONAN } from '../../consts/consts';
 import { WARHAMMER } from '../../consts/consts';
 import { CLASSIC } from '../../consts/diceConstants';
 import { COC } from '../../consts/consts';
-import { DiceModuleProps, DiceSetType } from './DiceTypes';
+import { DiceModuleProps } from './DiceTypes';
 
 function DiceModule ({
 	rollOptions,
@@ -34,7 +34,7 @@ function DiceModule ({
 
 	const diceSet = getDiceSet(diceSetType);
 
-	const diceSetElement = diceSet.map(({ diceType, label, extraMark, diceImg }) => (
+	const diceSetElement = diceSet.map(({ diceType, label, extraMark, diceImg, noDropdown }) => (
 		<Dice
 			key={diceType}
 			diceType={diceType}
@@ -42,6 +42,7 @@ function DiceModule ({
 			label={label}
 			extraMark={extraMark}
 			handleRollDice={handleRollDice}
+			noDropdown={noDropdown}
 		/>
 	));
 

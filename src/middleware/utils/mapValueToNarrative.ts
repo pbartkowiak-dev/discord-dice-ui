@@ -28,7 +28,6 @@ export default (diceType: string, value: number): string => {
 		switch (value) {
 			case 1:
 			case 2:
-			case 2:
 				return 'blank';
 			case 3:
 			case 4:

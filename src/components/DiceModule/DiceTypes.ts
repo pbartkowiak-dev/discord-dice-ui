@@ -9,6 +9,7 @@ export interface DicePropTypes {
 	label: string;
 	extraMark?: string;
 	diceImg?: string | undefined;
+	noDropdown?: boolean;
 }
 
 interface diceSetElement {
@@ -16,6 +17,8 @@ interface diceSetElement {
 	label: string;
 	extraMark?: string | undefined;
 	diceImg?: string | undefined;
+	isExcludedFromPool?: boolean;
+	noDropdown?: boolean;
 }
 
 export type DiceSetType = Array<diceSetElement>;

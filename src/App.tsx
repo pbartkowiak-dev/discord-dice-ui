@@ -3,6 +3,7 @@ import HeaderContainer from './components/Header/HeaderContainer';
 import DiceModuleOptions from './components/DiceModuleOptions/DiceModuleOptions';
 import DiceModuleContainer from './components/DiceModule/DiceModuleContainer';
 import NarrativeDicePoolBuilderContainer from './components/NarrativeDicePoolBuilder/NarrativeDicePoolBuilderContainer';
+import L5rDicePoolBuilderContainer from './components/L5rDicePoolBuilder/L5rDicePoolBuilderContainer';
 import Modals from './components/Modals/Modals';
 
 function App({ rollOptions }: any) {
@@ -10,6 +11,8 @@ function App({ rollOptions }: any) {
 
 	if (rollOptions?.narrativeDice) {
 		diceModule = <NarrativeDicePoolBuilderContainer />
+	} else if (rollOptions?.l5rMode) {
+		diceModule = <L5rDicePoolBuilderContainer />
 	} else {
 		diceModule = <DiceModuleContainer />;
 	}

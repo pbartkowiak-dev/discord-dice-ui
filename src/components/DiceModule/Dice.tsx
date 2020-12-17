@@ -4,21 +4,16 @@ import Button from 'react-bootstrap/Button';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Card from 'react-bootstrap/Card';
-import {
-	D6_CONAN,
-	D20_CONAN_TEST,
-	D20_CONAN_HL	
-} from '../../consts/consts';
-import { D100_SL } from '../../consts/consts';
+import { D6_CONAN } from '../../consts/diceConstants';
 import { DicePropTypes } from './DiceTypes';
-import { POOL } from '../../consts/diceConstants';
 
 function Dice({
 	handleRollDice,
 	diceType,
 	label,
 	extraMark,
-	diceImg
+	diceImg,
+	noDropdown
 }: DicePropTypes
 ) {
 	const DropdownContent = () => {
@@ -40,15 +35,6 @@ function Dice({
 		);
 	};
 
-	const shouldUseButton = (dt:string) => {
-		return (
-			dt === D100_SL ||
-			dt === D20_CONAN_HL ||
-			dt === D20_CONAN_TEST ||
-			dt === POOL
-		);
-	};
-
 	const diceImgFileName = diceImg || `${diceType}.png`;
 
 	return (
@@ -63,11 +49,11 @@ function Dice({
 				/>
 			</Card.Body>
 			<Card.Footer>
-				{
-					shouldUseButton(diceType) 
+				{ noDropdown
 					? <Button
 						onClick={ () => handleRollDice(diceType, 1) }
-						variant="primary">{label}</Button>
+						variant="primary">{label}
+					</Button>
 					: <DropdownButton
 							id="dropdown-basic-button"
 							variant="primary"
@@ -76,7 +62,6 @@ function Dice({
 						<DropdownContent />
 					</DropdownButton>
 				}
-
 			</Card.Footer>
 		</Card>
 	);

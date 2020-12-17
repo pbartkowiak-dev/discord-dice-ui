@@ -35,8 +35,8 @@ export default (store:any) => (next:any) => (action:any) => {
 				fields.push(
 					<div className={classNames({
 						[styles.poolResultsBlock]: true,
-						[styles.resultsBlock]: true}
-					)}>
+						[styles.resultsBlock]: true
+					})}>
 						<div className={styles.resultsBlockImageContainer}>
 							<img
 								className={styles.resultsBlockImage}

@@ -4,10 +4,7 @@ import getResultsArray from '../utils/getResultsArray';
 
 export default (store: any) => (next: any) => (action: any) => {
 	if (action.type === DICE_POOL_ROLL_REQUESTED) {
-		const state = store.getState();
-		const { form : { diceModuleForm } } = state;
-		const formValues = diceModuleForm?.values || {};
-		const { pool, modifier } = action.payload;	
+		const { pool, modifier } = action.payload;
 		const results = {};
 
 		Object.keys(pool).forEach((diceType: string) => {

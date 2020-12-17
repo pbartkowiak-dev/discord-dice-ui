@@ -7,7 +7,7 @@ import './DiceModuleForm.css';
 import InfoTooltip from '../InfoTooltip/InfoTooltip';
 
 const cocModeLabel = (
-	<span>Call of Cthulhu 7e <InfoTooltip content={tooltip.coCModTooltip} /></span>
+	<span>Call of Cthulhu 7e</span>
 );
 
 const warhammerModeLabel = (
@@ -15,16 +15,20 @@ const warhammerModeLabel = (
 );
 
 const conanModeLabel = (
-	<span>Conan 2d20 <InfoTooltip content={tooltip.conanTooltip} /></span>
+	<span>Conan 2d20</span>
 );
 
 const eoteModeLabel = (
 	<span>Narrative Dice</span>
 );
 
+const l5rModeLabel = (
+	<span>L5R 5e Dice</span>
+);
+
 
 // @ts-ignore
-const createRenderer = render  => ({ input, meta, label, id, disabled }, ...rest) => {
+const createRenderer = render  => ({ input, label, id, disabled }, ...rest) => {
 	return (
 		<>
 			{ render(input, label, id, disabled, rest )}
@@ -45,7 +49,14 @@ const RenderCheckbox = createRenderer((input, label, id, disabled) =>
 );
 
 function DiceModuleForm({ rollOptions }:any) {
-	const { warhammerMode, cocMode, conanMode, narrativeDice } = rollOptions;
+	const {
+		warhammerMode,
+		cocMode,
+		conanMode,
+		narrativeDice,
+		l5rMode
+	} = rollOptions;
+
 	return (
 		<Form id ="roll-options-form" className="dice-module dice-form">
 			<Field
@@ -59,28 +70,35 @@ function DiceModuleForm({ rollOptions }:any) {
 				id="cocMode"
 				label={cocModeLabel}
 				component={RenderCheckbox}
-				disabled={warhammerMode || conanMode || narrativeDice}
+				disabled={warhammerMode || conanMode || narrativeDice || l5rMode}
 			/>
 			<Field
 				name="warhammerMode"
 				id="warhammerMode"
 				label={warhammerModeLabel}
 				component={RenderCheckbox}
-				disabled={cocMode || conanMode || narrativeDice}
+				disabled={cocMode || conanMode || narrativeDice || l5rMode}
 			/>
 			<Field
 				name="conanMode"
 				id="conanMode"
 				label={conanModeLabel}
 				component={RenderCheckbox}
-				disabled={cocMode || warhammerMode || narrativeDice}
+				disabled={cocMode || warhammerMode || narrativeDice || l5rMode}
 			/>
 			<Field
 				name="narrativeDice"
 				id="narrativeDice"
 				label={eoteModeLabel}
 				component={RenderCheckbox}
-				disabled={cocMode || conanMode || warhammerMode}
+				disabled={cocMode || conanMode || warhammerMode || l5rMode}
+			/>
+			<Field
+				name="l5rMode"
+				id="l5rMode"
+				label={l5rModeLabel}
+				component={RenderCheckbox}
+				disabled={cocMode || conanMode || warhammerMode || narrativeDice}
 			/>
 		</Form>
 	);
@@ -96,5 +114,12 @@ const FormElement = reduxForm({
 const selector = formValueSelector(form);
 
 export default connect(state => ({
-	rollOptions: selector(state, 'cocMode', 'warhammerMode', 'conanMode', 'narrativeDice')
+	rollOptions: selector(
+		state,
+		'cocMode',
+		'warhammerMode',
+		'conanMode',
+		'narrativeDice',
+		'l5rMode'
+	)
 }))(FormElement);

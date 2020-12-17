@@ -12,6 +12,15 @@ export const POOL_BUILDER = 'POOL_BUILDER';
 export const POOL = 'pool';
 export const MODIFIER = 'modifier';
 
+export const D100_SL = 'd100SL';
+
+export const D6_CONAN = 'd6conan';
+export const D20_CONAN_TEST = 'd20conan-test';
+export const D20_CONAN = 'd20conan';
+export const D20_CONAN_HL = 'd20conan-hl';
+export const COMBAT_DIE = 'Combat Die';
+export const HIT_LOCATION  = 'Hit Location';
+
 export const NARRATIVE_DICE = 'NARRATIVE_DICE';
 export const BOOST = 'boost';
 export const DIFFICULTY  = 'difficulty';
@@ -20,3 +29,7 @@ export const CHALLENGE = 'challenge';
 export const FORCE = 'force';
 export const PROFICIENCY = 'proficiency';
 export const SETBACK = 'setback';
+
+export const L5R_DICE = 'L5R_DICE';
+export const RING_DIE = 'ring_die';
+export const SKILL_DIE = 'skill_die';

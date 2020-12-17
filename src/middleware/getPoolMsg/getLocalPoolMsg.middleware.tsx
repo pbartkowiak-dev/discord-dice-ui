@@ -12,9 +12,7 @@ const IconRight = <FontAwesomeIcon icon={faArrowAltCircleRight} />;
 export default (store:any) => (next:any) => (action:any) => {
 	if (action.type === DICE_POOL_ROLLED) {
 		const state = store.getState();
-		const { form : { diceModuleForm } } = state;
 		const { rerollCount } = state;
-		const formValues = diceModuleForm?.values || {};
 		const { results, modifier } = action.payload;
 		const allResults: Array<number> = [];
 		const fields = [];
@@ -32,8 +30,8 @@ export default (store:any) => (next:any) => (action:any) => {
 			fields.push(
 				<div className={classNames({
 					[styles.poolResultsBlock]: true,
-					[styles.resultsBlock]: true}
-				)}>
+					[styles.resultsBlock]: true
+				})}>
 					<div className={styles.resultsBlockImageContainer}>
 						<img
 							className={styles.resultsBlockImage}

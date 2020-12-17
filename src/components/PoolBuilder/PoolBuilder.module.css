@@ -1,21 +1,22 @@
 .diceContainer {
 	display: grid;
 	grid-template-columns: 1fr;
-	grid-gap: 20px 15px;
+	grid-gap: 10px;
 	justify-items: center;
 }
 
 .dieCardTitle {
+	width: 100%;
 	padding: 5px 0 1px;
 	background-color: #f1f1f1;
 	border-bottom: 1px solid #ced4da;
 }
 
 .dieImage {
-	width: 40px;
+	width: 50px;
 	height: auto;
-	margin-top: 4px;
-	margin-bottom: 4px;
+	margin-top: 10px;
+	margin-bottom: 10px;
 	align-self: center;
 	cursor: pointer;
 	opacity: .9;
@@ -31,7 +32,7 @@
 	flex-direction: column;
 	padding: 0;
 	overflow: hidden;
-	background: #f5f5f5;
+	background: transparent;
 }
 
 .input {
@@ -53,11 +54,7 @@
 	}
 	.dieCardTitle {
 		padding: 7px 0 2px;
-	}
-	.dieBody {
-		background: transparent;
-	}
-	
+	}	
 	.dieImage {
 		margin-top: 10px;
 		margin-bottom: 10px;
@@ -77,11 +74,15 @@
 	.dieImage {
 		width: 65px;
 	}
+	.dieImageLarge {
+		width: 95px;
+	}
 }
 
 @media only screen and (min-width: 640px) {
 	.diceContainer {
 		grid-template-columns: 1fr 1fr 1fr;
+		grid-gap: 15px;
 	}
 }
 
@@ -106,4 +107,32 @@
 
 .counterBtnRight {
 	border-top-right-radius: 0;
+}
+
+.poolBuilderBtnContainer {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+.narrativePoolBuilder :global(.card) {
+	height: auto;
+}
+
+@media only screen and (min-width: 640px) {
+	.narrativePoolBuilder :global(.card) {
+		height: 150px;
+	}
+	.narrativePoolBuilder :global(.dice__image) {
+		width: 65px;
+		height: auto;
+	}
+}
+
+.narrativePoolBuilder :global(.card-body) {	
+	padding: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }

@@ -4,6 +4,7 @@ import diceSelected from './diceSelectedReducer';
 import warhammerSlMode from './warhammerSlModeReducer';
 import modalsState from './modalsReducer';
 import msg from './msgReducer';
+import l5rData from './l5rReducer';
 import { reducer as form } from 'redux-form'
 import lastRollOptions from './lastRollOptionsReducer';
 import rerollCount from './rerollCountReducer';
@@ -15,6 +16,7 @@ export default combineReducers({
 	modalsState,
 	form,
 	msg,
+	l5rData,
 	lastRollOptions,
 	rerollCount
 });

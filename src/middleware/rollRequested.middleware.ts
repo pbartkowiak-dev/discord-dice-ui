@@ -1,8 +1,17 @@
-import { DICE_ROLL_REQUESTED, diceRolled, cocDiceRolled, conanDiceRolled, warhammerDiceRolled } from '../actions/roll.actions';
-import { D20_CONAN_TEST, D6_CONAN } from '../consts/consts';
-import { D100_SL } from '../consts/consts';
 import getDieNumberVal from '../utils/getDieNumberVal';
 import getResultsArray from '../utils/getResultsArray';
+import {
+	DICE_ROLL_REQUESTED,
+	diceRolled,
+	cocDiceRolled,
+	conanDiceRolled,
+	warhammerDiceRolled
+} from '../actions/roll.actions';
+import {
+	D100_SL,
+	D20_CONAN_TEST,
+	D6_CONAN
+} from '../consts/diceConstants';
 
 interface rollDiceProps {
 	diceType: number;

@@ -11,8 +11,19 @@ function PoolBuilderDie({
 	modifierValue,
 	onChange,
 	onIncrease,
-	onDecrease
+	onDecrease,
+	diceImg,
+	isDiceImgLarge
 }: any) {
+
+	const diceImgPath = diceImg
+		? require(`../../img/${diceImg}`)
+		: require(`../../img/${diceType}.png`);
+
+	const diceImgClassName = classNames({
+		[styles.dieImage]: true,
+		[styles.dieImageLarge]: !!isDiceImgLarge
+	});
 	
 	return (
 		<Card className={styles.dieCard}>
@@ -24,9 +35,10 @@ function PoolBuilderDie({
 				})}>{ title }</Card.Subtitle>
 				<Card.Img
 					variant="top"
-					className={styles.dieImage}
+					className={diceImgClassName}
 					onClick={() => onIncrease(diceType)}
-					src={require(`../../img/${diceType}.png`)} />
+					src={diceImgPath}
+				/>
 			</Card.Body>
 			<Card.Footer className={styles.dieFooter}>
 				<PoolBuilderCounter

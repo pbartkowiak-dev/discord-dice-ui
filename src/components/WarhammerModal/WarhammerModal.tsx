@@ -3,7 +3,7 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import WarhammerModalForm from './WarhammerModalForm';
 import localStorageWarhammerSlModeManager from '../../utils/localStorageWarhammerSlModeManager';
-import { D100_SL } from '../../consts/consts';
+import { D100_SL } from '../../consts/diceConstants';
 import { WarhammerModalPropTypes, WarhammerFormValuesTypes } from './WarhammerModalTypes';
 
 function WarhammerModal({

@@ -15,7 +15,6 @@ const mapDispatchToProps = {
 	hideMsg
 };
 
-
 function ResultsModalContainer({
 	hideMsg,
 	msgData,

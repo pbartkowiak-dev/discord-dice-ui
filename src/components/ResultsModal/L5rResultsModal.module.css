@@ -1,0 +1,217 @@
+.resultsBody {
+	text-align: center;
+}
+
+.resultsContainer {
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+}
+
+.resultsBlockImageContainer {
+	position: relative;
+}
+
+.img {
+	width: 45px;
+	height: auto;
+	margin: 5px;
+	padding: 0;
+	opacity: .9;
+	border-radius: 10px;
+	cursor: pointer;
+	background-color: transparent;
+	transition: .1s;
+}
+
+.img:hover {
+	opacity: 1;
+}
+
+.selected {
+	opacity: 1;
+	background-color: rgb(255 255 0 / 75%);
+	box-shadow: 0 0 10px 2px yellow;
+}
+
+.firstButtonsRow {
+	padding-top: 10px;
+	display: flex;
+	justify-content: space-around;
+}
+
+.rerolledOld {
+	opacity: .6;
+	pointer-events: none;
+}
+
+.rerolledNew {
+	position: absolute;
+	top: 6px;
+	left: 6px;
+	z-index: 10;
+	opacity: 1;
+}
+
+.header {
+	text-align: center;
+	font-size: 18px;
+	margin-bottom: 1px;
+}
+
+.headerGreater {
+	font-size: 25px;
+	margin: 0;
+}
+
+.keptDiceContainer {
+	/* when dice is altered this can disappear for 1 sec. */
+	margin-top: 5px;
+	min-height: 97px;
+}
+
+.buttonDisabledWrapper {
+	cursor: not-allowed;
+}
+
+.buttonDisabledWrapper * {
+	pointer-events: none;
+}
+
+
+.buttonDisabledWrapper.addDieWrapper *,
+.buttonDisabledWrapper.additionalDiceContainer * {
+	opacity: .7;
+}
+
+.hasResultsKept {
+	cursor: not-allowed
+}
+
+.hasResultsKept * {
+	opacity: .7;
+	pointer-events: none;
+}
+
+.dropdownIcon {
+	width: 30px;
+}
+
+.dropdownIconDie {
+	width: 25px;
+}
+
+.additionalDie {
+	background-color: rgb(0 220 55 / 60%);
+	box-shadow: 0 0 15px 2px #00dc37;
+}
+
+.modifyKeptDiceButton {
+	margin-top: 15px;
+}
+
+.noOptionAvailable {
+	cursor: default;
+}
+
+.addDieContainer {
+	width: 45px;
+	height: 55px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.addDie {
+	border-radius: 2px;
+	width: 45px;
+	height: 45px;
+	padding-top: 3px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	opacity: .8;
+	transition: .2s;
+}
+
+.addDie:hover {
+	cursor: pointer;
+	opacity: 1;
+}
+
+.addDieInner {
+	border-radius: 50%;
+	border: 2px dashed #494949;
+	color: #494949;
+	width: 40px;
+	height: 40px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.addDieIcon {
+	font-size: 22px;
+}
+
+.explosiveDie.explodingAllowed,
+.explosiveDie.additionalDieKept {
+	background-color: rgb(170 231 247 / 60%);
+	box-shadow: 0 0 15px 2px #aae7f7;
+}
+
+.exploded,
+.explosiveDie.exploded,
+.isAdditionalDieDropped,
+.additionalDieKept {
+	background-color: transparent;
+	box-shadow: none;
+}
+
+.poolBuilder :global(.card) {
+	height: auto;
+}
+
+.resultsDerivedContainer {
+	margin-top: 10px;
+	padding-top: 5px;
+	border-top: 1px solid #bebebe;
+}
+
+.resultsDerivedList {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+@media only screen and (min-width: 640px) {
+	.poolBuilder :global(.card) {
+		height: 180px;
+	}
+	.addDieContainer {
+		width: 60px;
+		height: 75px;
+	}
+	.addDie {
+		width: 60px;
+		height: 60px;
+		padding-top: 5px;
+	}
+	.addDieInner {
+		width: 50px;
+		height: 50px;
+	}
+	.addDieIcon {
+		font-size: 28px;
+	}
+	.img { 
+		width: 40px;
+		padding: 1px;
+	}
+}
+
+@media only screen and (min-width: 480px) {
+	.img {
+		width: 65px;
+	}
+}
