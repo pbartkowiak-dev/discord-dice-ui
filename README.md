@@ -23,8 +23,6 @@ The app offers special support for following games:
 
 After selecting the mode in the _Roll Options_ a dedicated modal will be shown for rolling d100 skill tests - with option to Push the roll and guidelines for optional spending luck.
 
-[![Call of Cthulhu 7e Mode 1](./public/coc-mode-1.png)]()
-
 [![Call of Cthulhu 7e Mode 2](./public/coc-mode-2.png)]()
 
 -----------------------------
@@ -32,11 +30,7 @@ After selecting the mode in the _Roll Options_ a dedicated modal will be shown f
 
 The app offers special support for rolling Success Levels in Warhammer 2e, Warhammer 4e and Dark Heresy II.
 
-[![WFRP Mode - modalp](./public/wfrp-modal.png)]()
-
 [![WFRP Mode - app](./public/wfrp-result-app.png)]()
-
-[![WFRP Mode - discord](./public/wfrp-result-discord.png)]()
 
 -----------------------------
 ## Conan 2d20 Mode
@@ -53,16 +47,14 @@ Damage Dice Result (with option to reroll selected dice):
 
 [![Conan 2d20 Mode Combat Dice roll results](./public/conan-mode-3.png)]()
 
-And the results in Discord Chat:
-
-[![Conan 2d20 Mode Discord Chat](./public/conan-mode-4.png)]()
-
 -----------------------------
-## Pool Builder
+## Legend of the Five Rings 5e
 
-Allows to roll different die types at once.
+Allows to roll Skill and Ring Dice and to modify the results:  
+[![L5R Pool Builder](./public/l5r-1.png)]()
 
-[![Pool Builder](./public/pool-builder.png)]()
+Roll Results:  
+[![L5r Results Modal](./public/l5r-2.png)]()
 
 -----------------------------
 ## Narrative Dice
@@ -70,8 +62,6 @@ Allows to roll different die types at once.
 Allows to build a custom dice pull from popular space opera RPG series.
 
 [![Narrative Dice Pool Builder](./public/narrative-dice-1.png)]()
-
-[![Narrative Dice Results ](./public/narrative-dice-2.png)]()
 
 -----------------------------
 ## Setup
