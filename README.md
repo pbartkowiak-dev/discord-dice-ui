@@ -9,6 +9,7 @@ The app offers special support for following games:
 - Warhammer (Dark Heresy II, WFRP 2e/4e)
 - Conan 2d20
 - Narrative Dice (EotE SW)
+- Legend of the Five Rings (5e)
 
 [![App interface](./public/app.png)]()
 
@@ -59,9 +60,11 @@ Roll Results:
 -----------------------------
 ## Narrative Dice
 
-Allows to build a custom dice pull from popular space opera RPG series.
-
+Allows to build a custom dice pull from popular space opera RPG series:  
 [![Narrative Dice Pool Builder](./public/narrative-dice-1.png)]()
+
+Roll Results:  
+[![Narrative Dice Pool Builder](./public/narrative-dice-2.png)]()
 
 -----------------------------
 ## Setup
