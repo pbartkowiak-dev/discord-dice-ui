@@ -25,11 +25,18 @@ function L5rResultsDropdown({
 	l5rAddDie,
 	l5rSendState
 }: any) {
-	const handleAddDie = (setTo: string) => {
-		l5rAddDie({
-			type,
-			setTo: `${setTo}_${RING_DIE}`
-		});
+	const handleAddDie = (setTo?: string) => {
+		if (setTo) {
+			l5rAddDie({
+				type,
+				setTo: `${setTo}_${RING_DIE}`
+			});
+		} else {
+			l5rAddDie({
+				type,
+				setTo: ''
+			});
+		}
 		l5rSendState();
 	};
 
@@ -38,7 +45,7 @@ function L5rResultsDropdown({
 	return (
 		<Dropdown className="dropdown-wrapper">
 			<Dropdown.Toggle id="add-die-dropdown">
-				<TooltipWrapper content={`Add a ${dieTypeString} die`}>
+				<TooltipWrapper content={`Add a die`}>
 					<div className={l5rStyles.addDieContainer}>
 						<div className={l5rStyles.addDie}>
 							<div className={l5rStyles.addDieInner}>
@@ -50,6 +57,8 @@ function L5rResultsDropdown({
 			</Dropdown.Toggle>
 
 			<Dropdown.Menu>
+				<Dropdown.Item onClick={() => handleAddDie()}>Roll a new {BlackRingImg} die</Dropdown.Item>
+				<Dropdown.Divider />
 				<Dropdown.Item onClick={() => handleAddDie(`${OPPORTUNITY}_${STRIFE}`)}>Add a {dieTypeString} {BlackRingImg} set to {OpportunityImg} {StrifeImg}</Dropdown.Item>
 				<Dropdown.Item onClick={() => handleAddDie(`${OPPORTUNITY}`)}>Add a {dieTypeString} {BlackRingImg} set to {OpportunityImg}</Dropdown.Item>
 				<Dropdown.Item onClick={() => handleAddDie(`${SUCCESS}_${STRIFE}`)}>Add a {dieTypeString} {BlackRingImg} set to {SuccessImg} {StrifeImg}</Dropdown.Item>
