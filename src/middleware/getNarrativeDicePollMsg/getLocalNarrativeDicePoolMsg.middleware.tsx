@@ -3,10 +3,11 @@ import classNames from 'classnames';
 import joinAsBlocks from '../../utils/joinAsBlocks';
 import narrativeDice from '../../consts/narrativeDice';
 import styles from '../../components/ResultsModal/ResultsModal.module.css';
+import DerivedResultsItem from '../../components/DerivedResults/DerivedResultsItem';
+import derivedResultsStyles from '../../components/DerivedResults/DerivedResults.module.css';
 import { NARRATIVE_DICE_POOL_ROLLED, localMsgReady } from '../../actions/roll.actions';
 import joinAsImages from './../utils/joinAsImages';
 import { ResultsDerivedType } from '../../components/PoolBuilder/PoolBuilderTypes';
-import TooltipWrapper from '../../components/InfoTooltip/TooltipWrapper';
 import narrativeSymbols from '../../consts/narrativeSymbols';
 import CodeSpan from '../../components/CodeSpan/CodeSpan';
 import narrativeDiceSorter from '../utils/narrativeDiceSorter';
@@ -71,34 +72,24 @@ export default (store:any) => (next:any) => (action:any) => {
 				const symbolLabel = narrativeSymbols[symbolType]?.label;
 
 				return (
-					<div className={styles.derivedResultsItem} key={`${symbolCount}_${symbolType}`}>
-						<TooltipWrapper content={`${symbolLabel || symbolType} (${symbolCount})`}>
-							<div>
-								<img
-									className={styles.derivedResultsImage}
-									src={require(`../../img/${symbolType}.png`)}
-									alt={symbolType}
-								/>
-								<div className={styles.derivedResultsCounter}>
-									<span>{symbolCount}</span>
-								</div>
-							</div>
-						</TooltipWrapper>
-					</div>
+					<DerivedResultsItem
+						symbolCount={symbolCount}
+						tooltipContent={symbolLabel}
+						symbolType={symbolType}
+						symbolImageName={symbolType}
+					/>
 				);
 			});
 
-		// Possible when only d100 was rolled
-		if (derivedResultsList.length) {
-			fields.push(
-				<div className={styles.derivedResultsContainer}>
-					<p>Results Summary:</p>
-					<div className={styles.derivedResultsList}>
-						{ derivedResultsList }
-					</div>
+		fields.push(
+			<div className={derivedResultsStyles.derivedResultsContainer}>
+				<p>Results Summary:</p>
+				<div className={derivedResultsStyles.derivedResultsList}>
+					{ derivedResultsList }
 				</div>
-			);
-		}
+			</div>
+		);
+
 
 		store.dispatch(localMsgReady({
 			fields,

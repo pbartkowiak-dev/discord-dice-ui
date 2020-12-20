@@ -4,7 +4,6 @@ import { NARRATIVE_DICE_POOL_ROLLED, requestMsgReady } from '../../actions/roll.
 import { ResultsDerivedType } from '../../components/PoolBuilder/PoolBuilderTypes';
 import narrativeSymbols from '../../consts/narrativeSymbols';
 import narrativeDice from '../../consts/narrativeDice';
-import { D100 } from '../../consts/diceConstants';
 import narrativeDiceSorter from '../utils/narrativeDiceSorter';
 
 export default (store:any) => (next:any) => (action:any) => {
@@ -53,13 +52,6 @@ export default (store:any) => (next:any) => (action:any) => {
 					value: `\`${symbolCount}\``
 				});
 			});
-
-		if (D100 in results) {
-			fields.push({
-				name: `:100: ${narrativeDice[D100].label} Results:`,
-				value: `${joinAsBlocks(results[D100], '', true)}.`
-			});
-		}
 	
 		store.dispatch(requestMsgReady({
 			msgTitle: `${username} rolled the dice. Results Summary:`,

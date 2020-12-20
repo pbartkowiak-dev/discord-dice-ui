@@ -5,17 +5,16 @@ import Button from 'react-bootstrap/Button';
 import { EXPLOSIVE_SUCCESS, l5rResults } from '../../consts/l5rSymbols';
 import styles from './ResultsModal.module.css';
 import l5rStyles from './L5rResultsModal.module.css';
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDiceD20 } from '@fortawesome/free-solid-svg-icons';
-import { ResultsModalPropTypes } from './ResultsModalTypes';
+import { L5rResultsModalPropTypes } from './L5rResultsModalTypes';
 import L5rAddDieContainer from './L5rAddDieContainer';
 import TooltipWrapper from '../InfoTooltip/TooltipWrapper';
 import L5rResultsDropdownContainer from './L5rResultsDropdownContainer';
 import L5rKeepItDropItDropdownContainer from './L5rKeepItDropItDropdownContainer';
 import { ADDITIONAL_DIE, ROLLED_DIE, KEPT_DIE } from '../../consts/consts';
-import CodeSpan from '../CodeSpan/CodeSpan';
-import InfoTooltip from '../InfoTooltip/InfoTooltip';
+import DerivedResultsItem from '../DerivedResults/DerivedResultsItem';
+import derivedResultsStyles from '../DerivedResults/DerivedResults.module.css';
 
 function L5rResultsModal({
 	hideMsg,
@@ -36,7 +35,7 @@ function L5rResultsModal({
 	additionalDiceIndexesKept,
 	additionalDiceIndexesDropped,
 	additionalDiceIndexesExploded
-}: any) {
+}: L5rResultsModalPropTypes) {
 	const [selectedDiceState, setSelectedDiceState] = useState<any>([]);
 	const [isModifyingAllowed, setIsModifyingAllowed] = useState<boolean>(true);
 
@@ -83,7 +82,7 @@ function L5rResultsModal({
 		if (!showModal) {
 			l5rClearData();
 		}
-	}, [showModal]);
+	}, [showModal, l5rClearData]);
 
 	results
 		.forEach((result: string | number, index: number) => {
@@ -357,11 +356,35 @@ function L5rResultsModal({
 						hidden: isModifyingAllowed || resultsKeptElements.length === 1
 					})}>
 					<h4 className={l5rStyles.headerGreater}>Results:</h4>
-					<ul className={l5rStyles.resultsDerivedList}>
+					{/* <ul className={l5rStyles.resultsDerivedList}>
 						<li>Success: <CodeSpan>{resultsDerived.success}</CodeSpan> <InfoTooltip content="Exploding Success included" /> </li>
 						<li>Opportunity: <CodeSpan>{resultsDerived.opportunity}</CodeSpan></li>
 						<li>Strife: <CodeSpan>{resultsDerived.strife}</CodeSpan></li>
-					</ul>
+					</ul> */}
+
+				<div className={derivedResultsStyles.derivedResultsContainer}>
+					<div className={derivedResultsStyles.derivedResultsList}>
+						<DerivedResultsItem
+							symbolCount={resultsDerived.success}
+							tooltipContent="Success (Exploding Success included)"
+							symbolType="Success"
+							symbolImageName="l5r/success"
+						/>
+						<DerivedResultsItem
+							symbolCount={resultsDerived.opportunity}
+							tooltipContent="Opportunity"
+							symbolType="Opportunity"
+							symbolImageName="l5r/opportunity"
+						/>
+						<DerivedResultsItem
+							symbolCount={resultsDerived.strife}
+							tooltipContent="Strife"
+							symbolType="Strife"
+							symbolImageName="l5r/strife"
+						/>
+					</div>
+				</div>
+
 				</section>
 
 			</Modal.Body>

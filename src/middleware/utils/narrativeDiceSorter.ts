@@ -2,7 +2,6 @@ import {
 	ABILITY,
 	BOOST,
 	CHALLENGE,
-	D100,
 	DIFFICULTY,
 	FORCE,
 	PROFICIENCY,
@@ -16,13 +15,10 @@ export default (a: string, b: string) => {
 	if (b === BOOST) {
 		return 1;
 	}
-	if (b === D100) {
+	if (b === FORCE) {
 		return -1;
 	}
-	if (a !== D100 && b === FORCE) {
-		return -1;
-	}
-	if (a === FORCE && b !== D100) {
+	if (a === FORCE) {
 		return 1;
 	}
 	if (a === ABILITY && b !== BOOST) {

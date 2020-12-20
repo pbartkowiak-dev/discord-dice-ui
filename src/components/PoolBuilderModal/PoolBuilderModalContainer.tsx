@@ -14,7 +14,7 @@ function PoolBuilderModalContainer({
 	closePoolBuilderModal,
 	submitRoll,
 	showModal
-}: any) {
+}: PoolBuilderModalPropTypes) {
 	return (
 		<PoolBuilderModal
 			closePoolBuilderModal={closePoolBuilderModal}

@@ -4,7 +4,7 @@ import { getResultsDerivedSelector } from '../../selectors/l5rSelectors';
 import { hideMsg } from '../../actions/modals';
 import { requestL5rReroll, l5rKeepDice, l5rClearData, l5rSendState } from '../../actions/l5r.actions';
 import L5rResultsModal from './L5rResultsModal';
-import { ResultsModalContainerPropTypes } from './ResultsModalTypes';
+import { L5rResultsModalContainerPropTypes } from './L5rResultsModalTypes';
 
 const mapStateToProps = (state: any) => {
 	const { l5rData, rerollCount } = state;
@@ -36,13 +36,13 @@ function L5rResultsModalContainer({
 		additionalDiceIndexesDropped,
 		additionalDiceIndexesExploded
 	},
-	requestL5rReroll,
 	rerollCount,
+	requestL5rReroll,
 	l5rKeepDice,
 	l5rClearData,
 	l5rSendState,
 	resultsDerived
-}: any) {
+}: L5rResultsModalContainerPropTypes) {
 	return (
 		<L5rResultsModal
 			hideMsg={hideMsg}

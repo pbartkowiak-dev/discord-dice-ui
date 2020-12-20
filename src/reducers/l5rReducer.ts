@@ -10,21 +10,9 @@ import {
 	L5R_CLEAR_DATA
 } from '../actions/l5r.actions';
 
-interface initialStateType {
-	showModal: boolean;
+import { InitialStateType } from '../components/ResultsModal/L5rResultsModalTypes';
 
-	results: Array<string>;
-	resultsKept:  Array<string>;
-	resultsKeptIndexesAltered: Array<number>;
-	resultsKeptIndexesExploded: Array<number>;
-
-	additionalDiceRolled: Array<string>;
-	additionalDiceIndexesKept: Array<number>;
-	additionalDiceIndexesDropped: Array<number>;
-	additionalDiceIndexesExploded: Array<number>;
-}
-
-const initialState: initialStateType = {
+const initialState: InitialStateType = {
 	showModal: false,
 
 	results: [],
