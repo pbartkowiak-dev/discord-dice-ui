@@ -20,6 +20,7 @@ function NarrativeDicePoolBuilder({
 			<PoolBuilderContainer
 				handleSubmit={handleSubmit}
 				formName={formName}
+				maxDicePool={9}
 			/>
 			<div className={poolBuilderStyles.poolBuilderBtnContainer}>
 				<Button

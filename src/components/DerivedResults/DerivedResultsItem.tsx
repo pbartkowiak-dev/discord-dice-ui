@@ -10,7 +10,7 @@ function DerivedResultsItem({
 	symbolImageName
 }: DerivedResultsItemTypes) {
 	return (
-		<div className={styles.derivedResultsItem} key={`${symbolCount}_${symbolType}`}>
+		<div className={styles.derivedResultsItem}>
 			<TooltipWrapper content={`${tooltipContent || symbolType} (${symbolCount})`}>
 				<div>
 					<img

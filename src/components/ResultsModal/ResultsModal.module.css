@@ -172,9 +172,70 @@
 	border-bottom: 1px solid #bebebe;
 }
 
+.narrativeImageResultBg {
+	width: 67px;
+	height: 67px;
+	display: inline-block;
+	background-size: 100%;
+	position: relative;
+	margin-right: 3px;
+}
+
 .narrativeImageResult {
-	width: 24px;
+	width: 50px;
 	height: auto;
+	position: absolute;
+	top: 50%; 
+	left: 50%;
+	transform: translate(-50%, -50%);
+}
+
+.narrativeImageResultIsCube {
+	width: 55px;
+	height: 55px;
+}
+
+.narrativeImageResultTwoSymbols img:nth-child(1) {
+	top: 22px;
+	width: 39px;
+}
+
+.narrativeImageResultTwoSymbols img:nth-child(2) {
+	top: 47px;
+	width: 39px;
+}
+
+.narrativeImageResultIsTriangle {
+	padding-top: 22px;
+	width: 40px;
+}
+
+.narrativeImageResultTwoSymbols img:nth-child(1).narrativeImageResultIsTriangle,
+.narrativeImageResultTwoSymbols img:nth-child(2).narrativeImageResultIsTriangle {
+	width: 25px;
+}
+
+.narrativeImageResultTwoSymbols img:nth-child(2).narrativeImageResultIsTriangle {
+	top: 39px;
+}
+
+.narrativeImageResultTwoSymbols.narrativeImageResultIsCube img:nth-child(1),
+.narrativeImageResultTwoSymbols.narrativeImageResultIsCube img:nth-child(2) {
+	width: 37px;
+}
+
+.narrativeImageResultTwoSymbols.narrativeImageResultIsCube img:nth-child(1) {
+	top: 18px;
+	left: 18px;
+}
+
+.narrativeImageResultTwoSymbols.narrativeImageResultIsCube img:nth-child(2) {
+	top: 38px;
+	left: 38px;
+}
+
+.narrativeImageResultIsDodecahedron {
+	padding-top: 8px;
 }
 
 @media only screen and (min-width: 480px) {

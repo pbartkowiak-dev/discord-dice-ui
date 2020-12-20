@@ -1,6 +1,5 @@
 import React from 'react';
 import classNames from 'classnames';
-import joinAsBlocks from '../../utils/joinAsBlocks';
 import narrativeDice from '../../consts/narrativeDice';
 import styles from '../../components/ResultsModal/ResultsModal.module.css';
 import DerivedResultsItem from '../../components/DerivedResults/DerivedResultsItem';
@@ -11,6 +10,7 @@ import { ResultsDerivedType } from '../../components/PoolBuilder/PoolBuilderType
 import narrativeSymbols from '../../consts/narrativeSymbols';
 import CodeSpan from '../../components/CodeSpan/CodeSpan';
 import narrativeDiceSorter from '../utils/narrativeDiceSorter';
+import TooltipWrapper from '../../components/InfoTooltip/TooltipWrapper';
 
 export default (store:any) => (next:any) => (action:any) => {
 	if (action.type === NARRATIVE_DICE_POOL_ROLLED) {
@@ -30,8 +30,10 @@ export default (store:any) => (next:any) => (action:any) => {
 			.sort(narrativeDiceSorter)
 			.forEach((diceType: string) => {
 				const resultsForDiceType: Array<string> = results[diceType];
+
 				// @ts-ignore
 				const diceLabel: string = narrativeDice[diceType]?.label;
+				const tooltipContent = `${resultsForDiceType.length}x ${diceLabel}`;
 
 				fields.push(
 					<div className={classNames({
@@ -39,19 +41,20 @@ export default (store:any) => (next:any) => (action:any) => {
 						[styles.resultsBlock]: true
 					})}>
 						<div className={styles.resultsBlockImageContainer}>
-							<img
-								className={styles.resultsBlockImage}
-								src={require(`../../img/${diceType}.png`)}
-								alt={diceType}
-							/>
+							<TooltipWrapper content={tooltipContent}>
+								<img
+									className={styles.resultsBlockImage}
+									src={require(`../../img/${diceType}.png`)}
+									alt={diceType}
+								/>
+							</TooltipWrapper>
 						</div>
 						<div className={styles.resultsBlockContentContainer}>
-							<div>{resultsForDiceType.length}x {diceLabel}:</div>
 							<div>
 								{
-								joinAsBlocks(resultsForDiceType.map((result, index) => (
-									<span key={index}>{joinAsImages(result, diceType)}</span>
-								)))
+									resultsForDiceType.map((result, index) => (
+										<span key={index}>{joinAsImages(result, diceType)}</span>
+									))
 								}
 							</div>
 						</div>
@@ -64,7 +67,7 @@ export default (store:any) => (next:any) => (action:any) => {
 				// return non-zero results;
 				return resultsTuple[1];
 			})
-			.map((resultsTuple: [string, number]) => {
+			.map((resultsTuple: [string, number], index: number) => {
 				// transform into JSX elements
 				const symbolType = resultsTuple[0];
 				const symbolCount = resultsTuple[1];
@@ -73,6 +76,7 @@ export default (store:any) => (next:any) => (action:any) => {
 
 				return (
 					<DerivedResultsItem
+						key={`${symbolType}_${index}`}
 						symbolCount={symbolCount}
 						tooltipContent={symbolLabel}
 						symbolType={symbolType}
