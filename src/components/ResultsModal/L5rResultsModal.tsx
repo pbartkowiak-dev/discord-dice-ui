@@ -343,7 +343,7 @@ function L5rResultsModal({
 						[l5rStyles.keptDiceContainer]: true,
 						hidden: additionalDiceRolled.length === 0
 					})}>
-					<h4 className={l5rStyles.header}>Additional Dice rolled:</h4>
+					<h4 className={l5rStyles.header}>Additional dice rolled:</h4>
 					<div className={l5rStyles.resultsContainer}>
 						{additionalDiceRolledElements}
 					</div>
@@ -356,35 +356,28 @@ function L5rResultsModal({
 						hidden: isModifyingAllowed || resultsKeptElements.length === 1
 					})}>
 					<h4 className={l5rStyles.headerGreater}>Results:</h4>
-					{/* <ul className={l5rStyles.resultsDerivedList}>
-						<li>Success: <CodeSpan>{resultsDerived.success}</CodeSpan> <InfoTooltip content="Exploding Success included" /> </li>
-						<li>Opportunity: <CodeSpan>{resultsDerived.opportunity}</CodeSpan></li>
-						<li>Strife: <CodeSpan>{resultsDerived.strife}</CodeSpan></li>
-					</ul> */}
-
-				<div className={derivedResultsStyles.derivedResultsContainer}>
-					<div className={derivedResultsStyles.derivedResultsList}>
-						<DerivedResultsItem
-							symbolCount={resultsDerived.success}
-							tooltipContent="Success (Exploding Success included)"
-							symbolType="Success"
-							symbolImageName="l5r/success"
-						/>
-						<DerivedResultsItem
-							symbolCount={resultsDerived.opportunity}
-							tooltipContent="Opportunity"
-							symbolType="Opportunity"
-							symbolImageName="l5r/opportunity"
-						/>
-						<DerivedResultsItem
-							symbolCount={resultsDerived.strife}
-							tooltipContent="Strife"
-							symbolType="Strife"
-							symbolImageName="l5r/strife"
-						/>
+					<div className={derivedResultsStyles.derivedResultsContainer}>
+						<div className={derivedResultsStyles.derivedResultsList}>
+							<DerivedResultsItem
+								symbolCount={resultsDerived.success}
+								tooltipContent="Success (Exploding Success included)"
+								symbolType="Success"
+								symbolImageName="l5r/success"
+							/>
+							<DerivedResultsItem
+								symbolCount={resultsDerived.opportunity}
+								tooltipContent="Opportunity"
+								symbolType="Opportunity"
+								symbolImageName="l5r/opportunity"
+							/>
+							<DerivedResultsItem
+								symbolCount={resultsDerived.strife}
+								tooltipContent="Strife"
+								symbolType="Strife"
+								symbolImageName="l5r/strife"
+							/>
+						</div>
 					</div>
-				</div>
-
 				</section>
 
 			</Modal.Body>
