@@ -44,13 +44,34 @@ function ConanTokensModal({
 		}
 	};
 
+	const onChange = (tokenType: string, event: any) => {
+		const { value } = event.target;
+
+		if (tokenType === MOMENTUM && isValueValid(value)) {
+			setMomentumState(value);
+		}
+		if (tokenType === DOOM && isValueValid(value)) {
+			setDoomState(value);
+		}
+	};
+
+	const isValueValid = (val: string) => {
+		const num = Number(val);
+		const maxAmount = 30;
+		const minAmount = 0;
+
+		if (!isNaN(num) && num >= minAmount && num <= maxAmount) {
+			return true;
+		}
+		return false;
+	};
+
 	useEffect(() => {
 		if (momentum) {
 			setMomentumState(momentum);
 		}
 		if (doom) {
 			setDoomState(doom);
-
 		}
 	}, [momentum, doom, showModal])
 
@@ -65,10 +86,8 @@ function ConanTokensModal({
 						title="Doom"
 						diceType={DOOM}
 						diceImg="doom.png"
-						// @ts-ignore
 						value={doomState}
-						// modifierValue={modifierState}
-						onChange={onIncrease}
+						onChange={onChange}
 						onIncrease={onIncrease}
 						onDecrease={onDecrease}
 						isDiceImgLarge={true}
@@ -78,10 +97,8 @@ function ConanTokensModal({
 							title="Momentum"
 							diceType={MOMENTUM}
 							diceImg="momentum.png"
-							// @ts-ignore
 							value={momentumState}
-							// modifierValue={modifierState}
-							onChange={onIncrease}
+							onChange={onChange}
 							onIncrease={onIncrease}
 							onDecrease={onDecrease}
 							isDiceImgLarge={true}
