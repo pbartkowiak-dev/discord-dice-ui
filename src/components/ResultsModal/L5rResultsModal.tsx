@@ -301,7 +301,7 @@ function L5rResultsModal({
 								[l5rStyles.buttonDisabledWrapper]: rerollCount > 0
 							})}>
 								<Button
-									disabled={!selectedDiceState.length || selectedDiceState.length > 2 || rerollCount > 0}
+									disabled={!selectedDiceState.length || rerollCount > 0}
 									variant="outline-info"
 									onClick={handleReroll}
 								>Reroll selected</Button>
