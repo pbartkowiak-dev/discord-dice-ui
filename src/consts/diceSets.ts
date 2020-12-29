@@ -22,7 +22,8 @@ import {
 	PROFICIENCY,
 	SETBACK,
 	RING_DIE,
-	SKILL_DIE
+	SKILL_DIE,
+	CONAN_TOKENS
 } from './diceConstants';
 
 import narrativeDice from './narrativeDice';
@@ -152,6 +153,11 @@ export const conanSet = [{
 }, {
 	diceType: D6_CONAN,
 	label: 'Combat Die'
+},{
+	diceType: CONAN_TOKENS,
+	label: 'Update pools',
+	diceImg: 'conan_tokens.png',
+	noDropdown: true
 }];
 
 export const narrativeDiceSet = [

@@ -4,7 +4,8 @@ import {
 	D100_SL,
 	D6_CONAN,
 	D20_CONAN_TEST,
-	D20_CONAN_HL
+	D20_CONAN_HL,
+	CONAN_TOKENS,
 } from '../consts/diceConstants';
 import {
 	openWarhammerModal,
@@ -23,6 +24,7 @@ import {
 	requestNarrativeDicePoolRoll
 } from '../actions/roll.actions';
 import { requestL5rRoll } from '../actions/l5r.actions';
+import { openTokensModal } from '../actions/conan.actions';
 
 export default (store:any) => (next:any) => (action:any) => {
 	if (action.type === ROLL_SUBMITTED) {
@@ -71,6 +73,8 @@ export default (store:any) => (next:any) => (action:any) => {
 				}));
 			} else if (diceType === POOL) {
 				store.dispatch(openPoolBuilderModal());
+			} else if (diceType === CONAN_TOKENS) {
+				store.dispatch(openTokensModal());
 			} else if (formValues.useModifier) {
 				store.dispatch(openModifierModal());
 			} else {

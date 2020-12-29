@@ -26,6 +26,11 @@ function CopyrightModal({
 				link="https://fontawesome.com/"
 				link2="https://github.com/FortAwesome/Font-Awesome"
 			/>
+			<CopyrightModalRow
+				title="Conan 2d20 Tokents"
+				content="Momentum and Doom tokens are taken from Riotous GM blog."
+				link="https://riotousgm.wordpress.com/2017/10/29/conan-tokens/"
+			/>
 			</Modal.Body>
 			<Modal.Footer>
 				<Button variant="secondary" onClick={closeCopyrightModal}>

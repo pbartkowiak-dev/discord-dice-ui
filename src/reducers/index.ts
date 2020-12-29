@@ -5,6 +5,7 @@ import warhammerSlMode from './warhammerSlModeReducer';
 import modalsState from './modalsReducer';
 import msg from './msgReducer';
 import l5rData from './l5rReducer';
+import conanData from './conanReducer';
 import { reducer as form } from 'redux-form'
 import lastRollOptions from './lastRollOptionsReducer';
 import rerollCount from './rerollCountReducer';
@@ -17,6 +18,7 @@ export default combineReducers({
 	form,
 	msg,
 	l5rData,
+	conanData,
 	lastRollOptions,
 	rerollCount
 });

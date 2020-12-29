@@ -20,6 +20,9 @@ export const D20_CONAN = 'd20conan';
 export const D20_CONAN_HL = 'd20conan-hl';
 export const COMBAT_DIE = 'Combat Die';
 export const HIT_LOCATION  = 'Hit Location';
+export const CONAN_TOKENS  = 'CONAN_TOKENS';
+export const DOOM  = 'DOOM';
+export const MOMENTUM  = 'MOMENTUM';
 
 export const NARRATIVE_DICE = 'NARRATIVE_DICE';
 export const BOOST = 'boost';
@@ -33,3 +36,4 @@ export const SETBACK = 'setback';
 export const L5R_DICE = 'L5R_DICE';
 export const RING_DIE = 'ring_die';
 export const SKILL_DIE = 'skill_die';
+

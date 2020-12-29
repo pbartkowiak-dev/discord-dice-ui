@@ -12,6 +12,8 @@ import CopyrightModalContainer from '../CopyrightModal/CopyrightModalContainer';
 import ResultsModalContainer from '../ResultsModal/ResultsModalContainer';
 import L5eResultsModalContainer from '../ResultsModal/L5rResultsModalContainer';
 
+import ConanTokensModalContainer from '../ConanTokensModal/ConanTokensModalContainer';
+
 import { ModalsStateTypes } from '../../reducers/modalsReducer';
 
 type modalsPropTypes = {
@@ -36,6 +38,7 @@ function Modals({ modalsState }: modalsPropTypes) {
 			<CopyrightModalContainer showModal={modalsState.isCopyrightModalOpen} />
 			<ResultsModalContainer />
 			<L5eResultsModalContainer />
+			<ConanTokensModalContainer />
 		</>
 	);
 }
