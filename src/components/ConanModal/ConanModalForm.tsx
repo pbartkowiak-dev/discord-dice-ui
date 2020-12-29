@@ -219,8 +219,8 @@ function ConanModalForm({
 		);
 	});
 
-	const focusLabel = <span>Foc <InfoTooltip placement="bottom" content={tooltip.tnInfo}/></span>;
-	const tnLabel = <span>TN <InfoTooltip placement="bottom" content={tooltip.focusInfo} /></span>;
+	const focusLabel = <span>Foc <InfoTooltip placement="bottom" content={tooltip.focusInfo}/></span>;
+	const tnLabel = <span>TN <InfoTooltip placement="bottom" content={tooltip.tnInfo} /></span>;
 	const untrainedTestLabel= <span>Untrained Test <InfoTooltip placement="bottom" content={tooltip.untrainedTestInfo} /></span>;
 
 	return (
