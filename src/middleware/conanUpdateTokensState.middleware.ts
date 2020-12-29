@@ -4,16 +4,25 @@ import { UPDATE_TOKENS_STATE } from '../actions/conan.actions';
 
 export default (store: any) => (next: any) => (action: any) => {
 	if (action.type === UPDATE_TOKENS_STATE) {
-		const { payload: {momentum, doom} } = action;
+		const { payload: { momentum, doom } } = action;
+		const doomNum = Number(doom);
+		const momentumNum = Number(momentum);
+		const fields = []
 
-		const description = `
-			:skull: Doom: \`${doom}\`\n
-			:boom: Momentum: \`${momentum}\`
-		`;
+		fields.push({
+			name: `:skull: Doom: \`${doom}\``,
+			value: doomNum === 0 ? '-' : new Array(doomNum).fill(':black_circle:').join(' ')
+		})
+
+		fields.push({
+			name: `:boom: Momentum: \`${momentum}\``,
+			value: momentumNum === 0 ? '-' : new Array(momentumNum).fill(':yellow_circle:').join(' ')
+		})
 
 		store.dispatch(requestMsgReady({
 			msgTitle: 'Conan Doom / Momentum Pools',
-			description,
+			// description,
+			fields,
 			color: getColor()
 		}));
 	}
