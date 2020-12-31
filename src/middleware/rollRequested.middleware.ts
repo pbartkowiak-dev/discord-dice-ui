@@ -48,7 +48,6 @@ interface rollDiceResult {
 	// Conan results
 	effects?: number | undefined;
 	dmg?: number | undefined;
-	assistanceDiceResults?: Array<number>;
 }
 
 export default (store: any) => (next: any) => (action: any) => {
@@ -71,15 +70,11 @@ export default (store: any) => (next: any) => (action: any) => {
 			cocTwoPenalty,
 
 			fortune,
-			assistanceDice
 		} = action.payload;
 
 		const diceTypeNum = getDieNumberVal(diceType);
 		const keepUnits = (cocBonus || cocTwoBonus || cocPenalty || cocTwoPenalty);
 		const result = {} as rollDiceResult;
-
-		// Conan
-		let assistanceDiceResults;
 
 		if (formValues.cocMode) {
 			if (cocBonus || cocPenalty) {
@@ -155,17 +150,6 @@ export default (store: any) => (next: any) => (action: any) => {
 			result.skillLevel = skillLevel ? Number(skillLevel) : undefined;
 		}
 	
-		if (rollOptions.assistanceDiceResults) {
-			result.assistanceDiceResults = rollOptions.assistanceDiceResults;
-		} else if (assistanceDice) {
-			assistanceDiceResults = getResultsArray(
-				20,
-				Number(assistanceDice),
-				false
-			);
-			result.assistanceDiceResults = assistanceDiceResults;
-		}
-	
 		if (modifier === 0) {
 			result.modSymbol = '';
 		} else if (modifier > 0) {
@@ -195,8 +179,7 @@ export default (store: any) => (next: any) => (action: any) => {
 				result,
 				rollOptions: {
 					...action.payload,
-					...formValues,
-					assistanceDiceResults
+					...formValues
 				}
 			}));
 		} else {

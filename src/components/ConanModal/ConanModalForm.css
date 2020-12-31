@@ -23,16 +23,28 @@
 }
 
 .conan-radio-fields {
-	display: flex;
-	justify-content: center;;
+	display: grid;
+	grid-auto-flow: column;
+	justify-content: center;
+	grid-column-gap: 10px;
 }
 
 .conan-radio-fields input {
 	margin-right: 5px;
 }
 
-.conan-radio-fields label {
-	margin-right: 10px;
+.conan-radio-fields--dice-to-roll {
+	justify-content: space-evenly;
+}
+
+.conan-radio-fields--dice-to-roll label {
+	width: 36px;
+	padding-bottom: 2px;
+}
+
+.conan-radio-fields--dice-to-roll input {
+	margin: 0;
+	display: none;
 }
 
 .fortune {
@@ -77,8 +89,8 @@
 .dice-row {
 	display: flex;
 	justify-content: space-around;
-	width: 260px;
-	margin: 0 auto 8px;
+	width: 460px;
+	margin: 10px auto 3px;
 }
 
 .dice-row-label {
@@ -116,31 +128,12 @@
 	opacity: 1;
 }
 
-/* assistance-dice-row */
-.assistance-title {
-	margin-bottom: 6px;
-	margin-top: 0;
-	font-size: 16px;
-	text-align: center;
-}
-
-.assistance-dice-row.dice-row {
-	width: 200px;
-	margin: 0;
-}
-.assistance-dice-row .dice-icon {
-	font-size: 35px;
-}
-.assistance-dice-row .dice-icon.active {
+.dice-icon--assistance.active {
 	color: #b8551c;
 	opacity: 1;
 }
-.assistance-dice-row .dice-icon.active.hovered {
+.dice-icon--assistance.active.hovered {
 	color: #da8e2c;
-	opacity: 1;
-}
-.assistance-dice-row .dice-icon.hovered {
-	color: #bebebe;
 	opacity: 1;
 }
 

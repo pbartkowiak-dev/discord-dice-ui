@@ -11,8 +11,7 @@ export default (
 	tn: number,
 	focus: number,
 	difficulty: number,
-	untrainedTest: boolean,
-	assistanceSuccessLevel?: number
+	untrainedTest: boolean
 ):any => {
 	const compilationMinVal = untrainedTest ? 19 : 20;
 	const compilationMaxVal = 20;
@@ -32,10 +31,6 @@ export default (
 			complications += 1;
 		}
 	});
-
-	if (successLevel > 0 && assistanceSuccessLevel) {
-		successLevel = successLevel + assistanceSuccessLevel;
-	}
 
 	return {
 		isSuccess: successLevel >= difficulty,

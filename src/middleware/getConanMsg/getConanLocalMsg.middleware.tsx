@@ -16,7 +16,7 @@ export default (store: any) => (next: any) => (action: any) => {
 		const { rerollCount } = state;
 		const { payload: { result } } = action;
 		const { payload: { rollOptions } } = action;
-		const { results, assistanceDiceResults } = result;
+		const { results } = result;
 		const {
 			diceAmount,
 			difficulty,
@@ -24,29 +24,16 @@ export default (store: any) => (next: any) => (action: any) => {
 			fortune,
 			tn,
 			untrainedTest,
-			assistanceDice
 		} = rollOptions;
 	
 		const fields = [];
-		let assistanceSuccessLevel: any = {};
-	
-		if (assistanceDice && assistanceDiceResults) {
-			assistanceSuccessLevel = getConanSuccessLevel(
-				assistanceDiceResults,
-				Number(tn),
-				Number(focus),
-				Number(difficulty),
-				untrainedTest
-			);
-		}
 	
 		const successLevel: conanSuccessLevelType = getConanSuccessLevel(
 			results,
 			tn,
 			focus,
 			difficulty,
-			untrainedTest,
-			assistanceSuccessLevel.successLevel
+			untrainedTest
 		);
 		const yourFocus = <p className={styles.resultDetailsRow}>Focus: <CodeSpan>{focus || 0}</CodeSpan></p>;
 		const yourTn = <p className={styles.resultDetailsRow}>TN: <CodeSpan>{tn}</CodeSpan></p>;
@@ -70,23 +57,6 @@ export default (store: any) => (next: any) => (action: any) => {
 			const timesWord = rerollCount === 1 ? 'time' : 'times';
 			fields.push(
 				<div className={`${styles.generalResult}`}>Rerolled <CodeSpan>{rerollCount}</CodeSpan> {timesWord}</div>
-			);
-		}
-	
-		if (assistanceDice && assistanceDiceResults?.length) {
-			const assistanceDiceResultsJoined = joinAsBlocks(assistanceDiceResults);
-			const assistanceComplications = assistanceSuccessLevel.complications
-				? <p className={styles.assistanceResultRow}>Complications: <CodeSpan>{assistanceSuccessLevel.complications}</CodeSpan></p>
-				: null;
-	
-			fields.push(
-				<div className={styles.assistanceResult}>
-					<p className={styles.assistanceResultRow}><strong>Assistance Roll:</strong></p>
-					<p className={styles.assistanceResultRow}>Rolled: {assistanceDiceResultsJoined}</p>
-					<p className={styles.assistanceResultRow}>Successes: <CodeSpan>{assistanceSuccessLevel.successLevel}</CodeSpan></p>
-					{ assistanceComplications }
-					<InfoTooltip content={tooltip.assistance} className={styles.assistanceIcon} />
-				</div>
 			);
 		}
 	

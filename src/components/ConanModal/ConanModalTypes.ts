@@ -5,7 +5,6 @@ export interface ConanModalPropTypes {
 }
 
 export interface ConanFormValuesTypes {
-	assistanceDice: string;
 	dice: string;
 	difficulty: string;
 	focus: string;

@@ -54,34 +54,22 @@ const RenderCheckbox = createRenderer((input, label, id, textMuted, meta, disabl
 	);
 });
 
-function DiceRow({ dice, isAssistance = false, handleDiceChange, setHover, hover, fortune }:any ) {
+function DiceRow({ dice, handleDiceChange, setHover, hover, fortune }: any ) {
 	const diceRowClass = classNames({
-		'dice-row': true,
-		'assistance-dice-row': isAssistance
+		'dice-row': true
 	});
 	return (
 		<div className={diceRowClass}>
-			{
-				isAssistance && (
-					<div className="die-container">
-						<FontAwesomeIcon
-							className="conan-field-icon-times"
-							icon={faTimes}
-							onClick={() => handleDiceChange('0', true)}
-						/>
-					</div>
-				)
-			}
 			<div className="die-container">
 				<FontAwesomeIcon className={classNames({
 					'dice-icon': true,
-					active: !isAssistance || (isAssistance && Number(dice) >= 1),
+					active: Number(dice) >= 1,
 					hovered: hover >= 1
-					})}
+				})}
 					icon={faDiceD20}
 					onMouseEnter={() => setHover(1)}
 					onMouseLeave={() => setHover(0)}
-					onClick={() => handleDiceChange('1', isAssistance)}
+					onClick={() => handleDiceChange('1')}
 				/>
 			</div>
 			<div className="die-container">
@@ -89,11 +77,11 @@ function DiceRow({ dice, isAssistance = false, handleDiceChange, setHover, hover
 					'dice-icon': true,
 					active: ((Number(dice) >= 2) || Number(fortune) >= 1),
 					hovered: hover >= 2
-					})}
+				})}
 					icon={faDiceD20}
 					onMouseEnter={() => setHover(2)}
 					onMouseLeave={() => setHover(0)}
-					onClick={() => handleDiceChange('2', isAssistance)}
+					onClick={() => handleDiceChange('2')}
 				/>
 			</div>
 			<div className="die-container">
@@ -101,11 +89,11 @@ function DiceRow({ dice, isAssistance = false, handleDiceChange, setHover, hover
 					'dice-icon': true,
 					active: ((Number(dice) >= 3) || Number(fortune) >= 1),
 					hovered: hover >= 3
-					})}
+				})}
 					icon={faDiceD20}
 					onMouseEnter={() => setHover(3)}
 					onMouseLeave={() => setHover(0)}
-					onClick={() => handleDiceChange('3', isAssistance)}
+					onClick={() => handleDiceChange('3')}
 				/>
 				<span className={classNames({
 					'die-fortune-point': true,
@@ -117,38 +105,73 @@ function DiceRow({ dice, isAssistance = false, handleDiceChange, setHover, hover
 					'dice-icon': true,
 					active: ((Number(dice) >= 4) || Number(fortune) >= 2),
 					hovered: hover >= 4
-					})}
+				})}
 					icon={faDiceD20}
 					onMouseEnter={() => setHover(4)}
 					onMouseLeave={() => setHover(0)}
-					onClick={() => handleDiceChange('4', isAssistance)}
+					onClick={() => handleDiceChange('4')}
 				/>
 				<span className={classNames({
 					'die-fortune-point': true,
 					show: Number(fortune) >= 2
-					})}>1</span>
+				})}>1</span>
 			</div>
-			{
-				// Because maximum group size is 5 - one leader and 4 assisting creatures
-				!isAssistance && (
-					<div className="die-container">
-						<FontAwesomeIcon className={classNames({
-							'dice-icon': true,
-							active: ((Number(dice) >= 5) || Number(fortune) >= 3),
-							hovered: hover >= 5
-							})}
-							icon={faDiceD20}
-							onMouseEnter={() => setHover(5)}
-							onMouseLeave={() => setHover(0)}
-							onClick={() => handleDiceChange('5', isAssistance)}
-						/>
-						<span className={classNames({
-							'die-fortune-point': true,
-							show: Number(fortune) >= 3
-							})}>1</span>
-					</div>
-				)
-			}
+				<div className="die-container">
+					<FontAwesomeIcon className={classNames({
+						'dice-icon': true,
+						active: ((Number(dice) >= 5) || Number(fortune) >= 3),
+						hovered: hover >= 5
+					})}
+						icon={faDiceD20}
+						onMouseEnter={() => setHover(5)}
+						onMouseLeave={() => setHover(0)}
+						onClick={() => handleDiceChange('5')}
+					/>
+					<span className={classNames({
+						'die-fortune-point': true,
+						show: Number(fortune) >= 3
+						})}>1</span>
+				</div>
+				<div className="die-container">
+				<FontAwesomeIcon className={classNames({
+					'dice-icon': true,
+					'dice-icon--assistance': true,
+					active: Number(dice) >= 6,
+					hovered: hover >= 6
+				})}
+					icon={faDiceD20}
+					onMouseEnter={() => setHover(6)}
+					onMouseLeave={() => setHover(0)}
+					onClick={() => handleDiceChange('6')}
+				/>
+			</div>
+			<div className="die-container">
+				<FontAwesomeIcon className={classNames({
+					'dice-icon': true,
+					'dice-icon--assistance': true,
+					active: Number(dice) >= 7,
+					hovered: hover >= 7
+				})}
+					icon={faDiceD20}
+					onMouseEnter={() => setHover(7)}
+					onMouseLeave={() => setHover(0)}
+					onClick={() => handleDiceChange('7')}
+				/>
+			</div>
+			<div className="die-container">
+				<FontAwesomeIcon className={classNames({
+					'dice-icon': true,
+					'dice-icon--assistance': true,
+					active: Number(dice) >= 8,
+					hovered: hover >= 8
+				})}
+					icon={faDiceD20}
+					onMouseEnter={() => setHover(8)}
+					onMouseLeave={() => setHover(0)}
+					onClick={() => handleDiceChange('8')}
+				/>
+			</div>
+			{/* <InfoTooltip content={tooltip.assistanceInfo} /> */}
 		</div>
 	);
 }
@@ -162,36 +185,32 @@ function ConanModalForm({
 	handleSubmit,
 	formValues
 }: any) {
-	const { focus, dice, fortune, assistanceDice } = formValues;
+	const { focus, dice, fortune } = formValues;
 	const [hover, setHover] = useState(0);
-	const [assistanceHover, setAssistanceHover] = useState(0);
-	const diceMax = 5;
+	const diceMax = 8;
 
-	const handleDiceChange = (dieAmount:string, isAssistance:boolean) => {
-		if (isAssistance) {
-			change('assistanceDice', dieAmount);
-		} else {
-			change('dice', dieAmount);
-			if (fortune === '3') {
-				if (dieAmount === '4') {
-					change('fortune', '2');
-				} else if (dieAmount === '3') {
-					change('fortune', '1');
-				} else if (dieAmount === '2' || dieAmount === '1') {
-					change('fortune', '0');
-				}
-			} else if (fortune === '2') {
-				if (dieAmount === '3') {
-					change('fortune', '1');
-				} else if (dieAmount === '2' || dieAmount === '1') {
-					change('fortune', '0');
-				}
-			} else if (fortune === '1') {
-				if (dieAmount === '2' || dieAmount === '1') {
-					change('fortune', '0');
-				}
+	const handleDiceChange = (dieAmount:string) => {
+		change('dice', dieAmount);
+		if (fortune === '3') {
+			if (dieAmount === '4') {
+				change('fortune', '2');
+			} else if (dieAmount === '3') {
+				change('fortune', '1');
+			} else if (dieAmount === '2' || dieAmount === '1') {
+				change('fortune', '0');
+			}
+		} else if (fortune === '2') {
+			if (dieAmount === '3') {
+				change('fortune', '1');
+			} else if (dieAmount === '2' || dieAmount === '1') {
+				change('fortune', '0');
+			}
+		} else if (fortune === '1') {
+			if (dieAmount === '2' || dieAmount === '1') {
+				change('fortune', '0');
 			}
 		}
+
 	};
 
 	const handleFocusChange = (focusValue:string) => {
@@ -256,11 +275,6 @@ function ConanModalForm({
 						component={DiffLadder}
 					/>
 				</div>
-				<div className="dice">
-					<div className="conan-radio-fields">
-						{diceRadios}
-					</div>
-				</div>
 				<DiceRow
 					dice={dice}
 					handleDiceChange={handleDiceChange}
@@ -268,6 +282,11 @@ function ConanModalForm({
 					hover={hover}
 					fortune={fortune}
 				/>
+				<div className="dice">
+					<div className="conan-radio-fields conan-radio-fields--dice-to-roll">
+						{diceRadios}
+					</div>
+				</div>
 				<Field
 					name="untrainedTest"
 					id="untrainedTest"
@@ -319,18 +338,6 @@ function ConanModalForm({
 						</label>
 					</div>
 				</div>
-				<div className="assistance">
-					<h5 className="assistance-title">Assistance <InfoTooltip content={tooltip.assistanceInfo} /></h5>
-					<div className="conan-radio-fields">
-						<DiceRow
-							isAssistance={true}
-							dice={assistanceDice}
-							handleDiceChange={handleDiceChange}
-							hover={assistanceHover}
-							setHover={setAssistanceHover}
-						/>
-					</div>
-				</div>
 		</Form>
 	);
 }
@@ -378,5 +385,5 @@ const FormElement = reduxForm({
 const selector = formValueSelector(form);
 
 export default connect(state => ({
-	formValues: selector(state, 'difficulty', 'untrainedTest', 'focus', 'tn', 'dice', 'fortune', 'assistanceDice')
+	formValues: selector(state, 'difficulty', 'untrainedTest', 'focus', 'tn', 'dice', 'fortune')
 }))(FormElement);

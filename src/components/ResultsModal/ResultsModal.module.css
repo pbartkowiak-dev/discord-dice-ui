@@ -125,19 +125,6 @@
 	margin: 0;
 }
 
-.assistanceResult {
-	margin: 0 0 5px;
-	padding-bottom: 4px;
-	font-size: 0.9rem;
-	border-bottom: 1px solid #bebebe;
-	line-height: 17px;
-	position: relative;
-}
-
-.assistanceResultRow {
-	margin: 0;
-}
-
 .poolResultsBlock {
 	border-bottom: 1px solid #bebebe;
 	padding-bottom: 2px;

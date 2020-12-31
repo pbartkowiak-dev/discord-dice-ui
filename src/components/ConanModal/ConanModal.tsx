@@ -13,7 +13,6 @@ function ConanModal({
 ) {
 	const handleSubmit = (values: ConanFormValuesTypes) => {
 		const {
-			assistanceDice,
 			dice,
 			difficulty,
 			focus,
@@ -24,7 +23,6 @@ function ConanModal({
 
 		requestRoll({
 			diceType: D20_CONAN_TEST,
-			assistanceDice: Number(assistanceDice),
 			diceAmount: Number(dice),
 			difficulty: Number(difficulty),
 			focus: Number(focus),
@@ -38,7 +36,6 @@ function ConanModal({
 
 	const initialValues = {
 		dice: '2',
-		assistanceDice: '0',
 		fortune: '0',
 		difficulty: '2',
 		untrainedTest: false
