@@ -44,14 +44,16 @@
 	margin: 5px 0;
 }
 
-.conan-radio-fields--dice-to-roll label {
-	width: 36px;
-	padding-bottom: 2px;
-}
-
 .conan-radio-fields--dice-to-roll input {
 	margin: 0;
 	display: none;
+}
+
+.conan-die-select {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 }
 
 .fortune {
