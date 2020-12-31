@@ -101,7 +101,7 @@ function ConanModalForm({
 	const diceRow = new Array(diceMax).fill('x').map((_, index) => {
 		const diceAmount = index + 1;
 		return (
-			<div>
+			<div key={`die-to-roll-${diceAmount}`}>
 				<div className="die-container">
 					<FontAwesomeIcon className={classNames({
 						'dice-icon': true,
@@ -174,7 +174,7 @@ function ConanModalForm({
 						component={DiffLadder}
 					/>
 				</div>
-				<div className="dice">
+				<div className="dice flex-center">
 					<div className="conan-radio-fields conan-radio-fields--dice-to-roll">
 						<InfoTooltip className="assistance-tooltip" content={tooltip.assistanceInfo} />
 						{ diceRow }

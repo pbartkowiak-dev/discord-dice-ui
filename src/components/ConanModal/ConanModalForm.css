@@ -35,10 +35,13 @@
 }
 
 .conan-radio-fields--dice-to-roll {
+	width: 340px;
 	justify-content: space-evenly;
 	grid-auto-flow: initial;
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	grid-column-gap: 10px;
 	position: relative;
+	margin: 5px 0;
 }
 
 .conan-radio-fields--dice-to-roll label {
@@ -77,11 +80,6 @@
 	margin-bottom: 0;
 }
 
-.dice {
-	margin-top: 5px;
-	margin-bottom: 5px;
-}
-
 .die-label--active {
 	font-weight: bold;
 	color: #28a745;
@@ -93,8 +91,8 @@
 
 .assistance-tooltip {
 	position: absolute;
-	top: -25px;
-	right: 10px;
+	top: 73px;
+	right: 125px;
 }
 
 .dice-title {
@@ -125,6 +123,7 @@
 }
 
 .die-container {
+	width: 52px;
 	display: inline-block;
 	position: relative;
 	display: flex;
@@ -159,9 +158,9 @@
 .die-fortune-point {
 	font-size: 21px;
 	position: absolute;
-	top: 9px;
+	top: 7px;
 	margin: 0 auto;
-	right: 6px;
+	right: 11px;
 	font-weight: bold;
 	display: inline-block;
 	background: white;
@@ -177,17 +176,4 @@
 
 .die-fortune-point.show {
 	display: inline-block;
-}
-
-@media only screen and (min-width: 480px) {
-	.dice {
-		margin-top: 18px;
-	}
-	.conan-radio-fields--dice-to-roll {
-		grid-auto-flow: column;
-		grid-template-columns: auto;
-	}
-	.conan-radio-fields {
-		grid-column-gap: 10px;
-	}
 }

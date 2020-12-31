@@ -48,6 +48,12 @@ button.disabled {
 	display: block;
 }
 
+.flex-center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
 .dropdown-item {
 	padding: 0.2rem 1.5rem;
 	font-size: 15px;
