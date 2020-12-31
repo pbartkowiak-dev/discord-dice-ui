@@ -83,7 +83,7 @@ function NarrativeTokensModal({
 			<Modal.Body>
 				<div className={styles.container}>
 					<PoolBuilderDie
-						title="DestinyDark"
+						title="Dark Destiny Points"
 						diceType={DESTINY_DARK}
 						diceImg="destiny_dark.png"
 						value={destinyDarkState}
@@ -94,7 +94,7 @@ function NarrativeTokensModal({
 					/>
 
 					<PoolBuilderDie
-							title="DestinyLight"
+							title="Light Destiny Points"
 							diceType={DESTINY_LIGHT}
 							diceImg="destiny_light.png"
 							value={destinyLightState}
