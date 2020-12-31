@@ -6,6 +6,7 @@ import {
 	D20_CONAN_TEST,
 	D20_CONAN_HL,
 	CONAN_TOKENS,
+	NARRATIVE_TOKENS
 } from '../consts/diceConstants';
 import {
 	openWarhammerModal,
@@ -24,7 +25,8 @@ import {
 	requestNarrativeDicePoolRoll
 } from '../actions/roll.actions';
 import { requestL5rRoll } from '../actions/l5r.actions';
-import { openTokensModal } from '../actions/conan.actions';
+import { openConanTokensModal } from '../actions/conan.actions';
+import { openNarrativeTokensModal } from '../actions/narrativeDice.actions';
 
 export default (store:any) => (next:any) => (action:any) => {
 	if (action.type === ROLL_SUBMITTED) {
@@ -43,8 +45,6 @@ export default (store:any) => (next:any) => (action:any) => {
 				diceType,
 				diceAmount
 			}));
-
-
 
 			if (action?.payload?.pool && formValues?.l5rMode) {
 				store.dispatch(requestL5rRoll({
@@ -74,7 +74,9 @@ export default (store:any) => (next:any) => (action:any) => {
 			} else if (diceType === POOL) {
 				store.dispatch(openPoolBuilderModal());
 			} else if (diceType === CONAN_TOKENS) {
-				store.dispatch(openTokensModal());
+				store.dispatch(openConanTokensModal());
+			} else if (diceType === NARRATIVE_TOKENS) {
+				store.dispatch(openNarrativeTokensModal());
 			} else if (formValues.useModifier) {
 				store.dispatch(openModifierModal());
 			} else {

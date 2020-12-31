@@ -32,6 +32,9 @@ export const CHALLENGE = 'challenge';
 export const FORCE = 'force';
 export const PROFICIENCY = 'proficiency';
 export const SETBACK = 'setback';
+export const NARRATIVE_TOKENS = 'NARRATIVE_TOKENS';
+export const DESTINY_LIGHT = 'DESTINY_LIGHT';
+export const DESTINY_DARK = 'DESTINY_DARK';
 
 export const L5R_DICE = 'L5R_DICE';
 export const RING_DIE = 'ring_die';

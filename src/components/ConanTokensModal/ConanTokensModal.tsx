@@ -47,17 +47,17 @@ function ConanTokensModal({
 	const onChange = (tokenType: string, event: any) => {
 		const { value } = event.target;
 
-		if (tokenType === MOMENTUM && isValueValid(value)) {
+		if (tokenType === MOMENTUM && isValueValid(value, tokenType)) {
 			setMomentumState(value);
 		}
-		if (tokenType === DOOM && isValueValid(value)) {
+		if (tokenType === DOOM && isValueValid(value, tokenType)) {
 			setDoomState(value);
 		}
 	};
 
-	const isValueValid = (val: string) => {
+	const isValueValid = (val: string, tokenType: string) => {
 		const num = Number(val);
-		const maxAmount = 30;
+		const maxAmount = tokenType === MOMENTUM ? 6 : 30;
 		const minAmount = 0;
 
 		if (!isNaN(num) && num >= minAmount && num <= maxAmount) {

@@ -23,7 +23,8 @@ import {
 	SETBACK,
 	RING_DIE,
 	SKILL_DIE,
-	CONAN_TOKENS
+	CONAN_TOKENS,
+	NARRATIVE_TOKENS
 } from './diceConstants';
 
 import narrativeDice from './narrativeDice';
@@ -153,7 +154,7 @@ export const conanSet = [{
 }, {
 	diceType: D6_CONAN,
 	label: 'Combat Die'
-},{
+}, {
 	diceType: CONAN_TOKENS,
 	label: 'Update pools',
 	diceImg: 'conan_tokens.png',
@@ -168,13 +169,18 @@ export const narrativeDiceSet = [
 	narrativeDice[DIFFICULTY],
 	narrativeDice[CHALLENGE],
 	narrativeDice[FORCE],
-	narrativeDice[D100]
+	narrativeDice[D100], {
+		diceType: NARRATIVE_TOKENS,
+		label: 'Update pools',
+		diceImg: 'narrative_tokens.png',
+		isExcludedFromPool: true,
+		noDropdown: true
+	}
 ];
 
 export const l5rDiceSet = [
 	l5rDice[RING_DIE],
-	l5rDice[SKILL_DIE],
-	{
+	l5rDice[SKILL_DIE], {
 		diceType: D10,
 		label: 'd10',
 		isExcludedFromPool: true,

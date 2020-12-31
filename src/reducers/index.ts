@@ -6,6 +6,7 @@ import modalsState from './modalsReducer';
 import msg from './msgReducer';
 import l5rData from './l5rReducer';
 import conanData from './conanReducer';
+import narrativeDiceData from './narrativeDicereducer';
 import { reducer as form } from 'redux-form'
 import lastRollOptions from './lastRollOptionsReducer';
 import rerollCount from './rerollCountReducer';
@@ -19,6 +20,7 @@ export default combineReducers({
 	msg,
 	l5rData,
 	conanData,
+	narrativeDiceData,
 	lastRollOptions,
 	rerollCount
 });

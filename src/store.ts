@@ -7,6 +7,7 @@ import rerollRequested from './middleware/rerollRequested.middleware';
 import narrativeDicePoolRollRequested from './middleware/narrativeDicePoolRollRequested.middleware';
 import getLocalNarrativeDicePoolMsg from './middleware/getNarrativeDicePollMsg/getLocalNarrativeDicePoolMsg.middleware';
 import getRequestNarrativeDicePoolMsg from './middleware/getNarrativeDicePollMsg/getRequestNarrativeDicePoolMsg.middleware';
+import narrativeDiceUpdateTokensState from './middleware/narrativeDiceUpdateTokensState.middleware';
 // General
 import getRequestMsg from './middleware/getMsg/getRequestMsg.middleware';
 import getLocalMsg from './middleware/getMsg/getLocalMsg.middleware';
@@ -45,6 +46,7 @@ const rollMiddleware = [
 	narrativeDicePoolRollRequested,
 	getLocalNarrativeDicePoolMsg,
 	getRequestNarrativeDicePoolMsg,
+	narrativeDiceUpdateTokensState,
 
 	l5rRollRequested,
 	l5rRerollRequested,

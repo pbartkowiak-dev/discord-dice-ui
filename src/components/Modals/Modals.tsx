@@ -13,6 +13,7 @@ import ResultsModalContainer from '../ResultsModal/ResultsModalContainer';
 import L5eResultsModalContainer from '../ResultsModal/L5rResultsModalContainer';
 
 import ConanTokensModalContainer from '../ConanTokensModal/ConanTokensModalContainer';
+import NarrativeTokensModalContainer from '../NarrativeTokensModal/NarrativeTokensModalContainer';
 
 import { ModalsStateTypes } from '../../reducers/modalsReducer';
 
@@ -39,6 +40,7 @@ function Modals({ modalsState }: modalsPropTypes) {
 			<ResultsModalContainer />
 			<L5eResultsModalContainer />
 			<ConanTokensModalContainer />
+			<NarrativeTokensModalContainer />
 		</>
 	);
 }
