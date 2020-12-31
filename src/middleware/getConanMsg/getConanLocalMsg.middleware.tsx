@@ -1,12 +1,9 @@
 import React from 'react';
 import classNames from 'classnames/bind';
-import joinAsBlocks from '../../utils/joinAsBlocks';
 import getConanSuccessLevel, { conanSuccessLevelType } from '../../utils/getConanSuccessLevel';
 import ResultVsSkillRow, { labelsType } from '../../components/ResultVsSkillRow/ResultVsSkillRow';
 import styles from '../../components/ResultsModal/ResultsModal.module.css';
-import InfoTooltip from '../../components/InfoTooltip/InfoTooltip';
 import CodeSpan from '../../components/CodeSpan/CodeSpan';
-import tooltip from '../../locale/tooltip';
 import { CONAN_DICE_ROLLED, localMsgReady } from "../../actions/roll.actions";
 
 export default (store: any) => (next: any) => (action: any) => {

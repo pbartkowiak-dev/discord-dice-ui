@@ -60,7 +60,6 @@ export default (store: any) => (next: any) => (action: any) => {
 			diceType,
 			modifier = 0,
 			diceAmount = 1,
-			rollOptions = {},
 			itemsToStay = [],
 			skillLevel,
 

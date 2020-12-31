@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import Form from 'react-bootstrap/Form';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDiceD20, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { faDiceD20 } from '@fortawesome/free-solid-svg-icons';
 import DiffLadder from '../DiffLadder/DiffLadder';
 import './ConanModalForm.css';
 import InfoTooltip from '../InfoTooltip/InfoTooltip';
@@ -54,129 +54,6 @@ const RenderCheckbox = createRenderer((input, label, id, textMuted, meta, disabl
 	);
 });
 
-function DiceRow({ dice, handleDiceChange, setHover, hover, fortune }: any ) {
-	const diceRowClass = classNames({
-		'dice-row': true
-	});
-	return (
-		<div className={diceRowClass}>
-			<div className="die-container">
-				<FontAwesomeIcon className={classNames({
-					'dice-icon': true,
-					active: Number(dice) >= 1,
-					hovered: hover >= 1
-				})}
-					icon={faDiceD20}
-					onMouseEnter={() => setHover(1)}
-					onMouseLeave={() => setHover(0)}
-					onClick={() => handleDiceChange('1')}
-				/>
-			</div>
-			<div className="die-container">
-				<FontAwesomeIcon className={classNames({
-					'dice-icon': true,
-					active: ((Number(dice) >= 2) || Number(fortune) >= 1),
-					hovered: hover >= 2
-				})}
-					icon={faDiceD20}
-					onMouseEnter={() => setHover(2)}
-					onMouseLeave={() => setHover(0)}
-					onClick={() => handleDiceChange('2')}
-				/>
-			</div>
-			<div className="die-container">
-				<FontAwesomeIcon className={classNames({
-					'dice-icon': true,
-					active: ((Number(dice) >= 3) || Number(fortune) >= 1),
-					hovered: hover >= 3
-				})}
-					icon={faDiceD20}
-					onMouseEnter={() => setHover(3)}
-					onMouseLeave={() => setHover(0)}
-					onClick={() => handleDiceChange('3')}
-				/>
-				<span className={classNames({
-					'die-fortune-point': true,
-					show: Number(fortune) >= 1
-					})}>1</span>
-			</div>
-			<div className="die-container">
-				<FontAwesomeIcon className={classNames({
-					'dice-icon': true,
-					active: ((Number(dice) >= 4) || Number(fortune) >= 2),
-					hovered: hover >= 4
-				})}
-					icon={faDiceD20}
-					onMouseEnter={() => setHover(4)}
-					onMouseLeave={() => setHover(0)}
-					onClick={() => handleDiceChange('4')}
-				/>
-				<span className={classNames({
-					'die-fortune-point': true,
-					show: Number(fortune) >= 2
-				})}>1</span>
-			</div>
-				<div className="die-container">
-					<FontAwesomeIcon className={classNames({
-						'dice-icon': true,
-						active: ((Number(dice) >= 5) || Number(fortune) >= 3),
-						hovered: hover >= 5
-					})}
-						icon={faDiceD20}
-						onMouseEnter={() => setHover(5)}
-						onMouseLeave={() => setHover(0)}
-						onClick={() => handleDiceChange('5')}
-					/>
-					<span className={classNames({
-						'die-fortune-point': true,
-						show: Number(fortune) >= 3
-						})}>1</span>
-				</div>
-				<div className="die-container">
-				<FontAwesomeIcon className={classNames({
-					'dice-icon': true,
-					'dice-icon--assistance': true,
-					active: Number(dice) >= 6,
-					hovered: hover >= 6
-				})}
-					icon={faDiceD20}
-					onMouseEnter={() => setHover(6)}
-					onMouseLeave={() => setHover(0)}
-					onClick={() => handleDiceChange('6')}
-				/>
-			</div>
-			<div className="die-container">
-				<FontAwesomeIcon className={classNames({
-					'dice-icon': true,
-					'dice-icon--assistance': true,
-					active: Number(dice) >= 7,
-					hovered: hover >= 7
-				})}
-					icon={faDiceD20}
-					onMouseEnter={() => setHover(7)}
-					onMouseLeave={() => setHover(0)}
-					onClick={() => handleDiceChange('7')}
-				/>
-			</div>
-			<div className="die-container">
-				<FontAwesomeIcon className={classNames({
-					'dice-icon': true,
-					'dice-icon--assistance': true,
-					active: Number(dice) >= 8,
-					hovered: hover >= 8
-				})}
-					icon={faDiceD20}
-					onMouseEnter={() => setHover(8)}
-					onMouseLeave={() => setHover(0)}
-					onClick={() => handleDiceChange('8')}
-				/>
-			</div>
-			{/* <InfoTooltip content={tooltip.assistanceInfo} /> */}
-		</div>
-	);
-}
-
-
 function ConanModalForm({
 	change,
 	invalid,
@@ -186,7 +63,7 @@ function ConanModalForm({
 	formValues
 }: any) {
 	const { focus, dice, fortune } = formValues;
-	const [hover, setHover] = useState(0);
+	const [hoverState, setHoverState] = useState(0);
 	const diceMax = 8;
 
 	const handleDiceChange = (dieAmount:string) => {
@@ -210,7 +87,6 @@ function ConanModalForm({
 				change('fortune', '0');
 			}
 		}
-
 	};
 
 	const handleFocusChange = (focusValue:string) => {
@@ -222,19 +98,42 @@ function ConanModalForm({
 		}
 	};
 
-	const diceRadios = new Array(diceMax).fill('x').map((_, index) => {
+	const diceRow = new Array(diceMax).fill('x').map((_, index) => {
 		const diceAmount = index + 1;
 		return (
-			<label className="dice-row-label" key={`dice-row-label-${index}`}>
-			<Field
-				name="dice"
-				component="input"
-				type="radio"
-				value={`${diceAmount}`}
-				onClick={() => handleDiceChange(`${diceAmount}`)}
-			/>
-				{diceAmount}d20
-			</label>
+			<div>
+				<div className="die-container">
+					<FontAwesomeIcon className={classNames({
+						'dice-icon': true,
+						'dice-icon--assistance': diceAmount >= 6,
+						active: Number(dice) >= diceAmount,
+						hovered: hoverState >= diceAmount
+					})}
+						icon={faDiceD20}
+						onMouseEnter={() => setHoverState(`${diceAmount}`)}
+						onMouseLeave={() => setHoverState(0)}
+						onClick={() => handleDiceChange(`${diceAmount}`)}
+					/>
+					<span className={classNames({
+						hidden: diceAmount < 3 || diceAmount > 5,
+						'die-fortune-point': true,
+						show: Number(fortune) >= diceAmount - 2 // one, two or thee fortune points
+					})}>1</span>
+				</div>
+				<label className="dice-row-label" key={`dice-row-label-${index}`}>
+					<Field
+						name="dice"
+						component="input"
+						type="radio"
+						value={`${diceAmount}`}
+						onClick={() => handleDiceChange(`${diceAmount}`)}
+					/>
+						<span className={classNames({
+							'die-label--active': Number(dice) === diceAmount,
+							'die-label--assistance': diceAmount >= 6
+						})}>{diceAmount}d20</span>
+				</label>
+			</div>
 		);
 	});
 
@@ -275,16 +174,10 @@ function ConanModalForm({
 						component={DiffLadder}
 					/>
 				</div>
-				<DiceRow
-					dice={dice}
-					handleDiceChange={handleDiceChange}
-					setHover={setHover}
-					hover={hover}
-					fortune={fortune}
-				/>
 				<div className="dice">
 					<div className="conan-radio-fields conan-radio-fields--dice-to-roll">
-						{diceRadios}
+						<InfoTooltip className="assistance-tooltip" content={tooltip.assistanceInfo} />
+						{ diceRow }
 					</div>
 				</div>
 				<Field
