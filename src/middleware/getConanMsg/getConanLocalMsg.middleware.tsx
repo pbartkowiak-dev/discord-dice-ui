@@ -4,7 +4,8 @@ import getConanSuccessLevel, { conanSuccessLevelType } from '../../utils/getCona
 import ResultVsSkillRow, { labelsType } from '../../components/ResultVsSkillRow/ResultVsSkillRow';
 import styles from '../../components/ResultsModal/ResultsModal.module.css';
 import CodeSpan from '../../components/CodeSpan/CodeSpan';
-import { CONAN_DICE_ROLLED, localMsgReady } from "../../actions/roll.actions";
+import { localMsgReady } from "../../actions/roll.actions";
+import { CONAN_DICE_ROLLED } from "../../actions/conan.actions";
 import joinAsBlocks from '../../utils/joinAsBlocks';
 import tooltip from '../../locale/tooltip';
 import InfoTooltip from '../../components/InfoTooltip/InfoTooltip';

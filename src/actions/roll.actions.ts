@@ -15,7 +15,6 @@ export const DICE_ROLLED = 'DICE_ROLLED';
 export const WARHAMMER_DICE_ROLLED = 'WARHAMMER_DICE_ROLLED';
 export const COC_DICE_ROLLED = 'COC_DICE_ROLLED';
 export const DICE_POOL_ROLLED = 'DICE_POOL_ROLLED';
-export const CONAN_DICE_ROLLED = 'CONAN_DICE_ROLLED';
 export const NARRATIVE_DICE_POOL_ROLLED = 'NARRATIVE_DICE_POOL_ROLLED';
 
 export const LOCAL_MSG_READY = 'LOCAL_MSG_READY';
@@ -89,13 +88,6 @@ export function cocDiceRolled(payload: any) {
 export function warhammerDiceRolled(payload: any) {
 	return {
 		type: WARHAMMER_DICE_ROLLED,
-		payload
-	}
-}
-
-export function conanDiceRolled(payload: any) {
-	return {
-		type: CONAN_DICE_ROLLED,
 		payload
 	}
 }

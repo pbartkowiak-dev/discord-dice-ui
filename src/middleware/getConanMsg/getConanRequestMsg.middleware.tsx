@@ -1,4 +1,5 @@
-import { CONAN_DICE_ROLLED, requestMsgReady } from "../../actions/roll.actions";
+import { requestMsgReady } from "../../actions/roll.actions";
+import { CONAN_DICE_ROLLED } from "../../actions/conan.actions";
 import getConanSuccessLevel, { conanSuccessLevelType } from '../../utils/getConanSuccessLevel';
 import joinAsBlocks from '../../utils/joinAsBlocks';
 import { SUCCESS, FAILURE, getColor } from "../../utils/getColor";

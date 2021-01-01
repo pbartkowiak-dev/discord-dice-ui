@@ -9,10 +9,17 @@ import {
 const rerollRequested = (store:any) => (next:any) => (action:any) => {
 	if (action.type === REROLL_REQUESTED) {
 		const state = store.getState();
+		const { conanData } = state;
 		const { form : { diceModuleForm } } = state;
 		const { lastRollOptions } = state;
 		const { itemsToStay } = action.payload
 		const formValues = diceModuleForm.values || {}
+
+		console.log('reroll requested action.payload', action.payload);
+
+		console.log('lastRollOptions', lastRollOptions);
+
+		console.log('conanData', conanData)
 
 		store.dispatch(updateRollCounter());
 		if (lastRollOptions.pool && formValues?.narrativeDice) {
@@ -27,6 +34,7 @@ const rerollRequested = (store:any) => (next:any) => (action:any) => {
 		} else {
 			store.dispatch(requestRoll({
 				...lastRollOptions,
+				assistanceDiceResults: conanData.assistanceDiceResults,
 				itemsToStay
 			}));
 		}

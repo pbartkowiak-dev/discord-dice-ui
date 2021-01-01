@@ -4,9 +4,9 @@ import {
 	DICE_ROLL_REQUESTED,
 	diceRolled,
 	cocDiceRolled,
-	conanDiceRolled,
 	warhammerDiceRolled
 } from '../actions/roll.actions';
+import { conanDiceRolled } from '../actions/conan.actions';
 import {
 	D100_SL,
 	D20_CONAN_TEST,
@@ -71,15 +71,13 @@ export default (store: any) => (next: any) => (action: any) => {
 			cocTwoPenalty,
 
 			fortune,
-			assistanceDice
+			assistanceDice,
+			assistanceDiceResults
 		} = action.payload;
 
 		const diceTypeNum = getDieNumberVal(diceType);
 		const keepUnits = (cocBonus || cocTwoBonus || cocPenalty || cocTwoPenalty);
 		const result = {} as rollDiceResult;
-
-		// Conan
-		let assistanceDiceResults;
 
 		if (formValues.cocMode) {
 			if (cocBonus || cocPenalty) {
@@ -155,15 +153,16 @@ export default (store: any) => (next: any) => (action: any) => {
 			result.skillLevel = skillLevel ? Number(skillLevel) : undefined;
 		}
 
-		if (rollOptions.assistanceDiceResults) {
-			result.assistanceDiceResults = rollOptions.assistanceDiceResults;
+		console.log('roll requested', assistanceDiceResults)
+		// assistance results should not be rerolled
+		if (assistanceDiceResults && assistanceDiceResults.length) {
+			result.assistanceDiceResults = assistanceDiceResults;
 		} else if (assistanceDice) {
-			assistanceDiceResults = getResultsArray(
+			result.assistanceDiceResults = getResultsArray(
 				20,
 				Number(assistanceDice),
 				false
 			);
-			result.assistanceDiceResults = assistanceDiceResults;
 		}
 	
 		if (modifier === 0) {
@@ -196,7 +195,7 @@ export default (store: any) => (next: any) => (action: any) => {
 				rollOptions: {
 					...action.payload,
 					...formValues,
-					assistanceDiceResults
+					assistanceDiceResults: result.assistanceDiceResults
 				}
 			}));
 		} else {

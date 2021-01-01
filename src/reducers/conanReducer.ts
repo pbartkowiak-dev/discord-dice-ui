@@ -1,7 +1,8 @@
 import { CLOSE_MSG_MODAL } from '../actions/modals';
 import {
 	OPEN_CONAN_TOKENS_MODAL,
-	UPDATE_CONAN_TOKENS_STATE
+	UPDATE_CONAN_TOKENS_STATE,
+	CONAN_DICE_ROLLED
 } from '../actions/conan.actions';
 
 import { InitialStateType } from './conanTypes';
@@ -10,6 +11,7 @@ const initialState: InitialStateType = {
 	showTokensModal: false,
 	momentum: '0',
 	doom: '0',
+	assistanceDiceResults: []
 };
 
 export default (state = initialState, action: any) => {
@@ -20,7 +22,16 @@ export default (state = initialState, action: any) => {
 				momentum: action.payload.momentum,
 				doom: action.payload.doom,
 				showTokensModal: false
-			}
+			};
+		}
+		case CONAN_DICE_ROLLED: {
+			const { payload: { result } } = action;
+			const { assistanceDiceResults } = result;
+
+			return {
+				...state,
+				assistanceDiceResults
+			};
 		}
 		case OPEN_CONAN_TOKENS_MODAL: {
 			return {
