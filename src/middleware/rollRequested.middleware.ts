@@ -153,7 +153,6 @@ export default (store: any) => (next: any) => (action: any) => {
 			result.skillLevel = skillLevel ? Number(skillLevel) : undefined;
 		}
 
-		console.log('roll requested', assistanceDiceResults)
 		// assistance results should not be rerolled
 		if (assistanceDiceResults && assistanceDiceResults.length) {
 			result.assistanceDiceResults = assistanceDiceResults;
