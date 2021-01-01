@@ -92,8 +92,7 @@
 	position: absolute;
 	right: 10px;
 	margin: auto;
-	top: 0;
-	bottom: 0;
+	top: 2px;
 	color: #7c7c7c;
 }
 
@@ -113,12 +112,15 @@
 	margin-bottom: 5px;
 }
 
-.conanRollResults {
-	text-align: center;
+.conanResultDetails {
+	line-height: 18px;
+	position: relative;
 }
 
-.conanResultDetails {
-	line-height: 15px;
+.conanResultDetailsAssistance {
+	border-bottom: 1px solid #bebebe;
+	padding-bottom: 4px;
+	margin-bottom: 6px;
 }
 
 .resultDetailsRow {

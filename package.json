@@ -1,9 +1,9 @@
 {
 	"name": "discord-ui",
-	"version": "6.6.1",
+	"version": "6.6.2",
 	"private": true,
 	"engines": {
-		"node": "14.7.0",
+		"node": "14.7.1",
 		"npm": "6.13.4"
 	},
 	"dependencies": {

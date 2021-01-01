@@ -16,6 +16,11 @@ code {
 		monospace;
 }
 
+.table-bordered td,
+.table-bordered th {
+	border: 1px solid #ced4da;
+}
+
 .hidden {
 	display: none !important;
 }

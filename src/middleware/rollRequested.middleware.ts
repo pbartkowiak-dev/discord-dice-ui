@@ -48,6 +48,7 @@ interface rollDiceResult {
 	// Conan results
 	effects?: number | undefined;
 	dmg?: number | undefined;
+	assistanceDiceResults?: Array<number>;
 }
 
 export default (store: any) => (next: any) => (action: any) => {
@@ -60,6 +61,7 @@ export default (store: any) => (next: any) => (action: any) => {
 			diceType,
 			modifier = 0,
 			diceAmount = 1,
+			rollOptions = {},
 			itemsToStay = [],
 			skillLevel,
 
@@ -69,11 +71,15 @@ export default (store: any) => (next: any) => (action: any) => {
 			cocTwoPenalty,
 
 			fortune,
+			assistanceDice
 		} = action.payload;
 
 		const diceTypeNum = getDieNumberVal(diceType);
 		const keepUnits = (cocBonus || cocTwoBonus || cocPenalty || cocTwoPenalty);
 		const result = {} as rollDiceResult;
+
+		// Conan
+		let assistanceDiceResults;
 
 		if (formValues.cocMode) {
 			if (cocBonus || cocPenalty) {
@@ -148,6 +154,17 @@ export default (store: any) => (next: any) => (action: any) => {
 		if (diceType === D100_SL && (formValues.cocMode || formValues.warhammerMode)) {
 			result.skillLevel = skillLevel ? Number(skillLevel) : undefined;
 		}
+
+		if (rollOptions.assistanceDiceResults) {
+			result.assistanceDiceResults = rollOptions.assistanceDiceResults;
+		} else if (assistanceDice) {
+			assistanceDiceResults = getResultsArray(
+				20,
+				Number(assistanceDice),
+				false
+			);
+			result.assistanceDiceResults = assistanceDiceResults;
+		}
 	
 		if (modifier === 0) {
 			result.modSymbol = '';
@@ -178,7 +195,8 @@ export default (store: any) => (next: any) => (action: any) => {
 				result,
 				rollOptions: {
 					...action.payload,
-					...formValues
+					...formValues,
+					assistanceDiceResults
 				}
 			}));
 		} else {

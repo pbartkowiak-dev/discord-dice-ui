@@ -1,7 +1,7 @@
 .table {
-	margin: 6px 0 8px;
+	margin: 5px 0 6px;
 	text-align: center;
-	width: 315px;
+	width: 271px;
 }
 
 .td {
@@ -14,7 +14,7 @@
 	margin: 0 !important;
 	cursor: pointer;
 	transition: .1s;
-	padding: 3px;
+	padding: 2px;
 	font-size: 15px;
 	font-weight: 600;
 }
@@ -77,3 +77,8 @@
 	color: #fff;
 }
 
+@media only screen and (min-width: 480px) {
+	.table {
+		width: 349px;
+	}
+}

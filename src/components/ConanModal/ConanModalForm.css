@@ -6,6 +6,10 @@
 	justify-content: space-evenly;
 }
 
+.conan-field {
+	flex: 1;
+}
+
 .conan-skill-level-field {
 	margin-bottom: 0;
 }
@@ -44,9 +48,61 @@
 	margin: 5px 0;
 }
 
+.conan-radio-fields--assistance {
+	width: 250px;
+	margin-bottom: 0;
+}
+
+.conan-radio-fields--assistance .die-container {
+	width: auto;
+}
+
+.die-container--remove-dice {
+	padding-bottom: 15px;
+	padding-left: 20px;
+}
+
+.assistance .form-label {
+	font-size: 14px;
+}
+
+#conan-mode-form .assistance .skill-level-field .form-control {
+	font-size: 15px;
+	height: 26px;
+}
+
+.assistance-title--container {
+	background: transparent;
+	border: 0;
+	width: 100%;
+	cursor: pointer;
+	transition: .1s;
+}
+
+.assistance-title--container:hover {
+	opacity: .8;
+}
+
+.assistance-title {
+	margin-bottom: 5px;
+	margin-top: 4px;
+	font-size: 16px;
+	text-align: center;
+	color: #212529;
+}
+
+.conan-radio-fields--assistance .dice-icon {
+	font-size: 38px;
+}
+
 .conan-radio-fields--dice-to-roll input {
 	margin: 0;
 	display: none;
+}
+
+.conan-skill-level-field--assistance {
+	margin-top: 5px;
+	margin-bottom: 8px;
 }
 
 .conan-die-select {
@@ -57,9 +113,10 @@
 }
 
 .fortune {
-	padding: 2px 0;
+	padding: 3px 0 5px;
 	margin: 3px 0 0;
 	border-top: 1px solid #bebebe;
+	border-bottom: 1px solid #bebebe;
 }
 
 .fortune-title {
@@ -67,11 +124,13 @@
 	margin-top: 0;
 	font-size: 16px;
 	text-align: center;
+	color: #212529;
 }
 
 #conan-mode-form .skill-level-field .form-control{
 	font-size: 18px;
 	height: 34px;
+	border-radius: 0;
 }
 
 #conan-mode-form .skill-level-field .form-group {

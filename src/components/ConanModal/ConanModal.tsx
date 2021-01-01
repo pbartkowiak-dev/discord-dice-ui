@@ -13,22 +13,30 @@ function ConanModal({
 ) {
 	const handleSubmit = (values: ConanFormValuesTypes) => {
 		const {
+			assistanceDice,
 			dice,
 			difficulty,
 			focus,
 			fortune,
 			tn,
-			untrainedTest
+			untrainedTest,
+			assistanceFocus,
+			assistanceTn,
+			assistanceUntrainedTest
 		} = values;
 
 		requestRoll({
 			diceType: D20_CONAN_TEST,
+			assistanceDice: Number(assistanceDice),
 			diceAmount: Number(dice),
 			difficulty: Number(difficulty),
 			focus: Number(focus),
 			fortune: Number(fortune),
 			tn: Number(tn),
-			untrainedTest
+			assistanceFocus: assistanceFocus.trim(),
+			assistanceTn: assistanceTn.trim(),
+			untrainedTest,
+			assistanceUntrainedTest
 		});
 
 		closeConanModal();
@@ -36,9 +44,13 @@ function ConanModal({
 
 	const initialValues = {
 		dice: '2',
+		assistanceDice: '0',
 		fortune: '0',
 		difficulty: '2',
-		untrainedTest: false
+		assistanceFocus: '',
+		assistanceTn: '',
+		untrainedTest: false,
+		assistanceUntrainedTest: false
 	};
 
 	return (

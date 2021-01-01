@@ -6,13 +6,23 @@ export type conanSuccessLevelType = {
 	momentum: number
 }
 
-export default (
-	results: Array<number>,
-	tn: number,
-	focus: number,
-	difficulty: number,
-	untrainedTest: boolean
-):any => {
+interface getConanSuccessLevelPropTypes {
+	results: Array<number>;
+	tn: number;
+	focus: number;
+	difficulty: number;
+	assistanceSuccessLevel?: number;
+	untrainedTest: boolean;
+}
+
+export default ({
+	results,
+	tn,
+	focus,
+	difficulty,
+	untrainedTest,
+	assistanceSuccessLevel,
+}: getConanSuccessLevelPropTypes) => {
 	const compilationMinVal = untrainedTest ? 19 : 20;
 	const compilationMaxVal = 20;
 	const focusNum = focus ? Number(focus) : 0;
@@ -31,6 +41,10 @@ export default (
 			complications += 1;
 		}
 	});
+
+	if (successLevel > 0 && assistanceSuccessLevel) {
+		successLevel = successLevel + assistanceSuccessLevel;
+	}
 
 	return {
 		isSuccess: successLevel >= difficulty,

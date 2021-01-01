@@ -10,29 +10,44 @@ export default (store:any) => (next:any) => (action:any) => {
 		const state = store.getState();
 		const { rerollCount } = state;
 		const { userSettings } = state;
-		const { results } = result;
+		const { results, assistanceDiceResults } = result;
 		const {
 			diceAmount,
 			difficulty,
 			focus,
 			fortune,
 			tn,
-			untrainedTest
+			untrainedTest,
+			assistanceDice,
+			assistanceFocus,
+			assistanceTn,
+			assistanceUntrainedTest
 		} = rollOptions;
 		const username = userSettings.username || 'USERNAME_MISSING'
 		const fields = [];
 		const resultsJoined = joinAsBlocks(results, null, true);
 		const msgTitle = `${username} rolled **\`${diceAmount}d20\`**. Results: ${resultsJoined}.`;
+		let assistanceSuccessLevel: any = {};
 		let description;
 
+		if (assistanceDice && assistanceDiceResults) {
+			assistanceSuccessLevel = getConanSuccessLevel({
+				results: assistanceDiceResults,
+				tn: assistanceTn === '' ? Number(tn) : Number(assistanceTn),
+				focus: assistanceFocus === '' ? Number(focus) : Number(assistanceFocus),
+				difficulty: Number(difficulty),
+				untrainedTest: assistanceUntrainedTest || untrainedTest
+			});
+		}
 
-		const successLevel:conanSuccessLevelType = getConanSuccessLevel(
-			results,
-			tn,
-			focus,
-			difficulty,
+		const successLevel: conanSuccessLevelType = getConanSuccessLevel({
+			results: results,
+			tn: tn,
+			focus: focus,
+			difficulty: difficulty,
+			assistanceSuccessLevel: assistanceSuccessLevel.successLevel,
 			untrainedTest
-		);
+		});
 		const successLevelIcon = successLevel.isSuccess ? ':green_circle:' : ':red_circle:';
 
 		description = `Successes: \`${successLevel.successLevel}\` vs. Difficulty: \`${difficulty}\``;
@@ -45,6 +60,28 @@ export default (store:any) => (next:any) => (action:any) => {
 		
 		if (untrainedTest) {
 			description += `\nUntrained Test`;
+		}
+
+		if (assistanceDice && assistanceDiceResults?.length) {
+			const assistanceDiceResultsJoined = joinAsBlocks(assistanceDiceResults, null, true);
+			let value = `:game_die: Rolled: ${assistanceDiceResultsJoined}\n:high_brightness: Successes: \`${assistanceSuccessLevel.successLevel}\``;
+			
+			if (assistanceTn !== '') {
+				value = value + `\nAssistance TN: \`${assistanceTn}\``;
+			}
+			if (assistanceFocus !== '') {
+				value = value + `\nAssistance Focus: \`${assistanceFocus}\``;
+			}
+			if (assistanceUntrainedTest) {
+				value = value + `\nAssistance Untrained Test`;
+			}
+			if (assistanceSuccessLevel.complications) {
+				value = value + `\n:black_circle: Complications: \`${assistanceSuccessLevel.complications}\``;
+			}
+			fields.push({
+				name: `:busts_in_silhouette: Assistance roll:`,
+				value
+			});
 		}
 
 		if (rerollCount) {

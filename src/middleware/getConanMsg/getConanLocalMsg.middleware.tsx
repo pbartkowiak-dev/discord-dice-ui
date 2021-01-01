@@ -5,6 +5,9 @@ import ResultVsSkillRow, { labelsType } from '../../components/ResultVsSkillRow/
 import styles from '../../components/ResultsModal/ResultsModal.module.css';
 import CodeSpan from '../../components/CodeSpan/CodeSpan';
 import { CONAN_DICE_ROLLED, localMsgReady } from "../../actions/roll.actions";
+import joinAsBlocks from '../../utils/joinAsBlocks';
+import tooltip from '../../locale/tooltip';
+import InfoTooltip from '../../components/InfoTooltip/InfoTooltip';
 
 export default (store: any) => (next: any) => (action: any) => {
 	if (action.type === CONAN_DICE_ROLLED) {
@@ -13,7 +16,7 @@ export default (store: any) => (next: any) => (action: any) => {
 		const { rerollCount } = state;
 		const { payload: { result } } = action;
 		const { payload: { rollOptions } } = action;
-		const { results } = result;
+		const { results, assistanceDiceResults } = result;
 		const {
 			diceAmount,
 			difficulty,
@@ -21,17 +24,35 @@ export default (store: any) => (next: any) => (action: any) => {
 			fortune,
 			tn,
 			untrainedTest,
+			assistanceDice,
+			assistanceFocus,
+			assistanceTn,
+			assistanceUntrainedTest
 		} = rollOptions;
 	
+		console.log('rollOptions', rollOptions);
+
 		const fields = [];
+		let assistanceSuccessLevel: any = {};
+
+		if (assistanceDice && assistanceDiceResults) {
+			assistanceSuccessLevel = getConanSuccessLevel({
+				results: assistanceDiceResults,
+				tn: assistanceTn === '' ? Number(tn) : Number(assistanceTn),
+				focus: assistanceFocus === '' ? Number(focus) : Number(assistanceFocus),
+				difficulty: Number(difficulty),
+				untrainedTest: assistanceUntrainedTest || untrainedTest
+			});
+		}
 	
-		const successLevel: conanSuccessLevelType = getConanSuccessLevel(
+		const successLevel: conanSuccessLevelType = getConanSuccessLevel({
 			results,
 			tn,
 			focus,
 			difficulty,
+			assistanceSuccessLevel: assistanceSuccessLevel.successLevel,
 			untrainedTest
-		);
+		});
 		const yourFocus = <p className={styles.resultDetailsRow}>Focus: <CodeSpan>{focus || 0}</CodeSpan></p>;
 		const yourTn = <p className={styles.resultDetailsRow}>TN: <CodeSpan>{tn}</CodeSpan></p>;
 		const wasUntrainedTest = untrainedTest ? <p className={styles.resultDetailsRow}>Untrained Test</p> : null;
@@ -54,6 +75,26 @@ export default (store: any) => (next: any) => (action: any) => {
 			const timesWord = rerollCount === 1 ? 'time' : 'times';
 			fields.push(
 				<div className={`${styles.generalResult}`}>Rerolled <CodeSpan>{rerollCount}</CodeSpan> {timesWord}</div>
+			);
+		}
+
+		if (assistanceDice && assistanceDiceResults?.length) {
+			const assistanceDiceResultsJoined = joinAsBlocks(assistanceDiceResults);
+			const assistanceComplications = assistanceSuccessLevel.complications
+				? <p className={styles.assistanceResultRow}>Complications: <CodeSpan>{assistanceSuccessLevel.complications}</CodeSpan></p>
+				: null;
+
+			fields.push(
+				<div className={classNames([styles.conanResultDetails, styles.conanResultDetailsAssistance])}>
+					<p className={styles.resultDetailsRow}><strong>Assistance Roll:</strong></p>
+					<p className={styles.resultDetailsRow}>Rolled: {assistanceDiceResultsJoined}</p>
+					{ assistanceFocus !== '' && <p className={styles.resultDetailsRow}>Assistance Focus: <CodeSpan>{assistanceFocus}</CodeSpan></p> }
+					{ assistanceTn !== '' && <p className={styles.resultDetailsRow}>Assistance TN: <CodeSpan>{assistanceTn}</CodeSpan></p> }
+					{ assistanceUntrainedTest && <p className={styles.resultDetailsRow}>Assistance Untrained Test</p> }
+					<p className={styles.resultDetailsRow}>Successes: <CodeSpan>{assistanceSuccessLevel.successLevel}</CodeSpan></p>
+					{ assistanceComplications }
+					<InfoTooltip content={tooltip.assistance} className={styles.assistanceIcon} />
+				</div>
 			);
 		}
 	

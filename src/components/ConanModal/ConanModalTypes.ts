@@ -5,10 +5,14 @@ export interface ConanModalPropTypes {
 }
 
 export interface ConanFormValuesTypes {
+	assistanceDice: string;
 	dice: string;
 	difficulty: string;
 	focus: string;
 	fortune: string;
 	tn: string;
-	untrainedTest: boolean
+	assistanceFocus: string;
+	assistanceTn: string;
+	untrainedTest: boolean;
+	assistanceUntrainedTest: boolean;
 }
