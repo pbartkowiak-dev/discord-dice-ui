@@ -29,8 +29,6 @@ export default (store: any) => (next: any) => (action: any) => {
 			assistanceTn,
 			assistanceUntrainedTest
 		} = rollOptions;
-	
-		console.log('rollOptions', rollOptions);
 
 		const fields = [];
 		let assistanceSuccessLevel: any = {};
@@ -38,8 +36,8 @@ export default (store: any) => (next: any) => (action: any) => {
 		if (assistanceDice && assistanceDiceResults) {
 			assistanceSuccessLevel = getConanSuccessLevel({
 				results: assistanceDiceResults,
-				tn: assistanceTn === '' ? Number(tn) : Number(assistanceTn),
-				focus: assistanceFocus === '' ? Number(focus) : Number(assistanceFocus),
+				tn: assistanceTn,
+				focus: assistanceFocus,
 				difficulty: Number(difficulty),
 				untrainedTest: assistanceUntrainedTest || untrainedTest
 			});
@@ -81,7 +79,7 @@ export default (store: any) => (next: any) => (action: any) => {
 		if (assistanceDice && assistanceDiceResults?.length) {
 			const assistanceDiceResultsJoined = joinAsBlocks(assistanceDiceResults);
 			const assistanceComplications = assistanceSuccessLevel.complications
-				? <p className={styles.assistanceResultRow}>Complications: <CodeSpan>{assistanceSuccessLevel.complications}</CodeSpan></p>
+				? <p className={styles.assistanceResultRow}>Complications: <CodeSpan type="failure">{assistanceSuccessLevel.complications}</CodeSpan></p>
 				: null;
 
 			fields.push(
@@ -91,7 +89,7 @@ export default (store: any) => (next: any) => (action: any) => {
 					{ assistanceFocus !== '' && <p className={styles.resultDetailsRow}>Assistance Focus: <CodeSpan>{assistanceFocus}</CodeSpan></p> }
 					{ assistanceTn !== '' && <p className={styles.resultDetailsRow}>Assistance TN: <CodeSpan>{assistanceTn}</CodeSpan></p> }
 					{ assistanceUntrainedTest && <p className={styles.resultDetailsRow}>Assistance Untrained Test</p> }
-					<p className={styles.resultDetailsRow}>Successes: <CodeSpan>{assistanceSuccessLevel.successLevel}</CodeSpan></p>
+					<p className={styles.resultDetailsRow}>Successes: <CodeSpan type={assistanceSuccessLevel.successLevel > 0 ? 'success' : ''}>{assistanceSuccessLevel.successLevel}</CodeSpan></p>
 					{ assistanceComplications }
 					<InfoTooltip content={tooltip.assistance} className={styles.assistanceIcon} />
 				</div>

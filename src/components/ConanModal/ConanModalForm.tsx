@@ -30,7 +30,7 @@ const renderInput = createRenderer((input, label, id, textMuted, meta, disabled,
 			<Form.Control
 				type="text"
 				size="sm"
-				placeholder={placeholder || '00'}
+				placeholder={placeholder || '0'}
 				autoComplete="off"
 				isInvalid={hasError}
 				{...input}
@@ -62,7 +62,7 @@ function ConanModalForm({
 	handleSubmit,
 	formValues
 }: any) {
-	const { focus, dice, fortune, assistanceDice, assistanceFocus } = formValues;
+	const { focus, tn, dice, fortune, assistanceDice } = formValues;
 	const [hoverState, setHoverState] = useState(0);
 	const [assistanceHover, setAssistanceHover] = useState(0);
 
@@ -99,15 +99,6 @@ function ConanModalForm({
 			const focusNum = Number(focusValue);
 			if (focusNum > 0) {
 				change('untrainedTest', false);
-			}
-		}
-	};
-
-	const handleAssistanceFocusChange = (focusValue: string) => {
-		if (focusValue) {
-			const focusNum = Number(focusValue);
-			if (focusNum > 0) {
-				change('assistanceUntrainedTest', false);
 			}
 		}
 	};
@@ -242,8 +233,7 @@ function ConanModalForm({
 										id="assistanceFocus"
 										name="assistanceFocus"
 										label={assistanceFocusLabel}
-										placeholder="-"
-										onChange={(evt => handleAssistanceFocusChange(evt.currentTarget.value))}
+										placeholder={focus}
 										component={renderInput}
 									/>
 								</div>
@@ -252,18 +242,19 @@ function ConanModalForm({
 										id="assistanceTn"
 										name="assistanceTn"
 										label={assistanceTnLabel}
-										placeholder="-"
+										placeholder={tn}
 										component={renderInput}
 									/>
 								</div>
 							</div>
+							{/* assistanceUntrainedTest wil be derived from assistanceFocus
 							<Field
 								name="assistanceUntrainedTest"
 								id="assistanceUntrainedTest"
 								label={untrainedTestLabel}
 								component={RenderCheckbox}
 								disabled={assistanceFocus && Number(assistanceFocus) > 0}
-							/>
+							/> */}
 						</>
 					</Accordion.Collapse>
 				</Accordion>
@@ -342,7 +333,6 @@ export default connect(state => ({
 		'fortune',
 		'assistanceDice',
 		'assistanceFocus',
-		'assistanceTn',
-		'assistanceUntrainedTest'
+		'assistanceTn'
 	)
 }))(FormElement);

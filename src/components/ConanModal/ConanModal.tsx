@@ -21,8 +21,7 @@ function ConanModal({
 			tn,
 			untrainedTest,
 			assistanceFocus,
-			assistanceTn,
-			assistanceUntrainedTest
+			assistanceTn
 		} = values;
 
 		requestRoll({
@@ -33,10 +32,10 @@ function ConanModal({
 			focus: Number(focus),
 			fortune: Number(fortune),
 			tn: Number(tn),
-			assistanceFocus: assistanceFocus.trim(),
-			assistanceTn: assistanceTn.trim(),
+			assistanceFocus: assistanceFocus.trim() === '' ? Number(focus) : Number(assistanceFocus),
+			assistanceTn: assistanceTn.trim() === '' ? Number(tn) : Number(assistanceTn),
 			untrainedTest,
-			assistanceUntrainedTest
+			assistanceUntrainedTest: assistanceFocus && assistanceFocus.trim() === '0'
 		});
 
 		closeConanModal();
@@ -49,8 +48,7 @@ function ConanModal({
 		difficulty: '2',
 		assistanceFocus: '',
 		assistanceTn: '',
-		untrainedTest: false,
-		assistanceUntrainedTest: false
+		untrainedTest: false
 	};
 
 	return (

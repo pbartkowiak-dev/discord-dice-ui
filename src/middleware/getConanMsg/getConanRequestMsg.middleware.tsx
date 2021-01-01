@@ -33,8 +33,8 @@ export default (store:any) => (next:any) => (action:any) => {
 		if (assistanceDice && assistanceDiceResults) {
 			assistanceSuccessLevel = getConanSuccessLevel({
 				results: assistanceDiceResults,
-				tn: assistanceTn === '' ? Number(tn) : Number(assistanceTn),
-				focus: assistanceFocus === '' ? Number(focus) : Number(assistanceFocus),
+				tn: assistanceTn,
+				focus: assistanceFocus,
 				difficulty: Number(difficulty),
 				untrainedTest: assistanceUntrainedTest || untrainedTest
 			});

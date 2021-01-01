@@ -10,7 +10,7 @@ export default function CodeSpan({
 	className,
 	type,
 	children
-}:any) {
+}: any) {
 	const fullClassName = classNames({
 		[styles.codeSpan]: true,
 		[className]: !!className,
