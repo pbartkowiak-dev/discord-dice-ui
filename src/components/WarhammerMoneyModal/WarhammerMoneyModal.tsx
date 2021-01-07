@@ -8,6 +8,7 @@ import { MoneyType, MoneyTypes, OperationsTypes, WarhammerMoneyModalProps } from
 import styles from './WarhammerMoneyModal.module.css';
 import { MONEY_GOLD, MONEY_SILVER, MONEY_BRASS} from '../../consts/consts' ;
 import PoolBuilderDie from '../PoolBuilder/PoolBuilderDie';
+import { Form } from 'react-bootstrap';
 
 function WarhammerMoneyModal({
 	showModal,
@@ -50,14 +51,6 @@ function WarhammerMoneyModal({
 	const onChange = (moneyType: MoneyType, event: any) => {
 		const { value } = event.target;
 	};
-
-	const changeOperationState = () => {
-		if (operationState === 'ADD') {
-			setOperationState('SUBTRACT');
-		} else {
-			setOperationState('ADD');
-		}
-	}
 
 	return (
 		<Modal show={showModal} onHide={closeModal} size="lg">
@@ -109,7 +102,7 @@ function WarhammerMoneyModal({
 					</div>
 					<div className={styles.row}>
 					<div className={classNames([styles.cell, styles.cellCenter])}>
-							Money to add:
+							{ operationState === 'ADD' ? 'Money to add:' : 'Money to subtract:' }
 						</div>
 						<div className={styles.cell}>
 							<PoolBuilderDie
@@ -156,20 +149,18 @@ function WarhammerMoneyModal({
 							<Button
 								className={classNames({
 									[styles.buttonMuted]: operationState === 'ADD',
-									[styles.buttonIcon]: true,
-									[styles.buttonPlus]: true
+									[styles.buttonIcon]: true
 								})}
 								variant="danger"
-								onClick={changeOperationState}
+								onClick={() => setOperationState('SUBTRACT')}
 								><FontAwesomeIcon icon={faMinus} /></Button>
 							<Button
 								className={classNames({
 									[styles.buttonMuted]: operationState === 'SUBTRACT',
-									[styles.buttonIcon]: true,
-									[styles.buttonMinus]: true
+									[styles.buttonIcon]: true
 								})}
 								variant="success"
-								onClick={changeOperationState}
+								onClick={() => setOperationState('ADD')}
 								><FontAwesomeIcon icon={faPlus} /></Button>
 						</div>
 					</div>
@@ -217,13 +208,18 @@ function WarhammerMoneyModal({
 							/>
 						</div>
 					</div>
-					<div className={styles.toRight}>
+					<div className={classNames([styles.rowToRight, styles.recalculateRow])}>
 						<Button variant="success" onClick={closeModal}><FontAwesomeIcon className={styles.syncIcon} icon={faSync} />Recalculate</Button>
+					</div>
+					<div className={styles.rowToRight}>
+						<Form.Group className={styles.checkboxContainer} controlId="sendToDiscordCheckbox">
+							<Form.Check className={styles.checkbox} type="checkbox" label="Send to Discord" />
+						</Form.Group>
 					</div>
 				</div>
 			</Modal.Body>
 			<Modal.Footer>
-				<Button variant="primary" onClick={closeModal}>Close</Button>
+				<Button variant="secondary" onClick={closeModal}>Close</Button>
 			</Modal.Footer>
 		</Modal>
 	);

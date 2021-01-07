@@ -16,11 +16,14 @@
 	margin-bottom: 10px;
 }
 
-.toRight {
-	margin-top: 15px;
+.rowToRight {
 	display: flex;
-	justify-content: flex-end;
-	margin-bottom: 5px;
+	justify-content: flex-end;	
+}
+
+.recalculateRow {
+	margin-top: 15px;
+	margin-bottom: 10px;
 }
 
 .cellCenter {
@@ -47,6 +50,15 @@
 	margin-bottom: 15px;
 }
 
+.checkboxContainer {
+	margin-bottom: 0;
+}
+
+.checkbox input,
+.checkbox label {
+	cursor: pointer;
+}
+
 .buttonsContainer {
 	position: absolute;
 	display: grid;
@@ -58,8 +70,14 @@
 	right: 0;
 }
 
+.buttonIcon {
+	cursor: pointer
+}
+
 .buttonMuted {
 	background: grey;
+	border-color: grey;
+	opacity: 0.6;
 }
 
 @media only screen and (min-width: 480px) {
