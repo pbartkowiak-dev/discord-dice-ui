@@ -12,3 +12,5 @@ export interface MoneyTypes {
 export type MoneyType = 'MONEY_GOLD'
 	| 'MONEY_SILVER'
 	| 'MONEY_BRASS'
+
+export type OperationsTypes = 'ADD' | 'SUBTRACT';

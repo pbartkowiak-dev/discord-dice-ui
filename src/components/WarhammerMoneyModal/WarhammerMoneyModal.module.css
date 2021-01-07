@@ -7,13 +7,20 @@
 }
 
 .rowResults {
-	padding: 10px;
+	padding: 15px 10px 5px;
 	border-radius: 10px;
 	background: #f9f9f9;
 }
 
 .cell {
 	margin-bottom: 10px;
+}
+
+.toRight {
+	margin-top: 15px;
+	display: flex;
+	justify-content: flex-end;
+	margin-bottom: 5px;
 }
 
 .cellCenter {
@@ -25,6 +32,11 @@
 
 .equalsIcon {
 	font-size: 28px;
+}
+
+.syncIcon {
+	margin-right: 8px;
+	font-size: 16px;
 }
 
 .separator {
@@ -44,6 +56,10 @@
 	background: #fff;
 	padding: 10px 0 10px 15px;
 	right: 0;
+}
+
+.buttonMuted {
+	background: grey;
 }
 
 @media only screen and (min-width: 480px) {

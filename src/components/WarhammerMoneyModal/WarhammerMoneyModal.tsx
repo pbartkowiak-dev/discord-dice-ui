@@ -3,8 +3,8 @@ import classNames from 'classnames';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPlus, faMinus, faEquals } from '@fortawesome/free-solid-svg-icons';
-import { MoneyType, MoneyTypes, WarhammerMoneyModalProps } from './WarhammerMoneyModalTypes';
+import { faPlus, faMinus, faEquals, faSync } from '@fortawesome/free-solid-svg-icons';
+import { MoneyType, MoneyTypes, OperationsTypes, WarhammerMoneyModalProps } from './WarhammerMoneyModalTypes';
 import styles from './WarhammerMoneyModal.module.css';
 import { MONEY_GOLD, MONEY_SILVER, MONEY_BRASS} from '../../consts/consts' ;
 import PoolBuilderDie from '../PoolBuilder/PoolBuilderDie';
@@ -23,6 +23,7 @@ function WarhammerMoneyModal({
 		[MONEY_BRASS]: ''
 	};
 	const [moneyState, setMoneyState] = useState<MoneyTypes>(initialMoneyState);
+	const [operationState, setOperationState] = useState<OperationsTypes>('ADD');
 
 	const clearMoneyState = () => {
 		setMoneyState(initialMoneyState);
@@ -49,6 +50,14 @@ function WarhammerMoneyModal({
 	const onChange = (moneyType: MoneyType, event: any) => {
 		const { value } = event.target;
 	};
+
+	const changeOperationState = () => {
+		if (operationState === 'ADD') {
+			setOperationState('SUBTRACT');
+		} else {
+			setOperationState('ADD');
+		}
+	}
 
 	return (
 		<Modal show={showModal} onHide={closeModal} size="lg">
@@ -144,13 +153,23 @@ function WarhammerMoneyModal({
 					</div>
 					<div className={styles.separator}>
 						<div className={styles.buttonsContainer}>
-							<Button className={classNames([styles.buttonIcon, styles.buttonPlus])}
+							<Button
+								className={classNames({
+									[styles.buttonMuted]: operationState === 'ADD',
+									[styles.buttonIcon]: true,
+									[styles.buttonPlus]: true
+								})}
 								variant="danger"
-								onClick={closeModal}
+								onClick={changeOperationState}
 								><FontAwesomeIcon icon={faMinus} /></Button>
-							<Button className={classNames([styles.buttonIcon, styles.buttonMinus])}
+							<Button
+								className={classNames({
+									[styles.buttonMuted]: operationState === 'SUBTRACT',
+									[styles.buttonIcon]: true,
+									[styles.buttonMinus]: true
+								})}
 								variant="success"
-								onClick={closeModal}
+								onClick={changeOperationState}
 								><FontAwesomeIcon icon={faPlus} /></Button>
 						</div>
 					</div>
@@ -197,6 +216,9 @@ function WarhammerMoneyModal({
 								readOnly={true}
 							/>
 						</div>
+					</div>
+					<div className={styles.toRight}>
+						<Button variant="success" onClick={closeModal}><FontAwesomeIcon className={styles.syncIcon} icon={faSync} />Recalculate</Button>
 					</div>
 				</div>
 			</Modal.Body>
