@@ -11,7 +11,6 @@ function Dice({
 	handleRollDice,
 	diceType,
 	label,
-	extraMark,
 	diceImg,
 	noDropdown
 }: DicePropTypes
@@ -40,7 +39,6 @@ function Dice({
 	return (
 		<Card className={`dice dice--${diceType}`}>
 			<Card.Body>
-				{ extraMark && <span className="dice__extra-mark">{ extraMark }</span> }
 				<Card.Img
 					variant="top"
 					className="dice__image"

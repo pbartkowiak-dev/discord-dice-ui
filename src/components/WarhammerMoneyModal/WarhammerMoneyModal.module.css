@@ -1,0 +1,55 @@
+.container {
+
+}
+
+.row {
+
+}
+
+.rowResults {
+	padding: 10px;
+	border-radius: 10px;
+	background: #f9f9f9;
+}
+
+.cell {
+	margin-bottom: 10px;
+}
+
+.cellCenter {
+	display: flex;
+	justify-content: flex-end;
+	padding: 5px;
+	align-items: center;
+}
+
+.equalsIcon {
+	font-size: 28px;
+}
+
+.separator {
+	position: relative;
+	border-top: 2px solid rgba(0,0,0,.125);
+	height: 20px;
+	margin-top: 25px;
+	margin-bottom: 15px;
+}
+
+.buttonsContainer {
+	position: absolute;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-column-gap: 20px;
+	top: -30px;
+	background: #fff;
+	padding: 10px 0 10px 15px;
+	right: 0;
+}
+
+@media only screen and (min-width: 480px) {
+	.row {
+		display: grid;
+		grid-template-columns: 150px 1fr 1fr 1fr;
+		grid-column-gap: 10px;
+	}
+}

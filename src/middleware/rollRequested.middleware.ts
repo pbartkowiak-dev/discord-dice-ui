@@ -13,14 +13,6 @@ import {
 	D6_CONAN
 } from '../consts/diceConstants';
 
-interface rollDiceProps {
-	diceType: number;
-	modifier?: number;
-	diceAmount?: number;
-	rollOptions: any;
-	itemsToStay?: Array<number>;
-}
-
 interface rollDiceResult {
 	results: Array<number>;
 	diceAmount: number;
@@ -61,7 +53,6 @@ export default (store: any) => (next: any) => (action: any) => {
 			diceType,
 			modifier = 0,
 			diceAmount = 1,
-			rollOptions = {},
 			itemsToStay = [],
 			skillLevel,
 

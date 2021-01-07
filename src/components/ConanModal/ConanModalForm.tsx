@@ -247,14 +247,6 @@ function ConanModalForm({
 									/>
 								</div>
 							</div>
-							{/* assistanceUntrainedTest wil be derived from assistanceFocus
-							<Field
-								name="assistanceUntrainedTest"
-								id="assistanceUntrainedTest"
-								label={untrainedTestLabel}
-								component={RenderCheckbox}
-								disabled={assistanceFocus && Number(assistanceFocus) > 0}
-							/> */}
 						</>
 					</Accordion.Collapse>
 				</Accordion>

@@ -92,17 +92,16 @@ function NarrativeTokensModal({
 						onDecrease={onDecrease}
 						isDiceImgLarge={true}
 					/>
-
 					<PoolBuilderDie
-							title="Light Destiny Points"
-							diceType={DESTINY_LIGHT}
-							diceImg="destiny_light.png"
-							value={destinyLightState}
-							onChange={onChange}
-							onIncrease={onIncrease}
-							onDecrease={onDecrease}
-							isDiceImgLarge={true}
-						/>
+						title="Light Destiny Points"
+						diceType={DESTINY_LIGHT}
+						diceImg="destiny_light.png"
+						value={destinyLightState}
+						onChange={onChange}
+						onIncrease={onIncrease}
+						onDecrease={onDecrease}
+						isDiceImgLarge={true}
+					/>
 				</div>
 			</Modal.Body>
 			<Modal.Footer>

@@ -10,7 +10,6 @@ import {
 	D10,
 	D8,
 	D6,
-	D5,
 	D4,
 	POOL,
 	MODIFIER,
@@ -24,7 +23,8 @@ import {
 	RING_DIE,
 	SKILL_DIE,
 	CONAN_TOKENS,
-	NARRATIVE_TOKENS
+	NARRATIVE_TOKENS,
+	WARHAMMER_MONEY
 } from './diceConstants';
 
 import narrativeDice from './narrativeDice';
@@ -134,10 +134,10 @@ export const warhammerSet = [{
 	diceType: D10,
 	label: 'd10'
 }, {
-	diceType: D5,
-	diceImg: 'd10.png',
-	label: 'd5',
-	extraMark: 'd5'
+	diceType: WARHAMMER_MONEY,
+	label: 'Money converter',
+	diceImg: 'warhammer_money/gold.png',
+	noDropdown: true
 }];
 
 export const conanSet = [{

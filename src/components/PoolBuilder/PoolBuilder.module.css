@@ -33,6 +33,7 @@
 	padding: 0;
 	overflow: hidden;
 	background: transparent;
+	min-height: auto;
 }
 
 .input {
@@ -93,8 +94,15 @@
 }
 
 .dieFooter {
+	border-top: 0;
 	padding: 0;
 	background: transparent;
+}
+
+.readOnlyValue {
+	text-align: center;
+	font-size: 21px;
+	color: #212529;
 }
 
 .input {

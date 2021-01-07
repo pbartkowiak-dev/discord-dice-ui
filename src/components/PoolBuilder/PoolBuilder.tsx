@@ -143,7 +143,7 @@ function PoolBuilder({
 		});
 	};
 
-	const PoolBuilderDice = diceSet.map(({ diceType, label, diceImg, extraMark, isExcludedFromPool, noDropdown }) => {
+	const PoolBuilderDice = diceSet.map(({ diceType, label, diceImg, isExcludedFromPool, noDropdown }) => {
 		if (isExcludedFromPool) {
 			return (
 				<Dice
@@ -151,7 +151,6 @@ function PoolBuilder({
 					diceType={diceType}
 					diceImg={diceImg}
 					label={label}
-					extraMark={extraMark}
 					handleRollDice={handleRollDice}
 					noDropdown={noDropdown}
 				/>

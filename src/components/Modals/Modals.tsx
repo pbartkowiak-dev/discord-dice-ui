@@ -5,6 +5,7 @@ import SettingsModalContainer from '../SettingsModal/SettingsModalContainer';
 import ModifierModalContainer from '../ModifierModal/ModifierModalContainer';
 import CoCModalContainer from '../CoCModal/CoCModalContainer';
 import WarhammerModalContainer from '../WarhammerModal/WarhammerModalContainer';
+import WarhammerMoneyModalContainer from '../WarhammerMoneyModal/WarhammerMoneyModalContainer';
 import ConanModalContainer from '../ConanModal/ConanModalContainer';
 import PoolBuilderModalContainer from '../PoolBuilderModal/PoolBuilderModalContainer';
 import CopyrightModalContainer from '../CopyrightModal/CopyrightModalContainer';
@@ -34,6 +35,7 @@ function Modals({ modalsState }: modalsPropTypes) {
 			<ModifierModalContainer showModal={modalsState.isModifierModalOpen} />
 			<CoCModalContainer showModal={modalsState.isCoCModalOpen} />
 			<WarhammerModalContainer showModal={modalsState.isWarhammerModalOpen} />
+			<WarhammerMoneyModalContainer showModal={modalsState.isWarhammerMoneyModalOpen} />
 			<ConanModalContainer showModal={modalsState.isConanModalOpen} />
 			<PoolBuilderModalContainer showModal={modalsState.isPoolBuilderModalOpen} />
 			<CopyrightModalContainer showModal={modalsState.isCopyrightModalOpen} />

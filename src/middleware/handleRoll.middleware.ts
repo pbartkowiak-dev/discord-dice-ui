@@ -6,14 +6,16 @@ import {
 	D20_CONAN_TEST,
 	D20_CONAN_HL,
 	CONAN_TOKENS,
-	NARRATIVE_TOKENS
+	NARRATIVE_TOKENS,
+	WARHAMMER_MONEY
 } from '../consts/diceConstants';
 import {
 	openWarhammerModal,
 	openCoCModal,
 	openConanModal,
 	openModifierModal,
-	openPoolBuilderModal
+	openPoolBuilderModal,
+	openWarhammerMoneyModal
 } from '../actions/modals';
 import {
 	requestRoll,
@@ -77,6 +79,8 @@ export default (store:any) => (next:any) => (action:any) => {
 				store.dispatch(openConanTokensModal());
 			} else if (diceType === NARRATIVE_TOKENS) {
 				store.dispatch(openNarrativeTokensModal());
+			} else if (diceType === WARHAMMER_MONEY) {
+				store.dispatch(openWarhammerMoneyModal());
 			} else if (formValues.useModifier) {
 				store.dispatch(openModifierModal());
 			} else {

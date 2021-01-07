@@ -13,42 +13,53 @@ function PoolBuilderDie({
 	onIncrease,
 	onDecrease,
 	diceImg,
-	isDiceImgLarge
+	isDiceImgLarge,
+	readOnly,
+	noImage,
+	noHeader
 }: any) {
+	let diceImgPath;
+	let diceImgClassName;
 
-	const diceImgPath = diceImg
+	if (!noImage) {
+
+		diceImgPath = diceImg
 		? require(`../../img/${diceImg}`)
 		: require(`../../img/${diceType}.png`);
 
-	const diceImgClassName = classNames({
-		[styles.dieImage]: true,
-		[styles.dieImageLarge]: !!isDiceImgLarge
-	});
+		diceImgClassName = classNames({
+			[styles.dieImage]: true,
+			[styles.dieImageLarge]: !!isDiceImgLarge
+		});
+	}
 	
 	return (
 		<Card className={styles.dieCard}>
 			<Card.Body className={styles.dieBody}>
 				<Card.Subtitle className={classNames({
+					hidden: noHeader,
 					'text-center': true,
 					'text-muted': true,
 					[styles.dieCardTitle]: true
 				})}>{ title }</Card.Subtitle>
-				<Card.Img
+				{ !noImage && <Card.Img
 					variant="top"
 					className={diceImgClassName}
 					onClick={() => onIncrease(diceType)}
 					src={diceImgPath}
 				/>
+				}
 			</Card.Body>
 			<Card.Footer className={styles.dieFooter}>
-				<PoolBuilderCounter
+				{ readOnly && <div className={styles.readOnlyValue}>{value}</div> }
+				{ !readOnly && <PoolBuilderCounter
 					value={value}
 					modifierValue={modifierValue}
 					diceType={diceType}
 					onChange={onChange}
 					onIncrease={onIncrease}
 					onDecrease={onDecrease}
-				/>
+				/> }
 			</Card.Footer>
 		</Card>
 	);

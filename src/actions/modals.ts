@@ -13,6 +13,9 @@ export const CLOSE_COC_MODAL = 'CLOSE_COC_MODAL';
 export const OPEN_WARHAMMER_MODAL = 'OPEN_WARHAMMER_MODAL';
 export const CLOSE_WARHAMMER_MODAL = 'CLOSE_WARHAMMER_MODAL';
 
+export const OPEN_WARHAMMER_MONEY_MODAL = 'OPEN_WARHAMMER_MONEY_MODAL';
+export const CLOSE_WARHAMMER_MONEY_MODAL = 'CLOSE_WARHAMMER_MONEY_MODAL';
+
 export const OPEN_CONAN_MODAL = 'OPEN_CONAN_MODAL';
 export const CLOSE_CONAN_MODAL = 'CLOSE_CONAN_MODAL';
 
@@ -130,5 +133,17 @@ export function openPoolBuilderModal() {
 export function closePoolBuilderModal() {
 	return {
 		type: CLOSE_POOL_BUILDER_MODAL
+	};
+}
+
+export function openWarhammerMoneyModal() {
+	return {
+		type: OPEN_WARHAMMER_MONEY_MODAL
+	};
+}
+
+export function closeWarhammerMoneyModal() {
+	return {
+		type: CLOSE_WARHAMMER_MONEY_MODAL
 	};
 }
