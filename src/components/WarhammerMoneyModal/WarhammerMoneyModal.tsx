@@ -127,17 +127,13 @@ function WarhammerMoneyModal({
 	};
 
 	const onChange = (moneyType: MoneyType, event: any) => {
-		console.log('onChange moneyType', moneyType);
 		const { value } = event.target;
-		console.log('value', value);
-		console.log('isValueValid(value)', isValueValid(value));
 		if (isValueValid(value)) {
 			setMoneyState({
 				...moneyState,
 				[moneyType]: `${value}`
 			});
 		}
-
 	};
 
 	const onChangeToAdd = (moneyType: MoneyType, event: any) => {
