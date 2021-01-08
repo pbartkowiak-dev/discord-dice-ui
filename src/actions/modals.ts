@@ -1,3 +1,5 @@
+import { WarhammerMoneyRecalculatedPayload } from '../components/WarhammerMoneyModal/WarhammerMoneyModalTypes';
+
 export const OPEN_INFO_MODAL = 'OPEN_INFO_MODAL';
 export const CLOSE_INFO_MODAL = 'CLOSE_INFO_MODAL';
 
@@ -24,6 +26,8 @@ export const CLOSE_MSG_MODAL = 'CLOSE_MSG_MODAL';
 
 export const OPEN_POOL_BUILDER_MODAL = 'OPEN_POOL_BUILDER_MODAL';
 export const CLOSE_POOL_BUILDER_MODAL = 'CLOSE_POOL_BUILDER_MODAL';
+
+export const WARHAMMER_MONEY_RECALCULATED = 'WARHAMMER_MONEY_RECALCULATED';
 
 interface fieldEmbedded {
 	name: string;
@@ -145,5 +149,12 @@ export function openWarhammerMoneyModal() {
 export function closeWarhammerMoneyModal() {
 	return {
 		type: CLOSE_WARHAMMER_MONEY_MODAL
+	};
+}
+
+export function warhammerMoneyRecalculated(payload: WarhammerMoneyRecalculatedPayload) {
+	return {
+		type: WARHAMMER_MONEY_RECALCULATED,
+		payload
 	};
 }

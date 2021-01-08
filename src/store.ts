@@ -17,6 +17,7 @@ import getCoCRequestMsg from './middleware/getCoCMsg/getCoCRequestMsg.middleware
 // Warhammer
 import getWarhammerLocalMsg from './middleware/getWarhammerMsg/getWarhammerLocalMsg.middleware';
 import getWarhammerRequestMsg from './middleware/getWarhammerMsg/getWarhammerRequestMsg.middleware';
+import warhammerMoneyRecalculated from './middleware/warhammerMoneyRecalculated.middleware';
 // Conan
 import getConanLocalMsg from './middleware/getConanMsg/getConanLocalMsg.middleware';
 import getConanRequestMsg from './middleware/getConanMsg/getConanRequestMsg.middleware';
@@ -65,6 +66,7 @@ const rollMiddleware = [
 
 	getWarhammerLocalMsg,
 	getWarhammerRequestMsg,
+	warhammerMoneyRecalculated,
 
 	getConanLocalMsg,
 	getConanRequestMsg,

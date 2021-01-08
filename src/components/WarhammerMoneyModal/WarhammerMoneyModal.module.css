@@ -37,7 +37,7 @@
 	font-size: 28px;
 }
 
-.syncIcon {
+.buttonIcon {
 	margin-right: 8px;
 	font-size: 16px;
 }
@@ -59,7 +59,7 @@
 	cursor: pointer;
 }
 
-.buttonsContainer {
+.buttonsContainerOperations {
 	position: absolute;
 	display: grid;
 	grid-template-columns: 1fr 1fr;
@@ -68,6 +68,12 @@
 	background: #fff;
 	padding: 10px 0 10px 15px;
 	right: 0;
+}
+
+.buttonsContainer {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-column-gap: 20px;
 }
 
 .buttonIcon {

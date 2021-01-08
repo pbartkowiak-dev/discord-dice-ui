@@ -32,6 +32,12 @@ function PoolBuilderDie({
 			[styles.dieImageLarge]: !!isDiceImgLarge
 		});
 	}
+
+	const handleIncrease = () => {
+		if (typeof onIncrease === 'function') {
+			onIncrease(diceType)
+		}
+	}
 	
 	return (
 		<Card className={styles.dieCard}>
@@ -45,7 +51,7 @@ function PoolBuilderDie({
 				{ !noImage && <Card.Img
 					variant="top"
 					className={diceImgClassName}
-					onClick={() => onIncrease(diceType)}
+					onClick={handleIncrease}
 					src={diceImgPath}
 				/>
 				}
