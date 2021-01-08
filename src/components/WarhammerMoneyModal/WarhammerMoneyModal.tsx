@@ -19,11 +19,6 @@ function WarhammerMoneyModal({
 	hasHookUrl
 }: WarhammerMoneyModalProps
 ) {
-	// const initialMoneyState = {
-	// 	[MONEY_GOLD]: '0',
-	// 	[MONEY_SILVER]: '0',
-	// 	[MONEY_BRASS]: '0'
-	// };
 	const initialMoneyState = useRef({
 		[MONEY_GOLD]: '0',
 		[MONEY_SILVER]: '0',
