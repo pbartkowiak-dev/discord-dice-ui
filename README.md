@@ -7,9 +7,10 @@
 The app offers special support for following games:
 - Call of Cthulhu 7e
 - Warhammer (Dark Heresy II, WFRP 2e/4e)
+	- Warhammer Money Converter
 - Conan 2d20
 - Narrative Dice (EotE SW)
-- Legend of the Five Rings (5e)
+- Legend of the Five Rings 5e
 
 [![App interface](./public/app.png)]()
 
@@ -32,6 +33,12 @@ After selecting the mode in the _Roll Options_ a dedicated modal will be shown f
 The app offers special support for rolling Success Levels in Warhammer 2e, Warhammer 4e and Dark Heresy II.
 
 [![WFRP Mode - app](./public/wfrp-result-app.png)]()
+
+The app can also help with adding and subtracting gold crowns, silver shillings and brass pennies:
+
+[![Warhammer Money Converter Info](./public/money_converter-info.png)]()
+
+[![Warhammer Money Converter](./public/money_converter.png)]()
 
 -----------------------------
 ## Conan 2d20 Mode
