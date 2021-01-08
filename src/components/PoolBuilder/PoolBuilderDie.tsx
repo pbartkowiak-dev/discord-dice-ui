@@ -29,6 +29,7 @@ function PoolBuilderDie({
 
 		diceImgClassName = classNames({
 			[styles.dieImage]: true,
+			[styles.dieImageReadOnly]: readOnly,
 			[styles.dieImageLarge]: !!isDiceImgLarge
 		});
 	}

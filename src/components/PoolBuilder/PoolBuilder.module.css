@@ -23,6 +23,13 @@
 	transition: .2s;
 }
 
+.dieImageReadOnly,
+.dieImageReadOnly:hover,
+.dieImage.dieImageReadOnly:hover {
+	opacity: .9;
+	cursor: default;
+}
+
 .dieImage:hover {
 	opacity: 1;
 }
