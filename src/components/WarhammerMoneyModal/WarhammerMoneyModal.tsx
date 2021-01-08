@@ -127,7 +127,35 @@ function WarhammerMoneyModal({
 	};
 
 	const onChange = (moneyType: MoneyType, event: any) => {
+		console.log('onChange moneyType', moneyType);
 		const { value } = event.target;
+		console.log('value', value);
+		console.log('isValueValid(value)', isValueValid(value));
+		if (isValueValid(value)) {
+			setMoneyState({
+				...moneyState,
+				[moneyType]: `${value}`
+			});
+		}
+
+	};
+
+	const onChangeToAdd = (moneyType: MoneyType, event: any) => {
+		const { value } = event.target;
+		if (isValueValid(value)) {
+			setMoneyToAddState({
+				...moneyToAddState,
+				[moneyType]: `${value}`
+			});
+		}
+	};
+
+	const isValueValid = (value: string) =>{
+		const num = Number(value);
+		if (!isNaN(num) && num >= 0) {
+			return true;
+		}
+		return false;
 	};
 
 	const tooltipContent = (
@@ -200,7 +228,7 @@ function WarhammerMoneyModal({
 								title="Gold crowns"
 								diceType={MONEY_GOLD}
 								value={moneyToAddState[MONEY_GOLD] || '0'}
-								onChange={onChange}
+								onChange={onChangeToAdd}
 								onIncrease={onIncreaseToChange}
 								onDecrease={onDecreaseToChange}
 								isDiceImgLarge={false}
@@ -213,7 +241,7 @@ function WarhammerMoneyModal({
 								title="Silver shillings"
 								diceType={MONEY_SILVER}
 								value={moneyToAddState[MONEY_SILVER] || '0'}
-								onChange={onChange}
+								onChange={onChangeToAdd}
 								onIncrease={onIncreaseToChange}
 								onDecrease={onDecreaseToChange}
 								isDiceImgLarge={false}
@@ -226,7 +254,7 @@ function WarhammerMoneyModal({
 								title="Brass pennies"
 								diceType={MONEY_BRASS}
 								value={moneyToAddState[MONEY_BRASS] || '0'}
-								onChange={onChange}
+								onChange={onChangeToAdd}
 								onIncrease={onIncreaseToChange}
 								onDecrease={onDecreaseToChange}
 								isDiceImgLarge={false}
