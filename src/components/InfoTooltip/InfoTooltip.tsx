@@ -13,9 +13,16 @@ type infoTooltipPropType = {
 	type?: string
 	placement?: Placement
 	className?: string
+	containerClassName?: string
 }
 
-function InfoTooltip({ content, type, placement='top', className='' }: infoTooltipPropType) {
+function InfoTooltip({
+	content,
+	type,
+	placement='top',
+	className='',
+	containerClassName=''
+}: infoTooltipPropType) {
 	const id = `tooltip-${getRandom(999)}`;
 	let icon;
 
@@ -30,7 +37,7 @@ function InfoTooltip({ content, type, placement='top', className='' }: infoToolt
 			placement={placement}
 			delay={100}
 			overlay={
-				<Tooltip id={id}>
+				<Tooltip id={id} className={containerClassName}>
 					<>{ content }</>
 				</Tooltip>
 			}

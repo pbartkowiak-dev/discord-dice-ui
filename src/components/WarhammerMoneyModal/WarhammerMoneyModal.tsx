@@ -1,7 +1,8 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import classNames from 'classnames';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
+import InfoTooltip from '../InfoTooltip/InfoTooltip';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faMinus, faEquals, faBalanceScaleLeft, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { MoneyType, MoneyStateTypes, OperationsTypes, WarhammerMoneyModalProps } from './WarhammerMoneyModalTypes';
@@ -16,9 +17,6 @@ function WarhammerMoneyModal({
 	warhammerMoneyRecalculated
 }: WarhammerMoneyModalProps
 ) {
-// 	Standard coin values are:
-// 1 gold crown (1GC) = 20 silver shillings (20/–) = 240
-// brass pennies (240d)
 	const initialMoneyState = {
 		[MONEY_GOLD]: '0',
 		[MONEY_SILVER]: '0',
@@ -29,6 +27,10 @@ function WarhammerMoneyModal({
 	const [moneyResultState, setMoneyResultState] = useState<MoneyStateTypes>(initialMoneyState);
 	const [operationState, setOperationState] = useState<OperationsTypes>('ADD');
 	const sendToDiscordRef = useRef<HTMLInputElement>(null);
+
+	useEffect(() => {
+		setMoneyResultState(initialMoneyState);
+	}, [moneyToAddState, moneyState, operationState]);
 
 	const handleClearMoneyState = () => {
 		setMoneyState(initialMoneyState);
@@ -128,6 +130,13 @@ function WarhammerMoneyModal({
 		const { value } = event.target;
 	};
 
+	const tooltipContent = (
+		<>
+			<p><span className={styles.silver}>1 silver shilling (1 ss)</span> = <span className={styles.brass}>12 brass pennies (12 d)</span></p>
+			<p><span className={styles.gold}>1 gold crown (1 GC)</span> = <span className={styles.silver}>20 ss</span> = <span className={styles.brass}>240 d</span></p>
+		</>
+	);
+
 	return (
 		<Modal show={showModal} onHide={closeModal} size="lg">
 			<Modal.Header closeButton>
@@ -135,46 +144,52 @@ function WarhammerMoneyModal({
 			</Modal.Header>
 			<Modal.Body>
 				<div className={styles.container}>
+					<InfoTooltip
+						content={tooltipContent}
+						className={styles.infoTooltip}
+						containerClassName={styles.infoTooltipContainer}
+						placement="bottom"
+					/>
 					<div className={styles.row}>
 					<div className={classNames([styles.cell, styles.cellCenter])}>
-							Your money:
-						</div>
-						<div className={styles.cell}>
-							<PoolBuilderDie
-								title="Gold crowns"
-								diceType={MONEY_GOLD}
-								diceImg="warhammer_money/gold.png"
-								value={moneyState[MONEY_GOLD]}
-								onChange={onChange}
-								onIncrease={onIncreaseCurrent}
-								onDecrease={onDecreaseCurrent}
-								isDiceImgLarge={true}
-							/>
-						</div>
-						<div className={styles.cell}>
-							<PoolBuilderDie
-								title="Silver shillings"
-								diceType={MONEY_SILVER}
-								diceImg="warhammer_money/silver.png"
-								value={moneyState[MONEY_SILVER]}
-								onChange={onChange}
-								onIncrease={onIncreaseCurrent}
-								onDecrease={onDecreaseCurrent}
-								isDiceImgLarge={true}
-							/>
-						</div>
-						<div className={styles.cell}>
-							<PoolBuilderDie
-								title="Brass pennies"
-								diceType={MONEY_BRASS}
-								diceImg="warhammer_money/brass.png"
-								value={moneyState[MONEY_BRASS]}
-								onChange={onChange}
-								onIncrease={onIncreaseCurrent}
-								onDecrease={onDecreaseCurrent}
-								isDiceImgLarge={true}
-							/>
-						</div>
+						Current money:
+					</div>
+					<div className={styles.cell}>
+						<PoolBuilderDie
+							title="Gold crowns"
+							diceType={MONEY_GOLD}
+							diceImg="warhammer_money/gold.png"
+							value={moneyState[MONEY_GOLD]}
+							onChange={onChange}
+							onIncrease={onIncreaseCurrent}
+							onDecrease={onDecreaseCurrent}
+							isDiceImgLarge={true}
+						/>
+					</div>
+					<div className={styles.cell}>
+						<PoolBuilderDie
+							title="Silver shillings"
+							diceType={MONEY_SILVER}
+							diceImg="warhammer_money/silver.png"
+							value={moneyState[MONEY_SILVER]}
+							onChange={onChange}
+							onIncrease={onIncreaseCurrent}
+							onDecrease={onDecreaseCurrent}
+							isDiceImgLarge={true}
+						/>
+					</div>
+					<div className={styles.cell}>
+						<PoolBuilderDie
+							title="Brass pennies"
+							diceType={MONEY_BRASS}
+							diceImg="warhammer_money/brass.png"
+							value={moneyState[MONEY_BRASS]}
+							onChange={onChange}
+							onIncrease={onIncreaseCurrent}
+							onDecrease={onDecreaseCurrent}
+							isDiceImgLarge={true}
+						/>
+					</div>
 					</div>
 					<div className={styles.row}>
 					<div className={classNames([styles.cell, styles.cellCenter])}>
