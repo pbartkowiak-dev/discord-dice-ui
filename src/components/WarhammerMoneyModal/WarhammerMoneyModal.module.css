@@ -2,6 +2,10 @@
 	position: relative;
 }
 
+.row input {
+	padding: .375rem 0.25rem;
+}
+
 .rowResults {
 	padding: 15px 10px 5px;
 	border-radius: 10px;
@@ -122,7 +126,7 @@
 	opacity: .7;
 }
 
-@media only screen and (min-width: 480px) {
+@media only screen and (min-width: 680px) {
 	.row {
 		display: grid;
 		grid-template-columns: 150px 1fr 1fr 1fr;
