@@ -113,6 +113,15 @@
 	color: #ad6314;
 }
 
+.disabledWrapper {
+	cursor: not-allowed;
+}
+
+.disabledWrapper * {
+	pointer-events: none;
+	opacity: .7;
+}
+
 @media only screen and (min-width: 480px) {
 	.row {
 		display: grid;

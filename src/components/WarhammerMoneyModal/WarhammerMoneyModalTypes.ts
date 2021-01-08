@@ -17,6 +17,7 @@ export interface WarhammerMoneyModalProps {
 	showModal: boolean;
 	closeModal: () => void;
 	warhammerMoneyRecalculated: (payload: WarhammerMoneyRecalculatedPayload) => void;
+	hasHookUrl: boolean;
 }
 
 export type MoneyType = 'MONEY_GOLD'

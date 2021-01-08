@@ -10,18 +10,25 @@ import styles from './WarhammerMoneyModal.module.css';
 import { MONEY_GOLD, MONEY_SILVER, MONEY_BRASS} from '../../consts/consts';
 import PoolBuilderDie from '../PoolBuilder/PoolBuilderDie';
 import { Form } from 'react-bootstrap';
+import TooltipWrapper from '../InfoTooltip/TooltipWrapper';
 
 function WarhammerMoneyModal({
 	showModal,
 	closeModal,
-	warhammerMoneyRecalculated
+	warhammerMoneyRecalculated,
+	hasHookUrl
 }: WarhammerMoneyModalProps
 ) {
-	const initialMoneyState = {
+	// const initialMoneyState = {
+	// 	[MONEY_GOLD]: '0',
+	// 	[MONEY_SILVER]: '0',
+	// 	[MONEY_BRASS]: '0'
+	// };
+	const initialMoneyState = useRef({
 		[MONEY_GOLD]: '0',
 		[MONEY_SILVER]: '0',
 		[MONEY_BRASS]: '0'
-	};
+	}).current;
 	const [moneyState, setMoneyState] = useState<MoneyStateTypes>(initialMoneyState);
 	const [moneyToAddState, setMoneyToAddState] = useState<MoneyStateTypes>(initialMoneyState);
 	const [moneyResultState, setMoneyResultState] = useState<MoneyStateTypes>(initialMoneyState);
@@ -30,7 +37,7 @@ function WarhammerMoneyModal({
 
 	useEffect(() => {
 		setMoneyResultState(initialMoneyState);
-	}, [moneyToAddState, moneyState, operationState]);
+	}, [moneyToAddState, moneyState, operationState, initialMoneyState]);
 
 	const handleClearMoneyState = () => {
 		setMoneyState(initialMoneyState);
@@ -330,13 +337,19 @@ function WarhammerMoneyModal({
 						</div>
 					</div>
 					<div className={styles.rowToRight}>
-						<Form.Group className={styles.checkboxContainer} controlId="sendToDiscordCheckbox">
-							<Form.Check
-							 	ref={sendToDiscordRef}
-								className={styles.checkbox}
-								type="checkbox"
-								label="Send to Discord" />
-						</Form.Group>
+						<TooltipWrapper content={!hasHookUrl ? 'No Discord Webhook url provided' : ''}>
+							<div className={classNames({
+								[styles.disabledWrapper]: !hasHookUrl
+							})}>
+								<Form.Group className={styles.checkboxContainer} controlId="sendToDiscordCheckbox">
+									<Form.Check
+										ref={sendToDiscordRef}
+										className={styles.checkbox}
+										type="checkbox"
+										label="Send to Discord" />
+								</Form.Group>
+							</div>
+						</TooltipWrapper>
 					</div>
 				</div>
 			</Modal.Body>
