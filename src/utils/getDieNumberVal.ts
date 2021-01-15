@@ -9,25 +9,18 @@ import {
 	RING_DIE,
 	SKILL_DIE
 } from '../consts/diceConstants';
+import { FATE_DIE } from '../consts/fateConsts';
 
 export default (diceType: string | number): number => {
 	if (typeof diceType === 'number') {
 		return diceType;
 	}
 
-	// handle narrative dice
-	if (diceType === BOOST || diceType === SETBACK) {
+	if (diceType === BOOST || diceType === SETBACK || diceType === RING_DIE || diceType === FATE_DIE) {
 		return 6;
 	} else if (diceType === ABILITY || diceType === DIFFICULTY) {
 		return 8;
-	} else if (diceType === PROFICIENCY || diceType === CHALLENGE || diceType === FORCE) {
-		return 12;
-	}
-
-	// handle l5r dice
-	if (diceType === RING_DIE) {
-		return 6;
-	} else if (diceType === SKILL_DIE) {
+	} else if (diceType === PROFICIENCY || diceType === CHALLENGE || diceType === FORCE || diceType === SKILL_DIE) {
 		return 12;
 	}
 

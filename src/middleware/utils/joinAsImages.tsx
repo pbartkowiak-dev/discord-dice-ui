@@ -31,7 +31,6 @@ export default (results: string, diceType: string) => {
 		[BOOST]: true
 	};
 
-
 	const triangleDie: d = {
 		[DIFFICULTY]: true,
 		[ABILITY]: true

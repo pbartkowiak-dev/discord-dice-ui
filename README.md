@@ -11,6 +11,7 @@ The app offers special support for following games:
 - Conan 2d20
 - Narrative Dice (EotE SW)
 - Legend of the Five Rings 5e
+- and Fate dice
 
 [![App interface](./public/app.png)]()
 

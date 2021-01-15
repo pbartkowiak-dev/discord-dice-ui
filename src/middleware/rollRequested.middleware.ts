@@ -12,6 +12,9 @@ import {
 	D20_CONAN_TEST,
 	D6_CONAN
 } from '../consts/diceConstants';
+import { FATE_DIE, MINUS, PLUS } from '../consts/fateConsts';
+import mapValueToFate from './utils/mapValueToFate';
+import ResultsModalContainer from '../components/ResultsModal/ResultsModalContainer';
 
 interface rollDiceResult {
 	results: Array<number>;
@@ -41,6 +44,10 @@ interface rollDiceResult {
 	effects?: number | undefined;
 	dmg?: number | undefined;
 	assistanceDiceResults?: Array<number>;
+
+	// Fate results
+	fateResults?: Array<string>;
+	fateResultTotal?: string;
 }
 
 export default (store: any) => (next: any) => (action: any) => {
@@ -161,6 +168,26 @@ export default (store: any) => (next: any) => (action: any) => {
 			result.modSymbol = '+';
 		} else {
 			result.modSymbol = '-';
+		}
+
+		// Fate Dice
+		if (diceType === FATE_DIE) {
+			result.fateResults = result.results.map(mapValueToFate);
+			const fateResultTotal = result.fateResults.reduce((resultTotal, current) => {
+				console.log('current', current);
+				if (current === PLUS) {
+					return resultTotal + 1;
+				} else if (current === MINUS) {
+					return resultTotal -1;
+				}
+				return resultTotal;
+			}, 0) + Number(modifier);
+
+			if (fateResultTotal > 0) {
+				result.fateResultTotal = `+${fateResultTotal}`;
+			} else {
+				result.fateResultTotal = `${fateResultTotal}`;
+			}
 		}
 
 		if (formValues.cocMode && diceType === D100_SL) {

@@ -1,7 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowAltCircleUp, faArrowAltCircleDown } from '@fortawesome/free-regular-svg-icons';
-import { faArrowAltCircleRight, faSkull, faSun } from '@fortawesome/free-solid-svg-icons';
+import { faArrowAltCircleUp, faArrowAltCircleDown, faSquare } from '@fortawesome/free-regular-svg-icons';
+import { faArrowAltCircleRight, faMinus, faPlus, faSkull, faSun } from '@fortawesome/free-solid-svg-icons';
 import joinAsBlocks from '../../utils/joinAsBlocks';
 import CodeSpan from '../../components/CodeSpan/CodeSpan';
 import { D6_CONAN, D20_CONAN_HL } from '../../consts/diceConstants';
@@ -9,6 +9,8 @@ import HitLocations from '../../components/HitLocations/HitLocations';
 import getConanHitLocation from '../../utils/getConanHitLocations';
 import styles from '../../components/ResultsModal/ResultsModal.module.css';
 import { DICE_ROLLED, localMsgReady } from '../../actions/roll.actions';
+import { MINUS, PLUS } from '../../consts/fateConsts';
+import TooltipWrapper from '../../components/InfoTooltip/TooltipWrapper';
 
 const IconUp = <FontAwesomeIcon icon={faArrowAltCircleUp} />;
 const IconDown = <FontAwesomeIcon icon={faArrowAltCircleDown} />;
@@ -36,7 +38,8 @@ const getLocalMsg = (store:any) => (next:any) => (action:any) => {
 			lowest,
 			dmg,
 			effects,
-			diceTypeNum
+			diceTypeNum,
+			fateResults
 		} = result;
 		const hasMultipleDice = diceAmount > 1;
 		const rolledWord = hasMultipleDice ? 'Results' : 'Result';
@@ -46,23 +49,7 @@ const getLocalMsg = (store:any) => (next:any) => (action:any) => {
 		const fields = [];
 		const isCombatDie = rollOptions.diceType === D6_CONAN;
 		const isConanHitLocationDie = rollOptions.diceType === D20_CONAN_HL;
-
-		const title = (
-			<div className={styles.resultsBlock}>
-				<div className={styles.resultsBlockImageContainer}>
-					<img
-						className={styles.resultsBlockImage}
-						src={require(`../../img/${rollOptions.diceType}.png`)}
-						alt={rollOptions.diceType}
-					/>
-				</div>
-				<div className={styles.resultsBlockContentContainer}>
-					<div><strong>You rolled</strong> <CodeSpan>{rolled}</CodeSpan><strong>. {rolledWord}:</strong></div>
-					<div>{resultsJoined}.</div>
-				</div>
-			</div>
-		);
-
+		const isFate = fateResults && fateResults.length;
 	
 		if (rollOptions.useModifier && (!isCombatDie && !isConanHitLocationDie)) {
 			fields.push(
@@ -81,12 +68,12 @@ const getLocalMsg = (store:any) => (next:any) => (action:any) => {
 				);
 			}
 		}
-		if (hasMultipleDice && (!isCombatDie && !isConanHitLocationDie)) {
+		if (hasMultipleDice && (!isCombatDie && !isConanHitLocationDie && !isFate)) {
 			fields.push(
 				<>{IconUp} Highest result rolled: <CodeSpan>{highest}</CodeSpan>.</>
 			);
 		}
-		if (hasMultipleDice && (!isCombatDie && !isConanHitLocationDie)) {
+		if (hasMultipleDice && (!isCombatDie && !isConanHitLocationDie && !isFate)) {
 			fields.push(
 				<>{IconDown} Lowest result rolled: <CodeSpan>{lowest}</CodeSpan>.</>
 			);
@@ -126,6 +113,58 @@ const getLocalMsg = (store:any) => (next:any) => (action:any) => {
 				/>
 			);
 		}
+
+		let titleMsg;
+		let resultsMsg
+
+		if (isFate) {
+			titleMsg = (
+				<div>
+					<strong>You rolled</strong> <CodeSpan>{diceAmount}dF</CodeSpan><strong>. {rolledWord}:</strong>
+				</div>
+			);
+
+			resultsMsg = joinAsBlocks(fateResults);
+			resultsMsg = joinAsBlocks(
+				fateResults.map((fateResult: string) => {
+					if (fateResult === PLUS) {
+						return <TooltipWrapper content="Plus">
+							<FontAwesomeIcon icon={faPlus} />
+						</TooltipWrapper>;
+					}  else if (fateResult === MINUS) {
+						return <TooltipWrapper content="Minus">
+							<FontAwesomeIcon icon={faMinus} />
+						</TooltipWrapper>;
+					}
+					return <TooltipWrapper content="Blank">
+						<FontAwesomeIcon icon={faSquare} />
+					</TooltipWrapper>;
+				})
+			);
+		} else {
+			titleMsg = (
+				<div>
+					<strong>You rolled</strong> <CodeSpan>{rolled}</CodeSpan><strong>. {rolledWord}:</strong>
+				</div>
+			);
+			resultsMsg = resultsJoined;
+		}
+
+		const title = (
+			<div className={styles.resultsBlock}>
+				<div className={styles.resultsBlockImageContainer}>
+					<img
+						className={styles.resultsBlockImage}
+						src={require(`../../img/${rollOptions.diceType}.png`)}
+						alt={rollOptions.diceType}
+					/>
+				</div>
+				<div className={styles.resultsBlockContentContainer}>
+					{ titleMsg }
+					<div>{ resultsMsg }.</div>
+				</div>
+			</div>
+		);
 	
 		store.dispatch(localMsgReady({
 			title,

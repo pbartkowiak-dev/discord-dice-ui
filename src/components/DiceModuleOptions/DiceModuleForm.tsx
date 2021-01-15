@@ -26,6 +26,10 @@ const l5rModeLabel = (
 	<span>L5R 5e Dice</span>
 );
 
+const fateLabel = (
+	<span>Fate Dice</span>
+);
+
 
 // @ts-ignore
 const createRenderer = render  => ({ input, label, id, disabled }, ...rest) => {
@@ -54,9 +58,11 @@ function DiceModuleForm({ rollOptions }:any) {
 		cocMode,
 		conanMode,
 		narrativeDice,
-		l5rMode
+		l5rMode,
+		fateMode
 	} = rollOptions;
 
+	// TODO CREATE ISDISABLED FN
 	return (
 		<Form id ="roll-options-form" className="dice-module dice-form">
 			<Field
@@ -70,33 +76,40 @@ function DiceModuleForm({ rollOptions }:any) {
 				id="cocMode"
 				label={cocModeLabel}
 				component={RenderCheckbox}
-				disabled={warhammerMode || conanMode || narrativeDice || l5rMode}
+				disabled={warhammerMode || conanMode || narrativeDice || l5rMode || fateMode }
 			/>
 			<Field
 				name="warhammerMode"
 				id="warhammerMode"
 				label={warhammerModeLabel}
 				component={RenderCheckbox}
-				disabled={cocMode || conanMode || narrativeDice || l5rMode}
+				disabled={cocMode || conanMode || narrativeDice || l5rMode || fateMode }
 			/>
 			<Field
 				name="conanMode"
 				id="conanMode"
 				label={conanModeLabel}
 				component={RenderCheckbox}
-				disabled={cocMode || warhammerMode || narrativeDice || l5rMode}
+				disabled={cocMode || warhammerMode || narrativeDice || l5rMode || fateMode }
 			/>
 			<Field
 				name="narrativeDice"
 				id="narrativeDice"
 				label={eoteModeLabel}
 				component={RenderCheckbox}
-				disabled={cocMode || conanMode || warhammerMode || l5rMode}
+				disabled={cocMode || conanMode || warhammerMode || l5rMode || fateMode }
 			/>
 			<Field
 				name="l5rMode"
 				id="l5rMode"
 				label={l5rModeLabel}
+				component={RenderCheckbox}
+				disabled={cocMode || conanMode || warhammerMode || narrativeDice || fateMode }
+			/>
+			<Field
+				name="fateMode"
+				id="fateMode"
+				label={fateLabel}
 				component={RenderCheckbox}
 				disabled={cocMode || conanMode || warhammerMode || narrativeDice}
 			/>
@@ -120,6 +133,7 @@ export default connect(state => ({
 		'warhammerMode',
 		'conanMode',
 		'narrativeDice',
-		'l5rMode'
+		'l5rMode',
+		'fateMode'
 	)
 }))(FormElement);

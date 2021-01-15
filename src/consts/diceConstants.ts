@@ -39,4 +39,3 @@ export const DESTINY_DARK = 'DESTINY_DARK';
 export const L5R_DICE = 'L5R_DICE';
 export const RING_DIE = 'ring_die';
 export const SKILL_DIE = 'skill_die';
-

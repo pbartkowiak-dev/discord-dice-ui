@@ -6,6 +6,7 @@ import { CONAN } from '../../consts/consts';
 import { WARHAMMER } from '../../consts/consts';
 import { CLASSIC } from '../../consts/diceConstants';
 import { COC } from '../../consts/consts';
+import { FATE_DICE } from '../../consts/fateConsts';
 import { DiceModuleProps } from './DiceTypes';
 
 function DiceModule ({
@@ -28,6 +29,8 @@ function DiceModule ({
 		diceSetType = CONAN;
 	} else if (rollOptions.cocMode) {
 		diceSetType = COC;
+	} else if (rollOptions.fateMode) {
+		diceSetType = FATE_DICE;
 	} else {
 		diceSetType = CLASSIC;
 	}

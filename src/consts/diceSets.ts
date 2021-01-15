@@ -27,6 +27,8 @@ import {
 	WARHAMMER_MONEY
 } from './diceConstants';
 
+import { FATE_DIE } from './fateConsts';
+
 import narrativeDice from './narrativeDice';
 import l5rDice from './l5rDice';
 
@@ -187,3 +189,8 @@ export const l5rDiceSet = [
 		noDropdown: true
 	}
 ];
+
+export const fateDiceSet = [{
+	diceType: FATE_DIE,
+	label: 'Fate Dice'
+}];
