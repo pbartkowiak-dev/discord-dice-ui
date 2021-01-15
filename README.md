@@ -15,6 +15,8 @@ The app offers special support for following games:
 
 [![App interface](./public/app.png)]()
 
+[![Fate dice](./public/fate.png)]()
+
 ### Sample results inside Discord's Chat
 [![Sample Chat Results](./public/chat-sample-results.png)]()
 

@@ -39,7 +39,8 @@ const getLocalMsg = (store:any) => (next:any) => (action:any) => {
 			dmg,
 			effects,
 			diceTypeNum,
-			fateResults
+			fateResults,
+			fateResultTotal
 		} = result;
 		const hasMultipleDice = diceAmount > 1;
 		const rolledWord = hasMultipleDice ? 'Results' : 'Result';
@@ -57,14 +58,14 @@ const getLocalMsg = (store:any) => (next:any) => (action:any) => {
 			);
 		}
 	
-		if ((hasMultipleDice || rollOptions.useModifier) && (!isCombatDie && !isConanHitLocationDie)) {
+		if ((hasMultipleDice || rollOptions.useModifier || isFate) && (!isCombatDie && !isConanHitLocationDie)) {
 			if (rollOptions.useModifier) {
 				fields.push(
-					<>{IconRight} Total (with {modifierWithSymbol} modifier): <CodeSpan>{totalWithModifier}</CodeSpan>.</>
+					<>{IconRight} Total (with {modifierWithSymbol} modifier): <CodeSpan>{fateResultTotal || totalWithModifier}</CodeSpan>.</>
 				);
 			} else {
 				fields.push(
-					<>{IconRight} Total: <CodeSpan>{totalWithoutModifier}</CodeSpan>.</>
+					<>{IconRight} Total: <CodeSpan>{fateResultTotal || totalWithoutModifier}</CodeSpan>.</>
 				);
 			}
 		}

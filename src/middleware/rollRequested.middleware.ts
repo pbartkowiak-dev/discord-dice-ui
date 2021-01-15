@@ -14,7 +14,6 @@ import {
 } from '../consts/diceConstants';
 import { FATE_DIE, MINUS, PLUS } from '../consts/fateConsts';
 import mapValueToFate from './utils/mapValueToFate';
-import ResultsModalContainer from '../components/ResultsModal/ResultsModalContainer';
 
 interface rollDiceResult {
 	results: Array<number>;
@@ -174,7 +173,6 @@ export default (store: any) => (next: any) => (action: any) => {
 		if (diceType === FATE_DIE) {
 			result.fateResults = result.results.map(mapValueToFate);
 			const fateResultTotal = result.fateResults.reduce((resultTotal, current) => {
-				console.log('current', current);
 				if (current === PLUS) {
 					return resultTotal + 1;
 				} else if (current === MINUS) {
