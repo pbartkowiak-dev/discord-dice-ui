@@ -6,7 +6,7 @@ import { CONAN } from '../../consts/consts';
 import { WARHAMMER } from '../../consts/consts';
 import { CLASSIC } from '../../consts/diceConstants';
 import { COC } from '../../consts/consts';
-import { FATE_DICE } from '../../consts/fateConsts';
+import { FATE_DICE, FATE_DIE } from '../../consts/fateConsts';
 import { DiceModuleProps } from './DiceTypes';
 
 function DiceModule ({
@@ -14,10 +14,23 @@ function DiceModule ({
 	submitRoll
 }: DiceModuleProps
 ) {
-	const handleRollDice = (diceType: string, diceAmount: number = 1) => {
+	const handleRollDice = (diceType: string, diceAmount?: number) => {
+		let diceAmountToRoll: number;
+		
+		if (!diceAmount) {
+			// 4 dice is default for Fate Dice
+			if (diceType === FATE_DIE) {
+				diceAmountToRoll = 4;
+			} else {
+				diceAmountToRoll = 1;
+			}
+		} else {
+			diceAmountToRoll = diceAmount
+		}
+
 		submitRoll({
 			diceType,
-			diceAmount
+			diceAmount: diceAmountToRoll
 		});
 	};
 

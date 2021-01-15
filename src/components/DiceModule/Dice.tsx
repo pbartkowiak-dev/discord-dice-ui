@@ -49,7 +49,7 @@ function Dice({
 			<Card.Footer>
 				{ noDropdown
 					? <Button
-						onClick={ () => handleRollDice(diceType, 1) }
+						onClick={ () => handleRollDice(diceType) }
 						variant="primary">{label}
 					</Button>
 					: <DropdownButton
