@@ -111,7 +111,7 @@ function DiceModuleForm({ rollOptions }:any) {
 				id="fateMode"
 				label={fateLabel}
 				component={RenderCheckbox}
-				disabled={cocMode || conanMode || warhammerMode || narrativeDice}
+				disabled={cocMode || conanMode || warhammerMode || narrativeDice || l5rMode }
 			/>
 		</Form>
 	);
