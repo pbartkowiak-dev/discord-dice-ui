@@ -1,11 +1,11 @@
-import { L5R_SEND_STATE } from '../actions/l5r.actions';
-import { requestMsgReady } from '../actions/roll.actions';
-import { getColor } from '../utils/getColor';
-import joinAsBlocks from '../utils/joinAsBlocks';
-import { l5rResults } from '../consts/l5rSymbols';
-import l5rDice from '../consts/l5rDice';
-import { RING_DIE, SKILL_DIE } from '../consts/diceConstants';
-import { getAdditionalDiceKeptSelector, getResultsDerivedSelector } from '../selectors/l5rSelectors';
+import { L5R_SEND_STATE } from '../../actions/l5r.actions';
+import { requestMsgReady } from '../../actions/roll.actions';
+import { getColor } from '../../utils/getColor';
+import joinAsBlocks from '../../utils/joinAsBlocks';
+import { l5rResults } from '../../consts/l5rSymbols';
+import l5rDice from '../../consts/l5rDice';
+import { RING_DIE, SKILL_DIE } from '../../consts/diceConstants';
+import { getAdditionalDiceKeptSelector, getResultsDerivedSelector } from '../../selectors/l5rSelectors';
 
 function l5rResultsToLabel(results: Array<string>): Array<string> {
 	const resultsMapped = results.map((result: string) => {

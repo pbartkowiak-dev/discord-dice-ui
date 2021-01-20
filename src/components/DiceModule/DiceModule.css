@@ -46,20 +46,21 @@
 	.dice-options .card-body {
 		padding: 15px;
 	}
-
-	.dice-form {
-		display: grid;
-		grid-auto-flow: column;
-		grid-template-columns: auto;
-		grid-template-rows: 1fr 1fr;
-
-	}
 	.dice-list {
 		grid-gap:
 		var(--col-gap)
 		var(--col-gap);
 		grid-template-columns: 1fr 1fr 1fr 1fr;
 		margin-bottom: 15px;
+	}
+}
+
+@media only screen and (min-width: 640px) {
+	.dice-form {
+		display: grid;
+		grid-auto-flow: column;
+		grid-template-columns: auto;
+		grid-template-rows: 1fr 1fr 1fr 1fr;
 	}
 }
 
@@ -71,11 +72,7 @@
 		padding: 15px;
 	}
 	.dice-form {
-		display: grid;
-		grid-auto-flow: column;
-		grid-template-columns: auto;
-		grid-template-rows: 1fr;
-
+		grid-template-rows: 1fr 1fr
 	}
 	.dice-list {
 		grid-gap:

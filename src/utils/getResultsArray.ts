@@ -2,9 +2,9 @@ import getRandom from './getRandom';
 
 export default (
 	diceType: number,
-	diceAmount: number,
+	diceAmount: number = 1,
 	keepUnits?: boolean
-) => {
+): Array<number> => {
 	const rollsArr = new Array(diceAmount).fill('');
 
 	if (keepUnits) {
@@ -14,4 +14,4 @@ export default (
 	}
 
 	return rollsArr.map(_ => getRandom(diceType));
-}
+};

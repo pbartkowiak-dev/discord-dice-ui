@@ -1,21 +1,21 @@
 import React from 'react';
-import CodeSpan from '../CodeSpan/CodeSpan';
+import CodeSpan from '../../CodeSpan/CodeSpan';
 import l5rSymbols, {
 	EXPLOSIVE_SUCCESS,
 	OPPORTUNITY,
 	STRIFE,
 	SUCCESS
-} from '../../consts/l5rSymbols';
-import { RING_DIE } from '../../consts/diceConstants';
-import l5rDice from '../../consts/l5rDice';
+} from '../../../consts/l5rSymbols';
+import { RING_DIE } from '../../../consts/diceConstants';
+import l5rDice from '../../../consts/l5rDice';
 import l5rStyles from './L5rResultsModal.module.css';
 
 const symbols = {
-	explosiveSuccess: require(`../../img/l5r/explosive_success.png`),
-	opportunity: require(`../../img/l5r/opportunity.png`),
-	strife: require(`../../img/l5r/strife.png`),
-	success: require(`../../img/l5r/success.png`),
-	blank_ring_die: require('../../img/l5r/blank_ring_die.png')
+	explosiveSuccess: require(`../../../img/l5r/explosive_success.png`),
+	opportunity: require(`../../../img/l5r/opportunity.png`),
+	strife: require(`../../../img/l5r/strife.png`),
+	success: require(`../../../img/l5r/success.png`),
+	blank_ring_die: require('../../../img/l5r/blank_ring_die.png')
 };
 
 export const ExplosiveSuccessImg = (

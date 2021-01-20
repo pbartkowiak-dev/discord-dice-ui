@@ -10,6 +10,7 @@ The app offers special support for following games:
 	- Warhammer Money Converter
 - Conan 2d20
 - Narrative Dice (EotE SW)
+- Legend of the Five Rings 1e (Roll and Keep)
 - Legend of the Five Rings 5e
 - and Fate dice
 
@@ -57,6 +58,14 @@ In the modal one can define Focus, Target Number, Difficulty, select amount of d
 Damage Dice Result (with option to reroll selected dice):
 
 [![Conan 2d20 Mode Combat Dice roll results](./public/conan-mode-3.png)]()
+
+-----------------------------
+## Legend of the Five Rings 1e (classical Roll and Keep)
+
+Roll and Keep Results:  
+[![Roll and Keep Results Modal](./public/roll-and-keep-results.png)]()
+
+-----------------------------
 
 -----------------------------
 ## Legend of the Five Rings 5e

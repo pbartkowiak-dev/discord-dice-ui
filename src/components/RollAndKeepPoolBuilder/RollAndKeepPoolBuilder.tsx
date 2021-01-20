@@ -6,17 +6,13 @@ import { PoolType } from '../PoolBuilderModal/PoolBuilderModalTypes';
 import l5rStyles from '../ResultsModal/L5rResultsModal/L5rResultsModal.module.css';
 import poolBuilderStyles from '../PoolBuilder/PoolBuilder.module.css';
 
-function L5rDicePoolBuilder({
-	submitRoll,
-	l5rSendState
-}: any ) {
-	const handleSubmit = (pool: PoolType) => {
-		submitRoll({ pool })
-		l5rSendState();
+function RollAndKeepPoolBuilder({ submitRoll }: any) {
+	const handleSubmit = (pool: PoolType, modifier: string) => {
+		submitRoll({ pool, modifier })
 	};
 
-	const formName = 'l5r-pool-builder-form';
-	const maxDicePool = 9;
+	const formName = 'roll-and-keep-pool-builder-form';
+	const maxDicePool = 10;
 
 	return (
 		<div className={classNames({
@@ -40,4 +36,4 @@ function L5rDicePoolBuilder({
 	);
 }
 
-export default L5rDicePoolBuilder;
+export default RollAndKeepPoolBuilder;

@@ -26,14 +26,19 @@ import conanUpdateTokensState from './middleware/conanUpdateTokensState.middlewa
 import getLocalPoolMsg from './middleware/getPoolMsg/getLocalPoolMsg.middleware';
 import getRequestPoolMsg from './middleware/getPoolMsg/getRequestPoolMsg.middleware';
 // L5R
-import l5rRollRequested from './middleware/l5rRollRequested.middleware';
-import l5rRerollRequested from './middleware/l5rRerollRequested.middleware';
-import l5rKeepDice from './middleware/l5rKeepDice.middleware';
-import l5rAlterDie from './middleware/l5rAlterDie.middleware';
-import l5rRollAdditionalDie from './middleware/l5rRollAdditionalDie.middleware';
-import l5rKeepAdditionalDie from './middleware/l5rKeepAdditionalDie.middleware';
-import l5rAddDie from './middleware/l5rAddDie.middleware';
-import l5rSendState from './middleware/l5rSendState.middleware';
+import l5rRollRequested from './middleware/l5r/l5rRollRequested.middleware';
+import l5rRerollRequested from './middleware/l5r/l5rRerollRequested.middleware';
+import l5rKeepDice from './middleware/l5r/l5rKeepDice.middleware';
+import l5rAlterDie from './middleware/l5r/l5rAlterDie.middleware';
+import l5rRollAdditionalDie from './middleware/l5r/l5rRollAdditionalDie.middleware';
+import l5rKeepAdditionalDie from './middleware/l5r/l5rKeepAdditionalDie.middleware';
+import l5rAddDie from './middleware/l5r/l5rAddDie.middleware';
+import l5rSendState from './middleware/l5r/l5rSendState.middleware';
+
+// Roll and Keep
+import rollAndKeepRollRequested from './middleware/rollAndKeep/rollAndKeepRollRequested.middleware';
+import rollAndKeepRerollRequested from './middleware/rollAndKeep/rollAndKeepRerollRequested.middleware';
+import rollAndKeepResultsKept from './middleware/rollAndKeep/rollAndKeepResultsKept.middleware';
 
 import sendRequestMsg from './middleware/sendRequestMsg.middleware';
 import reducers from './reducers/index';
@@ -57,6 +62,10 @@ const rollMiddleware = [
 	l5rKeepAdditionalDie,
 	l5rAddDie,
 	l5rSendState,
+
+	rollAndKeepRollRequested,
+	rollAndKeepRerollRequested,
+	rollAndKeepResultsKept,
 
 	getRequestMsg,
 	getLocalMsg,

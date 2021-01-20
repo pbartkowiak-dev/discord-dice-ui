@@ -2,19 +2,19 @@ import React, { useState, useEffect } from 'react';
 import classNames from 'classnames';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import { EXPLOSIVE_SUCCESS, l5rResults } from '../../consts/l5rSymbols';
-import styles from './ResultsModal.module.css';
+import { EXPLOSIVE_SUCCESS, l5rResults } from '../../../consts/l5rSymbols';
+import styles from '../ResultsModal.module.css';
 import l5rStyles from './L5rResultsModal.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDiceD20 } from '@fortawesome/free-solid-svg-icons';
 import { L5rResultsModalPropTypes } from './L5rResultsModalTypes';
 import L5rAddDieContainer from './L5rAddDieContainer';
-import TooltipWrapper from '../InfoTooltip/TooltipWrapper';
+import TooltipWrapper from '../../InfoTooltip/TooltipWrapper';
 import L5rResultsDropdownContainer from './L5rResultsDropdownContainer';
 import L5rKeepItDropItDropdownContainer from './L5rKeepItDropItDropdownContainer';
-import { ADDITIONAL_DIE, ROLLED_DIE, KEPT_DIE } from '../../consts/consts';
-import DerivedResultsItem from '../DerivedResults/DerivedResultsItem';
-import derivedResultsStyles from '../DerivedResults/DerivedResults.module.css';
+import { ADDITIONAL_DIE, ROLLED_DIE, KEPT_DIE } from '../../../consts/consts';
+import DerivedResultsItem from '../../DerivedResults/DerivedResultsItem';
+import derivedResultsStyles from '../../DerivedResults/DerivedResults.module.css';
 
 function L5rResultsModal({
 	hideMsg,
@@ -115,7 +115,7 @@ function L5rResultsModal({
 						<TooltipWrapper content={diceLabel || result}>
 							<img
 								className={diceImgClassNames}
-								src={require(`../../img/l5r/${result}.png`)}
+								src={require(`../../../img/l5r/${result}.png`)}
 								alt={diceLabel}
 								onClick={() => handleClick(index)}
 							/>
@@ -171,7 +171,7 @@ function L5rResultsModal({
 							<TooltipWrapper content={diceLabel || result}>
 									<img
 										className={diceImgClassNames}
-										src={require(`../../img/l5r/${result}.png`)}
+										src={require(`../../../img/l5r/${result}.png`)}
 										alt={diceLabel}
 									/>
 							</TooltipWrapper>
@@ -217,7 +217,7 @@ function L5rResultsModal({
 			const img = (
 				<img
 					className={diceImgClassNames}
-					src={require(`../../img/l5r/${result}.png`)}
+					src={require(`../../../img/l5r/${result}.png`)}
 					alt={diceLabel}
 				/>
 			);
@@ -383,7 +383,6 @@ function L5rResultsModal({
 			</Modal.Body>
 			<Modal.Footer>
 				<Button
-					block
 					variant="outline-secondary"
 					onClick={hideMsg}>Close</Button>
 			</Modal.Footer>

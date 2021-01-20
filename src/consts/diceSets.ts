@@ -190,6 +190,15 @@ export const l5rDiceSet = [
 	}
 ];
 
+export const rollAndKeepDiceSet = [{
+	diceType: D10,
+	label: 'Roll and Keep',
+	noDropdown: true
+}, {
+	diceType: MODIFIER,
+	label: 'Apply Modifier'
+}];
+
 export const fateDiceSet = [{
 	diceType: FATE_DIE,
 	label: 'Fate Dice'

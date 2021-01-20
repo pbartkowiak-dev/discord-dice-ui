@@ -1,4 +1,4 @@
-import { L5R_ALTER_DIE } from '../actions/l5r.actions';
+import { L5R_ALTER_DIE } from '../../actions/l5r.actions';
 
 export default (store: any) => (next: any) => (action: any) => {
 	if (action.type === L5R_ALTER_DIE) {

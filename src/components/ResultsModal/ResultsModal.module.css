@@ -5,7 +5,7 @@
 }
 
 .resultsModalHeader {
-	height: 100px;
+	height: 95px;
 	background: var(--header-bg);
 	color: var(--header-color);
 	display: block;

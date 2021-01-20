@@ -10,7 +10,7 @@ import {
 	L5R_CLEAR_DATA
 } from '../actions/l5r.actions';
 
-import { InitialStateType } from '../components/ResultsModal/L5rResultsModalTypes';
+import { InitialStateType } from '../components/ResultsModal/L5rResultsModal/L5rResultsModalTypes';
 
 const initialState: InitialStateType = {
 	showModal: false,

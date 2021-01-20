@@ -11,7 +11,8 @@ import PoolBuilderModalContainer from '../PoolBuilderModal/PoolBuilderModalConta
 import CopyrightModalContainer from '../CopyrightModal/CopyrightModalContainer';
 
 import ResultsModalContainer from '../ResultsModal/ResultsModalContainer';
-import L5eResultsModalContainer from '../ResultsModal/L5rResultsModalContainer';
+import L5rResultsModalContainer from '../ResultsModal/L5rResultsModal/L5rResultsModalContainer';
+import RollAndKeepResultsModalContainer from '../ResultsModal/RollAndKeepResultsModal/RollAndKeepResultsModalContainer';
 
 import ConanTokensModalContainer from '../ConanTokensModal/ConanTokensModalContainer';
 import NarrativeTokensModalContainer from '../NarrativeTokensModal/NarrativeTokensModalContainer';
@@ -40,7 +41,8 @@ function Modals({ modalsState }: modalsPropTypes) {
 			<PoolBuilderModalContainer showModal={modalsState.isPoolBuilderModalOpen} />
 			<CopyrightModalContainer showModal={modalsState.isCopyrightModalOpen} />
 			<ResultsModalContainer />
-			<L5eResultsModalContainer />
+			<RollAndKeepResultsModalContainer />
+			<L5rResultsModalContainer />
 			<ConanTokensModalContainer />
 			<NarrativeTokensModalContainer />
 		</>

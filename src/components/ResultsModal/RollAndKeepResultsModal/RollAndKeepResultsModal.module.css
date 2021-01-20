@@ -1,0 +1,138 @@
+.header {
+	text-align: center;
+	font-size: 18px;
+	margin-bottom: 0;
+}
+
+.rerolledHeader {
+	text-align: center;
+	font-size: 15px;
+	margin-bottom: 0;
+}
+
+.results {
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	justify-content: center;
+	margin-top: 2px;
+	border-bottom: 1px dashed gray;
+}
+
+.resultsRow {
+	display: flex;
+	padding-bottom: 2px;
+	margin-top: 2px;
+	margin-left: 15px;
+	cursor: pointer;
+	opacity: .8;
+	transition: .1s;
+	border-bottom: 1px dashed lightgray;
+}
+
+.resultsRow:last-of-type {
+	border-bottom: 0;
+}
+
+.resultsRow:hover {
+	opacity: 1;
+}
+
+.resultsBlock {
+	display: flex;
+}
+
+.equalsRow {
+	display: flex;
+	align-items: center;
+}
+
+.total,
+.sum {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 21px;
+	z-index: 9;
+	width: 40px;
+}
+
+.total {
+	font-weight: bold;
+}
+
+.arrowIconContainer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.equalsContainer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 15px;
+}
+
+.equalsIcon,
+.arrowIcon {
+	font-size: 17px;
+	z-index: 9;
+}
+
+.imgContainer {
+	position: relative;
+	display: inline-block;
+	z-index: 9;
+}
+
+.img {
+	width: 45px;
+	height: auto;
+	padding: 0;
+	border-radius: 10px;
+	cursor: pointer;
+	background-color: transparent;
+}
+
+.imgResult {
+	position: absolute;
+	top: 5px;
+	left: 12px;
+	margin: auto;
+	width: 19px;
+	font-size: 20px;
+	font-weight: bold;
+	color: #fff;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.selected {
+	position: relative;
+	opacity: 1;
+}
+
+.selected:after {
+	position: absolute;
+	content: '';
+	display: block;
+	width: 100%;
+	top: 13px;
+	left: -7px;
+	background-color: rgb(255 255 0 / 75%);
+	box-shadow: 0 0 15px 8px yellow;
+	height: 10px;
+	z-index: 1;
+}
+
+.selected .sum {
+	font-weight: bold;;
+}
+
+.buttonContainer {
+	margin-top: 5px;
+	display: flex;
+	justify-content: space-around;
+}

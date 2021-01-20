@@ -1,9 +1,9 @@
-import { L5R_ROLL_ADDITIONAL_DIE } from '../actions/l5r.actions';
-import { ADDITIONAL_DIE, ROLLED_DIE } from '../consts/consts';
-import { RING_DIE, SKILL_DIE } from '../consts/diceConstants';
-import getDieNumberVal from '../utils/getDieNumberVal';
-import getResultsArray from '../utils/getResultsArray';
-import mapValueToL5r from './utils/mapValueToL5r';
+import { L5R_ROLL_ADDITIONAL_DIE } from '../../actions/l5r.actions';
+import { ADDITIONAL_DIE, ROLLED_DIE } from '../../consts/consts';
+import { RING_DIE, SKILL_DIE } from '../../consts/diceConstants';
+import getDieNumberVal from '../../utils/getDieNumberVal';
+import getResultsArray from '../../utils/getResultsArray';
+import mapValueToL5r from '../utils/mapValueToL5r';
 
 export default (store: any) => (next: any) => (action: any) => {
 	if (action.type === L5R_ROLL_ADDITIONAL_DIE) {

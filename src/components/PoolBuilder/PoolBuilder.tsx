@@ -183,6 +183,7 @@ function PoolBuilder({
 		if (totalSelected) {
 			handleSubmit(poolState, modifierState);
 			setPoolState({});
+			setModifierState('0');
 		}
 	};
 

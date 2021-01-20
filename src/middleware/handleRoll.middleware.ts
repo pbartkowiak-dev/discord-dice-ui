@@ -26,6 +26,7 @@ import {
 	requestPoolRoll,
 	requestNarrativeDicePoolRoll
 } from '../actions/roll.actions';
+import { requestRollAndKeepRoll } from '../actions/rollAndKeep.actions';
 import { requestL5rRoll } from '../actions/l5r.actions';
 import { openConanTokensModal } from '../actions/conan.actions';
 import { openNarrativeTokensModal } from '../actions/narrativeDice.actions';
@@ -47,8 +48,11 @@ export default (store:any) => (next:any) => (action:any) => {
 				diceType,
 				diceAmount
 			}));
-
-			if (action?.payload?.pool && formValues?.l5rMode) {
+			if (action?.payload?.pool && formValues?.rollAndKeepMode) {
+				store.dispatch(requestRollAndKeepRoll({
+					...action.payload
+				}));
+			} else if (action?.payload?.pool && formValues?.l5rMode) {
 				store.dispatch(requestL5rRoll({
 					...action.payload
 				}));
