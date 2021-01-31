@@ -35,13 +35,6 @@ export default (store: any) => (next: any) => (action: any) => {
 		const modifierIcon = Number(modifier) > 0 ? ':arrow_up:' : ':arrow_down:';
 		const modifierSign = Number(modifier) > 0 ? '+' : '';
 
-		if (modifier && Number(modifier)) {
-			fields.push({
-				name: `${modifierIcon} Modifier:`,
-				value: `\`${modifierSign}${modifier}\``
-			});
-		}
-
 		let totalValue = `\`${total}\``;
 
 		if (modifier && Number(modifier)) {
