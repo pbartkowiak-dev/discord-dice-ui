@@ -32,12 +32,10 @@ export default (store: any) => (next: any) => (action: any) => {
 			});
 		}
 
-		const modifierIcon = Number(modifier) > 0 ? ':arrow_up:' : ':arrow_down:';
-		const modifierSign = Number(modifier) > 0 ? '+' : '';
-
 		let totalValue = `\`${total}\``;
 
 		if (modifier && Number(modifier)) {
+			const modifierSign = Number(modifier) > 0 ? '+' : '';
 			totalValue += ` (with \`${modifierSign}${modifier}\` modifier)`;
 		}
 
