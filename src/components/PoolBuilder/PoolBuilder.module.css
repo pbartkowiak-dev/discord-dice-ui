@@ -92,6 +92,9 @@
 		grid-template-columns: 1fr 1fr 1fr;
 		grid-gap: 15px;
 	}
+	.dieFooter {
+		border-top: 0;
+	}
 }
 
 @media only screen and (min-width: 960px) {
@@ -101,7 +104,7 @@
 }
 
 .dieFooter {
-	border-top: 0;
+	border-top: 1px solid rgba(0,0,0,.125);
 	padding: 0;
 	background: transparent;
 }
