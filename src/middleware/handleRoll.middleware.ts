@@ -6,6 +6,10 @@ import {
 	D20_CONAN_TEST,
 	D20_CONAN_HL,
 	CONAN_TOKENS,
+	D6_INFINITY,
+	D20_INFINITY_TEST,
+	D20_INFINITY_HL,
+	INFINITY_TOKENS,
 	NARRATIVE_TOKENS,
 	WARHAMMER_MONEY
 } from '../consts/diceConstants';
@@ -13,6 +17,7 @@ import {
 	openWarhammerModal,
 	openCoCModal,
 	openConanModal,
+	openInfinityModal,
 	openModifierModal,
 	openPoolBuilderModal,
 	openWarhammerMoneyModal
@@ -29,6 +34,7 @@ import {
 import { requestRollAndKeepRoll } from '../actions/rollAndKeep.actions';
 import { requestL5rRoll } from '../actions/l5r.actions';
 import { openConanTokensModal } from '../actions/conan.actions';
+import { openInfinityTokensModal } from '../actions/infinity.actions';
 import { openNarrativeTokensModal } from '../actions/narrativeDice.actions';
 
 export default (store:any) => (next:any) => (action:any) => {
@@ -71,7 +77,15 @@ export default (store:any) => (next:any) => (action:any) => {
 				store.dispatch(openWarhammerModal())
 			} else if (diceType === D20_CONAN_TEST) {
 				store.dispatch(openConanModal());
+			} else if (diceType === D20_INFINITY_TEST) {
+				store.dispatch(openInfinityModal());
 			} else if (diceType === D6_CONAN || diceType === D20_CONAN_HL) {
+				store.dispatch(requestRoll({
+					diceType,
+					diceAmount,
+					modifier: 0
+				}));
+			} else if (diceType === D6_INFINITY || diceType === D20_INFINITY_HL) {
 				store.dispatch(requestRoll({
 					diceType,
 					diceAmount,
@@ -81,6 +95,8 @@ export default (store:any) => (next:any) => (action:any) => {
 				store.dispatch(openPoolBuilderModal());
 			} else if (diceType === CONAN_TOKENS) {
 				store.dispatch(openConanTokensModal());
+			} else if (diceType === INFINITY_TOKENS) {
+				store.dispatch(openInfinityTokensModal());
 			} else if (diceType === NARRATIVE_TOKENS) {
 				store.dispatch(openNarrativeTokensModal());
 			} else if (diceType === WARHAMMER_MONEY) {

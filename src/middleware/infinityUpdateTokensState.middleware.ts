@@ -4,14 +4,14 @@ import { UPDATE_INFINITY_TOKENS_STATE } from '../actions/infinity.actions';
 
 export default (store: any) => (next: any) => (action: any) => {
 	if (action.type === UPDATE_INFINITY_TOKENS_STATE) {
-		const { payload: { momentum, doom } } = action;
-		const doomNum = Number(doom);
+		const { payload: { momentum, heat } } = action;
+		const heatNum = Number(heat);
 		const momentumNum = Number(momentum);
 		const fields = []
 
 		fields.push({
-			name: `:skull: Doom: \`${doom}\``,
-			value: doomNum === 0 ? '-' : new Array(doomNum).fill(':black_circle:').join(' ')
+			name: `:skull: Heat: \`${heat}\``,
+			value: heatNum === 0 ? '-' : new Array(heatNum).fill(':black_circle:').join(' ')
 		})
 
 		fields.push({

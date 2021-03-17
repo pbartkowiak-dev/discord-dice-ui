@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import PoolBuilderDie from '../PoolBuilder/PoolBuilderDie';
-import { DOOM, MOMENTUM } from '../../consts/diceConstants';
+import { HEAT, MOMENTUM } from '../../consts/diceConstants';
 import styles from './InfinityTokensModal.module.css';
 
 function InfinityTokensModal({
@@ -10,15 +10,15 @@ function InfinityTokensModal({
 	showModal,
 	hideMsg,
 	momentum,
-	doom
+	heat
 }: any) {
 	const [momentumState, setMomentumState] = useState('0');
-	const [doomState, setDoomState] = useState('0');
+	const [heatState, setHeatState] = useState('0');
 
 	const handleUpdateTokens = () => {
 		updateTokensState({
 			momentum: momentumState,
-			doom: doomState
+			heat: heatState
 		});
 	};
 
@@ -27,9 +27,9 @@ function InfinityTokensModal({
 			const newVal = Number(momentumState) + 1;
 			setMomentumState(`${newVal}`);
 		}
-		if (tokenType === DOOM) {
-			const newVal = Number(doomState) + 1;
-			setDoomState(`${newVal}`);
+		if (tokenType === HEAT) {
+			const newVal = Number(heatState) + 1;
+			setHeatState(`${newVal}`);
 		}
 	};
 
@@ -38,9 +38,9 @@ function InfinityTokensModal({
 			const newVal = Number(momentumState) - 1;
 			if (newVal >= 0) setMomentumState(`${newVal}`); 
 		}
-		if (tokenType === DOOM) {
-			const newVal = Number(doomState) - 1;
-			if (newVal >= 0) setDoomState(`${newVal}`);
+		if (tokenType === HEAT) {
+			const newVal = Number(heatState) - 1;
+			if (newVal >= 0) setHeatState(`${newVal}`);
 		}
 	};
 
@@ -50,8 +50,8 @@ function InfinityTokensModal({
 		if (tokenType === MOMENTUM && isValueValid(value, tokenType)) {
 			setMomentumState(value);
 		}
-		if (tokenType === DOOM && isValueValid(value, tokenType)) {
-			setDoomState(value);
+		if (tokenType === HEAT && isValueValid(value, tokenType)) {
+			setHeatState(value);
 		}
 	};
 
@@ -70,10 +70,10 @@ function InfinityTokensModal({
 		if (momentum) {
 			setMomentumState(momentum);
 		}
-		if (doom) {
-			setDoomState(doom);
+		if (heat) {
+			setHeatState(heat);
 		}
-	}, [momentum, doom, showModal])
+	}, [momentum, heat, showModal])
 
 	return (
 		<Modal show={showModal} onHide={hideMsg}>
@@ -83,10 +83,10 @@ function InfinityTokensModal({
 			<Modal.Body>
 				<div className={styles.container}>
 					<PoolBuilderDie
-						title="Doom"
-						diceType={DOOM}
-						diceImg="doom.png"
-						value={doomState}
+						title="Heat"
+						diceType={HEAT}
+						diceImg="infinityHeat.png"
+						value={heatState}
 						onChange={onChange}
 						onIncrease={onIncrease}
 						onDecrease={onDecrease}
@@ -96,7 +96,7 @@ function InfinityTokensModal({
 					<PoolBuilderDie
 							title="Momentum"
 							diceType={MOMENTUM}
-							diceImg="momentum.png"
+							diceImg="infinityMomentum.png"
 							value={momentumState}
 							onChange={onChange}
 							onIncrease={onIncrease}
