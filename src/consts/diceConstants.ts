@@ -18,9 +18,16 @@ export const D6_CONAN = 'd6conan';
 export const D20_CONAN_TEST = 'd20conan-test';
 export const D20_CONAN = 'd20conan';
 export const D20_CONAN_HL = 'd20conan-hl';
+
+export const D6_INFINITY = 'd6infinity';
+export const D20_INFINITY_TEST = 'd20infinity-test';
+export const D20_INFINITY = 'd20infinity';
+export const D20_INFINITY_HL = 'd20infinity-hl';
+
 export const COMBAT_DIE = 'Combat Die';
 export const HIT_LOCATION  = 'Hit Location';
 export const CONAN_TOKENS  = 'CONAN_TOKENS';
+export const INFINITY_TOKENS  = 'INFINITY_TOKENS';
 export const DOOM  = 'DOOM';
 export const MOMENTUM  = 'MOMENTUM';
 

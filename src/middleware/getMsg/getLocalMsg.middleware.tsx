@@ -4,9 +4,10 @@ import { faArrowAltCircleUp, faArrowAltCircleDown, faSquare } from '@fortawesome
 import { faArrowAltCircleRight, faMinus, faPlus, faSkull, faSun } from '@fortawesome/free-solid-svg-icons';
 import joinAsBlocks from '../../utils/joinAsBlocks';
 import CodeSpan from '../../components/CodeSpan/CodeSpan';
-import { D6_CONAN, D20_CONAN_HL } from '../../consts/diceConstants';
+import { D6_CONAN, D20_CONAN_HL, D6_INFINITY, D20_INFINITY_HL } from '../../consts/diceConstants';
 import HitLocations from '../../components/HitLocations/HitLocations';
 import getConanHitLocation from '../../utils/getConanHitLocations';
+import getInfinityHitLocation from '../../utils/getInfinityHitLocations';
 import styles from '../../components/ResultsModal/ResultsModal.module.css';
 import { DICE_ROLLED, localMsgReady } from '../../actions/roll.actions';
 import { MINUS, PLUS } from '../../consts/fateConsts';
@@ -48,17 +49,18 @@ const getLocalMsg = (store:any) => (next:any) => (action:any) => {
 		const resultsJoined = joinAsBlocks(results);
 		const modifierWithSymbol = <CodeSpan>{modSymbol}{Math.abs(modifier)}</CodeSpan>;
 		const fields = [];
-		const isCombatDie = rollOptions.diceType === D6_CONAN;
+		const isCombatDie = rollOptions.diceType === D6_CONAN || D6_INFINITY;
 		const isConanHitLocationDie = rollOptions.diceType === D20_CONAN_HL;
+		const isInfinityHitLocationDie = rollOptions.diceType === D20_INFINITY_HL;
 		const isFate = fateResults && fateResults.length;
 	
-		if (rollOptions.useModifier && (!isCombatDie && !isConanHitLocationDie)) {
+		if (rollOptions.useModifier && (!isCombatDie && !(isConanHitLocationDie || isInfinityHitLocationDie))) {
 			fields.push(
 				<>Modifier: {modifierWithSymbol}.</>
 			);
 		}
 	
-		if ((hasMultipleDice || rollOptions.useModifier || isFate) && (!isCombatDie && !isConanHitLocationDie)) {
+		if ((hasMultipleDice || rollOptions.useModifier || isFate) && (!isCombatDie && !(isConanHitLocationDie || isInfinityHitLocationDie))) {
 			if (rollOptions.useModifier) {
 				fields.push(
 					<>{IconRight} Total (with {modifierWithSymbol} modifier): <CodeSpan>{fateResultTotal || totalWithModifier}</CodeSpan>.</>
@@ -69,12 +71,12 @@ const getLocalMsg = (store:any) => (next:any) => (action:any) => {
 				);
 			}
 		}
-		if (hasMultipleDice && (!isCombatDie && !isConanHitLocationDie && !isFate)) {
+		if (hasMultipleDice && (!isCombatDie && !(isConanHitLocationDie || isInfinityHitLocationDie) && !isFate)) {
 			fields.push(
 				<>{IconUp} Highest result rolled: <CodeSpan>{highest}</CodeSpan>.</>
 			);
 		}
-		if (hasMultipleDice && (!isCombatDie && !isConanHitLocationDie && !isFate)) {
+		if (hasMultipleDice && (!isCombatDie && !(isConanHitLocationDie || isInfinityHitLocationDie) && !isFate)) {
 			fields.push(
 				<>{IconDown} Lowest result rolled: <CodeSpan>{lowest}</CodeSpan>.</>
 			);
@@ -98,7 +100,7 @@ const getLocalMsg = (store:any) => (next:any) => (action:any) => {
 				<>{IconSun} Effects: <CodeSpan>{effects}</CodeSpan>.</>
 			);
 		}
-	
+		
 		if (isConanHitLocationDie) {
 			const hitResult = results[0];
 			const hitLocation = getConanHitLocation(hitResult);
@@ -110,6 +112,24 @@ const getLocalMsg = (store:any) => (next:any) => (action:any) => {
 					isDarkHeresy={false}
 					isWarhammer2e={false}
 					isConan={true}
+					isInfinity={true}
+					alwaysExpanded={true}
+				/>
+			);
+		}
+
+		if (isInfinityHitLocationDie) {
+			const hitResult = results[0];
+			const hitLocation = getInfinityHitLocation(hitResult);
+	
+			fields.push(
+				<HitLocations
+					result={hitResult}
+					hitLocation={hitLocation}
+					isDarkHeresy={false}
+					isWarhammer2e={false}
+					isConan={false}
+					isInfinity={true}
 					alwaysExpanded={true}
 				/>
 			);

@@ -10,6 +10,7 @@ const rerollRequested = (store:any) => (next:any) => (action:any) => {
 	if (action.type === REROLL_REQUESTED) {
 		const state = store.getState();
 		const { conanData } = state;
+		const { infinityData } = state;
 		const { form : { diceModuleForm } } = state;
 		const { lastRollOptions } = state;
 		const { itemsToStay } = action.payload

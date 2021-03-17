@@ -1,6 +1,7 @@
 export const COC = 'coc';
 export const WARHAMMER = 'warhammer';
 export const CONAN = 'conan';
+export const INFINITY = 'infinity';
 export const SL = 'SL';
 export const MONEY_GOLD = 'MONEY_GOLD';
 export const MONEY_SILVER = 'MONEY_SILVER';

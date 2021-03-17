@@ -1,0 +1,240 @@
+#infinity-mode-form {
+	text-align: center;
+}
+
+.infinity-skill-level-field {
+	justify-content: space-evenly;
+}
+
+.infinity-field {
+	flex: 1;
+}
+
+.infinity-skill-level-field {
+	margin-bottom: 0;
+}
+
+.infinity-field-icon-times {
+	font-size: 24px;
+	opacity: .8;
+	color: #7c7c7c;
+	cursor: pointer;
+}
+
+.infinity-field-icon-times:hover {
+	color: #bebebe;
+	opacity: 1;
+}
+
+.infinity-radio-fields {
+	display: grid;
+	grid-auto-flow: column;
+	justify-content: center;
+	grid-column-gap: 20px;
+	grid-row-gap: 10px;
+}
+
+.infinity-radio-fields input {
+	margin-right: 5px;
+}
+
+.infinity-radio-fields--dice-to-roll {
+	width: 340px;
+	justify-content: space-evenly;
+	grid-auto-flow: initial;
+	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+	grid-column-gap: 10px;
+	position: relative;
+	margin: 5px 0;
+}
+
+.infinity-radio-fields--assistance {
+	width: 250px;
+	margin-bottom: 0;
+}
+
+.infinity-radio-fields--assistance .die-container {
+	width: auto;
+}
+
+.die-container--remove-dice {
+	padding-bottom: 15px;
+	padding-left: 20px;
+}
+
+.assistance .form-label {
+	font-size: 14px;
+}
+
+#infinity-mode-form .assistance .skill-level-field .form-control {
+	font-size: 15px;
+	height: 26px;
+}
+
+.assistance-title--container {
+	background: transparent;
+	border: 0;
+	width: 100%;
+	cursor: pointer;
+	transition: .1s;
+}
+
+.assistance-title--container:hover {
+	opacity: .8;
+}
+
+.assistance-title {
+	margin-bottom: 5px;
+	margin-top: 4px;
+	font-size: 16px;
+	text-align: center;
+	color: #212529;
+}
+
+.infinity-radio-fields--assistance .dice-icon {
+	font-size: 38px;
+}
+
+.infinity-radio-fields--dice-to-roll input {
+	margin: 0;
+	display: none;
+}
+
+.infinity-skill-level-field--assistance {
+	margin-top: 4px;
+	margin-bottom: 2px;
+}
+
+.infinity-die-select {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.fortune {
+	padding: 3px 0 5px;
+	margin: 3px 0 0;
+	border-top: 1px solid #bebebe;
+	border-bottom: 1px solid #bebebe;
+}
+
+.fortune-title {
+	margin-bottom: 2px;
+	margin-top: 0;
+	font-size: 16px;
+	text-align: center;
+	color: #212529;
+}
+
+#infinity-mode-form .skill-level-field .form-control{
+	font-size: 18px;
+	height: 34px;
+	border-radius: 0;
+}
+
+#infinity-mode-form .skill-level-field .form-group {
+	margin-bottom: 0;
+}
+
+#infinity-mode-form label {
+	margin-bottom: 0;
+}
+
+.die-label--active {
+	font-weight: bold;
+	color: #28a745;
+}
+
+.die-label--active.die-label--assistance {
+	color: #b8551c;
+}
+
+.assistance-tooltip {
+	position: absolute;
+	top: 73px;
+	right: 125px;
+}
+
+.dice-title {
+	margin-bottom: 0;
+	margin-top: 4px;
+	font-size: 17px;
+	font-weight: bold;
+	text-align: center;
+}
+
+.dice-row {
+	display: flex;
+	justify-content: space-around;
+	width: 460px;
+	margin: 10px auto 3px;
+}
+
+.dice-row-label {
+	cursor: pointer;
+	font-size: 15px;
+}
+
+.dice-icon {
+	font-size: 44px;
+	color: #7e7e7e;
+	cursor: pointer;
+	opacity: .8;
+}
+
+.die-container {
+	width: 52px;
+	display: inline-block;
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.dice-icon.active {
+	color: #28a745;
+	opacity: 1;
+}
+
+.dice-icon.hovered {
+	color: #bebebe;
+	opacity: 1;
+}
+
+.dice-icon.active.hovered {
+	color: #1ad345;
+	opacity: 1;
+}
+
+.dice-icon--assistance.active {
+	color: #b8551c;
+	opacity: 1;
+}
+.dice-icon--assistance.active.hovered {
+	color: #da8e2c;
+	opacity: 1;
+}
+
+.die-fortune-point {
+	font-size: 21px;
+	position: absolute;
+	top: 7px;
+	margin: 0 auto;
+	right: 11px;
+	font-weight: bold;
+	display: inline-block;
+	background: white;
+	border-radius: 50%;
+	width: 30px;
+	height: 30px;
+	text-align: center;
+	line-height: 31px;
+	color: darkolivegreen;
+	pointer-events: none;
+	display: none;
+}
+
+.die-fortune-point.show {
+	display: inline-block;
+}

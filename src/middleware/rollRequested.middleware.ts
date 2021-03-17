@@ -7,10 +7,13 @@ import {
 	warhammerDiceRolled
 } from '../actions/roll.actions';
 import { conanDiceRolled } from '../actions/conan.actions';
+import { infinityDiceRolled } from '../actions/infinity.actions';
 import {
 	D100_SL,
 	D20_CONAN_TEST,
-	D6_CONAN
+	D6_CONAN,
+	D20_INFINITY_TEST,
+	D6_INFINITY
 } from '../consts/diceConstants';
 import { FATE_DIE, MINUS, PLUS } from '../consts/fateConsts';
 import mapValueToFate from './utils/mapValueToFate';
@@ -136,6 +139,19 @@ export default (store: any) => (next: any) => (action: any) => {
 			result.dmg = combatDieResults.dmg;
 			result.effects = combatDieResults.effects;
 		}
+
+		if (diceType === D6_INFINITY) {
+			const combatDieResults = result.results.reduce((total, current) => {
+				if (current === 6) {					
+					total.effects = total.effects + 1;
+				} else if (current === 1 || current === 2) {
+					total.dmg = total.dmg + current;
+				}
+				return total;
+			}, { dmg: 0, effects: 0 });
+			result.dmg = combatDieResults.dmg;
+			result.effects = combatDieResults.effects;
+		}
 	
 		if (formValues.cocMode) {
 			result.cocBonusResult = (cocBonus || cocTwoBonus) ? Math.min(...result.results) : undefined;
@@ -206,6 +222,15 @@ export default (store: any) => (next: any) => (action: any) => {
 			}));
 		} else if (formValues.conanMode && diceType === D20_CONAN_TEST) {
 			store.dispatch(conanDiceRolled({
+				result,
+				rollOptions: {
+					...action.payload,
+					...formValues,
+					assistanceDiceResults: result.assistanceDiceResults
+				}
+			}));
+		} else if (formValues.infinityMode && diceType === D20_INFINITY_TEST) {
+			store.dispatch(infinityDiceRolled({
 				result,
 				rollOptions: {
 					...action.payload,

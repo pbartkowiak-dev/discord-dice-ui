@@ -3,6 +3,7 @@ import './DiceModule.css';
 import Dice from './Dice';
 import getDiceSet from '../../utils/getDiceSet';
 import { CONAN } from '../../consts/consts';
+import { INFINITY } from '../../consts/consts';
 import { WARHAMMER } from '../../consts/consts';
 import { CLASSIC } from '../../consts/diceConstants';
 import { COC } from '../../consts/consts';
@@ -40,6 +41,8 @@ function DiceModule ({
 		diceSetType = WARHAMMER;
 	} else if(rollOptions.conanMode) {
 		diceSetType = CONAN;
+	} else if(rollOptions.infinityMode) {
+		diceSetType = INFINITY;
 	} else if (rollOptions.cocMode) {
 		diceSetType = COC;
 	} else if (rollOptions.fateMode) {

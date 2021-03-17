@@ -21,6 +21,9 @@ export const CLOSE_WARHAMMER_MONEY_MODAL = 'CLOSE_WARHAMMER_MONEY_MODAL';
 export const OPEN_CONAN_MODAL = 'OPEN_CONAN_MODAL';
 export const CLOSE_CONAN_MODAL = 'CLOSE_CONAN_MODAL';
 
+export const OPEN_INFINITY_MODAL = 'OPEN_INFINITY_MODAL';
+export const CLOSE_INFINITY_MODAL = 'CLOSE_INFINITY_MODAL';
+
 export const OPEN_MSG_MODAL = 'OPEN_MSG_MODAL';
 export const CLOSE_MSG_MODAL = 'CLOSE_MSG_MODAL';
 
@@ -112,6 +115,18 @@ export function openConanModal() {
 export function closeConanModal() {
 	return {
 		type: CLOSE_CONAN_MODAL
+	};
+}
+
+export function openInfinityModal() {
+	return {
+		type: OPEN_INFINITY_MODAL
+	};
+}
+
+export function closeInfinityModal() {
+	return {
+		type: CLOSE_INFINITY_MODAL
 	};
 }
 

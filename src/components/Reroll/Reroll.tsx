@@ -4,6 +4,7 @@ import classNames from 'classnames/bind';
 import Button from 'react-bootstrap/Button';
 import CodeSpan from '../CodeSpan/CodeSpan';
 import { D6_CONAN, D20_CONAN_TEST } from '../../consts/diceConstants';
+import { D6_INFINITY, D20_INFINITY_TEST } from '../../consts/diceConstants';
 import { SelectedDiceType } from '../../reducers/diceSelectedReducer';
 import styles from './Reroll.module.css';
 
@@ -17,7 +18,7 @@ function Reroll({ handleReroll, results, diceSelected }: RerollPropTypes) {
 	const cx = classNames.bind(styles);
 	const { diceType } = diceSelected;
 	const [ itemIndexes, setItemIndexes ] = useState([]);
-	const shouldSelectToReroll = (diceType === D6_CONAN || diceType === D20_CONAN_TEST);
+	const shouldSelectToReroll = (diceType === D6_CONAN || diceType === D20_CONAN_TEST || diceType === D6_INFINITY || diceType === D20_INFINITY_TEST);
 
 	const addItemIndex = (itemIndex: number) => {
 		if (itemIndexes.indexOf(itemIndex) === -1) {

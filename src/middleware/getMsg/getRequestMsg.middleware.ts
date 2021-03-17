@@ -1,7 +1,8 @@
 import { getColor } from '../../utils/getColor';
 import joinAsBlocks from '../../utils/joinAsBlocks';
 import getConanHitLocation from '../../utils/getConanHitLocations';
-import { D6_CONAN, D20_CONAN_HL } from '../../consts/diceConstants';
+import getInfinityHitLocation from '../../utils/getInfinityHitLocations';
+import { D6_CONAN, D20_CONAN_HL, D6_INFINITY } from '../../consts/diceConstants';
 import { DICE_ROLLED, requestMsgReady } from '../../actions/roll.actions';
 import { MINUS, PLUS } from '../../consts/fateConsts';
 
@@ -34,15 +35,16 @@ export default (store:any) => (next:any) => (action:any) => {
 		const rolled = `${diceAmount}d${diceTypeNum}`;
 		const username = userSettings.username || 'USERNAME_MISSING';
 		const resultsJoined = joinAsBlocks(results, null, true);
-		const isCombatDie = rollOptions.diceType === D6_CONAN;
+		const isCombatDie = rollOptions.diceType === D6_CONAN || D6_INFINITY;
 		const isConanHitLocationDie = rollOptions.diceType === D20_CONAN_HL;
+		const isInfinityHitLocationDie = rollOptions.diceType === D20_INFINITY_HL;
 		const isFate = fateResults && fateResults.length;
 		const fields = [];
 		let msgTitle;
 
 		let description = '';
 		
-		if (rollOptions.useModifier && (!isCombatDie && !isConanHitLocationDie)) {
+		if (rollOptions.useModifier && (!isCombatDie && !(isConanHitLocationDie || isInfinityHitLocationDie))) {
 			description = `**Modifier**: \`${modSymbol}${Math.abs(modifier)}\`.`;
 		}
 	
@@ -51,7 +53,7 @@ export default (store:any) => (next:any) => (action:any) => {
 			description += `\nRerolled \`${rerollCount}\` ${timesWord}.`;
 		}
 	
-		if ((hasMultipleDice || modifier) && (!isCombatDie && !isConanHitLocationDie && !isFate)) {
+		if ((hasMultipleDice || modifier) && (!isCombatDie && !(isConanHitLocationDie || isInfinityHitLocationDie) && !isFate)) {
 			const sumJoined = joinAsBlocks(results, '+', true);
 			let name = `:arrow_right: Sum of ${sumJoined}`;
 			if (Number(modifier)) name += ` ${modSymbol} \`${Math.abs(modifier)}\` (modifier)`;
@@ -60,13 +62,13 @@ export default (store:any) => (next:any) => (action:any) => {
 				value: `Total: \`${totalWithModifier}\`.`
 			});
 		}
-		if (hasMultipleDice && (!isCombatDie && !isConanHitLocationDie&& !isFate)) {
+		if (hasMultipleDice && (!isCombatDie && !(isConanHitLocationDie || isInfinityHitLocationDie)&& !isFate)) {
 			fields.push({
 				name: ':arrow_up: Highest',
 				value: `Highest result rolled: \`${highest}\`.`
 			});
 		}
-		if (hasMultipleDice && (!isCombatDie && !isConanHitLocationDie&& !isFate)) {
+		if (hasMultipleDice && (!isCombatDie && !(isConanHitLocationDie || isInfinityHitLocationDie)&& !isFate)) {
 			fields.push({
 				name: ':arrow_down: Lowest',
 				value: `Lowest result rolled: \`${lowest}\`.`
@@ -94,6 +96,16 @@ export default (store:any) => (next:any) => (action:any) => {
 		if (isConanHitLocationDie) {
 			const hitResult = results[0];
 			const hitLocation = getConanHitLocation(hitResult);
+	
+			fields.push({
+				name: ':mens: Hit Location:',
+				value: `\`${hitResult}\` - ${hitLocation}`
+			});
+		}
+
+		if (isInfinityHitLocationDie) {
+			const hitResult = results[0];
+			const hitLocation = getInfinityHitLocation(hitResult);
 	
 			fields.push({
 				name: ':mens: Hit Location:',
