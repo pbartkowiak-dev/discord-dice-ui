@@ -3,6 +3,10 @@ import {
 	D20_CONAN_TEST,
 	D20_CONAN,
 	D20_CONAN_HL,
+	D6_INFINITY,
+	D20_INFINITY_TEST,
+	D20_INFINITY,
+	D20_INFINITY_HL,
 	D100_SL,
 	D100,
 	D20,
@@ -23,6 +27,7 @@ import {
 	RING_DIE,
 	SKILL_DIE,
 	CONAN_TOKENS,
+	INFINITY_TOKENS,
 	NARRATIVE_TOKENS,
 	WARHAMMER_MONEY
 } from './diceConstants';
@@ -160,6 +165,27 @@ export const conanSet = [{
 	diceType: CONAN_TOKENS,
 	label: 'Update pools',
 	diceImg: 'conan_tokens.png',
+	noDropdown: true
+}];
+
+export const infinitySet = [{
+	diceType: D20_INFINITY_TEST,
+	label: 'Skill Test',
+	noDropdown: true
+}, {
+	diceType: D20_INFINITY,
+	label: 'd20'
+}, {
+	diceType: D20_INFINITY_HL,
+	label: 'Hit Location',
+	noDropdown: true
+}, {
+	diceType: D6_INFINITY,
+	label: 'Combat Die'
+}, {
+	diceType: INFINITY_TOKENS,
+	label: 'Update pools',
+	diceImg: 'infinity_tokens.png',
 	noDropdown: true
 }];
 

@@ -5,6 +5,7 @@ import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
 import Card from 'react-bootstrap/Card';
 import { D6_CONAN } from '../../consts/diceConstants';
+import { D6_INFINITY } from '../../consts/diceConstants';
 import { DicePropTypes } from './DiceTypes';
 
 function Dice({
@@ -16,7 +17,7 @@ function Dice({
 }: DicePropTypes
 ) {
 	const DropdownContent = () => {
-		const maxDiceInOneRoll = diceType === D6_CONAN ? 15 : 10;
+		const maxDiceInOneRoll = diceType === (D6_CONAN || D6_INFINITY) ? 15 : 10;
 		const options =  new Array(maxDiceInOneRoll).fill('').map((_, index) => {
 			const dieWord = index === 0 ? 'die' : 'dice';
 			return (

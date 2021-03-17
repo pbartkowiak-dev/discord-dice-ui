@@ -3,6 +3,8 @@ import {
 	CLOSE_COC_MODAL,
 	OPEN_CONAN_MODAL,
 	CLOSE_CONAN_MODAL,
+	OPEN_INFINITY_MODAL,
+	CLOSE_INFINITY_MODAL,
 	OPEN_MODIFIER_MODAL,
 	CLOSE_MODIFIER_MODAL,
 	OPEN_WARHAMMER_MODAL,
@@ -20,6 +22,7 @@ import {
 export interface ModalsStateTypes {
 	isCoCModalOpen: boolean;
 	isConanModalOpen: boolean;
+	isInfinityModalOpen: boolean;
 	isWarhammerModalOpen: boolean;
 	isWarhammerMoneyModalOpen: boolean;
 	isModifierModalOpen: boolean;
@@ -31,6 +34,7 @@ export interface ModalsStateTypes {
 const modalsState = {
 	isCoCModalOpen: false,
 	isConanModalOpen: false,
+	isInfinityModalOpen: false,
 	isWarhammerModalOpen: false,
 	isWarhammerMoneyModalOpen: false,
 	isModifierModalOpen: false,
@@ -91,6 +95,16 @@ function modalsReducer(state: ModalsStateTypes = modalsState, action: any) {
 			return {
 				...state,
 				isConanModalOpen: true
+			};
+		case CLOSE_INFINITY_MODAL:
+			return {
+				...state,
+				isInfinityModalOpen: false
+			};
+		case OPEN_INFINITY_MODAL:
+			return {
+				...state,
+				isInfinityModalOpen: true
 			};
 		case OPEN_POOL_BUILDER_MODAL:
 			return {

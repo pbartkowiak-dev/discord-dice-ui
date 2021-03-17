@@ -13,10 +13,11 @@ type HitLocationsPropsType = {
 	isDarkHeresy?: boolean
 	isWarhammer2e?: boolean
 	isConan?: boolean
+	isInfinity?: boolean
 	alwaysExpanded?: boolean
 }
 
-function HitLocationTooltip({ isDarkHeresy, isWarhammer2e, isConan }:any) {
+function HitLocationTooltip({ isDarkHeresy, isWarhammer2e, isInfinity }:any) {
 	let head;
 	let leftArm;
 	let rightArm;
@@ -40,6 +41,13 @@ function HitLocationTooltip({ isDarkHeresy, isWarhammer2e, isConan }:any) {
 		rightLeg = '81-90';
 		leftLeg = '91-00';
 	} else if (isConan) {
+		head = '01-02';
+		rightArm = '03-05';
+		leftArm = '06-08';
+		body = '09-14';
+		rightLeg = '15-17';
+		leftLeg = '18-20';
+	} else if (isInfinity) {
 		head = '01-02';
 		rightArm = '03-05';
 		leftArm = '06-08';
@@ -77,6 +85,27 @@ function HitLocationTooltip({ isDarkHeresy, isWarhammer2e, isConan }:any) {
 			</div>
 		</>
 	} else if (isConan) {
+		tooltipBody = <>
+			<div>
+				<strong>{head}</strong> - <span>Head</span>
+			</div>
+			<div>
+				<strong>{rightArm}</strong> - <span>Right Arm</span>
+			</div>
+			<div>
+				<strong>{leftArm}</strong> - <span>Left Arm</span>
+			</div>
+			<div>
+				<strong>{body}</strong> - <span>Torso</span>
+			</div>
+			<div>
+				<strong>{rightLeg}</strong> - <span>Right Leg</span>
+			</div>
+			<div>
+				<strong>{leftLeg}</strong> - <span>Left Leg</span>
+			</div>
+		</>
+	} else if (isInfinity) {
 		tooltipBody = <>
 			<div>
 				<strong>{head}</strong> - <span>Head</span>
@@ -147,6 +176,7 @@ function HitLocations({
 	isDarkHeresy,
 	isWarhammer2e,
 	isConan,
+	isInfinity,
 	alwaysExpanded
 }:HitLocationsPropsType) {
 	let header;
@@ -180,6 +210,7 @@ function HitLocations({
 								isDarkHeresy={isDarkHeresy}
 								isWarhammer2e={isWarhammer2e}
 								isConan={isConan}
+								isInfinity={isInfinity}
 							/>
 						</div>
 					</Card.Body>
