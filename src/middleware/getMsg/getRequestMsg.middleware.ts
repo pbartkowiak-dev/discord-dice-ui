@@ -2,7 +2,7 @@ import { getColor } from '../../utils/getColor';
 import joinAsBlocks from '../../utils/joinAsBlocks';
 import getConanHitLocation from '../../utils/getConanHitLocations';
 import getInfinityHitLocation from '../../utils/getInfinityHitLocations';
-import { D6_CONAN, D20_CONAN_HL, D6_INFINITY } from '../../consts/diceConstants';
+import { D6_CONAN, D20_CONAN_HL, D6_INFINITY, D20_INFINITY_HL } from '../../consts/diceConstants';
 import { DICE_ROLLED, requestMsgReady } from '../../actions/roll.actions';
 import { MINUS, PLUS } from '../../consts/fateConsts';
 
