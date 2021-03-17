@@ -7,6 +7,7 @@ import CoCModalContainer from '../CoCModal/CoCModalContainer';
 import WarhammerModalContainer from '../WarhammerModal/WarhammerModalContainer';
 import WarhammerMoneyModalContainer from '../WarhammerMoneyModal/WarhammerMoneyModalContainer';
 import ConanModalContainer from '../ConanModal/ConanModalContainer';
+import InfinityModalContainer from '../InfinityModal/InfinityModalContainer';
 import PoolBuilderModalContainer from '../PoolBuilderModal/PoolBuilderModalContainer';
 import CopyrightModalContainer from '../CopyrightModal/CopyrightModalContainer';
 
@@ -15,6 +16,7 @@ import L5rResultsModalContainer from '../ResultsModal/L5rResultsModal/L5rResults
 import RollAndKeepResultsModalContainer from '../ResultsModal/RollAndKeepResultsModal/RollAndKeepResultsModalContainer';
 
 import ConanTokensModalContainer from '../ConanTokensModal/ConanTokensModalContainer';
+import InfinityTokensModalContainer from '../InfinityTokensModal/InfinityTokensModalContainer';
 import NarrativeTokensModalContainer from '../NarrativeTokensModal/NarrativeTokensModalContainer';
 
 import { ModalsStateTypes } from '../../reducers/modalsReducer';
@@ -38,12 +40,14 @@ function Modals({ modalsState }: modalsPropTypes) {
 			<WarhammerModalContainer showModal={modalsState.isWarhammerModalOpen} />
 			<WarhammerMoneyModalContainer showModal={modalsState.isWarhammerMoneyModalOpen} />
 			<ConanModalContainer showModal={modalsState.isConanModalOpen} />
+			<InfinityModalContainer showModal={modalsState.isInfinityModalOpen} />
 			<PoolBuilderModalContainer showModal={modalsState.isPoolBuilderModalOpen} />
 			<CopyrightModalContainer showModal={modalsState.isCopyrightModalOpen} />
 			<ResultsModalContainer />
 			<RollAndKeepResultsModalContainer />
 			<L5rResultsModalContainer />
 			<ConanTokensModalContainer />
+			<InfinityTokensModalContainer />
 			<NarrativeTokensModalContainer />
 		</>
 	);

@@ -29,6 +29,7 @@ export const HIT_LOCATION  = 'Hit Location';
 export const CONAN_TOKENS  = 'CONAN_TOKENS';
 export const INFINITY_TOKENS  = 'INFINITY_TOKENS';
 export const DOOM  = 'DOOM';
+export const HEAT  = 'HEAT';
 export const MOMENTUM  = 'MOMENTUM';
 
 export const NARRATIVE_DICE = 'NARRATIVE_DICE';

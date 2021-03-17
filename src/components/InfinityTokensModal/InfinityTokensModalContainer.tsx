@@ -22,7 +22,7 @@ function InfinityTokensModalContainer({
 	infinityData: {
 		showTokensModal,
 		momentum,
-		doom
+		heat
 	},
 }: any) {
 
@@ -32,7 +32,7 @@ function InfinityTokensModalContainer({
 			showModal={showTokensModal}
 			hideMsg={hideMsg}
 			momentum={momentum}
-			doom={doom}
+			heat={heat}
 		/>
 	);
 }

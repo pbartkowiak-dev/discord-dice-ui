@@ -2,6 +2,7 @@ import {
 	classicSet,
 	warhammerSet,
 	conanSet,
+	infinitySet,
 	CoCSet,
 	poolSet,
 	narrativeDiceSet,
@@ -9,7 +10,7 @@ import {
 	fateDiceSet,
 	rollAndKeepDiceSet
 } from '../consts/diceSets';
-import { WARHAMMER, CONAN, COC } from '../consts/consts';
+import { WARHAMMER, CONAN, COC, INFINITY } from '../consts/consts';
 import { DiceSetType } from '../components/DiceModule/DiceTypes';
 import { POOL, NARRATIVE_DICE, L5R_DICE, ROLL_AND_KEEP_DICE } from '../consts/diceConstants';
 import { FATE_DICE } from '../consts/fateConsts';
@@ -19,6 +20,8 @@ export default (setType: string): DiceSetType => {
 		return warhammerSet;
 	} else if (setType === CONAN) {
 		return conanSet;
+	} else if (setType === INFINITY) {
+		return infinitySet;
 	} else if (setType === COC) {
 		return CoCSet;
 	} else if (setType === POOL) {

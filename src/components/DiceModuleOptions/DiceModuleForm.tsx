@@ -106,7 +106,7 @@ function DiceModuleForm({ rollOptions }:any) {
 			<Field
 				name="infinityMode"
 				id="infinityMode"
-				label={conanModeLabel}
+				label={infinityModeLabel}
 				component={RenderCheckbox}
 				disabled={cocMode || warhammerMode || conanMode || narrativeDice || l5rMode || fateMode || rollAndKeepMode }
 			/>
