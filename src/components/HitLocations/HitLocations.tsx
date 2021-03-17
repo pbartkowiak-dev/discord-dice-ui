@@ -17,7 +17,7 @@ type HitLocationsPropsType = {
 	alwaysExpanded?: boolean
 }
 
-function HitLocationTooltip({ isDarkHeresy, isWarhammer2e, isInfinity }:any) {
+function HitLocationTooltip({ isDarkHeresy, isWarhammer2e, isConan, isInfinity }:any) {
 	let head;
 	let leftArm;
 	let rightArm;
