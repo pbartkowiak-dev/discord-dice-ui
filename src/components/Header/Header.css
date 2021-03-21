@@ -1,5 +1,10 @@
 .logo {
 	height: 35px;
+	display: none;
+}
+
+.logo-small {
+	height: 35px;
 }
 
 .icon-settings {
@@ -9,7 +14,16 @@
 }
 
 .navbar {
-	margin-bottom: 5px;
+	padding: 0.3rem 1rem;
+}
+
+@media only screen and (min-width: 480px) {
+	.logo-small {
+		display: none;
+	}
+	.logo {
+		display: inline-block;
+	}
 }
 
 @media only screen and (min-width: 960px) {

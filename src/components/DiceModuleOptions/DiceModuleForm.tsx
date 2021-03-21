@@ -2,42 +2,16 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Form from 'react-bootstrap/Form';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
-import tooltip from '../../locale/tooltip';
 import './DiceModuleForm.css';
-import InfoTooltip from '../InfoTooltip/InfoTooltip';
 
-const cocModeLabel = (
-	<span>Call of Cthulhu 7e</span>
-);
-
-const warhammerModeLabel = (
-	<span>Warhammer <InfoTooltip content={tooltip.warhammerTooltip} /></span>
-);
-
-const conanModeLabel = (
-	<span>Conan 2d20</span>
-);
-
-const infinityModeLabel = (
-	<span>Infinity 2d20</span>
-);
-
-const eoteModeLabel = (
-	<span>Narrative Dice</span>
-);
-
-const rollAndKeepModeLabel = (
-	<span>Roll and Keep <InfoTooltip content={tooltip.rollAndKeepTooltip} /></span>
-);
-
-const l5rModeLabel = (
-	<span>L5R 5e Dice</span>
-);
-
-const fateLabel = (
-	<span>Fate Dice</span>
-);
-
+const cocModeLabel = <span>Call of Cthulhu 7e</span>;
+const warhammerModeLabel = <span>Warhammer</span>;
+const conanModeLabel = <span>Conan 2d20</span>;
+const infinityModeLabel = <span>Infinity 2d20</span>;
+const eoteModeLabel = <span>Narrative Dice</span>;
+const l5r1eModeLabel = <span>Roll and Keep</span>;
+const l5rModeLabel = <span>L5R 5e</span>;
+const fateLabel = <span>Fate</span>;
 
 // @ts-ignore
 const createRenderer = render  => ({ input, label, id, disabled }, ...rest) => {
@@ -127,7 +101,7 @@ function DiceModuleForm({ rollOptions }:any) {
 			<Field
 				name="rollAndKeepMode"
 				id="rollAndKeepMode"
-				label={rollAndKeepModeLabel}
+				label={l5r1eModeLabel}
 				component={RenderCheckbox}
 				disabled={cocMode || conanMode || infinityMode || warhammerMode || narrativeDice || fateMode || l5rMode} 
 			/>

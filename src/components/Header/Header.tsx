@@ -1,6 +1,7 @@
 import React from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import logo from '../../img/logo.png';
+import logoSmall from '../../img/logo192.png';
 import TooltipWrapper from '../InfoTooltip/TooltipWrapper';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCopyright } from '@fortawesome/free-regular-svg-icons';
@@ -23,11 +24,16 @@ function Header({
 			<Navbar.Brand>
 				<img
 					src={logo}
-					className="logo d-inline-block align-top"
+					className="logo align-top"
+					alt="RPG Poznań Logo "
+				/>
+				<img
+					src={logoSmall}
+					className="logo-small align-top"
 					alt="RPG Poznań Logo "
 				/>
 			</Navbar.Brand>
-			<Navbar.Collapse className="justify-content-end"></Navbar.Collapse>
+			<Navbar.Collapse className="justify-content-end"/>
 			<TooltipWrapper content="View Copyright Info" placement="left">
 				<FontAwesomeIcon
 					onClick={openCopyrightModal}
@@ -55,4 +61,3 @@ function Header({
 }
 
 export default Header;
-;

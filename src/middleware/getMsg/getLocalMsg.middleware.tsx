@@ -49,7 +49,7 @@ const getLocalMsg = (store:any) => (next:any) => (action:any) => {
 		const resultsJoined = joinAsBlocks(results);
 		const modifierWithSymbol = <CodeSpan>{modSymbol}{Math.abs(modifier)}</CodeSpan>;
 		const fields = [];
-		const isCombatDie = rollOptions.diceType === D6_CONAN || D6_INFINITY;
+		const isCombatDie = rollOptions.diceType === D6_CONAN || rollOptions.diceType === D6_INFINITY;
 		const isConanHitLocationDie = rollOptions.diceType === D20_CONAN_HL;
 		const isInfinityHitLocationDie = rollOptions.diceType === D20_INFINITY_HL;
 		const isFate = fateResults && fateResults.length;

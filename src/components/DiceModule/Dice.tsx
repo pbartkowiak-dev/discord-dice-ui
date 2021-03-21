@@ -17,7 +17,7 @@ function Dice({
 }: DicePropTypes
 ) {
 	const DropdownContent = () => {
-		const maxDiceInOneRoll = diceType === (D6_CONAN || D6_INFINITY) ? 15 : 10;
+		const maxDiceInOneRoll = (diceType === D6_CONAN || diceType === D6_INFINITY) ? 15 : 10;
 		const options =  new Array(maxDiceInOneRoll).fill('').map((_, index) => {
 			const dieWord = index === 0 ? 'die' : 'dice';
 			return (

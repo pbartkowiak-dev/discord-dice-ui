@@ -35,7 +35,7 @@ export default (store:any) => (next:any) => (action:any) => {
 		const rolled = `${diceAmount}d${diceTypeNum}`;
 		const username = userSettings.username || 'USERNAME_MISSING';
 		const resultsJoined = joinAsBlocks(results, null, true);
-		const isCombatDie = rollOptions.diceType === D6_CONAN || D6_INFINITY;
+		const isCombatDie = rollOptions.diceType === D6_CONAN || rollOptions.diceType === D6_INFINITY;
 		const isConanHitLocationDie = rollOptions.diceType === D20_CONAN_HL;
 		const isInfinityHitLocationDie = rollOptions.diceType === D20_INFINITY_HL;
 		const isFate = fateResults && fateResults.length;
