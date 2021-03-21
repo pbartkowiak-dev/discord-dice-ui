@@ -21,13 +21,13 @@
 
 ## The App Overview <a id="overview"></a>
 
-The App interface:
+The App interface:  
 [![App interface](./public/app.png)]()
 
-Sample results inside a Discord Chat:
+Sample results inside a Discord Chat:  
 [![Sample Chat Results](./public/chat-sample-results.png)]()
 
-Sample results inside the App:
+Sample results inside the App:  
 [![Sample App Results](./public/app-sample-results-1.png)]()
 
 ## Call of Cthulhu 7e <a id="call-of-cthulhu"></a>
