@@ -1,10 +1,27 @@
-<a href="#"><img src="./public/logo192.png" title="Discord Dice Ui" alt="Discord Dice Ui"></a>
+[![Discord Dice Ui](./public/logo.png)]() 
 
 # Discord Dice UI
 
-> 🎲 The app is intended to use as a graphical interface dice roller for Discord. You can connect it with your Discord chat and use to roll some dice without typing!
+🎲 The app is intended to use as a graphical interface dice roller for Discord. You can connect it with your Discord chat and use to roll some dice without typing!
 
-The app offers special support for following games:
+> Table of content: 
+> 
+> - [The App Overview](#overview)
+>     * [Supported systems](#systems)
+>         + [Call of Cthulhu 7e](#call-of-cthulhu)
+>         + [Warhammer](#warhammer)
+>         + [Conan 2d20](#conan-2d20)
+>         + [Infinity 2d20](#infinity-2d20)
+>         + [Legend of the Five Rings 1e](#l5r1e)
+>         + [Legend of the Five Rings 5e](#l5r5e)    
+>         + [Narrative Dice](#narrative-dice)    
+> - [Discord Configuration](#discord-configuration)
+> - [Developers' Info](#dev-info)
+
+## The App Overview <a id="overview"></a>
+
+
+### Supported systems: <a id="systems"></a>
 - Call of Cthulhu 7e
 - Warhammer (Dark Heresy II, WFRP 2e/4e)
 	- Warhammer Money Converter
@@ -24,15 +41,13 @@ The app offers special support for following games:
 ### Sample results inside the App
 [![Sample App Results](./public/app-sample-results-1.png)]()
 
------------------------------
-## Call of Cthulhu 7e Mode
+## Call of Cthulhu 7e <a id="call-of-cthulhu"></a>
 
 After selecting the mode in the _Roll Options_ a dedicated modal will be shown for rolling d100 skill tests - with option to Push the roll and guidelines for optional spending luck.
 
 [![Call of Cthulhu 7e Mode 2](./public/coc-mode-2.png)]()
 
------------------------------
-## Warhammer Mode
+## Warhammer <a id="warhammer"></a>
 
 The app offers special support for rolling Success Levels in Warhammer 2e, Warhammer 4e and Dark Heresy II.
 
@@ -44,8 +59,7 @@ The app can also help with adding and subtracting gold crowns, silver shillings 
 
 [![Warhammer Money Converter](./public/money_converter.png)]()
 
------------------------------
-## Conan 2d20 Mode
+## Conan 2d20 <a id="conan-2d20"></a>
 
 This mode adds special modal for testing abilities, generating Hit Location and rolling Combat Dice:
 
@@ -59,16 +73,14 @@ Damage Dice Result (with option to reroll selected dice):
 
 [![Conan 2d20 Mode Combat Dice roll results](./public/conan-mode-3.png)]()
 
------------------------------
-## Legend of the Five Rings 1e (classical Roll and Keep)
+## Infinity 2d20 <a id="infinity-2d20"></a>
+
+## Legend of the Five Rings 1e (classical Roll and Keep) <a id="l5r1e"></a>
 
 Roll and Keep Results:  
 [![Roll and Keep Results Modal](./public/roll-and-keep-results.png)]()
 
------------------------------
-
------------------------------
-## Legend of the Five Rings 5e
+## Legend of the Five Rings 5e <a id="l5r5e"></a>
 
 Allows to roll Skill and Ring Dice and to modify the results:  
 [![L5R Pool Builder](./public/l5r-1.png)]()
@@ -76,8 +88,7 @@ Allows to roll Skill and Ring Dice and to modify the results:
 Roll Results:  
 [![L5r Results Modal](./public/l5r-2.png)]()
 
------------------------------
-## Narrative Dice
+## Narrative Dice <a id="narrative-dice"></a>
 
 Allows to build a custom dice pull from popular space opera RPG series:  
 [![Narrative Dice Pool Builder](./public/narrative-dice-1.png)]()
@@ -85,8 +96,9 @@ Allows to build a custom dice pull from popular space opera RPG series:
 Roll Results:  
 [![Narrative Dice Pool Builder](./public/narrative-dice-2.png)]()
 
------------------------------
-## Setup
+--------------------------------------------
+
+## Discord Configuration <a id="discord-configuration"></a>
 
 In order to get started, **Discord's server admin has to create a Webhook** and share a special link with other users. Read below how to do it.
 
@@ -120,8 +132,8 @@ In order to get started, **Discord's server admin has to create a Webhook** and 
 
 6. Saving the Webhook in the app will connect the app with the Discord server.
 
------------------------------
-## Developers' info
+--------------------------------------------
+## Developers' Info <a id="dev-info"></a>
 
 ### Production build
 
