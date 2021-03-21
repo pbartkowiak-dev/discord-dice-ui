@@ -7,7 +7,7 @@
 > Table of content: 
 > 
 > - [The App Overview](#overview)
->     * [Supported systems](#systems)
+>     * [Supported Systems](#systems)
 >         + [Call of Cthulhu 7e](#call-of-cthulhu)
 >         + [Warhammer](#warhammer)
 >         + [Conan 2d20](#conan-2d20)
@@ -15,13 +15,14 @@
 >         + [Legend of the Five Rings 1e](#l5r1e)
 >         + [Legend of the Five Rings 5e](#l5r5e)    
 >         + [Narrative Dice](#narrative-dice)    
+>         + [Fate](#fate)    
 > - [Discord Configuration](#discord-configuration)
 > - [Developers' Info](#dev-info)
 
 ## The App Overview <a id="overview"></a>
 
 
-### Supported systems: <a id="systems"></a>
+### Supported Systems: <a id="systems"></a>
 - Call of Cthulhu 7e
 - Warhammer (Dark Heresy II, WFRP 2e/4e)
 	- Warhammer Money Converter
@@ -32,8 +33,6 @@
 - and Fate dice
 
 [![App interface](./public/app.png)]()
-
-[![Fate dice](./public/fate.png)]()
 
 ### Sample results inside Discord's Chat
 [![Sample Chat Results](./public/chat-sample-results.png)]()
@@ -75,6 +74,8 @@ Damage Dice Result (with option to reroll selected dice):
 
 ## Infinity 2d20 <a id="infinity-2d20"></a>
 
+[![Conan 2d20 Mode general interface](./public/infinity-mode-1.png)]()
+
 ## Legend of the Five Rings 1e (classical Roll and Keep) <a id="l5r1e"></a>
 
 Roll and Keep Results:  
@@ -96,6 +97,9 @@ Allows to build a custom dice pull from popular space opera RPG series:
 Roll Results:  
 [![Narrative Dice Pool Builder](./public/narrative-dice-2.png)]()
 
+## Fate <a id="fate"></a>
+
+[![Fate dice](./public/fate.png)]()
 --------------------------------------------
 
 ## Discord Configuration <a id="discord-configuration"></a>
