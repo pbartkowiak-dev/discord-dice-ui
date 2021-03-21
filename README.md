@@ -7,7 +7,7 @@
 > Table of content: 
 > 
 > - [The App Overview](#overview)
->     * [Supported Systems](#systems)
+>     * Supported Systems:
 >         + [Call of Cthulhu 7e](#call-of-cthulhu)
 >         + [Warhammer](#warhammer)
 >         + [Conan 2d20](#conan-2d20)
@@ -21,23 +21,13 @@
 
 ## The App Overview <a id="overview"></a>
 
-
-### Supported Systems: <a id="systems"></a>
-- Call of Cthulhu 7e
-- Warhammer (Dark Heresy II, WFRP 2e/4e)
-	- Warhammer Money Converter
-- Conan 2d20
-- Narrative Dice (EotE SW)
-- Legend of the Five Rings 1e (Roll and Keep)
-- Legend of the Five Rings 5e
-- and Fate dice
-
+The App interface:
 [![App interface](./public/app.png)]()
 
-### Sample results inside Discord's Chat
+Sample results inside a Discord Chat:
 [![Sample Chat Results](./public/chat-sample-results.png)]()
 
-### Sample results inside the App
+Sample results inside the App:
 [![Sample App Results](./public/app-sample-results-1.png)]()
 
 ## Call of Cthulhu 7e <a id="call-of-cthulhu"></a>
