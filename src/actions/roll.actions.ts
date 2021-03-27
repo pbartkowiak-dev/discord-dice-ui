@@ -12,7 +12,6 @@ export const DICE_POOL_ROLL_REQUESTED = 'DICE_POOL_ROLL_REQUESTED';
 export const NARRATIVE_DICE_POOL_ROLL_REQUESTED = 'NARRATIVE_DICE_POOL_ROLL_REQUESTED';
 
 export const DICE_ROLLED = 'DICE_ROLLED';
-export const WARHAMMER_DICE_ROLLED = 'WARHAMMER_DICE_ROLLED';
 export const COC_DICE_ROLLED = 'COC_DICE_ROLLED';
 export const DICE_POOL_ROLLED = 'DICE_POOL_ROLLED';
 export const NARRATIVE_DICE_POOL_ROLLED = 'NARRATIVE_DICE_POOL_ROLLED';
@@ -81,13 +80,6 @@ export function narrativeDicePoolRolled(payload: any) {
 export function cocDiceRolled(payload: any) {
 	return {
 		type: COC_DICE_ROLLED,
-		payload
-	}
-}
-
-export function warhammerDiceRolled(payload: any) {
-	return {
-		type: WARHAMMER_DICE_ROLLED,
 		payload
 	}
 }

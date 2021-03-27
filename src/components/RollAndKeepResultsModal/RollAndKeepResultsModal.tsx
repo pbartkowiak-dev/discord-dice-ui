@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import classNames from 'classnames';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import styles from '../ResultsModal.module.css';
+import styles from '../ResultsModal/ResultsModal.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDiceD20, faArrowRight, faEquals } from '@fortawesome/free-solid-svg-icons';
 import rollAndKeepStyles from './RollAndKeepResultsModal.module.css';
-import CodeSpan from '../../CodeSpan/CodeSpan';
+import CodeSpan from '../CodeSpan/CodeSpan';
 
 function RollAndKeepResultsModal({
 	hideMsg,
@@ -86,7 +86,7 @@ function RollAndKeepResultsModal({
 								<div className={rollAndKeepStyles.imgContainer}>
 									<img
 										className={rollAndKeepStyles.img}
-										src={require(`../../../img/d10_bg.png`)}
+										src={require(`../../img/d10_bg.png`)}
 										alt={'diceLabel'}
 									/>
 									<span className={rollAndKeepStyles.imgResult}>{showResult}</span>

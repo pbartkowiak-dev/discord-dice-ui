@@ -1,4 +1,3 @@
-
 import {
 	POOL,
 	D100_SL,
@@ -14,7 +13,6 @@ import {
 	WARHAMMER_MONEY
 } from '../consts/diceConstants';
 import {
-	openWarhammerModal,
 	openCoCModal,
 	openConanModal,
 	openInfinityModal,
@@ -36,6 +34,7 @@ import { requestL5rRoll } from '../actions/l5r.actions';
 import { openConanTokensModal } from '../actions/conan.actions';
 import { openInfinityTokensModal } from '../actions/infinity.actions';
 import { openNarrativeTokensModal } from '../actions/narrativeDice.actions';
+import { openWarhammerModal } from "../actions/warhammer.actions";
 
 export default (store:any) => (next:any) => (action:any) => {
 	if (action.type === ROLL_SUBMITTED) {
@@ -54,15 +53,15 @@ export default (store:any) => (next:any) => (action:any) => {
 				diceType,
 				diceAmount
 			}));
-			if (action?.payload?.pool && formValues?.rollAndKeepMode) {
+			if (action?.payload?.pool && formValues.rollAndKeepMode) {
 				store.dispatch(requestRollAndKeepRoll({
 					...action.payload
 				}));
-			} else if (action?.payload?.pool && formValues?.l5rMode) {
+			} else if (action?.payload?.pool && formValues.l5rMode) {
 				store.dispatch(requestL5rRoll({
 					...action.payload
 				}));
-			} else if (action?.payload?.pool && formValues?.narrativeDice) {
+			} else if (action?.payload?.pool && formValues.narrativeDice) {
 				store.dispatch(requestNarrativeDicePoolRoll({
 					...action.payload
 				}));
@@ -73,7 +72,6 @@ export default (store:any) => (next:any) => (action:any) => {
 			} else if (formValues.cocMode && diceType === D100_SL) {
 				store.dispatch(openCoCModal());
 			} else if (formValues.warhammerMode && diceType === D100_SL) {
-				openWarhammerModal();
 				store.dispatch(openWarhammerModal())
 			} else if (diceType === D20_CONAN_TEST) {
 				store.dispatch(openConanModal());

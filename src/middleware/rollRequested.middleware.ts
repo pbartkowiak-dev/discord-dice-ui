@@ -3,8 +3,7 @@ import getResultsArray from '../utils/getResultsArray';
 import {
 	DICE_ROLL_REQUESTED,
 	diceRolled,
-	cocDiceRolled,
-	warhammerDiceRolled
+	cocDiceRolled
 } from '../actions/roll.actions';
 import { conanDiceRolled } from '../actions/conan.actions';
 import { infinityDiceRolled } from '../actions/infinity.actions';
@@ -162,7 +161,7 @@ export default (store: any) => (next: any) => (action: any) => {
 			result.cocTwoPenalty = cocTwoPenalty;
 		}
 	
-		if (diceType === D100_SL && (formValues.cocMode || formValues.warhammerMode)) {
+		if (diceType === D100_SL && (formValues.cocMode)) {
 			result.skillLevel = skillLevel ? Number(skillLevel) : undefined;
 		}
 
@@ -206,14 +205,6 @@ export default (store: any) => (next: any) => (action: any) => {
 
 		if (formValues.cocMode && diceType === D100_SL) {
 			store.dispatch(cocDiceRolled({
-				result,
-				rollOptions: {
-					...action.payload,
-					...formValues
-				}
-			}));
-		} else if (formValues.warhammerMode && diceType === D100_SL) {
-			store.dispatch(warhammerDiceRolled({
 				result,
 				rollOptions: {
 					...action.payload,

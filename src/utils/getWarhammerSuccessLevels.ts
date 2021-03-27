@@ -1,21 +1,21 @@
-export type successLevelsType = {
-	isSuccess: boolean
-	isFailure: boolean
-	isAutoFailure: boolean
-	isAutoSuccess: boolean
-	isDouble: boolean,
-	SL: number
+export interface successLevelsType {
+	isSuccess: boolean;
+	isFailure: boolean;
+	isAutoFailure: boolean;
+	isAutoSuccess: boolean;
+	isDouble: boolean;
+	SL: number;
 }
 
 const getTens = (num:number) => Math.floor(num / 10);
 
-export default (
-	skillLevel:number,
-	finalDieResult:number,
-	useFastSL:boolean,
-	useDarkHeresySL:boolean,
-	useWarhammer2eSL: boolean
-):successLevelsType => {
+export default ({
+	skillLevel,
+	result,
+	useFastSL,
+	useDarkHeresySL,
+	useWarhammer2eSL,
+}: any): successLevelsType => {
 	let autoFailureMin;
 	let autoFailureMax;
 	let autoSuccessMin; 
@@ -33,19 +33,20 @@ export default (
 		autoSuccessMax = 5;
 	}
 
-	const isAutoFailure = !useWarhammer2eSL && (finalDieResult >= autoFailureMin && finalDieResult <= autoFailureMax);
-	const isAutoSuccess = !useWarhammer2eSL && (finalDieResult >= autoSuccessMin && finalDieResult <= autoSuccessMax);
+	const isAutoFailure = !useWarhammer2eSL && (result >= autoFailureMin && result <= autoFailureMax);
+	const isAutoSuccess = !useWarhammer2eSL && (result >= autoSuccessMin && result <= autoSuccessMax);
 
-	const isSuccess = (!isAutoFailure && (finalDieResult <= skillLevel)) || isAutoSuccess;
+	const isSuccess = (!isAutoFailure && (result <= skillLevel)) || isAutoSuccess;
 	const isFailure = (!isAutoSuccess && !isSuccess) || isAutoFailure;
 
-	const isDouble = finalDieResult % 11 === 0;
+	const isDouble = result % 11 === 0;
 
 	let SL;
+
 	if (useFastSL && isSuccess) {
-		SL = getTens(finalDieResult);
+		SL = getTens(result);
 	} else {
-		const rolledTens = getTens(finalDieResult);
+		const rolledTens = getTens(result);
 		const skillTens = getTens(skillLevel);
 		SL = skillTens - rolledTens;
 
@@ -66,9 +67,9 @@ export default (
 
 	if (useWarhammer2eSL) {
 		if (isSuccess) {
-			SL = Math.floor((skillLevel - finalDieResult) / 10);
+			SL = Math.floor((skillLevel - result) / 10);
 		} else if (isFailure) {
-			SL = (Math.floor((finalDieResult - skillLevel) / 10));
+			SL = (Math.floor((result - skillLevel) / 10));
 			if (SL !== 0) {
 				SL = SL * (-1);
 			}

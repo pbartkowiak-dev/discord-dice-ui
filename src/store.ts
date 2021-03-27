@@ -15,7 +15,8 @@ import getLocalMsg from './middleware/getMsg/getLocalMsg.middleware';
 import getCoCLocalMsg from './middleware/getCoCMsg/getCoCLocalMsg.middleware';
 import getCoCRequestMsg from './middleware/getCoCMsg/getCoCRequestMsg.middleware';
 // Warhammer
-import getWarhammerLocalMsg from './middleware/getWarhammerMsg/getWarhammerLocalMsg.middleware';
+import warhammerRollRequested from './middleware/warhammer/warhammerRollRequested.middleware';
+import warhammerRerollRequested from './middleware/warhammer/warhammerRerollRequested.middleware';
 import getWarhammerRequestMsg from './middleware/getWarhammerMsg/getWarhammerRequestMsg.middleware';
 import warhammerMoneyRecalculated from './middleware/warhammerMoneyRecalculated.middleware';
 // Conan
@@ -38,7 +39,6 @@ import l5rRollAdditionalDie from './middleware/l5r/l5rRollAdditionalDie.middlewa
 import l5rKeepAdditionalDie from './middleware/l5r/l5rKeepAdditionalDie.middleware';
 import l5rAddDie from './middleware/l5r/l5rAddDie.middleware';
 import l5rSendState from './middleware/l5r/l5rSendState.middleware';
-
 // Roll and Keep
 import rollAndKeepRollRequested from './middleware/rollAndKeep/rollAndKeepRollRequested.middleware';
 import rollAndKeepRerollRequested from './middleware/rollAndKeep/rollAndKeepRerollRequested.middleware';
@@ -77,8 +77,9 @@ const rollMiddleware = [
 	getCoCLocalMsg,
 	getCoCRequestMsg,
 
-	getWarhammerLocalMsg,
 	getWarhammerRequestMsg,
+	warhammerRollRequested,
+	warhammerRerollRequested,
 	warhammerMoneyRecalculated,
 
 	getConanLocalMsg,

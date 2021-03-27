@@ -102,33 +102,21 @@ const getLocalMsg = (store:any) => (next:any) => (action:any) => {
 		}
 		
 		if (isConanHitLocationDie) {
-			const hitResult = results[0];
-			const hitLocation = getConanHitLocation(hitResult);
-	
+			const hitLocation = getConanHitLocation(results[0]);
 			fields.push(
 				<HitLocations
-					result={hitResult}
 					hitLocation={hitLocation}
-					isDarkHeresy={false}
-					isWarhammer2e={false}
 					isConan={true}
-					isInfinity={true}
 					alwaysExpanded={true}
 				/>
 			);
 		}
 
 		if (isInfinityHitLocationDie) {
-			const hitResult = results[0];
-			const hitLocation = getInfinityHitLocation(hitResult);
-	
+			const hitLocation = getInfinityHitLocation(results[0]);
 			fields.push(
 				<HitLocations
-					result={hitResult}
 					hitLocation={hitLocation}
-					isDarkHeresy={false}
-					isWarhammer2e={false}
-					isConan={false}
 					isInfinity={true}
 					alwaysExpanded={true}
 				/>

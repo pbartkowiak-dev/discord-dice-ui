@@ -7,8 +7,6 @@ import {
 	CLOSE_INFINITY_MODAL,
 	OPEN_MODIFIER_MODAL,
 	CLOSE_MODIFIER_MODAL,
-	OPEN_WARHAMMER_MODAL,
-	CLOSE_WARHAMMER_MODAL,
 	OPEN_WARHAMMER_MONEY_MODAL,
 	CLOSE_WARHAMMER_MONEY_MODAL,
 	OPEN_SETTINGS_MODAL,
@@ -23,28 +21,26 @@ export interface ModalsStateTypes {
 	isCoCModalOpen: boolean;
 	isConanModalOpen: boolean;
 	isInfinityModalOpen: boolean;
-	isWarhammerModalOpen: boolean;
-	isWarhammerMoneyModalOpen: boolean;
 	isModifierModalOpen: boolean;
 	isSettingsModalOpen: boolean;
 	isPoolBuilderModalOpen: boolean;
 	isCopyrightModalOpen: boolean;
+	isWarhammerMoneyModalOpen: boolean;
 }
 
-const modalsState = {
+const initialState = {
 	isCoCModalOpen: false,
 	isConanModalOpen: false,
 	isInfinityModalOpen: false,
-	isWarhammerModalOpen: false,
-	isWarhammerMoneyModalOpen: false,
 	isModifierModalOpen: false,
 	isSettingsModalOpen: false,
 	isPoolBuilderModalOpen: false,
-	isCopyrightModalOpen: false
+	isCopyrightModalOpen: false,
+	isWarhammerMoneyModalOpen: false
 };
 
 // @TODO UNIFY REDUCER CASES
-function modalsReducer(state: ModalsStateTypes = modalsState, action: any) {
+function modalsReducer(state: ModalsStateTypes = initialState, action: any) {
 	switch (action.type) {
 		case CLOSE_COC_MODAL:
 			return {
@@ -55,16 +51,6 @@ function modalsReducer(state: ModalsStateTypes = modalsState, action: any) {
 			return {
 				...state,
 				isCoCModalOpen: true
-			};
-		case CLOSE_WARHAMMER_MODAL:
-			return {
-				...state,
-				isWarhammerModalOpen: false
-			};
-		case OPEN_WARHAMMER_MODAL:
-			return {
-				...state,
-				isWarhammerModalOpen: true
 			};
 		case CLOSE_SETTINGS_MODAL:
 			return {

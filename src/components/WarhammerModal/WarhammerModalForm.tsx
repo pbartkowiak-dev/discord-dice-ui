@@ -99,7 +99,7 @@ function WarhammerModalForm({
 				<div className="specialSLContainer">
 					<label>
 						<Field
-							name="warhammerSlMode"
+							name="slType"
 							value="warhammer4eSL"
 							component="input"
 							type="radio"
@@ -108,7 +108,7 @@ function WarhammerModalForm({
 					</label>
 					<label>
 						<Field
-							name="warhammerSlMode"
+							name="slType"
 							value="fastSL"
 							component="input"
 							type="radio"
@@ -117,7 +117,7 @@ function WarhammerModalForm({
 					</label>
 					<label>
 						<Field
-							name="warhammerSlMode"
+							name="slType"
 							value="warhammer2eSL"
 							component="input"
 							type="radio"
@@ -126,7 +126,7 @@ function WarhammerModalForm({
 					</label>
 					<label>
 						<Field
-							name="warhammerSlMode"
+							name="slType"
 							value="darkHeresySL"
 							component="input"
 							type="radio"
@@ -186,5 +186,5 @@ const FormElement = reduxForm({
 const selector = formValueSelector(form);
 
 export default connect(state => ({
-	formValues: selector(state, 'fastSL', 'darkHeresySL', 'warhammer4eSL', 'warhammer2eSL', 'warhammerSlMode')
+	formValues: selector(state, 'fastSL', 'darkHeresySL', 'warhammer4eSL', 'warhammer2eSL', 'slType')
 }))(FormElement);

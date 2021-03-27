@@ -7,16 +7,16 @@ type WarhammerSlTypes =
 export interface WarhammerModalPropTypes {
 	showModal: boolean,
 	closeWarhammerModal: () => void;
-	warhammerSlMode: WarhammerSlTypes;
-	requestRoll: (data: any) => void;
+	slType: WarhammerSlTypes;
+	requestWarhammerRoll: (data: any) => void;
 }
 
 export interface WarhammerModalContainerPropTypes extends WarhammerModalPropTypes{
-	saveWarhammerSlMode: (warhammerSlMode: string) => void;
+	saveslType: (slType: string) => void;
 }
 
 
 export interface WarhammerFormValuesTypes {
 	skillLevel: string;
-	warhammerSlMode: WarhammerSlTypes
+	slType: WarhammerSlTypes
 }

@@ -1,16 +1,16 @@
 const localStorageWarhammerSlModeManager = {
-	save(warhammerSlMode:string) {
-		if (warhammerSlMode) {
-			localStorage.setItem('warhammerSlMode', warhammerSlMode);
+	save(slType:string) {
+		if (slType) {
+			localStorage.setItem('slType', slType);
 		}
 	},
 
 	load() {
-		return localStorage.getItem('warhammerSlMode');
+		return localStorage.getItem('slType');
 	},
 
 	clear() {
-		localStorage.removeItem('warhammerSlMode');
+		localStorage.removeItem('slType');
 	}
 };
 

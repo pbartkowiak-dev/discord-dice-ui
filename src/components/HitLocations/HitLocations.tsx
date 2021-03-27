@@ -7,17 +7,16 @@ import { faMale } from '@fortawesome/free-solid-svg-icons';
 import styles from './HitLocations.module.css';
 import InfoTooltip from '../InfoTooltip/InfoTooltip';
 
-type HitLocationsPropsType = {
-	result: string
-	hitLocation: string
-	isDarkHeresy?: boolean
-	isWarhammer2e?: boolean
-	isConan?: boolean
-	isInfinity?: boolean
-	alwaysExpanded?: boolean
+interface HitLocationsPropsType {
+	hitLocation: string;
+	isDarkHeresy?: boolean;
+	isWarhammer2e?: boolean;
+	isConan?: boolean;
+	isInfinity?: boolean;
+	alwaysExpanded?: boolean;
 }
 
-function HitLocationTooltip({ isDarkHeresy, isWarhammer2e, isConan, isInfinity }:any) {
+function HitLocationTooltip({ isDarkHeresy, isWarhammer2e, isConan, isInfinity }: any) {
 	let head;
 	let leftArm;
 	let rightArm;
@@ -171,14 +170,13 @@ function HitLocationTooltip({ isDarkHeresy, isWarhammer2e, isConan, isInfinity }
 }
 
 function HitLocations({
-	result,
 	hitLocation,
 	isDarkHeresy,
 	isWarhammer2e,
 	isConan,
 	isInfinity,
 	alwaysExpanded
-}:HitLocationsPropsType) {
+}: HitLocationsPropsType) {
 	let header;
 
 	if (alwaysExpanded) {

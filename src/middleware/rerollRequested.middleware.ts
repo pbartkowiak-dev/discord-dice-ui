@@ -6,7 +6,7 @@ import {
 	requestNarrativeDicePoolRoll
 } from '../actions/roll.actions';
 
-const rerollRequested = (store:any) => (next:any) => (action:any) => {
+const rerollRequested = (store :any) => (next :any) => (action :any) => {
 	if (action.type === REROLL_REQUESTED) {
 		const state = store.getState();
 		const { conanData } = state;
@@ -17,6 +17,7 @@ const rerollRequested = (store:any) => (next:any) => (action:any) => {
 		const formValues = diceModuleForm.values || {}
 
 		store.dispatch(updateRollCounter());
+
 		if (lastRollOptions.pool && formValues?.narrativeDice) {
 			store.dispatch(requestNarrativeDicePoolRoll({
 				pool: lastRollOptions.pool

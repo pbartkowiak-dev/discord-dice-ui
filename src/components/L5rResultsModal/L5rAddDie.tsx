@@ -1,5 +1,5 @@
 import React from 'react';
-import TooltipWrapper from '../../InfoTooltip/TooltipWrapper';
+import TooltipWrapper from '../InfoTooltip/TooltipWrapper';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 import {
@@ -7,7 +7,7 @@ import {
 	OPPORTUNITY,
 	STRIFE,
 	SUCCESS
-} from '../../../consts/l5rSymbols';
+} from '../../consts/l5rSymbols';
 import {
 	ExplosiveSuccessImg,
 	OpportunityImg,
@@ -17,8 +17,8 @@ import {
 } from './L5rDropdownSymbols';
 import { Dropdown } from 'react-bootstrap';
 import l5rStyles from './L5rResultsModal.module.css';
-import { RING_DIE } from '../../../consts/diceConstants';
-import { ROLLED_DIE } from '../../../consts/consts';
+import { RING_DIE } from '../../consts/diceConstants';
+import { ROLLED_DIE } from '../../consts/consts';
 
 function L5rResultsDropdown({
 	type,

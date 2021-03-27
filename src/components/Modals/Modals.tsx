@@ -12,8 +12,8 @@ import PoolBuilderModalContainer from '../PoolBuilderModal/PoolBuilderModalConta
 import CopyrightModalContainer from '../CopyrightModal/CopyrightModalContainer';
 
 import ResultsModalContainer from '../ResultsModal/ResultsModalContainer';
-import L5rResultsModalContainer from '../ResultsModal/L5rResultsModal/L5rResultsModalContainer';
-import RollAndKeepResultsModalContainer from '../ResultsModal/RollAndKeepResultsModal/RollAndKeepResultsModalContainer';
+import L5rResultsModalContainer from '../L5rResultsModal/L5rResultsModalContainer';
+import RollAndKeepResultsModalContainer from '../RollAndKeepResultsModal/RollAndKeepResultsModalContainer';
 
 import ConanTokensModalContainer from '../ConanTokensModal/ConanTokensModalContainer';
 import InfinityTokensModalContainer from '../InfinityTokensModal/InfinityTokensModalContainer';
@@ -21,23 +21,27 @@ import NarrativeTokensModalContainer from '../NarrativeTokensModal/NarrativeToke
 
 import { ModalsStateTypes } from '../../reducers/modalsReducer';
 
-type modalsPropTypes = {
-	modalsState: ModalsStateTypes
+import WarhammerResultsModal from "../WarhammerResultsModal/WarhammerResultsModal";
+
+interface modalsPropTypes {
+	modalsState: ModalsStateTypes;
+	warhammerState: any
 }
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = ({ modalsState, warhammerState }: any) => {
 	return {
-		modalsState: state.modalsState
+		modalsState,
+		warhammerState
 	};
-}
+};
 
-function Modals({ modalsState }: modalsPropTypes) {
+function Modals({ modalsState, warhammerState }: modalsPropTypes) {
 	return (
 		<>
 			<SettingsModalContainer showModal={modalsState.isSettingsModalOpen} />
 			<ModifierModalContainer showModal={modalsState.isModifierModalOpen} />
 			<CoCModalContainer showModal={modalsState.isCoCModalOpen} />
-			<WarhammerModalContainer showModal={modalsState.isWarhammerModalOpen} />
+			<WarhammerModalContainer showModal={warhammerState.showModal} />
 			<WarhammerMoneyModalContainer showModal={modalsState.isWarhammerMoneyModalOpen} />
 			<ConanModalContainer showModal={modalsState.isConanModalOpen} />
 			<InfinityModalContainer showModal={modalsState.isInfinityModalOpen} />
@@ -45,10 +49,12 @@ function Modals({ modalsState }: modalsPropTypes) {
 			<CopyrightModalContainer showModal={modalsState.isCopyrightModalOpen} />
 			<ResultsModalContainer />
 			<RollAndKeepResultsModalContainer />
-			<L5rResultsModalContainer />
 			<ConanTokensModalContainer />
 			<InfinityTokensModalContainer />
 			<NarrativeTokensModalContainer />
+
+			<L5rResultsModalContainer />
+			<WarhammerResultsModal />
 		</>
 	);
 }

@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import Button from 'react-bootstrap/Button';
 import PoolBuilderContainer from '../PoolBuilder/PoolBuilderContainer';
 import { PoolType } from '../PoolBuilderModal/PoolBuilderModalTypes';
-import l5rStyles from '../ResultsModal/L5rResultsModal/L5rResultsModal.module.css';
+import l5rStyles from '../L5rResultsModal/L5rResultsModal.module.css';
 import poolBuilderStyles from '../PoolBuilder/PoolBuilder.module.css';
 
 function RollAndKeepPoolBuilder({ submitRoll }: any) {

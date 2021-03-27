@@ -1,47 +1,44 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { saveWarhammerSlMode } from '../../actions';
-import { closeWarhammerModal } from '../../actions/modals';
+import { saveslType, closeWarhammerModal, requestWarhammerRoll } from '../../actions/warhammer.actions';
 import WarhammerModal from './WarhammerModal';
-import { requestRoll } from '../../actions/roll.actions';
 import localStorageWarhammerSlModeManager from '../../utils/localStorageWarhammerSlModeManager';
 import { WarhammerModalContainerPropTypes } from './WarhammerModalTypes';
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = ({ warhammerState }: any) => {
 	return {
-		warhammerSlMode: state.warhammerSlMode
+		slType: warhammerState.slType
 	};
 };
 
 const mapDispatchToProps = {
 	closeWarhammerModal,
-	saveWarhammerSlMode,
-	requestRoll
+	saveslType,
+	requestWarhammerRoll
 };
 
 function WarhammerModalContainer({
 	showModal,
 	closeWarhammerModal,
-	saveWarhammerSlMode,
-	warhammerSlMode,
-	requestRoll
+	saveslType,
+	slType,
+	requestWarhammerRoll
 }: WarhammerModalContainerPropTypes) {
 	useEffect(() => {
-		const localStorageWarhammerSlMode = localStorageWarhammerSlModeManager.load()
-		if (localStorageWarhammerSlMode) {
-			saveWarhammerSlMode(localStorageWarhammerSlMode);
+		const localStorageslType = localStorageWarhammerSlModeManager.load()
+		if (localStorageslType) {
+			saveslType(localStorageslType);
 		}
-	}, [showModal, saveWarhammerSlMode]);
+	}, [showModal, saveslType]);
 
 	return (
 		<WarhammerModal
 			closeWarhammerModal={closeWarhammerModal}
-			warhammerSlMode={warhammerSlMode}
-			requestRoll={requestRoll}
+			slType={slType}
+			requestWarhammerRoll={requestWarhammerRoll}
 			showModal={showModal}
 		/>
 	);
-
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(WarhammerModalContainer);

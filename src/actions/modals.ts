@@ -12,9 +12,6 @@ export const CLOSE_MODIFIER_MODAL = 'CLOSE_MODIFIER_MODAL';
 export const OPEN_COC_MODAL = 'OPEN_COC_MODAL';
 export const CLOSE_COC_MODAL = 'CLOSE_COC_MODAL';
 
-export const OPEN_WARHAMMER_MODAL = 'OPEN_WARHAMMER_MODAL';
-export const CLOSE_WARHAMMER_MODAL = 'CLOSE_WARHAMMER_MODAL';
-
 export const OPEN_WARHAMMER_MONEY_MODAL = 'OPEN_WARHAMMER_MONEY_MODAL';
 export const CLOSE_WARHAMMER_MONEY_MODAL = 'CLOSE_WARHAMMER_MONEY_MODAL';
 
@@ -92,19 +89,6 @@ export function closeCoCModal() {
 		type: CLOSE_COC_MODAL
 	};
 }
-
-export function openWarhammerModal() {
-	return {
-		type: OPEN_WARHAMMER_MODAL
-	};
-}
-
-export function closeWarhammerModal() {
-	return {
-		type: CLOSE_WARHAMMER_MODAL
-	};
-}
-
 
 export function openConanModal() {
 	return {

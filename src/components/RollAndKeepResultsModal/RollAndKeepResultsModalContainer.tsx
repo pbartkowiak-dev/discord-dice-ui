@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { hideMsg } from '../../../actions/modals';
-import { keepDice, requestRollAndKeepReroll } from '../../../actions/rollAndKeep.actions';
+import { hideMsg } from '../../actions/modals';
+import { keepDice, requestRollAndKeepReroll } from '../../actions/rollAndKeep.actions';
 import RollAndKeepResultsModal from './RollAndKeepResultsModal';
 
 const mapStateToProps = (state: any) => {

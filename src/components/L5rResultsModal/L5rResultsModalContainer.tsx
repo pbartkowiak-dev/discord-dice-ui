@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getResultsDerivedSelector } from '../../../selectors/l5rSelectors';
-import { hideMsg } from '../../../actions/modals';
-import { requestL5rReroll, l5rKeepDice, l5rClearData, l5rSendState } from '../../../actions/l5r.actions';
+import { getResultsDerivedSelector } from '../../selectors/l5rSelectors';
+import { hideMsg } from '../../actions/modals';
+import { requestL5rReroll, l5rKeepDice, l5rClearData, l5rSendState } from '../../actions/l5r.actions';
 import L5rResultsModal from './L5rResultsModal';
 import { L5rResultsModalContainerPropTypes } from './L5rResultsModalTypes';
 

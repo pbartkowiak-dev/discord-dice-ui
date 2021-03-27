@@ -4,14 +4,14 @@ import {
 	OPPORTUNITY,
 	STRIFE,
 	SUCCESS
-} from '../../../consts/l5rSymbols';
+} from '../../consts/l5rSymbols';
 import {
 	ExplosiveSuccessImg,
 	OpportunityImg,
 	StrifeImg,
 	SuccessImg
 } from './L5rDropdownSymbols';
-import { RING_DIE } from '../../../consts/diceConstants';
+import { RING_DIE } from '../../consts/diceConstants';
 import { Dropdown } from 'react-bootstrap';
 
 function L5rResultsDropdown({

@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import userSettings from './userSettingsReducer';
 import diceSelected from './diceSelectedReducer';
-import warhammerSlMode from './warhammerSlModeReducer';
+import warhammerState from './warhammerReducer';
 import modalsState from './modalsReducer';
 import msg from './msgReducer';
 import rollAndKeepData from './rollAndKeepReducer';
@@ -16,7 +16,7 @@ import rerollCount from './rerollCountReducer';
 export default combineReducers({
 	userSettings,
 	diceSelected,
-	warhammerSlMode,
+	warhammerState,
 	modalsState,
 	form,
 	msg,
