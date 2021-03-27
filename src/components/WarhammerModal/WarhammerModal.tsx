@@ -2,7 +2,6 @@ import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import WarhammerModalForm from './WarhammerModalForm';
-import localStorageWarhammerSlModeManager from '../../utils/localStorageWarhammerSlModeManager';
 import { WarhammerModalPropTypes, WarhammerFormValuesTypes } from './WarhammerModalTypes';
 
 function WarhammerModal({
@@ -20,9 +19,6 @@ function WarhammerModal({
 			...values,
 			skillLevel: Number(values.skillLevel)
 		});
-
-		localStorageWarhammerSlModeManager.save(values.slType);
-
 		closeWarhammerModal();
 	};
 

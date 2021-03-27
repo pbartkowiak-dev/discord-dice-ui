@@ -20,7 +20,7 @@ export function warhammerDiceRolled(payload: any) {
 	};
 }
 
-export function saveslType(payload: any) {
+export function saveSlType(payload: any) {
 	return {
 		type: SAVE_WARHAMMER_SL_TYPE,
 		payload

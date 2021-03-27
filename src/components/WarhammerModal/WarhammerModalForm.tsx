@@ -1,6 +1,6 @@
 // @ts-nocheck
 import React from 'react';
-import { connect } from 'react-redux';
+import {connect, useDispatch} from 'react-redux';
 import Form from 'react-bootstrap/Form';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -8,6 +8,8 @@ import { faPercent } from '@fortawesome/free-solid-svg-icons';
 import InfoTooltip from '../InfoTooltip/InfoTooltip';
 import tooltip from '../../locale/tooltip';
 import './WarhammerModalForm.css';
+import localStorageWarhammerSlModeManager from "../../utils/localStorageWarhammerSlModeManager";
+import { saveSlType } from "../../actions/warhammer.actions";
 
 const percentIcon = <span className="percent-icon"><FontAwesomeIcon icon={faPercent} /></span>;
 
@@ -91,6 +93,13 @@ function WarhammerModalForm({
 	handleSubmit,
 	formValues = {}
 }: any) {
+	const dispatch = useDispatch();
+
+	const handleSlChange = (_, slType) => {
+		dispatch(saveSlType(slType));
+		localStorageWarhammerSlModeManager.save(slType);
+	};
+
 	return (
 		<Form
 			className={ (invalid && (submitFailed || anyTouched)) ? 'form-invalid' : '' }
@@ -103,6 +112,7 @@ function WarhammerModalForm({
 							value="warhammer4eSL"
 							component="input"
 							type="radio"
+							onChange={handleSlChange}
 						/>
 						{warhammer4eSLLabel}
 					</label>
@@ -112,6 +122,7 @@ function WarhammerModalForm({
 							value="fastSL"
 							component="input"
 							type="radio"
+							onChange={handleSlChange}
 						/>
 						{fastSLLabel}
 					</label>
@@ -121,6 +132,7 @@ function WarhammerModalForm({
 							value="warhammer2eSL"
 							component="input"
 							type="radio"
+							onChange={handleSlChange}
 						/>
 						{warhammer2eSLLabel}
 					</label>
@@ -130,6 +142,7 @@ function WarhammerModalForm({
 							value="darkHeresySL"
 							component="input"
 							type="radio"
+							onChange={handleSlChange}
 						/>
 						{darkHeresyLabel}
 					</label>

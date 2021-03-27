@@ -12,7 +12,7 @@ export interface WarhammerModalPropTypes {
 }
 
 export interface WarhammerModalContainerPropTypes extends WarhammerModalPropTypes{
-	saveslType: (slType: string) => void;
+	saveSlType: (slType: string) => void;
 }
 
 
