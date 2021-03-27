@@ -87,6 +87,7 @@ const darkHeresyLabel = (
 );
 
 function WarhammerModalForm({
+	change,
 	invalid,
 	anyTouched,
 	submitFailed,
@@ -98,6 +99,15 @@ function WarhammerModalForm({
 	const handleSlChange = (_, slType) => {
 		dispatch(saveSlType(slType));
 		localStorageWarhammerSlModeManager.save(slType);
+	};
+
+	const handleRangeChange = event => change('skillLevel', event.target.value);
+
+	const handleSkillChange = event => {
+		const skillRange = document.getElementById("skillRange");
+		if (skillRange) {
+			skillRange.value = event.target.value;
+		}
 	};
 
 	return (
@@ -147,14 +157,29 @@ function WarhammerModalForm({
 						{darkHeresyLabel}
 					</label>
 				</div>
-				<div className="skill-level-field">
+				<div className="warhammer-skill-level-field skill-level-field">
 					<Field
 						id="skillLevel"
 						name="skillLevel"
 						label="Skill level:"
 						textMuted="Enter your Character's skill level"
 						component={renderInput}
+						onChange={handleSkillChange}
 					/>
+					<div className="range-container">
+						<span>1%</span>
+						<Form.Group>
+							<Form.Control
+								type="range"
+								id="skillRange"
+								name="skillRange"
+								min="1"
+								max="100"
+								onChange={handleRangeChange}
+							/>
+						</Form.Group>
+						<span>100%</span>
+					</div>
 				</div>
 		</Form>
 	);
