@@ -3,7 +3,7 @@ import {
 	warhammerSet,
 	conanSet,
 	infinitySet,
-	CoCSet,
+	CthulhuSet,
 	poolSet,
 	narrativeDiceSet,
 	l5rDiceSet,
@@ -23,7 +23,7 @@ export default (setType: string): DiceSetType => {
 	} else if (setType === INFINITY) {
 		return infinitySet;
 	} else if (setType === COC) {
-		return CoCSet;
+		return CthulhuSet;
 	} else if (setType === POOL) {
 		return poolSet;
 	} else if (setType === NARRATIVE_DICE) {

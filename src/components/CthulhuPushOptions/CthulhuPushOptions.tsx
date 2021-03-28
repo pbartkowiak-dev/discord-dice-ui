@@ -3,10 +3,10 @@ import Button from 'react-bootstrap/Button';
 import CodeSpan from '../CodeSpan/CodeSpan';
 import InfoTooltip from '../InfoTooltip/InfoTooltip';
 import classNames from 'classnames';
-import styles from './CocPushOptions.module.css';
+import styles from './CthulhuPushOptions.module.css';
 import tooltip from '../../locale/tooltip';
 
-function CocPushOptions({ 
+function CthulhuPushOptions({
 	handlePushRoll,
 	isPushed,
 	luckRequiredForSuccess,
@@ -57,4 +57,4 @@ function CocPushOptions({
 	);
 }
 
-export default CocPushOptions;
+export default CthulhuPushOptions;

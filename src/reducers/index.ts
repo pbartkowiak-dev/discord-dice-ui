@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 import userSettings from './userSettingsReducer';
 import diceSelected from './diceSelectedReducer';
 import warhammerState from './warhammerReducer';
+import cthulhuState from './cthulhuReducer';
 import modalsState from './modalsReducer';
 import msg from './msgReducer';
 import rollAndKeepData from './rollAndKeepReducer';
@@ -17,6 +18,7 @@ export default combineReducers({
 	userSettings,
 	diceSelected,
 	warhammerState,
+	cthulhuState,
 	modalsState,
 	form,
 	msg,

@@ -13,7 +13,6 @@ import {
 	WARHAMMER_MONEY
 } from '../consts/diceConstants';
 import {
-	openCoCModal,
 	openConanModal,
 	openInfinityModal,
 	openModifierModal,
@@ -35,6 +34,7 @@ import { openConanTokensModal } from '../actions/conan.actions';
 import { openInfinityTokensModal } from '../actions/infinity.actions';
 import { openNarrativeTokensModal } from '../actions/narrativeDice.actions';
 import { openWarhammerModal } from "../actions/warhammer.actions";
+import { openCthulhuModal } from "../actions/cthulhu.actions";
 
 export default (store:any) => (next:any) => (action:any) => {
 	if (action.type === ROLL_SUBMITTED) {
@@ -70,7 +70,7 @@ export default (store:any) => (next:any) => (action:any) => {
 					...action.payload
 				}));
 			} else if (formValues.cocMode && diceType === D100_SL) {
-				store.dispatch(openCoCModal());
+				store.dispatch(openCthulhuModal());
 			} else if (formValues.warhammerMode && diceType === D100_SL) {
 				store.dispatch(openWarhammerModal())
 			} else if (diceType === D20_CONAN_TEST) {

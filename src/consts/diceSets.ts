@@ -100,7 +100,7 @@ export const poolSet = [{
 	label: 'Apply Modifier'
 }];
 
-export const CoCSet = [{
+export const CthulhuSet = [{
 	diceType: D100_SL,
 	diceImg: 'd100.png',
 	label: 'Skill test',

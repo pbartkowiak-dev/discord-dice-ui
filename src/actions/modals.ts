@@ -9,9 +9,6 @@ export const CLOSE_SETTINGS_MODAL = 'CLOSE_SETTINGS_MODAL';
 export const OPEN_MODIFIER_MODAL = 'OPEN_MODIFIER_MODAL';
 export const CLOSE_MODIFIER_MODAL = 'CLOSE_MODIFIER_MODAL';
 
-export const OPEN_COC_MODAL = 'OPEN_COC_MODAL';
-export const CLOSE_COC_MODAL = 'CLOSE_COC_MODAL';
-
 export const OPEN_WARHAMMER_MONEY_MODAL = 'OPEN_WARHAMMER_MONEY_MODAL';
 export const CLOSE_WARHAMMER_MONEY_MODAL = 'CLOSE_WARHAMMER_MONEY_MODAL';
 
@@ -75,18 +72,6 @@ export function openModifierModal() {
 export function closeModifierModal() {
 	return {
 		type: CLOSE_MODIFIER_MODAL
-	};
-}
-
-export function openCoCModal() {
-	return {
-		type: OPEN_COC_MODAL
-	};
-}
-
-export function closeCoCModal() {
-	return {
-		type: CLOSE_COC_MODAL
 	};
 }
 

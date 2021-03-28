@@ -12,8 +12,7 @@ import narrativeDiceUpdateTokensState from './middleware/narrativeDiceUpdateToke
 import getRequestMsg from './middleware/getMsg/getRequestMsg.middleware';
 import getLocalMsg from './middleware/getMsg/getLocalMsg.middleware';
 // Call of Cthulhu
-import getCoCLocalMsg from './middleware/getCoCMsg/getCoCLocalMsg.middleware';
-import getCoCRequestMsg from './middleware/getCoCMsg/getCoCRequestMsg.middleware';
+import cthulhuRollRequested from './middleware/cthulhu/cthulhuRollRequested.middleware';
 // Warhammer
 import warhammerRollRequested from './middleware/warhammer/warhammerRollRequested.middleware';
 import warhammerRerollRequested from './middleware/warhammer/warhammerRerollRequested.middleware';
@@ -74,8 +73,7 @@ const rollMiddleware = [
 	getRequestMsg,
 	getLocalMsg,
 
-	getCoCLocalMsg,
-	getCoCRequestMsg,
+	cthulhuRollRequested,
 
 	warhammerSendResults,
 	warhammerRollRequested,

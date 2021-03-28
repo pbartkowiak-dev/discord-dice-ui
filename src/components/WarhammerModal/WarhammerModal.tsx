@@ -25,7 +25,7 @@ function WarhammerModal({
 	return (
 		<Modal show={showModal} onHide={closeWarhammerModal}>
 			<Modal.Header closeButton>
-				<Modal.Title>Warhammer Options</Modal.Title>
+				<Modal.Title>Warhammer Roll Options</Modal.Title>
 			</Modal.Header>
 			<Modal.Body>
 				<WarhammerModalForm

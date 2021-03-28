@@ -5,7 +5,7 @@ import { Field, reduxForm, formValueSelector } from 'redux-form';
 import Col from 'react-bootstrap/Col';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPercent } from '@fortawesome/free-solid-svg-icons';
-import './CoCModalForm.css';
+import './CthulhuModalForm.css';
 import InputRange from "../InputRange/InputRange";
 
 const percentIcon = <span className="percent-icon"><FontAwesomeIcon icon={faPercent} /></span>;
@@ -61,7 +61,7 @@ const penaltyDieLabel = <span>Apply <strong>one</strong> Penalty Die</span>;
 const penaltyTwoDiceLabel = <span>Apply <strong>two</strong> Penalty Dice</span>;
 
 
-function CoCModalForm({
+function CthulhuModalForm({
 	change,
 	invalid,
 	anyTouched,
@@ -169,7 +169,7 @@ const form = 'cocModeForm';
 const FormElement = reduxForm({
 	form,
 	validate
-})(CoCModalForm);
+})(CthulhuModalForm);
 
 
 const selector = formValueSelector(form);

@@ -2,13 +2,11 @@ import getDieNumberVal from '../utils/getDieNumberVal';
 import getResultsArray from '../utils/getResultsArray';
 import {
 	DICE_ROLL_REQUESTED,
-	diceRolled,
-	cocDiceRolled
+	diceRolled
 } from '../actions/roll.actions';
 import { conanDiceRolled } from '../actions/conan.actions';
 import { infinityDiceRolled } from '../actions/infinity.actions';
 import {
-	D100_SL,
 	D20_CONAN_TEST,
 	D6_CONAN,
 	D20_INFINITY_TEST,
@@ -32,15 +30,6 @@ interface rollDiceResult {
 	highest: number;
 	lowest: number;
 
-	// CoC results
-	cocBonusResult?: number | undefined;
-	cocPenaltyResult?: number | undefined;
-	cocBonus?: boolean;
-	cocPenalty?: boolean;
-	cocTwoBonus?: boolean;
-	cocTwoPenalty?: boolean;
-	skillLevel?: number | undefined;
-
 	// Conan results
 	effects?: number | undefined;
 	dmg?: number | undefined;
@@ -62,29 +51,13 @@ export default (store: any) => (next: any) => (action: any) => {
 			modifier = 0,
 			diceAmount = 1,
 			itemsToStay = [],
-			skillLevel,
-
-			cocBonus,
-			cocTwoBonus,
-			cocPenalty,
-			cocTwoPenalty,
-
 			fortune,
 			assistanceDice,
 			assistanceDiceResults
 		} = action.payload;
 
 		const diceTypeNum = getDieNumberVal(diceType);
-		const keepUnits = (cocBonus || cocTwoBonus || cocPenalty || cocTwoPenalty);
 		const result = {} as rollDiceResult;
-
-		if (formValues.cocMode) {
-			if (cocBonus || cocPenalty) {
-				diceAmount = 2;
-			} else if (cocTwoBonus || cocTwoPenalty) {
-				diceAmount = 3;
-			}
-		}
 	
 		if (fortune) {
 			diceAmount = diceAmount - fortune;
@@ -94,7 +67,7 @@ export default (store: any) => (next: any) => (action: any) => {
 			diceAmount = diceAmount - itemsToStay.length;
 		}
 	
-		result.results = getResultsArray(diceTypeNum, diceAmount, keepUnits);
+		result.results = getResultsArray(diceTypeNum, diceAmount);
 	
 		if (itemsToStay?.length) {
 			diceAmount = diceAmount + itemsToStay.length;
@@ -151,19 +124,6 @@ export default (store: any) => (next: any) => (action: any) => {
 			result.dmg = combatDieResults.dmg;
 			result.effects = combatDieResults.effects;
 		}
-	
-		if (formValues.cocMode) {
-			result.cocBonusResult = (cocBonus || cocTwoBonus) ? Math.min(...result.results) : undefined;
-			result.cocPenaltyResult = (cocPenalty || cocTwoPenalty) ?  Math.max(...result.results) : undefined;
-			result.cocBonus = cocBonus;
-			result.cocPenalty = cocBonus;
-			result.cocTwoBonus = cocTwoBonus;
-			result.cocTwoPenalty = cocTwoPenalty;
-		}
-	
-		if (diceType === D100_SL && (formValues.cocMode)) {
-			result.skillLevel = skillLevel ? Number(skillLevel) : undefined;
-		}
 
 		// assistance results should not be rerolled
 		if (assistanceDiceResults && assistanceDiceResults.length) {
@@ -203,15 +163,7 @@ export default (store: any) => (next: any) => (action: any) => {
 			}
 		}
 
-		if (formValues.cocMode && diceType === D100_SL) {
-			store.dispatch(cocDiceRolled({
-				result,
-				rollOptions: {
-					...action.payload,
-					...formValues
-				}
-			}));
-		} else if (formValues.conanMode && diceType === D20_CONAN_TEST) {
+		if (formValues.conanMode && diceType === D20_CONAN_TEST) {
 			store.dispatch(conanDiceRolled({
 				result,
 				rollOptions: {

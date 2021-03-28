@@ -2,11 +2,9 @@ import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import styles from './ResultsModal.module.css';
-import CocPushOptionsContainer from '../CocPushOptions/CocPushOptionsContainer';
 import RerollContainer from '../Reroll/RerollContainer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDiceD20 } from '@fortawesome/free-solid-svg-icons';
-import { D100_SL } from '../../consts/diceConstants';
 import { ResultsModalPropTypes } from './ResultsModalTypes';
 
 function ResultsModal({
@@ -20,12 +18,9 @@ function ResultsModal({
 		isSuccess,
 		rollOptions = {},
 		title,
-		finalDieResult,
 		results = []
 	} = msgParams;
 
-	let pushElement;
-	let rerollElement;
 	let modalBodyList;
 
 	if (msgParams.fields && msgParams.fields.length) {
@@ -45,34 +40,6 @@ function ResultsModal({
 		? `${styles.resultsModalHeader} ${styles.isFailure}`
 		: `${styles.resultsModalHeader}`;
 
-	if (rollOptions.cocMode) {
-		const canPush = isSuccess === false && !rollOptions.isPushed;
-		if (canPush) {
-			pushElement = (
-				<CocPushOptionsContainer
-					rollOptions={rollOptions}
-					finalDieResult={finalDieResult}
-				/>
-			);
-		}
-	} else {
-		pushElement = null;
-	}
-
-	if (
-		(rollOptions.warhammerMode && isSuccess) ||
-		(rollOptions.cocMode && diceSelected.diceType === D100_SL)
-	) {
-		rerollElement = null;
-	} else {
-		rerollElement = (
-			<RerollContainer
-				rollOptions={rollOptions}
-				results={results}
-			/>
-		);
-	}
-
 	return (
 		<Modal
 			show={showModal}
@@ -88,8 +55,10 @@ function ResultsModal({
 				{ rollOptions.isPushed && <div className={styles.pushedTitle}>Pushed roll</div> }
 				{ title && <div className={styles.rollResults}>{ title }</div> }
 				{ modalBodyList }
-				{ pushElement }
-				{ rerollElement }
+				<RerollContainer
+					rollOptions={rollOptions}
+					results={results}
+				/>
 			</Modal.Body>
 			<Modal.Footer>
 			<Button

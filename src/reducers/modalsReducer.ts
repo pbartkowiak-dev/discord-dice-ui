@@ -1,6 +1,4 @@
 import {
-	OPEN_COC_MODAL,
-	CLOSE_COC_MODAL,
 	OPEN_CONAN_MODAL,
 	CLOSE_CONAN_MODAL,
 	OPEN_INFINITY_MODAL,
@@ -18,7 +16,6 @@ import {
 } from '../actions/modals';
 
 export interface ModalsStateTypes {
-	isCoCModalOpen: boolean;
 	isConanModalOpen: boolean;
 	isInfinityModalOpen: boolean;
 	isModifierModalOpen: boolean;
@@ -29,7 +26,6 @@ export interface ModalsStateTypes {
 }
 
 const initialState = {
-	isCoCModalOpen: false,
 	isConanModalOpen: false,
 	isInfinityModalOpen: false,
 	isModifierModalOpen: false,
@@ -42,16 +38,6 @@ const initialState = {
 // @TODO UNIFY REDUCER CASES
 function modalsReducer(state: ModalsStateTypes = initialState, action: any) {
 	switch (action.type) {
-		case CLOSE_COC_MODAL:
-			return {
-				...state,
-				isCoCModalOpen: false
-			};
-		case OPEN_COC_MODAL:
-			return {
-				...state,
-				isCoCModalOpen: true
-			};
 		case CLOSE_SETTINGS_MODAL:
 			return {
 				...state,

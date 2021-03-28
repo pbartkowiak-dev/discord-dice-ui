@@ -77,13 +77,6 @@ export function narrativeDicePoolRolled(payload: any) {
 	};
 }
 
-export function cocDiceRolled(payload: any) {
-	return {
-		type: COC_DICE_ROLLED,
-		payload
-	}
-}
-
 export function localMsgReady(payload: any) {
 	return {
 		type: LOCAL_MSG_READY, 

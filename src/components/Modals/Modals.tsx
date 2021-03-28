@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import SettingsModalContainer from '../SettingsModal/SettingsModalContainer';
 import ModifierModalContainer from '../ModifierModal/ModifierModalContainer';
-import CoCModalContainer from '../CoCModal/CoCModalContainer';
+import CthulhuModalContainer from '../CthulhuModal/CthulhuModalContainer';
 import WarhammerModalContainer from '../WarhammerModal/WarhammerModalContainer';
 import WarhammerMoneyModalContainer from '../WarhammerMoneyModal/WarhammerMoneyModalContainer';
 import ConanModalContainer from '../ConanModal/ConanModalContainer';
@@ -40,7 +40,7 @@ function Modals({ modalsState, warhammerState }: modalsPropTypes) {
 		<>
 			<SettingsModalContainer showModal={modalsState.isSettingsModalOpen} />
 			<ModifierModalContainer showModal={modalsState.isModifierModalOpen} />
-			<CoCModalContainer showModal={modalsState.isCoCModalOpen} />
+			<CthulhuModalContainer showModal={modalsState.isCthulhuModalOpen} />
 			<WarhammerModalContainer showModal={warhammerState.showModal} />
 			<WarhammerMoneyModalContainer showModal={modalsState.isWarhammerMoneyModalOpen} />
 			<ConanModalContainer showModal={modalsState.isConanModalOpen} />

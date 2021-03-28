@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { hideMsg } from '../../actions/modals';
-import CoCPushOptions from './CocPushOptions';
+import CthulhuPushOptions from './CthulhuPushOptions';
 import { requestRoll } from '../../actions/roll.actions';
 import { D100_SL } from '../../consts/diceConstants';
 
@@ -10,7 +10,7 @@ const mapDispatchToProps = {
 	requestRoll
 };
 
-function CocPushOptionsContainer({
+function CthulhuPushOptionsContainer({
 	rollOptions = {},
 	finalDieResult,
 	requestRoll,
@@ -34,7 +34,7 @@ function CocPushOptionsContainer({
 	const luckRequiredForExtremeSuccess = Number(finalDieResult) - Math.floor( Number(rollOptions.skillLevel) / 5 );
 
 	return (
-		<CoCPushOptions
+		<CthulhuPushOptions
 			handlePushRoll={handlePushRoll}
 			isPushed={rollOptions.isPushed}
 			luckRequiredForSuccess={luckRequiredForSuccess}
@@ -44,4 +44,4 @@ function CocPushOptionsContainer({
 	);
 }
 
-export default connect(undefined, mapDispatchToProps)(CocPushOptionsContainer);
+export default connect(undefined, mapDispatchToProps)(CthulhuPushOptionsContainer);
