@@ -81,18 +81,21 @@ function WarhammerResultsModal() {
 			show={showResultsModal}
 			onHide={hideModal}
 		>
-			<Modal.Header closeButton className={styles.resultsModalHeader}>
+			<Modal.Header closeButton className={classNames({
+				[styles.resultsModalHeader]: true,
+				[styles.isFailure]: !isSuccess
+			})}>
 				<FontAwesomeIcon className={styles.resultsModalDiceIcon} icon={faDiceD20} />
 				<Modal.Title className={styles.resultsModalTitle}>Roll Results</Modal.Title>
 			</Modal.Header>
 			<Modal.Body>
+				<div className={styles.rollResults}>{ slInfo }</div>
 
 				{/* Results vs Skill */}
-				<div className={styles.rollResults}>{ slInfo }</div>
 				<ResultVsSkillRow
 					skillLevel={skillLevelString}
 					finalDieResult={resultString}
-					isSuccess={successLevels.isSuccess}
+					isSuccess={isSuccess}
 				/>
 
 				{/* Roll Data */}
