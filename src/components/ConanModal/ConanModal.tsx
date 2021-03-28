@@ -60,7 +60,7 @@ function ConanModal({
 				<ConanModalForm
 					initialValues={initialValues}
 					onSubmit={values => handleSubmit(values)}
-					/>
+				/>
 			</Modal.Body>
 			<Modal.Footer>
 				<Button variant="secondary" onClick={closeConanModal}>

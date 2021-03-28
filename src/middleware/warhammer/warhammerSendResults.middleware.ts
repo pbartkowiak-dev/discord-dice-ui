@@ -16,6 +16,7 @@ export default (store: any) => (next: any) => (action: any) => {
 			skillLevel,
 			hitLocation
 		} = action.payload;
+
 		const {
 			SL,
 			isSuccess,

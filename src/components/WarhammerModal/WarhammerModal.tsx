@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
@@ -22,6 +23,8 @@ function WarhammerModal({
 		closeWarhammerModal();
 	};
 
+	const formId = 'warhammer-mode-form';
+
 	return (
 		<Modal show={showModal} onHide={closeWarhammerModal}>
 			<Modal.Header closeButton>
@@ -31,7 +34,8 @@ function WarhammerModal({
 				<WarhammerModalForm
 					onSubmit={values => handleSubmit(values)}
 					initialValues={initialValues}
-					/>
+					formId={formId}
+				/>
 			</Modal.Body>
 			<Modal.Footer>
 				<Button variant="secondary" onClick={closeWarhammerModal}>
@@ -40,7 +44,7 @@ function WarhammerModal({
 				<Button
 					variant="success"
 					type="submit"
-					form="warhammer-mode-form">Roll!
+					form={formId}>Roll!
 				</Button>
 			</Modal.Footer>
 		</Modal>

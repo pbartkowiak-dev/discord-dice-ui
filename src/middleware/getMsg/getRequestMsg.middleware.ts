@@ -22,8 +22,8 @@ export default (store:any) => (next:any) => (action:any) => {
 			totalWithModifier,
 			highest,
 			lowest,
-			cocBonus,
-			cocPenalty,
+			cthulhuBonus,
+			cthulhuPenalty,
 			dmg,
 			effects,
 			diceTypeNum,
@@ -74,16 +74,16 @@ export default (store:any) => (next:any) => (action:any) => {
 				value: `Lowest result rolled: \`${lowest}\`.`
 			});
 		}
-		if (rollOptions.cocBonus) {
+		if (rollOptions.cthulhuBonus) {
 			fields.push({
 				name: ':arrow_heading_up: Bonus Die',
-				value: `Bonus Die result: \`${cocBonus}\`.`
+				value: `Bonus Die result: \`${cthulhuBonus}\`.`
 			});
 		}
-		if (rollOptions.cocPenalty) {
+		if (rollOptions.cthulhuPenalty) {
 			fields.push({
 				name: ':arrow_heading_down: Penalty Die',
-				value: `Penalty Die result: \`${cocPenalty}\`.`
+				value: `Penalty Die result: \`${cthulhuPenalty}\`.`
 			});
 		}
 		if (isCombatDie) {

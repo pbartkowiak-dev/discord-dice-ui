@@ -1,5 +1,3 @@
-export const DICE_ROLL = 'DICE_ROLL';
-export const DIE_CLICKED = 'DIE_CLICKED';
 export const ROLL_SUBMITTED = 'ROLL_SUBMITTED';
 export const DICE_SELECTED = 'DICE_SELECTED';
 export const ROLL_COUNTER_RESET = 'ROLL_COUNTER_RESET';
@@ -12,13 +10,11 @@ export const DICE_POOL_ROLL_REQUESTED = 'DICE_POOL_ROLL_REQUESTED';
 export const NARRATIVE_DICE_POOL_ROLL_REQUESTED = 'NARRATIVE_DICE_POOL_ROLL_REQUESTED';
 
 export const DICE_ROLLED = 'DICE_ROLLED';
-export const COC_DICE_ROLLED = 'COC_DICE_ROLLED';
 export const DICE_POOL_ROLLED = 'DICE_POOL_ROLLED';
 export const NARRATIVE_DICE_POOL_ROLLED = 'NARRATIVE_DICE_POOL_ROLLED';
 
 export const LOCAL_MSG_READY = 'LOCAL_MSG_READY';
 export const REQUEST_MSG_READY = 'REQUEST_MSG_READY';
-
 
 export function submitRoll(payload: any) {
 	return {
@@ -47,7 +43,6 @@ export function requestNarrativeDicePoolRoll(payload: any) {
 		payload
 	}
 }
-
 
 export function requestReroll(payload: any ) {
 	return {

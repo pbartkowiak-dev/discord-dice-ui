@@ -34,7 +34,7 @@ import { openConanTokensModal } from '../actions/conan.actions';
 import { openInfinityTokensModal } from '../actions/infinity.actions';
 import { openNarrativeTokensModal } from '../actions/narrativeDice.actions';
 import { openWarhammerModal } from "../actions/warhammer.actions";
-import { openCthulhuModal } from "../actions/cthulhu.actions";
+import { openCthulhuModal } from '../actions/cthulhu.actions';
 
 export default (store:any) => (next:any) => (action:any) => {
 	if (action.type === ROLL_SUBMITTED) {
@@ -69,7 +69,7 @@ export default (store:any) => (next:any) => (action:any) => {
 				store.dispatch(requestPoolRoll({
 					...action.payload
 				}));
-			} else if (formValues.cocMode && diceType === D100_SL) {
+			} else if (formValues.cthulhuMode && diceType === D100_SL) {
 				store.dispatch(openCthulhuModal());
 			} else if (formValues.warhammerMode && diceType === D100_SL) {
 				store.dispatch(openWarhammerModal())

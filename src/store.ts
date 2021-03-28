@@ -13,6 +13,8 @@ import getRequestMsg from './middleware/getMsg/getRequestMsg.middleware';
 import getLocalMsg from './middleware/getMsg/getLocalMsg.middleware';
 // Call of Cthulhu
 import cthulhuRollRequested from './middleware/cthulhu/cthulhuRollRequested.middleware';
+import cthulhuPushRollRequested from './middleware/cthulhu/cthulhuPushRollRequested.middleware';
+import cthulhuSendResults from './middleware/cthulhu/cthulhuSendResults.middleware';
 // Warhammer
 import warhammerRollRequested from './middleware/warhammer/warhammerRollRequested.middleware';
 import warhammerRerollRequested from './middleware/warhammer/warhammerRerollRequested.middleware';
@@ -74,6 +76,8 @@ const rollMiddleware = [
 	getLocalMsg,
 
 	cthulhuRollRequested,
+	cthulhuPushRollRequested,
+	cthulhuSendResults,
 
 	warhammerSendResults,
 	warhammerRollRequested,

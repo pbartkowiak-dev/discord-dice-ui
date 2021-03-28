@@ -6,44 +6,40 @@ export default (store: any) => (next: any) => (action: any) => {
 	if (action.type === CTHULHU_ROLL_REQESTED) {
 		const {
 			skillLevel,
-			cocBonus,
-			cocTwoBonus,
-			cocPenalty,
-			cocTwoPenalty
+			cthulhuBonus,
+			cthulhuTwoBonus,
+			cthulhuPenalty,
+			cthulhuTwoPenalty
 		} = action.payload;
 
 		let diceAmount = 1;
-		let finalDieResult;
 
-		if (cocBonus || cocPenalty) {
+		if (cthulhuBonus || cthulhuPenalty) {
 			diceAmount = 2;
-		} else if (cocTwoBonus || cocTwoPenalty) {
+		} else if (cthulhuTwoBonus || cthulhuTwoPenalty) {
 			diceAmount = 3;
 		}
 
-		const keepUnits = (cocBonus || cocTwoBonus || cocPenalty || cocTwoPenalty);
-		const rollResults = getResultsArray(100, diceAmount, keepUnits);
+		const keepUnits = (cthulhuBonus || cthulhuTwoBonus || cthulhuPenalty || cthulhuTwoPenalty);
+		const rollResults = getResultsArray(100, diceAmount, keepUnits)
+			.sort((a: number, b: number) => a - b);
 
-		const cocBonusResult = (cocBonus || cocTwoBonus) ? Math.min(...results) : undefined;
-		const cocPenaltyResult = (cocPenalty || cocTwoPenalty) ?  Math.max(...results) : undefined;
+		let finalDieResult = rollResults[0];
 
-		if (cocBonus || cocTwoBonus) {
-			finalDieResult = cocBonusResult;
-		} else if (cocPenalty || cocTwoPenalty) {
-			finalDieResult = cocPenaltyResult;
-		} else {
-			finalDieResult = results[0];
+		if (cthulhuBonus || cthulhuTwoBonus) {
+			finalDieResult = Math.min(...rollResults);
+		} else if (cthulhuPenalty || cthulhuTwoPenalty) {
+			finalDieResult =  Math.max(...rollResults);
 		}
 
-		const successLevels = getSuccessLevels(skillLevel, finalDieResult || 0);
+		const successLevels = getSuccessLevels(skillLevel, finalDieResult);
 
 		store.dispatch(cthulhuDiceRolled({
 			...action.payload,
+			skillLevel,
 			finalDieResult,
 			successLevels,
-			rollResults,
-			cocBonusResult,
-			cocPenaltyResult
+			rollResults
 		}));
 	}
 

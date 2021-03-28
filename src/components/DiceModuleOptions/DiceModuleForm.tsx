@@ -4,7 +4,7 @@ import Form from 'react-bootstrap/Form';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
 import './DiceModuleForm.css';
 
-const cocModeLabel = <span>Call of Cthulhu 7e</span>;
+const cthulhuModeLabel = <span>Call of Cthulhu 7e</span>;
 const warhammerModeLabel = <span>Warhammer</span>;
 const conanModeLabel = <span>Conan 2d20</span>;
 const infinityModeLabel = <span>Infinity 2d20</span>;
@@ -37,7 +37,7 @@ const RenderCheckbox = createRenderer((input, label, id, disabled) =>
 function DiceModuleForm({ rollOptions }:any) {
 	const {
 		warhammerMode,
-		cocMode,
+		cthulhuMode,
 		conanMode,
 		infinityMode,
 		narrativeDice,
@@ -57,9 +57,9 @@ function DiceModuleForm({ rollOptions }:any) {
 				disabled={ narrativeDice || rollAndKeepMode }
 			/>
 			<Field
-				name="cocMode"
-				id="cocMode"
-				label={cocModeLabel}
+				name="cthulhuMode"
+				id="cthulhuMode"
+				label={cthulhuModeLabel}
 				component={RenderCheckbox}
 				disabled={warhammerMode || conanMode || infinityMode || narrativeDice || l5rMode || fateMode || rollAndKeepMode }
 			/>
@@ -68,49 +68,49 @@ function DiceModuleForm({ rollOptions }:any) {
 				id="warhammerMode"
 				label={warhammerModeLabel}
 				component={RenderCheckbox}
-				disabled={cocMode || conanMode || infinityMode || narrativeDice || l5rMode || fateMode || rollAndKeepMode }
+				disabled={cthulhuMode || conanMode || infinityMode || narrativeDice || l5rMode || fateMode || rollAndKeepMode }
 			/>
 			<Field
 				name="conanMode"
 				id="conanMode"
 				label={conanModeLabel}
 				component={RenderCheckbox}
-				disabled={cocMode || warhammerMode || infinityMode || narrativeDice || l5rMode || fateMode || rollAndKeepMode }
+				disabled={cthulhuMode || warhammerMode || infinityMode || narrativeDice || l5rMode || fateMode || rollAndKeepMode }
 			/>
 			<Field
 				name="infinityMode"
 				id="infinityMode"
 				label={infinityModeLabel}
 				component={RenderCheckbox}
-				disabled={cocMode || warhammerMode || conanMode || narrativeDice || l5rMode || fateMode || rollAndKeepMode }
+				disabled={cthulhuMode || warhammerMode || conanMode || narrativeDice || l5rMode || fateMode || rollAndKeepMode }
 			/>
 			<Field
 				name="narrativeDice"
 				id="narrativeDice"
 				label={eoteModeLabel}
 				component={RenderCheckbox}
-				disabled={cocMode || conanMode || infinityMode || warhammerMode || l5rMode || fateMode || rollAndKeepMode }
+				disabled={cthulhuMode || conanMode || infinityMode || warhammerMode || l5rMode || fateMode || rollAndKeepMode }
 			/>
 			<Field
 				name="fateMode"
 				id="fateMode"
 				label={fateLabel}
 				component={RenderCheckbox}
-				disabled={cocMode || conanMode || infinityMode || warhammerMode || narrativeDice || l5rMode || rollAndKeepMode }
+				disabled={cthulhuMode || conanMode || infinityMode || warhammerMode || narrativeDice || l5rMode || rollAndKeepMode }
 			/>
 			<Field
 				name="rollAndKeepMode"
 				id="rollAndKeepMode"
 				label={l5r1eModeLabel}
 				component={RenderCheckbox}
-				disabled={cocMode || conanMode || infinityMode || warhammerMode || narrativeDice || fateMode || l5rMode} 
+				disabled={cthulhuMode || conanMode || infinityMode || warhammerMode || narrativeDice || fateMode || l5rMode}
 			/>
 			<Field
 				name="l5rMode"
 				id="l5rMode"
 				label={l5rModeLabel}
 				component={RenderCheckbox}
-				disabled={cocMode || conanMode || infinityMode || warhammerMode || narrativeDice || fateMode || rollAndKeepMode }
+				disabled={cthulhuMode || conanMode || infinityMode || warhammerMode || narrativeDice || fateMode || rollAndKeepMode }
 			/>
 		</Form>
 	);
@@ -128,7 +128,7 @@ const selector = formValueSelector(form);
 export default connect(state => ({
 	rollOptions: selector(
 		state,
-		'cocMode',
+		'cthulhuMode',
 		'warhammerMode',
 		'conanMode',
 		'infinityMode',

@@ -43,7 +43,7 @@ function DiceModule ({
 		diceSetType = CONAN;
 	} else if(rollOptions.infinityMode) {
 		diceSetType = INFINITY;
-	} else if (rollOptions.cocMode) {
+	} else if (rollOptions.cthulhuMode) {
 		diceSetType = COC;
 	} else if (rollOptions.fateMode) {
 		diceSetType = FATE_DICE;

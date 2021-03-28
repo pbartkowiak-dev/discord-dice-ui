@@ -60,8 +60,8 @@ const bonusTwoDiceLabel = <span>Apply <strong>two</strong> Bonus Dice</span>;
 const penaltyDieLabel = <span>Apply <strong>one</strong> Penalty Die</span>;
 const penaltyTwoDiceLabel = <span>Apply <strong>two</strong> Penalty Dice</span>;
 
-
 function CthulhuModalForm({
+	formId,
 	change,
 	invalid,
 	anyTouched,
@@ -69,9 +69,9 @@ function CthulhuModalForm({
 	handleSubmit,
 	specialDie
 }: any) {
-	const { cocBonus, cocTwoBonus, cocPenalty, cocTwoPenalty } = specialDie;
+	const { cthulhuBonus, cthulhuTwoBonus, cthulhuPenalty, cthulhuTwoPenalty } = specialDie;
 
-	const rangeId = 'coc-skill-range';
+	const rangeId = 'cthulhu-skill-range';
 
 	const handleRangeChange = (event: React.ChangeEvent<HTMLInputElement>) => change('skillLevel', event.target.value);
 
@@ -85,7 +85,7 @@ function CthulhuModalForm({
 	return (
 		<Form
 			className={ (invalid && (submitFailed || anyTouched)) ? 'form-invalid' : '' }
-			id="coc-mode-form"
+			id={formId}
 			onSubmit={handleSubmit}>
 				<div className="skill-level-field skill-level-field--with-range">
 					<Field
@@ -98,37 +98,37 @@ function CthulhuModalForm({
 					/>
 					<InputRange id={rangeId} onChange={handleRangeChange} />
 				</div>
-				<Form.Row className="coc-checkboxes-row">
+				<Form.Row className="cthulhu-checkboxes-row">
 					<Form.Group as={Col} md="6">
 						<Field
-							name="cocBonus"
-							id="cocBonus"
+							name="cthulhuBonus"
+							id="cthulhuBonus"
 							label={bonusDieLabel}
 							component={RenderCheckbox}
-							disabled={ cocPenalty || cocTwoPenalty || cocTwoBonus }
+							disabled={ cthulhuPenalty || cthulhuTwoPenalty || cthulhuTwoBonus }
 						/>
 						<Field
-							name="cocTwoBonus"
-							id="cocTwoBonus"
+							name="cthulhuTwoBonus"
+							id="cthulhuTwoBonus"
 							label={bonusTwoDiceLabel}
 							component={RenderCheckbox}
-							disabled={ cocPenalty || cocTwoPenalty || cocBonus }
+							disabled={ cthulhuPenalty || cthulhuTwoPenalty || cthulhuBonus }
 						/>
 					</Form.Group>
 					<Form.Group as={Col} md="6">
 					<Field
-						name="cocPenalty"
-						id="cocPenalty"
+						name="cthulhuPenalty"
+						id="cthulhuPenalty"
 						label={penaltyDieLabel}
 						component={RenderCheckbox}
-						disabled={ cocBonus || cocTwoPenalty || cocTwoBonus }
+						disabled={ cthulhuBonus || cthulhuTwoPenalty || cthulhuTwoBonus }
 					/>
 					<Field
-						name="cocTwoPenalty"
-						id="cocTwoPenalty"
+						name="cthulhuTwoPenalty"
+						id="cthulhuTwoPenalty"
 						label={penaltyTwoDiceLabel}
 						component={RenderCheckbox}
-						disabled={ cocBonus || cocPenalty || cocTwoBonus }
+						disabled={ cthulhuBonus || cthulhuPenalty || cthulhuTwoBonus }
 					/>
 				</Form.Group>
 			</Form.Row>
@@ -164,7 +164,7 @@ const validate = (values:any) => {
 	return errors;
 }
 
-const form = 'cocModeForm';
+const form = 'cthulhuForm';
 
 const FormElement = reduxForm({
 	form,
@@ -175,5 +175,11 @@ const FormElement = reduxForm({
 const selector = formValueSelector(form);
 
 export default connect(state => ({
-	specialDie: selector(state, 'cocBonus', 'cocPenalty', 'cocTwoBonus', 'cocTwoPenalty')
+	specialDie: selector(
+		state,
+		'cthulhuBonus',
+		'cthulhuPenalty',
+		'cthulhuTwoBonus',
+		'cthulhuTwoPenalty'
+	)
 }))(FormElement);

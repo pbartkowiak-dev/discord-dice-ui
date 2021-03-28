@@ -8,58 +8,62 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDiceD20 } from "@fortawesome/free-solid-svg-icons";
 import { closeCthulhuResultsModal } from "../../actions/cthulhu.actions";
 import ResultVsSkillRow from "../ResultVsSkillRow/ResultVsSkillRow";
-import CodeSpan from "../CodeSpan/CodeSpan";
 import SuccessLevelLadder from "../SuccessLevelLadder/SuccessLevelLadder";
 import joinAsBlocks from "../../utils/joinAsBlocks";
-import CthulhuPushOptionsContainer from "../CthulhuPushOptions/CthulhuPushOptionsContainer";
+import CthulhuPushOptions from "./CthulhuPushOptions";
 
 function CthulhuResultsModal() {
 	const dispatch = useDispatch();
 	const hideModal = () => dispatch(closeCthulhuResultsModal());
-
 	const cthulhuState = useSelector(({ cthulhuState }: any) => cthulhuState);
-	const { showResultsModal, results } = cthulhuState;
+	const lastRollOptions = useSelector(({ lastRollOptions }: any) => lastRollOptions);
+	const { showResultsModal, isPushed, results } = cthulhuState;
+
 	const {
+		skillLevel,
 		finalDieResult,
 		successLevels,
 		rollResults,
-		cocBonusResult,
-		cocPenaltyResult,
 	} = results;
 
 	if (!successLevels) {
 		return null;
 	}
 
-	// const handleReroll = () => {
-	// 	dispatch(closeCthulhuResultsModal());
-	//
-	// 	setTimeout(() => {
-	// 		dispatch(requestCthulhuReroll());
-	// 	}, 500);
-	// };
+	const {
+		cthulhuBonus,
+		cthulhuTwoBonus,
+		cthulhuPenalty,
+		cthulhuTwoPenalty
+	} = lastRollOptions;
+
+	const {
+		isSuccess,
+	} = successLevels;
 
 	const resultsJoined = joinAsBlocks(rollResults);
 	let resultsInfo = null;
 
-	if (cocBonus || cocTwoBonus) {
-		const dieWord = rollOptions.cocBonus ? 'one Bonus Die' : 'two Bonus Dice';
+	if (cthulhuBonus || cthulhuTwoBonus) {
+		const dieWord = cthulhuBonus ? 'one Bonus Die' : 'two Bonus Dice';
 		resultsInfo = <>You rolled <strong>{dieWord}</strong>. Results: {resultsJoined}.</>;
-	} else if (rollOptions.cocPenalty || rollOptions.cocTwoPenalty) {
-		const dieWord = cocPenalty ? 'one Penalty Die' : 'two Penalty Dice';
+	} else if (cthulhuPenalty || cthulhuTwoPenalty) {
+		const dieWord = cthulhuPenalty ? 'one Penalty Die' : 'two Penalty Dice';
 		resultsInfo = <>You rolled <strong>{dieWord}</strong>. Results: {resultsJoined}.</>;
 	}
 
 	const skillLevelString = skillLevel <= 9 ? `0${skillLevel}` : `${skillLevel}`;
-
-	const canPush = isSuccess === false && !rollOptions.isPushed;
+	const canPush = !isSuccess && !isPushed;
 
 	return (
 		<Modal
 			show={showResultsModal}
 			onHide={hideModal}
 		>
-			<Modal.Header closeButton className={styles.resultsModalHeader}>
+			<Modal.Header closeButton className={classNames({
+				[styles.resultsModalHeader]: true,
+				[styles.isFailure]: !isSuccess
+			})}>
 				<FontAwesomeIcon className={styles.resultsModalDiceIcon} icon={faDiceD20} />
 				<Modal.Title className={styles.resultsModalTitle}>Roll Results</Modal.Title>
 			</Modal.Header>
@@ -69,19 +73,18 @@ function CthulhuResultsModal() {
 				{/* Results vs Skill */}
 				<ResultVsSkillRow
 					skillLevel={skillLevelString}
-					finalDieResult={resultString}
-					isSuccess={successLevels.isSuccess}
+					finalDieResult={finalDieResult}
+					isSuccess={isSuccess}
 				/>
 
-				{/* Succes Level Ladder */}
+				{/* Success Level Ladder */}
 				<SuccessLevelLadder successLevels={successLevels} />
 
 				{/* Push */}
-				{canPush && <CthulhuPushOptionsContainer
-					rollOptions={rollOptions}
+				{canPush && <CthulhuPushOptions
+					skillLevel={skillLevel}
 					finalDieResult={finalDieResult}
 				/>}
-
 			</Modal.Body>
 			<Modal.Footer>
 				<Button

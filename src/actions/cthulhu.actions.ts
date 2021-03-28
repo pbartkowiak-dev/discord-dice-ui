@@ -1,6 +1,7 @@
 export const OPEN_CTHULHU_MODAL = 'OPEN_CTHULHU_MODAL';
 export const CLOSE_CTHULHU_MODAL = 'CLOSE_CTHULHU_MODAL';
 export const CTHULHU_ROLL_REQESTED = 'CTHULHU_ROLL_REQESTED';
+export const CTHULHU_PUSH_ROLL_REQESTED = 'CTHULHU_PUSH_ROLL_REQESTED';
 export const CTHULHU_DICE_ROLLED = 'CTHULHU_DICE_ROLLED';
 export const CLOSE_CTHULHU_RESULTS_MODAL = 'CLOSE_CTHULHU_RESULTS_MODAL';
 
@@ -34,4 +35,10 @@ export function closeCthulhuResultsModal() {
 	return {
 		type: CLOSE_CTHULHU_RESULTS_MODAL
 	};
+}
+
+ export function requestCthulhuPushRoll() {
+	return {
+		type: CTHULHU_PUSH_ROLL_REQESTED
+	}
 }

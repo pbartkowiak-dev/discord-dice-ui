@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
@@ -18,13 +19,18 @@ function CthulhuModal({
 		closeCthulhuModal();
 	};
 
+	const formId = 'cthulhu-mode-form';
+
 	return (
 		<Modal show={showModal} onHide={closeCthulhuModal}>
 			<Modal.Header closeButton>
 				<Modal.Title>Call of Cthulhu 7e Roll Options</Modal.Title>
 			</Modal.Header>
 			<Modal.Body>
-				<CthulhuModalForm onSubmit={values => handleSubmit(values)} />
+				<CthulhuModalForm
+					onSubmit={values => handleSubmit(values)}
+					formId={formId}
+				/>
 			</Modal.Body>
 			<Modal.Footer>
 				<Button variant="secondary" onClick={closeCthulhuModal}>
@@ -33,7 +39,7 @@ function CthulhuModal({
 				<Button
 					variant="success"
 					type="submit"
-					form="coc-mode-form">Roll!
+					form={formId}>Roll!
 				</Button>
 			</Modal.Footer>
 		</Modal>

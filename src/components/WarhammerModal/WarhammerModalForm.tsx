@@ -88,6 +88,7 @@ const darkHeresyLabel = (
 );
 
 function WarhammerModalForm({
+	formId,
 	change,
 	invalid,
 	anyTouched,
@@ -115,7 +116,7 @@ function WarhammerModalForm({
 	return (
 		<Form
 			className={ (invalid && (submitFailed || anyTouched)) ? 'form-invalid' : '' }
-			id="warhammer-mode-form"
+			id={formId}
 			onSubmit={handleSubmit}>
 				<div className="specialSLContainer">
 					<label>

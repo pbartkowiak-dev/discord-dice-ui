@@ -5,7 +5,7 @@ export interface CthulhuModalPropTypes {
 }
 
 export interface CthulhuFormValuesTypes {
-	cocTwoBonus?: boolean;
-	cocTwoPenalty?: boolean;
+	cthulhuTwoBonus?: boolean;
+	cthulhuTwoPenalty?: boolean;
 	skillLevel: string;
 }

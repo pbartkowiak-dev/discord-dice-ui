@@ -22,25 +22,28 @@ import NarrativeTokensModalContainer from '../NarrativeTokensModal/NarrativeToke
 import { ModalsStateTypes } from '../../reducers/modalsReducer';
 
 import WarhammerResultsModal from "../WarhammerResultsModal/WarhammerResultsModal";
+import CthulhuResultsModal from "../CthulhuResultsModal/CthulhuResultsModal";
 
 interface modalsPropTypes {
 	modalsState: ModalsStateTypes;
-	warhammerState: any
+	warhammerState: any,
+	cthulhuState: any
 }
 
-const mapStateToProps = ({ modalsState, warhammerState }: any) => {
+const mapStateToProps = ({ modalsState, warhammerState, cthulhuState }: any) => {
 	return {
 		modalsState,
-		warhammerState
+		warhammerState,
+		cthulhuState
 	};
 };
 
-function Modals({ modalsState, warhammerState }: modalsPropTypes) {
+function Modals({ modalsState, warhammerState, cthulhuState }: modalsPropTypes) {
 	return (
 		<>
 			<SettingsModalContainer showModal={modalsState.isSettingsModalOpen} />
 			<ModifierModalContainer showModal={modalsState.isModifierModalOpen} />
-			<CthulhuModalContainer showModal={modalsState.isCthulhuModalOpen} />
+			<CthulhuModalContainer showModal={cthulhuState.showModal} />
 			<WarhammerModalContainer showModal={warhammerState.showModal} />
 			<WarhammerMoneyModalContainer showModal={modalsState.isWarhammerMoneyModalOpen} />
 			<ConanModalContainer showModal={modalsState.isConanModalOpen} />
@@ -55,6 +58,7 @@ function Modals({ modalsState, warhammerState }: modalsPropTypes) {
 
 			<L5rResultsModalContainer />
 			<WarhammerResultsModal />
+			<CthulhuResultsModal />
 		</>
 	);
 }
