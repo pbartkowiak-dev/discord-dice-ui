@@ -43,21 +43,8 @@
 	margin-bottom: 0;
 }
 
-.warhammer-skill-level-field {
+.skill-level-field--with-range {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-}
-
-.range-container {
-	display: flex;
-	justify-content: center;
-	align-content: center;
-	color: #767676;
-	font-size: 15px;
-}
-
-.range-container .form-group {
-	margin: 0;
-	padding: 0 10px;
 }

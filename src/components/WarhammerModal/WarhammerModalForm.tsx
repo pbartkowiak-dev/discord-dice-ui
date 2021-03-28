@@ -1,6 +1,6 @@
 // @ts-nocheck
 import React from 'react';
-import {connect, useDispatch} from 'react-redux';
+import { connect, useDispatch } from 'react-redux';
 import Form from 'react-bootstrap/Form';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -10,6 +10,7 @@ import tooltip from '../../locale/tooltip';
 import './WarhammerModalForm.css';
 import localStorageWarhammerSlModeManager from "../../utils/localStorageWarhammerSlModeManager";
 import { saveSlType } from "../../actions/warhammer.actions";
+import InputRange from "../InputRange/InputRange";
 
 const percentIcon = <span className="percent-icon"><FontAwesomeIcon icon={faPercent} /></span>;
 
@@ -91,8 +92,7 @@ function WarhammerModalForm({
 	invalid,
 	anyTouched,
 	submitFailed,
-	handleSubmit,
-	formValues = {}
+	handleSubmit
 }: any) {
 	const dispatch = useDispatch();
 
@@ -101,10 +101,12 @@ function WarhammerModalForm({
 		localStorageWarhammerSlModeManager.save(slType);
 	};
 
-	const handleRangeChange = event => change('skillLevel', event.target.value);
+	const rangeId = 'warhammer-skill-range';
 
-	const handleSkillChange = event => {
-		const skillRange = document.getElementById("skillRange");
+	const handleRangeChange = (event: React.ChangeEvent<HTMLInputElement>) => change('skillLevel', event.target.value);
+
+	const handleSkillChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		const skillRange = document.getElementById(rangeId) as HTMLInputElement;
 		if (skillRange) {
 			skillRange.value = event.target.value;
 		}
@@ -157,7 +159,7 @@ function WarhammerModalForm({
 						{darkHeresyLabel}
 					</label>
 				</div>
-				<div className="warhammer-skill-level-field skill-level-field">
+				<div className="skill-level-field skill-level-field--with-range">
 					<Field
 						id="skillLevel"
 						name="skillLevel"
@@ -166,20 +168,7 @@ function WarhammerModalForm({
 						component={renderInput}
 						onChange={handleSkillChange}
 					/>
-					<div className="range-container">
-						<span>1%</span>
-						<Form.Group>
-							<Form.Control
-								type="range"
-								id="skillRange"
-								name="skillRange"
-								min="1"
-								max="100"
-								onChange={handleRangeChange}
-							/>
-						</Form.Group>
-						<span>100%</span>
-					</div>
+					<InputRange id={rangeId} onChange={handleRangeChange} />
 				</div>
 		</Form>
 	);

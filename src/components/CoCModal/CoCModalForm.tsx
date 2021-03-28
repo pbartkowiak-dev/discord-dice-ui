@@ -6,6 +6,7 @@ import Col from 'react-bootstrap/Col';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPercent } from '@fortawesome/free-solid-svg-icons';
 import './CoCModalForm.css';
+import InputRange from "../InputRange/InputRange";
 
 const percentIcon = <span className="percent-icon"><FontAwesomeIcon icon={faPercent} /></span>;
 
@@ -61,6 +62,7 @@ const penaltyTwoDiceLabel = <span>Apply <strong>two</strong> Penalty Dice</span>
 
 
 function CoCModalForm({
+	change,
 	invalid,
 	anyTouched,
 	submitFailed,
@@ -68,21 +70,35 @@ function CoCModalForm({
 	specialDie
 }: any) {
 	const { cocBonus, cocTwoBonus, cocPenalty, cocTwoPenalty } = specialDie;
+
+	const rangeId = 'coc-skill-range';
+
+	const handleRangeChange = (event: React.ChangeEvent<HTMLInputElement>) => change('skillLevel', event.target.value);
+
+	const handleSkillChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		const skillRange = document.getElementById(rangeId) as HTMLInputElement;
+		if (skillRange) {
+			skillRange.value = event.target.value;
+		}
+	};
+
 	return (
 		<Form
 			className={ (invalid && (submitFailed || anyTouched)) ? 'form-invalid' : '' }
 			id="coc-mode-form"
 			onSubmit={handleSubmit}>
-				<div className="skill-level-field">
+				<div className="skill-level-field skill-level-field--with-range">
 					<Field
 						id="skillLevel"
 						name="skillLevel"
 						label="Skill level:"
 						textMuted="Enter your Investigator's skill level"
 						component={renderInput}
+						onChange={handleSkillChange}
 					/>
+					<InputRange id={rangeId} onChange={handleRangeChange} />
 				</div>
-				<Form.Row>
+				<Form.Row className="coc-checkboxes-row">
 					<Form.Group as={Col} md="6">
 						<Field
 							name="cocBonus"

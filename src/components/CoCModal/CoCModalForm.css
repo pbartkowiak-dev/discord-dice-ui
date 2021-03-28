@@ -34,3 +34,7 @@
 .form-invalid .percent-icon{
 	color: #dc3545;
 }
+
+.coc-checkboxes-row {
+	margin-top: 20px;
+}
