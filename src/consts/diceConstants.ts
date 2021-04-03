@@ -49,3 +49,6 @@ export const RING_DIE = 'ring_die';
 export const SKILL_DIE = 'skill_die';
 
 export const ROLL_AND_KEEP_DICE = 'ROLL_AND_KEEP_DICE';
+
+export const CTHULHU_SHEET_MODAL = 'CTHULHU_SHEET_MODAL';
+

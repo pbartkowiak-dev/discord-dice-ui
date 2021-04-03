@@ -6,6 +6,7 @@ import NarrativeDicePoolBuilderContainer from './components/NarrativeDicePoolBui
 import L5rDicePoolBuilderContainer from './components/L5rDicePoolBuilder/L5rDicePoolBuilderContainer';
 import RollAndKeepPoolBuilderContainer from './components/RollAndKeepPoolBuilder/RollAndKeepPoolBuilderContainer';
 import Modals from './components/Modals/Modals';
+import LocalStorageManager from "./components/LocalStorageManager/LocalStorageManager";
 
 function App({ rollOptions }: any) {
 	let diceModule;
@@ -28,6 +29,7 @@ function App({ rollOptions }: any) {
 				<DiceModuleOptions rollOptions={rollOptions} />
 				{ diceModule }
 			</div>
+			<LocalStorageManager />
 		</div>
 	);
 }

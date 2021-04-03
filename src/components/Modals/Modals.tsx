@@ -23,6 +23,7 @@ import { ModalsStateTypes } from '../../reducers/modalsReducer';
 
 import WarhammerResultsModal from "../WarhammerResultsModal/WarhammerResultsModal";
 import CthulhuResultsModal from "../CthulhuResultsModal/CthulhuResultsModal";
+import CthulhuSheetModal from "../CthulhuSheetModal/CthulhuSheetModal";
 
 interface modalsPropTypes {
 	modalsState: ModalsStateTypes;
@@ -59,6 +60,7 @@ function Modals({ modalsState, warhammerState, cthulhuState }: modalsPropTypes) 
 			<L5rResultsModalContainer />
 			<WarhammerResultsModal />
 			<CthulhuResultsModal />
+			<CthulhuSheetModal />
 		</>
 	);
 }

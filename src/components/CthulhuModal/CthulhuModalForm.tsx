@@ -1,14 +1,29 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Dropdown } from "react-bootstrap";
+import classNames from 'classnames';
 import Form from 'react-bootstrap/Form';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
 import Col from 'react-bootstrap/Col';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPercent } from '@fortawesome/free-solid-svg-icons';
+import { faPercent, faTimes } from '@fortawesome/free-solid-svg-icons';
 import './CthulhuModalForm.css';
 import InputRange from "../InputRange/InputRange";
+import cthulhuSkillsList, { getSkillById, SkillType } from "../CthulhuSheetModal/utils/cthulhuSkillsList";
+import cthulhuAttributesList, {
+	AttributeType,
+	getAttributeById
+} from "../CthulhuSheetModal/utils/cthulhuAttributesList";
+import styles from "../CthulhuSheetModal/CthulhuSheetModal.module.css";
+import Modal from "react-bootstrap/Modal";
 
-const percentIcon = <span className="percent-icon"><FontAwesomeIcon icon={faPercent} /></span>;
+const PercentIcon = () => (
+	<span className="percent-icon"><FontAwesomeIcon icon={faPercent} /></span>
+);
+
+const TimesIcon = ({ onClick }: { onClick: (e: any) => void }) => (
+	<span className="cthulhu-select-to-sheet__times-icon" onClick={onClick}><FontAwesomeIcon icon={faTimes} /></span>
+);
 
 // @ts-ignore
 const createRenderer = render => ({ input, label, id, textMuted, meta, disabled }, ...rest) => {
@@ -35,7 +50,7 @@ const renderInput = createRenderer((input, label, id, textMuted, meta, disabled)
 					isInvalid ={hasError}
 					{...input}
 				/>
-				{ percentIcon }
+				<PercentIcon />
 			</div>
 			{ hasError && <Form.Control.Feedback type="invalid">{ error }</Form.Control.Feedback> }
 			{ textMuted && <Form.Text className="text-muted">{ textMuted }</Form.Text> }
@@ -67,20 +82,32 @@ function CthulhuModalForm({
 	anyTouched,
 	submitFailed,
 	handleSubmit,
-	specialDie
+	specialDie,
+	skillId = ''
 }: any) {
 	const { cthulhuBonus, cthulhuTwoBonus, cthulhuPenalty, cthulhuTwoPenalty } = specialDie;
-
 	const rangeId = 'cthulhu-skill-range';
 
 	const handleRangeChange = (event: React.ChangeEvent<HTMLInputElement>) => change('skillLevel', event.target.value);
 
-	const handleSkillChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+	const handleSkillValueChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 		const skillRange = document.getElementById(rangeId) as HTMLInputElement;
 		if (skillRange) {
 			skillRange.value = event.target.value;
 		}
 	};
+
+	const handleDropdownChange = (event: any, id: string) => {
+		event.preventDefault();
+		change('skillId', id)
+	};
+
+	const clearSkill = (event: any) => {
+		event.preventDefault();
+		change('skillId', '')
+	};
+
+	const selectedSkill = getSkillById(skillId) || getAttributeById(skillId) || null;
 
 	return (
 		<Form
@@ -94,7 +121,7 @@ function CthulhuModalForm({
 						label="Skill level:"
 						textMuted="Enter your Investigator's skill level"
 						component={renderInput}
-						onChange={handleSkillChange}
+						onChange={handleSkillValueChange}
 					/>
 					<InputRange id={rangeId} onChange={handleRangeChange} />
 				</div>
@@ -132,6 +159,44 @@ function CthulhuModalForm({
 					/>
 				</Form.Group>
 			</Form.Row>
+			<section className="cthulhu-select-to-sheet__container">
+				<input type="hidden" name="skillId" id="skillId" value={skillId} />
+				<Dropdown className="cthulhu-select-to-sheet__dropdown">
+					<Dropdown.Toggle
+						variant="outline-secondary"
+						id="cthulhu-select-to-sheet-dropdown"
+						className="cthulhu-select-to-sheet__button"
+					>
+						<span>{selectedSkill?.name || "Save a Skill to the Character Sheet"}</span>
+					</Dropdown.Toggle>
+					<Dropdown.Menu>
+						<div className="cthulhu-select-to-sheet__list"> {
+							cthulhuAttributesList.map(({ id, name }: AttributeType) => (
+								<Dropdown.Item
+									key={id}
+									href="#"
+									className={classNames({
+										'cthulhu-select-to-sheet__item--selected': skillId && skillId === id
+									})}
+									onClick={(e) => handleDropdownChange(e, id)}>{name}</Dropdown.Item>
+							))
+						} </div>
+						<div className="cthulhu-select-to-sheet__list-separator" />
+						<div className="cthulhu-select-to-sheet__list"> {
+							cthulhuSkillsList.map(({ id, name }: SkillType) => (
+								<Dropdown.Item
+									key={id}
+									href="#"
+									className={classNames({
+										'cthulhu-select-to-sheet__item--selected': skillId && skillId === id
+									})}
+									onClick={(e) => handleDropdownChange(e, id)}>{name}</Dropdown.Item>
+							))
+						} </div>
+					</Dropdown.Menu>
+				</Dropdown>
+				<TimesIcon onClick={clearSkill}/>
+			</section>
 		</Form>
 	);
 }
@@ -175,6 +240,7 @@ const FormElement = reduxForm({
 const selector = formValueSelector(form);
 
 export default connect(state => ({
+	skillId: selector(state, 'skillId'),
 	specialDie: selector(
 		state,
 		'cthulhuBonus',

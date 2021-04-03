@@ -1,5 +1,5 @@
 const localStorageUserSettingsManager = {
-	save(userSettings:any) {
+	save(userSettings: any) {
 		if (userSettings) {
 			localStorage.setItem(
 				'userSettings',

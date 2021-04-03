@@ -29,7 +29,8 @@ import {
 	CONAN_TOKENS,
 	INFINITY_TOKENS,
 	NARRATIVE_TOKENS,
-	WARHAMMER_MONEY
+	WARHAMMER_MONEY,
+	CTHULHU_SHEET_MODAL
 } from './diceConstants';
 
 import { FATE_DIE } from './fateConsts';
@@ -126,6 +127,11 @@ export const CthulhuSet = [{
 }, {
 	diceType: D4,
 	label: 'd4'
+},  {
+	diceType: CTHULHU_SHEET_MODAL,
+	diceImg: 'sheet-icon.png',
+	label: 'Character Sheet',
+	noDropdown: true
 }];
 
 export const warhammerSet = [{

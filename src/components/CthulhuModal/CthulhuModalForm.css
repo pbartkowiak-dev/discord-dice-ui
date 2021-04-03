@@ -38,3 +38,85 @@
 .cthulhu-checkboxes-row {
 	margin-top: 20px;
 }
+
+.cthulhu-select-to-sheet__container {
+	display: flex;
+	justify-content: center;
+	border-top: 1px solid #bebebe;
+	margin-top: 5px;
+	padding-top: 10px;
+}
+
+.cthulhu-select-to-sheet__list {
+	-webkit-column-count: 1;
+	-moz-column-count: 1;
+	column-count: 1;
+}
+
+.cthulhu-select-to-sheet__list-separator {
+	margin: 5px 10px;
+	border-top: 1px solid lightgray;
+}
+
+.cthulhu-select-to-sheet__dropdown {
+	width: 100%;
+}
+
+.cthulhu-select-to-sheet__button {
+	width: 100%;
+}
+
+.cthulhu-select-to-sheet__times-icon {
+	width: 45px;
+	height: 35px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+	padding-top: 5px;
+	color: #252525;
+	font-size: 19px;
+	opacity: 0.5;
+	transition: .2s;
+}
+
+.cthulhu-select-to-sheet__times-icon:hover {
+	opacity: 1;
+}
+
+.cthulhu-select-to-sheet__item--selected {
+	font-weight: bold;
+	background: #d1ecf1;
+}
+
+@media only screen and (min-width: 480px) {
+	.cthulhu-select-to-sheet__list {
+		-webkit-column-count: 2;
+		-moz-column-count: 2;
+		column-count: 2;
+	}
+}
+
+@media only screen and (min-width: 640px) {
+	.cthulhu-select-to-sheet__list {
+		-webkit-column-count: 3;
+		-moz-column-count: 3;
+		column-count: 3;
+	}
+}
+
+@media only screen and (min-width: 960px) {
+	.cthulhu-select-to-sheet__list {
+		-webkit-column-count: 4;
+		-moz-column-count: 4;
+		column-count: 4;
+	}
+}
+
+@media only screen and (min-width: 1180px) {
+	.cthulhu-select-to-sheet__list {
+		-webkit-column-count: 5;
+		-moz-column-count: 5;
+		column-count: 5;
+	}
+}

@@ -10,7 +10,8 @@ import {
 	D20_INFINITY_HL,
 	INFINITY_TOKENS,
 	NARRATIVE_TOKENS,
-	WARHAMMER_MONEY
+	WARHAMMER_MONEY,
+	CTHULHU_SHEET_MODAL
 } from '../consts/diceConstants';
 import {
 	openConanModal,
@@ -34,7 +35,7 @@ import { openConanTokensModal } from '../actions/conan.actions';
 import { openInfinityTokensModal } from '../actions/infinity.actions';
 import { openNarrativeTokensModal } from '../actions/narrativeDice.actions';
 import { openWarhammerModal } from "../actions/warhammer.actions";
-import { openCthulhuModal } from '../actions/cthulhu.actions';
+import { openCthulhuModal, openCthulhuSheetModal } from '../actions/cthulhu.actions';
 
 export default (store:any) => (next:any) => (action:any) => {
 	if (action.type === ROLL_SUBMITTED) {
@@ -99,6 +100,8 @@ export default (store:any) => (next:any) => (action:any) => {
 				store.dispatch(openNarrativeTokensModal());
 			} else if (diceType === WARHAMMER_MONEY) {
 				store.dispatch(openWarhammerMoneyModal());
+			} else if (diceType === CTHULHU_SHEET_MODAL) {
+				store.dispatch(openCthulhuSheetModal());
 			} else if (formValues.useModifier) {
 				store.dispatch(openModifierModal());
 			} else {
