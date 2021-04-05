@@ -124,7 +124,7 @@ function CthulhuSheetModal() {
 			size="lg"
 		>
 			<Modal.Header closeButton>
-				<Modal.Title><FontAwesomeIcon className={styles.headerIcon} icon={faFileInvoice} /> Character Skills</Modal.Title>
+				<Modal.Title><FontAwesomeIcon className={styles.headerIcon} icon={faFileInvoice} /> Character Sheet</Modal.Title>
 			</Modal.Header>
 			<Modal.Body>
 				<div className={styles.containerBonusDice}>

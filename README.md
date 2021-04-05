@@ -36,6 +36,10 @@ After selecting the mode in the _Roll Options_ a dedicated modal will be shown f
 
 [![Call of Cthulhu 7e Mode 2](./public/coc-mode-2.png)]()
 
+Skill values can be stored in build-in character sheet:
+
+[![Call of Cthulhu 7e Mode 2](./public/cthulhu-sheet.png)]()
+
 ## Warhammer <a id="warhammer"></a>
 
 The app offers special support for rolling Success Levels in Warhammer 2e, Warhammer 4e and Dark Heresy II.
