@@ -17,6 +17,7 @@
 >         + [Narrative Dice](#narrative-dice)    
 >         + [Fate](#fate)    
 > - [Discord Configuration](#discord-configuration)
+> - [Query parameters](#query-params)
 > - [Developers' Info](#dev-info)
 
 ## The App Overview <a id="overview"></a>
@@ -129,6 +130,25 @@ In order to get started, **Discord's server admin has to create a Webhook** and 
     ![how-to-5](./public/how-to-4.png)
 
 6. Saving the Webhook in the app will connect the app with the Discord server.
+
+--------------------------------------------
+
+## Query Parameters <a id="query-params"></a>
+Several settings can by passed directly in the URL in the following format:
+<pre xmlns="http://www.w3.org/1999/html">
+discord-dice-ui.herokuapp.com/<font color="green"><b>?q=</b></font>foo123<b><font color="orange">&username=</font></b>Django<b><font color="blue">&sl=</b></font>fast
+</pre>
+Available parameters:
+-  `q` - Discord Webhook URL
+-  `username` - Discord UI Username
+- `sl` - Warhammer Success Level calculation method. Available values:
+  - `4e` for default Warhammer 4e Success Level
+  - `fast`  for Warhammer 4e Fast Success Level
+  - `2e`  for default Warhammer 2e Degrees of Success
+  - `dh`  for default Dark Heresy 2e Degrees of Success
+
+
+
 
 --------------------------------------------
 ## Developers' Info <a id="dev-info"></a>

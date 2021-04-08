@@ -11,6 +11,7 @@ import './WarhammerModalForm.css';
 import localStorageWarhammerSlModeManager from "../../utils/localStorageWarhammerSlModeManager";
 import { saveSlType } from "../../actions/warhammer.actions";
 import InputRange from "../InputRange/InputRange";
+import sl from "./sl";
 
 const percentIcon = <span className="percent-icon"><FontAwesomeIcon icon={faPercent} /></span>;
 
@@ -49,7 +50,7 @@ const renderInput = createRenderer((input, label, id, textMuted, meta, disabled)
 
 const warhammer4eSLLabel = (
 	<span
-		>Use default Warhammer 4e SL <InfoTooltip
+		>Use <strong>default</strong> Warhammer 4e SL <InfoTooltip
 			content={tooltip.warhammer4eSL}
 			className="tooltip-fast-sl-icon"
 			placement="bottom"
@@ -59,7 +60,7 @@ const warhammer4eSLLabel = (
 
 const fastSLLabel = (
 	<span
-		>Use Warhammer 4e Fast SL <InfoTooltip
+	>Use Warhammer 4e <strong>Fast SL</strong> <InfoTooltip
 			content={tooltip.fastSL}
 			className="tooltip-fast-sl-icon"
 			placement="bottom"
@@ -122,7 +123,7 @@ function WarhammerModalForm({
 					<label>
 						<Field
 							name="slType"
-							value="warhammer4eSL"
+							value={sl.wfrp4e}
 							component="input"
 							type="radio"
 							onChange={handleSlChange}
@@ -132,7 +133,7 @@ function WarhammerModalForm({
 					<label>
 						<Field
 							name="slType"
-							value="fastSL"
+							value={sl.fast}
 							component="input"
 							type="radio"
 							onChange={handleSlChange}
@@ -142,7 +143,7 @@ function WarhammerModalForm({
 					<label>
 						<Field
 							name="slType"
-							value="warhammer2eSL"
+							value={sl.wfrp2e}
 							component="input"
 							type="radio"
 							onChange={handleSlChange}
@@ -152,7 +153,7 @@ function WarhammerModalForm({
 					<label>
 						<Field
 							name="slType"
-							value="darkHeresySL"
+							value={sl.dh}
 							component="input"
 							type="radio"
 							onChange={handleSlChange}
@@ -214,5 +215,5 @@ const FormElement = reduxForm({
 const selector = formValueSelector(form);
 
 export default connect(state => ({
-	formValues: selector(state, 'fastSL', 'darkHeresySL', 'warhammer4eSL', 'warhammer2eSL', 'slType')
+	formValues: selector(state,'slType')
 }))(FormElement);

@@ -4,6 +4,8 @@ import { saveSlType, closeWarhammerModal, requestWarhammerRoll } from '../../act
 import WarhammerModal from './WarhammerModal';
 import localStorageWarhammerSlModeManager from '../../utils/localStorageWarhammerSlModeManager';
 import { WarhammerModalContainerPropTypes } from './WarhammerModalTypes';
+import queryParamsManager from "../../utils/queryParamsManager";
+import sl, { isProperSl } from "./sl";
 
 const mapStateToProps = ({ warhammerState }: any) => {
 	return {
@@ -26,11 +28,15 @@ function WarhammerModalContainer({
 }: WarhammerModalContainerPropTypes) {
 
 	useEffect(() => {
-		const localStorageSlType = localStorageWarhammerSlModeManager.load()
-		if (localStorageSlType) {
-			saveSlType(localStorageSlType);
+		const storedSL = queryParamsManager.get('sl') || localStorageWarhammerSlModeManager.load();
+
+		if (isProperSl(storedSL)) {
+			// @ts-ignore
+			saveSlType(storedSL);
+		} else {
+			saveSlType(sl.wfrp4e);
 		}
-	}, [showModal, saveSlType]);
+	}, [saveSlType]);
 
 	return (
 		<WarhammerModal

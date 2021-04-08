@@ -2,6 +2,7 @@ import { WARHAMMER_DICE_ROLLED } from "../../actions/warhammer.actions";
 import { requestMsgReady } from '../../actions/roll.actions';
 import { FAILURE, getColor, SUCCESS } from '../../utils/getColor';
 import getWarhammerSuccessLevelString from "../../utils/getWarhammerSuccessLevelString";
+import sl from "../../components/WarhammerModal/sl";
 
 export default (store: any) => (next: any) => (action: any) => {
 	if (action.type === WARHAMMER_DICE_ROLLED) {
@@ -24,9 +25,9 @@ export default (store: any) => (next: any) => (action: any) => {
 			isDouble
 		} = successLevels;
 
-		const useFastSL = slType === 'fastSL';
-		const useDarkHeresySL = slType === 'darkHeresySL';
-		const useWarhammer2eSL = slType === 'warhammer2eSL';
+		const useFastSL = slType === sl.fast;
+		const useDarkHeresySL = slType === sl.dh;
+		const useWarhammer2eSL = slType === sl.wfrp2e;
 
 		const msgTitle = `${username} rolled **\`1d100\`**. Result: \`${result}\`.`;
 		const fields = [];

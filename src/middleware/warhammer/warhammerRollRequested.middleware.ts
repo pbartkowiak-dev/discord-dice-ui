@@ -5,6 +5,7 @@ import getReversedResult from "../../utils/getReversedResult";
 import getDarkHeresyIIHitLocation from "../../utils/getDarkHeresyIIHitLocation";
 import getWarhammer2eHitLocation from "../../utils/getWarhammer2eHitLocation";
 import getWarhammer4eHitLocation from "../../utils/getWarhammer4eHitLocation";
+import sl from "../../components/WarhammerModal/sl";
 
 export default (store: any) => (next: any) => (action: any) => {
 	if (action.type === WARHAMMER_ROLL_REQESTED) {
@@ -13,13 +14,13 @@ export default (store: any) => (next: any) => (action: any) => {
 		const { skillLevel } = action.payload;
 		const result = getResultsArray(100)[0];
 		const { slType } = warhammerState;
-		const useDarkHeresySL = slType === 'darkHeresySL';
-		const useWarhammer2eSL = slType === 'warhammer2eSL';
+		const useDarkHeresySL = slType === sl.dh;
+		const useWarhammer2eSL = slType === sl.wfrp2e;
 
 		const successLevels = getWarhammerSuccessLevels({
 			skillLevel,
 			result,
-			useFastSL: slType === 'fastSL',
+			useFastSL: slType === sl.fast,
 			useDarkHeresySL,
 			useWarhammer2eSL
 		});

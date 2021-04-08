@@ -11,6 +11,7 @@ import ResultVsSkillRow from "../ResultVsSkillRow/ResultVsSkillRow";
 import CodeSpan from "../CodeSpan/CodeSpan";
 import HitLocations from "../HitLocations/HitLocations";
 import rerollStyles from '../Reroll/Reroll.module.css';
+import sl from "../WarhammerModal/sl";
 
 function WarhammerResultsModal() {
 	const dispatch = useDispatch();
@@ -47,9 +48,9 @@ function WarhammerResultsModal() {
 		isDouble
 	} = successLevels;
 
-	const useFastSL = slType === 'fastSL';
-	const useDarkHeresySL = slType === 'darkHeresySL';
-	const useWarhammer2eSL = slType === 'warhammer2eSL';
+	const useFastSL = slType === sl.fast;
+	const useDarkHeresySL = slType === sl.dh;
+	const useWarhammer2eSL = slType === sl.wfrp2e;
 
 	let slString = successLevels.SL > 0 ? `+${successLevels.SL}` : `${successLevels.SL}`;
 	let slWord = 'Success Level';
