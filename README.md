@@ -143,9 +143,9 @@ Available parameters:
 -  `username` - Discord UI Username
 - `sl` - Warhammer Success Level calculation method. Available values:
   - `4e` for default Warhammer 4e Success Level
-  - `fast`  for Warhammer 4e Fast Success Level
-  - `2e`  for default Warhammer 2e Degrees of Success
-  - `dh`  for default Dark Heresy 2e Degrees of Success
+  - `fast` for Warhammer 4e Fast Success Level
+  - `2e` for default Warhammer 2e Degrees of Success
+  - `dh` for default Dark Heresy 2e Degrees of Success
 
 
 
