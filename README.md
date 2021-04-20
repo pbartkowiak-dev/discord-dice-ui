@@ -39,7 +39,9 @@ After selecting the mode in the _Roll Options_ a dedicated modal will be shown f
 
 Skill values can be stored in build-in character sheet:
 
-[![Call of Cthulhu 7e Mode 2](./public/cthulhu-sheet.png)]()
+[![Call of Cthulhu 7e Character Sheet Icon](./src/img/sheet-icon.png)]()
+
+[![Call of Cthulhu 7e Character Sheet](./public/cthulhu-sheet.png)]()
 
 ## Warhammer <a id="warhammer"></a>
 
