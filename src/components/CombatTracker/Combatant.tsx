@@ -69,7 +69,7 @@ interface HpCounterProps {
 	hp: number;
 	hpMax: number;
 	onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-	onKeyPress: (event: React.ChangeEvent<HTMLInputElement>) => void;
+	onKeyPress: (event: React.KeyboardEvent<HTMLElement>) => void;
 }
 
 function HpCounter ({ hp, hpMax, onChange, onKeyPress } : HpCounterProps) {
@@ -158,12 +158,11 @@ export default function Combatant({
 		}
 	};
 
-	// const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
-	const handleKeyPress = (event: any) => {
+	const handleKeyPress = (event: React.KeyboardEvent<HTMLElement>) => {
 		if (event.key === 'Enter') {
-			event.target.blur();
+			event.currentTarget.blur();
 		}
-	}
+	};
 
 	return (
 		<Draggable

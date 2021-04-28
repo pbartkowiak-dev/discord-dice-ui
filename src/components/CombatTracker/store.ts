@@ -55,6 +55,7 @@ const getIncreasedRenders = (renders: number) => {
     return renders + 1;
 }
 
+// @TODO get
 const useStore = create<State>(persist((set => ({
     renders: 0,
     isModalOpen: false,
@@ -84,23 +85,19 @@ const useStore = create<State>(persist((set => ({
 
             const combatants = [...state.combatants, newCombatant];
 
-            set({ combatants });
+            return { combatants };
         });
     },
     updateCombatant: (combatantId, field, value) => {
         set((state) => {
-            const combatant = state.combatants.find(c => combatantId === c.id) as CombatantTypes;
+            const combatant = state.combatants.find(c => combatantId === c.id)!;
             const combatantIndex = state.combatants.findIndex(c => combatantId === c.id);
-            let newValue;
 
-            if (field === 'hp' || field ===  'initiative') {
-                newValue = Number(value);
+            if (field === 'hp' || field ===  'initiative' || field ===  'advantage') {
+                combatant[field] = Number(value);
             } else {
-                newValue = value;
+                combatant[field] = value;
             }
-
-            // @ts-ignore
-            combatant[field] = newValue;
 
             const newCombatants = [...state.combatants];
             newCombatants[combatantIndex] = combatant;
