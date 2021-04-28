@@ -25,6 +25,8 @@ import WarhammerResultsModal from "../WarhammerResultsModal/WarhammerResultsModa
 import CthulhuResultsModal from "../CthulhuResultsModal/CthulhuResultsModal";
 import CthulhuSheetModal from "../CthulhuSheetModal/CthulhuSheetModal";
 
+import CombatTrackerModal from "../CombatTracker/CombatTrackerModal";
+
 interface modalsPropTypes {
 	modalsState: ModalsStateTypes;
 	warhammerState: any,
@@ -61,6 +63,7 @@ function Modals({ modalsState, warhammerState, cthulhuState }: modalsPropTypes) 
 			<WarhammerResultsModal />
 			<CthulhuResultsModal />
 			<CthulhuSheetModal />
+			<CombatTrackerModal />
 		</>
 	);
 }

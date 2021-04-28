@@ -10,6 +10,7 @@ export const SKILL_TEST = 'SKILL_TEST';
 export const POOL_BUILDER = 'POOL_BUILDER';
 export const POOL = 'pool';
 export const MODIFIER = 'modifier';
+export const COMBAT_TRACKER = 'COMBAT_TRACKER';
 
 export const D100_SL = 'd100SL';
 export const WARHAMMER_MONEY = 'WARHAMMER_MONEY';

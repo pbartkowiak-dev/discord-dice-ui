@@ -47,6 +47,8 @@ import rollAndKeepResultsKept from './middleware/rollAndKeep/rollAndKeepResultsK
 
 import sendRequestMsg from './middleware/sendRequestMsg.middleware';
 import reducers from './reducers/index';
+// Combat Tracker
+import combatTrackerSendRequested from './middleware/combatTracker/combatTrackerSendRequested.middleware';
 
 const rollMiddleware = [
 	handleRoll,
@@ -94,6 +96,8 @@ const rollMiddleware = [
 
 	getLocalPoolMsg,
 	getRequestPoolMsg,
+
+	combatTrackerSendRequested,
 
 	sendRequestMsg
 ];

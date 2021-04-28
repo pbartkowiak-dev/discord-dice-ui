@@ -11,7 +11,8 @@ import {
 	INFINITY_TOKENS,
 	NARRATIVE_TOKENS,
 	WARHAMMER_MONEY,
-	CTHULHU_SHEET_MODAL
+	CTHULHU_SHEET_MODAL,
+	COMBAT_TRACKER
 } from '../consts/diceConstants';
 import {
 	openConanModal,
@@ -36,6 +37,7 @@ import { openInfinityTokensModal } from '../actions/infinity.actions';
 import { openNarrativeTokensModal } from '../actions/narrativeDice.actions';
 import { openWarhammerModal } from "../actions/warhammer.actions";
 import { openCthulhuModal, openCthulhuSheetModal } from '../actions/cthulhu.actions';
+import useCombatTrackerStore from "../components/CombatTracker/store";
 
 export default (store:any) => (next:any) => (action:any) => {
 	if (action.type === ROLL_SUBMITTED) {
@@ -70,6 +72,9 @@ export default (store:any) => (next:any) => (action:any) => {
 				store.dispatch(requestPoolRoll({
 					...action.payload
 				}));
+			} else if (diceType === COMBAT_TRACKER) {
+				// @ts-ignore
+				useCombatTrackerStore.setState({ isModalOpen: true });
 			} else if (formValues.cthulhuMode && diceType === D100_SL) {
 				store.dispatch(openCthulhuModal());
 			} else if (formValues.warhammerMode && diceType === D100_SL) {

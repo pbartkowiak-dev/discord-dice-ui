@@ -1,0 +1,41 @@
+.container {
+    margin: 10px 0;
+    background: #fff;
+    border-radius: 12px;
+    border: 1px solid #c6c6c6;
+    min-height: 85px;
+    position: relative;
+}
+
+.containerWaitingRoom {
+    background: #f3f3f3;
+}
+
+.isDragging {
+    background: #007bff;
+}
+
+.draggingOverlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: .4;
+    background: #5f83de;
+}
+
+.draggingOverlayHovered {
+    background: #d4e4ff;
+    opacity: .8;
+}
+
+.name {
+    border-top-right-radius: 12px;
+    border-top-left-radius: 12px;
+    background: #e3e3e3;
+    text-align: center;
+    font-family: 'Roboto Mono', 'Courier New', Courier, monospace;
+}
+
+.nameWaitingRoom {
+    background: #b8b8b8;
+}

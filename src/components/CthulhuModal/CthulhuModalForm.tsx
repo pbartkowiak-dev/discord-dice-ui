@@ -14,8 +14,6 @@ import cthulhuAttributesList, {
 	AttributeType,
 	getAttributeById
 } from "../CthulhuSheetModal/utils/cthulhuAttributesList";
-import styles from "../CthulhuSheetModal/CthulhuSheetModal.module.css";
-import Modal from "react-bootstrap/Modal";
 
 const PercentIcon = () => (
 	<span className="percent-icon"><FontAwesomeIcon icon={faPercent} /></span>

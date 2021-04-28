@@ -2,7 +2,7 @@
 
 # Discord Dice UI
 
-🎲 **The app is intended to use as a graphical interface dice roller for Discord. You can connect it with your Discord chat and use it to roll some dice without typing!** 🎲
+**The app is intended to use as a graphical interface dice roller for Discord. You can connect it with your Discord chat and use it to roll some dice without typing!**
 
 > Table of content: 
 > 
@@ -16,11 +16,12 @@
 >         + [Legend of the Five Rings 5e](#l5r5e)    
 >         + [Narrative Dice](#narrative-dice)    
 >         + [Fate](#fate)    
+> - [Combat Tracker](#combat-tracker)
 > - [Discord Configuration](#discord-configuration)
 > - [Query parameters](#query-params)
 > - [Developers' Info](#dev-info)
 
-## The App Overview <a id="overview"></a>
+## 🎲 The App Overview <a id="overview"></a>
 
 The App interface:  
 [![App interface](./public/app.png)]()
@@ -97,9 +98,28 @@ Roll Results:
 ## Fate <a id="fate"></a>
 
 [![Fate dice](./public/fate.png)]()
+
 --------------------------------------------
 
-## Discord Configuration <a id="discord-configuration"></a>
+## ⚔️ Combat Tracker <a id="combat-tracker"></a>
+
+The Combat Tracker lets you organize the combat and share the current state of the battlefield with other players on Discord. It supports:
+- creating combat zones and moving combatants between them
+- adding descriptive conditions
+- adding descriptive wounds
+- sorting combatants in the initiative order
+- tracking HP
+- tracking the advantage (Warhammer 4e support)
+- creating combatants of the same type easily with one click (the _Copy_ button)  
+- saving the favorite combatants for the latter encounters
+
+[![Combat Tracker UI](./public/combat-tracker-1.png)]()
+
+[![Combat Tracker on Discord](./public/combat-tracker-2.png)]()
+
+--------------------------------------------
+
+## 🔧 Discord Configuration <a id="discord-configuration"></a>
 
 In order to get started, **Discord's server admin has to create a Webhook** and share a special link with other users. Read below how to do it.
 
@@ -135,7 +155,7 @@ In order to get started, **Discord's server admin has to create a Webhook** and 
 
 --------------------------------------------
 
-## Query Parameters <a id="query-params"></a>
+## 🔗 Query Parameters <a id="query-params"></a>
 Several settings can by passed directly in the URL in the following format:
 <pre xmlns="http://www.w3.org/1999/html">
 discord-dice-ui.herokuapp.com/<font color="green"><b>?q=</b></font>foo123<b><font color="orange">&username=</font></b>Django<b><font color="blue">&sl=</b></font>fast
@@ -153,7 +173,7 @@ Available parameters:
 
 
 --------------------------------------------
-## Developers' Info <a id="dev-info"></a>
+## 👨‍💻 Developers' Info <a id="dev-info"></a>
 
 ### Production build
 

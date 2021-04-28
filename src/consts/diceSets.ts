@@ -30,7 +30,8 @@ import {
 	INFINITY_TOKENS,
 	NARRATIVE_TOKENS,
 	WARHAMMER_MONEY,
-	CTHULHU_SHEET_MODAL
+	CTHULHU_SHEET_MODAL,
+	COMBAT_TRACKER
 } from './diceConstants';
 
 import { FATE_DIE } from './fateConsts';
@@ -47,6 +48,13 @@ import l5rDice from './l5rDice';
  * or described in `diceImg` property
  *
  ***************************************** */
+
+const combatTracker = {
+	diceType: COMBAT_TRACKER,
+	label: 'Combat Tracker',
+	diceImg: 'combat-tracker.png',
+	noDropdown: true
+};
 
 export const classicSet = [{
 	diceType: D100,
@@ -73,7 +81,9 @@ export const classicSet = [{
 	diceType: POOL,
 	label: 'Pool Builder',
 	noDropdown: true
-}];
+},
+	combatTracker
+];
 
 export const poolSet = [{
 	diceType: D100,
@@ -127,7 +137,9 @@ export const CthulhuSet = [{
 }, {
 	diceType: D4,
 	label: 'd4'
-},  {
+},
+	combatTracker,
+{
 	diceType: CTHULHU_SHEET_MODAL,
 	diceImg: 'sheet-icon.png',
 	label: 'Character Sheet',
@@ -146,7 +158,9 @@ export const warhammerSet = [{
 }, {
 	diceType: D10,
 	label: 'd10'
-}, {
+},
+	combatTracker,
+{
 	diceType: WARHAMMER_MONEY,
 	label: 'Money converter',
 	diceImg: 'warhammer_money/gold.png',
@@ -214,13 +228,14 @@ export const narrativeDiceSet = [
 
 export const l5rDiceSet = [
 	l5rDice[RING_DIE],
-	l5rDice[SKILL_DIE], {
+	l5rDice[SKILL_DIE],
+	combatTracker,
+{
 		diceType: D10,
 		label: 'd10',
 		isExcludedFromPool: true,
 		noDropdown: true
-	}
-];
+}];
 
 export const rollAndKeepDiceSet = [{
 	diceType: D10,
@@ -229,9 +244,13 @@ export const rollAndKeepDiceSet = [{
 }, {
 	diceType: MODIFIER,
 	label: 'Apply Modifier'
-}];
+},
+	combatTracker
+];
 
 export const fateDiceSet = [{
 	diceType: FATE_DIE,
 	label: 'Fate Dice'
-}];
+},
+	combatTracker
+];
