@@ -12,7 +12,12 @@ export default (store: any) => (next: any) => (action: any) => {
 		const combatTrackerState = useCombatTrackerStore.getState();
 		const { combatants, zones } = combatTrackerState;
 
-		const longestName = combatants.reduce((acc, c) => Math.max(acc, c.name.length), 12);
+		const showConditions = !!combatants.filter(c => c.conditions?.length > 0).length;
+
+		const longestName = combatants.reduce(
+			(acc, c) => Math.max(acc, c.name.length),
+			showConditions ? 20 : 12
+		);
 
 		const longestInitiative = combatants.reduce((acc, c) => {
 			return Math.max(acc, `${c.initiative}`.length);
@@ -33,9 +38,12 @@ export default (store: any) => (next: any) => (action: any) => {
 
 		zones.forEach((zoneName, currentZone) => {
 			description += '```md\n';
-			description += zoneName;
-			description += '\n';
-			description += `${'='.repeat( (showWounds ? woundsPad + 3 : 11) + longestName + longestAdvantage + longestHP)}\n`;
+
+			if (zones.length > 1) {
+				description += zoneName;
+				description += '\n';
+				description += `${'='.repeat( (showWounds ? woundsPad + 3 : 11) + longestName + longestAdvantage + longestHP)}\n`;
+			}
 
 			const zoneCombatants = combatants
 				.filter(c => c.zoneIndex === currentZone)
