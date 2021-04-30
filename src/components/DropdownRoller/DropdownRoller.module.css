@@ -9,3 +9,7 @@
     height: auto;
     margin-right: 10px;
 }
+
+.dropdownItem {
+    cursor: pointer;
+}

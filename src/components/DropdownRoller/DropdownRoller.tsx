@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Dropdown } from "react-bootstrap";
-import classNames from "classnames";
 import { commonDice } from '../../consts/diceSets';
 import { useDispatch } from "react-redux";
 import { submitRoll } from "../../actions/roll.actions";
@@ -13,6 +12,8 @@ interface DropdownRoller {
 function DropdownRoller({ onToggle } : DropdownRoller) {
 	const [show, setShow] = useState(false);
 	const dispatch = useDispatch();
+
+	const dropdownRef = useRef(null);
 
 	const handleRollDice = (diceType: string, diceAmount: number = 1) => {
 		setShow(false);
@@ -29,8 +30,24 @@ function DropdownRoller({ onToggle } : DropdownRoller) {
 		setShow(!show);
 	};
 
+	const handleOutsideClick = (event: Event) => {
+		// @ts-ignore
+		if (!dropdownRef.current?.contains(event.target) && show) {
+			setShow(false);
+			onToggle(false);
+		}
+	};
+
+	useEffect(() => {
+		document.addEventListener('click', handleOutsideClick);
+
+		return () => {
+			document.removeEventListener('click', handleOutsideClick);
+		};
+	});
+
 	return (
-		<Dropdown drop={"up"} show={show}>
+		<Dropdown drop="up" show={show}>
 			<Dropdown.Toggle
 				variant="outline-primary"
 				id="dropdown-roller"
@@ -39,13 +56,14 @@ function DropdownRoller({ onToggle } : DropdownRoller) {
 				<span>Roll the Dice</span>
 			</Dropdown.Toggle>
 			<Dropdown.Menu>
-				<div> {
+				<div ref={dropdownRef}> {
 					commonDice.map(({ diceType, label }) => (
 						<Dropdown.Item
 							key={diceType}
-							href="#"
+							className={styles.dropdownItem}
+							as="div"
 						>
-							<Dropdown drop={"right"}>
+							<Dropdown drop="right">
 								<Dropdown.Toggle
 									as="div"
 									id="dropdown-roller-second-level"
@@ -62,11 +80,10 @@ function DropdownRoller({ onToggle } : DropdownRoller) {
 								<Dropdown.Menu>
 									<div> {
 										[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((diceAmount) => (
-											<>
+											<div key={diceAmount}>
 												<Dropdown.Item
-													key={diceAmount}
 													href="#"
-													onClick={(e) => handleRollDice(diceType, diceAmount)}>
+													onClick={() => handleRollDice(diceType, diceAmount)}>
 													<span>
 														<img
 															src={require(`../../img/${diceType}.png`)}
@@ -77,13 +94,11 @@ function DropdownRoller({ onToggle } : DropdownRoller) {
 													</span>
 												</Dropdown.Item>
 												{ diceAmount === 1 && <Dropdown.Divider /> }
-											</>
+											</div>
 										))
 									} </div>
 								</Dropdown.Menu>
 							</Dropdown>
-
-
 						</Dropdown.Item>
 					))
 				} </div>
