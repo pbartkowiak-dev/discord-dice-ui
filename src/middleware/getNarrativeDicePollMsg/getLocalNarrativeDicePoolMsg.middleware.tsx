@@ -97,7 +97,8 @@ export default (store:any) => (next:any) => (action:any) => {
 
 		store.dispatch(localMsgReady({
 			fields,
-			results
+			results,
+			isPool: true
 		}));
 	}
 	next(action);

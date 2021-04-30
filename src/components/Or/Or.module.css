@@ -1,0 +1,30 @@
+.orContainer {
+    width: 100%;
+    text-align: center;
+    position: relative;
+    font-size: .8rem;
+    margin: 1px 0;
+}
+
+.orContainer:before {
+    width: 100%;
+    content: '';
+    display: block;
+    position: absolute;
+    background: #bebebe;
+    height: 1px;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    left: 0;
+    right: 0;
+}
+
+.or {
+    display: inline-block;
+    text-transform: uppercase;
+    padding: 1px 6px;
+    background: #fff;
+    color: #444444;
+    position: relative;
+}

@@ -29,6 +29,8 @@
 	text-align: left;
 	margin-bottom: 0;
 	padding-left: 0;
+	padding-bottom: 5px;
+	border-bottom: 1px solid #bebebe;
 }
 
 :global(.modal-content) {

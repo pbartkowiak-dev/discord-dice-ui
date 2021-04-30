@@ -3,22 +3,19 @@ import React, { useState } from 'react';
 import classNames from 'classnames/bind';
 import Button from 'react-bootstrap/Button';
 import CodeSpan from '../CodeSpan/CodeSpan';
-import { D6_CONAN, D20_CONAN_TEST } from '../../consts/diceConstants';
-import { D6_INFINITY, D20_INFINITY_TEST } from '../../consts/diceConstants';
-import { SelectedDiceType } from '../../reducers/diceSelectedReducer';
 import styles from './Reroll.module.css';
+import Or from "../Or/Or";
 
 interface RerollPropTypes {
 	handleReroll: (itemsToStay: Array<number>) => void;
 	results: Array<any>;
-	diceSelected: SelectedDiceType;
+	isPool: boolean;
+	isFate: boolean;
 }
 
-function Reroll({ handleReroll, results, diceSelected }: RerollPropTypes) {
+function Reroll({ handleReroll, results, isPool, isFate }: RerollPropTypes) {
 	const cx = classNames.bind(styles);
-	const { diceType } = diceSelected;
 	const [ itemIndexes, setItemIndexes ] = useState([]);
-	const shouldSelectToReroll = (diceType === D6_CONAN || diceType === D20_CONAN_TEST || diceType === D6_INFINITY || diceType === D20_INFINITY_TEST);
 
 	const addItemIndex = (itemIndex: number) => {
 		if (itemIndexes.indexOf(itemIndex) === -1) {
@@ -32,7 +29,7 @@ function Reroll({ handleReroll, results, diceSelected }: RerollPropTypes) {
 
 	let selectToRerollElement;
 	
-	if (shouldSelectToReroll && results.length) {
+	if (results.length) {
 		const resultsElement = results
 			.map((result: number, index: number) => {
 				if (index === results.length - 1) {
@@ -52,14 +49,14 @@ function Reroll({ handleReroll, results, diceSelected }: RerollPropTypes) {
 			selectToRerollElement = (
 				<div className={cx({row: true, selectItems: true})}>
 					<div className={styles.rerollInfo}>Select roll results you want to reroll:</div>
-					<div>{ resultsElement }</div>
+					<div className={styles.resultsElementsRow}>{ resultsElement }</div>
 				</div>
 			);
 	} else {
 		selectToRerollElement = null;
 	}
 
-	const handleClick = () => {
+	const handleRerollClick = () => {
 		let itemsToStay = [];
 		if (itemIndexes && itemIndexes.length) {
 			// get items from indexes
@@ -68,15 +65,39 @@ function Reroll({ handleReroll, results, diceSelected }: RerollPropTypes) {
 		handleReroll(itemsToStay);
 	};
 
+	const handleRerollAllClick = () => {
+		handleReroll();
+	};
+
+	if (results.length === 1 || isPool || isFate) {
+		return (
+			<div className={styles.container}>
+				<div className={styles.row}>
+					<Button
+						variant="outline-primary"
+						onClick={handleRerollAllClick}
+					>Reroll</Button>
+				</div>
+			</div>
+		);
+	}
+
 	return (
 		<div className={styles.container}>
 			{ selectToRerollElement }
 			<div className={styles.row}>
 				<Button
-					disabled={ (shouldSelectToReroll && !itemIndexes.length) }
+					disabled={ !itemIndexes.length }
 					variant="outline-primary"
-					onClick={handleClick}
+					onClick={handleRerollClick}
 				>Reroll</Button>
+			</div>
+			<Or />
+			<div className={styles.row}>
+				<Button
+					variant="outline-primary"
+					onClick={handleRerollAllClick}
+				>Reroll All</Button>
 			</div>
 		</div>
 	);

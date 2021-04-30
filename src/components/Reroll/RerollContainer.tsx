@@ -4,12 +4,6 @@ import { hideMsg } from '../../actions/modals';
 import { requestReroll } from '../../actions/roll.actions';
 import Reroll from './Reroll';
 
-const mapStateToProps = ({ diceSelected }: any) => {
-	return {
-		diceSelected
-	};
-}
-
 const mapDispatchToProps = { 
 	hideMsg,
 	requestReroll
@@ -19,7 +13,8 @@ function RerollContainer({
 	hideMsg,
 	results,
 	requestReroll,
-	diceSelected
+	isPool,
+	isFate
 }: any) {
 	const handleReroll = (itemsToStay: Array<number>) => {
 		hideMsg();
@@ -34,9 +29,10 @@ function RerollContainer({
 		<Reroll
 			handleReroll={handleReroll}
 			results={results}
-			diceSelected={diceSelected}
+			isPool={isPool}
+			isFate={isFate}
 		/>
 	);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(RerollContainer);
+export default connect(undefined, mapDispatchToProps)(RerollContainer);

@@ -7,6 +7,7 @@ import styles from './CthulhuPushOptions.module.css';
 import tooltip from '../../locale/tooltip';
 import { useDispatch } from "react-redux";
 import { closeCthulhuResultsModal, requestCthulhuPushRoll } from "../../actions/cthulhu.actions";
+import Or from "../Or/Or";
 
 function CthulhuPushOptions({
 	finalDieResult,
@@ -39,9 +40,8 @@ function CthulhuPushOptions({
 					className={styles.pushInfoIcon}
 				/>
 			</div>
-			<div className={styles.orContainer}>
-				<span className={styles.or}>or</span>
-			</div>
+
+			<Or />
 
 			{/* Luck Spends */}
 			<div className={classNames([styles.row, styles.luckSpends])}>

@@ -6,19 +6,20 @@ import RerollContainer from '../Reroll/RerollContainer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDiceD20 } from '@fortawesome/free-solid-svg-icons';
 import { ResultsModalPropTypes } from './ResultsModalTypes';
+import { useSelector } from "react-redux";
 
 function ResultsModal({
 	hideMsg,
 	msgData,
-	showModal,
-	diceSelected
+	showModal
 }: ResultsModalPropTypes) {
 	const { msgParams } = msgData;
 	const {
 		isSuccess,
 		rollOptions = {},
 		title,
-		results = []
+		results = [],
+		isPool
 	} = msgParams;
 
 	let modalBodyList;
@@ -40,6 +41,9 @@ function ResultsModal({
 		? `${styles.resultsModalHeader} ${styles.isFailure}`
 		: `${styles.resultsModalHeader}`;
 
+	const diceModuleForm = useSelector(({ form }: any) => form.diceModuleForm?.values);
+	const isFate = diceModuleForm?.fateMode;
+
 	return (
 		<Modal
 			show={showModal}
@@ -52,11 +56,12 @@ function ResultsModal({
 				</div>
 			</Modal.Header>
 			<Modal.Body className={styles.resultsBody}>
-				{ rollOptions.isPushed && <div className={styles.pushedTitle}>Pushed roll</div> }
 				{ title && <div className={styles.rollResults}>{ title }</div> }
 				{ modalBodyList }
 				<RerollContainer
 					rollOptions={rollOptions}
+					isPool={isPool}
+					isFate={isFate}
 					results={results}
 				/>
 			</Modal.Body>
