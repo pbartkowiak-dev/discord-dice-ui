@@ -55,8 +55,7 @@ const getIncreasedRenders = (renders: number) => {
     return renders + 1;
 }
 
-// @TODO get
-const useStore = create<State>(persist((set => ({
+const useStore = create<State>(persist(((set, get) => ({
     renders: 0,
     isModalOpen: false,
     isDragging: false,
@@ -65,29 +64,28 @@ const useStore = create<State>(persist((set => ({
     hoverZone: null,
     openModal: () => set({ isModalOpen: false}),
     closeModal: () => set({ isModalOpen: false }),
-    addZone: (zoneName) => {
-        set((state) => set({ zones: [...state.zones, zoneName] }))
-    },
-    addCombatant: (data) => {
-        set((state) => set({ combatants: [...state.combatants, createCombatant(data)] }));
-    },
-    deleteCombatant: (combatantId) => {
-        set((state) => set({ combatants: state.combatants.filter(({ id }) => id !== combatantId) }));
-    },
-    cloneCombatant: (combatantId) => {
-        set((state) => {
-            const combatant = state.combatants.find(c => combatantId === c.id) as CombatantTypes;
+    addZone: (zoneName) => set({
+        zones: [...get().zones, zoneName]
+    }),
+    addCombatant: (data) => set({
+        combatants: [...get().combatants,
+            createCombatant(data)]
+    }),
+    deleteCombatant: (combatantId) => set({
+        combatants: get().combatants.filter(({ id }) => id !== combatantId)
+    }),
+    cloneCombatant: (combatantId) => set((state) => {
+        const combatant = state.combatants.find(c => combatantId === c.id) as CombatantTypes;
 
-            const newCombatant = {
-                ...combatant,
-                id: createCombatantId()
-            };
+        const newCombatant = {
+            ...combatant,
+            id: createCombatantId()
+        };
 
-            const combatants = [...state.combatants, newCombatant];
+        const combatants = [...state.combatants, newCombatant];
 
-            return { combatants };
-        });
-    },
+        return { combatants };
+    }),
     updateCombatant: (combatantId, field, value) => {
         set((state) => {
             const combatant = state.combatants.find(c => combatantId === c.id)!;
@@ -102,19 +100,21 @@ const useStore = create<State>(persist((set => ({
             const newCombatants = [...state.combatants];
             newCombatants[combatantIndex] = combatant;
 
-            set({
+            return {
                 combatants: newCombatants
-            });
+            };
         });
     },
     lockCombatant: (combatantId) => {
-        set((state) => set({ combatants: state.combatants.map((combatant) => {
+        set({
+            combatants: get().combatants.map((combatant) => {
                 if (combatantId === combatant.id) {
                     combatant.isLocked = !combatant.isLocked
                 }
                 return combatant;
-            }) }));
-     },
+            })
+        });
+    },
     setCombatantZone: (combatantId, zoneIndex) => {
         set((state) => {
             const combatants = [...state.combatants].map(combatant => {
@@ -123,19 +123,22 @@ const useStore = create<State>(persist((set => ({
                 }
                 return combatant;
             });
-            set({ combatants, renders: getIncreasedRenders(state.renders) })
+            return{
+                combatants,
+                renders: getIncreasedRenders(state.renders)
+            }
         });
     },
     setIsDragging: (dragState) => set({ isDragging: dragState }),
     setHoverZone: (zoneIndex) => set({ hoverZone: zoneIndex }),
-    forceUpdateCombatants: () => set((state) => set({ renders: getIncreasedRenders(state.renders) })),
-    clearState: () => set(({ combatants }) => set({
+    forceUpdateCombatants: () => set({ renders: getIncreasedRenders(get().renders) }),
+    clearState: () => set({
         zones: [],
-        combatants: combatants.filter(c => c.isLocked).map(c => {
+        combatants: get().combatants.filter(c => c.isLocked).map(c => {
             c.zoneIndex = -1;
             return c;
         })
-    })),
+    }),
 
 })), {
     name: 'combat-tracker'

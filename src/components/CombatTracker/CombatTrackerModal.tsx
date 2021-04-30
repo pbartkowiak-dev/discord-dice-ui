@@ -67,16 +67,30 @@ function CombatTrackerModal() {
 						<DropdownRoller onToggle={onToggle} />
 					</div>
 					<div className={styles.footerContainerButtons}>
-						<Button variant="outline-danger" onClick={clearState} className={styles.button}>
+						<Button
+							variant="outline-danger"
+							onClick={clearState}
+							className={styles.button}>
 							Clear
 						</Button>
-						<Button variant="outline-secondary" onClick={closeModal} className={styles.button}>
+						<Button
+							variant="outline-secondary"
+							onClick={closeModal}
+							className={styles.button}>
 							Close
 						</Button>
-						<Button variant="outline-success" onClick={handleSendAndClose} className={styles.button}>
+						<Button
+							variant="outline-success"
+							onClick={handleSendAndClose}
+							className={styles.button}
+							disabled={zones.length === 0}>
 							Send and Close
 						</Button>
-						<Button variant="success" onClick={handleSend} className={styles.button}>
+						<Button
+							variant="success"
+							onClick={handleSend}
+							className={styles.button}
+							disabled={zones.length === 0}>
 							Send
 						</Button>
 					</div>

@@ -16,7 +16,7 @@ export default (store: any) => (next: any) => (action: any) => {
 
 		const longestName = combatants.reduce(
 			(acc, c) => Math.max(acc, c.name.length),
-			showConditions ? 20 : 12
+			showConditions ? 20 : 10
 		);
 
 		const longestInitiative = combatants.reduce((acc, c) => {
