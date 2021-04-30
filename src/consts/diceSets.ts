@@ -56,7 +56,7 @@ const combatTracker = {
 	noDropdown: true
 };
 
-export const classicSet = [{
+export const commonDice = [{
 	diceType: D100,
 	label: 'd100'
 }, {
@@ -77,7 +77,11 @@ export const classicSet = [{
 }, {
 	diceType: D4,
 	label: 'd4'
-}, {
+}];
+
+export const classicSet = [
+	...commonDice
+, {
 	diceType: POOL,
 	label: 'Pool Builder',
 	noDropdown: true
@@ -85,28 +89,9 @@ export const classicSet = [{
 	combatTracker
 ];
 
-export const poolSet = [{
-	diceType: D100,
-	label: 'd100'
-}, {
-	diceType: D20,
-	label: 'd20'
-}, {
-	diceType: D12,
-	label: 'd12'
-}, {
-	diceType: D10,
-	label: 'd10'
-}, {
-	diceType: D8,
-	label: 'd8'
-}, {
-	diceType: D6,
-	label: 'd6'
-}, {
-	diceType: D4,
-	label: 'd4'
-}, {
+export const poolSet = [
+	...commonDice,
+{
 	diceType: MODIFIER,
 	label: 'Apply Modifier'
 }];
@@ -116,28 +101,8 @@ export const CthulhuSet = [{
 	diceImg: 'd100.png',
 	label: 'Skill test',
 	noDropdown: true
-}, {
-	diceType: D100,
-	label: 'd100'
-}, {
-	diceType: D20,
-	label: 'd20'
-}, {
-	diceType: D12,
-	label: 'd12'
-}, {
-	diceType: D10,
-	label: 'd10'
-}, {
-	diceType: D8,
-	label: 'd8'
-}, {
-	diceType: D6,
-	label: 'd6'
-}, {
-	diceType: D4,
-	label: 'd4'
 },
+	...commonDice,
 	combatTracker,
 {
 	diceType: CTHULHU_SHEET_MODAL,

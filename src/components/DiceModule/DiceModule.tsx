@@ -15,6 +15,7 @@ function DiceModule ({
 	submitRoll
 }: DiceModuleProps
 ) {
+	// @TODO MOVE TO UTILS/CREATE HOOK
 	const handleRollDice = (diceType: string, diceAmount?: number) => {
 		let diceAmountToRoll: number;
 		

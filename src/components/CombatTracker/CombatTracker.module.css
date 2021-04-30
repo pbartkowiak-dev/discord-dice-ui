@@ -1,0 +1,38 @@
+.footerContainer {
+    display: flex;
+    width: 100%;
+}
+
+.footerContainerDropdown {
+    display: flex;
+    align-items: center;
+    flex: 1;
+}
+
+.footerContainerButtons {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex: 1;
+}
+
+.button {
+    margin-left: 8px;
+}
+
+.button:first-of-type {
+    margin-left: 0;
+}
+
+.overlay {
+    width: 100%;
+    height: 100%;
+    background: #6e6e6e;
+    position: absolute;
+    z-index: 1;
+    opacity: 0.3;
+}
+
+.hidden {
+    display: none;
+}

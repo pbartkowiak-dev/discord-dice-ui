@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from "react-redux";
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
@@ -7,6 +7,9 @@ import useCombatTrackerStore from "./store";
 import Zone from "./Zone";
 import AddZone from "./AddZone";
 import { combatTrackerSend } from "../../actions/combatTracker.actions";
+import styles from './CombatTracker.module.css';
+import DropdownRoller from "../DropdownRoller/DropdownRoller";
+import classNames from "classnames";
 
 function CombatTrackerModal() {
 	const dispatch = useDispatch();
@@ -15,6 +18,8 @@ function CombatTrackerModal() {
 	const closeModal: () => void = useCombatTrackerStore(({ closeModal }) => closeModal);
 	const clearState: () => void = useCombatTrackerStore(({ clearState }) => clearState);
 	const renders: () => void = useCombatTrackerStore(({ renders }) => renders);
+
+	const [isDropdownOpen, setDropdownState] = useState(false);
 
 	const handleSend = () => {
 		dispatch(combatTrackerSend());
@@ -25,8 +30,16 @@ function CombatTrackerModal() {
 		closeModal();
 	};
 
+	const onToggle = (isOpen: boolean) => {
+		setDropdownState(isOpen);
+	};
+
 	return (
 		<Modal show={showModal} onHide={closeModal} size="lg">
+			<div className={classNames({
+				[styles.overlay]: true,
+				[styles.hidden]: !isDropdownOpen
+			})}	/>
 			<Modal.Header closeButton>
 				<Modal.Title>Combat Tracker</Modal.Title>
 			</Modal.Header>
@@ -49,18 +62,25 @@ function CombatTrackerModal() {
 				</section>
 			</Modal.Body>
 			<Modal.Footer>
-				<Button variant="outline-danger" onClick={clearState}>
-					Clear
-				</Button>
-				<Button variant="outline-secondary" onClick={closeModal}>
-					Close
-				</Button>
-				<Button variant="outline-success" onClick={handleSendAndClose}>
-					Send and Close
-				</Button>
-				<Button variant="success" onClick={handleSend}>
-					Send
-				</Button>
+				<div className={styles.footerContainer}>
+					<div className={styles.footerContainerDropdown}>
+						<DropdownRoller onToggle={onToggle} />
+					</div>
+					<div className={styles.footerContainerButtons}>
+						<Button variant="outline-danger" onClick={clearState} className={styles.button}>
+							Clear
+						</Button>
+						<Button variant="outline-secondary" onClick={closeModal} className={styles.button}>
+							Close
+						</Button>
+						<Button variant="outline-success" onClick={handleSendAndClose} className={styles.button}>
+							Send and Close
+						</Button>
+						<Button variant="success" onClick={handleSend} className={styles.button}>
+							Send
+						</Button>
+					</div>
+				</div>
 			</Modal.Footer>
 		</Modal>
 	);
