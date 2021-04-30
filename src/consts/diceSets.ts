@@ -53,7 +53,8 @@ const combatTracker = {
 	diceType: COMBAT_TRACKER,
 	label: 'Combat Tracker',
 	diceImg: 'combat-tracker.png',
-	noDropdown: true
+	noDropdown: true,
+	isExcludedFromPool: true
 };
 
 export const commonDice = [{
