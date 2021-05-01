@@ -141,7 +141,7 @@ const useStore = create<State>(persist(((set, get) => ({
     }),
 
 })), {
-    name: 'combat-tracker'
+    name: 'd-dice-ui-combat-tracker'
 }));
 
 export default useStore;

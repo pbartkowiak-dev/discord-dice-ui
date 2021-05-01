@@ -99,8 +99,8 @@ export const poolSet = [
 
 export const CthulhuSet = [{
 	diceType: D100_SL,
-	diceImg: 'd100.png',
-	label: 'Skill test',
+	diceImg: 'd100-skill-test.png',
+	label: 'Skill Test',
 	noDropdown: true
 },
 	...commonDice,
@@ -114,10 +114,9 @@ export const CthulhuSet = [{
 
 export const warhammerSet = [{
 	diceType: D100_SL,
-	diceImg: 'd100.png',
-	label: 'Skill test',
+	diceImg: 'd100-skill-test.png',
+	label: 'Skill Test',
 	noDropdown: true
-
 }, {
 	diceType: D100,
 	label: 'd100'

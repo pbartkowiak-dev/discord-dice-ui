@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Dropdown } from "react-bootstrap";
 import { commonDice } from '../../consts/diceSets';
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { submitRoll } from "../../actions/roll.actions";
+import { openWarhammerModal } from "../../actions/warhammer.actions";
 import styles from './DropdownRoller.module.css';
 
 interface DropdownRoller {
@@ -13,29 +14,38 @@ function DropdownRoller({ onToggle } : DropdownRoller) {
 	const [show, setShow] = useState(false);
 	const dispatch = useDispatch();
 
+	const diceModuleForm = useSelector(({ form }: any) => form.diceModuleForm?.values);
+	const warhammerMode = diceModuleForm?.warhammerMode;
+
+	const diceRolls = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+
 	const dropdownRef = useRef(null);
 
-	const handleRollDice = (diceType: string, diceAmount: number = 1) => {
+	const closeDropdown = () => {
 		setShow(false);
 		onToggle(false);
-
-		dispatch(submitRoll({
-			diceType,
-			diceAmount
-		}));
 	};
 
-	const toggle = () => {
-		onToggle(!show);
-		setShow(!show);
+	const handleRollDice = (diceType: string, diceAmount: number = 1) => {
+		closeDropdown();
+		dispatch(submitRoll({ diceType, diceAmount }));
+	};
+
+	const handleWarhammerRoll = () => {
+		closeDropdown();
+		dispatch(openWarhammerModal());
 	};
 
 	const handleOutsideClick = (event: Event) => {
 		// @ts-ignore
 		if (!dropdownRef.current?.contains(event.target) && show) {
-			setShow(false);
-			onToggle(false);
+			closeDropdown();
 		}
+	};
+
+	const toggle = () => {
+		onToggle(!show);
+		setShow(!show);
 	};
 
 	useEffect(() => {
@@ -56,8 +66,24 @@ function DropdownRoller({ onToggle } : DropdownRoller) {
 				<span>Roll the Dice</span>
 			</Dropdown.Toggle>
 			<Dropdown.Menu>
-				<div ref={dropdownRef}> {
-					commonDice.map(({ diceType, label }) => (
+				<div ref={dropdownRef}>
+					{ warhammerMode && <>
+						<Dropdown.Item
+							className={styles.dropdownItem}
+							as="div"
+							onClick={handleWarhammerRoll}>
+								<span>
+									<img
+										src={require(`../../img/d100-skill-test.png`)}
+										className={styles.dieImg}
+										alt="Skill Test"
+									/>
+									<strong>Skill Test</strong>
+								</span>
+						</Dropdown.Item>
+						<Dropdown.Divider />
+					</> }
+					{ commonDice.map(({ diceType, label }) => (
 						<Dropdown.Item
 							key={diceType}
 							className={styles.dropdownItem}
@@ -79,7 +105,7 @@ function DropdownRoller({ onToggle } : DropdownRoller) {
 								</Dropdown.Toggle>
 								<Dropdown.Menu>
 									<div> {
-										[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((diceAmount) => (
+										diceRolls.map((diceAmount) => (
 											<div key={diceAmount}>
 												<Dropdown.Item
 													href="#"

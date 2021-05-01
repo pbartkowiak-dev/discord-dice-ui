@@ -52,9 +52,6 @@
 	opacity: 1;
 }
 
-.dice--d100SL .dice__image {
-	filter: hue-rotate(210deg) contrast(1.6);
-}
 .dice--d5 .dice__image {
 	filter: hue-rotate(75deg);
 }
