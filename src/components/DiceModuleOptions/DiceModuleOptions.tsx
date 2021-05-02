@@ -5,9 +5,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faWrench, faCircle } from '@fortawesome/free-solid-svg-icons';
 import DiceModuleForm from './DiceModuleForm';
 import styles from '../DiceModule/DiceModule.module.css';
+import useDiceModuleFormStore from "./store";
 
-function DiceModuleOptions({ rollOptions }:any) {
-	const hasAnyOptionActive = !!Object.values(rollOptions).filter(value => value).length;
+function DiceModuleOptions() {
+	const diceModuleFormState = useDiceModuleFormStore(( { state }) => state);
+	const hasAnyOptionActive = !!Object.values(diceModuleFormState).filter(value => value).length;
 	const titleClass = `${ hasAnyOptionActive ? `${styles.title} ${styles.active}` : styles.title }`;
 	const indicatorClass = `${ hasAnyOptionActive ? styles.visible : styles.invisible} ${styles.indicator}`;
 	const indicator = <span className={indicatorClass}><FontAwesomeIcon icon={faCircle} /></span>;

@@ -7,15 +7,17 @@ import L5rDicePoolBuilderContainer from './components/L5rDicePoolBuilder/L5rDice
 import RollAndKeepPoolBuilderContainer from './components/RollAndKeepPoolBuilder/RollAndKeepPoolBuilderContainer';
 import Modals from './components/Modals/Modals';
 import LocalStorageManager from "./components/LocalStorageManager/LocalStorageManager";
+import useDiceModuleFormStore from './components/DiceModuleOptions/store';
 
-function App({ rollOptions }: any) {
+function App() {
+	const diceModuleFormState = useDiceModuleFormStore(( { state }) => state);
 	let diceModule;
 
-	if (rollOptions?.narrativeDice) {
+	if (diceModuleFormState.narrativeDice) {
 		diceModule = <NarrativeDicePoolBuilderContainer />
-	} else if (rollOptions?.l5rMode) {
+	} else if (diceModuleFormState.l5rMode) {
 		diceModule = <L5rDicePoolBuilderContainer />
-	} else if (rollOptions?.rollAndKeepMode) {
+	} else if (diceModuleFormState.rollAndKeepMode) {
 		diceModule = <RollAndKeepPoolBuilderContainer />
 	} else {
 		diceModule = <DiceModuleContainer />;
@@ -26,7 +28,7 @@ function App({ rollOptions }: any) {
 			<Modals />
 			<HeaderContainer />
 			<div className="dice-module-container">
-				<DiceModuleOptions rollOptions={rollOptions} />
+				<DiceModuleOptions />
 				{ diceModule }
 			</div>
 			<LocalStorageManager />
