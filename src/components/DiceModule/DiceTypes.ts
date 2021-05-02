@@ -1,7 +1,6 @@
 export interface DiceModuleProps {
-	rollOptions: any;
 	submitRoll: Function;
-};
+}
 
 export interface DicePropTypes {
 	handleRollDice: Function;

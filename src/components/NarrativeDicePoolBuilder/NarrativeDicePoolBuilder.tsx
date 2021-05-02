@@ -1,14 +1,15 @@
 import React from 'react';
+import { useDispatch } from "react-redux";
 import classNames from 'classnames';
 import Button from 'react-bootstrap/Button';
 import PoolBuilderContainer from '../PoolBuilder/PoolBuilderContainer';
+import { submitRoll } from '../../actions/roll.actions';
 import { PoolType } from '../PoolBuilderModal/PoolBuilderModalTypes';
 import poolBuilderStyles from '../PoolBuilder/PoolBuilder.module.css';
 
-function NarrativeDicePoolBuilder({
-	submitRoll
-}: any ) {
-	const handleSubmit = (pool: PoolType) => submitRoll({ pool });
+function NarrativeDicePoolBuilder() {
+	const dispatch = useDispatch();
+	const handleSubmit = (pool: PoolType) => dispatch(submitRoll({ pool }));
 
 	const formName = 'narrative-pool-builder-form';
 

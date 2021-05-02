@@ -58,7 +58,7 @@ function DiceModuleForm() {
 					name={name}
 					id={name}
 					key={name}
-					value={state[name]}
+					checked={state[name]}
 					disabled={isDisabled(state)}
 					onChange={() => handleChange(name)}
 					custom

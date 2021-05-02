@@ -3,16 +3,18 @@ import classNames from 'classnames';
 import Button from 'react-bootstrap/Button';
 import PoolBuilderContainer from '../PoolBuilder/PoolBuilderContainer';
 import { PoolType } from '../PoolBuilderModal/PoolBuilderModalTypes';
+import { submitRoll } from '../../actions/roll.actions';
+import { l5rSendState } from '../../actions/l5r.actions';
 import l5rStyles from '../L5rResultsModal/L5rResultsModal.module.css';
 import poolBuilderStyles from '../PoolBuilder/PoolBuilder.module.css';
+import { useDispatch } from "react-redux";
 
-function L5rDicePoolBuilder({
-	submitRoll,
-	l5rSendState
-}: any ) {
+function L5rDicePoolBuilder() {
+	const dispatch = useDispatch();
+
 	const handleSubmit = (pool: PoolType) => {
-		submitRoll({ pool })
-		l5rSendState();
+		dispatch(submitRoll({ pool }));
+		dispatch(l5rSendState());
 	};
 
 	const formName = 'l5r-pool-builder-form';
