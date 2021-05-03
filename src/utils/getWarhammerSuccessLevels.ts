@@ -44,7 +44,13 @@ export default ({
 	let SL;
 
 	if (useFastSL && isSuccess) {
-		SL = getTens(result);
+		const rolledTens = getTens(result);
+
+		if (isAutoSuccess) {
+			SL = rolledTens > 1 ? rolledTens : 1;
+		} else {
+			SL = getTens(result);
+		}
 	} else {
 		const rolledTens = getTens(result);
 		const skillTens = getTens(skillLevel);
