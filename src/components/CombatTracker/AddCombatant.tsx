@@ -56,6 +56,7 @@ export default function AddCombatant({ zoneIndex }: AddCombatantProps) {
 					placeholder="Initiative"
 					className={classNames([styles.input, styles.initiativeInput])}
 					onChange={(e: React.ChangeEvent<HTMLInputElement>) => setInitiative(e.target.value)}
+					autoComplete="off"
 				/>
 				<input
 					name="name"
@@ -64,6 +65,7 @@ export default function AddCombatant({ zoneIndex }: AddCombatantProps) {
 					placeholder="Combatant's Name"
 					className={classNames([styles.input, styles.nameInput])}
 					onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
+					autoComplete="off"
 				/>
 				<input
 					name="hp"
@@ -72,6 +74,7 @@ export default function AddCombatant({ zoneIndex }: AddCombatantProps) {
 					placeholder="HP"
 					className={classNames([styles.input, styles.hpInput])}
 					onChange={(e: React.ChangeEvent<HTMLInputElement>) => setHp(e.target.value)}
+					autoComplete="off"
 				/>
 				<Button variant="primary" size="sm" type="submit">
 					Add Combatant

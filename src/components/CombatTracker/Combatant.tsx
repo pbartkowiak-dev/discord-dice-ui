@@ -39,6 +39,7 @@ function Input ({
 			placeholder={placeholder}
 			disabled={disabled}
 			onKeyPress={onKeyPress}
+			autoComplete="off"
 		/>
 	);
 }
