@@ -14,6 +14,7 @@ import {
 } from '../consts/diceConstants';
 import { FATE_DIE, MINUS, PLUS } from '../consts/fateConsts';
 import mapValueToFate from './utils/mapValueToFate';
+import diceModuleOptionsStore from "../components/DiceModuleOptions/store";
 
 interface rollDiceResult {
 	results: Array<number>;
@@ -42,9 +43,7 @@ interface rollDiceResult {
 
 export default (store: any) => (next: any) => (action: any) => {
 	if (action.type === DICE_ROLL_REQUESTED) {
-		const state = store.getState();
-		const { form : { diceModuleForm } } = state;
-		const formValues = diceModuleForm?.values || {};
+		const diceModuleForm = diceModuleOptionsStore.getState().state;
 
 		let {
 			diceType,
@@ -163,21 +162,21 @@ export default (store: any) => (next: any) => (action: any) => {
 			}
 		}
 
-		if (formValues.conanMode && diceType === D20_CONAN_TEST) {
+		if (diceModuleForm.conanMode && diceType === D20_CONAN_TEST) {
 			store.dispatch(conanDiceRolled({
 				result,
 				rollOptions: {
 					...action.payload,
-					...formValues,
+					formValues: {...diceModuleForm},
 					assistanceDiceResults: result.assistanceDiceResults
 				}
 			}));
-		} else if (formValues.infinityMode && diceType === D20_INFINITY_TEST) {
+		} else if (diceModuleForm.infinityMode && diceType === D20_INFINITY_TEST) {
 			store.dispatch(infinityDiceRolled({
 				result,
 				rollOptions: {
 					...action.payload,
-					...formValues,
+					formValues: {...diceModuleForm},
 					assistanceDiceResults: result.assistanceDiceResults
 				}
 			}));
@@ -186,7 +185,7 @@ export default (store: any) => (next: any) => (action: any) => {
 				result,
 				rollOptions: {
 					...action.payload,
-					...formValues
+					formValues: {...diceModuleForm}
 				}
 			}));
 		}

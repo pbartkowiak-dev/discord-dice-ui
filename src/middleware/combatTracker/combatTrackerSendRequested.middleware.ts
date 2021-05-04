@@ -3,11 +3,11 @@ import { requestMsgReady } from '../../actions/roll.actions';
 import { getColor } from '../../utils/getColor';
 import useCombatTrackerStore from "../../components/CombatTracker/store";
 import { chunkString } from "../../components/CombatTracker/utils/utils";
+import diceModuleOptionsStore from "../../components/DiceModuleOptions/store";
 
 export default (store: any) => (next: any) => (action: any) => {
 	if (action.type === COMBAT_TRACKER_SEND_REQUESTED) {
-		const state = store.getState();
-		const showAdvantage = state.form.diceModuleForm?.values?.warhammerMode;
+		const showAdvantage = diceModuleOptionsStore.getState().state;
 
 		const combatTrackerState = useCombatTrackerStore.getState();
 		const { combatants, zones } = combatTrackerState;

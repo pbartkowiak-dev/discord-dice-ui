@@ -27,7 +27,7 @@ const getLocalMsg = (store:any) => (next:any) => (action:any) => {
 		const diceModuleForm = diceModuleOptionsStore.getState().state;
 
 		const { payload } = action;
-		const { result, rollOptions } = payload; 
+		const { result, rollOptions } = payload;
 		const {
 			results,
 			diceAmount,
@@ -54,14 +54,14 @@ const getLocalMsg = (store:any) => (next:any) => (action:any) => {
 		const isInfinityHitLocationDie = rollOptions.diceType === D20_INFINITY_HL;
 		const isFate = fateResults && fateResults.length;
 	
-		if (rollOptions.useModifier && (!isCombatDie && !(isConanHitLocationDie || isInfinityHitLocationDie))) {
+		if (diceModuleForm.useModifier && (!isCombatDie && !(isConanHitLocationDie || isInfinityHitLocationDie))) {
 			fields.push(
 				<>Modifier: {modifierWithSymbol}.</>
 			);
 		}
 	
-		if ((hasMultipleDice || rollOptions.useModifier || isFate) && (!isCombatDie && !(isConanHitLocationDie || isInfinityHitLocationDie))) {
-			if (rollOptions.useModifier) {
+		if ((hasMultipleDice || diceModuleForm.useModifier || isFate) && (!isCombatDie && !(isConanHitLocationDie || isInfinityHitLocationDie))) {
+			if (diceModuleForm.useModifier) {
 				fields.push(
 					<>{IconRight} Total (with {modifierWithSymbol} modifier): <CodeSpan>{fateResultTotal || totalWithModifier}</CodeSpan>.</>
 				);
