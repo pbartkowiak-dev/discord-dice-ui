@@ -5,20 +5,19 @@ import {
 	requestPoolRoll,
 	requestNarrativeDicePoolRoll
 } from '../actions/roll.actions';
+import diceModuleOptionsStore from "../components/DiceModuleOptions/store";
 
 const rerollRequested = (store :any) => (next :any) => (action :any) => {
 	if (action.type === REROLL_REQUESTED) {
 		const state = store.getState();
 		const { conanData } = state;
-		const { infinityData } = state;
-		const { form : { diceModuleForm } } = state;
 		const { lastRollOptions } = state;
 		const { itemsToStay } = action.payload
-		const formValues = diceModuleForm.values || {}
+		const formValues = diceModuleOptionsStore.getState().state;
 
 		store.dispatch(updateRollCounter());
 
-		if (lastRollOptions.pool && formValues?.narrativeDice) {
+		if (lastRollOptions.pool && formValues.narrativeDice) {
 			store.dispatch(requestNarrativeDicePoolRoll({
 				pool: lastRollOptions.pool
 			}));

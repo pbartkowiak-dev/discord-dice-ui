@@ -5,36 +5,30 @@ import { POOL, NARRATIVE_DICE, L5R_DICE, ROLL_AND_KEEP_DICE } from '../../consts
 import PoolBuilder from './PoolBuilder';
 import { submitRoll } from '../../actions/roll.actions';
 
-function mapStateToProps(state:any) {
-	return {
-		diceModuleForm: state.form.diceModuleForm
-	};
-}
-
 const mapDispatchToProps = { submitRoll };
 
 function PoolBuilderContainer({
 	handleSubmit,
-	diceModuleForm,
 	formName,
 	maxDicePool,
-	submitRoll
+	submitRoll,
+	type
 }: any) {
-	const rollOptions = diceModuleForm?.values || {};
 	let isDiceImgLarge = false;
 
 	let diceSetType;
-	if (rollOptions?.narrativeDice) {
+	if (type === 'narrativeDice') {
 		diceSetType = NARRATIVE_DICE;
-	} else if (rollOptions?.l5rMode) {
+	} else if (type === 'l5rMode') {
 		diceSetType = L5R_DICE;
 		isDiceImgLarge = true;
-	} else if (rollOptions?.rollAndKeepMode) {
+	} else if (type === 'rollAndKeepMode') {
 		diceSetType = ROLL_AND_KEEP_DICE;
 		isDiceImgLarge = true;
 	} else {
 		diceSetType = POOL;
 	}
+
 	const diceSet = getDiceSet(diceSetType);
 
 	return (
@@ -49,4 +43,4 @@ function PoolBuilderContainer({
 	);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PoolBuilderContainer);
+export default connect(undefined, mapDispatchToProps)(PoolBuilderContainer);

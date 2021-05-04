@@ -1,4 +1,5 @@
 import React from 'react';
+import { useDispatch } from "react-redux";
 import './DiceModule.css';
 import Dice from './Dice';
 import getDiceSet from '../../utils/getDiceSet';
@@ -8,14 +9,13 @@ import { WARHAMMER } from '../../consts/consts';
 import { CLASSIC } from '../../consts/diceConstants';
 import { COC } from '../../consts/consts';
 import { FATE_DICE, FATE_DIE } from '../../consts/fateConsts';
-import { DiceModuleProps } from './DiceTypes';
+import useDiceModuleFormStore from "../DiceModuleOptions/store";
+import { submitRoll } from "../../actions/roll.actions";
 
-function DiceModule ({
-	rollOptions,
-	submitRoll
-}: DiceModuleProps
-) {
-	// @TODO MOVE TO UTILS/CREATE HOOK
+function DiceModule () {
+	const dispatch = useDispatch();
+	const { warhammerMode, conanMode, infinityMode, cthulhuMode, fateMode } = useDiceModuleFormStore(( { state }) => state);
+
 	const handleRollDice = (diceType: string, diceAmount?: number) => {
 		let diceAmountToRoll: number;
 		
@@ -30,23 +30,23 @@ function DiceModule ({
 			diceAmountToRoll = diceAmount
 		}
 
-		submitRoll({
+		dispatch(submitRoll({
 			diceType,
 			diceAmount: diceAmountToRoll
-		});
+		}));
 	};
 
 	// @TODO MOVE TO ONE DICE SET GETTER
 	let diceSetType;
-	if (rollOptions.warhammerMode) {
+	if (warhammerMode) {
 		diceSetType = WARHAMMER;
-	} else if(rollOptions.conanMode) {
+	} else if(conanMode) {
 		diceSetType = CONAN;
-	} else if(rollOptions.infinityMode) {
+	} else if(infinityMode) {
 		diceSetType = INFINITY;
-	} else if (rollOptions.cthulhuMode) {
+	} else if (cthulhuMode) {
 		diceSetType = COC;
-	} else if (rollOptions.fateMode) {
+	} else if (fateMode) {
 		diceSetType = FATE_DICE;
 	} else {
 		diceSetType = CLASSIC;

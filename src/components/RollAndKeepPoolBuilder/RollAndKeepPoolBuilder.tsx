@@ -3,12 +3,16 @@ import classNames from 'classnames';
 import Button from 'react-bootstrap/Button';
 import PoolBuilderContainer from '../PoolBuilder/PoolBuilderContainer';
 import { PoolType } from '../PoolBuilderModal/PoolBuilderModalTypes';
+import { submitRoll } from '../../actions/roll.actions';
 import l5rStyles from '../L5rResultsModal/L5rResultsModal.module.css';
 import poolBuilderStyles from '../PoolBuilder/PoolBuilder.module.css';
+import { useDispatch } from "react-redux";
 
-function RollAndKeepPoolBuilder({ submitRoll }: any) {
+function RollAndKeepPoolBuilder() {
+	const dispatch = useDispatch();
+
 	const handleSubmit = (pool: PoolType, modifier: string) => {
-		submitRoll({ pool, modifier })
+		dispatch(submitRoll({ pool, modifier }));
 	};
 
 	const formName = 'roll-and-keep-pool-builder-form';
@@ -23,6 +27,7 @@ function RollAndKeepPoolBuilder({ submitRoll }: any) {
 				handleSubmit={handleSubmit}
 				formName={formName}
 				maxDicePool={maxDicePool}
+				type="rollAndKeepMode"
 			/>
 			<div className={poolBuilderStyles.poolBuilderBtnContainer}>
 				<Button
