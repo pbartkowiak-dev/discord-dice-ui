@@ -167,7 +167,7 @@ export default (store: any) => (next: any) => (action: any) => {
 				result,
 				rollOptions: {
 					...action.payload,
-					formValues: {...diceModuleForm},
+					...diceModuleForm,
 					assistanceDiceResults: result.assistanceDiceResults
 				}
 			}));
@@ -176,7 +176,7 @@ export default (store: any) => (next: any) => (action: any) => {
 				result,
 				rollOptions: {
 					...action.payload,
-					formValues: {...diceModuleForm},
+					...diceModuleForm,
 					assistanceDiceResults: result.assistanceDiceResults
 				}
 			}));
@@ -185,7 +185,7 @@ export default (store: any) => (next: any) => (action: any) => {
 				result,
 				rollOptions: {
 					...action.payload,
-					formValues: {...diceModuleForm}
+					...diceModuleForm
 				}
 			}));
 		}

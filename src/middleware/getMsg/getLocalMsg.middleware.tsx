@@ -12,7 +12,6 @@ import styles from '../../components/ResultsModal/ResultsModal.module.css';
 import { DICE_ROLLED, localMsgReady } from '../../actions/roll.actions';
 import { MINUS, PLUS } from '../../consts/fateConsts';
 import TooltipWrapper from '../../components/InfoTooltip/TooltipWrapper';
-import diceModuleOptionsStore from "../../components/DiceModuleOptions/store";
 
 const IconUp = <FontAwesomeIcon icon={faArrowAltCircleUp} />;
 const IconDown = <FontAwesomeIcon icon={faArrowAltCircleDown} />;
@@ -24,7 +23,6 @@ const getLocalMsg = (store:any) => (next:any) => (action:any) => {
 	if (action.type === DICE_ROLLED) {
 		const state = store.getState();
 		const { rerollCount } = state;
-		const diceModuleForm = diceModuleOptionsStore.getState().state;
 
 		const { payload } = action;
 		const { result, rollOptions } = payload;
@@ -54,14 +52,14 @@ const getLocalMsg = (store:any) => (next:any) => (action:any) => {
 		const isInfinityHitLocationDie = rollOptions.diceType === D20_INFINITY_HL;
 		const isFate = fateResults && fateResults.length;
 	
-		if (diceModuleForm.useModifier && (!isCombatDie && !(isConanHitLocationDie || isInfinityHitLocationDie))) {
+		if (rollOptions.useModifier && (!isCombatDie && !(isConanHitLocationDie || isInfinityHitLocationDie))) {
 			fields.push(
 				<>Modifier: {modifierWithSymbol}.</>
 			);
 		}
 	
-		if ((hasMultipleDice || diceModuleForm.useModifier || isFate) && (!isCombatDie && !(isConanHitLocationDie || isInfinityHitLocationDie))) {
-			if (diceModuleForm.useModifier) {
+		if ((hasMultipleDice || rollOptions.useModifier || isFate) && (!isCombatDie && !(isConanHitLocationDie || isInfinityHitLocationDie))) {
+			if (rollOptions.useModifier) {
 				fields.push(
 					<>{IconRight} Total (with {modifierWithSymbol} modifier): <CodeSpan>{fateResultTotal || totalWithModifier}</CodeSpan>.</>
 				);
@@ -180,7 +178,7 @@ const getLocalMsg = (store:any) => (next:any) => (action:any) => {
 			fields,
 			rollOptions: {
 				...rollOptions,
-				formValues: { ...diceModuleForm },
+				...rollOptions,
 			},
 			results
 		}));
