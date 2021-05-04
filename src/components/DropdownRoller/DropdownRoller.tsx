@@ -1,10 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Dropdown } from "react-bootstrap";
 import { commonDice } from '../../consts/diceSets';
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { submitRoll } from "../../actions/roll.actions";
 import { openWarhammerModal } from "../../actions/warhammer.actions";
 import styles from './DropdownRoller.module.css';
+import useDiceModuleFormStore from "../DiceModuleOptions/store";
 
 interface DropdownRoller {
 	onToggle: (isOpen: boolean) => void;
@@ -14,7 +15,7 @@ function DropdownRoller({ onToggle } : DropdownRoller) {
 	const [show, setShow] = useState(false);
 	const dispatch = useDispatch();
 
-	const diceModuleForm = useSelector(({ form }: any) => form.diceModuleForm?.values);
+	const diceModuleForm = useDiceModuleFormStore(( { state }) => state);
 	const warhammerMode = diceModuleForm?.warhammerMode;
 
 	const diceRolls = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];

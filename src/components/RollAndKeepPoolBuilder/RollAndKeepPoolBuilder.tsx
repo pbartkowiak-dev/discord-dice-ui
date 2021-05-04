@@ -27,6 +27,7 @@ function RollAndKeepPoolBuilder() {
 				handleSubmit={handleSubmit}
 				formName={formName}
 				maxDicePool={maxDicePool}
+				type="rollAndKeepMode"
 			/>
 			<div className={poolBuilderStyles.poolBuilderBtnContainer}>
 				<Button

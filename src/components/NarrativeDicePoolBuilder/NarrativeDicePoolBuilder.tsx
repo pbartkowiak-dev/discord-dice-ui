@@ -22,6 +22,7 @@ function NarrativeDicePoolBuilder() {
 				handleSubmit={handleSubmit}
 				formName={formName}
 				maxDicePool={9}
+				type="narrativeDice"
 			/>
 			<div className={poolBuilderStyles.poolBuilderBtnContainer}>
 				<Button

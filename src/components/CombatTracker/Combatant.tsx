@@ -8,7 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashAlt, faCopy } from "@fortawesome/free-regular-svg-icons";
 import { faGripHorizontal, faLock, faLockOpen } from "@fortawesome/free-solid-svg-icons";
 import { validateCombatantFields } from "./utils/utils";
-import { useSelector } from "react-redux";
+import useDiceModuleFormStore from "../DiceModuleOptions/store";
 
 interface InputProps {
 	value: string | number;
@@ -115,7 +115,7 @@ export default function Combatant({
 	const lockCombatant = useCombatTrackerStore(({ lockCombatant }) => lockCombatant);
 	const hoverZone = useCombatTrackerStore(({ hoverZone }) => hoverZone);
 
-	const diceModuleForm = useSelector(({ form }: any) => form.diceModuleForm?.values);
+	const diceModuleForm = useDiceModuleFormStore(( { state }) => state);
 	const showAdvantage = diceModuleForm?.warhammerMode;
 
 	const handleStart = () => {

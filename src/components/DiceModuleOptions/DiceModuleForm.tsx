@@ -7,8 +7,6 @@ import './DiceModuleForm.css';
 function DiceModuleForm() {
 	const { state, toggle } = useDiceModuleFormStore();
 
-	const handleChange = (key: string) => toggle(key);
-
 	const fields = [{
 		label: 'Use Modifier',
 		name: 'useModifier',
@@ -47,8 +45,6 @@ function DiceModuleForm() {
 		isDisabled: s => s.cthulhuMode || s.conanMode || s.infinityMode || s.warhammerMode || s.narrativeDice || s.fateMode || s.rollAndKeepMode
 	}];
 
-	console.log('dceModuleFormStore', state);
-
 	return (
 		<div className="dice-module dice-form"> {
 			fields.map(({ label, name, isDisabled }) => (
@@ -60,7 +56,7 @@ function DiceModuleForm() {
 					key={name}
 					checked={state[name]}
 					disabled={isDisabled(state)}
-					onChange={() => handleChange(name)}
+					onChange={() => toggle(name)}
 					custom
 				/>
 			))

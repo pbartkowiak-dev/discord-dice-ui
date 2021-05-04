@@ -6,7 +6,7 @@ import RerollContainer from '../Reroll/RerollContainer';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faDiceD20 } from '@fortawesome/free-solid-svg-icons';
 import { ResultsModalPropTypes } from './ResultsModalTypes';
-import { useSelector } from "react-redux";
+import useDiceModuleFormStore from "../DiceModuleOptions/store";
 
 function ResultsModal({
 	hideMsg,
@@ -41,7 +41,7 @@ function ResultsModal({
 		? `${styles.resultsModalHeader} ${styles.isFailure}`
 		: `${styles.resultsModalHeader}`;
 
-	const diceModuleForm = useSelector(({ form }: any) => form.diceModuleForm?.values);
+	const diceModuleForm = useDiceModuleFormStore(( { state }) => state);
 	const isFate = diceModuleForm?.fateMode;
 
 	return (

@@ -14,9 +14,7 @@ import { submitRoll } from "../../actions/roll.actions";
 
 function DiceModule () {
 	const dispatch = useDispatch();
-
-	const diceModuleFormState = useDiceModuleFormStore(( { state }) => state);
-	const { warhammerMode, conanMode, infinityMode, cthulhuMode, fateMode } = diceModuleFormState;
+	const { warhammerMode, conanMode, infinityMode, cthulhuMode, fateMode } = useDiceModuleFormStore(( { state }) => state);
 
 	const handleRollDice = (diceType: string, diceAmount?: number) => {
 		let diceAmountToRoll: number;

@@ -12,6 +12,7 @@ import styles from '../../components/ResultsModal/ResultsModal.module.css';
 import { DICE_ROLLED, localMsgReady } from '../../actions/roll.actions';
 import { MINUS, PLUS } from '../../consts/fateConsts';
 import TooltipWrapper from '../../components/InfoTooltip/TooltipWrapper';
+import diceModuleOptionsStore from "../../components/DiceModuleOptions/store";
 
 const IconUp = <FontAwesomeIcon icon={faArrowAltCircleUp} />;
 const IconDown = <FontAwesomeIcon icon={faArrowAltCircleDown} />;
@@ -22,9 +23,8 @@ const IconSun = <FontAwesomeIcon icon={faSun} />;
 const getLocalMsg = (store:any) => (next:any) => (action:any) => {
 	if (action.type === DICE_ROLLED) {
 		const state = store.getState();
-		const { form : { diceModuleForm } } = state;
 		const { rerollCount } = state;
-		const formValues = diceModuleForm?.values || {};
+		const diceModuleForm = diceModuleOptionsStore.getState().state;
 
 		const { payload } = action;
 		const { result, rollOptions } = payload; 
@@ -180,7 +180,7 @@ const getLocalMsg = (store:any) => (next:any) => (action:any) => {
 			fields,
 			rollOptions: {
 				...rollOptions,
-				...formValues,
+				formValues: { ...diceModuleForm },
 			},
 			results
 		}));

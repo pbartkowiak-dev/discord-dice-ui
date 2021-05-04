@@ -29,6 +29,7 @@ function L5rDicePoolBuilder() {
 				handleSubmit={handleSubmit}
 				formName={formName}
 				maxDicePool={maxDicePool}
+				type="l5rMode"
 			/>
 			<div className={poolBuilderStyles.poolBuilderBtnContainer}>
 				<Button

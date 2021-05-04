@@ -3,6 +3,7 @@ import { persist } from "zustand/middleware";
 
 type State = {
 	state: {
+		useModifier: boolean
 		warhammerMode: boolean
 		cthulhuMode: boolean
 		conanMode: boolean
@@ -12,11 +13,12 @@ type State = {
 		l5rMode: boolean
 		fateMode: boolean
 	}
-	toggle: (key: string) => void;
+	toggle: (key: string) => void
 }
 
 const useStore = create<State>(persist(((set, get) => ({
 	state: {
+		useModifier: false,
 		warhammerMode: false,
 		cthulhuMode: false,
 		conanMode: false,
@@ -39,7 +41,6 @@ const useStore = create<State>(persist(((set, get) => ({
 			state: newState
 		});
 	}
-
 })), {
 	name: 'd-dice-ui-dice-module-options'
 }));
