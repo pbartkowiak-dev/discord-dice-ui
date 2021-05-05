@@ -1,28 +1,27 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import Form from 'react-bootstrap/Form';
 import { Field, reduxForm } from 'redux-form';
 
-function EnterModifier({input}:any) {
-	return (
-		<Form.Group controlId="formBasicPassword">
-			<Form.Label>Enter Modifier value:</Form.Label>
-			<Form.Control
-				type="text"
-				placeholder="Modifier"
-				{...input}
-			/>
-		</Form.Group>
-	);
-}
+function ModifierForm( { handleSubmit, formName }:any) {
+	const fieldRef = useRef(null);
+	useEffect(() => {
+		if (fieldRef.current) {
+			// @ts-ignore
+			fieldRef.current.focus();
+		}
+	});
 
-function ModifierForm( { handleSubmit }:any) {	
 	return (
-		<Form id="modifier-form"
-			onSubmit={handleSubmit}>
-			<Field
-				name="modifier"
-				component={EnterModifier}
-			/>
+		<Form id={formName} onSubmit={handleSubmit}>
+			<Form.Group controlId="formBasicPassword">
+				<Form.Label>Enter Modifier value:</Form.Label>
+				<Form.Control
+					type="text"
+					placeholder="Modifier"
+					name="modifier"
+					ref={fieldRef}
+				/>
+			</Form.Group>
 		</Form>
 	);
 }
