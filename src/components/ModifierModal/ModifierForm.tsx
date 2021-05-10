@@ -17,8 +17,7 @@ function ModifierForm( { onSubmit, formName }: any) {
 	};
 
 	return (
-		// @ts-ignore
-		<form id={formName} onSubmit={handleSubmit}>
+		<Form id={formName} onSubmit={handleSubmit}>
 			<Form.Group controlId={formName}>
 				<Form.Label>Enter Modifier value:</Form.Label>
 				<Form.Control
@@ -28,7 +27,7 @@ function ModifierForm( { onSubmit, formName }: any) {
 					ref={fieldRef}
 				/>
 			</Form.Group>
-		</form>
+		</Form>
 	);
 }
 

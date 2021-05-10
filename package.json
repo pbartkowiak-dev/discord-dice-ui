@@ -1,6 +1,6 @@
 {
 	"name": "discord-ui",
-	"version": "11.4.7",
+	"version": "11.4.8",
 	"private": true,
 	"engines": {
 		"node": "14.7.0",

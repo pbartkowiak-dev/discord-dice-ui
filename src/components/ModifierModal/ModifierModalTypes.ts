@@ -9,7 +9,3 @@ export interface ModifierModalPropTypes {
 	diceSelected: DiceSelectedType;
 	showModal: boolean;
 }
-
-export interface ModifierFormValuesTypes {
-	modifier: string
-}

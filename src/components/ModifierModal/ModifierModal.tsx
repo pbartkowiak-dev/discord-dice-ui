@@ -2,7 +2,7 @@ import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import ModifierForm from './ModifierForm';
-import { ModifierModalPropTypes, ModifierFormValuesTypes } from './ModifierModalTypes';
+import { ModifierModalPropTypes } from './ModifierModalTypes';
 
 function ModifierModal({
 	closeModifierModal,
