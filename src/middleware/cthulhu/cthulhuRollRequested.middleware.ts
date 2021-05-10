@@ -21,8 +21,7 @@ export default (store: any) => (next: any) => (action: any) => {
 		}
 
 		const keepUnits = (cthulhuBonus || cthulhuTwoBonus || cthulhuPenalty || cthulhuTwoPenalty);
-		const rollResults = getResultsArray(100, diceAmount, keepUnits)
-			.sort((a: number, b: number) => a - b);
+		const rollResults = getResultsArray(100, diceAmount, keepUnits);
 
 		let finalDieResult = rollResults[0];
 

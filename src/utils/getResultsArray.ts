@@ -6,12 +6,15 @@ export default (
 	keepUnits?: boolean
 ): Array<number> => {
 	const rollsArr = new Array(diceAmount).fill('');
+	let result;
 
 	if (keepUnits) {
 		// this setting will reroll only tens and will keep units untouched
 		const units = getRandom(10);
-		return rollsArr.map(_ => ((getRandom(10)-1) * 10 + units));
+		result = rollsArr.map(_ => ((getRandom(10)-1) * 10 + units));
+	} else {
+		result = rollsArr.map(_ => getRandom(diceType));
 	}
 
-	return rollsArr.map(_ => getRandom(diceType));
+	return result.sort((a: number, b: number) => a - b);
 };
