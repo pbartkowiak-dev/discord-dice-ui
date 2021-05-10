@@ -13,14 +13,13 @@ function ModifierModal({
 ) {
 	const formName = 'modifier-form';
 
-	const handleSubmit = (values: ModifierFormValuesTypes) => {
+	const onSubmit = (modifier: string) => {
 		const { diceType, diceAmount } = diceSelected;
-		const modifier = values.modifier ? Number(values.modifier) : 0;
 
 		requestRoll({
 			diceType,
 			diceAmount,
-			modifier
+			modifier: Number(modifier) || 0
 		});
 
 		closeModifierModal();
@@ -33,8 +32,7 @@ function ModifierModal({
 			</Modal.Header>
 			<Modal.Body>
 				<ModifierForm
-					/* @ts-ignore */
-					onSubmit={(values: ModifierFormValuesTypes) => handleSubmit(values)}
+					onSubmit={onSubmit}
 					formName={formName}
 				/>
 			</Modal.Body>
