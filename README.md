@@ -1,6 +1,6 @@
 [![Discord Dice Ui](./public/logo.png)]() 
 
-# Discord Dice UI
+# 🎲 Discord Dice UI
 
 **The app is intended to use as a graphical interface dice roller for Discord. You can connect it with your Discord chat and use it to roll some dice without typing!**
 
