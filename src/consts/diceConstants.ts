@@ -1,5 +1,6 @@
 export const CLASSIC = 'classic';
 export const D100 = 'd100';
+export const D66 = 'd66';
 export const D20 = 'd20';
 export const D12 = 'd12';
 export const D10 = 'd10';
@@ -50,6 +51,7 @@ export const RING_DIE = 'ring_die';
 export const SKILL_DIE = 'skill_die';
 
 export const ROLL_AND_KEEP_DICE = 'ROLL_AND_KEEP_DICE';
+export const WRATH_AND_GLORY_DICE = 'WRATH_AND_GLORY_DICE';
 
 export const CTHULHU_SHEET_MODAL = 'CTHULHU_SHEET_MODAL';
 

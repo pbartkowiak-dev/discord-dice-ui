@@ -43,6 +43,10 @@ function DiceModuleForm() {
 		label: 'L5R 5e',
 		name: 'l5rMode',
 		isDisabled: s => s.cthulhuMode || s.conanMode || s.infinityMode || s.warhammerMode || s.narrativeDice || s.fateMode || s.rollAndKeepMode
+	}, {
+		label: 'Wrath and Glory',
+		name: 'wrathAndGloryMode',
+		isDisabled: s => s.cthulhuMode || s.conanMode || s.infinityMode || s.warhammerMode || s.narrativeDice || s.fateMode || s.rollAndKeepMode || s.l5rMode
 	}];
 
 	return (

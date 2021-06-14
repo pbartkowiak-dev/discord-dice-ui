@@ -8,11 +8,11 @@ import {
 	narrativeDiceSet,
 	l5rDiceSet,
 	fateDiceSet,
-	rollAndKeepDiceSet
+	rollAndKeepDiceSet, wrathAndGloryDiceSet
 } from '../consts/diceSets';
 import { WARHAMMER, CONAN, COC, INFINITY } from '../consts/consts';
 import { DiceSetType } from '../components/DiceModule/DiceTypes';
-import { POOL, NARRATIVE_DICE, L5R_DICE, ROLL_AND_KEEP_DICE } from '../consts/diceConstants';
+import { POOL, NARRATIVE_DICE, L5R_DICE, ROLL_AND_KEEP_DICE, WRATH_AND_GLORY_DICE } from '../consts/diceConstants';
 import { FATE_DICE } from '../consts/fateConsts';
 
 export default (setType: string): DiceSetType => {
@@ -34,6 +34,8 @@ export default (setType: string): DiceSetType => {
 		return rollAndKeepDiceSet;
 	} else if (setType === FATE_DICE) {
 		return fateDiceSet
+	} else if (setType === WRATH_AND_GLORY_DICE) {
+		return wrathAndGloryDiceSet
 	}
 	return classicSet;
 };

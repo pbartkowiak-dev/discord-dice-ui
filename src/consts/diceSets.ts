@@ -9,6 +9,7 @@ import {
 	D20_INFINITY_HL,
 	D100_SL,
 	D100,
+	D66,
 	D20,
 	D12,
 	D10,
@@ -216,6 +217,22 @@ export const rollAndKeepDiceSet = [{
 export const fateDiceSet = [{
 	diceType: FATE_DIE,
 	label: 'Fate Dice'
+},
+	combatTracker
+];
+
+export const wrathAndGloryDiceSet = [{
+	diceType: D6,
+	label: 'Skill Test',
+	diceImg: 'wrath-and-glory-skill-test.png',
+}, {
+	diceType: D6,
+	label: 'd6'
+}, {
+	diceType: D66,
+	label: 'd66',
+	isExcludedFromPool: true,
+	noDropdown: true
 },
 	combatTracker
 ];

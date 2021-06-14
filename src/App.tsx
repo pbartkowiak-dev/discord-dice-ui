@@ -5,12 +5,13 @@ import DiceModule from './components/DiceModule/DiceModule';
 import NarrativeDicePoolBuilder from './components/NarrativeDicePoolBuilder/NarrativeDicePoolBuilder';
 import L5rDicePoolBuilder from './components/L5rDicePoolBuilder/L5rDicePoolBuilder';
 import RollAndKeepPoolBuilder from './components/RollAndKeepPoolBuilder/RollAndKeepPoolBuilder';
+import WrathAndGloryPoolBuilder from './components/WrathAndGloryPoolBuilder/WrathAndGloryPoolBuilder';
 import Modals from './components/Modals/Modals';
 import LocalStorageManager from "./components/LocalStorageManager/LocalStorageManager";
 import useDiceModuleFormStore from './components/DiceModuleOptions/store';
 
 function App() {
-	const { narrativeDice, l5rMode, rollAndKeepMode } = useDiceModuleFormStore(( { state }) => state);
+	const { narrativeDice, l5rMode, rollAndKeepMode, wrathAndGloryMode } = useDiceModuleFormStore(( { state }) => state);
 
 	return (
 		<div className="App">
@@ -21,7 +22,8 @@ function App() {
 				{ narrativeDice && <NarrativeDicePoolBuilder /> }
 				{ l5rMode && <L5rDicePoolBuilder /> }
 				{ rollAndKeepMode && <RollAndKeepPoolBuilder /> }
-				{ !narrativeDice && !l5rMode && !rollAndKeepMode && <DiceModule /> }
+				{ wrathAndGloryMode && <WrathAndGloryPoolBuilder /> }
+				{ !narrativeDice && !l5rMode && !rollAndKeepMode && !wrathAndGloryMode && <DiceModule /> }
 			</div>
 			<LocalStorageManager />
 		</div>

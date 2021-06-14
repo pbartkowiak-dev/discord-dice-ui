@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import getDiceSet from '../../utils/getDiceSet';
-import { POOL, NARRATIVE_DICE, L5R_DICE, ROLL_AND_KEEP_DICE } from '../../consts/diceConstants';
+import { POOL, NARRATIVE_DICE, L5R_DICE, ROLL_AND_KEEP_DICE, WRATH_AND_GLORY_DICE } from '../../consts/diceConstants';
 import PoolBuilder from './PoolBuilder';
 import { submitRoll } from '../../actions/roll.actions';
 
@@ -24,6 +24,9 @@ function PoolBuilderContainer({
 		isDiceImgLarge = true;
 	} else if (type === 'rollAndKeepMode') {
 		diceSetType = ROLL_AND_KEEP_DICE;
+		isDiceImgLarge = true;
+	} else if (type === 'wrathAndGloryMode') {
+		diceSetType = WRATH_AND_GLORY_DICE;
 		isDiceImgLarge = true;
 	} else {
 		diceSetType = POOL;
