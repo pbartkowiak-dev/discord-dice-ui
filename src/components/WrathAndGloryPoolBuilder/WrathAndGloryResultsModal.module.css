@@ -193,8 +193,8 @@
     background: black;
     opacity: 0.05;
     transform: rotate(45deg);
-    top: 16px;
-    left: 7px;
+    top: 12px;
+    left: 5px;
 }
 
 .modifier {
@@ -211,5 +211,5 @@
 }
 
 .dot {
-    font-size: 7px;
+    font-size: 6px;
 }
