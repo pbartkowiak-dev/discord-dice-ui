@@ -3,7 +3,8 @@ import getRandom from './getRandom';
 export default (
 	diceType: number,
 	diceAmount: number = 1,
-	keepUnits?: boolean
+	keepUnits?: boolean,
+	sort: boolean = true
 ): Array<number> => {
 	const rollsArr = new Array(diceAmount).fill('');
 	let result;
@@ -20,5 +21,9 @@ export default (
 		result = rollsArr.map(_ => getRandom(diceType));
 	}
 
-	return result.sort((a: number, b: number) => a - b);
+	if (sort) {
+		return result.sort((a: number, b: number) => a - b);
+	} else {
+		return result;
+	}
 };

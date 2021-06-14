@@ -1,0 +1,110 @@
+.resultsTable {
+    border: 1px solid #363030;
+    border-radius: 2px;
+    width: 125px;
+    background: #e8e3dd;
+    padding: 5px;
+    position: relative;
+}
+
+.resultsTableWrapper {
+    background: #e8e3dd;
+    border: 1px solid #363030;
+    border-radius: 3px;
+}
+
+.exaltedExclamation {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    right: 0;
+    margin: 0 auto;
+    transform: translateX(-50%);
+    font-weight: bold;
+    font-style: italic;
+}
+
+.exaltedExclamation:before {
+    position: absolute;
+    content: "";
+    bottom: 4px;
+    width: 100%;
+    height: 11px;
+    left: -2px;
+    background: #e8e3dd;
+    z-index:-1;
+    border-radius: 2px;
+}
+
+.resultsRow {
+    padding: 4px 6px;
+    display: flex;
+    gap: 15px;
+    background: #e8e3dd;
+}
+
+.divider {
+    height: 1px;
+    background: #363030;
+}
+
+.resultsRow.exaltedIcon {
+    background: #dda92f;
+}
+
+.resultsRow.normalIcon {
+    background: #a4bb2c;
+}
+
+.iconsContainer {
+    text-align: center;
+    line-height: 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.dieContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.die {
+    background: #e7dece;
+    width: 35px;
+    height: 35px;
+    border: 1px solid darkgray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 23px;
+    border-radius: 6px;
+    overflow: hidden;
+    position: relative;
+}
+
+.die:after {
+    content: "";
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background: black;
+    opacity: 0.05;
+    transform: rotate(45deg);
+    top: 16px;
+    left: 7px;
+}
+
+.modifier {
+    font-size: 19px;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.iconsText {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 10px;
+    text-align: center;
+}
