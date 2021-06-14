@@ -1,5 +1,6 @@
 import create from 'zustand';
 import { persist } from "zustand/middleware";
+import addStorePrefix from "../../utils/addStorePrefix";
 
 type State = {
 	state: {
@@ -44,7 +45,7 @@ const useStore = create<State>(persist(((set, get) => ({
 		});
 	}
 })), {
-	name: 'd-dice-ui-dice-module-options'
+	name: addStorePrefix('module-options')
 }));
 
 export default useStore;

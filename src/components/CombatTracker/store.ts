@@ -1,6 +1,7 @@
 import create from 'zustand';
 import { persist } from "zustand/middleware"
 import { createCombatant, createCombatantId } from "./utils/utils";
+import addStorePrefix from "../../utils/addStorePrefix";
 
 export interface CreateCombatant {
     name: string;
@@ -141,7 +142,7 @@ const useStore = create<State>(persist(((set, get) => ({
     }),
 
 })), {
-    name: 'd-dice-ui-combat-tracker'
+    name: addStorePrefix('combat-tracker')
 }));
 
 export default useStore;

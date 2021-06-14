@@ -10,8 +10,8 @@ import { useDispatch } from "react-redux";
 function WrathAndGloryPoolBuilder() {
 	const dispatch = useDispatch();
 
-	const handleSubmit = (pool: PoolType, modifier: string) => {
-		dispatch(submitRoll({ pool, modifier }));
+	const handleSubmit = (pool: PoolType) => {
+		dispatch(submitRoll({ pool }));
 	};
 
 	const formName = 'wrath-and-glory-builder-form';
