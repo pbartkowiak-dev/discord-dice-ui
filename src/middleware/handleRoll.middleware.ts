@@ -39,6 +39,7 @@ import { openWarhammerModal } from "../actions/warhammer.actions";
 import { openCthulhuModal, openCthulhuSheetModal } from '../actions/cthulhu.actions';
 import combatTrackerStore from "../components/CombatTracker/store";
 import diceModuleOptionsStore from "../components/DiceModuleOptions/store";
+import { requestWrathAndGloryRoll } from "../actions/wrathAndGloryActions";
 
 export default (store:any) => (next:any) => (action:any) => {
 	if (action.type === ROLL_SUBMITTED) {
@@ -54,7 +55,11 @@ export default (store:any) => (next:any) => (action:any) => {
 			diceAmount
 		}));
 
-		if (action?.payload?.pool && diceModuleForm.rollAndKeepMode) {
+		if (action?.payload?.pool && diceModuleForm.wrathAndGloryMode) {
+			store.dispatch(requestWrathAndGloryRoll({
+				...action.payload
+			}));
+		} else if (action?.payload?.pool && diceModuleForm.rollAndKeepMode) {
 			store.dispatch(requestRollAndKeepRoll({
 				...action.payload
 			}));

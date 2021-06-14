@@ -8,6 +8,10 @@ export default (
 	const rollsArr = new Array(diceAmount).fill('');
 	let result;
 
+	if (diceType === 66) {
+		return [getRandom(66, 11)];
+	}
+
 	if (keepUnits) {
 		// this setting will reroll only tens and will keep units untouched
 		const units = getRandom(10);
