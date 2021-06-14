@@ -7,6 +7,47 @@ import useWrathAndGloryStore, { Result } from "./store";
 import styles from './WrathAndGloryResultsModal.module.css';
 import classNames from "classnames";
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCircle } from "@fortawesome/free-solid-svg-icons";
+
+const dot = <FontAwesomeIcon icon={faCircle} className={styles.dot}/>
+
+function getDotDie(val: nuber) {
+	switch (val) {
+		case 6: {
+			return (
+				<div className={classNames(styles.die, styles[`die-${val}`])}>{dot}{dot}{dot}{dot}{dot}{dot}</div>
+			);
+		}
+		case 5: {
+			return (
+				<div className={classNames(styles.die, styles[`die-${val}`])}>{dot}{dot}{dot}{dot}{dot}</div>
+			);
+		}
+		case 4: {
+			return (
+				<div className={classNames(styles.die, styles[`die-${val}`])}>{dot}{dot}{dot}{dot}</div>
+			);
+		}
+		case 3: {
+			return (
+				<div className={classNames(styles.die, styles[`die-${val}`])}>{dot}{dot}{dot}</div>
+			);
+		}
+		case 2: {
+			return (
+				<div className={classNames(styles.die, styles[`die-${val}`])}>{dot}{dot}</div>
+			);
+		}
+		case 1: {
+			return (
+				<div className={classNames(styles.die, styles[`die-${val}`])}>{dot}</div>
+			);
+		}
+
+	}
+}
+
 function ResultRow({ id, val }) {
 	return (
 		<div data-result-id={id} className={classNames({
@@ -15,7 +56,7 @@ function ResultRow({ id, val }) {
 			[styles.exaltedIcon]: val === 6,
 		})}>
 			<div className={styles.dieContainer}>
-				<div className={styles.die}>{val}</div>
+				<div className={styles.die}>{getDotDie(val)}</div>
 			</div>
 			<div className={styles.iconsContainer}>
 				<div className={styles.modifier}>

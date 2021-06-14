@@ -28,9 +28,9 @@
     position: absolute;
     content: "";
     bottom: 4px;
-    width: 100%;
+    width: 120%;
     height: 11px;
-    left: -2px;
+    left: -4px;
     background: #e8e3dd;
     z-index:-1;
     border-radius: 2px;
@@ -84,6 +84,107 @@
     position: relative;
 }
 
+.die-2 .dot:nth-of-type(1) {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+}
+
+.die-2 .dot:nth-of-type(2) {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+}
+
+.die-3 .dot:nth-of-type(1) {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+}
+
+.die-3 .dot:nth-of-type(3) {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+}
+
+.die-4 .dot:nth-of-type(1) {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+}
+
+.die-4 .dot:nth-of-type(2) {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+.die-4 .dot:nth-of-type(3) {
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+}
+
+.die-4 .dot:nth-of-type(4) {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+}
+
+.die-5 .dot:nth-of-type(2) {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+}
+.die-5 .dot:nth-of-type(3) {
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+}
+.die-5 .dot:nth-of-type(4) {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+.die-5 .dot:nth-of-type(5) {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+}
+.die-6 .dot:nth-of-type(1) {
+    position: absolute;
+    left: 5px;
+}
+
+.die-6 .dot:nth-of-type(2) {
+    position: absolute;
+    right: 5px;
+}
+
+.die-6 .dot:nth-of-type(3) {
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+}
+.die-6 .dot:nth-of-type(4) {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+}
+
+.die-6 .dot:nth-of-type(5) {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+}
+
+.die-6 .dot:nth-of-type(6) {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
 .die:after {
     content: "";
     position: absolute;
@@ -107,4 +208,8 @@
     font-weight: bold;
     font-size: 10px;
     text-align: center;
+}
+
+.dot {
+    font-size: 7px;
 }
