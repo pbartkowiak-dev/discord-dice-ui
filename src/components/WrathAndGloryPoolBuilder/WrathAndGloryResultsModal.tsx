@@ -165,7 +165,7 @@ function WrathAndGloryResultsModal() {
 									.filter(({val}) => val === 4 || val === 5)
 									.map(({ id, val }) => <ResultRow id={id} val={val} key={id} /> )
 							}
-							{ (normalIcons > 0 && (normalIcons + exaltedIcons < resultsSorted.length)) && <div className={styles.divider} /> }
+							{ (normalIcons > 0 && normalIcons + exaltedIcons / 2 < results.length) && <div className={styles.divider} /> }
 							{
 								resultsSorted
 									.filter(({val}) => val < 4)
