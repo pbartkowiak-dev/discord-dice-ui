@@ -1,8 +1,7 @@
 import create from 'zustand';
-import { persist } from "zustand/middleware"
-import addStorePrefix from "../../utils/addStorePrefix";
 import { D3, D6, WRATH_AND_GLORY_SKILL_TEST } from "../../consts/diceConstants";
 import getResultsArray from "../../utils/getResultsArray";
+import getRandom from "../../utils/getRandom";
 
 interface Pool {
 	WRATH_AND_GLORY_SKILL_TEST?: number;
@@ -13,7 +12,7 @@ interface Pool {
 export interface Result {
 	id: number;
 	val: number;
-	position: [number, number];
+	position: number;
 }
 
 type State = {
@@ -21,17 +20,19 @@ type State = {
 	openModal: () => void
 	closeModal: () => void
 	rollDice: (pool: Pool) => void
+	getPosition: () => number
 	results: Result[]
 	normalIcons: number
 	exaltedIcons: number
 	totalIcons: number
 	wrathDieResult: number
+	positionsTaken: number[]
 }
 
 const positionMin = 0;
-const positionMax = 39;
+export const positionMax = 35;
 
-const useStore = create<State>(persist(((set, get) => ({
+const useStore = create<State>(((set, get) => ({
 	isModalOpen: false,
 	results: [],
 	normalIcons: 0,
@@ -42,11 +43,35 @@ const useStore = create<State>(persist(((set, get) => ({
 	getPosition: () => {
 		const store = get();
 
+		const getUniqePosition = (): number => {
+			let position = getRandom(positionMax, positionMin);
+			if (store.positionsTaken.includes(position)) {
+				return getUniqePosition();
+			}
+			return position;
+		}
+
+		const position = getUniqePosition()
+
+		set({
+			positionsTaken: [...store.positionsTaken, position]
+		});
+
+		return position;
 	},
-	openModal: () => set({ isModalOpen: false}),
+	openModal: () => set({
+		isModalOpen: true,
+		results: [],
+		normalIcons: 0,
+		exaltedIcons: 0,
+		totalIcons: 0,
+		wrathDieResult: 0,
+		positionsTaken: [],
+
+	}),
 	closeModal: () => set({ isModalOpen: false }),
 	rollDice: (pool: Pool) => {
-		console.log('pool', pool)
+		const store = get();
 
 		const skillDice = pool[WRATH_AND_GLORY_SKILL_TEST]
 		const d6 = pool[D6]
@@ -63,10 +88,10 @@ const useStore = create<State>(persist(((set, get) => ({
 		console.log('exaltedIcons', exaltedIcons)
 		console.log('totalIcons', totalIcons)
 		console.log('wrathDieResult', wrathDieResult)
-		console.log('get()', get())
+		console.log('get()', store)
 
 		set({
-			results: results.map((val, id) => ({ val, id, position: [0, 0] })),
+			results: results.map((val, id) => ({ val, id, position: store.getPosition() })),
 			normalIcons,
 			exaltedIcons,
 			totalIcons,
@@ -75,8 +100,6 @@ const useStore = create<State>(persist(((set, get) => ({
 		})
 	}
 
-})), {
-	name: addStorePrefix('wrath-and-glory')
-}));
+})));
 
 export default useStore;

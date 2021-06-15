@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useDispatch } from "react-redux";
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import useWrathAndGloryStore, { Result } from "./store";
+import useWrathAndGloryStore, { positionMax, Result } from "./store";
 import styles from './WrathAndGloryResultsModal.module.css';
 import classNames from "classnames";
 
@@ -78,13 +78,15 @@ function WrathAndGloryResultsModal() {
 	const exaltedIcons: number[] = useWrathAndGloryStore(({ exaltedIcons }) => exaltedIcons);
 	const normalIcons: number[] = useWrathAndGloryStore(({ normalIcons }) => normalIcons);
 	const totalIcons: number[] = useWrathAndGloryStore(({ totalIcons }) => totalIcons);
-	const showModal = useWrathAndGloryStore(({ isModalOpen }) => isModalOpen);
+	const isModalOpen = useWrathAndGloryStore(({ isModalOpen }) => isModalOpen);
 	const closeModal: () => void = useWrathAndGloryStore(({ closeModal }) => closeModal);
 
-	const resultsSorted = results.sort((a: Result, b: Result) => b.val - a.val)
+	const resultsSorted = results.sort((a: Result, b: Result) => b.val - a.val);
+
+	console.log('results', results)
 
 	return (
-		<Modal show={showModal} onHide={closeModal}>
+		<Modal show={isModalOpen} onHide={closeModal}>
 			<Modal.Header closeButton>
 				<Modal.Title>Wrath and Glory Results</Modal.Title>
 			</Modal.Header>
@@ -115,9 +117,16 @@ function WrathAndGloryResultsModal() {
 					</div>
 					{/*	GRID*/}
 					<div className={styles.resultsGrid}>
-						{ new Array(36).fill('0').map(_ => (
-							<div className={styles.gridCell}>{getDotDie(6)}</div>
-						))}
+						{ new Array(positionMax + 1).fill('_').map((_, index) => {
+							const result = results.filter(({ position }) => position === index )[0];
+
+							console.log('result', result)
+
+							if (result) {
+								return <div className={styles.gridCell}>{getDotDie(result.val)}</div>;
+							}
+							return <div className={styles.gridCell} />;
+						})}
 					</div>
 				</div>
 			</Modal.Body>
