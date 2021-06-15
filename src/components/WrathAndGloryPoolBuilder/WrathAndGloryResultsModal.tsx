@@ -9,14 +9,25 @@ import classNames from "classnames";
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircle } from "@fortawesome/free-solid-svg-icons";
+import getRandom from "../../utils/getRandom";
 
 const dot = <FontAwesomeIcon icon={faCircle} className={styles.dot}/>
 
-function getDotDie(val: nuber, id) {
+function getDotDie(val: nuber, id: number, rotate: boolean) {
+	let style = {};
+
+	if (rotate) {
+		style = {
+			transform: `rotate(${getRandom(90, -90)}deg)`
+		}
+	}
+
 	switch (val) {
 		case 6: {
 			return (
-				<div className={classNames({
+				<div
+					style={style}
+					className={classNames({
 					[styles.die]: true,
 					[styles[`die-${val}`]]: true,
 					[styles.wrathDie]: id === 0
@@ -25,7 +36,9 @@ function getDotDie(val: nuber, id) {
 		}
 		case 5: {
 			return (
-				<div className={classNames({
+				<div
+					style={style}
+					className={classNames({
 					[styles.die]: true,
 					[styles[`die-${val}`]]: true,
 					[styles.wrathDie]: id === 0
@@ -34,7 +47,9 @@ function getDotDie(val: nuber, id) {
 		}
 		case 4: {
 			return (
-				<div className={classNames({
+				<div
+					style={style}
+					className={classNames({
 					[styles.die]: true,
 					[styles[`die-${val}`]]: true,
 					[styles.wrathDie]: id === 0
@@ -43,7 +58,9 @@ function getDotDie(val: nuber, id) {
 		}
 		case 3: {
 			return (
-				<div className={classNames({
+				<div
+					style={style}
+					className={classNames({
 					[styles.die]: true,
 					[styles[`die-${val}`]]: true,
 					[styles.wrathDie]: id === 0
@@ -52,7 +69,9 @@ function getDotDie(val: nuber, id) {
 		}
 		case 2: {
 			return (
-				<div className={classNames({
+				<div
+					style={style}
+					className={classNames({
 					[styles.die]: true,
 					[styles[`die-${val}`]]: true,
 					[styles.wrathDie]: id === 0
@@ -61,7 +80,9 @@ function getDotDie(val: nuber, id) {
 		}
 		case 1: {
 			return (
-				<div className={classNames({
+				<div
+					style={style}
+					className={classNames({
 					[styles.die]: true,
 					[styles[`die-${val}`]]: true,
 					[styles.wrathDie]: id === 0
@@ -141,15 +162,20 @@ function WrathAndGloryResultsModal() {
 						</div>
 					</div>
 					{/*	GRID*/}
-					<div className={styles.resultsGrid}>
-						{ new Array(positionMax).fill('_').map((_, index) => {
-							const result = results.filter(({ position }) => position === index )[0];
+					<div className={styles.resultsGridContainer}>
+						<div className={styles.resultsGrid}>
+							{ new Array(positionMax).fill('_').map((_, index) => {
+								const result = results.filter(({ position }) => position === index )[0];
 
-							if (result) {
-								return <div className={styles.gridCell}>{getDotDie(result.val, result.id)}</div>;
-							}
-							return <div className={styles.gridCell} />;
-						})}
+								if (result) {
+									return (
+										<div className={styles.gridCell}>
+											{getDotDie(result.val, result.id, true)}
+										</div>);
+								}
+								return <div className={styles.gridCell} />;
+							})}
+						</div>
 					</div>
 				</div>
 			</Modal.Body>

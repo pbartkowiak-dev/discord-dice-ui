@@ -78,7 +78,7 @@ const useStore = create<State>(((set, get) => ({
 		console.log('wrathDieResult', wrathDieResult)
 		console.log('get()', store)
 
-		const positionMax = results.length + 6;
+		const positionMax = results.length + 8;
 
 		set({
 			results: results.map((val, id) => ({ val, id, position: store.getPosition(positionMax) })),
@@ -87,6 +87,7 @@ const useStore = create<State>(((set, get) => ({
 			totalIcons,
 			wrathDieResult,
 			positionMax,
+			positionsTaken: [],
 			isModalOpen: true
 		})
 	}
