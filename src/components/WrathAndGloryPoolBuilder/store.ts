@@ -11,8 +11,9 @@ interface Pool {
 }
 
 export interface Result {
-	id: number,
-	val: number
+	id: number;
+	val: number;
+	position: [number, number];
 }
 
 type State = {
@@ -27,6 +28,9 @@ type State = {
 	wrathDieResult: number
 }
 
+const positionMin = 0;
+const positionMax = 39;
+
 const useStore = create<State>(persist(((set, get) => ({
 	isModalOpen: false,
 	results: [],
@@ -34,6 +38,11 @@ const useStore = create<State>(persist(((set, get) => ({
 	exaltedIcons: 0,
 	totalIcons: 0,
 	wrathDieResult: 0,
+	positionsTaken: [],
+	getPosition: () => {
+		const store = get();
+
+	},
 	openModal: () => set({ isModalOpen: false}),
 	closeModal: () => set({ isModalOpen: false }),
 	rollDice: (pool: Pool) => {
@@ -54,9 +63,10 @@ const useStore = create<State>(persist(((set, get) => ({
 		console.log('exaltedIcons', exaltedIcons)
 		console.log('totalIcons', totalIcons)
 		console.log('wrathDieResult', wrathDieResult)
+		console.log('get()', get())
 
 		set({
-			results: results.map((val, id) => ({ val, id })),
+			results: results.map((val, id) => ({ val, id, position: [0, 0] })),
 			normalIcons,
 			exaltedIcons,
 			totalIcons,

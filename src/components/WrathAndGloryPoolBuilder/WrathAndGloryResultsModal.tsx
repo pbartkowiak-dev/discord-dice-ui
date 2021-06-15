@@ -89,26 +89,35 @@ function WrathAndGloryResultsModal() {
 				<Modal.Title>Wrath and Glory Results</Modal.Title>
 			</Modal.Header>
 			<Modal.Body>
-				<div className={styles.resultsTable}>
-					{ (exaltedIcons > 0) && <span className={styles.exaltedExclamation}>Exalted!</span>}
-					<div className={styles.resultsTableWrapper}>
-						{
-							resultsSorted
-								.filter(({val}) => val === 6)
-								.map(({ id, val }) => <ResultRow id={id} val={val} key={id} /> )
-						}
-						{ (exaltedIcons > 0) && <div className={styles.divider} /> }
-						{
-							resultsSorted
-								.filter(({val}) => val === 4 || val === 5)
-								.map(({ id, val }) => <ResultRow id={id} val={val} key={id} /> )
-						}
-						{ (normalIcons > 0 && (normalIcons + exaltedIcons < resultsSorted.length)) && <div className={styles.divider} /> }
-						{
-							resultsSorted
-								.filter(({val}) => val < 4)
-								.map(({ id, val }) => <ResultRow id={id} val={val} key={id} /> )
-						}
+				<div className={styles.content}>
+					{/* RESULTS TABLE */}
+					<div className={styles.resultsTable}>
+						{ (exaltedIcons > 0) && <span className={styles.exaltedExclamation}>Exalted!</span>}
+						<div className={styles.resultsTableWrapper}>
+							{
+								resultsSorted
+									.filter(({val}) => val === 6)
+									.map(({ id, val }) => <ResultRow id={id} val={val} key={id} /> )
+							}
+							{ (exaltedIcons > 0) && <div className={styles.divider} /> }
+							{
+								resultsSorted
+									.filter(({val}) => val === 4 || val === 5)
+									.map(({ id, val }) => <ResultRow id={id} val={val} key={id} /> )
+							}
+							{ (normalIcons > 0 && (normalIcons + exaltedIcons < resultsSorted.length)) && <div className={styles.divider} /> }
+							{
+								resultsSorted
+									.filter(({val}) => val < 4)
+									.map(({ id, val }) => <ResultRow id={id} val={val} key={id} /> )
+							}
+						</div>
+					</div>
+					{/*	GRID*/}
+					<div className={styles.resultsGrid}>
+						{ new Array(36).fill('0').map(_ => (
+							<div className={styles.gridCell}>{getDotDie(6)}</div>
+						))}
 					</div>
 				</div>
 			</Modal.Body>

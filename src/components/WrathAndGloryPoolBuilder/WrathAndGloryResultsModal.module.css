@@ -1,3 +1,18 @@
+.content {
+    display: flex;
+    gap: 10px;
+}
+
+.resultsGrid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+}
+
+.gridCell {
+
+}
+
 .resultsTable {
     border: 1px solid #363030;
     border-radius: 2px;
@@ -18,8 +33,7 @@
     top: -15px;
     left: 50%;
     right: 0;
-    margin: 0 auto;
-    transform: translateX(-50%);
+    transform: translateX(-55%);
     font-weight: bold;
     font-style: italic;
     letter-spacing: 1.2px;
