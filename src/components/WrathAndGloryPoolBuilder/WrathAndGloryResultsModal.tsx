@@ -18,7 +18,7 @@ function getDotDie(val: nuber, id: number, rotate: boolean) {
 
 	if (rotate) {
 		style = {
-			transform: `rotate(${getRandom(90, -90)}deg)`
+			transform: `rotate(${getRandom(90, -90)}deg) scale(0.9)`
 		}
 	}
 
@@ -30,7 +30,9 @@ function getDotDie(val: nuber, id: number, rotate: boolean) {
 					className={classNames({
 					[styles.die]: true,
 					[styles[`die-${val}`]]: true,
-					[styles.wrathDie]: id === 0
+					[styles.wrathDie]: id === 0,
+					[styles.normalIconGlow]: val === 4 || val === 5,
+					[styles.exaltedIconGlow]: val === 6
 				})}>{dot}{dot}{dot}{dot}{dot}{dot}</div>
 			);
 		}
@@ -41,7 +43,9 @@ function getDotDie(val: nuber, id: number, rotate: boolean) {
 					className={classNames({
 					[styles.die]: true,
 					[styles[`die-${val}`]]: true,
-					[styles.wrathDie]: id === 0
+					[styles.wrathDie]: id === 0,
+					[styles.normalIconGlow]: val === 4 || val === 5,
+					[styles.exaltedIconGlow]: val === 6
 				})}>{dot}{dot}{dot}{dot}{dot}</div>
 			);
 		}
@@ -52,7 +56,9 @@ function getDotDie(val: nuber, id: number, rotate: boolean) {
 					className={classNames({
 					[styles.die]: true,
 					[styles[`die-${val}`]]: true,
-					[styles.wrathDie]: id === 0
+					[styles.wrathDie]: id === 0,
+					[styles.normalIconGlow]: val === 4 || val === 5,
+					[styles.exaltedIconGlow]: val === 6
 				})}>{dot}{dot}{dot}{dot}</div>
 			);
 		}
@@ -63,7 +69,9 @@ function getDotDie(val: nuber, id: number, rotate: boolean) {
 					className={classNames({
 					[styles.die]: true,
 					[styles[`die-${val}`]]: true,
-					[styles.wrathDie]: id === 0
+					[styles.wrathDie]: id === 0,
+					[styles.normalIconGlow]: val === 4 || val === 5,
+					[styles.exaltedIconGlow]: val === 6
 				})}>{dot}{dot}{dot}</div>
 			);
 		}
@@ -74,7 +82,9 @@ function getDotDie(val: nuber, id: number, rotate: boolean) {
 					className={classNames({
 					[styles.die]: true,
 					[styles[`die-${val}`]]: true,
-					[styles.wrathDie]: id === 0
+					[styles.wrathDie]: id === 0,
+					[styles.normalIconGlow]: val === 4 || val === 5,
+					[styles.exaltedIconGlow]: val === 6
 				})}>{dot}{dot}</div>
 			);
 		}
@@ -85,7 +95,9 @@ function getDotDie(val: nuber, id: number, rotate: boolean) {
 					className={classNames({
 					[styles.die]: true,
 					[styles[`die-${val}`]]: true,
-					[styles.wrathDie]: id === 0
+					[styles.wrathDie]: id === 0,
+					[styles.normalIconGlow]: val === 4 || val === 5,
+					[styles.exaltedIconGlow]: val === 6
 				})}>{dot}</div>
 			);
 		}

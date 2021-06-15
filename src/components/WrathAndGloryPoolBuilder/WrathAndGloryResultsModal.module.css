@@ -10,17 +10,12 @@
 .resultsGrid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    grid-template-rows: repeat(8, 1fr);
     grid-gap: 20px;
 }
 
 .gridCell {
     height: 37px;
     width: 37px;
-}
-
-.gridCell .die {
-    transform: scale(0.9);
 }
 
 .resultsTable {
@@ -227,6 +222,14 @@
     transform: rotate(45deg);
     top: 12px;
     left: 5px;
+}
+
+.normalIconGlow {
+    box-shadow: 0 0 0 3px #a4bb2c;
+}
+
+.exaltedIconGlow {
+    box-shadow: 0 0 0 3px #dda92f;
 }
 
 .modifier {
