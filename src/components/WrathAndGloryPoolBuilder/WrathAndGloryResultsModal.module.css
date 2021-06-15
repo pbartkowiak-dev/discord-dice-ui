@@ -7,10 +7,11 @@
     display: grid;
     grid-template-columns: repeat(6, 1fr);
     grid-template-rows: repeat(6, 1fr);
+    grid-gap: 20px;
 }
 
-.gridCell {
-
+.gridCell .die {
+    transform: scale(0.75);
 }
 
 .resultsTable {
@@ -20,12 +21,14 @@
     background: #e8e3dd;
     padding: 5px;
     position: relative;
+    display: flex;
 }
 
 .resultsTableWrapper {
     background: #e8e3dd;
     border: 1px solid #363030;
     border-radius: 3px;
+    flex: 1;
 }
 
 .exaltedExclamation {
