@@ -22,6 +22,7 @@
     transform: translateX(-50%);
     font-weight: bold;
     font-style: italic;
+    letter-spacing: 1.2px;
 }
 
 .exaltedExclamation:before {

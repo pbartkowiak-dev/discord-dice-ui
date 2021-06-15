@@ -21,19 +21,19 @@ type State = {
 	closeModal: () => void
 	rollDice: (pool: Pool) => void
 	results: Result[]
-	normalIcons: null | number
-	exaltedIcons: null | number
-	totalIcons: null | number
-	wrathDieResult: null | number
+	normalIcons: number
+	exaltedIcons: number
+	totalIcons: number
+	wrathDieResult: number
 }
 
 const useStore = create<State>(persist(((set, get) => ({
 	isModalOpen: false,
 	results: [],
-	normalIcons: null,
-	exaltedIcons: null,
-	totalIcons: null,
-	wrathDieResult: null,
+	normalIcons: 0,
+	exaltedIcons: 0,
+	totalIcons: 0,
+	wrathDieResult: 0,
 	openModal: () => set({ isModalOpen: false}),
 	closeModal: () => set({ isModalOpen: false }),
 	rollDice: (pool: Pool) => {

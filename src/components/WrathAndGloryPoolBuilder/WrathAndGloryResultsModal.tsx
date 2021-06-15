@@ -44,7 +44,6 @@ function getDotDie(val: nuber) {
 				<div className={classNames(styles.die, styles[`die-${val}`])}>{dot}</div>
 			);
 		}
-
 	}
 }
 
@@ -77,11 +76,12 @@ function WrathAndGloryResultsModal() {
 	const dispatch = useDispatch();
 	const results: number[] = useWrathAndGloryStore(({ results }) => results);
 	const exaltedIcons: number[] = useWrathAndGloryStore(({ exaltedIcons }) => exaltedIcons);
+	const normalIcons: number[] = useWrathAndGloryStore(({ normalIcons }) => normalIcons);
+	const totalIcons: number[] = useWrathAndGloryStore(({ totalIcons }) => totalIcons);
 	const showModal = useWrathAndGloryStore(({ isModalOpen }) => isModalOpen);
 	const closeModal: () => void = useWrathAndGloryStore(({ closeModal }) => closeModal);
 
 	const resultsSorted = results.sort((a: Result, b: Result) => b.val - a.val)
-
 
 	return (
 		<Modal show={showModal} onHide={closeModal}>
@@ -90,20 +90,20 @@ function WrathAndGloryResultsModal() {
 			</Modal.Header>
 			<Modal.Body>
 				<div className={styles.resultsTable}>
-					{ exaltedIcons && exaltedIcons > 0 &&  <span className={styles.exaltedExclamation}>Exalted!</span>}
+					{ (exaltedIcons > 0) && <span className={styles.exaltedExclamation}>Exalted!</span>}
 					<div className={styles.resultsTableWrapper}>
 						{
 							resultsSorted
 								.filter(({val}) => val === 6)
 								.map(({ id, val }) => <ResultRow id={id} val={val} key={id} /> )
 						}
-						<div className={styles.divider} />
+						{ (exaltedIcons > 0) && <div className={styles.divider} /> }
 						{
 							resultsSorted
 								.filter(({val}) => val === 4 || val === 5)
 								.map(({ id, val }) => <ResultRow id={id} val={val} key={id} /> )
 						}
-						<div className={styles.divider} />
+						{ (normalIcons > 0 && (normalIcons + exaltedIcons < resultsSorted.length)) && <div className={styles.divider} /> }
 						{
 							resultsSorted
 								.filter(({val}) => val < 4)
