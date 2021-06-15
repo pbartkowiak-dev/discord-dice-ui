@@ -17,10 +17,10 @@ export interface Result {
 
 type State = {
 	isModalOpen: boolean;
-	openModal: () => void
 	closeModal: () => void
 	rollDice: (pool: Pool) => void
-	getPosition: () => number
+	getPosition: (positionMax: number) => number
+	positionMax: number
 	results: Result[]
 	normalIcons: number
 	exaltedIcons: number
@@ -29,9 +29,6 @@ type State = {
 	positionsTaken: number[]
 }
 
-const positionMin = 0;
-export const positionMax = 35;
-
 const useStore = create<State>(((set, get) => ({
 	isModalOpen: false,
 	results: [],
@@ -39,12 +36,13 @@ const useStore = create<State>(((set, get) => ({
 	exaltedIcons: 0,
 	totalIcons: 0,
 	wrathDieResult: 0,
+	positionMax: 0,
 	positionsTaken: [],
-	getPosition: () => {
+	getPosition: (positionMax) => {
 		const store = get();
 
 		const getUniqePosition = (): number => {
-			let position = getRandom(positionMax, positionMin);
+			let position = getRandom(positionMax, 0);
 			if (store.positionsTaken.includes(position)) {
 				return getUniqePosition();
 			}
@@ -59,16 +57,6 @@ const useStore = create<State>(((set, get) => ({
 
 		return position;
 	},
-	openModal: () => set({
-		isModalOpen: true,
-		results: [],
-		normalIcons: 0,
-		exaltedIcons: 0,
-		totalIcons: 0,
-		wrathDieResult: 0,
-		positionsTaken: [],
-
-	}),
 	closeModal: () => set({ isModalOpen: false }),
 	rollDice: (pool: Pool) => {
 		const store = get();
@@ -90,12 +78,15 @@ const useStore = create<State>(((set, get) => ({
 		console.log('wrathDieResult', wrathDieResult)
 		console.log('get()', store)
 
+		const positionMax = results.length + 6;
+
 		set({
-			results: results.map((val, id) => ({ val, id, position: store.getPosition() })),
+			results: results.map((val, id) => ({ val, id, position: store.getPosition(positionMax) })),
 			normalIcons,
 			exaltedIcons,
 			totalIcons,
 			wrathDieResult,
+			positionMax,
 			isModalOpen: true
 		})
 	}

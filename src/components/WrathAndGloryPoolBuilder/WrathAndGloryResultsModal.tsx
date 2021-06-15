@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useDispatch } from "react-redux";
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import useWrathAndGloryStore, { positionMax, Result } from "./store";
+import useWrathAndGloryStore, { Result } from "./store";
 import styles from './WrathAndGloryResultsModal.module.css';
 import classNames from "classnames";
 
@@ -12,36 +12,60 @@ import { faCircle } from "@fortawesome/free-solid-svg-icons";
 
 const dot = <FontAwesomeIcon icon={faCircle} className={styles.dot}/>
 
-function getDotDie(val: nuber) {
+function getDotDie(val: nuber, id) {
 	switch (val) {
 		case 6: {
 			return (
-				<div className={classNames(styles.die, styles[`die-${val}`])}>{dot}{dot}{dot}{dot}{dot}{dot}</div>
+				<div className={classNames({
+					[styles.die]: true,
+					[styles[`die-${val}`]]: true,
+					[styles.wrathDie]: id === 0
+				})}>{dot}{dot}{dot}{dot}{dot}{dot}</div>
 			);
 		}
 		case 5: {
 			return (
-				<div className={classNames(styles.die, styles[`die-${val}`])}>{dot}{dot}{dot}{dot}{dot}</div>
+				<div className={classNames({
+					[styles.die]: true,
+					[styles[`die-${val}`]]: true,
+					[styles.wrathDie]: id === 0
+				})}>{dot}{dot}{dot}{dot}{dot}</div>
 			);
 		}
 		case 4: {
 			return (
-				<div className={classNames(styles.die, styles[`die-${val}`])}>{dot}{dot}{dot}{dot}</div>
+				<div className={classNames({
+					[styles.die]: true,
+					[styles[`die-${val}`]]: true,
+					[styles.wrathDie]: id === 0
+				})}>{dot}{dot}{dot}{dot}</div>
 			);
 		}
 		case 3: {
 			return (
-				<div className={classNames(styles.die, styles[`die-${val}`])}>{dot}{dot}{dot}</div>
+				<div className={classNames({
+					[styles.die]: true,
+					[styles[`die-${val}`]]: true,
+					[styles.wrathDie]: id === 0
+				})}>{dot}{dot}{dot}</div>
 			);
 		}
 		case 2: {
 			return (
-				<div className={classNames(styles.die, styles[`die-${val}`])}>{dot}{dot}</div>
+				<div className={classNames({
+					[styles.die]: true,
+					[styles[`die-${val}`]]: true,
+					[styles.wrathDie]: id === 0
+				})}>{dot}{dot}</div>
 			);
 		}
 		case 1: {
 			return (
-				<div className={classNames(styles.die, styles[`die-${val}`])}>{dot}</div>
+				<div className={classNames({
+					[styles.die]: true,
+					[styles[`die-${val}`]]: true,
+					[styles.wrathDie]: id === 0
+				})}>{dot}</div>
 			);
 		}
 	}
@@ -55,7 +79,7 @@ function ResultRow({ id, val }) {
 			[styles.exaltedIcon]: val === 6,
 		})}>
 			<div className={styles.dieContainer}>
-				<div className={styles.die}>{getDotDie(val)}</div>
+				<div className={styles.die}>{getDotDie(val, id)}</div>
 			</div>
 			<div className={styles.iconsContainer}>
 				<div className={styles.modifier}>
@@ -78,6 +102,7 @@ function WrathAndGloryResultsModal() {
 	const exaltedIcons: number[] = useWrathAndGloryStore(({ exaltedIcons }) => exaltedIcons);
 	const normalIcons: number[] = useWrathAndGloryStore(({ normalIcons }) => normalIcons);
 	const totalIcons: number[] = useWrathAndGloryStore(({ totalIcons }) => totalIcons);
+	const positionMax: number[] = useWrathAndGloryStore(({ positionMax }) => positionMax);
 	const isModalOpen = useWrathAndGloryStore(({ isModalOpen }) => isModalOpen);
 	const closeModal: () => void = useWrathAndGloryStore(({ closeModal }) => closeModal);
 
@@ -117,13 +142,11 @@ function WrathAndGloryResultsModal() {
 					</div>
 					{/*	GRID*/}
 					<div className={styles.resultsGrid}>
-						{ new Array(positionMax + 1).fill('_').map((_, index) => {
+						{ new Array(positionMax).fill('_').map((_, index) => {
 							const result = results.filter(({ position }) => position === index )[0];
 
-							console.log('result', result)
-
 							if (result) {
-								return <div className={styles.gridCell}>{getDotDie(result.val)}</div>;
+								return <div className={styles.gridCell}>{getDotDie(result.val, result.id)}</div>;
 							}
 							return <div className={styles.gridCell} />;
 						})}

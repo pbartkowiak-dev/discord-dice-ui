@@ -11,7 +11,7 @@
 }
 
 .gridCell .die {
-    transform: scale(0.75);
+    transform: scale(0.8);
 }
 
 .resultsTable {
@@ -100,6 +100,10 @@
     border-radius: 6px;
     overflow: hidden;
     position: relative;
+}
+
+.die.wrathDie {
+    background: #da7f31;
 }
 
 .die-2 .dot:nth-of-type(1) {
