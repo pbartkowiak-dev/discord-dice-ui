@@ -13,6 +13,7 @@ export interface Result {
 	id: number;
 	val: number;
 	position: number;
+	isRerolled: boolean;
 }
 
 type State = {
@@ -74,17 +75,15 @@ const useStore = create<State>(((set, get) => ({
 		const totalIcons = normalIcons + (exaltedIcons * 2);
 		const wrathDieResult = results[0];
 
-		console.log('results', results)
-		console.log('normalIcons', normalIcons)
-		console.log('exaltedIcons', exaltedIcons)
-		console.log('totalIcons', totalIcons)
-		console.log('wrathDieResult', wrathDieResult)
-		console.log('get()', store)
-
 		const positionMax = results.length + 8;
 
 		set({
-			results: results.map((val, id) => ({ val, id, position: store.getPosition(positionMax) })),
+			results: results.map((val, id) => ({
+				val,
+				id,
+				position: store.getPosition(positionMax),
+				isRerolled: false
+			})),
 			normalIcons,
 			exaltedIcons,
 			totalIcons,

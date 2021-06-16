@@ -4,36 +4,55 @@ import useWrathAndGloryStore, { Result } from "./store";
 import styles from './WrathAndGloryResultsModal.module.css';
 import classNames from "classnames";
 import Die from "./Die";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faRedoAlt } from "@fortawesome/free-solid-svg-icons";
+import TooltipWrapper from "../InfoTooltip/TooltipWrapper";
 
 interface ResultRowProps {
 	id: number;
 	val: number;
-	isSelected: boolean
+	isSelected: boolean;
+	isRerolled: boolean;
 	onClick: (id: number) => void;
 }
 
-const ResultRow: FC<ResultRowProps> = ({ id, val, isSelected, onClick }) => {
+const RerolledIcon: FC = () => (
+	<TooltipWrapper content="Die rerolled">
+		<FontAwesomeIcon icon={faRedoAlt} className={styles.rerolledIcon} />
+	</TooltipWrapper>
+);
+
+const ResultRow: FC<ResultRowProps> = ({
+	id,
+	val,
+	isSelected,
+	onClick,
+	isRerolled
+}) => {
 	return (
-		<div data-result-id={id}
-			 onClick={() => onClick(id)}
-			 className={classNames({
-				 [styles.resultsRow]: true,
-				 [styles.isSelected]: isSelected,
-				 [styles.normalIcon]: val === 4 || val === 5,
-				 [styles.exaltedIcon]: val === 6,
-			 })}>
-			<div className={styles.dieContainer}>
-				<Die val={val} id={id} enableGlow={false} />
-			</div>
-			<div className={styles.iconsContainer}>
-				<div className={styles.modifier}>
-					{(val === 6) && "+2"}
-					{(val === 4 || val === 5) && "+1"}
-					{(val) < 4  && "+0"}
+		<div className={styles.resultsRowWrapper}>
+			{ isRerolled && <RerolledIcon /> }
+			<div data-result-id={id}
+				 onClick={() => onClick(id)}
+				 className={classNames({
+					 [styles.resultsRow]: true,
+					 [styles.isSelected]: isSelected,
+					 [styles.normalIcon]: val === 4 || val === 5,
+					 [styles.exaltedIcon]: val === 6,
+				 })}>
+				<div className={styles.dieContainer}>
+					<Die val={val} id={id} enableGlow={false} />
 				</div>
-				<div className={styles.iconsText}>
-					{(val) === 6 && "Icons"}
-					{(val === 4 || val === 5) && "Icon"}
+				<div className={styles.iconsContainer}>
+					<div className={styles.modifier}>
+						{(val === 6) && "+2"}
+						{(val === 4 || val === 5) && "+1"}
+						{(val) < 4  && "+0"}
+					</div>
+					<div className={styles.iconsText}>
+						{(val) === 6 && "Icons"}
+						{(val === 4 || val === 5) && "Icon"}
+					</div>
 				</div>
 			</div>
 		</div>
@@ -53,6 +72,8 @@ function ResultsTable() {
 		toggleSelect(id);
 	};
 
+	console.log('resultsSorted', resultsSorted)
+
 	return (
 		<div className={styles.resultsTable}>
 			{ (exaltedIcons > 0) && <span className={styles.exaltedExclamation}>Exalted!</span>}
@@ -60,12 +81,13 @@ function ResultsTable() {
 				{
 					resultsSorted
 						.filter(({val}) => val === 6)
-						.map(({ id, val }) => (
+						.map(({ id, val, isRerolled }) => (
 							<ResultRow
 								id={id}
 								val={val}
 								onClick={() => handleSelect(id)}
 								isSelected={selectedIds.includes(id)}
+								isRerolled={isRerolled}
 								key={id}
 							/>
 						))
