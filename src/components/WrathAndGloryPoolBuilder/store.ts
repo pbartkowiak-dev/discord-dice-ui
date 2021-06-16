@@ -20,6 +20,7 @@ type State = {
 	closeModal: () => void
 	rollDice: (pool: Pool) => void
 	getPosition: (positionMax: number) => number
+	toggleSelect: (id: number) => void
 	positionMax: number
 	results: Result[]
 	normalIcons: number
@@ -27,11 +28,13 @@ type State = {
 	totalIcons: number
 	wrathDieResult: number
 	positionsTaken: number[]
+	selectedIds: number[]
 }
 
 const useStore = create<State>(((set, get) => ({
 	isModalOpen: false,
 	results: [],
+	selectedIds: [],
 	normalIcons: 0,
 	exaltedIcons: 0,
 	totalIcons: 0,
@@ -90,6 +93,19 @@ const useStore = create<State>(((set, get) => ({
 			positionsTaken: [],
 			isModalOpen: true
 		})
+	},
+	toggleSelect: (id) => {
+		const { selectedIds } = get();
+
+		if (selectedIds.includes(id)) {
+			set({
+				selectedIds: selectedIds.filter(i => i !== id)
+			});
+		} else {
+			set({
+				selectedIds: [...selectedIds, id]
+			});
+		}
 	}
 
 })));

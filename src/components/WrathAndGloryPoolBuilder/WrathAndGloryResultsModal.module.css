@@ -79,6 +79,10 @@
     background: #a4bb2c;
 }
 
+.resultsRow.isSelected {
+    background: #007bff;
+}
+
 .iconsContainer {
     text-align: center;
     line-height: 14px;
@@ -109,6 +113,10 @@
 
 .die.wrathDie {
     background: #da7f31;
+}
+
+.die.isSelected {
+    background: #007bff;
 }
 
 .die-2 .dot:nth-of-type(1) {
