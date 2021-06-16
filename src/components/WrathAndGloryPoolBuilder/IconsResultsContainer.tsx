@@ -1,6 +1,6 @@
 // @ts-nocheck
 import React, { FC } from 'react';
-import useWrathAndGloryStore, { Result } from "./store";
+import useWrathAndGloryStore from "./store";
 import styles from './WrathAndGloryResultsModal.module.css';
 import CodeSpan from "../CodeSpan/CodeSpan";
 

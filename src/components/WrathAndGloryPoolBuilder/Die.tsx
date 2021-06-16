@@ -13,7 +13,7 @@ interface DieProps {
 	id: number;
 	enableGlow: boolean;
 	onClick?: (id: number) => void;
-	style?: { [key: string]: string }
+	style?: { [key: string]: string };
 }
 
 const Die: FC<DieProps> = ({ val, id, enableGlow,style, onClick }) => {

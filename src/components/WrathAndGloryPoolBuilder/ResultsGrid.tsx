@@ -3,7 +3,6 @@ import React, { FC, useMemo } from 'react';
 import useWrathAndGloryStore from "./store";
 import styles from './WrathAndGloryResultsModal.module.css';
 import Die from "./Die";
-import getRandom from "../../utils/getRandom";
 
 const ResultsGrid: FC<> = () => {
 	const results: number[] = useWrathAndGloryStore(({ results }) => results);
@@ -21,9 +20,6 @@ const ResultsGrid: FC<> = () => {
 	const list = useMemo(() => {
 		return arr.map((_, index) => {
 			const result = results.filter(({ position }) => position === index )[0];
-			const style = {
-				transform: `rotate(${getRandom(90, -90)}deg) scale(0.9) translate(${getRandom(5, -5)}px, ${getRandom(5, -5)}px)`
-			};
 
 			if (result) {
 				return (
@@ -32,7 +28,7 @@ const ResultsGrid: FC<> = () => {
 							val={result.val}
 							id={result.id}
 							enableGlow={true}
-							style={style}
+							style={result.style}
 							onClick={handleSelect}
 						/>
 					</div>

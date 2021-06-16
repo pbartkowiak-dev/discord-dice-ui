@@ -15,6 +15,7 @@ export interface Result {
 	position: number;
 	isRerolled: boolean;
 	isAdded: boolean;
+	style: { [key: string]: string };
 }
 
 type State = {
@@ -35,6 +36,26 @@ type State = {
 	positionsTaken: number[]
 	selectedIds: number[]
 }
+
+interface GetNewResult {
+	val: number;
+	id: number;
+	position: number;
+	isReroll?: boolean;
+}
+
+const getNewResult = ({ val, id, position, isReroll }: GetNewResult): Result => {
+	return {
+		val,
+		id,
+		position,
+		isRerolled: Boolean(isReroll),
+		isAdded: false,
+		style: {
+			transform: `rotate(${getRandom(90, -90)}deg) scale(.95) translate(${getRandom(5, -5)}px, ${getRandom(5, -5)}px)`
+		}
+	};
+};
 
 const useStore = create<State>(((set, get) => ({
 	isModalOpen: false,
@@ -83,12 +104,11 @@ const useStore = create<State>(((set, get) => ({
 		const positionMax = results.length + 8;
 
 		set({
-			results: results.map((val, id) => ({
+			results: results.map((val, id) => getNewResult({
 				val,
 				id,
 				position: store.getPosition(positionMax),
-				isRerolled: Boolean(isReroll),
-				isAdded: false
+				isReroll
 			})),
 			normalIcons,
 			exaltedIcons,
