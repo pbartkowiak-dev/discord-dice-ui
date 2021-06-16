@@ -1,18 +1,30 @@
 // @ts-nocheck
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { useDispatch } from "react-redux";
 import Modal from 'react-bootstrap/Modal';
+import Spinner from 'react-bootstrap/Spinner';
 import Button from 'react-bootstrap/Button';
 import useWrathAndGloryStore, { Result } from "./store";
 import styles from './WrathAndGloryResultsModal.module.css';
 import classNames from "classnames";
 import ResultsGrid from "./ResultsGrid";
 import ResultsTable from "./ResultsTable";
-import rollAndKeepStyles from "../RollAndKeepResultsModal/RollAndKeepResultsModal.module.css";
 import CodeSpan from "../CodeSpan/CodeSpan";
+
+const RerollOverlay: FC = () => {
+	return (
+		<div className={styles.rerollOverlay}>
+			<div className={styles.rerollBackground}/>
+			<Spinner animation="border" role="status" variant="primary" className={styles.rerollSpinner}>
+				<span className="sr-only">Rerolling...</span>
+			</Spinner>
+		</div>
+	);
+};
 
 const WrathAndGloryResultsModal: FC = () => {
 	const dispatch = useDispatch();
+	const [isRerolling, setIsRerolling] = useState<boolean>(false);
 	const exaltedIcons: number[] = useWrathAndGloryStore(({ exaltedIcons }) => exaltedIcons);
 	const normalIcons: number[] = useWrathAndGloryStore(({ normalIcons }) => normalIcons);
 	const totalIcons: number[] = useWrathAndGloryStore(({ totalIcons }) => totalIcons);
@@ -29,6 +41,8 @@ const WrathAndGloryResultsModal: FC = () => {
 
 	return (
 		<Modal show={isModalOpen} onHide={closeModal}>
+			<div className={styles.modalWrapper}>
+			{isRerolling && <RerollOverlay />}
 			<Modal.Header closeButton>
 				<Modal.Title>Wrath and Glory Results</Modal.Title>
 			</Modal.Header>
@@ -75,6 +89,7 @@ const WrathAndGloryResultsModal: FC = () => {
 					</div>
 				</div>
 			</Modal.Footer>
+			</div>
 		</Modal>
 	);
 }
