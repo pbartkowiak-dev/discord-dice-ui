@@ -83,7 +83,7 @@ function ResultsTable() {
 								key={id}
 							/>) )
 				}
-				{ (normalIcons > 0 && normalIcons + exaltedIcons / 2 < results.length) && <div className={styles.divider} /> }
+				{ (normalIcons > 0 && normalIcons + exaltedIcons < results.length) && <div className={styles.divider} /> }
 				{
 					resultsSorted
 						.filter(({val}) => val < 4)

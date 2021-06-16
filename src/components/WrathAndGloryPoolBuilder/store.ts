@@ -70,8 +70,8 @@ const useStore = create<State>(((set, get) => ({
 
 		const results = getResultsArray(6, skillDice, undefined, false);
 		const normalIcons = results.filter(val => val === 4 || val === 5).length;
-		const exaltedIcons = results.filter(val => val === 6).length * 2;
-		const totalIcons = normalIcons + exaltedIcons
+		const exaltedIcons = results.filter(val => val === 6).length;
+		const totalIcons = normalIcons + (exaltedIcons * 2);
 		const wrathDieResult = results[0];
 
 		console.log('results', results)
