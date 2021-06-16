@@ -48,7 +48,7 @@ const WrathAndGloryResultsModal: FC = () => {
 							<div className={styles.iconsResultsData}>
 								<div><strong>Exalted Icons</strong>: <CodeSpan>{exaltedIcons}</CodeSpan></div>
 								<div><strong>Normal Icons</strong>: <CodeSpan>{normalIcons}</CodeSpan></div>
-								<div><strong>Wrath Die</strong>: <CodeSpan>{wrathDieResult}{wrathResultComment}</CodeSpan></div>
+								<div><strong>Wrath Die</strong>: <CodeSpan>{wrathDieResult}</CodeSpan> {wrathResultComment ? <CodeSpan>{wrathResultComment}</CodeSpan> : null }</div>
 							</div>
 						</section>
 						<hr/>

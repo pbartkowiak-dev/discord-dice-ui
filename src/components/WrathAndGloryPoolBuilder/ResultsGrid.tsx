@@ -15,7 +15,7 @@ const ResultsGrid: FC<> = () => {
 	};
 
 	const arr = useMemo(() => {
-		return new Array(positionMax).fill('_');
+		return new Array(positionMax + 1).fill('_');
 	}, [positionMax]);
 
 	const list = useMemo(() => {

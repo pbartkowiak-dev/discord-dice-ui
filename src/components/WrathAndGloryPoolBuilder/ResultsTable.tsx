@@ -64,7 +64,7 @@ function ResultsTable() {
 							<ResultRow
 								id={id}
 								val={val}
-								onClick={handleSelect}
+								onClick={() => handleSelect(id)}
 								isSelected={selectedIds.includes(id)}
 								key={id}
 							/>
@@ -78,7 +78,7 @@ function ResultsTable() {
 							<ResultRow
 								id={id}
 								val={val}
-								onClick={handleSelect}
+								onClick={() => handleSelect(id)}
 								isSelected={selectedIds.includes(id)}
 								key={id}
 							/>) )
@@ -91,7 +91,7 @@ function ResultsTable() {
 							<ResultRow
 								id={id}
 								val={val}
-								onClick={handleSelect}
+								onClick={() => handleSelect(id)}
 								isSelected={selectedIds.includes(id)}
 								key={id}
 							/>) )
