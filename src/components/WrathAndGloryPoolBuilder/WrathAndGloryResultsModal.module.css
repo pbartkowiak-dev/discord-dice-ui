@@ -3,6 +3,14 @@
     gap: 15px;
 }
 
+.rightContent {
+    flex: 1;
+}
+
+.leftContent {
+    display: flex;
+}
+
 .resultsGridContainer {
     width: 100%;
 }
@@ -63,7 +71,6 @@
     display: flex;
     gap: 15px;
     background: #e8e3dd;
-    width: 115px;
     cursor: pointer;
 }
 
@@ -102,7 +109,7 @@
     background: #e7dece;
     width: 32px;
     height: 32px;
-    border: 1px solid darkgray;
+    border: 1px solid #1d2125;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -230,7 +237,7 @@
     background: black;
     opacity: 0.05;
     transform: rotate(45deg);
-    top: 12px;
+    top: 7px;
     left: 5px;
 }
 
@@ -257,4 +264,11 @@
 
 .dot {
     font-size: 6px;
+}
+
+.buttonsContainer {
+    width: 100%;
+    margin-top: 15px;
+    display: flex;
+    justify-content: space-between;
 }

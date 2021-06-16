@@ -28,6 +28,7 @@ const ResultsGrid: FC<> = () => {
 						<Die
 							val={result.val}
 							id={result.id}
+							enableGlow={true}
 							style={{
 								transform: `rotate(${getRandom(90, -90)}deg) scale(0.9)`
 							}}

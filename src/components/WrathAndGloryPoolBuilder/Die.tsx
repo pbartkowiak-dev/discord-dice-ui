@@ -11,11 +11,12 @@ const dot = <FontAwesomeIcon icon={faCircle} className={styles.dot}/>
 interface DieProps {
 	val: number;
 	id: number;
+	enableGlow: boolean;
 	onClick?: (id: number) => void;
 	style?: { [key: string]: string }
 }
 
-const Die: FC<DieProps> = ({ val, id, style, onClick }) => {
+const Die: FC<DieProps> = ({ val, id, enableGlow,style, onClick }) => {
 	const selectedIds: number[] = useWrathAndGloryStore(({ selectedIds }) => selectedIds);
 	const isSelected = selectedIds.includes(id)
 
@@ -30,8 +31,8 @@ const Die: FC<DieProps> = ({ val, id, style, onClick }) => {
 						[styles.isSelected]: isSelected,
 						[styles[`die-${val}`]]: true,
 						[styles.wrathDie]: id === 0,
-						[styles.normalIconGlow]: val === 4 || val === 5,
-						[styles.exaltedIconGlow]: val === 6
+						[styles.normalIconGlow]: enableGlow && (val === 4 || val === 5),
+						[styles.exaltedIconGlow]: enableGlow && val === 6
 					})}>{dot}{dot}{dot}{dot}{dot}{dot}</div>
 			);
 		}
@@ -45,8 +46,8 @@ const Die: FC<DieProps> = ({ val, id, style, onClick }) => {
 						[styles.isSelected]: isSelected,
 						[styles[`die-${val}`]]: true,
 						[styles.wrathDie]: id === 0,
-						[styles.normalIconGlow]: val === 4 || val === 5,
-						[styles.exaltedIconGlow]: val === 6
+						[styles.normalIconGlow]: enableGlow && (val === 4 || val === 5),
+						[styles.exaltedIconGlow]: enableGlow && val === 6
 					})}>{dot}{dot}{dot}{dot}{dot}</div>
 			);
 		}
@@ -60,8 +61,8 @@ const Die: FC<DieProps> = ({ val, id, style, onClick }) => {
 						[styles.isSelected]: isSelected,
 						[styles[`die-${val}`]]: true,
 						[styles.wrathDie]: id === 0,
-						[styles.normalIconGlow]: val === 4 || val === 5,
-						[styles.exaltedIconGlow]: val === 6
+						[styles.normalIconGlow]: enableGlow && (val === 4 || val === 5),
+						[styles.exaltedIconGlow]: enableGlow && val === 6
 					})}>{dot}{dot}{dot}{dot}</div>
 			);
 		}
@@ -75,8 +76,8 @@ const Die: FC<DieProps> = ({ val, id, style, onClick }) => {
 						[styles.isSelected]: isSelected,
 						[styles[`die-${val}`]]: true,
 						[styles.wrathDie]: id === 0,
-						[styles.normalIconGlow]: val === 4 || val === 5,
-						[styles.exaltedIconGlow]: val === 6
+						[styles.normalIconGlow]: enableGlow && (val === 4 || val === 5),
+						[styles.exaltedIconGlow]: enableGlow && val === 6
 					})}>{dot}{dot}{dot}</div>
 			);
 		}
@@ -90,8 +91,8 @@ const Die: FC<DieProps> = ({ val, id, style, onClick }) => {
 						[styles.isSelected]: isSelected,
 						[styles[`die-${val}`]]: true,
 						[styles.wrathDie]: id === 0,
-						[styles.normalIconGlow]: val === 4 || val === 5,
-						[styles.exaltedIconGlow]: val === 6
+						[styles.normalIconGlow]: enableGlow && (val === 4 || val === 5),
+						[styles.exaltedIconGlow]: enableGlow && val === 6
 					})}>{dot}{dot}</div>
 			);
 		}
@@ -105,8 +106,8 @@ const Die: FC<DieProps> = ({ val, id, style, onClick }) => {
 						[styles.isSelected]: isSelected,
 						[styles[`die-${val}`]]: true,
 						[styles.wrathDie]: id === 0,
-						[styles.normalIconGlow]: val === 4 || val === 5,
-						[styles.exaltedIconGlow]: val === 6
+						[styles.normalIconGlow]: enableGlow && (val === 4 || val === 5),
+						[styles.exaltedIconGlow]: enableGlow && val === 6
 					})}>{dot}</div>
 			);
 		}
