@@ -12,6 +12,15 @@ import PoolBuilderDie from '../PoolBuilder/PoolBuilderDie';
 import { Form } from 'react-bootstrap';
 import TooltipWrapper from '../InfoTooltip/TooltipWrapper';
 
+
+export const isValueValid = (value: string) =>{
+	const num = Number(value);
+	if (!isNaN(num) && num >= 0) {
+		return true;
+	}
+	return false;
+};
+
 function WarhammerMoneyModal({
 	showModal,
 	closeModal,
@@ -146,14 +155,6 @@ function WarhammerMoneyModal({
 				[moneyType]: `${value}`
 			});
 		}
-	};
-
-	const isValueValid = (value: string) =>{
-		const num = Number(value);
-		if (!isNaN(num) && num >= 0) {
-			return true;
-		}
-		return false;
 	};
 
 	const tooltipContent = (

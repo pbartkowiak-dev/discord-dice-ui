@@ -20,7 +20,8 @@ export interface Result {
 
 type State = {
 	isModalOpen: boolean;
-	isRerolled: boolean
+	isRerolled: boolean;
+	areDiceAdded: boolean;
 	closeModal: () => void
 	rollDice: (pool: Pool, isReroll?: boolean) => void
 	getPosition: (positionMax: number) => number
@@ -60,6 +61,7 @@ const getNewResult = ({ val, id, position, isReroll }: GetNewResult): Result => 
 const useStore = create<State>(((set, get) => ({
 	isModalOpen: false,
 	isRerolled: false,
+	areDiceAdded: false,
 	results: [],
 	selectedIds: [],
 	normalIcons: 0,
@@ -118,7 +120,8 @@ const useStore = create<State>(((set, get) => ({
 			positionsTaken: [],
 			selectedIds: [],
 			isModalOpen: true,
-			isRerolled: false
+			isRerolled: false,
+			areDiceAdded: false
 		})
 	},
 	toggleSelect: (id) => {

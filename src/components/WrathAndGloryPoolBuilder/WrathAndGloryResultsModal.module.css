@@ -290,20 +290,20 @@
 
 .rerollButtonsContainer {
     width: 100%;
-    margin-top: 15px;
+    margin: 10px 0;
     display: flex;
     justify-content: space-between;
 }
 
 .iconsResultsContainer {
-    margin-top: 15px;
+    margin-top: 10px;
     display: flex;
     gap: 15px;
 }
 
 .totalIconsContainer {
-    width: 75px;
-    height: 75px;
+    width: 73px;
+    height: 73px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -370,4 +370,9 @@
 
 .pointer:hover {
     opacity: .8;
+}
+
+.increaseDicePoolContainer {
+    display: flex;
+    gap: 15px;
 }

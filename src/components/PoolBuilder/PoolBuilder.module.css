@@ -30,6 +30,18 @@
 	cursor: default;
 }
 
+.disabled,
+.disabled:hover {
+	opacity: .7 !important;
+	cursor: not-allowed;
+}
+
+.disabled .dieImageReadOnly,
+.disabled .dieImageReadOnly:hover,
+.disabled .dieImage.dieImageReadOnly:hover {
+	cursor: not-allowed;
+}
+
 .dieImage:hover {
 	opacity: 1;
 }

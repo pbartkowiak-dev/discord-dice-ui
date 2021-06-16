@@ -16,7 +16,8 @@ function PoolBuilderDie({
 	isDiceImgLarge,
 	readOnly,
 	noImage,
-	noHeader
+	noHeader,
+	disabled
 }: any) {
 	let diceImgPath;
 	let diceImgClassName;
@@ -41,14 +42,18 @@ function PoolBuilderDie({
 	}
 	
 	return (
-		<Card className={styles.dieCard}>
+		<Card className={classNames({
+			[styles.dieCard]: true,
+			[styles.disabled]: Boolean(disabled)
+		})}>
 			<Card.Body className={styles.dieBody}>
-				<Card.Subtitle className={classNames({
+				{title && <Card.Subtitle className={classNames({
 					hidden: noHeader,
 					'text-center': true,
 					'text-muted': true,
 					[styles.dieCardTitle]: true
 				})}>{ title }</Card.Subtitle>
+				}
 				{ !noImage && <Card.Img
 					variant="top"
 					className={diceImgClassName}
