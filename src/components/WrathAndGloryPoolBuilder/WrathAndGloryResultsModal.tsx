@@ -1,130 +1,22 @@
 // @ts-nocheck
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
 import { useDispatch } from "react-redux";
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import useWrathAndGloryStore, { Result } from "./store";
 import styles from './WrathAndGloryResultsModal.module.css';
 import classNames from "classnames";
+import ResultsGrid from "./ResultsGrid";
+import Die from "./Die";
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCircle } from "@fortawesome/free-solid-svg-icons";
-import getRandom from "../../utils/getRandom";
-
-const dot = <FontAwesomeIcon icon={faCircle} className={styles.dot}/>
-
-interface GetDotDie {
-	val: number;
+interface ResultRowProps {
 	id: number;
-	rotate: boolean;
-	isSelected: boolean;
+	val: number;
+	isSelected: boolean
 	onClick: (id: number) => void;
 }
 
-function getDotDie({ val, id, rotate, isSelected, onClick }: GetDotDie) {
-	let style = {};
-
-	if (rotate) {
-		style = {
-			transform: `rotate(${getRandom(90, -90)}deg) scale(0.9)`
-		}
-	}
-
-	switch (val) {
-		case 6: {
-			return (
-				<div
-					onClick={typeof onClick !== 'undefined' ? () => onClick(id) : null}
-					style={style}
-					className={classNames({
-					[styles.die]: true,
-					[styles.isSelected]: isSelected,
-					[styles[`die-${val}`]]: true,
-					[styles.wrathDie]: id === 0,
-					[styles.normalIconGlow]: val === 4 || val === 5,
-					[styles.exaltedIconGlow]: val === 6
-				})}>{dot}{dot}{dot}{dot}{dot}{dot}</div>
-			);
-		}
-		case 5: {
-			return (
-				<div
-					onClick={typeof onClick !== 'undefined' ? () => onClick(id) : null}
-					style={style}
-					className={classNames({
-					[styles.die]: true,
-					[styles.isSelected]: isSelected,
-					[styles[`die-${val}`]]: true,
-					[styles.wrathDie]: id === 0,
-					[styles.normalIconGlow]: val === 4 || val === 5,
-					[styles.exaltedIconGlow]: val === 6
-				})}>{dot}{dot}{dot}{dot}{dot}</div>
-			);
-		}
-		case 4: {
-			return (
-				<div
-					onClick={typeof onClick !== 'undefined' ? () => onClick(id) : null}
-					style={style}
-					className={classNames({
-					[styles.die]: true,
-					[styles.isSelected]: isSelected,
-					[styles[`die-${val}`]]: true,
-					[styles.wrathDie]: id === 0,
-					[styles.normalIconGlow]: val === 4 || val === 5,
-					[styles.exaltedIconGlow]: val === 6
-				})}>{dot}{dot}{dot}{dot}</div>
-			);
-		}
-		case 3: {
-			return (
-				<div
-					onClick={typeof onClick !== 'undefined' ? () => onClick(id) : null}
-					style={style}
-					className={classNames({
-					[styles.die]: true,
-					[styles.isSelected]: isSelected,
-					[styles[`die-${val}`]]: true,
-					[styles.wrathDie]: id === 0,
-					[styles.normalIconGlow]: val === 4 || val === 5,
-					[styles.exaltedIconGlow]: val === 6
-				})}>{dot}{dot}{dot}</div>
-			);
-		}
-		case 2: {
-			return (
-				<div
-					onClick={typeof onClick !== 'undefined' ? () => onClick(id) : null}
-					style={style}
-					className={classNames({
-					[styles.die]: true,
-					[styles.isSelected]: isSelected,
-					[styles[`die-${val}`]]: true,
-					[styles.wrathDie]: id === 0,
-					[styles.normalIconGlow]: val === 4 || val === 5,
-					[styles.exaltedIconGlow]: val === 6
-				})}>{dot}{dot}</div>
-			);
-		}
-		case 1: {
-			return (
-				<div
-					onClick={typeof onClick !== 'undefined' ? () => onClick(id) : null}
-					style={style}
-					className={classNames({
-					[styles.die]: true,
-					[styles.isSelected]: isSelected,
-					[styles[`die-${val}`]]: true,
-					[styles.wrathDie]: id === 0,
-					[styles.normalIconGlow]: val === 4 || val === 5,
-					[styles.exaltedIconGlow]: val === 6
-				})}>{dot}</div>
-			);
-		}
-	}
-}
-
-function ResultRow({ id, val, isSelected, onClick }) {
+const ResultRow: FC<ResultRowProps> = ({ id, val, isSelected, onClick }) => {
 	return (
 		<div data-result-id={id}
 			 onClick={() => onClick(id)}
@@ -133,10 +25,11 @@ function ResultRow({ id, val, isSelected, onClick }) {
 				[styles.isSelected]: isSelected,
 				[styles.normalIcon]: val === 4 || val === 5,
 				[styles.exaltedIcon]: val === 6,
-			}
-		)}>
+		})}>
 			<div className={styles.dieContainer}>
-				<div className={styles.die}>{getDotDie({ val, id })}</div>
+				<div className={styles.die}>
+					<Die val={val} id={id} />
+				</div>
 			</div>
 			<div className={styles.iconsContainer}>
 				<div className={styles.modifier}>
@@ -150,8 +43,8 @@ function ResultRow({ id, val, isSelected, onClick }) {
 				</div>
 			</div>
 		</div>
-	)
-}
+	);
+};
 
 function WrathAndGloryResultsModal() {
 	const dispatch = useDispatch();
@@ -192,7 +85,8 @@ function WrathAndGloryResultsModal() {
 											onClick={handleSelect}
 											isSelected={selectedIds.includes(id)}
 											key={id}
-										/>) )
+										/>
+									))
 							}
 							{ (exaltedIcons > 0) && <div className={styles.divider} /> }
 							{
@@ -222,28 +116,7 @@ function WrathAndGloryResultsModal() {
 							}
 						</div>
 					</div>
-					{/*	GRID*/}
-					<div className={styles.resultsGridContainer}>
-						<div className={styles.resultsGrid}>
-							{ new Array(positionMax).fill('_').map((_, index) => {
-								const result = results.filter(({ position }) => position === index )[0];
-
-								if (result) {
-									return (
-										<div className={styles.gridCell}>
-											{getDotDie({
-												val: result.val,
-												id: result.id,
-												rotate: true,
-												isSelected: selectedIds.includes(result.id),
-												onClick: handleSelect
-											})}
-										</div>);
-								}
-								return <div className={styles.gridCell} />;
-							})}
-						</div>
-					</div>
+					<ResultsGrid />
 				</div>
 			</Modal.Body>
 			<Modal.Footer>

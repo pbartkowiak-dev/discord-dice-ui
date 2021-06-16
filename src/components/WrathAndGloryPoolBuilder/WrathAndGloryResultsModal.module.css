@@ -64,6 +64,7 @@
     gap: 15px;
     background: #e8e3dd;
     width: 115px;
+    cursor: pointer;
 }
 
 .divider {
@@ -99,8 +100,8 @@
 
 .die {
     background: #e7dece;
-    width: 35px;
-    height: 35px;
+    width: 32px;
+    height: 32px;
     border: 1px solid darkgray;
     display: flex;
     justify-content: center;
@@ -109,6 +110,7 @@
     border-radius: 6px;
     overflow: hidden;
     position: relative;
+    cursor: pointer;
 }
 
 .die.wrathDie {
