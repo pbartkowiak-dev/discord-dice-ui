@@ -9,12 +9,14 @@ import classNames from "classnames";
 import ResultsGrid from "./ResultsGrid";
 import ResultsTable from "./ResultsTable";
 import rollAndKeepStyles from "../RollAndKeepResultsModal/RollAndKeepResultsModal.module.css";
+import CodeSpan from "../CodeSpan/CodeSpan";
 
 const WrathAndGloryResultsModal: FC = () => {
 	const dispatch = useDispatch();
 	const exaltedIcons: number[] = useWrathAndGloryStore(({ exaltedIcons }) => exaltedIcons);
 	const normalIcons: number[] = useWrathAndGloryStore(({ normalIcons }) => normalIcons);
 	const totalIcons: number[] = useWrathAndGloryStore(({ totalIcons }) => totalIcons);
+	const wrathDieResult: number[] = useWrathAndGloryStore(({ results }) => results[0]?.val);
 	const isModalOpen = useWrathAndGloryStore(({ isModalOpen }) => isModalOpen);
 	const closeModal: () => void = useWrathAndGloryStore(({ closeModal }) => closeModal);
 
@@ -30,13 +32,19 @@ const WrathAndGloryResultsModal: FC = () => {
 					</div>
 					<div className={styles.rightContent}>
 						<ResultsGrid />
-						<section>
-							<div><strong>Total Icons</strong>: {totalIcons}</div>
-							<div><strong>Exalted Icons</strong>: {exaltedIcons}</div>
-							<div><strong>Normal Icons</strong>: {normalIcons}</div>
-							<div><strong>Wrath Die</strong>:</div>
-							<div><strong>Complication</strong>: 1</div>
+						<hr />
+						<section className={styles.iconsResultsContainer}>
+							<div className={styles.totalIconsContainer}>
+								<div className={styles.totalIconsScore}>{totalIcons}</div>
+								<div className={styles.iconsTextContainer}><span className={styles.totalText}>Total</span><br/><span className={styles.iconText}>Icons</span></div>
+							</div>
+							<div className={styles.iconsResultsData}>
+								<div><strong>Exalted Icons</strong>: <CodeSpan>{exaltedIcons}</CodeSpan></div>
+								<div><strong>Normal Icons</strong>: <CodeSpan>{normalIcons}</CodeSpan></div>
+								<div><strong>Wrath Die</strong>: <CodeSpan>{wrathDieResult}</CodeSpan></div>
+							</div>
 						</section>
+						<hr/>
 						<section className={styles.buttonsContainer}>
 							<Button
 								variant="outline-info"

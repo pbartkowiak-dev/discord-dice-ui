@@ -272,3 +272,48 @@
     display: flex;
     justify-content: space-between;
 }
+
+.iconsResultsContainer {
+    margin-top: 15px;
+    display: flex;
+    gap: 15px;
+}
+
+.totalIconsContainer {
+    width: 75px;
+    height: 75px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    background: #3f3f3d;
+    border: 1px solid #3f3f3d;
+    border-radius: 5px;
+    font-size: 24px;
+    color: #fff;
+    line-height: 28px;
+    font-weight: bold;
+    font-style: italic;
+}
+
+.totalIconsScore {
+    font-size: 32px;
+}
+
+.iconsTextContainer {
+    line-height: 10px;
+}
+
+.totalText {
+    font-size: 16px;
+}
+
+.iconText {
+    font-size: 21px;
+}
+
+.iconsResultsData {
+    margin-top: 2px;
+    line-height: 17px;
+}
