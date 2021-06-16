@@ -1,29 +1,23 @@
 // @ts-nocheck
-import React, { FC, useState } from 'react';
+import React, { FC } from 'react';
 import styles from './WrathAndGloryResultsModal.module.css';
 import classNames from "classnames";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCircle } from "@fortawesome/free-solid-svg-icons";
-import getRandom from "../../utils/getRandom";
+import useWrathAndGloryStore from "./store";
 
 const dot = <FontAwesomeIcon icon={faCircle} className={styles.dot}/>
 
 interface DieProps {
 	val: number;
 	id: number;
-	rotate?: boolean;
-	isSelected?: boolean;
 	onClick?: (id: number) => void;
+	style?: { [key: string]: string }
 }
 
-const Die: FC<DieProps> = ({ val, id, rotate, isSelected, onClick }) => {
-	let style = {};
-
-	if (rotate) {
-		style = {
-			transform: `rotate(${getRandom(90, -90)}deg) scale(0.9)`
-		};
-	}
+const Die: FC<DieProps> = ({ val, id, style, onClick }) => {
+	const selectedIds: number[] = useWrathAndGloryStore(({ selectedIds }) => selectedIds);
+	const isSelected = selectedIds.includes(id)
 
 	switch (val) {
 		case 6: {

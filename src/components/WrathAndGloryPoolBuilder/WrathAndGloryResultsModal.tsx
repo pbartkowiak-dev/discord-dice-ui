@@ -54,7 +54,6 @@ function WrathAndGloryResultsModal() {
 	const totalIcons: number[] = useWrathAndGloryStore(({ totalIcons }) => totalIcons);
 	const toggleSelect: number[] = useWrathAndGloryStore(({ toggleSelect }) => toggleSelect);
 	const selectedIds: number[] = useWrathAndGloryStore(({ selectedIds }) => selectedIds);
-	const positionMax: number[] = useWrathAndGloryStore(({ positionMax }) => positionMax);
 	const isModalOpen = useWrathAndGloryStore(({ isModalOpen }) => isModalOpen);
 	const closeModal: () => void = useWrathAndGloryStore(({ closeModal }) => closeModal);
 
