@@ -66,13 +66,11 @@ function ResultsTable() {
 	const toggleSelect: number[] = useWrathAndGloryStore(({ toggleSelect }) => toggleSelect);
 	const selectedIds: number[] = useWrathAndGloryStore(({ selectedIds }) => selectedIds);
 
-	const resultsSorted = results.sort((a: Result, b: Result) => b.val - a.val);
+	const resultsSorted = [...results].sort((a: Result, b: Result) => b.val - a.val);
 
 	const handleSelect = (id) => {
 		toggleSelect(id);
 	};
-
-	console.log('resultsSorted', resultsSorted)
 
 	return (
 		<div className={styles.resultsTable}>
