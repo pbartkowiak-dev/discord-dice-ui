@@ -22,6 +22,8 @@ type State = {
 	rollDice: (pool: Pool) => void
 	getPosition: (positionMax: number) => number
 	toggleSelect: (id: number) => void
+	rerollAll: () => void
+	rerollSelected: () => void
 	positionMax: number
 	results: Result[]
 	normalIcons: number
@@ -106,8 +108,17 @@ const useStore = create<State>(((set, get) => ({
 				selectedIds: [...selectedIds, id]
 			});
 		}
-	}
+	},
+	rerollAll: () => {
+		const store = get();
 
+		store.rollDice({
+			[WRATH_AND_GLORY_SKILL_TEST]: store.results.length
+		});
+	},
+	rerollSelected: () => {
+
+	},
 })));
 
 export default useStore;

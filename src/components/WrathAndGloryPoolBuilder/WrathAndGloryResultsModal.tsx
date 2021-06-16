@@ -23,7 +23,6 @@ const RerollOverlay: FC = () => {
 };
 
 const WrathAndGloryResultsModal: FC = () => {
-	const dispatch = useDispatch();
 	const [isRerolling, setIsRerolling] = useState<boolean>(false);
 	const exaltedIcons: number[] = useWrathAndGloryStore(({ exaltedIcons }) => exaltedIcons);
 	const normalIcons: number[] = useWrathAndGloryStore(({ normalIcons }) => normalIcons);
@@ -31,6 +30,9 @@ const WrathAndGloryResultsModal: FC = () => {
 	const wrathDieResult: number[] = useWrathAndGloryStore(({ results }) => results[0]?.val);
 	const isModalOpen = useWrathAndGloryStore(({ isModalOpen }) => isModalOpen);
 	const closeModal: () => void = useWrathAndGloryStore(({ closeModal }) => closeModal);
+	const selectedIds: number[] = useWrathAndGloryStore(({ selectedIds }) => selectedIds);
+	const rerollAll: number[] = useWrathAndGloryStore(({ rerollAll }) => rerollAll);
+	const rerollSelected: number[] = useWrathAndGloryStore(({ rerollSelected }) => rerollSelected);
 
 	let wrathResultComment = '';
 	if (wrathDieResult === 6) {
@@ -38,6 +40,18 @@ const WrathAndGloryResultsModal: FC = () => {
 	} else if (wrathDieResult === 1) {
 		wrathResultComment = ' (Complication)';
 	}
+
+	const handleRerollAll = () => {
+		setIsRerolling(true);
+		setTimeout(() => {
+			rerollAll();
+			setIsRerolling(false);
+		}, 1000);
+	};
+
+	const handleRerollSelected = () => {
+		setIsRerolling(true);
+	};
 
 	return (
 		<Modal show={isModalOpen} onHide={closeModal}>
@@ -69,9 +83,12 @@ const WrathAndGloryResultsModal: FC = () => {
 						<section className={styles.buttonsContainer}>
 							<Button
 								variant="outline-info"
+								onClick={handleRerollAll}
 							>Reroll all dice</Button>
 							<Button
 								variant="outline-primary"
+								onClick={handleRerollSelected}
+								disabled={selectedIds.length === 0}
 							>Reroll selected</Button>
 						</section>
 					</div>
