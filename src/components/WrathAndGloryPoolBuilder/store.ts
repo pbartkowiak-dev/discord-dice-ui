@@ -91,6 +91,7 @@ const useStore = create<State>(((set, get) => ({
 			wrathDieResult,
 			positionMax,
 			positionsTaken: [],
+			selectedIds: [],
 			isModalOpen: true
 		})
 	},

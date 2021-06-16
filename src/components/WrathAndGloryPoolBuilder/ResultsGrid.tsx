@@ -21,6 +21,9 @@ const ResultsGrid: FC<> = () => {
 	const list = useMemo(() => {
 		return arr.map((_, index) => {
 			const result = results.filter(({ position }) => position === index )[0];
+			const style = {
+				transform: `rotate(${getRandom(90, -90)}deg) scale(0.9) translate(${getRandom(5, -5)}px, ${getRandom(5, -5)}px)`
+			};
 
 			if (result) {
 				return (
@@ -29,9 +32,7 @@ const ResultsGrid: FC<> = () => {
 							val={result.val}
 							id={result.id}
 							enableGlow={true}
-							style={{
-								transform: `rotate(${getRandom(90, -90)}deg) scale(0.9)`
-							}}
+							style={style}
 							onClick={handleSelect}
 						/>
 					</div>
