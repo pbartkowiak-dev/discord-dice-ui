@@ -56,7 +56,7 @@ export default (store:any) => (next:any) => (action:any) => {
 		}));
 
 		if (action?.payload?.pool && diceModuleForm.wrathAndGloryMode) {
-			wrathAndGloryStore.getState().rollDice({... action.payload.pool})
+			wrathAndGloryStore.getState().rollDice({...action.payload.pool})
 		} else if (action?.payload?.pool && diceModuleForm.rollAndKeepMode) {
 			store.dispatch(requestRollAndKeepRoll({
 				...action.payload

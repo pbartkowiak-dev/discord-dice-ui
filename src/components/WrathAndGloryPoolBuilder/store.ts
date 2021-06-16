@@ -14,12 +14,14 @@ export interface Result {
 	val: number;
 	position: number;
 	isRerolled: boolean;
+	isAdded: boolean;
 }
 
 type State = {
 	isModalOpen: boolean;
+	isRerolled: boolean
 	closeModal: () => void
-	rollDice: (pool: Pool) => void
+	rollDice: (pool: Pool, isReroll?: boolean) => void
 	getPosition: (positionMax: number) => number
 	toggleSelect: (id: number) => void
 	rerollAll: () => void
@@ -36,6 +38,7 @@ type State = {
 
 const useStore = create<State>(((set, get) => ({
 	isModalOpen: false,
+	isRerolled: false,
 	results: [],
 	selectedIds: [],
 	normalIcons: 0,
@@ -64,7 +67,7 @@ const useStore = create<State>(((set, get) => ({
 		return position;
 	},
 	closeModal: () => set({ isModalOpen: false }),
-	rollDice: (pool: Pool) => {
+	rollDice: (pool, isReroll) => {
 		const store = get();
 
 		const skillDice = pool[WRATH_AND_GLORY_SKILL_TEST]
@@ -84,7 +87,8 @@ const useStore = create<State>(((set, get) => ({
 				val,
 				id,
 				position: store.getPosition(positionMax),
-				isRerolled: false
+				isRerolled: Boolean(isReroll),
+				isAdded: false
 			})),
 			normalIcons,
 			exaltedIcons,
@@ -93,31 +97,53 @@ const useStore = create<State>(((set, get) => ({
 			positionMax,
 			positionsTaken: [],
 			selectedIds: [],
-			isModalOpen: true
+			isModalOpen: true,
+			isRerolled: false
 		})
 	},
 	toggleSelect: (id) => {
-		const { selectedIds } = get();
+		const { selectedIds, isRerolled } = get();
 
-		if (selectedIds.includes(id)) {
-			set({
-				selectedIds: selectedIds.filter(i => i !== id)
-			});
-		} else {
-			set({
-				selectedIds: [...selectedIds, id]
-			});
+		if (!isRerolled) {
+			if (selectedIds.includes(id)) {
+				set({
+					selectedIds: selectedIds.filter(i => i !== id)
+				});
+			} else {
+				set({
+					selectedIds: [...selectedIds, id]
+				});
+			}
 		}
 	},
 	rerollAll: () => {
 		const store = get();
 
 		store.rollDice({
-			[WRATH_AND_GLORY_SKILL_TEST]: store.results.length
-		});
+				[WRATH_AND_GLORY_SKILL_TEST]: store.results.length
+			},
+			true
+		);
+
+		set({ isRerolled : true });
 	},
 	rerollSelected: () => {
+		const { results, selectedIds } = get();
 
+		const rerolledResults = results.map(result => {
+			const newResult = { ...result };
+			if (selectedIds.includes(newResult.id)) {
+				newResult.val = getResultsArray(6)[0];
+				newResult.isRerolled = true;
+			}
+			return newResult;
+		});
+
+		set({
+			isRerolled : true,
+			selectedIds: [],
+			results: rerolledResults
+		});
 	},
 })));
 

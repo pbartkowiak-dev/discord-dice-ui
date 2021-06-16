@@ -1,6 +1,6 @@
 // @ts-nocheck
 import React, { FC, useMemo } from 'react';
-import useWrathAndGloryStore, { Result } from "./store";
+import useWrathAndGloryStore from "./store";
 import styles from './WrathAndGloryResultsModal.module.css';
 import Die from "./Die";
 import getRandom from "../../utils/getRandom";
@@ -40,7 +40,7 @@ const ResultsGrid: FC<> = () => {
 			}
 			return <div className={styles.gridCell} />;
 		});
-	}, [results])
+	}, [results, arr]);
 
 	return (
 		<div className={styles.resultsGridContainer}>

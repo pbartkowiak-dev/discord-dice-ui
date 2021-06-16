@@ -5,7 +5,7 @@ import styles from './WrathAndGloryResultsModal.module.css';
 import classNames from "classnames";
 import Die from "./Die";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faRedoAlt } from "@fortawesome/free-solid-svg-icons";
+import { faRedoAlt, faSkull } from "@fortawesome/free-solid-svg-icons";
 import TooltipWrapper from "../InfoTooltip/TooltipWrapper";
 
 interface ResultRowProps {
@@ -13,12 +13,19 @@ interface ResultRowProps {
 	val: number;
 	isSelected: boolean;
 	isRerolled: boolean;
+	isAdded: boolean;
 	onClick: (id: number) => void;
 }
 
 const RerolledIcon: FC = () => (
 	<TooltipWrapper content="Die rerolled">
-		<FontAwesomeIcon icon={faRedoAlt} className={styles.rerolledIcon} />
+		<FontAwesomeIcon icon={faRedoAlt} className={styles.extraIcon} />
+	</TooltipWrapper>
+);
+
+const AddedIcon: FC = () => (
+	<TooltipWrapper content="Die added (cannot be rerolled)">
+		<FontAwesomeIcon icon={faSkull} className={styles.extraIcon} />
 	</TooltipWrapper>
 );
 
@@ -27,14 +34,22 @@ const ResultRow: FC<ResultRowProps> = ({
 	val,
 	isSelected,
 	onClick,
-	isRerolled
+	isRerolled,
+	isAdded
 }) => {
+	const isRerolledState: number[] = useWrathAndGloryStore(({ isRerolled }) => isRerolled);
+
 	return (
 		<div className={styles.resultsRowWrapper}>
-			{ isRerolled && <RerolledIcon /> }
+			<div className={styles.extraIconsContainer}>
+				{ isRerolled && <RerolledIcon /> }
+				{ isAdded &&<AddedIcon /> }
+			</div>
+
 			<div data-result-id={id}
 				 onClick={() => onClick(id)}
 				 className={classNames({
+					 [styles.pointer]: !isRerolledState,
 					 [styles.resultsRow]: true,
 					 [styles.isSelected]: isSelected,
 					 [styles.normalIcon]: val === 4 || val === 5,
@@ -79,13 +94,14 @@ function ResultsTable() {
 				{
 					resultsSorted
 						.filter(({val}) => val === 6)
-						.map(({ id, val, isRerolled }) => (
+						.map(({ id, val, isRerolled, isAdded }) => (
 							<ResultRow
 								id={id}
 								val={val}
 								onClick={() => handleSelect(id)}
 								isSelected={selectedIds.includes(id)}
 								isRerolled={isRerolled}
+								isAdded={isAdded}
 								key={id}
 							/>
 						))
@@ -94,12 +110,14 @@ function ResultsTable() {
 				{
 					resultsSorted
 						.filter(({val}) => val === 4 || val === 5)
-						.map(({ id, val }) => (
+						.map(({ id, val, isRerolled, isAdded }) => (
 							<ResultRow
 								id={id}
 								val={val}
 								onClick={() => handleSelect(id)}
 								isSelected={selectedIds.includes(id)}
+								isRerolled={isRerolled}
+								isAdded={isAdded}
 								key={id}
 							/>) )
 				}
@@ -107,12 +125,14 @@ function ResultsTable() {
 				{
 					resultsSorted
 						.filter(({val}) => val < 4)
-						.map(({ id, val }) => (
+						.map(({ id, val, isRerolled, isAdded }) => (
 							<ResultRow
 								id={id}
 								val={val}
 								onClick={() => handleSelect(id)}
 								isSelected={selectedIds.includes(id)}
+								isRerolled={isRerolled}
+								isAdded={isAdded}
 								key={id}
 							/>) )
 				}
