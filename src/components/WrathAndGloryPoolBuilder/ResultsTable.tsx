@@ -5,7 +5,7 @@ import styles from './WrathAndGloryResultsModal.module.css';
 import classNames from "classnames";
 import Die from "./Die";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faRedoAlt, faSkull } from "@fortawesome/free-solid-svg-icons";
+import { faRedoAlt, faSkull, faStar } from "@fortawesome/free-solid-svg-icons";
 import TooltipWrapper from "../InfoTooltip/TooltipWrapper";
 
 interface ResultRowProps {
@@ -23,9 +23,14 @@ const RerolledIcon: FC = () => (
 	</TooltipWrapper>
 );
 
+const WrathIcon: FC = () => (
+	<TooltipWrapper content="Wrath Die">
+		<FontAwesomeIcon icon={faSkull} className={styles.extraIcon} />
+	</TooltipWrapper>
+);
 const AddedIcon: FC = () => (
 	<TooltipWrapper content="Die added (cannot be rerolled)">
-		<FontAwesomeIcon icon={faSkull} className={styles.extraIcon} />
+		<FontAwesomeIcon icon={faStar} className={styles.extraIcon} />
 	</TooltipWrapper>
 );
 
@@ -47,8 +52,9 @@ const ResultRow: FC<ResultRowProps> = ({
 			onMouseLeave={() => setHoverId(null)}
 			className={styles.resultsRowWrapper}>
 			<div className={styles.extraIconsContainer}>
+				{ id === 0 && <WrathIcon /> }
 				{ isRerolled && <RerolledIcon /> }
-				{ isAdded &&<AddedIcon /> }
+				{ isAdded && <AddedIcon /> }
 			</div>
 			<div
 				onClick={() => onClick(id)}
