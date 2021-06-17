@@ -76,7 +76,7 @@ const useStore = create<State>(((set, get) => ({
 		const { positionsTaken } = get();
 
 		const getUniqePosition = (): number => {
-			let position = getRandom(positionMax, 0);
+			const position = getRandom(positionMax, 0);
 			if (positionsTaken.includes(position)) {
 				return getUniqePosition();
 			}
@@ -94,7 +94,15 @@ const useStore = create<State>(((set, get) => ({
 	},
 	closeModal: () => set({ isModalOpen: false }),
 	rollDice: (pool, isReroll) => {
-		const store = get();
+		const { getPosition } = get();
+
+		// Open modal
+		set({
+			positionsTaken: [],
+			isModalOpen: true,
+			isRerolled: false,
+			areDiceAdded: false
+		});
 
 		const skillDice = pool[WRATH_AND_GLORY_SKILL_TEST]
 		const d6 = pool[D6]
@@ -108,11 +116,12 @@ const useStore = create<State>(((set, get) => ({
 
 		const positionMax = results.length + 8;
 
+		// Set results
 		set({
 			results: results.map((val, index) => getNewResult({
 				val,
 				id: index,
-				position: store.getPosition(positionMax),
+				position: getPosition(positionMax),
 				isReroll
 			})),
 			normalIcons,
@@ -120,12 +129,9 @@ const useStore = create<State>(((set, get) => ({
 			totalIcons,
 			wrathDieResult,
 			positionMax,
-			positionsTaken: [],
-			selectedIds: [],
-			isModalOpen: true,
-			isRerolled: false,
-			areDiceAdded: false
-		})
+			selectedIds: []
+		});
+
 	},
 	toggleSelect: (id) => {
 		const { selectedIds, results } = get();
