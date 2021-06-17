@@ -37,19 +37,24 @@ const ResultRow: FC<ResultRowProps> = ({
 	isRerolled,
 	isAdded
 }) => {
+	const setHoverId: number[] = useWrathAndGloryStore(({ setHoverId }) => setHoverId);
+	const hoverId: number[] = useWrathAndGloryStore(({ hoverId }) => hoverId);
+
 	return (
 		<div
 			data-result-id={id}
+			onMouseEnter={() => setHoverId(id)}
+			onMouseLeave={() => setHoverId(null)}
 			className={styles.resultsRowWrapper}>
 			<div className={styles.extraIconsContainer}>
 				{ isRerolled && <RerolledIcon /> }
 				{ isAdded &&<AddedIcon /> }
 			</div>
-
 			<div
 				onClick={() => onClick(id)}
 				className={classNames({
 					 [styles.pointer]: !isAdded,
+					 [styles.hover]: hoverId === id,
 					 [styles.notAllowed]: isAdded,
 					 [styles.resultsRow]: true,
 					 [styles.isSelected]: isSelected,

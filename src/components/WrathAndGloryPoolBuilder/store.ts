@@ -26,6 +26,7 @@ type State = {
 	rollDice: (pool: Pool, isReroll?: boolean) => void
 	getPosition: (positionMax: number) => number
 	toggleSelect: (id: number) => void
+	setHoverId: (id: number | null) => void
 	rerollAll: () => void
 	rerollSelected: () => void
 	increaseDicePool: (amount: number) => void
@@ -37,6 +38,7 @@ type State = {
 	wrathDieResult: number
 	positionsTaken: number[]
 	selectedIds: number[]
+	hoverId: null | number
 }
 
 interface GetNewResult {
@@ -71,6 +73,7 @@ const useStore = create<State>(((set, get) => ({
 	totalIcons: 0,
 	wrathDieResult: 0,
 	positionMax: 0,
+	hoverId: null,
 	positionsTaken: [],
 	getPosition: (positionMax) => {
 		const { positionsTaken } = get();
@@ -209,6 +212,12 @@ const useStore = create<State>(((set, get) => ({
 			positionMax: positionMax + newResults.length
 		});
 	},
+	setHoverId: (id) => {
+		console.log('store = setHoverId, id', id)
+		set({
+			hoverId: id
+		});
+	}
 })));
 
 export default useStore;

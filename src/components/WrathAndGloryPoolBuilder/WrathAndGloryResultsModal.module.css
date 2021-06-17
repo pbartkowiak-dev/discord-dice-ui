@@ -150,6 +150,10 @@
     background: #007bff;
 }
 
+.die.wrathDie.isSelected {
+    background: #0d5cb4;
+}
+
 .die-2 .dot:nth-of-type(1) {
     position: absolute;
     top: 5px;
@@ -369,8 +373,9 @@
     transition: .1s;
 }
 
-.pointer:hover {
+.hover {
     opacity: .8;
+    background: #007bff !important;
 }
 .notAllowed *,
 .notAllowed {

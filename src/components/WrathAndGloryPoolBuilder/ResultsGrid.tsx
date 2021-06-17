@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React, { FC, useMemo } from 'react';
+import React, { FC, useCallback, useMemo } from 'react';
 import useWrathAndGloryStore from "./store";
 import styles from './WrathAndGloryResultsModal.module.css';
 import Die from "./Die";
@@ -8,6 +8,8 @@ const ResultsGrid: FC<> = () => {
 	const results: number[] = useWrathAndGloryStore(({ results }) => results);
 	const toggleSelect: number[] = useWrathAndGloryStore(({ toggleSelect }) => toggleSelect);
 	const positionMax: number[] = useWrathAndGloryStore(({ positionMax }) => positionMax);
+	const setHoverId: number[] = useWrathAndGloryStore(({ setHoverId }) => setHoverId);
+	const hoverId: number[] = useWrathAndGloryStore(({ hoverId }) => hoverId);
 
 	const handleSelect = (id) => {
 		toggleSelect(id);
@@ -17,6 +19,17 @@ const ResultsGrid: FC<> = () => {
 		return new Array(positionMax + 1).fill('_');
 	}, [positionMax]);
 
+	const onMouseEnter = useCallback((id: number) => {
+		return () => {
+			console.log('onMouseEnter', id)
+			setHoverId(id);
+		}
+	}, []);
+
+	const onMouseLeave = useCallback(() => {
+		return () => setHoverId(null);
+	}, []);
+
 	const list = useMemo(() => {
 		return arr.map((_, index) => {
 			const result = results.filter(({ position }) => position === index )[0];
@@ -25,6 +38,9 @@ const ResultsGrid: FC<> = () => {
 				return (
 					<div className={styles.gridCell}>
 						<Die
+							onMouseEnter={onMouseEnter}
+							onMouseLeave={onMouseLeave}
+							hover={hoverId === result.id}
 							val={result.val}
 							isAdded={result.isAdded}
 							id={result.id}
@@ -37,7 +53,7 @@ const ResultsGrid: FC<> = () => {
 			}
 			return <div className={styles.gridCell} />;
 		});
-	}, [results, arr]);
+	}, [results, arr, hoverId]);
 
 	return (
 		<div className={styles.resultsGridContainer}>

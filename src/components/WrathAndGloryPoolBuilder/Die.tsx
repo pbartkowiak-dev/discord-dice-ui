@@ -15,9 +15,22 @@ interface DieProps {
 	onClick?: (id: number) => void;
 	style?: { [key: string]: string };
 	isAdded: boolean;
+	onMouseEnter?: (id:  number) => void;
+	onMouseLeave?: () => void;
+	hover?: boolean;
 }
 
-const Die: FC<DieProps> = ({ val, id, isAdded, enableGlow,style, onClick }) => {
+const Die: FC<DieProps> = ({
+	val,
+	id,
+	isAdded,
+	enableGlow,
+	style,
+	onClick,
+	onMouseEnter,
+	onMouseLeave,
+	hover,
+}) => {
 	const selectedIds: number[] = useWrathAndGloryStore(({ selectedIds }) => selectedIds);
 	const isSelected = selectedIds.includes(id)
 
@@ -26,9 +39,12 @@ const Die: FC<DieProps> = ({ val, id, isAdded, enableGlow,style, onClick }) => {
 			return (
 				<div
 					onClick={typeof onClick !== 'undefined' ? () => onClick(id) : null}
+					onMouseEnter={typeof onMouseEnter !== 'undefined' ? onMouseEnter(id) : null}
+					onMouseLeave={typeof onMouseLeave !== 'undefined' ? onMouseLeave() : null}
 					style={style}
 					className={classNames({
 						[styles.pointer]: !isAdded,
+						[styles.hover]: hover,
 						[styles.notAllowed]: isAdded,
 						[styles.die]: true,
 						[styles.isSelected]: isSelected,
@@ -43,9 +59,12 @@ const Die: FC<DieProps> = ({ val, id, isAdded, enableGlow,style, onClick }) => {
 			return (
 				<div
 					onClick={typeof onClick !== 'undefined' ? () => onClick(id) : null}
+					onMouseEnter={typeof onMouseEnter !== 'undefined' ? onMouseEnter(id) : null}
+					onMouseLeave={typeof onMouseLeave !== 'undefined' ? onMouseLeave() : null}
 					style={style}
 					className={classNames({
 						[styles.pointer]: !isAdded,
+						[styles.hover]: hover,
 						[styles.notAllowed]: isAdded,
 						[styles.die]: true,
 						[styles.isSelected]: isSelected,
@@ -60,9 +79,12 @@ const Die: FC<DieProps> = ({ val, id, isAdded, enableGlow,style, onClick }) => {
 			return (
 				<div
 					onClick={typeof onClick !== 'undefined' ? () => onClick(id) : null}
+					onMouseEnter={typeof onMouseEnter !== 'undefined' ? onMouseEnter(id) : null}
+					onMouseLeave={typeof onMouseLeave !== 'undefined' ? onMouseLeave() : null}
 					style={style}
 					className={classNames({
 						[styles.pointer]: !isAdded,
+						[styles.hover]: hover,
 						[styles.notAllowed]: isAdded,
 						[styles.die]: true,
 						[styles.isSelected]: isSelected,
@@ -77,9 +99,12 @@ const Die: FC<DieProps> = ({ val, id, isAdded, enableGlow,style, onClick }) => {
 			return (
 				<div
 					onClick={typeof onClick !== 'undefined' ? () => onClick(id) : null}
+					onMouseEnter={typeof onMouseEnter !== 'undefined' ? onMouseEnter(id) : null}
+					onMouseLeave={typeof onMouseLeave !== 'undefined' ? onMouseLeave() : null}
 					style={style}
 					className={classNames({
 						[styles.pointer]: !isAdded,
+						[styles.hover]: hover,
 						[styles.notAllowed]: isAdded,
 						[styles.die]: true,
 						[styles.isSelected]: isSelected,
@@ -94,9 +119,12 @@ const Die: FC<DieProps> = ({ val, id, isAdded, enableGlow,style, onClick }) => {
 			return (
 				<div
 					onClick={typeof onClick !== 'undefined' ? () => onClick(id) : null}
+					onMouseEnter={typeof onMouseEnter !== 'undefined' ? onMouseEnter(id) : null}
+					onMouseLeave={typeof onMouseLeave !== 'undefined' ? onMouseLeave() : null}
 					style={style}
 					className={classNames({
 						[styles.pointer]: !isAdded,
+						[styles.hover]: hover,
 						[styles.notAllowed]: isAdded,
 						[styles.die]: true,
 						[styles.isSelected]: isSelected,
@@ -111,9 +139,12 @@ const Die: FC<DieProps> = ({ val, id, isAdded, enableGlow,style, onClick }) => {
 			return (
 				<div
 					onClick={typeof onClick !== 'undefined' ? () => onClick(id) : null}
+					onMouseEnter={typeof onMouseEnter !== 'undefined' ? onMouseEnter(id) : null}
+					onMouseLeave={typeof onMouseLeave !== 'undefined' ? onMouseLeave() : null}
 					style={style}
 					className={classNames({
 						[styles.pointer]: !isAdded,
+						[styles.hover]: hover,
 						[styles.notAllowed]: isAdded,
 						[styles.die]: true,
 						[styles.isSelected]: isSelected,
