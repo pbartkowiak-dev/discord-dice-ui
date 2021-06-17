@@ -28,6 +28,7 @@ type State = {
 	toggleSelect: (id: number) => void
 	rerollAll: () => void
 	rerollSelected: () => void
+	increaseDicePool: (amount: number) => void
 	positionMax: number
 	results: Result[]
 	normalIcons: number
@@ -43,15 +44,16 @@ interface GetNewResult {
 	id: number;
 	position: number;
 	isReroll?: boolean;
+	isAdded?: boolean;
 }
 
-const getNewResult = ({ val, id, position, isReroll }: GetNewResult): Result => {
+const getNewResult = ({ val, position, isReroll, id, isAdded }: GetNewResult): Result => {
 	return {
 		val,
 		id,
 		position,
 		isRerolled: Boolean(isReroll),
-		isAdded: false,
+		isAdded: Boolean(isAdded),
 		style: {
 			transform: `rotate(${getRandom(90, -90)}deg) scale(.95) translate(${getRandom(5, -5)}px, ${getRandom(5, -5)}px)`
 		}
@@ -71,20 +73,21 @@ const useStore = create<State>(((set, get) => ({
 	positionMax: 0,
 	positionsTaken: [],
 	getPosition: (positionMax) => {
-		const store = get();
+		const { positionsTaken } = get();
 
 		const getUniqePosition = (): number => {
 			let position = getRandom(positionMax, 0);
-			if (store.positionsTaken.includes(position)) {
+			if (positionsTaken.includes(position)) {
 				return getUniqePosition();
 			}
 			return position;
 		}
 
+		// @FIXME DICE ADDED DON'T GET UNIQE POSITION
 		const position = getUniqePosition()
 
 		set({
-			positionsTaken: [...store.positionsTaken, position]
+			positionsTaken: [...positionsTaken, position]
 		});
 
 		return position;
@@ -106,9 +109,9 @@ const useStore = create<State>(((set, get) => ({
 		const positionMax = results.length + 8;
 
 		set({
-			results: results.map((val, id) => getNewResult({
+			results: results.map((val, index) => getNewResult({
 				val,
-				id,
+				id: index,
 				position: store.getPosition(positionMax),
 				isReroll
 			})),
@@ -125,9 +128,10 @@ const useStore = create<State>(((set, get) => ({
 		})
 	},
 	toggleSelect: (id) => {
-		const { selectedIds, isRerolled } = get();
+		const { selectedIds, results } = get();
 
-		if (!isRerolled) {
+		// Added dice cannot be rerolled
+		if (!results.find(result => result.id === id && result.isAdded)) {
 			if (selectedIds.includes(id)) {
 				set({
 					selectedIds: selectedIds.filter(i => i !== id)
@@ -140,10 +144,12 @@ const useStore = create<State>(((set, get) => ({
 		}
 	},
 	rerollAll: () => {
-		const store = get();
+		const { rollDice, results } = get();
+		const diceAddedAmount = results.filter(result => result.isAdded).length;
 
-		store.rollDice({
-				[WRATH_AND_GLORY_SKILL_TEST]: store.results.length
+		rollDice({
+				// Added dice cannot be rerolled
+				[WRATH_AND_GLORY_SKILL_TEST]: results.length - diceAddedAmount
 			},
 			true
 		);
@@ -163,9 +169,38 @@ const useStore = create<State>(((set, get) => ({
 		});
 
 		set({
-			isRerolled : true,
+			isRerolled: true,
+			areDiceAdded: false,
 			selectedIds: [],
 			results: rerolledResults
+		});
+	},
+	increaseDicePool: (amount) => {
+		const { results, getPosition, positionMax, normalIcons, exaltedIcons, totalIcons } = get();
+
+		const diceResults = getResultsArray(6, amount, undefined, false);
+
+		const newNormalIcons = diceResults.filter(val => val === 4 || val === 5).length;
+		const newExaltedIcons = diceResults.filter(val => val === 6).length;
+		const newTotalIcons = newNormalIcons + (newExaltedIcons * 2);
+
+		const newPositionMax = positionMax + diceResults.length;
+
+		const newResults = diceResults
+			.map((val, index) => getNewResult({
+				val,
+				id: index + 200,
+				position: getPosition(newPositionMax),
+				isAdded: true
+			}));
+
+		set({
+			areDiceAdded : true,
+			results: results.concat(newResults),
+			normalIcons: newNormalIcons + normalIcons,
+			exaltedIcons: newExaltedIcons + exaltedIcons,
+			totalIcons: newTotalIcons + totalIcons,
+			positionMax: positionMax + newResults.length
 		});
 	},
 })));

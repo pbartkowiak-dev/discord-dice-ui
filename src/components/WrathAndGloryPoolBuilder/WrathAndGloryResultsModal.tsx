@@ -13,62 +13,71 @@ import RerollOverlay from "./RerollOverlay";
 import PoolBuilderDie from "../PoolBuilder/PoolBuilderDie";
 import { D6 } from "../../consts/diceConstants";
 import { isValueValid } from "../WarhammerMoneyModal/WarhammerMoneyModal";
-import { MoneyType } from "../WarhammerMoneyModal/WarhammerMoneyModalTypes";
 
 const WrathAndGloryResultsModal: FC = () => {
-	const [addD6Count, setAddD6Count] = useState<number>(0);
-	const [isRerolling, setIsRerolling] = useState<boolean>(false);
+	const [addD6Amount, setAddD6Amount] = useState<number>(0);
+	const [isRolling, setIsRolling] = useState<boolean>(false);
 	const isRerolled: number[] = useWrathAndGloryStore(({ isRerolled }) => isRerolled);
 	const isModalOpen = useWrathAndGloryStore(({ isModalOpen }) => isModalOpen);
 	const closeModal: () => void = useWrathAndGloryStore(({ closeModal }) => closeModal);
 	const selectedIds: number[] = useWrathAndGloryStore(({ selectedIds }) => selectedIds);
 	const rerollAll: number[] = useWrathAndGloryStore(({ rerollAll }) => rerollAll);
 	const rerollSelected: number[] = useWrathAndGloryStore(({ rerollSelected }) => rerollSelected);
+	const increaseDicePool: number[] = useWrathAndGloryStore(({ increaseDicePool }) => increaseDicePool);
 	const areDiceAdded: number[] = useWrathAndGloryStore(({ areDiceAdded }) => areDiceAdded);
 	const increaseDicePoolMax = 10;
 
 
 	const handleRerollAll = () => {
-		setIsRerolling(true);
+		setIsRolling(true);
 		setTimeout(() => {
 			rerollAll();
-			setIsRerolling(false);
+			setIsRolling(false);
 		}, 1000);
 	};
 
 	const handleRerollSelected = () => {
-		setIsRerolling(true);
+		setIsRolling(true);
 		setTimeout(() => {
 			rerollSelected();
-			setIsRerolling(false);
+			setIsRolling(false);
 		}, 1000);
 	};
 
 	const onChange = (_, event: any) => {
 		const { value } = event.target;
 		if (isValueValid(value) && value <= increaseDicePoolMax) {
-			setAddD6Count(value);
+			setAddD6Amount(value);
 		}
 	};
 
 	const onIncrease = () => {
-		const newValue = Number(addD6Count) + 1;
+		const newValue = Number(addD6Amount) + 1;
 		if (newValue <= increaseDicePoolMax) {
-			setAddD6Count(newValue);
+			setAddD6Amount(newValue);
 		}
 	};
 
 	const onDecrease = () => {
-		const newValue = Number(addD6Count) - 1;
+		const newValue = Number(addD6Amount) - 1;
 		if (newValue >= 0) {
-			setAddD6Count(newValue);
+			setAddD6Amount(newValue);
 		}
+	};
+
+	const handleIncreaseDicePool = () => {
+		setIsRolling(true);
+		setTimeout(() => {
+			setAddD6Amount(0);
+			increaseDicePool(addD6Amount);
+			setIsRolling(false);
+		}, 1000);
 	};
 
 	return (
 		<Modal show={isModalOpen} onHide={closeModal}>
 			<div className={styles.modalWrapper}>
-			{isRerolling && <RerollOverlay />}
+			{isRolling && <RerollOverlay />}
 			<Modal.Header closeButton>
 				<Modal.Title>Wrath and Glory Results {isRerolled ? "(rerolled)" : ""}</Modal.Title>
 			</Modal.Header>
@@ -86,34 +95,36 @@ const WrathAndGloryResultsModal: FC = () => {
 							<Button
 								variant="outline-info"
 								onClick={handleRerollAll}
-								disabled={isRerolling || isRerolled}
+								disabled={isRolling}
 							>Reroll all dice</Button>
 							<Button
 								variant="outline-primary"
 								onClick={handleRerollSelected}
-								disabled={selectedIds.length === 0 || isRerolling ||isRerolled}
+								disabled={selectedIds.length === 0 || isRolling}
 							>Reroll selected</Button>
 						</section>
 						<hr />
 						<section>
 							<div className={styles.increaseDicePoolContainer}>
-								<div>
+								<div className={styles.increaseDicePoolCounterContainer}>
 									<PoolBuilderDie
 										diceType={D6}
-										value={addD6Count}
+										value={addD6Amount}
 										onChange={onChange}
 										onIncrease={onIncrease}
 										onDecrease={onDecrease}
+										noImage={true}
+										variant={"secondary"}
 										isDiceImgLarge={false}
-										disabled={areDiceAdded}
+										disabled={areDiceAdded || isRolling}
 										readOnly={areDiceAdded}
 									/>
 								</div>
 								<div>
 									<Button
-										variant="outline-info"
-										onClick={handleRerollAll}
-										disabled={areDiceAdded || addD6Count === 0}
+										variant="outline-secondary"
+										onClick={handleIncreaseDicePool}
+										disabled={areDiceAdded || addD6Amount === 0 || isRolling}
 									>Increase Dice Pool</Button>
 								</div>
 							</div>

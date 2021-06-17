@@ -37,19 +37,20 @@ const ResultRow: FC<ResultRowProps> = ({
 	isRerolled,
 	isAdded
 }) => {
-	const isRerolledState: number[] = useWrathAndGloryStore(({ isRerolled }) => isRerolled);
-
 	return (
-		<div className={styles.resultsRowWrapper}>
+		<div
+			data-result-id={id}
+			className={styles.resultsRowWrapper}>
 			<div className={styles.extraIconsContainer}>
 				{ isRerolled && <RerolledIcon /> }
 				{ isAdded &&<AddedIcon /> }
 			</div>
 
-			<div data-result-id={id}
-				 onClick={() => onClick(id)}
-				 className={classNames({
-					 [styles.pointer]: !isRerolledState,
+			<div
+				onClick={() => onClick(id)}
+				className={classNames({
+					 [styles.pointer]: !isAdded,
+					 [styles.notAllowed]: isAdded,
 					 [styles.resultsRow]: true,
 					 [styles.isSelected]: isSelected,
 					 [styles.normalIcon]: val === 4 || val === 5,

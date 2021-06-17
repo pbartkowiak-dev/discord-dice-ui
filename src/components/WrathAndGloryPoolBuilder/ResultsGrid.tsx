@@ -26,6 +26,7 @@ const ResultsGrid: FC<> = () => {
 					<div className={styles.gridCell}>
 						<Die
 							val={result.val}
+							isAdded={result.isAdded}
 							id={result.id}
 							enableGlow={true}
 							style={result.style}

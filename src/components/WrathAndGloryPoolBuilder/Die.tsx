@@ -14,11 +14,11 @@ interface DieProps {
 	enableGlow: boolean;
 	onClick?: (id: number) => void;
 	style?: { [key: string]: string };
+	isAdded: boolean;
 }
 
-const Die: FC<DieProps> = ({ val, id, enableGlow,style, onClick }) => {
+const Die: FC<DieProps> = ({ val, id, isAdded, enableGlow,style, onClick }) => {
 	const selectedIds: number[] = useWrathAndGloryStore(({ selectedIds }) => selectedIds);
-	const isRerolled: number[] = useWrathAndGloryStore(({ isRerolled }) => isRerolled);
 	const isSelected = selectedIds.includes(id)
 
 	switch (val) {
@@ -28,7 +28,8 @@ const Die: FC<DieProps> = ({ val, id, enableGlow,style, onClick }) => {
 					onClick={typeof onClick !== 'undefined' ? () => onClick(id) : null}
 					style={style}
 					className={classNames({
-						[styles.pointer]: !isRerolled,
+						[styles.pointer]: !isAdded,
+						[styles.notAllowed]: isAdded,
 						[styles.die]: true,
 						[styles.isSelected]: isSelected,
 						[styles[`die-${val}`]]: true,
@@ -44,7 +45,8 @@ const Die: FC<DieProps> = ({ val, id, enableGlow,style, onClick }) => {
 					onClick={typeof onClick !== 'undefined' ? () => onClick(id) : null}
 					style={style}
 					className={classNames({
-						[styles.pointer]: !isRerolled,
+						[styles.pointer]: !isAdded,
+						[styles.notAllowed]: isAdded,
 						[styles.die]: true,
 						[styles.isSelected]: isSelected,
 						[styles[`die-${val}`]]: true,
@@ -60,7 +62,8 @@ const Die: FC<DieProps> = ({ val, id, enableGlow,style, onClick }) => {
 					onClick={typeof onClick !== 'undefined' ? () => onClick(id) : null}
 					style={style}
 					className={classNames({
-						[styles.pointer]: !isRerolled,
+						[styles.pointer]: !isAdded,
+						[styles.notAllowed]: isAdded,
 						[styles.die]: true,
 						[styles.isSelected]: isSelected,
 						[styles[`die-${val}`]]: true,
@@ -76,7 +79,8 @@ const Die: FC<DieProps> = ({ val, id, enableGlow,style, onClick }) => {
 					onClick={typeof onClick !== 'undefined' ? () => onClick(id) : null}
 					style={style}
 					className={classNames({
-						[styles.pointer]: !isRerolled,
+						[styles.pointer]: !isAdded,
+						[styles.notAllowed]: isAdded,
 						[styles.die]: true,
 						[styles.isSelected]: isSelected,
 						[styles[`die-${val}`]]: true,
@@ -92,7 +96,8 @@ const Die: FC<DieProps> = ({ val, id, enableGlow,style, onClick }) => {
 					onClick={typeof onClick !== 'undefined' ? () => onClick(id) : null}
 					style={style}
 					className={classNames({
-						[styles.pointer]: !isRerolled,
+						[styles.pointer]: !isAdded,
+						[styles.notAllowed]: isAdded,
 						[styles.die]: true,
 						[styles.isSelected]: isSelected,
 						[styles[`die-${val}`]]: true,
@@ -108,7 +113,8 @@ const Die: FC<DieProps> = ({ val, id, enableGlow,style, onClick }) => {
 					onClick={typeof onClick !== 'undefined' ? () => onClick(id) : null}
 					style={style}
 					className={classNames({
-						[styles.pointer]: !isRerolled,
+						[styles.pointer]: !isAdded,
+						[styles.notAllowed]: isAdded,
 						[styles.die]: true,
 						[styles.isSelected]: isSelected,
 						[styles[`die-${val}`]]: true,

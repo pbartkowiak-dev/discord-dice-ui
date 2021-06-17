@@ -30,6 +30,10 @@
 	cursor: default;
 }
 
+.noImage {
+	border: 0;
+}
+
 .disabled,
 .disabled:hover {
 	opacity: .7 !important;

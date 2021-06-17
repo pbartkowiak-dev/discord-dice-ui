@@ -17,13 +17,14 @@ function PoolBuilderCounter({
 	onIncrease,
 	onDecrease,
 	modifierValue,
-	value
+	value,
+	variant
 }: any) {
 	return (
 		<InputGroup className="mb-3">
 		<InputGroup.Prepend>
 			<Button
-				variant="primary"
+				variant={variant || "primary"}
 				onClick={() => onDecrease(diceType)}
 				className={classNames({
 					[styles.counterBtnLeft]: true,
@@ -39,7 +40,7 @@ function PoolBuilderCounter({
 		/>
 		<InputGroup.Append>
 			<Button
-				variant="primary"
+				variant={variant || "primary"}
 				onClick={() => onIncrease(diceType)}
 				className={classNames({
 					[styles.counterBtnRight]: true,
