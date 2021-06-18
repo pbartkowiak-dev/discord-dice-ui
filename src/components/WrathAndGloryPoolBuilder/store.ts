@@ -213,7 +213,6 @@ const useStore = create<State>(((set, get) => ({
 		});
 	},
 	setHoverId: (id) => {
-		console.log('store = setHoverId, id', id)
 		set({
 			hoverId: id
 		});

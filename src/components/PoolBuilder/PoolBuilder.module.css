@@ -125,6 +125,10 @@
 	background: transparent;
 }
 
+.disabled .dieFooter {
+	border: 1px solid rgba(0,0,0,.1);
+}
+
 .readOnlyValue {
 	text-align: center;
 	font-size: 21px;

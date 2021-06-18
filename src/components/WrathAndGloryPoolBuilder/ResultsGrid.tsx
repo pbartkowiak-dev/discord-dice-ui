@@ -21,7 +21,6 @@ const ResultsGrid: FC<> = () => {
 
 	const onMouseEnter = useCallback((id: number) => {
 		return () => {
-			console.log('onMouseEnter', id)
 			setHoverId(id);
 		}
 	}, []);
