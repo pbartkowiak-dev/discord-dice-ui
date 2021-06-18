@@ -146,8 +146,12 @@ const useStore = create<State>(((set, get) => ({
 
 			description += '**Results**:';
 			description += '\n';
+			description += `\`${wrathDieResult}\` :skull:`;
+			description += '\n';
+
 			description += `${joinAsBlocks(
 				results
+					.filter((_, index) => index)
 					.sort((a, b) => b - a),				
 				', ',
 				true
