@@ -2,6 +2,8 @@ import create from 'zustand';
 import { D3, D6, WRATH_AND_GLORY_SKILL_TEST } from "../../consts/diceConstants";
 import getResultsArray from "../../utils/getResultsArray";
 import getRandom from "../../utils/getRandom";
+import { requestPoolRoll } from "../../actions/roll.actions";
+import reduxStore from '../../store';
 
 interface Pool {
 	WRATH_AND_GLORY_SKILL_TEST?: number;
@@ -99,10 +101,9 @@ const useStore = create<State>(((set, get) => ({
 	rollDice: (pool, isReroll) => {
 		const { getPosition } = get();
 
-		// Open modal
+		// Prepere modal for results
 		set({
 			positionsTaken: [],
-			isModalOpen: true,
 			isRerolled: false,
 			areDiceAdded: false
 		});
@@ -111,30 +112,34 @@ const useStore = create<State>(((set, get) => ({
 		const d6 = pool[D6]
 		const d3 = pool[D3]
 
-		const results = getResultsArray(6, skillDice, undefined, false);
-		const normalIcons = results.filter(val => val === 4 || val === 5).length;
-		const exaltedIcons = results.filter(val => val === 6).length;
-		const totalIcons = normalIcons + (exaltedIcons * 2);
-		const wrathDieResult = results[0];
+		if (skillDice) {
+			const results = getResultsArray(6, skillDice, undefined, false);
+			const normalIcons = results.filter(val => val === 4 || val === 5).length;
+			const exaltedIcons = results.filter(val => val === 6).length;
+			const totalIcons = normalIcons + (exaltedIcons * 2);
+			const wrathDieResult = results[0];
 
-		const positionMax = results.length + 8;
+			const positionMax = results.length + 8;
 
-		// Set results
-		set({
-			results: results.map((val, index) => getNewResult({
-				val,
-				id: index,
-				position: getPosition(positionMax),
-				isReroll
-			})),
-			normalIcons,
-			exaltedIcons,
-			totalIcons,
-			wrathDieResult,
-			positionMax,
-			selectedIds: []
-		});
-
+			// Set results
+			set({
+				results: results.map((val, index) => getNewResult({
+					val,
+					id: index,
+					position: getPosition(positionMax),
+					isReroll
+				})),
+				normalIcons,
+				exaltedIcons,
+				totalIcons,
+				wrathDieResult,
+				positionMax,
+				isModalOpen: true,
+				selectedIds: []
+			});
+		} else {
+			reduxStore.dispatch(requestPoolRoll({ pool }));
+		}
 	},
 	toggleSelect: (id) => {
 		const { selectedIds, results } = get();
