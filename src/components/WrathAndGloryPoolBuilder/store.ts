@@ -2,8 +2,10 @@ import create from 'zustand';
 import { D3, D6, WRATH_AND_GLORY_SKILL_TEST } from "../../consts/diceConstants";
 import getResultsArray from "../../utils/getResultsArray";
 import getRandom from "../../utils/getRandom";
-import { requestPoolRoll } from "../../actions/roll.actions";
+import { requestMsgReady, requestPoolRoll } from "../../actions/roll.actions";
 import reduxStore from '../../store';
+import { getColor } from "../../utils/getColor";
+import joinAsBlocks from "../../utils/joinAsBlocks";
 
 interface Pool {
 	WRATH_AND_GLORY_SKILL_TEST?: number;
@@ -135,6 +137,39 @@ const useStore = create<State>(((set, get) => ({
 				isModalOpen: true,
 				selectedIds: []
 			});
+
+			//	prepare request msg
+			const fields = [];
+			const { userSettings } = reduxStore.getState()
+			console.log('reduxStore', reduxStore)
+			const username = userSettings.username || 'USERNAME_MISSING';
+
+			fields.push({
+				name: `Total Icons`,
+				value: `\`${totalIcons}\``
+			});
+
+			fields.push({
+				name: `Exalted Icons`,
+				value: `\`${exaltedIcons}\``
+			});
+
+			fields.push({
+				name: `Normal Icons`,
+				value: `\`${normalIcons}\``
+			});
+
+			fields.push({
+				name: `:skull: Wrath Die Result:`,
+				value: `\`${wrathDieResult}\``
+			});
+
+			reduxStore.dispatch(requestMsgReady({
+				msgTitle: `${username} rolled \`${skillDice}d6\`. Results:`,
+				description: `${joinAsBlocks(results.sort(), ', ', true)}.`,
+				fields,
+				color: getColor()
+			}));
 		} else {
 			reduxStore.dispatch(requestPoolRoll({ pool }));
 		}

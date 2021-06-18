@@ -12,12 +12,12 @@ export default (store: any) => (next: any) => (action: any) => {
 		fields.push({
 			name: `:skull: Doom: \`${doom}\``,
 			value: doomNum === 0 ? '-' : new Array(doomNum).fill(':black_circle:').join(' ')
-		})
+		});
 
 		fields.push({
 			name: `:boom: Momentum: \`${momentum}\``,
 			value: momentumNum === 0 ? '-' : new Array(momentumNum).fill(':yellow_circle:').join(' ')
-		})
+		});
 
 		store.dispatch(requestMsgReady({
 			msgTitle: 'Conan Doom / Momentum Pools',

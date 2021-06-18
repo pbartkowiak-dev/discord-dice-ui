@@ -35,7 +35,7 @@ const ResultsGrid: FC<> = () => {
 
 			if (result) {
 				return (
-					<div className={styles.gridCell}>
+					<div className={styles.gridCell} key={index}>
 						<Die
 							onMouseEnter={onMouseEnter}
 							onMouseLeave={onMouseLeave}
@@ -50,7 +50,7 @@ const ResultsGrid: FC<> = () => {
 					</div>
 				);
 			}
-			return <div className={styles.gridCell} />;
+			return <div className={styles.gridCell} key={index} />;
 		});
 	}, [results, arr, hoverId]);
 
