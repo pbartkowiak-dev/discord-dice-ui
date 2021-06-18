@@ -139,35 +139,31 @@ const useStore = create<State>(((set, get) => ({
 			});
 
 			//	prepare request msg
-			const fields = [];
 			const { userSettings } = reduxStore.getState()
-			console.log('reduxStore', reduxStore)
 			const username = userSettings.username || 'USERNAME_MISSING';
+			let description = '';
 
-			fields.push({
-				name: `Total Icons`,
-				value: `\`${totalIcons}\``
-			});
+			description += '**Results**:';
+			description += '\n';
+			description += `${joinAsBlocks(results.sort(), ', ', true)}.`;
 
-			fields.push({
-				name: `Exalted Icons`,
-				value: `\`${exaltedIcons}\``
-			});
+			description += '\n';
+			description += '\n';
+			description += `**:star: Total Icons**: \`${totalIcons}\``;
 
-			fields.push({
-				name: `Normal Icons`,
-				value: `\`${normalIcons}\``
-			});
+			description += '\n';
+			description += '\n';
+			description += `**:arrow_double_up: Exalted Icons**: \`${exaltedIcons}\``;
 
-			fields.push({
-				name: `:skull: Wrath Die Result:`,
-				value: `\`${wrathDieResult}\``
-			});
+			description += '\n';
+			description += `**:arrow_right: Normal Icons**: \`${normalIcons}\``;
+
+			description += '\n';
+			description += `**:skull: Wrath Die**: \`${wrathDieResult}\``;
 
 			reduxStore.dispatch(requestMsgReady({
 				msgTitle: `${username} rolled \`${skillDice}d6\`. Results:`,
-				description: `${joinAsBlocks(results.sort(), ', ', true)}.`,
-				fields,
+				description,
 				color: getColor()
 			}));
 		} else {
