@@ -109,8 +109,6 @@ const useStore = create<State>(((set, get) => ({
 		});
 
 		const skillDice = pool[WRATH_AND_GLORY_SKILL_TEST]
-		const d6 = pool[D6]
-		const d3 = pool[D3]
 
 		if (skillDice) {
 			const results = getResultsArray(6, skillDice, undefined, false);
