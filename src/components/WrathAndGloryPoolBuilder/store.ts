@@ -120,15 +120,16 @@ const useStore = create<State>(((set, get) => ({
 			const wrathDieResult = results[0];
 
 			const positionMax = results.length + 8;
+			const resultsMapped = results.map((val, index) => getNewResult({
+				val,
+				id: index,
+				position: getPosition(positionMax),
+				isReroll
+			}));
 
 			// Set results
 			set({
-				results: results.map((val, index) => getNewResult({
-					val,
-					id: index,
-					position: getPosition(positionMax),
-					isReroll
-				})),
+				results: resultsMapped,
 				normalIcons,
 				exaltedIcons,
 				totalIcons,
@@ -145,7 +146,12 @@ const useStore = create<State>(((set, get) => ({
 
 			description += '**Results**:';
 			description += '\n';
-			description += `${joinAsBlocks(results.sort(), ', ', true)}.`;
+			description += `${joinAsBlocks(
+				results
+					.sort((a, b) => b - a),				
+				', ',
+				true
+			)}.`;
 
 			description += '\n';
 			description += '\n';
@@ -162,7 +168,7 @@ const useStore = create<State>(((set, get) => ({
 			description += `**:skull: Wrath Die**: \`${wrathDieResult}\``;
 
 			reduxStore.dispatch(requestMsgReady({
-				msgTitle: `${username} rolled \`${skillDice}d6\`. Results:`,
+				msgTitle: `${username} rolled \`${skillDice}d6\``,
 				description,
 				color: getColor()
 			}));
