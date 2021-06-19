@@ -32,7 +32,9 @@ import {
 	NARRATIVE_TOKENS,
 	WARHAMMER_MONEY,
 	CTHULHU_SHEET_MODAL,
-	COMBAT_TRACKER, WRATH_AND_GLORY_SKILL_TEST, D3
+	COMBAT_TRACKER,
+	WRATH_AND_GLORY_SKILL_TEST,
+	D3
 } from './diceConstants';
 
 import { FATE_DIE } from './fateConsts';
@@ -231,7 +233,6 @@ export const wrathAndGloryDiceSet = [{
 }, {
 	diceType: D3,
 	label: 'd3',
-	diceImg: 'd6.png',
 }, {
 	diceType: D66,
 	label: 'd66',

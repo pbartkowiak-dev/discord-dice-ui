@@ -1,5 +1,5 @@
 import create from 'zustand';
-import { D3, D6, WRATH_AND_GLORY_SKILL_TEST } from "../../consts/diceConstants";
+import { WRATH_AND_GLORY_SKILL_TEST } from "../../consts/diceConstants";
 import getResultsArray from "../../utils/getResultsArray";
 import getRandom from "../../utils/getRandom";
 import { requestMsgReady, requestPoolRoll } from "../../actions/roll.actions";
