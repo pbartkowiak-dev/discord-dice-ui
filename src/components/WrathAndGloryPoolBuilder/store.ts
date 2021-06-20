@@ -4,8 +4,7 @@ import getResultsArray from "../../utils/getResultsArray";
 import getRandom from "../../utils/getRandom";
 import { requestMsgReady, requestPoolRoll } from "../../actions/roll.actions";
 import reduxStore from '../../store';
-import { getColor } from "../../utils/getColor";
-import joinAsBlocks from "../../utils/joinAsBlocks";
+import { getDiscordMsgData } from "./getDiscordMsgData";
 
 interface Pool {
 	WRATH_AND_GLORY_SKILL_TEST?: number;
@@ -24,10 +23,10 @@ export interface Result {
 
 type State = {
 	isModalOpen: boolean;
-	isRerolled: boolean;
+	wasAllDiceRerolled: boolean;
 	areDiceAdded: boolean;
 	closeModal: () => void
-	rollDice: (pool: Pool, isReroll?: boolean) => void
+	rollDice: (pool: Pool, isRerollingAllDice?: boolean) => void
 	getPosition: (positionMax: number) => number
 	toggleSelect: (id: number) => void
 	setHoverId: (id: number | null) => void
@@ -49,16 +48,15 @@ interface GetNewResult {
 	val: number;
 	id: number;
 	position: number;
-	isReroll?: boolean;
 	isAdded?: boolean;
 }
 
-const getNewResult = ({ val, position, isReroll, id, isAdded }: GetNewResult): Result => {
+const getNewResult = ({ val, position, id, isAdded }: GetNewResult): Result => {
 	return {
 		val,
 		id,
 		position,
-		isRerolled: Boolean(isReroll),
+		isRerolled: false,
 		isAdded: Boolean(isAdded),
 		style: {
 			transform: `rotate(${getRandom(90, -90)}deg) scale(.95) translate(${getRandom(5, -5)}px, ${getRandom(5, -5)}px)`
@@ -68,7 +66,7 @@ const getNewResult = ({ val, position, isReroll, id, isAdded }: GetNewResult): R
 
 const useStore = create<State>(((set, get) => ({
 	isModalOpen: false,
-	isRerolled: false,
+	wasAllDiceRerolled: false,
 	areDiceAdded: false,
 	results: [],
 	selectedIds: [],
@@ -90,8 +88,7 @@ const useStore = create<State>(((set, get) => ({
 			return position;
 		}
 
-		// @FIXME DICE ADDED DON'T GET UNIQE POSITION
-		const position = getUniqePosition()
+		const position = getUniqePosition();
 
 		set({
 			positionsTaken: [...positionsTaken, position]
@@ -100,13 +97,13 @@ const useStore = create<State>(((set, get) => ({
 		return position;
 	},
 	closeModal: () => set({ isModalOpen: false }),
-	rollDice: (pool, isReroll) => {
+	rollDice: (pool, isRerollingAllDice) => {
 		const { getPosition } = get();
 
 		// Prepere modal for results
 		set({
 			positionsTaken: [],
-			isRerolled: false,
+			wasAllDiceRerolled: false,
 			areDiceAdded: false
 		});
 
@@ -124,7 +121,6 @@ const useStore = create<State>(((set, get) => ({
 				val,
 				id: index,
 				position: getPosition(positionMax),
-				isReroll
 			}));
 
 			// Set results
@@ -139,43 +135,17 @@ const useStore = create<State>(((set, get) => ({
 				selectedIds: []
 			});
 
-			//	prepare request msg
-			const { userSettings } = reduxStore.getState()
-			const username = userSettings.username || 'USERNAME_MISSING';
-			let description = '';
-
-			description += '**Results**:';
-			description += '\n';
-			description += `\`${wrathDieResult}\` :skull:`;
-			description += '\n';
-
-			description += `${joinAsBlocks(
-				results
-					.filter((_, index) => index)
-					.sort((a, b) => b - a),				
-				', ',
-				true
-			)}.`;
-
-			description += '\n';
-			description += '\n';
-			description += `**:star: Total Icons**: \`${totalIcons}\``;
-
-			description += '\n';
-			description += '\n';
-			description += `**:arrow_double_up: Exalted Icons**: \`${exaltedIcons}\``;
-
-			description += '\n';
-			description += `**:arrow_right: Normal Icons**: \`${normalIcons}\``;
-
-			description += '\n';
-			description += `**:skull: Wrath Die**: \`${wrathDieResult}\``;
-
-			reduxStore.dispatch(requestMsgReady({
-				msgTitle: `${username} rolled \`${skillDice}d6\``,
-				description,
-				color: getColor()
-			}));
+			reduxStore.dispatch(requestMsgReady(
+				getDiscordMsgData({
+					results: resultsMapped,
+					totalIcons,
+					exaltedIcons,
+					normalIcons,
+					wrathDieResult,
+					skillDice,
+					isRerollingAllDice: !!isRerollingAllDice
+				})
+			));
 		} else {
 			reduxStore.dispatch(requestPoolRoll({ pool }));
 		}
@@ -207,7 +177,7 @@ const useStore = create<State>(((set, get) => ({
 			true
 		);
 
-		set({ isRerolled : true });
+		set({ wasAllDiceRerolled : true });
 	},
 	rerollSelected: () => {
 		const { results, selectedIds } = get();
@@ -222,7 +192,6 @@ const useStore = create<State>(((set, get) => ({
 		});
 
 		set({
-			isRerolled: true,
 			areDiceAdded: false,
 			selectedIds: [],
 			results: rerolledResults

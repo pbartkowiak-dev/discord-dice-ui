@@ -1,11 +1,9 @@
 // @ts-nocheck
 import React, { FC, useState } from 'react';
-import { useDispatch } from "react-redux";
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import useWrathAndGloryStore from "./store";
 import styles from './WrathAndGloryResultsModal.module.css';
-import classNames from "classnames";
 import ResultsGrid from "./ResultsGrid";
 import ResultsTable from "./ResultsTable";
 import IconsResultsContainer from "./IconsResultsContainer";
@@ -17,7 +15,7 @@ import { isValueValid } from "../WarhammerMoneyModal/WarhammerMoneyModal";
 const WrathAndGloryResultsModal: FC = () => {
 	const [addD6Amount, setAddD6Amount] = useState<number>(0);
 	const [isRolling, setIsRolling] = useState<boolean>(false);
-	const isRerolled: number[] = useWrathAndGloryStore(({ isRerolled }) => isRerolled);
+	const wasAllDiceRerolled: number[] = useWrathAndGloryStore(({ wasAllDiceRerolled }) => wasAllDiceRerolled);
 	const isModalOpen = useWrathAndGloryStore(({ isModalOpen }) => isModalOpen);
 	const closeModal: () => void = useWrathAndGloryStore(({ closeModal }) => closeModal);
 	const selectedIds: number[] = useWrathAndGloryStore(({ selectedIds }) => selectedIds);
@@ -79,7 +77,9 @@ const WrathAndGloryResultsModal: FC = () => {
 			<div className={styles.modalWrapper}>
 			{isRolling && <RerollOverlay />}
 			<Modal.Header closeButton>
-				<Modal.Title>Wrath and Glory Results {isRerolled ? "(rerolled)" : ""}</Modal.Title>
+				<Modal.Title>
+					Wrath and Glory Results {wasAllDiceRerolled ? <small>(all dice rerolled)</small> : null}
+				</Modal.Title>
 			</Modal.Header>
 			<Modal.Body>
 				<div className={styles.content}>

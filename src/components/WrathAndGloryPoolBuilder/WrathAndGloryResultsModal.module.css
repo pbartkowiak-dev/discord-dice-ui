@@ -140,6 +140,7 @@
     border-radius: 6px;
     overflow: hidden;
     position: relative;
+    transform-style: preserve-3d;
 }
 
 .die.wrathDie {
