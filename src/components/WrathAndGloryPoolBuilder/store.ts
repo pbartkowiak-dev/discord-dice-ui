@@ -191,25 +191,32 @@ const useStore = create<State>(((set, get) => ({
 			return newResult;
 		});
 
-		// @FIXME RECALCULATE ICONS
+		const normalIcons = rerolledResults.filter(({ val }) => val === 4 || val === 5).length;
+		const exaltedIcons = rerolledResults.filter(({ val }) => val === 6).length;
+		const totalIcons = normalIcons + (exaltedIcons * 2);
+		const wrathDieResult = rerolledResults.filter(result => result.id === 0)[0].val;
+
 		set({
 			areDiceAdded: false,
 			selectedIds: [],
+			wasAllDiceRerolled: false,
 			results: rerolledResults,
-			wasAllDiceRerolled: false
+			normalIcons,
+			exaltedIcons,
+			totalIcons
 		});
 
-		// reduxStore.dispatch(requestMsgReady(
-		// 	getDiscordMsgData({
-		// 		results: resultsMapped,
-		// 		totalIcons,
-		// 		exaltedIcons,
-		// 		normalIcons,
-		// 		wrathDieResult,
-		// 		skillDice,
-		// 		isRerollingAllDice: !!isRerollingAllDice
-		// 	})
-		// ));
+		reduxStore.dispatch(requestMsgReady(
+			getDiscordMsgData({
+				results: rerolledResults,
+				totalIcons,
+				exaltedIcons,
+				normalIcons,
+				wrathDieResult,
+				skillDice: rerolledResults.length,
+				isRerollingAllDice: false
+			})
+		));
 	},
 	increaseDicePool: (amount) => {
 		const { results, getPosition, positionMax, normalIcons, exaltedIcons, totalIcons } = get();
