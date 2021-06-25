@@ -177,7 +177,7 @@ const useStore = create<State>(((set, get) => ({
 			true
 		);
 
-		set({ wasAllDiceRerolled: true });
+		set({ wasAllDiceRerolled: true, areDiceAdded: false });
 	},
 	rerollSelected: () => {
 		const { results, selectedIds } = get();
@@ -196,16 +196,6 @@ const useStore = create<State>(((set, get) => ({
 		const totalIcons = normalIcons + (exaltedIcons * 2);
 		const wrathDieResult = rerolledResults.filter(result => result.id === 0)[0].val;
 
-		set({
-			areDiceAdded: false,
-			selectedIds: [],
-			wasAllDiceRerolled: false,
-			results: rerolledResults,
-			normalIcons,
-			exaltedIcons,
-			totalIcons
-		});
-
 		reduxStore.dispatch(requestMsgReady(
 			getDiscordMsgData({
 				results: rerolledResults,
@@ -214,35 +204,61 @@ const useStore = create<State>(((set, get) => ({
 				normalIcons,
 				wrathDieResult,
 				skillDice: rerolledResults.length,
-				isRerollingAllDice: false
+				diceSelectedToReroll: selectedIds.length
 			})
 		));
+
+		set({
+			selectedIds: [],
+			wasAllDiceRerolled: false,
+			results: rerolledResults,
+			normalIcons,
+			exaltedIcons,
+			totalIcons
+		});
 	},
 	increaseDicePool: (amount) => {
-		const { results, getPosition, positionMax, normalIcons, exaltedIcons, totalIcons } = get();
+		const { results, getPosition, positionMax, normalIcons, exaltedIcons, totalIcons, wrathDieResult } = get();
 
-		const diceResults = getResultsArray(6, amount, undefined, false);
+		const addedDiceResults = getResultsArray(6, amount, undefined, false);
 
-		const newNormalIcons = diceResults.filter(val => val === 4 || val === 5).length;
-		const newExaltedIcons = diceResults.filter(val => val === 6).length;
+		const newNormalIcons = addedDiceResults.filter(val => val === 4 || val === 5).length;
+		const newExaltedIcons = addedDiceResults.filter(val => val === 6).length;
 		const newTotalIcons = newNormalIcons + (newExaltedIcons * 2);
 
-		const newPositionMax = positionMax + diceResults.length;
+		const newPositionMax = positionMax + addedDiceResults.length;
 
-		const newResults = diceResults
+		const newResults = addedDiceResults
 			.map((val, index) => getNewResult({
 				val,
-				id: index + 200,
+				id: index + 500,
 				position: getPosition(newPositionMax),
 				isAdded: true
 			}));
 
+		const resultsJoined = results.concat(newResults);
+		const normalIconsSum = newNormalIcons + normalIcons;
+		const totalIconsSum = newTotalIcons + totalIcons;
+		const exaltedIconSum = newExaltedIcons + exaltedIcons;
+
+		reduxStore.dispatch(requestMsgReady(
+			getDiscordMsgData({
+				results: resultsJoined,
+				normalIcons: normalIconsSum,
+				totalIcons: totalIconsSum,
+				exaltedIcons: exaltedIconSum,
+				wrathDieResult,
+				diceAdded: amount,
+				diceAddedResults: newResults,
+			})
+		));
+
 		set({
 			areDiceAdded : true,
-			results: results.concat(newResults),
-			normalIcons: newNormalIcons + normalIcons,
-			exaltedIcons: newExaltedIcons + exaltedIcons,
-			totalIcons: newTotalIcons + totalIcons,
+			results: resultsJoined,
+			normalIcons: normalIconsSum,
+			exaltedIcons: exaltedIconSum,
+			totalIcons: totalIconsSum,
 			positionMax: positionMax + newResults.length
 		});
 	},

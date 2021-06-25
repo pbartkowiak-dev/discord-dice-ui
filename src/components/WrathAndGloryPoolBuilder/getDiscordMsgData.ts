@@ -5,12 +5,15 @@ import { Result } from "./store";
 
 interface Props {
 	results: Result[];
+	diceAddedResults?: Result[];
 	totalIcons: number;
 	exaltedIcons: number;
 	normalIcons: number;
 	wrathDieResult: number;
-	skillDice: number;
-	isRerollingAllDice: boolean;
+	skillDice?: number;
+	diceAdded?: number;
+	isRerollingAllDice?: boolean;
+	diceSelectedToReroll?: number;
 }
 
 interface ReturnType {
@@ -21,20 +24,29 @@ interface ReturnType {
 
 export const getDiscordMsgData = ({
 	results,
+	diceAddedResults,
 	totalIcons,
 	exaltedIcons,
 	normalIcons,
 	wrathDieResult,
 	skillDice,
-	isRerollingAllDice
+	diceAdded,
+	isRerollingAllDice,
+	diceSelectedToReroll
 }: Props): ReturnType => {
 	const { userSettings } = reduxStore.getState()
 	const username = userSettings.username || 'USERNAME_MISSING';
 	let msgTitle = '';
 	let description = '';
 
-	if (isRerollingAllDice) {
+	if (diceAdded) {
+		const dieWord = diceAdded === 1 ? 'die' : 'dice';
+		msgTitle = `${username} __added__ \`${diceAdded}\` ${dieWord}`;
+	} else if (isRerollingAllDice) {
 		msgTitle = `${username} __rerolled all__ \`${skillDice}d6\` dice`;
+	} else if (diceSelectedToReroll)	{
+		const dieWord = diceSelectedToReroll === 1 ? 'die' : 'dice';
+		msgTitle = `${username} __rerolled__ \`${diceSelectedToReroll}\` ${dieWord}`;
 	} else {
 		msgTitle = `${username} rolled \`${skillDice}d6\``;
 	}
@@ -42,7 +54,7 @@ export const getDiscordMsgData = ({
 	description += '**Results**:';
 	description += '\n';
 	description += `\`${wrathDieResult}\` :skull:`;
-	description += results[0].isRerolled ? '(rerolled)\n' : '';
+	description += results[0].isRerolled ? '(rerolled)' : '';
 	description += '\n';
 
 	description += `${joinAsBlocks(
@@ -67,6 +79,23 @@ export const getDiscordMsgData = ({
 
 	description += '\n';
 	description += `**:skull: Wrath Die**: \`${wrathDieResult}\``;
+
+
+	if (diceAddedResults?.length) {
+		const dieWord = diceAdded === 1 ? 'die' : 'dice';
+		const resultWord = diceAdded === 1 ? 'result' : 'results';
+
+		description += '\n';
+		description += `:game_die: **Added ${dieWord} ${resultWord}**: `;
+		description += `${joinAsBlocks(
+			diceAddedResults
+				.map((result) => result.val)
+				.sort((a, b) => b - a),
+			', ',
+			true
+		)}.`;
+		description += '\n';
+	}
 
 	return {
 		msgTitle,
