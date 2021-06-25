@@ -88,7 +88,7 @@ const WrathAndGloryResultsModal: FC = () => {
 					</div>
 					<div className={styles.rightContent}>
 						<ResultsGrid />
-						<hr />
+						<hr className={styles.resultsGridSeparator} />
 						<IconsResultsContainer />
 						<hr/>
 						<section className={styles.rerollButtonsContainer}>
@@ -120,7 +120,7 @@ const WrathAndGloryResultsModal: FC = () => {
 										readOnly={areDiceAdded}
 									/>
 								</div>
-								<div>
+								<div className={styles.increaseDicePoolButtonContainer}>
 									<Button
 										variant="outline-secondary"
 										onClick={handleIncreaseDicePool}

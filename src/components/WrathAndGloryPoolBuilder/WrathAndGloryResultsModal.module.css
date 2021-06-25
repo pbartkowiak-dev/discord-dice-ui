@@ -17,12 +17,17 @@
 
 .resultsGridContainer {
     width: 100%;
+    display: none;
 }
 
 .resultsGrid {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-gap: 20px;
+}
+
+.resultsGridSeparator {
+    display: none;
 }
 
 .gridCell {
@@ -297,14 +302,17 @@
 .rerollButtonsContainer {
     width: 100%;
     margin: 10px 0;
+    gap: 10px;
     display: flex;
     justify-content: space-between;
+    flex-direction: column;
 }
 
 .iconsResultsContainer {
     margin-top: 10px;
-    display: flex;
     gap: 15px;
+    display: flex;
+    flex-direction: column;
 }
 
 .totalIconsContainer {
@@ -384,12 +392,43 @@
 }
 
 .increaseDicePoolContainer {
-    display: flex;
     gap: 15px;
     justify-content: center;
     align-items: center;
+    display: flex;
+    flex-direction: column;
 }
 
+.increaseDicePoolButtonContainer,
 .increaseDicePoolCounterContainer {
-    width: 130px;
+    width: 100%;
+}
+
+.increaseDicePoolButtonContainer > button {
+    width: 100%;
+}
+
+@media only screen and (min-width: 480px) {
+    .resultsGridContainer {
+        display: block;
+    }
+    .resultsGridSeparator {
+        display: block;
+    }
+    .iconsResultsContainer {
+        flex-direction: row;
+    }
+    .rerollButtonsContainer {
+        flex-direction: row;
+    }
+    .increaseDicePoolContainer {
+        flex-direction: row;
+    }
+    .increaseDicePoolCounterContainer {
+        width: 130px;
+    }
+    .increaseDicePoolButtonContainer {
+        width: auto;
+    }
+
 }
