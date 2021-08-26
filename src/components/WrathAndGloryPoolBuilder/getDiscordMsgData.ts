@@ -9,7 +9,7 @@ interface Props {
 	totalIcons: number;
 	exaltedIcons: number;
 	normalIcons: number;
-	wrathDieResult: number;
+	wrathDieResults: number[];
 	skillDice?: number;
 	diceAdded?: number;
 	isRerollingAllDice?: boolean;
@@ -28,7 +28,7 @@ export const getDiscordMsgData = ({
 	totalIcons,
 	exaltedIcons,
 	normalIcons,
-	wrathDieResult,
+	wrathDieResults,
 	skillDice,
 	diceAdded,
 	isRerollingAllDice,
@@ -53,7 +53,7 @@ export const getDiscordMsgData = ({
 
 	description += '**Results**:';
 	description += '\n';
-	description += `\`${wrathDieResult}\` :skull:`;
+	description += `\`${joinAsBlocks(wrathDieResults, ', ', true)}\` :skull:`;
 	description += results[0].isRerolled ? '(rerolled)' : '';
 	description += '\n';
 
@@ -77,9 +77,16 @@ export const getDiscordMsgData = ({
 	description += '\n';
 	description += `**:arrow_right: Normal Icons**: \`${normalIcons}\``;
 
-	description += '\n';
-	description += `**:skull: Wrath Die**: \`${wrathDieResult}\``;
+	if (wrathDieResults.length) {
+		description += '\n';
+		const wrathDiceResult = joinAsBlocks(wrathDieResults, ', ', true);
 
+		if (wrathDieResults.length === 1) {
+			description += `**:skull: Wrath Die**: \`${wrathDiceResult}\``;
+		} else {
+			description += `**:skull: Wrath Dice**: \`${wrathDiceResult}\``;
+		}
+	}
 
 	if (diceAddedResults?.length) {
 		const dieWord = diceAdded === 1 ? 'die' : 'dice';

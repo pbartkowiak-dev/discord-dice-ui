@@ -40,7 +40,8 @@ const ResultRow: FC<ResultRowProps> = ({
 	isSelected,
 	onClick,
 	isRerolled,
-	isAdded
+	isAdded,
+	isWrathDie
 }) => {
 	const setHoverId: number[] = useWrathAndGloryStore(({ setHoverId }) => setHoverId);
 	const hoverId: number[] = useWrathAndGloryStore(({ hoverId }) => hoverId);
@@ -52,7 +53,7 @@ const ResultRow: FC<ResultRowProps> = ({
 			onMouseLeave={() => setHoverId(null)}
 			className={styles.resultsRowWrapper}>
 			<div className={styles.extraIconsContainer}>
-				{ id === 0 && <WrathIcon /> }
+				{ isWrathDie && <WrathIcon /> }
 				{ isRerolled && <RerolledIcon /> }
 				{ isAdded && <AddedIcon /> }
 			</div>
@@ -68,7 +69,7 @@ const ResultRow: FC<ResultRowProps> = ({
 					 [styles.exaltedIcon]: val === 6,
 				 })}>
 				<div className={styles.dieContainer}>
-					<Die val={val} id={id} enableGlow={false} />
+					<Die val={val} id={id} enableGlow={false} isWrathDie={isWrathDie} />
 				</div>
 				<div className={styles.iconsContainer}>
 					<div className={styles.modifier}>
@@ -106,7 +107,7 @@ function ResultsTable() {
 				{
 					resultsSorted
 						.filter(({val}) => val === 6)
-						.map(({ id, val, isRerolled, isAdded }) => (
+						.map(({ id, val, isRerolled, isAdded, isWrathDie }) => (
 							<ResultRow
 								id={id}
 								val={val}
@@ -114,6 +115,7 @@ function ResultsTable() {
 								isSelected={selectedIds.includes(id)}
 								isRerolled={isRerolled}
 								isAdded={isAdded}
+								isWrathDie={isWrathDie}
 								key={id}
 							/>
 						))
@@ -122,7 +124,7 @@ function ResultsTable() {
 				{
 					resultsSorted
 						.filter(({val}) => val === 4 || val === 5)
-						.map(({ id, val, isRerolled, isAdded }) => (
+						.map(({ id, val, isRerolled, isAdded, isWrathDie }) => (
 							<ResultRow
 								id={id}
 								val={val}
@@ -130,6 +132,7 @@ function ResultsTable() {
 								isSelected={selectedIds.includes(id)}
 								isRerolled={isRerolled}
 								isAdded={isAdded}
+								isWrathDie={isWrathDie}
 								key={id}
 							/>) )
 				}
@@ -137,7 +140,7 @@ function ResultsTable() {
 				{
 					resultsSorted
 						.filter(({val}) => val < 4)
-						.map(({ id, val, isRerolled, isAdded }) => (
+						.map(({ id, val, isRerolled, isAdded, isWrathDie }) => (
 							<ResultRow
 								id={id}
 								val={val}
@@ -145,6 +148,7 @@ function ResultsTable() {
 								isSelected={selectedIds.includes(id)}
 								isRerolled={isRerolled}
 								isAdded={isAdded}
+								isWrathDie={isWrathDie}
 								key={id}
 							/>) )
 				}

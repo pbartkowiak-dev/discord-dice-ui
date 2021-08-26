@@ -3,17 +3,18 @@ import React, { FC } from 'react';
 import useWrathAndGloryStore from "./store";
 import styles from './WrathAndGloryResultsModal.module.css';
 import CodeSpan from "../CodeSpan/CodeSpan";
+import joinAsBlocks from "../../utils/joinAsBlocks";
 
 const IconsResultsContainer: FC = () => {
 const exaltedIcons: number[] = useWrathAndGloryStore(({ exaltedIcons }) => exaltedIcons);
 	const normalIcons: number[] = useWrathAndGloryStore(({ normalIcons }) => normalIcons);
 	const totalIcons: number[] = useWrathAndGloryStore(({ totalIcons }) => totalIcons);
-	const wrathDieResult: number[] = useWrathAndGloryStore(({ results }) => results[0]?.val);
+	const wrathDieResults: number[] = useWrathAndGloryStore(({ wrathDieResults }) => wrathDieResults);
 
 	let wrathResultComment = '';
-	if (wrathDieResult === 6) {
+	if (wrathDieResults.every(result => result === 6)) {
 		wrathResultComment = ' (Critical)';
-	} else if (wrathDieResult === 1) {
+	} else if (wrathDieResults.includes(1)) {
 		wrathResultComment = ' (Complication)';
 	}
 
@@ -26,7 +27,9 @@ const exaltedIcons: number[] = useWrathAndGloryStore(({ exaltedIcons }) => exalt
 			<div className={styles.iconsResultsData}>
 				<div><strong>Exalted Icons</strong>: <CodeSpan>{exaltedIcons}</CodeSpan></div>
 				<div><strong>Normal Icons</strong>: <CodeSpan>{normalIcons}</CodeSpan></div>
-				<div><strong>Wrath Die</strong>: <CodeSpan>{wrathDieResult}</CodeSpan> {wrathResultComment ? <CodeSpan>{wrathResultComment}</CodeSpan> : null }</div>
+				{ wrathDieResults.length > 0 &&
+				<div><strong>{wrathDieResults === 1 ? 'Wrath Die' : 'Wrath Dice'}</strong>: <CodeSpan>{joinAsBlocks(wrathDieResults)}</CodeSpan> {wrathResultComment ? <CodeSpan>{wrathResultComment}</CodeSpan> : null }
+				</div> }
 			</div>
 		</section>
 	);

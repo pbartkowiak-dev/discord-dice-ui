@@ -15,6 +15,7 @@ interface DieProps {
 	onClick?: (id: number) => void;
 	style?: { [key: string]: string };
 	isAdded: boolean;
+	isWrathDie: boolean;
 	onMouseEnter?: (id:  number) => void;
 	onMouseLeave?: () => void;
 	hover?: boolean;
@@ -24,6 +25,7 @@ const Die: FC<DieProps> = ({
 	val,
 	id,
 	isAdded,
+	isWrathDie,
 	enableGlow,
 	style,
 	onClick,
@@ -49,7 +51,7 @@ const Die: FC<DieProps> = ({
 						[styles.die]: true,
 						[styles.isSelected]: isSelected,
 						[styles[`die-${val}`]]: true,
-						[styles.wrathDie]: id === 0,
+						[styles.wrathDie]: isWrathDie,
 						[styles.normalIconGlow]: enableGlow && (val === 4 || val === 5),
 						[styles.exaltedIconGlow]: enableGlow && val === 6
 					})}>{dot}{dot}{dot}{dot}{dot}{dot}</div>
@@ -69,7 +71,7 @@ const Die: FC<DieProps> = ({
 						[styles.die]: true,
 						[styles.isSelected]: isSelected,
 						[styles[`die-${val}`]]: true,
-						[styles.wrathDie]: id === 0,
+						[styles.wrathDie]: isWrathDie,
 						[styles.normalIconGlow]: enableGlow && (val === 4 || val === 5),
 						[styles.exaltedIconGlow]: enableGlow && val === 6
 					})}>{dot}{dot}{dot}{dot}{dot}</div>
@@ -89,7 +91,7 @@ const Die: FC<DieProps> = ({
 						[styles.die]: true,
 						[styles.isSelected]: isSelected,
 						[styles[`die-${val}`]]: true,
-						[styles.wrathDie]: id === 0,
+						[styles.wrathDie]: isWrathDie,
 						[styles.normalIconGlow]: enableGlow && (val === 4 || val === 5),
 						[styles.exaltedIconGlow]: enableGlow && val === 6
 					})}>{dot}{dot}{dot}{dot}</div>
@@ -109,7 +111,7 @@ const Die: FC<DieProps> = ({
 						[styles.die]: true,
 						[styles.isSelected]: isSelected,
 						[styles[`die-${val}`]]: true,
-						[styles.wrathDie]: id === 0,
+						[styles.wrathDie]: isWrathDie,
 						[styles.normalIconGlow]: enableGlow && (val === 4 || val === 5),
 						[styles.exaltedIconGlow]: enableGlow && val === 6
 					})}>{dot}{dot}{dot}</div>
@@ -129,7 +131,7 @@ const Die: FC<DieProps> = ({
 						[styles.die]: true,
 						[styles.isSelected]: isSelected,
 						[styles[`die-${val}`]]: true,
-						[styles.wrathDie]: id === 0,
+						[styles.wrathDie]: isWrathDie,
 						[styles.normalIconGlow]: enableGlow && (val === 4 || val === 5),
 						[styles.exaltedIconGlow]: enableGlow && val === 6
 					})}>{dot}{dot}</div>
@@ -149,7 +151,7 @@ const Die: FC<DieProps> = ({
 						[styles.die]: true,
 						[styles.isSelected]: isSelected,
 						[styles[`die-${val}`]]: true,
-						[styles.wrathDie]: id === 0,
+						[styles.wrathDie]: isWrathDie,
 						[styles.normalIconGlow]: enableGlow && (val === 4 || val === 5),
 						[styles.exaltedIconGlow]: enableGlow && val === 6
 					})}>{dot}</div>
