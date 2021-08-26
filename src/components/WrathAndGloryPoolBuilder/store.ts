@@ -191,7 +191,7 @@ const useStore = create<State>(((set, get) => ({
 		set({ wasAllDiceRerolled: true, areDiceAdded: false });
 	},
 	rerollSelected: () => {
-		const { results, selectedIds, wrathDiceNumber } = get();
+		const { results, selectedIds } = get();
 
 		const rerolledResults = results.map(result => {
 			const newResult = { ...result };
@@ -223,6 +223,7 @@ const useStore = create<State>(((set, get) => ({
 			selectedIds: [],
 			wasAllDiceRerolled: false,
 			results: rerolledResults,
+			wrathDieResults,
 			normalIcons,
 			exaltedIcons,
 			totalIcons
