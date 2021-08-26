@@ -172,7 +172,7 @@ In order to get started, **Discord's server admin has to create a Webhook** and 
 ## 🔗 Query Parameters <a id="query-params"></a>
 Several settings can by passed directly in the URL in the following format:
 <pre xmlns="http://www.w3.org/1999/html">
-discord-dice-ui.herokuapp.com/<font color="green"><b>?q=</b></font>foo123<b><font color="orange">&username=</font></b>Django<b><font color="blue">&sl=</b></font>fast
+discord-dice-ui.herokuapp.com/<font color="green"><b>?q=</b></font>foo123<b><font color="orange">&username=</font></b>Django<font color="blue"><b>&sl=</b></font>fast
 </pre>
 Available parameters:
 -  `q` - Discord Webhook URL
