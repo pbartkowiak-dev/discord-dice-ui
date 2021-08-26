@@ -1,0 +1,23 @@
+.container {
+    margin: 10px 0 15px;
+    text-align: left;
+    display: flex;
+}
+
+.iconsRow {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: inline-flex;
+}
+
+.iconContainer {
+    margin-left: 6px;
+    cursor: pointer;
+    font-size: 18px;
+    opacity: .4;
+}
+
+.iconSelected {
+    opacity: 1;
+}
