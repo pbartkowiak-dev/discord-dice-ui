@@ -6,6 +6,7 @@ import { PoolType } from '../PoolBuilderModal/PoolBuilderModalTypes';
 import { submitRoll } from '../../actions/roll.actions';
 import poolBuilderStyles from '../PoolBuilder/PoolBuilder.module.css';
 import { useDispatch } from "react-redux";
+import WrathDiceNumberSetter from "./WrathDiceNumberSetter";
 
 function WrathAndGloryPoolBuilder() {
 	const dispatch = useDispatch();
@@ -21,6 +22,7 @@ function WrathAndGloryPoolBuilder() {
 		<div className={classNames({
 			'dice-module' : true,
 		})}>
+			<WrathDiceNumberSetter />
 			<PoolBuilderContainer
 				handleSubmit={handleSubmit}
 				formName={formName}

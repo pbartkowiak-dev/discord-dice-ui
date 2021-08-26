@@ -9,7 +9,7 @@ interface Props {
 	totalIcons: number;
 	exaltedIcons: number;
 	normalIcons: number;
-	wrathDieResult: number;
+	wrathDieResults: number[];
 	skillDice?: number;
 	diceAdded?: number;
 	isRerollingAllDice?: boolean;
@@ -28,7 +28,7 @@ export const getDiscordMsgData = ({
 	totalIcons,
 	exaltedIcons,
 	normalIcons,
-	wrathDieResult,
+	wrathDieResults,
 	skillDice,
 	diceAdded,
 	isRerollingAllDice,
@@ -36,8 +36,7 @@ export const getDiscordMsgData = ({
 }: Props): ReturnType => {
 	const { userSettings } = reduxStore.getState()
 	const username = userSettings.username || 'USERNAME_MISSING';
-	let msgTitle = '';
-	let description = '';
+	let msgTitle: string;
 
 	if (diceAdded) {
 		const dieWord = diceAdded === 1 ? 'die' : 'dice';
@@ -51,22 +50,31 @@ export const getDiscordMsgData = ({
 		msgTitle = `${username} rolled \`${skillDice}d6\``;
 	}
 
-	description += '**Results**:';
+	let description = '**Results**:';
 	description += '\n';
-	description += `\`${wrathDieResult}\` :skull:`;
-	description += results[0].isRerolled ? '(rerolled)' : '';
-	description += '\n';
+	if (wrathDieResults.length) {
+		description += ':skull: '
+		description += `${joinAsBlocks(
+			wrathDieResults.sort((a, b) => b - a),
+			', ',
+			true
+		)}.`;
+		description += '\n';
+	}
 
-	description += `${joinAsBlocks(
-		results
-			.filter((_, index) => index)
-			.map((result) => result.val)
-			.sort((a, b) => b - a),
-		', ',
-		true
-	)}.`;
+	if (results.length - wrathDieResults.length > 0) {
+		description += `${joinAsBlocks(
+			results
+				.filter((result) => !result.isWrathDie)
+				.map((result) => result.val)
+				.sort((a, b) => b - a),
+			', ',
+			true
+		)}.`;
 
-	description += '\n';
+		description += '\n';
+	}
+
 	description += '\n';
 	description += `**:star: Total Icons**: \`${totalIcons}\``;
 
@@ -77,9 +85,16 @@ export const getDiscordMsgData = ({
 	description += '\n';
 	description += `**:arrow_right: Normal Icons**: \`${normalIcons}\``;
 
-	description += '\n';
-	description += `**:skull: Wrath Die**: \`${wrathDieResult}\``;
+	if (wrathDieResults.length) {
+		description += '\n';
+		const wrathDiceResult = joinAsBlocks(wrathDieResults, ', ', true);
 
+		if (wrathDieResults.length === 1) {
+			description += `**:skull: Wrath Die**: ${wrathDiceResult}`;
+		} else {
+			description += `**:skull: Wrath Dice**: ${wrathDiceResult}`;
+		}
+	}
 
 	if (diceAddedResults?.length) {
 		const dieWord = diceAdded === 1 ? 'die' : 'dice';

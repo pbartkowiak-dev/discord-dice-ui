@@ -10,6 +10,7 @@
 >     * Supported Systems:
 >         + [Call of Cthulhu 7e](#call-of-cthulhu)
 >         + [Warhammer](#warhammer)
+>         + [Wrath & Glory](#wrath-and-glory)
 >         + [Conan 2d20](#conan-2d20)
 >         + [Infinity 2d20](#infinity-2d20)
 >         + [Legend of the Five Rings 1e](#l5r1e)
@@ -55,6 +56,19 @@ The app can also help with adding and subtracting gold crowns, silver shillings 
 [![Warhammer Money Converter Info](./public/money_converter-info.png)]()
 
 [![Warhammer Money Converter](./public/money_converter.png)]()
+
+## Wrath & Glory <a id="wrath-and-glory"></a>
+- neat, colorful, and interactive interface
+- skill test with automatical Icons calculation
+- various number of Wrath Dice in a roll
+- ability to reroll all dice
+- ability to reroll selected dice
+- abillity to increase Dice Pool after rolling the dice
+- d6, d3 and d66 dice available
+
+[![Wrath and Glory UI](./public/wrath-and-glory-01.png)]()
+
+[![Wrath and Glory Results](./public/wrath-and-glory-02.png)]()
 
 ## Conan 2d20 <a id="conan-2d20"></a>
 
@@ -158,7 +172,7 @@ In order to get started, **Discord's server admin has to create a Webhook** and 
 ## 🔗 Query Parameters <a id="query-params"></a>
 Several settings can by passed directly in the URL in the following format:
 <pre xmlns="http://www.w3.org/1999/html">
-discord-dice-ui.herokuapp.com/<font color="green"><b>?q=</b></font>foo123<b><font color="orange">&username=</font></b>Django<b><font color="blue">&sl=</b></font>fast
+discord-dice-ui.herokuapp.com/<font color="green"><b>?q=</b></font>foo123<b><font color="orange">&username=</font></b>Django<font color="blue"><b>&sl=</b></font>fast
 </pre>
 Available parameters:
 -  `q` - Discord Webhook URL

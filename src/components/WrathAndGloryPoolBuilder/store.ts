@@ -17,6 +17,7 @@ export interface Result {
 	val: number;
 	position: number;
 	isRerolled: boolean;
+	isWrathDie?: boolean;
 	isAdded: boolean;
 	style: { [key: string]: string };
 }
@@ -25,11 +26,13 @@ type State = {
 	isModalOpen: boolean;
 	wasAllDiceRerolled: boolean;
 	areDiceAdded: boolean;
+	wrathDiceNumber: number;
 	closeModal: () => void
 	rollDice: (pool: Pool, isRerollingAllDice?: boolean) => void
 	getPosition: (positionMax: number) => number
 	toggleSelect: (id: number) => void
 	setHoverId: (id: number | null) => void
+	setWrathDiceNumber: (wrathDiceNumber: number) => void
 	rerollAll: () => void
 	rerollSelected: () => void
 	increaseDicePool: (amount: number) => void
@@ -38,7 +41,7 @@ type State = {
 	normalIcons: number
 	exaltedIcons: number
 	totalIcons: number
-	wrathDieResult: number
+	wrathDieResults: number[]
 	positionsTaken: number[]
 	selectedIds: number[]
 	hoverId: null | number
@@ -49,14 +52,16 @@ interface GetNewResult {
 	id: number;
 	position: number;
 	isAdded?: boolean;
+	isWrathDie?: boolean;
 }
 
-const getNewResult = ({ val, position, id, isAdded }: GetNewResult): Result => {
+const getNewResult = ({ val, position, id, isAdded, isWrathDie = false }: GetNewResult): Result => {
 	return {
 		val,
 		id,
 		position,
 		isRerolled: false,
+		isWrathDie,
 		isAdded: Boolean(isAdded),
 		style: {
 			transform: `rotate(${getRandom(90, -90)}deg) scale(.95) translate(${getRandom(5, -5)}px, ${getRandom(5, -5)}px)`
@@ -68,12 +73,13 @@ const useStore = create<State>(((set, get) => ({
 	isModalOpen: false,
 	wasAllDiceRerolled: false,
 	areDiceAdded: false,
+	wrathDiceNumber: 1,
 	results: [],
 	selectedIds: [],
 	normalIcons: 0,
 	exaltedIcons: 0,
 	totalIcons: 0,
-	wrathDieResult: 0,
+	wrathDieResults: [],
 	positionMax: 0,
 	hoverId: null,
 	positionsTaken: [],
@@ -98,7 +104,7 @@ const useStore = create<State>(((set, get) => ({
 	},
 	closeModal: () => set({ isModalOpen: false }),
 	rollDice: (pool, isRerollingAllDice) => {
-		const { getPosition } = get();
+		const { getPosition, wrathDiceNumber } = get();
 
 		// Prepere modal for results
 		set({
@@ -109,18 +115,21 @@ const useStore = create<State>(((set, get) => ({
 
 		const skillDice = pool[WRATH_AND_GLORY_SKILL_TEST]
 
+		// Skill test
 		if (skillDice) {
 			const results = getResultsArray(6, skillDice, undefined, false);
 			const normalIcons = results.filter(val => val === 4 || val === 5).length;
 			const exaltedIcons = results.filter(val => val === 6).length;
 			const totalIcons = normalIcons + (exaltedIcons * 2);
-			const wrathDieResult = results[0];
+			// X first dice are designated as Wrath Dice
+			const wrathDieResults = results.slice(0, wrathDiceNumber);
 
 			const positionMax = results.length + 8;
 			const resultsMapped = results.map((val, index) => getNewResult({
 				val,
 				id: index,
 				position: getPosition(positionMax),
+				isWrathDie: index + 1 <= wrathDiceNumber
 			}));
 
 			// Set results
@@ -129,7 +138,7 @@ const useStore = create<State>(((set, get) => ({
 				normalIcons,
 				exaltedIcons,
 				totalIcons,
-				wrathDieResult,
+				wrathDieResults,
 				positionMax,
 				isModalOpen: true,
 				selectedIds: []
@@ -141,11 +150,13 @@ const useStore = create<State>(((set, get) => ({
 					totalIcons,
 					exaltedIcons,
 					normalIcons,
-					wrathDieResult,
+					wrathDieResults,
 					skillDice,
 					isRerollingAllDice: !!isRerollingAllDice
 				})
 			));
+
+		// Numeral die roll
 		} else {
 			reduxStore.dispatch(requestPoolRoll({ pool }));
 		}
@@ -194,7 +205,7 @@ const useStore = create<State>(((set, get) => ({
 		const normalIcons = rerolledResults.filter(({ val }) => val === 4 || val === 5).length;
 		const exaltedIcons = rerolledResults.filter(({ val }) => val === 6).length;
 		const totalIcons = normalIcons + (exaltedIcons * 2);
-		const wrathDieResult = rerolledResults.filter(result => result.id === 0)[0].val;
+		const wrathDieResults = rerolledResults.filter(result => result.isWrathDie).map(result => result.val);
 
 		reduxStore.dispatch(requestMsgReady(
 			getDiscordMsgData({
@@ -202,7 +213,7 @@ const useStore = create<State>(((set, get) => ({
 				totalIcons,
 				exaltedIcons,
 				normalIcons,
-				wrathDieResult,
+				wrathDieResults,
 				skillDice: rerolledResults.length,
 				diceSelectedToReroll: selectedIds.length
 			})
@@ -212,13 +223,14 @@ const useStore = create<State>(((set, get) => ({
 			selectedIds: [],
 			wasAllDiceRerolled: false,
 			results: rerolledResults,
+			wrathDieResults,
 			normalIcons,
 			exaltedIcons,
 			totalIcons
 		});
 	},
 	increaseDicePool: (amount) => {
-		const { results, getPosition, positionMax, normalIcons, exaltedIcons, totalIcons, wrathDieResult } = get();
+		const { results, getPosition, positionMax, normalIcons, exaltedIcons, totalIcons, wrathDieResults } = get();
 
 		const addedDiceResults = getResultsArray(6, amount, undefined, false);
 
@@ -247,7 +259,7 @@ const useStore = create<State>(((set, get) => ({
 				normalIcons: normalIconsSum,
 				totalIcons: totalIconsSum,
 				exaltedIcons: exaltedIconSum,
-				wrathDieResult,
+				wrathDieResults,
 				diceAdded: amount,
 				diceAddedResults: newResults,
 			})
@@ -266,6 +278,9 @@ const useStore = create<State>(((set, get) => ({
 		set({
 			hoverId: id
 		});
+	},
+	setWrathDiceNumber: (wrathDiceNumber) => {
+		set({ wrathDiceNumber })
 	}
 })));
 

@@ -42,6 +42,7 @@ const ResultsGrid: FC<> = () => {
 							hover={hoverId === result.id}
 							val={result.val}
 							isAdded={result.isAdded}
+							isWrathDie={result.isWrathDie}
 							id={result.id}
 							enableGlow={true}
 							style={result.style}

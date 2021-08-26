@@ -6,10 +6,10 @@ type ResultsType = Array<number | string | JSX.Element>;
 export default function joinAsBlocks(
 	results: ResultsType = [],
 	joinerProp?: string | null,
-	shouldGetMd?: boolean
+	getForDiscord?: boolean
 ) {
 	const joiner = joinerProp || ', ';
-	if (shouldGetMd) {
+	if (getForDiscord) {
 		return getMd(results, joiner);
 	}
 	return getJsx(results, joiner);
