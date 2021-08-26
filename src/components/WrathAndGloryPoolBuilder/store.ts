@@ -25,11 +25,13 @@ type State = {
 	isModalOpen: boolean;
 	wasAllDiceRerolled: boolean;
 	areDiceAdded: boolean;
+	wrathDiceNumber: number;
 	closeModal: () => void
 	rollDice: (pool: Pool, isRerollingAllDice?: boolean) => void
 	getPosition: (positionMax: number) => number
 	toggleSelect: (id: number) => void
 	setHoverId: (id: number | null) => void
+	setWrathDiceNumber: (wrathDiceNumber: number) => void
 	rerollAll: () => void
 	rerollSelected: () => void
 	increaseDicePool: (amount: number) => void
@@ -68,6 +70,7 @@ const useStore = create<State>(((set, get) => ({
 	isModalOpen: false,
 	wasAllDiceRerolled: false,
 	areDiceAdded: false,
+	wrathDiceNumber: 1,
 	results: [],
 	selectedIds: [],
 	normalIcons: 0,
@@ -266,6 +269,9 @@ const useStore = create<State>(((set, get) => ({
 		set({
 			hoverId: id
 		});
+	},
+	setWrathDiceNumber: (wrathDiceNumber) => {
+		set({ wrathDiceNumber })
 	}
 })));
 
