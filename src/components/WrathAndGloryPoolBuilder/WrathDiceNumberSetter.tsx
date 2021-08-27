@@ -62,6 +62,22 @@ function WrathDiceNumberSetter() {
 			>
 				<FontAwesomeIcon icon={faSkull} />
 			</li>
+			<li className={classNames({
+				[styles.iconContainer]: true,
+				[styles.iconSelected]: wrathDiceNumber >= 6
+			})}
+				onClick={() => setWrathDiceNumber(6)}
+			>
+				<FontAwesomeIcon icon={faSkull} />
+			</li>
+			<li className={classNames({
+				[styles.iconContainer]: true,
+				[styles.iconSelected]: wrathDiceNumber >= 7
+			})}
+				onClick={() => setWrathDiceNumber(7)}
+			>
+				<FontAwesomeIcon icon={faSkull} />
+			</li>
 		</ul>
 		</div>
 	);
