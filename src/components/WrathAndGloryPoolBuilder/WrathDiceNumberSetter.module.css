@@ -2,6 +2,7 @@
     margin: 10px 0 15px;
     text-align: left;
     display: flex;
+    padding: 0 10px;
 }
 
 .iconsRow {
@@ -12,12 +13,29 @@
 }
 
 .iconContainer {
-    margin-left: 6px;
+    margin-left: 8px;
     cursor: pointer;
-    font-size: 18px;
+    font-size: 19px;
     opacity: .4;
 }
 
 .iconSelected {
     opacity: 1;
+}
+
+@media only screen and (max-width: 480px) {
+    .container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .iconsRow {
+        margin-top: 5px;
+        justify-content: center;
+    }
+
+    .iconContainer {
+        margin-left: 15px;
+        font-size: 20px;
+    }
 }
