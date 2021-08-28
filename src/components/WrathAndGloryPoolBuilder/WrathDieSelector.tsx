@@ -16,7 +16,7 @@ const WrathDieSelector: FC<WrathDieProps> = ({ wrathDieValue }) => {
 	return (
 		<li className={classNames({
 			[styles.iconContainer]: true,
-			[styles.iconSelected]: wrathDiceNumber >= wrathDieValue
+			[styles.iconSelected]: wrathDieValue === 0 ?  wrathDiceNumber === 0 : wrathDiceNumber >= wrathDieValue
 		})}
 			onClick={() => setWrathDiceNumber(wrathDieValue)}
 		>
