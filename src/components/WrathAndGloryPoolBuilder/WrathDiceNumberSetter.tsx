@@ -12,7 +12,7 @@ const WrathDiceNumberSetter: FC = () => {
 		<div className={styles.container}>
 			<span>Set Wrath Dice Number (<CodeSpan>{wrathDiceNumber}</CodeSpan>):</span>
 			<ul className={styles.iconsRow}>
-				{ new Array(maxWrathDice).fill('.').map((_: string, index) => (
+				{ new Array(maxWrathDice + 1).fill('.').map((_: string, index) => (
 					<WrathDieSelector wrathDieValue={index} />
 				))}
 			</ul>
