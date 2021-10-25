@@ -34,7 +34,9 @@ import {
 	CTHULHU_SHEET_MODAL,
 	COMBAT_TRACKER,
 	WRATH_AND_GLORY_SKILL_TEST,
-	D3
+	D3, TOR_SKILL_TEST,
+	TOR_FEATURE_DIE,
+	TOR_SKILL_DIE
 } from './diceConstants';
 
 import { FATE_DIE } from './fateConsts';
@@ -47,7 +49,7 @@ import l5rDice from './l5rDice';
  * image file name
  * ================
  *
- * die image has to be named {diceType}.png 
+ * die image has to be named {diceType}.png
  * or described in `diceImg` property
  *
  ***************************************** */
@@ -238,6 +240,22 @@ export const wrathAndGloryDiceSet = [{
 	label: 'd66',
 	isExcludedFromPool: true,
 	noDropdown: true
+},
+	combatTracker
+];
+
+export const torDiceSet = [{
+	diceType: TOR_SKILL_TEST,
+	label: 'Skill Test',
+	diceImg: 'tor-skill-test.png',
+	noDropdown: true
+}, {
+	diceType: TOR_FEATURE_DIE,
+	label: 'Feature Die',
+	diceImg: 'tor-feature-die.png',
+}, {
+	diceType: TOR_SKILL_DIE,
+	label: 'Skill Die'
 },
 	combatTracker
 ];
