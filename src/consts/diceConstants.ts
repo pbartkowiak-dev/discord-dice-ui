@@ -9,11 +9,15 @@ export const D6 = 'd6';
 export const D3 = 'd3';
 export const D4 = 'd4';
 export const WRATH_AND_GLORY_SKILL_TEST = 'WRATH_AND_GLORY_SKILL_TEST';
-export const SKILL_TEST = 'SKILL_TEST';
-export const POOL_BUILDER = 'POOL_BUILDER';
 export const POOL = 'pool';
 export const MODIFIER = 'modifier';
 export const COMBAT_TRACKER = 'COMBAT_TRACKER';
+
+// TOR
+export const TOR_SKILL_TEST = 'TOR_SKILL_TEST';
+export const TOR_FEATURE_DIE = 'TOR_FEATURE_DIE';
+export const TOR_SKILL_DIE = 'TOR_SKILL_DIE';
+export const TOR_DICE = 'TOR_DICE';
 
 export const D100_SL = 'd100SL';
 export const WARHAMMER_MONEY = 'WARHAMMER_MONEY';
@@ -28,8 +32,6 @@ export const D20_INFINITY_TEST = 'd20infinity-test';
 export const D20_INFINITY = 'd20infinity';
 export const D20_INFINITY_HL = 'd20infinity-hl';
 
-export const COMBAT_DIE = 'Combat Die';
-export const HIT_LOCATION  = 'Hit Location';
 export const CONAN_TOKENS  = 'CONAN_TOKENS';
 export const INFINITY_TOKENS  = 'INFINITY_TOKENS';
 export const DOOM  = 'DOOM';
