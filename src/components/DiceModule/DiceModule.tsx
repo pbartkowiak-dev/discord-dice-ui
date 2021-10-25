@@ -6,7 +6,7 @@ import getDiceSet from '../../utils/getDiceSet';
 import { CONAN } from '../../consts/consts';
 import { INFINITY } from '../../consts/consts';
 import { WARHAMMER } from '../../consts/consts';
-import { CLASSIC } from '../../consts/diceConstants';
+import { CLASSIC, TOR_DICE } from '../../consts/diceConstants';
 import { COC } from '../../consts/consts';
 import { FATE_DICE, FATE_DIE } from '../../consts/fateConsts';
 import useDiceModuleFormStore from "../DiceModuleOptions/store";
@@ -14,11 +14,11 @@ import { submitRoll } from "../../actions/roll.actions";
 
 function DiceModule () {
 	const dispatch = useDispatch();
-	const { warhammerMode, conanMode, infinityMode, cthulhuMode, fateMode } = useDiceModuleFormStore(( { state }) => state);
+	const { warhammerMode, conanMode, infinityMode, cthulhuMode, fateMode, torMode } = useDiceModuleFormStore(( { state }) => state);
 
 	const handleRollDice = (diceType: string, diceAmount?: number) => {
 		let diceAmountToRoll: number;
-		
+
 		if (!diceAmount) {
 			// 4 dice is default for Fate Dice
 			if (diceType === FATE_DIE) {
@@ -48,6 +48,8 @@ function DiceModule () {
 		diceSetType = COC;
 	} else if (fateMode) {
 		diceSetType = FATE_DICE;
+	} else if (torMode) {
+		diceSetType = TOR_DICE;
 	} else {
 		diceSetType = CLASSIC;
 	}
