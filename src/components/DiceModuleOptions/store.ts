@@ -14,6 +14,7 @@ type State = {
 		l5rMode: boolean
 		fateMode: boolean
 		wrathAndGloryMode: boolean
+		torMode: boolean
 	}
 	toggle: (key: string) => void
 }
@@ -29,7 +30,8 @@ const useStore = create<State>(persist(((set, get) => ({
 		rollAndKeepMode: false,
 		l5rMode: false,
 		fateMode: false,
-		wrathAndGloryMode: false
+		wrathAndGloryMode: false,
+		torMode: false
 	},
 	toggle: (key) => {
 		const { state } = get();
