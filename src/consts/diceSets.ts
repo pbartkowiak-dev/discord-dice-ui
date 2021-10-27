@@ -252,10 +252,11 @@ export const torDiceSet = [{
 }, {
 	diceType: TOR_FEATURE_DIE,
 	label: 'Feature Die',
-	diceImg: 'tor-feature-die.png',
+	diceImg: 'tor-feat-die.png',
 }, {
 	diceType: TOR_SKILL_DIE,
-	label: 'Skill Die'
+	label: 'Skill Die',
+	diceImg: 'tor-skill-die.png',
 },
 	combatTracker
 ];
