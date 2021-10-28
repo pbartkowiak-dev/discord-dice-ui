@@ -12,7 +12,8 @@ import {
 	NARRATIVE_TOKENS,
 	WARHAMMER_MONEY,
 	CTHULHU_SHEET_MODAL,
-	COMBAT_TRACKER
+	COMBAT_TRACKER,
+	TOR_SKILL_TEST
 } from '../consts/diceConstants';
 import {
 	openConanModal,
@@ -40,6 +41,7 @@ import { openCthulhuModal, openCthulhuSheetModal } from '../actions/cthulhu.acti
 import combatTrackerStore from "../components/CombatTracker/store";
 import diceModuleOptionsStore from "../components/DiceModuleOptions/store";
 import wrathAndGloryStore from "../components/WrathAndGloryPoolBuilder/store";
+import torStore from "../components/tor/store";
 
 export default (store:any) => (next:any) => (action:any) => {
 	if (action.type === ROLL_SUBMITTED) {
@@ -55,8 +57,10 @@ export default (store:any) => (next:any) => (action:any) => {
 			diceAmount
 		}));
 
-		if (action?.payload?.pool && diceModuleForm.wrathAndGloryMode) {
-			wrathAndGloryStore.getState().rollDice({...action.payload.pool})
+		if (diceType === TOR_SKILL_TEST) {
+			torStore.getState().openModal();
+		} else if (action?.payload?.pool && diceModuleForm.wrathAndGloryMode) {
+			wrathAndGloryStore.getState().rollDice({...action.payload.pool});
 		} else if (action?.payload?.pool && diceModuleForm.rollAndKeepMode) {
 			store.dispatch(requestRollAndKeepRoll({
 				...action.payload

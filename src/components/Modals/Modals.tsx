@@ -27,6 +27,8 @@ import CthulhuSheetModal from "../CthulhuSheetModal/CthulhuSheetModal";
 
 import CombatTrackerModal from "../CombatTracker/CombatTrackerModal";
 import WrathAndGloryResultsModal from "../WrathAndGloryPoolBuilder/WrathAndGloryResultsModal";
+import TorModal from "../torModals/TorModal";
+import TorResultsModal from "../torModals/TorResultsModal";
 
 interface modalsPropTypes {
 	modalsState: ModalsStateTypes;
@@ -66,6 +68,8 @@ function Modals({ modalsState, warhammerState, cthulhuState }: modalsPropTypes) 
 			<CthulhuSheetModal />
 			<CombatTrackerModal />
 			<WrathAndGloryResultsModal />
+			<TorModal />
+			<TorResultsModal />
 		</>
 	);
 }
