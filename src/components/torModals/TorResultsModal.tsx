@@ -17,6 +17,7 @@ function TorResultsModal() {
 	const dispatch = useDispatch();
 	const torState = useTorStore((torState: any) => torState);
 	// const lastRollOptions = useSelector(({ lastRollOptions }: any) => lastRollOptions);
+	console.log('torState', torState)
 	const { isResultsModalOpen, closeResultsModal, isSuccess, results } = torState;
 
 
