@@ -6,23 +6,26 @@ import styles from './InputRange.module.css';
 interface InputRangeProps {
 	id: string,
 	onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+	hidePercent?: boolean;
+	min?: number;
+	max?: number;
 }
 
-function InputRange({ id, onChange }: InputRangeProps) {
+function InputRange({ id, onChange, hidePercent, min, max }: InputRangeProps) {
 	return (
 		<div className={styles.container}>
-			<span className={classNames([styles.num, styles.numLeft])}>1%</span>
+			{ !hidePercent && <span className={classNames([styles.num, styles.numLeft])}>1%</span> }
 			<Form.Group>
 				<Form.Control
 					type="range"
 					id={id}
 					name={id}
-					min="1"
-					max="100"
+					min={min || 1}
+					max={max || 100}
 					onChange={onChange}
 				/>
 			</Form.Group>
-			<span className={classNames([styles.num, styles.numRight])}>100%</span>
+			{ !hidePercent && <span className={classNames([styles.num, styles.numRight])}>100%</span> }
 		</div>
 	);
 }
