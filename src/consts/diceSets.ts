@@ -35,7 +35,7 @@ import {
 	COMBAT_TRACKER,
 	WRATH_AND_GLORY_SKILL_TEST,
 	D3, TOR_SKILL_TEST,
-	TOR_FEATURE_DIE,
+	TOR_FEAT_DIE,
 	TOR_SKILL_DIE
 } from './diceConstants';
 
@@ -250,7 +250,7 @@ export const torDiceSet = [{
 	diceImg: 'tor-skill-test.png',
 	noDropdown: true
 }, {
-	diceType: TOR_FEATURE_DIE,
+	diceType: TOR_FEAT_DIE,
 	label: 'Feature Die',
 	diceImg: 'tor-feat-die.png',
 }, {

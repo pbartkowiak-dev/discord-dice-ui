@@ -21,25 +21,29 @@ export interface Result {
 }
 
 type State = {
+	openModal: () => void;
 	isModalOpen: boolean;
-	closeModal: () => void
-	rollDice: (pool: Pool, isRerollingAllDice?: boolean) => void
-	rerollAll: () => void
-	rerollSelected: () => void
-	results: Result[]
-	selectedIds: number[]
-	wasAllDiceRerolled: boolean,
+	isResultsModalOpen: boolean;
+
+	openResultsModal: () => void;
+	closeModal: () => void;
+	closeResultsModal: () => void;
+
+	rollDice: (pool: Pool, isRerollingAllDice?: boolean) => void;
+	rerollAll: () => void;
+	rerollSelected: () => void;
+	results: Result[];
+	selectedIds: number[];
+	wasAllDiceRerolled: boolean;
 }
 
 interface GetNewResult {
-	val: number;
 	id: number;
-	position: number;
-	isAdded?: boolean;
-	isWrathDie?: boolean;
+	val: number;
+	isFeatDie?: boolean;
 }
 
-const getNewResult = ({ val, id, isFeatDie = false }: GetNewResult): Result => {
+const getNewResult = ({ val, id, isFeatDie }: GetNewResult): Result => {
 	return {
 		val,
 		id,
@@ -50,11 +54,17 @@ const getNewResult = ({ val, id, isFeatDie = false }: GetNewResult): Result => {
 
 const useStore = create<State>(((set, get) => ({
 	isModalOpen: false,
+	isResultsModalOpen: false,
 	results: [],
 	selectedIds: [],
 	wasAllDiceRerolled: false,
 
+	openModal: () => set({ isModalOpen: true }),
+	openResultsModal: () => set({ isResultsModalOpen: true }),
+
 	closeModal: () => set({ isModalOpen: false }),
+	closeResultsModal: () => set({ isResultsModalOpen: false }),
+
 	rollDice: (pool, isRerollingAllDice) => {
 		const skillDice = pool[TOR_SKILL_TEST];
 
@@ -62,18 +72,20 @@ const useStore = create<State>(((set, get) => ({
 		if (skillDice) {
 			const results = getResultsArray(6, skillDice, undefined, false);
 
+			const resultsMapped = results.map((val, id) => getNewResult({ val, id  }));
+
 			// Set results
 			set({
-				results,
+				results: resultsMapped,
 				isModalOpen: true,
 				selectedIds: []
 			});
 
 			reduxStore.dispatch(requestMsgReady(
 				getDiscordMsgData({
-					results,
-					skillDice,
-					isRerollingAllDice: !!isRerollingAllDice
+					results: resultsMapped,
+					// skillDice,
+					// isRerollingAllDice: !!isRerollingAllDice
 				})
 			));
 
@@ -82,7 +94,7 @@ const useStore = create<State>(((set, get) => ({
 			reduxStore.dispatch(requestPoolRoll({ pool }));
 		}
 	},
-	toggleSelect: (id) => {
+	toggleSelect: (id: number) => {
 		const { selectedIds } = get();
 
 		if (selectedIds.includes(id)) {
@@ -111,28 +123,28 @@ const useStore = create<State>(((set, get) => ({
 	rerollSelected: () => {
 		const { results, selectedIds } = get();
 
-		const rerolledResults = results.map(result => {
-			const newResult = { ...result };
-			if (selectedIds.includes(newResult.id)) {
-				newResult.val = getResultsArray(6)[0];
-				newResult.isRerolled = true;
-			}
-			return newResult;
-		});
-
-		reduxStore.dispatch(requestMsgReady(
-			getDiscordMsgData({
-				results: rerolledResults,
-				skillDice: rerolledResults.length,
-				diceSelectedToReroll: selectedIds.length
-			})
-		));
-
-		set({
-			selectedIds: [],
-			wasAllDiceRerolled: false,
-			results: rerolledResults,
-		});
+		// const rerolledResults = results.map(result => {
+		// 	const newResult = { ...result };
+		// 	if (selectedIds.includes(newResult.id)) {
+		// 		newResult.val = getResultsArray(6)[0];
+		// 		newResult.isRerolled = true;
+		// 	}
+		// 	return newResult;
+		// });
+		//
+		// reduxStore.dispatch(requestMsgReady(
+		// 	getDiscordMsgData({
+		// 		results: rerolledResults,
+		// 		skillDice: rerolledResults.length,
+		// 		diceSelectedToReroll: selectedIds.length
+		// 	})
+		// ));
+		//
+		// set({
+		// 	selectedIds: [],
+		// 	wasAllDiceRerolled: false,
+		// 	results: rerolledResults,
+		// });
 	},
 })));
 
