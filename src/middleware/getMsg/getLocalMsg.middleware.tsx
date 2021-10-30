@@ -10,8 +10,8 @@ import getConanHitLocation from '../../utils/getConanHitLocations';
 import getInfinityHitLocation from '../../utils/getInfinityHitLocations';
 import styles from '../../components/ResultsModal/ResultsModal.module.css';
 import { DICE_ROLLED, localMsgReady } from '../../actions/roll.actions';
-import { MINUS, PLUS } from '../../consts/fateConsts';
-import TooltipWrapper from '../../components/InfoTooltip/TooltipWrapper';
+import { FateResult } from '../../consts/fateConsts';
+import { FateSymbol } from "../utils/FateSymbol";
 
 const IconUp = <FontAwesomeIcon icon={faArrowAltCircleUp} />;
 const IconDown = <FontAwesomeIcon icon={faArrowAltCircleDown} />;
@@ -133,20 +133,7 @@ const getLocalMsg = (store:any) => (next:any) => (action:any) => {
 
 			resultsMsg = joinAsBlocks(fateResults);
 			resultsMsg = joinAsBlocks(
-				fateResults.map((fateResult: string) => {
-					if (fateResult === PLUS) {
-						return <TooltipWrapper content="Plus">
-							<FontAwesomeIcon icon={faPlus} />
-						</TooltipWrapper>;
-					}  else if (fateResult === MINUS) {
-						return <TooltipWrapper content="Minus">
-							<FontAwesomeIcon icon={faMinus} />
-						</TooltipWrapper>;
-					}
-					return <TooltipWrapper content="Blank">
-						<FontAwesomeIcon icon={faSquare} />
-					</TooltipWrapper>;
-				})
+				fateResults.map((fateResult: FateResult) => FateSymbol(fateResult))
 			);
 		} else {
 			titleMsg = (

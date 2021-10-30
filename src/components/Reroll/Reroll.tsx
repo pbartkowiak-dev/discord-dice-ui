@@ -5,6 +5,8 @@ import Button from 'react-bootstrap/Button';
 import CodeSpan from '../CodeSpan/CodeSpan';
 import styles from './Reroll.module.css';
 import Or from "../Or/Or";
+import mapValueToFate from "../../middleware/utils/mapValueToFate";
+import { FateSymbol } from "../../middleware/utils/FateSymbol";
 
 interface RerollPropTypes {
 	handleReroll: (itemsToStay: Array<number>) => void;
@@ -28,7 +30,7 @@ function Reroll({ handleReroll, results, isPool, isFate }: RerollPropTypes) {
 	};
 
 	let selectToRerollElement;
-	
+
 	if (results.length) {
 		const resultsElement = results
 			.map((result: number, index: number) => {
@@ -37,13 +39,13 @@ function Reroll({ handleReroll, results, isPool, isFate }: RerollPropTypes) {
 						<CodeSpan className={cx({
 							rollItem: true,
 							active: itemIndexes.indexOf(index) >= 0
-						})}>{result}</CodeSpan></span>;
+						})}>{isFate ?  FateSymbol(mapValueToFate(result)) : result }</CodeSpan></span>;
 				}
 				return <span key={index} onClick={ () => addItemIndex(index) }>
 					<CodeSpan className={cx({
 						rollItem: true,
 						active: itemIndexes.indexOf(index) >= 0
-					})}>{result}</CodeSpan>,&nbsp;</span>;
+					})}>{isFate ?  FateSymbol(mapValueToFate(result)) : result }</CodeSpan>,&nbsp;</span>;
 			});
 
 			selectToRerollElement = (
@@ -69,7 +71,7 @@ function Reroll({ handleReroll, results, isPool, isFate }: RerollPropTypes) {
 		handleReroll();
 	};
 
-	if (results.length === 1 || isPool || isFate) {
+	if (results.length === 1 || isPool) {
 		return (
 			<div className={styles.container}>
 				<div className={styles.row}>
