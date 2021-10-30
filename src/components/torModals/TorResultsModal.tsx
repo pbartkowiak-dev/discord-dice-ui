@@ -1,9 +1,8 @@
 import React from 'react';
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import classNames from 'classnames';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import styles from "../ResultsModal/ResultsModal.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDiceD20 } from "@fortawesome/free-solid-svg-icons";
 import { closeCthulhuResultsModal } from "../../actions/cthulhu.actions";
@@ -11,12 +10,14 @@ import ResultVsSkillRow from "../ResultVsSkillRow/ResultVsSkillRow";
 import SuccessLevelLadder from "../SuccessLevelLadder/SuccessLevelLadder";
 import joinAsBlocks from "../../utils/joinAsBlocks";
 import styles from './TorModal.module.css';
+import torStyles from "../ResultsModal/ResultsModal.module.css";
+import useTorStore from '../tor/store';
 
 function TorResultsModal() {
 	const dispatch = useDispatch();
-	const torState = useSelector(({ torState }: any) => torState);
-	const lastRollOptions = useSelector(({ lastRollOptions }: any) => lastRollOptions);
-	const { showModal, hideModal, isSuccess, results } = torState;
+	const torState = useTorStore((torState: any) => torState);
+	// const lastRollOptions = useSelector(({ lastRollOptions }: any) => lastRollOptions);
+	const { isResultsModalOpen, closeResultsModal, isSuccess, results } = torState;
 
 
 	const resultsJoined = joinAsBlocks(results);
@@ -25,8 +26,8 @@ function TorResultsModal() {
 
 	return (
 		<Modal
-			show={showModal}
-			onHide={hideModal}
+			show={isResultsModalOpen}
+			onHide={closeResultsModal}
 		>
 			<Modal.Header closeButton className={classNames({
 				[styles.resultsModalHeader]: true,
@@ -42,7 +43,7 @@ function TorResultsModal() {
 			<Modal.Footer>
 				<Button
 					variant="outline-secondary"
-					onClick={hideModal}>Close</Button>
+					onClick={closeResultsModal}>Close</Button>
 			</Modal.Footer>
 		</Modal>
 	);

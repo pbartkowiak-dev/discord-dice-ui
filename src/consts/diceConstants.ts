@@ -15,7 +15,7 @@ export const COMBAT_TRACKER = 'COMBAT_TRACKER';
 
 // TOR
 export const TOR_SKILL_TEST = 'TOR_SKILL_TEST';
-export const TOR_FEATURE_DIE = 'TOR_FEATURE_DIE';
+export const TOR_FEAT_DIE = 'TOR_FEAT_DIE';
 export const TOR_SKILL_DIE = 'TOR_SKILL_DIE';
 export const TOR_DICE = 'TOR_DICE';
 
