@@ -11,11 +11,12 @@ import ResultVsSkillRow from "../ResultVsSkillRow/ResultVsSkillRow";
 import SuccessLevelLadder from "../SuccessLevelLadder/SuccessLevelLadder";
 import joinAsBlocks from "../../utils/joinAsBlocks";
 import torStyles from "../ResultsModal/ResultsModal.module.css";
+import useTorStore from "../tor/store";
 
 function TorModal() {
 	const dispatch = useDispatch();
-	const torState = useSelector(({ torState }: any) => torState);
-	const lastRollOptions = useSelector(({ lastRollOptions }: any) => lastRollOptions);
+	const torState = useTorStore((torState: any) => torState);
+	// const lastRollOptions = useSelector(({ lastRollOptions }: any) => lastRollOptions);
 	const { isModalOpen, closeModal, isSuccess, results } = torState;
 
 

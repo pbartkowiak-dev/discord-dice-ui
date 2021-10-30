@@ -51,13 +51,13 @@ const getLocalMsg = (store:any) => (next:any) => (action:any) => {
 		const isConanHitLocationDie = rollOptions.diceType === D20_CONAN_HL;
 		const isInfinityHitLocationDie = rollOptions.diceType === D20_INFINITY_HL;
 		const isFate = fateResults && fateResults.length;
-	
+
 		if (rollOptions.useModifier && (!isCombatDie && !(isConanHitLocationDie || isInfinityHitLocationDie))) {
 			fields.push(
 				<>Modifier: {modifierWithSymbol}.</>
 			);
 		}
-	
+
 		if ((hasMultipleDice || rollOptions.useModifier || isFate) && (!isCombatDie && !(isConanHitLocationDie || isInfinityHitLocationDie))) {
 			if (rollOptions.useModifier) {
 				fields.push(
@@ -79,14 +79,14 @@ const getLocalMsg = (store:any) => (next:any) => (action:any) => {
 				<>{IconDown} Lowest result rolled: <CodeSpan>{lowest}</CodeSpan>.</>
 			);
 		}
-	
+
 		if (rerollCount) {
 			const timesWord = rerollCount === 1 ? 'time' : 'times';
 			fields.push(
 				<div className={styles.generalResult}>Rerolled <CodeSpan>{rerollCount}</CodeSpan> {timesWord}</div>
 			);
 		}
-	
+
 		if (isCombatDie) {
 			fields.push(
 				<strong>Combat Die Results:</strong>
@@ -98,7 +98,7 @@ const getLocalMsg = (store:any) => (next:any) => (action:any) => {
 				<>{IconSun} Effects: <CodeSpan>{effects}</CodeSpan>.</>
 			);
 		}
-		
+
 		if (isConanHitLocationDie) {
 			const hitLocation = getConanHitLocation(results[0]);
 			fields.push(
@@ -172,7 +172,7 @@ const getLocalMsg = (store:any) => (next:any) => (action:any) => {
 				</div>
 			</div>
 		);
-	
+
 		store.dispatch(localMsgReady({
 			title,
 			fields,

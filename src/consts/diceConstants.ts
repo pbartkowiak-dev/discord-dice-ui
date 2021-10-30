@@ -14,9 +14,13 @@ export const MODIFIER = 'modifier';
 export const COMBAT_TRACKER = 'COMBAT_TRACKER';
 
 // TOR
+export type TorSkillDie = 'tor-skill-die';
+export type TorFeatDie = 'tor-feat-die';
+export type TorDice = TorSkillDie | TorFeatDie;
+
 export const TOR_SKILL_TEST = 'TOR_SKILL_TEST';
-export const TOR_FEAT_DIE = 'TOR_FEAT_DIE';
-export const TOR_SKILL_DIE = 'TOR_SKILL_DIE';
+export const TOR_FEAT_DIE: TorFeatDie = 'tor-feat-die';
+export const TOR_SKILL_DIE: TorSkillDie = 'tor-skill-die';
 export const TOR_DICE = 'TOR_DICE';
 
 export const D100_SL = 'd100SL';

@@ -1,5 +1,5 @@
 import create from 'zustand';
-import { TOR_SKILL_DIE, TOR_FEAT_DIE, TOR_SKILL_TEST } from "../../consts/diceConstants";
+import { TOR_SKILL_DIE, TOR_FEAT_DIE, TOR_SKILL_TEST, TorDice } from "../../consts/diceConstants";
 import getResultsArray from "../../utils/getResultsArray";
 import getRandom from "../../utils/getRandom";
 import { requestMsgReady, requestPoolRoll } from "../../actions/roll.actions";
@@ -11,13 +11,11 @@ interface Pool {
 	d6?: number
 }
 
-type TOR_DICE = 'TOR_SKILL_DIE' | 'TOR_FEAT_DIE'
-
 export interface Result {
 	id: number;
 	val: number;
 	isRerolled: boolean;
-	type: TOR_DICE;
+	type: TorDice;
 }
 
 type State = {
