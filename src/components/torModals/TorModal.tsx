@@ -7,6 +7,10 @@ import useTorStore from "../tor/store";
 import InputRange from "../InputRange/InputRange";
 import Form from "react-bootstrap/Form";
 import InfoTooltip from "../InfoTooltip/InfoTooltip";
+import PoolBuilder from "../PoolBuilder/PoolBuilder";
+import { torSkillDie } from "../../consts/torDice";
+import PoolBuilderDie from "../PoolBuilder/PoolBuilderDie";
+import { isValueValid } from "../WarhammerMoneyModal/WarhammerMoneyModal";
 
 
 function TorModal() {
@@ -16,12 +20,14 @@ function TorModal() {
 	const tnInputId = 'tn-input'
 	const tnMax = 20;
 	const tnMin = 0;
+	const skillDiceMax = 20;
 
 	const [tn, setTn] = useState<string>('');
 	const [isFavoured, setIsFavoured] = useState<boolean>(false);
 	const [isIllFavoured, setIsIllFavoured] = useState<boolean>(false);
 	const [isWeary, setIsWeary] = useState<boolean>(false);
 	const [isMiserable, setIsMiserable] = useState<boolean>(false);
+	const [skillDice, setSkillDice] = useState<number>(0);
 
 	const isValid = () => {
 		let isValid = true;
@@ -51,12 +57,26 @@ function TorModal() {
 		}
 	};
 
-	const onCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-		const target = event.target;
-		console.log('isFavoured', isFavoured)
-		setIsFavoured(!isFavoured);
+	const onChange = (_: any, event: any) => {
+		const { value } = event.target;
+		if (isValueValid(value) && value <= skillDiceMax) {
+			setSkillDice(value);
+		}
 	};
 
+	const onIncrease = () => {
+		const newValue = Number(skillDice) + 1;
+		if (newValue <= skillDiceMax) {
+			setSkillDice(newValue);
+		}
+	};
+
+	const onDecrease = () => {
+		const newValue = Number(skillDice) - 1;
+		if (newValue >= 0) {
+			setSkillDice(newValue);
+		}
+	};
 
 	return (
 		<Modal show={isModalOpen} onHide={closeModal}>
@@ -71,7 +91,7 @@ function TorModal() {
 						id="Favoured Roll"
 						label="Favoured Roll"
 						checked={isFavoured}
-						onChange={onCheckboxChange}
+						onChange={() => setIsFavoured(!isFavoured)}
 						disabled={isIllFavoured}
 						custom
 					/>
@@ -87,28 +107,41 @@ function TorModal() {
 					/>
 				</div>
 				<div className={torStyles.tnContainer}>
-					<InfoTooltip
-						content="Target Number"
-						className={torStyles.tnInfoIcon}
-					/>
-					<Form.Control
-						type="text"
-						size="lg"
-						placeholder="TN"
-						autoComplete="off"
-						onChange={onTnChange}
-						value={tn}
-						className={torStyles.tnInput}
+					<div className={torStyles.tnContainerInner}>
+						<InfoTooltip
+							content="Target Number"
+							className={torStyles.tnInfoIcon}
+						/>
+						<Form.Control
+							type="text"
+							size="lg"
+							placeholder="TN"
+							autoComplete="off"
+							onChange={onTnChange}
+							value={tn}
+							className={torStyles.tnInput}
 
-					/>
+						/>
 
+					</div>
+					<InputRange
+						id={tnInputId}
+						onChange={onTnRangeChange}
+						hidePercent={true}
+						max={tnMax}
+						min={tnMin}
+					/>
 				</div>
-				<InputRange
-					id={tnInputId}
-					onChange={onTnRangeChange}
-					hidePercent={true}
-					max={tnMax}
-					min={tnMin}
+				<h5 className={torStyles.subheader}>Skill Dice Number</h5>
+				<PoolBuilderDie
+					diceType={torSkillDie.diceType}
+					noHeader={true}
+					value={skillDice}
+					onChange={onChange}
+					onIncrease={onIncrease}
+					onDecrease={onDecrease}
+					isDiceImgLarge={false}
+					hideBorder={true}
 				/>
 				<h5 className={torStyles.subheader}>Conditions</h5>
 				<div className={torStyles.checkboxContainer}>

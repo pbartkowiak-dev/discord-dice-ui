@@ -10,7 +10,7 @@ export interface DicePropTypes {
 	noDropdown?: boolean;
 }
 
-interface diceSetElement {
+interface DiceSetElement {
 	diceType: string;
 	label: string;
 	diceImg?: string | undefined;
@@ -18,4 +18,4 @@ interface diceSetElement {
 	noDropdown?: boolean;
 }
 
-export type DiceSetType = Array<diceSetElement>;
+export type DiceSetType = Array<DiceSetElement>;
