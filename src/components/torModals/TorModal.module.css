@@ -1,0 +1,45 @@
+.torModalBody {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+}
+
+.tnContainer {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    padding-top: 20px;
+    padding-bottom: 25px;
+    width: 150px;
+    margin: 0 auto;
+}
+
+.tnInput {
+    width: 70px;
+    height: 60px;
+    text-align: center;
+    font-size: 25px;
+    border: 0;
+}
+
+.tnContainer:after {
+    position: absolute;
+    content: "";
+    display: block;
+    border: 2px solid #858585;
+    width: 70px;
+    height: 70px;
+    transform: rotate(45deg);
+    top: 15px;
+    left: 0;
+    right: 0;
+    margin: auto;
+}
+
+.tnInfoIcon {
+    position: absolute;
+    top: 21px;
+    right: 21px;
+}
