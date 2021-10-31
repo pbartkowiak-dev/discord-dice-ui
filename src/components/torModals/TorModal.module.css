@@ -11,9 +11,9 @@
     justify-content: center;
     align-content: center;
     padding-top: 20px;
-    padding-bottom: 25px;
+    padding-bottom: 30px;
     width: 150px;
-    margin: 0 auto;
+    margin: 15px auto 0;
 }
 
 .tnInput {
@@ -40,6 +40,28 @@
 
 .tnInfoIcon {
     position: absolute;
-    top: 21px;
-    right: 21px;
+    top: 17px;
+    right: 24px;
+}
+
+.subheader {
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 15px;
+    margin-top: 10px;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    color: #6c6c6c;
+    letter-spacing: 1px;
+    font-weight: 400;
+    border-top: 1px solid #bebebe;
+}
+
+.checkboxContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.checkboxContainer * + * {
+    margin: 0 10px;
 }
