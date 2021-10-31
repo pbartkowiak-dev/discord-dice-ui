@@ -16,7 +16,12 @@ function TorModal() {
 	const tnInputId = 'tn-input'
 	const tnMax = 20;
 	const tnMin = 0;
+
 	const [tn, setTn] = useState<string>('');
+	const [isFavoured, setIsFavoured] = useState<boolean>(false);
+	const [isIllFavoured, setIsIllFavoured] = useState<boolean>(false);
+	const [isWeary, setIsWeary] = useState<boolean>(false);
+	const [isMiserable, setIsMiserable] = useState<boolean>(false);
 
 	const isValid = () => {
 		let isValid = true;
@@ -46,12 +51,41 @@ function TorModal() {
 		}
 	};
 
+	const onCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+		const target = event.target;
+		console.log('isFavoured', isFavoured)
+		setIsFavoured(!isFavoured);
+	};
+
+
 	return (
 		<Modal show={isModalOpen} onHide={closeModal}>
 			<Modal.Header closeButton>
 				<Modal.Title>The One Ring 2e Roll Options</Modal.Title>
 			</Modal.Header>
 			<Modal.Body className={torStyles.torModalBody}>
+				<div className={torStyles.checkboxContainer}>
+					<Form.Check
+						type="checkbox"
+						name="Favoured Roll"
+						id="Favoured Roll"
+						label="Favoured Roll"
+						checked={isFavoured}
+						onChange={onCheckboxChange}
+						disabled={isIllFavoured}
+						custom
+					/>
+					<Form.Check
+						type="checkbox"
+						name="Ill-Favoured Roll"
+						id="Ill-Favoured Roll"
+						label="Ill-Favoured Roll"
+						checked={isIllFavoured}
+						onChange={() => setIsIllFavoured(!isIllFavoured)}
+						disabled={isFavoured}
+						custom
+					/>
+				</div>
 				<div className={torStyles.tnContainer}>
 					<InfoTooltip
 						content="Target Number"
@@ -67,6 +101,7 @@ function TorModal() {
 						className={torStyles.tnInput}
 
 					/>
+
 				</div>
 				<InputRange
 					id={tnInputId}
@@ -75,6 +110,27 @@ function TorModal() {
 					max={tnMax}
 					min={tnMin}
 				/>
+				<h5 className={torStyles.subheader}>Conditions</h5>
+				<div className={torStyles.checkboxContainer}>
+					<Form.Check
+						type="checkbox"
+						name="Weary"
+						id="Weary"
+						label="Weary"
+						checked={isWeary}
+						onChange={() => setIsWeary(!isWeary)}
+						custom
+					/>
+					<Form.Check
+						type="checkbox"
+						name="Miserable"
+						id="Miserable"
+						label="Miserable"
+						checked={isMiserable}
+						onChange={() => setIsMiserable(!isMiserable)}
+						custom
+					/>
+				</div>
 			</Modal.Body>
 			<Modal.Footer>
 				<Button variant="secondary" onClick={closeModal}>
