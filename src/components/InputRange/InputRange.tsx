@@ -20,7 +20,7 @@ function InputRange({ id, onChange, hidePercent, min, max }: InputRangeProps) {
 					type="range"
 					id={id}
 					name={id}
-					min={min || 1}
+					min={min ?? 1}
 					max={max || 100}
 					onChange={onChange}
 				/>
