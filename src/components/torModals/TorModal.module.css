@@ -6,14 +6,19 @@
 }
 
 .tnContainer {
+    border-bottom: 1px solid #bebebe;
+    padding-bottom: 5px;
+}
+
+.tnContainerInner {
     position: relative;
     display: flex;
     justify-content: center;
     align-content: center;
-    padding-top: 20px;
-    padding-bottom: 30px;
+    padding-top: 18px;
+    padding-bottom: 26px;
     width: 150px;
-    margin: 15px auto 0;
+    margin: 10px auto 0;
 }
 
 .tnInput {
@@ -24,15 +29,15 @@
     border: 0;
 }
 
-.tnContainer:after {
+.tnContainerInner:after {
     position: absolute;
     content: "";
     display: block;
-    border: 2px solid #858585;
+    border: 4px double #858585;
     width: 70px;
     height: 70px;
     transform: rotate(45deg);
-    top: 15px;
+    top: 13px;
     left: 0;
     right: 0;
     margin: auto;
@@ -40,7 +45,7 @@
 
 .tnInfoIcon {
     position: absolute;
-    top: 17px;
+    top: 15px;
     right: 24px;
 }
 
@@ -49,19 +54,27 @@
     text-transform: uppercase;
     font-size: 15px;
     margin-top: 10px;
-    padding-top: 10px;
-    padding-bottom: 5px;
+    padding-bottom: 0;
     color: #6c6c6c;
     letter-spacing: 1px;
     font-weight: 400;
-    border-top: 1px solid #bebebe;
 }
 
 .checkboxContainer {
     display: flex;
     justify-content: center;
+    flex-direction: column;
 }
 
-.checkboxContainer * + * {
-    margin: 0 10px;
+@media only screen and (min-width: 480px) {
+    .checkboxContainer {
+        flex-direction: row;
+    }
 }
+
+@media only screen and (min-width: 480px) {
+    .checkboxContainer * + * {
+        margin: 0 10px;
+    }
+}
+

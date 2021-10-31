@@ -78,7 +78,7 @@
 	}
 	.dieCardTitle {
 		padding: 7px 0 2px;
-	}	
+	}
 	.dieImage {
 		margin-top: 10px;
 		margin-bottom: 10px;
@@ -125,6 +125,12 @@
 	background: transparent;
 }
 
+@media only screen and (min-width: 480px) {
+	.dieFooter {
+		border-top: 0;
+	}
+}
+
 .disabled .dieFooter {
 	border: 1px solid rgba(0,0,0,.1);
 }
@@ -168,9 +174,13 @@
 	}
 }
 
-.narrativePoolBuilder :global(.card-body) {	
+.narrativePoolBuilder :global(.card-body) {
 	padding: 0;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+}
+
+.noBorder {
+	border: 0;
 }

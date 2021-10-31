@@ -43,6 +43,7 @@ import { FATE_DIE } from './fateConsts';
 
 import narrativeDice from './narrativeDice';
 import l5rDice from './l5rDice';
+import { torFeatDie, torSkillDie, torSkillTest } from "./torDice";
 
 /*******************************************
  *
@@ -244,19 +245,8 @@ export const wrathAndGloryDiceSet = [{
 	combatTracker
 ];
 
-export const torDiceSet = [{
-	diceType: TOR_SKILL_TEST,
-	label: 'Skill Test',
-	diceImg: 'tor-skill-test.png',
-	noDropdown: true
-}, {
-	diceType: TOR_FEAT_DIE,
-	label: 'Feature Die',
-	diceImg: 'tor-feat-die.png',
-}, {
-	diceType: TOR_SKILL_DIE,
-	label: 'Skill Die',
-	diceImg: 'tor-skill-die.png',
-},
-	combatTracker
+export const torDiceSet = [
+	torSkillTest,
+	torSkillDie,
+	torFeatDie
 ];
