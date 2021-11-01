@@ -1,7 +1,6 @@
 import create from 'zustand';
 import { TOR_SKILL_DIE, TOR_FEAT_DIE, TOR_SKILL_TEST, TorDice } from "../../consts/diceConstants";
 import getResultsArray from "../../utils/getResultsArray";
-import getRandom from "../../utils/getRandom";
 import { requestMsgReady, requestPoolRoll } from "../../actions/roll.actions";
 import reduxStore from '../../store';
 import { getDiscordMsgData } from "./getDiscordMsgData";
@@ -17,13 +16,6 @@ export interface SkillRoll {
 	isAdversary: boolean;
 }
 
-export interface Result {
-	id: number;
-	val: number;
-	isRerolled: boolean;
-	type: TorDice;
-}
-
 export type State = {
 	openModal: () => void;
 	isModalOpen: boolean;
@@ -35,33 +27,30 @@ export type State = {
 
 	rollDice: (skillRoll: SkillRoll, isRerollingAllDice?: boolean) => void;
 	rerollAll: () => void;
-	rerollSelected: () => void;
-	results: Result[];
-	selectedIds: number[];
 	wasAllDiceRerolled: boolean;
-}
 
-interface GetNewResult {
-	id: number;
-	val: number;
-	isFeatDie?: boolean;
+	// Results
+	isSuccess:  null | boolean;
+	featDiceResults: null | number[];
+	skillDiceResults: null | number[];
+	featDiceScore: null | number;
+	skillDiceScore: null | number;
+	totalDiceScore: null |  number;
 }
-
-const getNewResult = ({ val, id, isFeatDie }: GetNewResult): Result => {
-	return {
-		val,
-		id,
-		isRerolled: false,
-		type: isFeatDie ? TOR_FEAT_DIE : TOR_SKILL_DIE,
-	};
-};
 
 const useStore = create<State>(((set, get) => ({
 	isModalOpen: false,
 	isResultsModalOpen: false,
 	results: [],
-	selectedIds: [],
 	wasAllDiceRerolled: false,
+
+	// Results
+	isSuccess: null,
+	featDiceResults: null,
+	skillDiceResults: null,
+	featDiceScore: null,
+	skillDiceScore: null,
+	totalDiceScore: null,
 
 	openModal: () => set({ isModalOpen: true }),
 	openResultsModal: () => set({ isResultsModalOpen: true }),
@@ -77,10 +66,7 @@ const useStore = create<State>(((set, get) => ({
 		isWeary,
 		isMiserable,
 		isAdversary}) => {
-		// const skillDice = pool[TOR_SKILL_TEST];
-		//
-		// // Skill test
-		// if (skillDice) {
+
 			const featDiceAmount = isFavoured || isIllFavoured ? 2 : 1;
 			const featDiceResults = getResultsArray(12, featDiceAmount, false, false);
 			const skillDiceResults = getResultsArray(6, skillDiceAmount, false, false);
@@ -146,15 +132,17 @@ const useStore = create<State>(((set, get) => ({
 				// Normal success calculation
 			}
 
-		//
-		// 	const resultsMapped = results.map((val, id) => getNewResult({ val, id  }));
-		//
-		// 	// Set results
-		// 	set({
-		// 		results: resultsMapped,
-		// 		isModalOpen: true,
-		// 		selectedIds: []
-		// 	});
+			// Set results
+			set({
+				isSuccess,
+				featDiceResults,
+				skillDiceResults,
+				featDiceScore,
+				skillDiceScore,
+				totalDiceScore,
+				isResultsModalOpen: true,
+
+			});
 		//
 		// 	reduxStore.dispatch(requestMsgReady(
 		// 		getDiscordMsgData({
@@ -169,22 +157,9 @@ const useStore = create<State>(((set, get) => ({
 		// 	reduxStore.dispatch(requestPoolRoll({ pool }));
 		// }
 	},
-	toggleSelect: (id: number) => {
-		const { selectedIds } = get();
 
-		if (selectedIds.includes(id)) {
-			set({
-				selectedIds: selectedIds.filter(i => i !== id)
-			});
-		} else {
-			set({
-				selectedIds: [...selectedIds, id]
-			});
-		}
-
-	},
 	rerollAll: () => {
-		const { rollDice, results } = get();
+		const { rollDice } = get();
 
 		// rollDice({
 		// 		// Added dice cannot be rerolled
@@ -194,33 +169,7 @@ const useStore = create<State>(((set, get) => ({
 		// );
 
 		set({ });
-	},
-	rerollSelected: () => {
-		const { results, selectedIds } = get();
-
-		// const rerolledResults = results.map(result => {
-		// 	const newResult = { ...result };
-		// 	if (selectedIds.includes(newResult.id)) {
-		// 		newResult.val = getResultsArray(6)[0];
-		// 		newResult.isRerolled = true;
-		// 	}
-		// 	return newResult;
-		// });
-		//
-		// reduxStore.dispatch(requestMsgReady(
-		// 	getDiscordMsgData({
-		// 		results: rerolledResults,
-		// 		skillDice: rerolledResults.length,
-		// 		diceSelectedToReroll: selectedIds.length
-		// 	})
-		// ));
-		//
-		// set({
-		// 	selectedIds: [],
-		// 	wasAllDiceRerolled: false,
-		// 	results: rerolledResults,
-		// });
-	},
+	}
 })));
 
 export default useStore;
