@@ -12,8 +12,9 @@ import PoolBuilderDie from "../PoolBuilder/PoolBuilderDie";
 import { isValueValid } from "../WarhammerMoneyModal/WarhammerMoneyModal";
 import { faEye } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import GandalfRune from "./GandalfRune";
 
-function TorModal() {
+export default () => {
 	const torStore = useTorStore((torStore: State) => torStore);
 	const { isModalOpen, closeModal, rollDice } = torStore;
 
@@ -192,9 +193,11 @@ function TorModal() {
 						onChange={() => setIsAdversary(!isAdversary)}
 						custom
 					/>
-					<InfoTooltip content={<span>
-							When rolling for <strong>an Adversary</strong>, the <FontAwesomeIcon icon={faEye} /> icon (<strong>{EYE_SCORE}</strong>) becomes the highest result possible, while the rune (<strong>{GANDALF_SCORE}</strong>) becomes the lowest result possible and is read as <strong>0</strong>.
-						</span>} />
+					<InfoTooltip content={(
+						<span>
+							When rolling for <strong>an Adversary</strong>, the <FontAwesomeIcon icon={faEye} /> icon (<strong>{EYE_SCORE}</strong>) becomes the highest result possible, while the <GandalfRune  style={{ fill: '#fff' }} /> rune (<strong>{GANDALF_SCORE}</strong>) becomes the lowest result possible and is read&nbsp;as&nbsp;<strong>0</strong>.
+						</span>
+					)} />
 				</div>
 			</Modal.Body>
 			<Modal.Footer>
@@ -212,5 +215,3 @@ function TorModal() {
 		</Modal>
 	);
 }
-
-export default TorModal;
