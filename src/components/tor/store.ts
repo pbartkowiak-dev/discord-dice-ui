@@ -5,10 +5,16 @@ import getRandom from "../../utils/getRandom";
 import { requestMsgReady, requestPoolRoll } from "../../actions/roll.actions";
 import reduxStore from '../../store';
 import { getDiscordMsgData } from "./getDiscordMsgData";
+import { EYE_SCORE, GANDALF_SCORE } from "../../consts/torDice";
 
-interface Pool {
-	TOR_SKILL_TEST?: number;
-	d6?: number
+export interface SkillRoll {
+	tn: number;
+	skillDiceAmount: number;
+	isFavoured: boolean;
+	isIllFavoured: boolean;
+	isWeary: boolean;
+	isMiserable: boolean;
+	isAdversary: boolean;
 }
 
 export interface Result {
@@ -18,7 +24,7 @@ export interface Result {
 	type: TorDice;
 }
 
-type State = {
+export type State = {
 	openModal: () => void;
 	isModalOpen: boolean;
 	isResultsModalOpen: boolean;
@@ -27,7 +33,7 @@ type State = {
 	closeModal: () => void;
 	closeResultsModal: () => void;
 
-	rollDice: (pool: Pool, isRerollingAllDice?: boolean) => void;
+	rollDice: (skillRoll: SkillRoll, isRerollingAllDice?: boolean) => void;
 	rerollAll: () => void;
 	rerollSelected: () => void;
 	results: Result[];
@@ -63,34 +69,93 @@ const useStore = create<State>(((set, get) => ({
 	closeModal: () => set({ isModalOpen: false }),
 	closeResultsModal: () => set({ isResultsModalOpen: false }),
 
-	rollDice: (pool, isRerollingAllDice) => {
-		const skillDice = pool[TOR_SKILL_TEST];
+	rollDice: ({
+		tn,
+		skillDiceAmount,
+		isFavoured,
+		isIllFavoured,
+		isWeary,
+		isMiserable,
+		isAdversary}) => {
+		// const skillDice = pool[TOR_SKILL_TEST];
+		//
+		// // Skill test
+		// if (skillDice) {
+			const featDiceAmount = isFavoured || isIllFavoured ? 2 : 1;
+			const featDiceResults = getResultsArray(12, featDiceAmount, false, false);
+			const skillDiceResults = getResultsArray(6, skillDiceAmount, false, false);
 
-		// Skill test
-		if (skillDice) {
-			const results = getResultsArray(6, skillDice, undefined, false);
+			// Get FEAT DICE score
+			let featDiceScore: number;
 
-			const resultsMapped = results.map((val, id) => getNewResult({ val, id  }));
+			if (isFavoured) {
+				featDiceScore = Math.max(...featDiceResults);
+			} else if (isIllFavoured) {
+				featDiceScore = Math.min(...featDiceResults);
+			} else {
+				featDiceScore = featDiceResults[0];
+			}
 
-			// Set results
-			set({
-				results: resultsMapped,
-				isModalOpen: true,
-				selectedIds: []
-			});
+			// Get SKILL DICE score
+			const skillDiceScore = skillDiceResults.reduce((previousValue, currentValue) => {
+				if (isWeary && currentValue <= 3) {
+					return previousValue;
+				}
+				return previousValue + currentValue;
+			}, 0);
 
-			reduxStore.dispatch(requestMsgReady(
-				getDiscordMsgData({
-					results: resultsMapped,
-					// skillDice,
-					// isRerollingAllDice: !!isRerollingAllDice
-				})
-			));
+			// Get TOTAL DICE score
+			let totalDiceScore: number;
 
-			// Numeral die roll
-		} else {
-			reduxStore.dispatch(requestPoolRoll({ pool }));
-		}
+			if (featDiceScore === EYE_SCORE || featDiceScore == GANDALF_SCORE) {
+				totalDiceScore = skillDiceScore;
+			} else {
+				totalDiceScore = skillDiceScore + featDiceScore;
+			}
+
+			// Get SUCCESS result
+			let isSuccess = totalDiceScore >= tn;
+
+			// Auto failure
+			if (isMiserable) {
+				if (!isAdversary && featDiceScore === EYE_SCORE) {
+					isSuccess = false;
+				}
+				if (isAdversary && featDiceScore === GANDALF_SCORE) {
+					isSuccess = false;
+				}
+			}
+
+			// Auto success
+			if (!isAdversary && featDiceScore === GANDALF_SCORE) {
+				isSuccess = true;
+			} else if (isAdversary && featDiceScore === EYE_SCORE) {
+				isSuccess = true;
+				// Normal success calculation
+			}
+
+		//
+		// 	const resultsMapped = results.map((val, id) => getNewResult({ val, id  }));
+		//
+		// 	// Set results
+		// 	set({
+		// 		results: resultsMapped,
+		// 		isModalOpen: true,
+		// 		selectedIds: []
+		// 	});
+		//
+		// 	reduxStore.dispatch(requestMsgReady(
+		// 		getDiscordMsgData({
+		// 			results: resultsMapped,
+		// 			// skillDice,
+		// 			// isRerollingAllDice: !!isRerollingAllDice
+		// 		})
+		// 	));
+		//
+		// 	// Numeral die roll
+		// } else {
+		// 	reduxStore.dispatch(requestPoolRoll({ pool }));
+		// }
 	},
 	toggleSelect: (id: number) => {
 		const { selectedIds } = get();

@@ -18,3 +18,7 @@ export const torFeatDie = {
 	label: 'Feature Die',
 	diceImg: 'tor-feat-die.png',
 };
+
+export const EYE_SCORE = 11;
+
+export const GANDALF_SCORE = 12
