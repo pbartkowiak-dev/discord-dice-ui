@@ -1,11 +1,9 @@
 import reduxStore from "../../store";
 import joinAsBlocks from "../../utils/joinAsBlocks";
 import { getColor } from "../../utils/getColor";
-import { Result } from "./store";
 
 interface Props {
-	results: Result[];
-
+	results: number[];
 }
 
 interface ReturnType {
@@ -36,14 +34,14 @@ export const getDiscordMsgData = ({
 	let description = '**Results**:';
 	description += '\n';
 
-	description += `${joinAsBlocks(
-		results
-			// .filter((result) => !result.isWrathDie)
-			.map((result) => result.val)
-			.sort((a, b) => b - a),
-		', ',
-		true
-	)}.`;
+	// description += `${joinAsBlocks(
+	// 	results
+	// 		// .filter((result) => !result.isWrathDie)
+	// 		.map((result) => result.val)
+	// 		.sort((a, b) => b - a),
+	// 	', ',
+	// 	true
+	// )}.`;
 
 	description += '\n';
 
