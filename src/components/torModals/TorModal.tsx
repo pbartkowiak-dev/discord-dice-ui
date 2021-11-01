@@ -2,42 +2,43 @@ import React, { useState } from 'react';
 import classNames from 'classnames';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import torStyles from "./TorModal.module.css";
-import useTorStore from "../tor/store";
+import styles from "./TorModal.module.css";
+import useTorStore, { State } from "../tor/store";
 import InputRange from "../InputRange/InputRange";
 import Form from "react-bootstrap/Form";
 import InfoTooltip from "../InfoTooltip/InfoTooltip";
-import PoolBuilder from "../PoolBuilder/PoolBuilder";
-import { torSkillDie } from "../../consts/torDice";
+import { EYE_SCORE, GANDALF_SCORE, torSkillDie } from "../../consts/torDice";
 import PoolBuilderDie from "../PoolBuilder/PoolBuilderDie";
 import { isValueValid } from "../WarhammerMoneyModal/WarhammerMoneyModal";
-
+import { faEye } from "@fortawesome/free-regular-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 function TorModal() {
-	const torState = useTorStore((torState: any) => torState);
-	const { isModalOpen, closeModal } = torState;
+	const torStore = useTorStore((torStore: State) => torStore);
+	const { isModalOpen, closeModal, rollDice } = torStore;
 
 	const tnInputId = 'tn-input'
 	const tnMax = 20;
 	const tnMin = 0;
-	const skillDiceMax = 20;
+	const skillDiceAmountMax = 20;
 
 	const [tn, setTn] = useState<string>('');
+	const [skillDiceAmount, setSkillDice] = useState<number>(0);
 	const [isFavoured, setIsFavoured] = useState<boolean>(false);
 	const [isIllFavoured, setIsIllFavoured] = useState<boolean>(false);
 	const [isWeary, setIsWeary] = useState<boolean>(false);
 	const [isMiserable, setIsMiserable] = useState<boolean>(false);
-	const [skillDice, setSkillDice] = useState<number>(0);
+	const [isAdversary, setIsAdversary] = useState<boolean>(false);
 
 	const isValid = () => {
 		let isValid = true;
 		const tnNumber = Number(tn);
-		const skillDiceNumber = Number(skillDice);
+		const skillDiceAmountNumber = Number(skillDiceAmount);
 
 		if (isNaN(tnNumber) || tnNumber <= 0 || tnNumber > tnMax) {
 			isValid = false;
 		}
-		if (isNaN(skillDiceNumber) || skillDiceNumber <= 0 || skillDiceNumber > skillDiceMax) {
+		if (isNaN(skillDiceAmountNumber) || skillDiceAmountNumber <= 0 || skillDiceAmountNumber > skillDiceAmountMax) {
 			isValid = false;
 		}
 
@@ -63,23 +64,37 @@ function TorModal() {
 
 	const onChange = (_: any, event: any) => {
 		const { value } = event.target;
-		if (isValueValid(value) && value <= skillDiceMax) {
+		if (isValueValid(value) && value <= skillDiceAmountMax) {
 			setSkillDice(value);
 		}
 	};
 
 	const onIncrease = () => {
-		const newValue = Number(skillDice) + 1;
-		if (newValue <= skillDiceMax) {
+		const newValue = Number(skillDiceAmount) + 1;
+		if (newValue <= skillDiceAmountMax) {
 			setSkillDice(newValue);
 		}
 	};
 
 	const onDecrease = () => {
-		const newValue = Number(skillDice) - 1;
+		const newValue = Number(skillDiceAmount) - 1;
 		if (newValue >= 0) {
 			setSkillDice(newValue);
 		}
+	};
+
+	const onSubmit = () => {
+		rollDice({
+			tn: Number(tn),
+			skillDiceAmount: Number(skillDiceAmount),
+			isFavoured,
+			isIllFavoured,
+			isWeary,
+			isMiserable,
+			isAdversary,
+		});
+
+		closeModal();
 	};
 
 	return (
@@ -87,8 +102,8 @@ function TorModal() {
 			<Modal.Header closeButton>
 				<Modal.Title>The One Ring 2e Roll Options</Modal.Title>
 			</Modal.Header>
-			<Modal.Body className={torStyles.torModalBody}>
-				<div className={torStyles.checkboxContainer}>
+			<Modal.Body className={styles.torModalBody}>
+				<div className={styles.checkboxContainer}>
 					<Form.Check
 						type="checkbox"
 						name="Favoured Roll"
@@ -110,11 +125,11 @@ function TorModal() {
 						custom
 					/>
 				</div>
-				<div className={torStyles.tnContainer}>
-					<div className={torStyles.tnContainerInner}>
+				<div className={styles.tnContainer}>
+					<div className={styles.tnContainerInner}>
 						<InfoTooltip
 							content="Target Number"
-							className={torStyles.tnInfoIcon}
+							className={styles.tnInfoIcon}
 						/>
 						<Form.Control
 							type="text"
@@ -123,10 +138,8 @@ function TorModal() {
 							autoComplete="off"
 							onChange={onTnChange}
 							value={tn}
-							className={torStyles.tnInput}
-
+							className={styles.tnInput}
 						/>
-
 					</div>
 					<InputRange
 						id={tnInputId}
@@ -136,19 +149,19 @@ function TorModal() {
 						min={tnMin}
 					/>
 				</div>
-				<h5 className={torStyles.subheader}>Skill Dice Number</h5>
+				<h5 className={styles.subheader}>Skill Dice Number</h5>
 				<PoolBuilderDie
 					diceType={torSkillDie.diceType}
 					noHeader={true}
-					value={skillDice}
+					value={skillDiceAmount}
 					onChange={onChange}
 					onIncrease={onIncrease}
 					onDecrease={onDecrease}
 					isDiceImgLarge={false}
 					hideBorder={true}
 				/>
-				<h5 className={torStyles.subheader}>Conditions</h5>
-				<div className={torStyles.checkboxContainer}>
+				<h5 className={styles.subheader}>Conditions</h5>
+				<div className={styles.checkboxContainer}>
 					<Form.Check
 						type="checkbox"
 						name="Weary"
@@ -168,6 +181,21 @@ function TorModal() {
 						custom
 					/>
 				</div>
+				<h5 className={styles.subheader}>Loremaster's Tools</h5>
+				<div className={styles.checkboxContainer}>
+					<Form.Check
+						type="checkbox"
+						name="isOpposition"
+						id="isOpposition"
+						label="Rolling for an Adversary"
+						checked={isAdversary}
+						onChange={() => setIsAdversary(!isAdversary)}
+						custom
+					/>
+					<InfoTooltip content={<span>
+							When rolling for <strong>an Adversary</strong>, the <FontAwesomeIcon icon={faEye} /> icon (<strong>{EYE_SCORE}</strong>) becomes the highest result possible, while the rune (<strong>{GANDALF_SCORE}</strong>) becomes the lowest result possible and is read as <strong>0</strong>.
+						</span>} />
+				</div>
 			</Modal.Body>
 			<Modal.Footer>
 				<Button variant="secondary" onClick={closeModal}>
@@ -177,6 +205,7 @@ function TorModal() {
 					variant="success"
 					type="submit"
 					disabled={!isValid()}
+					onClick={onSubmit}
 					>Roll!
 				</Button>
 			</Modal.Footer>
