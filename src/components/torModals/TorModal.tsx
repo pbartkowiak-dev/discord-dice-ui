@@ -32,8 +32,12 @@ function TorModal() {
 	const isValid = () => {
 		let isValid = true;
 		const tnNumber = Number(tn);
+		const skillDiceNumber = Number(skillDice);
 
 		if (isNaN(tnNumber) || tnNumber <= 0 || tnNumber > tnMax) {
+			isValid = false;
+		}
+		if (isNaN(skillDiceNumber) || skillDiceNumber <= 0 || skillDiceNumber > skillDiceMax) {
 			isValid = false;
 		}
 
