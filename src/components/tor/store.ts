@@ -89,9 +89,21 @@ const useStore = create<State>(((set, get) => ({
 			let featDiceScore: number;
 
 			if (isFavoured) {
-				featDiceScore = Math.max(...featDiceResults);
+				if (isAdversary && featDiceResults.includes(EYE_SCORE) ) {
+					featDiceScore = EYE_SCORE;
+				} else if (!isAdversary && featDiceResults.includes((GANDALF_SCORE))) {
+					featDiceScore = GANDALF_SCORE;
+				} else {
+					featDiceScore = Math.max(...featDiceResults);
+				}
 			} else if (isIllFavoured) {
-				featDiceScore = Math.min(...featDiceResults);
+				if (isAdversary && featDiceResults.includes(GANDALF_SCORE) ) {
+					featDiceScore = GANDALF_SCORE;
+				} else if (!isAdversary && featDiceResults.includes((EYE_SCORE))) {
+					featDiceScore = EYE_SCORE;
+				} else {
+					featDiceScore = Math.min(...featDiceResults);
+				}
 			} else {
 				featDiceScore = featDiceResults[0];
 			}
