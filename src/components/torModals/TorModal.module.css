@@ -95,7 +95,7 @@
 
 @media only screen and (min-width: 480px) {
     .checkboxContainer * + * {
-        margin: 0 10px;
+        margin: 0 5px;
     }
 }
 
