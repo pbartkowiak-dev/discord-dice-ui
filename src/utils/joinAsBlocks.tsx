@@ -18,9 +18,9 @@ export default function joinAsBlocks(
 function getJsx(results: ResultsType, joiner: string) {
 	return results.map((result, i) => {
 		if (i === results.length - 1) {
-			return <span key={i}><CodeSpan>{result}</CodeSpan></span>;
+			return <span key={i} data-value={result}><CodeSpan>{result}</CodeSpan></span>;
 		}
-		return <span key={i}><CodeSpan>{result}</CodeSpan>{joiner}</span>;
+		return <span key={i} data-value={result}><CodeSpan>{result}</CodeSpan>{joiner}</span>;
 	});
 }
 

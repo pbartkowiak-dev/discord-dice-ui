@@ -18,7 +18,7 @@
     padding-top: 18px;
     padding-bottom: 26px;
     width: 150px;
-    margin: 10px auto 0;
+    margin: 6px auto 0;
 }
 
 .tnInput {
@@ -27,6 +27,20 @@
     text-align: center;
     font-size: 25px;
     border: 0;
+}
+
+.tnResultNumber {
+    font-size: 34px;
+    font-weight: bold;
+    padding: 4px 0 0;
+}
+
+.failureText {
+    color: var(--header-bg-failure);
+}
+
+.successText {
+    color: var(--header-bg);
 }
 
 .tnContainerInner:after {
@@ -64,6 +78,12 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
+}
+
+.isWeary [data-value="1"],
+.isWeary [data-value="2"],
+.isWeary [data-value="3"] {
+    opacity: .5;
 }
 
 @media only screen and (min-width: 480px) {
