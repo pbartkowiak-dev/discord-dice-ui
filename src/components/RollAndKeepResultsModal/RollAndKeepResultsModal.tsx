@@ -4,7 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import styles from '../ResultsModal/ResultsModal.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDiceD20, faArrowRight, faEquals } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRight, faEquals } from '@fortawesome/free-solid-svg-icons';
 import rollAndKeepStyles from './RollAndKeepResultsModal.module.css';
 import CodeSpan from '../CodeSpan/CodeSpan';
 
@@ -23,8 +23,6 @@ function RollAndKeepResultsModal({
 		setSelectedDiceState([]);
 	}, [showModal]);
 
-	const DiceIcon = <FontAwesomeIcon className={styles.resultsModalDiceIcon} icon={faDiceD20} />;
-
 	const selectDie = (rowIndex: number) => {
 		setSelectedDiceState([
 			...selectedDiceState,
@@ -37,7 +35,7 @@ function RollAndKeepResultsModal({
 			selectedDiceState.filter((i: number) => i !== rowIndex)
 		);
 	};
-	
+
 	const handleReroll = () => {
 		hideMsg();
 		setSelectedDiceState([]);
@@ -80,7 +78,7 @@ function RollAndKeepResultsModal({
 				{
 					resultsInner.map((result: number, index: number) => {
 						const showResult = result === 10 ? 0 : result;
-				
+
 						return (
 							<div key={`row-index-${index}`} className={rollAndKeepStyles.resultsBlock}>
 								<div className={rollAndKeepStyles.imgContainer}>
@@ -122,10 +120,7 @@ function RollAndKeepResultsModal({
 			onHide={hideMsg}
 		>
 			<Modal.Header closeButton className={styles.resultsModalHeader}>
-				<div>
-					{DiceIcon}
-					<Modal.Title className={styles.resultsModalTitle}>Roll Results</Modal.Title>
-				</div>
+				<Modal.Title className={styles.resultsModalTitle}>Roll Results</Modal.Title>
 			</Modal.Header>
 			<Modal.Body className={styles.resultsBody}>
 

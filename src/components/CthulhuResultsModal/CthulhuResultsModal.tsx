@@ -4,8 +4,6 @@ import classNames from 'classnames';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import styles from "../ResultsModal/ResultsModal.module.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faDiceD20 } from "@fortawesome/free-solid-svg-icons";
 import { closeCthulhuResultsModal } from "../../actions/cthulhu.actions";
 import ResultVsSkillRow from "../ResultVsSkillRow/ResultVsSkillRow";
 import SuccessLevelLadder from "../SuccessLevelLadder/SuccessLevelLadder";
@@ -64,7 +62,6 @@ function CthulhuResultsModal() {
 				[styles.resultsModalHeader]: true,
 				[styles.isFailure]: !isSuccess
 			})}>
-				<FontAwesomeIcon className={styles.resultsModalDiceIcon} icon={faDiceD20} />
 				<Modal.Title className={styles.resultsModalTitle}>Roll Results</Modal.Title>
 			</Modal.Header>
 			<Modal.Body>

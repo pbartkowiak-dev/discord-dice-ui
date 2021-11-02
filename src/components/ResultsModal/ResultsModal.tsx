@@ -3,10 +3,9 @@ import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import styles from './ResultsModal.module.css';
 import RerollContainer from '../Reroll/RerollContainer';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDiceD20 } from '@fortawesome/free-solid-svg-icons';
 import { ResultsModalPropTypes } from './ResultsModalTypes';
 import useDiceModuleFormStore from "../DiceModuleOptions/store";
+import classNames from "classnames";
 
 function ResultsModal({
 	hideMsg,
@@ -35,25 +34,19 @@ function ResultsModal({
 			</ul>
 		);
 	}
-	const DiceIcon = <FontAwesomeIcon className={styles.resultsModalDiceIcon} icon={faDiceD20} />;
-	
-	const headerClass = isSuccess === false 
-		? `${styles.resultsModalHeader} ${styles.isFailure}`
-		: `${styles.resultsModalHeader}`;
 
 	const diceModuleForm = useDiceModuleFormStore(( { state }) => state);
-	const isFate = diceModuleForm?.fateMode;
 
 	return (
 		<Modal
 			show={showModal}
 			onHide={hideMsg}
 		>
-			<Modal.Header closeButton className={headerClass}>
-				<div>
-					{DiceIcon}
-					<Modal.Title className={styles.resultsModalTitle}>Roll Results</Modal.Title>
-				</div>
+			<Modal.Header closeButton className={classNames({
+				[`${styles.isFailure}`]: isSuccess === false,
+				[`${styles.resultsModalHeader}`]: true
+			})}>
+				<Modal.Title className={styles.resultsModalTitle}>Roll Results</Modal.Title>
 			</Modal.Header>
 			<Modal.Body className={styles.resultsBody}>
 				{ title && <div className={styles.rollResults}>{ title }</div> }
@@ -61,7 +54,7 @@ function ResultsModal({
 				<RerollContainer
 					rollOptions={rollOptions}
 					isPool={isPool}
-					isFate={isFate}
+					isFate={diceModuleForm?.fateMode}
 					results={results}
 				/>
 			</Modal.Body>
