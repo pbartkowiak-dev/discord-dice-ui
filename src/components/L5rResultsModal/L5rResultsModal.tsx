@@ -5,8 +5,6 @@ import Button from 'react-bootstrap/Button';
 import { EXPLOSIVE_SUCCESS, l5rResults } from '../../consts/l5rSymbols';
 import styles from '../ResultsModal/ResultsModal.module.css';
 import l5rStyles from './L5rResultsModal.module.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faDiceD20 } from '@fortawesome/free-solid-svg-icons';
 import { L5rResultsModalPropTypes } from './L5rResultsModalTypes';
 import L5rAddDieContainer from './L5rAddDieContainer';
 import TooltipWrapper from '../InfoTooltip/TooltipWrapper';
@@ -38,9 +36,6 @@ function L5rResultsModal({
 }: L5rResultsModalPropTypes) {
 	const [selectedDiceState, setSelectedDiceState] = useState<any>([]);
 	const [isModifyingAllowed, setIsModifyingAllowed] = useState<boolean>(true);
-
-	const DiceIcon = <FontAwesomeIcon className={styles.resultsModalDiceIcon} icon={faDiceD20} />;
-
 	const resultsElements: Array<JSX.Element> = [];
 	const resultsKeptElements: Array<JSX.Element> = [];
 	const additionalDiceRolledElements: Array<JSX.Element> = [];
@@ -276,16 +271,12 @@ function L5rResultsModal({
 			onHide={hideMsg}
 		>
 			<Modal.Header closeButton className={styles.resultsModalHeader}>
-				<div>
-					{DiceIcon}
-					<Modal.Title className={styles.resultsModalTitle}>Roll Results</Modal.Title>
-				</div>
+				<Modal.Title className={styles.resultsModalTitle}>Roll Results</Modal.Title>
 			</Modal.Header>
 			<Modal.Body className={classNames({
 				[styles.resultsBody]: true,
 				[l5rStyles.resultsBody]: true
 			})}>
-
 				<section
 					data-step-results
 					className={classNames({
@@ -348,7 +339,7 @@ function L5rResultsModal({
 						{additionalDiceRolledElements}
 					</div>
 				</section>
-				
+
 				<section
 					data-step-results-derived
 					className={classNames({
