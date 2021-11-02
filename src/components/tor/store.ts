@@ -29,7 +29,10 @@ export type State = {
 	rerollAll: () => void;
 	wasAllDiceRerolled: boolean;
 
+	isWeary: boolean;
+
 	// Results
+	tn: null | number;
 	isSuccess:  null | boolean;
 	featDiceResults: null | number[];
 	skillDiceResults: null | number[];
@@ -44,6 +47,8 @@ const useStore = create<State>(((set, get) => ({
 	results: [],
 	wasAllDiceRerolled: false,
 
+	isWeary: false,
+
 	// Results
 	isSuccess: null,
 	featDiceResults: null,
@@ -51,6 +56,7 @@ const useStore = create<State>(((set, get) => ({
 	featDiceScore: null,
 	skillDiceScore: null,
 	totalDiceScore: null,
+	tn: null,
 
 	openModal: () => set({ isModalOpen: true }),
 	openResultsModal: () => set({ isResultsModalOpen: true }),
@@ -134,6 +140,8 @@ const useStore = create<State>(((set, get) => ({
 
 			// Set results
 			set({
+				tn,
+				isWeary,
 				isSuccess,
 				featDiceResults,
 				skillDiceResults,

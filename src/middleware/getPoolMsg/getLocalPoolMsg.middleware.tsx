@@ -24,14 +24,11 @@ export default (store:any) => (next:any) => (action:any) => {
 				<div className={styles.generalResult}>Rerolled <CodeSpan>{rerollCount}</CodeSpan> {timesWord}</div>
 			);
 		}
-		
+
 		Object.keys(results).forEach((diceType: string) => {
 			const resultsForDiceType: Array<number> = results[diceType];
 			fields.push(
-				<div className={classNames({
-					[styles.poolResultsBlock]: true,
-					[styles.resultsBlock]: true
-				})}>
+				<div className={classNames(styles.poolResultsBlock, styles.resultsBlock)}>
 					<div className={styles.resultsBlockImageContainer}>
 						<img
 							className={styles.resultsBlockImage}
@@ -69,7 +66,7 @@ export default (store:any) => (next:any) => (action:any) => {
 				<div>Total: <CodeSpan>{modifier ? total + Number(modifier) : total}</CodeSpan></div>
 			</div>
 		);
-		
+
 		store.dispatch(localMsgReady({
 			fields,
 			results,
