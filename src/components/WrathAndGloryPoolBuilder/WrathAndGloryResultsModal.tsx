@@ -43,8 +43,8 @@ const WrathAndGloryResultsModal: FC = () => {
 	};
 
 	const onChange = (_, event: any) => {
-		const { value } = event.target;
-		if (isValueValid(value) && value <= increaseDicePoolMax) {
+		const value = Number(event.target.value);
+		if (isValueValid(event.target.value) && value <= increaseDicePoolMax) {
 			setAddD6Amount(value);
 		}
 	};
