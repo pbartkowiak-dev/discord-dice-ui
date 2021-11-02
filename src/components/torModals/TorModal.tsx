@@ -165,7 +165,7 @@ export default () => {
 						min={tnMin}
 					/>
 				</div>
-				<h5 className={styles.subheader}>Skill Dice Number</h5>
+				<h5 className={styles.subheader}>Success Dice Number</h5>
 				<PoolBuilderDie
 					diceType={torSkillDie.diceType}
 					noHeader={true}

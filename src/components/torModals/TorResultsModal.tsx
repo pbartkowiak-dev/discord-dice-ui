@@ -70,7 +70,7 @@ function TorResultsModal() {
 						<div className={styles.resultsBlockImageContainer}>
 							<img
 								className={styles.resultsBlockImage}
-								src={require(`../../img/tor-skill-die.png`)}
+								src={require(`../../img/tor-success-die.png`)}
 								alt="Success Die"
 							/>
 						</div>

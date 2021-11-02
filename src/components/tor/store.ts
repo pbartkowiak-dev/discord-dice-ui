@@ -1,5 +1,5 @@
 import create from 'zustand';
-import { TOR_SKILL_DIE, TOR_FEAT_DIE, TOR_SKILL_TEST, TorDice } from "../../consts/diceConstants";
+import { TOR_SUCCESS_DIE, TOR_FEAT_DIE, TOR_SKILL_TEST, TorDice } from "../../consts/diceConstants";
 import getResultsArray from "../../utils/getResultsArray";
 import { requestMsgReady, requestPoolRoll } from "../../actions/roll.actions";
 import reduxStore from '../../store';
@@ -116,7 +116,7 @@ const useStore = create<State>(((set, get) => ({
 			featDiceScore = featDiceResults[0];
 		}
 
-		// Get SKILL DICE score
+		// Get SUCCESS DICE score
 		const skillDiceScore = skillDiceResults.reduce((previousValue, currentValue) => {
 			if (isWeary && currentValue <= 3) {
 				return previousValue;
