@@ -36,7 +36,7 @@ import {
 	WRATH_AND_GLORY_SKILL_TEST,
 	D3, TOR_SKILL_TEST,
 	TOR_FEAT_DIE,
-	TOR_SKILL_DIE
+	TOR_SUCCESS_DIE
 } from './diceConstants';
 
 import { FATE_DIE } from './fateConsts';
