@@ -76,6 +76,7 @@ function TorResultsModal() {
 						</div>
 						<div className={classNames({
 							[styles.resultsBlockContentContainer]: true,
+							// important for marking inactive dice
 							[torStyles.isWeary]: isWeary
 						})}>
 							<div>{ skillDiceResults && joinAsBlocks(skillDiceResults.sort((a: number, b: number) => a - b)) }</div>
@@ -90,7 +91,10 @@ function TorResultsModal() {
 								alt="Feat Die"
 							/>
 						</div>
-						<div className={styles.resultsBlockContentContainer}>
+						<div className={classNames({
+							[styles.resultsBlockContentContainer]: true,
+							[torStyles.featDiceResultsBlockContentContainer]: true,
+						})}>
 							<div>{ featDiceResults && joinAsBlocks(featDiceResults) }</div>
 						</div>
 					</div>

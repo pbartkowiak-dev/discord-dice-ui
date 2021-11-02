@@ -86,6 +86,33 @@
     opacity: .5;
 }
 
+.featDiceResultsBlockContentContainer [data-value="11"],
+.featDiceResultsBlockContentContainer [data-value="12"] {
+    position: relative;
+}
+
+.featDiceResultsBlockContentContainer [data-value="11"]:after,
+.featDiceResultsBlockContentContainer [data-value="12"]:after {
+    content: '';
+    position: absolute;
+    width: 23px;
+    height: 28px;
+    background-color: #f4f4f4;
+    background-repeat: no-repeat;
+    background-size: contain;
+    left: 0;
+    border-radius: 5px;
+    background-position: center;
+}
+
+.featDiceResultsBlockContentContainer [data-value="11"]:after {
+    background-image: url("./assets/eye-icon.png");
+}
+
+.featDiceResultsBlockContentContainer [data-value="12"]:after {
+    background-image: url("./assets/gandalf-rune.png");
+}
+
 @media only screen and (min-width: 480px) {
     .checkboxContainer {
         flex-direction: row;
