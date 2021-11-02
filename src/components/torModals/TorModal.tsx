@@ -16,20 +16,30 @@ import GandalfRune from "./GandalfRune";
 
 export default () => {
 	const torStore = useTorStore((torStore: State) => torStore);
-	const { isModalOpen, closeModal, rollDice } = torStore;
+	const {
+		isModalOpen,
+		closeModal,
+		rollDice,
+		tn,
+		skillDiceAmount,
+		isFavoured,
+		isIllFavoured,
+		isWeary,
+		isMiserable,
+		isAdversary,
+		setTn,
+		setIsFavoured,
+		setIsIllFavoured,
+		setIsWeary,
+		setIsMiserable,
+		setIsAdversary,
+		setSkillDiceAmount,
+	} = torStore;
 
 	const tnInputId = 'tn-input'
 	const tnMax = 20;
 	const tnMin = 0;
 	const skillDiceAmountMax = 20;
-
-	const [tn, setTn] = useState<string>('');
-	const [skillDiceAmount, setSkillDice] = useState<number>(0);
-	const [isFavoured, setIsFavoured] = useState<boolean>(false);
-	const [isIllFavoured, setIsIllFavoured] = useState<boolean>(false);
-	const [isWeary, setIsWeary] = useState<boolean>(false);
-	const [isMiserable, setIsMiserable] = useState<boolean>(false);
-	const [isAdversary, setIsAdversary] = useState<boolean>(false);
 
 	const isValid = () => {
 		let isValid = true;
@@ -64,37 +74,28 @@ export default () => {
 	};
 
 	const onChange = (_: any, event: any) => {
-		const { value } = event.target;
-		if (isValueValid(value) && value <= skillDiceAmountMax) {
-			setSkillDice(value);
+		const value = Number(event.target.value);
+		if (isValueValid(event.target.value) && value <= skillDiceAmountMax) {
+			setSkillDiceAmount(`${value}`);
 		}
 	};
 
 	const onIncrease = () => {
 		const newValue = Number(skillDiceAmount) + 1;
 		if (newValue <= skillDiceAmountMax) {
-			setSkillDice(newValue);
+			setSkillDiceAmount(`${newValue}`);
 		}
 	};
 
 	const onDecrease = () => {
 		const newValue = Number(skillDiceAmount) - 1;
 		if (newValue >= 0) {
-			setSkillDice(newValue);
+			setSkillDiceAmount(`${newValue}`);
 		}
 	};
 
 	const onSubmit = () => {
-		rollDice({
-			tn: Number(tn),
-			skillDiceAmount: Number(skillDiceAmount),
-			isFavoured,
-			isIllFavoured,
-			isWeary,
-			isMiserable,
-			isAdversary,
-		});
-
+		rollDice();
 		closeModal();
 	};
 

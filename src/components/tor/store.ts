@@ -6,16 +6,6 @@ import reduxStore from '../../store';
 import { getDiscordMsgData } from "./getDiscordMsgData";
 import { EYE_SCORE, GANDALF_SCORE } from "../../consts/torDice";
 
-export interface SkillRoll {
-	tn: number;
-	skillDiceAmount: number;
-	isFavoured: boolean;
-	isIllFavoured: boolean;
-	isWeary: boolean;
-	isMiserable: boolean;
-	isAdversary: boolean;
-}
-
 export type State = {
 	openModal: () => void;
 	isModalOpen: boolean;
@@ -25,14 +15,27 @@ export type State = {
 	closeModal: () => void;
 	closeResultsModal: () => void;
 
-	rollDice: (skillRoll: SkillRoll, isRerollingAllDice?: boolean) => void;
+	rollDice: (isRerollingAllDice?: boolean) => void;
 	rerollAll: () => void;
 	wasAllDiceRerolled: boolean;
 
+	tn: string;
+	skillDiceAmount: string;
+	isFavoured: boolean;
+	isIllFavoured: boolean;
 	isWeary: boolean;
+	isMiserable: boolean;
+	isAdversary: boolean;
+
+	setTn: (tn: string) => void;
+	setIsFavoured: (isFavoured: boolean) => void;
+	setIsIllFavoured: (isIllFavoured: boolean) => void;
+	setIsWeary: (isWeary: boolean) => void;
+	setIsMiserable: (isMiserable: boolean) => void;
+	setIsAdversary: (isAdversary: boolean) => void;
+	setSkillDiceAmount: (skillDiceAmount: string) => void;
 
 	// Results
-	tn: null | number;
 	isSuccess:  null | boolean;
 	featDiceResults: null | number[];
 	skillDiceResults: null | number[];
@@ -44,10 +47,14 @@ export type State = {
 const useStore = create<State>(((set, get) => ({
 	isModalOpen: false,
 	isResultsModalOpen: false,
-	results: [],
 	wasAllDiceRerolled: false,
-
+	tn: '',
+	skillDiceAmount: '',
+	isFavoured: false,
+	isIllFavoured: false,
 	isWeary: false,
+	isMiserable: false,
+	isAdversary: false,
 
 	// Results
 	isSuccess: null,
@@ -56,7 +63,6 @@ const useStore = create<State>(((set, get) => ({
 	featDiceScore: null,
 	skillDiceScore: null,
 	totalDiceScore: null,
-	tn: null,
 
 	openModal: () => set({ isModalOpen: true }),
 	openResultsModal: () => set({ isResultsModalOpen: true }),
@@ -64,93 +70,103 @@ const useStore = create<State>(((set, get) => ({
 	closeModal: () => set({ isModalOpen: false }),
 	closeResultsModal: () => set({ isResultsModalOpen: false }),
 
-	rollDice: ({
-		tn,
-		skillDiceAmount,
-		isFavoured,
-		isIllFavoured,
-		isWeary,
-		isMiserable,
-		isAdversary}) => {
+	setTn: (tn) => set({ tn }),
+	setIsFavoured: (isFavoured) => set({ isFavoured }),
+	setIsIllFavoured: (isIllFavoured) => set({ isIllFavoured }),
+	setIsWeary: (isWeary) => set({ isWeary }),
+	setIsMiserable: (isMiserable) => set({ isMiserable }),
+	setIsAdversary: (isAdversary) => set({ isAdversary }),
+	setSkillDiceAmount: (skillDiceAmount) => set({ skillDiceAmount }),
 
-			const featDiceAmount = isFavoured || isIllFavoured ? 2 : 1;
-			const featDiceResults = getResultsArray(12, featDiceAmount, false, false);
-			const skillDiceResults = getResultsArray(6, skillDiceAmount, false, false);
+	rollDice: () => {
+		const {
+			tn,
+			isFavoured,
+			isIllFavoured,
+			skillDiceAmount,
+			isAdversary,
+			isWeary,
+			isMiserable
+		} = get();
 
-			// Get FEAT DICE score
-			let featDiceScore: number;
+		const featDiceAmount = isFavoured || isIllFavoured ? 2 : 1;
+		const featDiceResults = getResultsArray(12, featDiceAmount, false, false);
+		const skillDiceResults = getResultsArray(6, Number(skillDiceAmount), false, false);
 
-			if (isFavoured) {
-				if (isAdversary && featDiceResults.includes(EYE_SCORE) ) {
-					featDiceScore = EYE_SCORE;
-				} else if (!isAdversary && featDiceResults.includes((GANDALF_SCORE))) {
-					featDiceScore = GANDALF_SCORE;
-				} else {
-					featDiceScore = Math.max(...featDiceResults);
-				}
-			} else if (isIllFavoured) {
-				if (isAdversary && featDiceResults.includes(GANDALF_SCORE) ) {
-					featDiceScore = GANDALF_SCORE;
-				} else if (!isAdversary && featDiceResults.includes((EYE_SCORE))) {
-					featDiceScore = EYE_SCORE;
-				} else {
-					featDiceScore = Math.min(...featDiceResults);
-				}
+		// Get FEAT DICE score
+		let featDiceScore: number;
+
+		if (isFavoured) {
+			if (isAdversary && featDiceResults.includes(EYE_SCORE) ) {
+				featDiceScore = EYE_SCORE;
+			} else if (!isAdversary && featDiceResults.includes((GANDALF_SCORE))) {
+				featDiceScore = GANDALF_SCORE;
 			} else {
-				featDiceScore = featDiceResults[0];
+				featDiceScore = Math.max(...featDiceResults);
 			}
-
-			// Get SKILL DICE score
-			const skillDiceScore = skillDiceResults.reduce((previousValue, currentValue) => {
-				if (isWeary && currentValue <= 3) {
-					return previousValue;
-				}
-				return previousValue + currentValue;
-			}, 0);
-
-			// Get TOTAL DICE score
-			let totalDiceScore: number;
-
-			if (featDiceScore === EYE_SCORE || featDiceScore == GANDALF_SCORE) {
-				totalDiceScore = skillDiceScore;
+		} else if (isIllFavoured) {
+			if (isAdversary && featDiceResults.includes(GANDALF_SCORE) ) {
+				featDiceScore = GANDALF_SCORE;
+			} else if (!isAdversary && featDiceResults.includes((EYE_SCORE))) {
+				featDiceScore = EYE_SCORE;
 			} else {
-				totalDiceScore = skillDiceScore + featDiceScore;
+				featDiceScore = Math.min(...featDiceResults);
 			}
+		} else {
+			featDiceScore = featDiceResults[0];
+		}
 
-			// Get SUCCESS result
-			let isSuccess = totalDiceScore >= tn;
-
-			// Auto failure
-			if (isMiserable) {
-				if (!isAdversary && featDiceScore === EYE_SCORE) {
-					isSuccess = false;
-				}
-				if (isAdversary && featDiceScore === GANDALF_SCORE) {
-					isSuccess = false;
-				}
+		// Get SKILL DICE score
+		const skillDiceScore = skillDiceResults.reduce((previousValue, currentValue) => {
+			if (isWeary && currentValue <= 3) {
+				return previousValue;
 			}
+			return previousValue + currentValue;
+		}, 0);
 
-			// Auto success
-			if (!isAdversary && featDiceScore === GANDALF_SCORE) {
-				isSuccess = true;
-			} else if (isAdversary && featDiceScore === EYE_SCORE) {
-				isSuccess = true;
-				// Normal success calculation
+		// Get TOTAL DICE score
+		let totalDiceScore: number;
+
+		if (featDiceScore === EYE_SCORE || featDiceScore == GANDALF_SCORE) {
+			totalDiceScore = skillDiceScore;
+		} else {
+			totalDiceScore = skillDiceScore + featDiceScore;
+		}
+
+		// Get SUCCESS result
+		let isSuccess = totalDiceScore >= Number(tn);
+
+		// Auto failure
+		if (isMiserable) {
+			if (!isAdversary && featDiceScore === EYE_SCORE) {
+				isSuccess = false;
 			}
+			if (isAdversary && featDiceScore === GANDALF_SCORE) {
+				isSuccess = false;
+			}
+		}
 
-			// Set results
-			set({
-				tn,
-				isWeary,
-				isSuccess,
-				featDiceResults,
-				skillDiceResults,
-				featDiceScore,
-				skillDiceScore,
-				totalDiceScore,
-				isResultsModalOpen: true,
+		// Auto success
+		if (!isAdversary && featDiceScore === GANDALF_SCORE) {
+			isSuccess = true;
+		} else if (isAdversary && featDiceScore === EYE_SCORE) {
+			isSuccess = true;
+			// Normal success calculation
+		}
 
-			});
+		// Set results
+		set({
+			tn,
+			isWeary,
+			isSuccess,
+			featDiceResults,
+			skillDiceResults,
+			featDiceScore,
+			skillDiceScore,
+			totalDiceScore,
+			isResultsModalOpen: true,
+
+		});
 		//
 		// 	reduxStore.dispatch(requestMsgReady(
 		// 		getDiscordMsgData({
