@@ -183,4 +183,11 @@
 
 .noBorder {
 	border: 0;
+	border-bottom: 1px solid #ced4da;
+}
+
+@media only screen and (min-width: 480px) {
+	.noBorder {
+		border: 0;
+	}
 }
