@@ -26,6 +26,14 @@ function getJsx(results: ResultsType, joiner: string) {
 
 function getMd(results: ResultsType, joiner: string) {
 	const arr = results.map((result, i) => {
+		// don't escape Discord icons
+		if (typeof result === 'string' && result[0] === ':' && result[result.length -1] === ':') {
+			if (i === results.length - 1) {
+				return result;
+			}
+			return `${result}${joiner}`;
+		}
+
 		if (i === results.length - 1) {
 			return `\`${result}\``;
 		}
