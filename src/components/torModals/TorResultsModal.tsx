@@ -11,6 +11,10 @@ import InfoTooltip from "../InfoTooltip/InfoTooltip";
 import Form from "react-bootstrap/Form";
 import InputRange from "../InputRange/InputRange";
 import { EYE_SCORE, GANDALF_SCORE } from "../../consts/torDice";
+import rollAndKeepStyles from "../RollAndKeepResultsModal/RollAndKeepResultsModal.module.css";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEquals } from "@fortawesome/free-solid-svg-icons";
+import { faEye } from "@fortawesome/free-regular-svg-icons";
 
 
 function TorResultsModal() {
@@ -31,8 +35,15 @@ function TorResultsModal() {
 		isWeary,
 		isMiserable,
 		isAdversary,
-		featDieScore
+		featDieScore,
+		totalDiceScore
 	} = torState;
+
+	const FAVOURED_DIE = isAdversary ? EYE_SCORE : GANDALF_SCORE;
+	const ILL_FAVOURED_DIE = isAdversary ? GANDALF_SCORE : EYE_SCORE;
+
+	const isAutoSuccess = featDieScore === FAVOURED_DIE;
+	const isAutoFailure = isMiserable && featDieScore === ILL_FAVOURED_DIE;
 
 	const skillDiceResultsSorted =  skillDiceResults.sort((a: number, b: number) => a - b);
 
@@ -49,12 +60,6 @@ function TorResultsModal() {
 			</Modal.Header>
 			<Modal.Body>
 				<div>
-					{ isSuccess && <div className={classNames([styles.generalResult, styles.generalResultSuccess])}>Success</div> }
-					{ !isSuccess && <div className={classNames([styles.generalResult, styles.generalResultFailure])}>Failure</div> }
-				</div>
-				<div>
-					{/*<strong>You rolled <CodeSpan>{skillDiceAmount}</CodeSpan> Success { skillDiceAmount === 1 ? 'die' : 'dice'} and <CodeSpan>{ isFavoured || isIllFavoured ? 2 : 1}</CodeSpan>.Results:</strong>*/}
-
 					<div className={torStyles.tnContainer}>
 						<div className={torStyles.tnContainerInner}>
 							<InfoTooltip
@@ -79,7 +84,6 @@ function TorResultsModal() {
 						</div>
 						<div className={classNames({
 							[styles.resultsBlockContentContainer]: true,
-							// important for marking inactive dice
 							[torStyles.isWeary]: isWeary
 						})}>
 							<div>{ skillDiceResults && joinAsBlocks(skillDiceResultsSorted) }</div>
@@ -97,7 +101,7 @@ function TorResultsModal() {
 						<div className={classNames({
 							[styles.resultsBlockContentContainer]: true,
 							[torStyles.featDiceResultsBlockContentContainer]: true,
-							[torStyles.isFirstScoreDimmed]: featDiceResults.length && ((() => {
+							[torStyles.isFirstScoreDimmed]: featDiceResults.length > 1 && ((() => {
 								const firstScore = featDiceResults[0];
 								const secondScore = featDiceResults[1];
 								if (firstScore === secondScore) {
@@ -105,7 +109,7 @@ function TorResultsModal() {
 								}
 								return secondScore === featDieScore;
 							})()),
-							[torStyles.isSecondScoreDimmed]: featDiceResults.length && ((() => {
+							[torStyles.isSecondScoreDimmed]: featDiceResults.length > 1 && ((() => {
 								const firstScore = featDiceResults[0];
 								const secondScore = featDiceResults[1];
 								if (firstScore === secondScore) {
@@ -116,6 +120,39 @@ function TorResultsModal() {
 						})}>
 							<div>{ featDiceResults && joinAsBlocks(featDiceResults) }</div>
 						</div>
+					</div>
+					<div className={classNames({
+						[torStyles.equalsRow]: true,
+						[torStyles.successText]: isSuccess,
+						[torStyles.failureText]: !isSuccess,
+					})}>
+						<span className={torStyles.equalsContainer}><FontAwesomeIcon className={torStyles.equalsIcon} icon={faEquals} /></span>
+						<span className={classNames({
+							[torStyles.totalScore]: true,
+							[torStyles.struckThroughText]: isAutoSuccess || isAutoFailure,
+						})}
+						>{totalDiceScore}
+						</span>
+						{ isAutoSuccess
+							? (
+								<span> { isAdversary
+									? <FontAwesomeIcon className={torStyles.resultIcon} icon={faEye} />
+									: <img className={torStyles.resultImg} src={require("./assets/gandalf-rune-success.png")} alt="Gandalf Icon"/>
+								} </span>
+							)
+							: null
+						}
+						{ isAutoFailure
+							? (
+								<span> { isAdversary
+									? <img className={torStyles.resultImg} src={require("./assets/gandalf-rune-failure.png")} alt="Gandalf Icon"/>
+									: <FontAwesomeIcon className={torStyles.resultIcon} icon={faEye} />
+							} </span>
+							)
+							: null
+						}
+						<span>({isSuccess ? 'Success' : 'Failure'})
+						</span>
 					</div>
 				</div>
 
