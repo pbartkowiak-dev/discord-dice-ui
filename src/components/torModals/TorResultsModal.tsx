@@ -23,7 +23,7 @@ function TorResultsModal() {
 		closeResultsModal,
 		isSuccess,
 		featDiceResults,
-		skillDiceResults,
+		successDiceResults,
 		isFavoured,
 		isIllFavoured,
 		tn,
@@ -43,8 +43,8 @@ function TorResultsModal() {
 	const isAutoSuccess = featDieScore === FAVOURED_DIE;
 	const isAutoFailure = isMiserable && featDieScore === ILL_FAVOURED_DIE;
 
-	const skillDiceResultsSorted =  skillDiceResults.sort((a: number, b: number) => a - b);
-	const specialSuccessesAmount = skillDiceResults.filter((result: number) => result === 6).length;
+	const successDiceResultsSorted =  successDiceResults.sort((a: number, b: number) => a - b);
+	const specialSuccessesAmount = successDiceResults.filter((result: number) => result === 6).length;
 
 	const onReroll = () => {
 		setIsRerolling(true);
@@ -100,7 +100,7 @@ function TorResultsModal() {
 						[styles.resultsBlockContentContainer]: true,
 						[torStyles.isWeary]: isWeary
 					})}>
-						<div>{ skillDiceResults && joinAsBlocks(skillDiceResultsSorted) }</div>
+						<div>{ successDiceResults && joinAsBlocks(successDiceResultsSorted) }</div>
 					</div>
 				</section>
 
