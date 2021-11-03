@@ -19,7 +19,7 @@ export type State = {
 	wasAllDiceRerolled: boolean;
 
 	tn: string;
-	skillDiceAmount: string;
+	successDiceAmount: string;
 	isFavoured: boolean;
 	isIllFavoured: boolean;
 	isWeary: boolean;
@@ -34,12 +34,12 @@ export type State = {
 	setIsWeary: (isWeary: boolean) => void;
 	setIsMiserable: (isMiserable: boolean) => void;
 	setIsAdversary: (isAdversary: boolean) => void;
-	setSkillDiceAmount: (skillDiceAmount: string) => void;
+	setSuccessDiceAmount: (successDiceAmount: string) => void;
 
 	// Results
 	isSuccess:  null | boolean;
 	featDiceResults: number[];
-	skillDiceResults: number[];
+	successDiceResults: number[];
 	featDieScore: null | number;
 	totalDiceScore: null |  number;
 }
@@ -49,19 +49,19 @@ const useStore = create<State>(((set, get) => ({
 	isResultsModalOpen: false,
 	wasAllDiceRerolled: false,
 	tn: '',
-	skillDiceAmount: '',
+	successDiceAmount: '',
 	isFavoured: false,
 	isIllFavoured: false,
 	isWeary: false,
 	isMiserable: false,
-	isAdversary: false,
 
 	wasRerolled: false,
+	isAdversary: false,
 
 	// Results
 	isSuccess: null,
 	featDiceResults: [],
-	skillDiceResults: [],
+	successDiceResults: [],
 	featDieScore: null,
 	totalDiceScore: null,
 
@@ -70,7 +70,7 @@ const useStore = create<State>(((set, get) => ({
 		wasRerolled: false,
 		isSuccess: null,
 		featDiceResults: [],
-		skillDiceResults: [],
+		successDiceResults: [],
 		featDieScore: null,
 		totalDiceScore: null,
 	}),
@@ -84,14 +84,14 @@ const useStore = create<State>(((set, get) => ({
 	setIsWeary: (isWeary) => set({ isWeary }),
 	setIsMiserable: (isMiserable) => set({ isMiserable }),
 	setIsAdversary: (isAdversary) => set({ isAdversary }),
-	setSkillDiceAmount: (skillDiceAmount) => set({ skillDiceAmount }),
+	setSuccessDiceAmount: (successDiceAmount) => set({ successDiceAmount }),
 
 	rollDice: (isRerolling) => {
 		const {
 			tn,
 			isFavoured,
 			isIllFavoured,
-			skillDiceAmount,
+			successDiceAmount,
 			isAdversary,
 			isWeary,
 			isMiserable,
@@ -99,7 +99,7 @@ const useStore = create<State>(((set, get) => ({
 
 		const featDiceAmount = isFavoured || isIllFavoured ? 2 : 1;
 		const featDiceResults = getResultsArray(12, featDiceAmount, false, false);
-		const skillDiceResults = getResultsArray(6, Number(skillDiceAmount), false, false);
+		const successDiceResults = getResultsArray(6, Number(successDiceAmount), false, false);
 
 		// Get FEAT DICE score
 		const FAVOURED_DIE = isAdversary ? EYE_SCORE : GANDALF_SCORE;
@@ -123,7 +123,7 @@ const useStore = create<State>(((set, get) => ({
 		}
 
 		// Get SUCCESS DICE score
-		const skillDiceScore = skillDiceResults.reduce((previousValue, currentValue) => {
+		const successDiceScore = successDiceResults.reduce((previousValue, currentValue) => {
 			if (isWeary && currentValue <= 3) {
 				return previousValue;
 			}
@@ -134,9 +134,9 @@ const useStore = create<State>(((set, get) => ({
 		let totalDiceScore: number;
 
 		if (featDieScore === EYE_SCORE || featDieScore == GANDALF_SCORE) {
-			totalDiceScore = skillDiceScore;
+			totalDiceScore = successDiceScore;
 		} else {
-			totalDiceScore = skillDiceScore + featDieScore;
+			totalDiceScore = successDiceScore + featDieScore;
 		}
 
 		// Get SUCCESS result
@@ -158,26 +158,33 @@ const useStore = create<State>(((set, get) => ({
 		set({
 			isSuccess,
 			featDiceResults,
-			skillDiceResults,
+			successDiceResults,
 			featDieScore,
 			totalDiceScore,
 			isResultsModalOpen: true,
 			wasRerolled: Boolean(isRerolling)
 		});
 
-		//
-		// 	reduxStore.dispatch(requestMsgReady(
-		// 		getDiscordMsgData({
-		// 			results: resultsMapped,
-		// 			// skillDice,
-		// 			// isRerollingAllDice: !!isRerollingAllDice
-		// 		})
-		// 	));
-		//
-		// 	// Numeral die roll
-		// } else {
-		// 	reduxStore.dispatch(requestPoolRoll({ pool }));
-		// }
+
+		reduxStore.dispatch(requestMsgReady(
+			getDiscordMsgData({
+				isSuccess,
+				featDiceResults,
+				successDiceResults,
+				featDieScore,
+				totalDiceScore,
+				wasRerolled: Boolean(isRerolling),
+				tn,
+				successDiceAmount,
+				isFavoured,
+				isIllFavoured,
+				isWeary,
+				isMiserable,
+				isAdversary,
+			})
+		));
+
+
 	},
 })));
 

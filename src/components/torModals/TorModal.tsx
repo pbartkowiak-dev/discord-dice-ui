@@ -18,7 +18,7 @@ export default () => {
 		closeModal,
 		rollDice,
 		tn,
-		skillDiceAmount,
+		successDiceAmount,
 		isFavoured,
 		isIllFavoured,
 		isWeary,
@@ -30,23 +30,23 @@ export default () => {
 		setIsWeary,
 		setIsMiserable,
 		setIsAdversary,
-		setSkillDiceAmount,
+		setSuccessDiceAmount,
 	} = torStore;
 
 	const tnInputId = 'tn-input'
 	const tnMax = 20;
 	const tnMin = 0;
-	const skillDiceAmountMax = 20;
+	const successDiceAmountMax = 20;
 
 	const isValid = () => {
 		let isValid = true;
 		const tnNumber = Number(tn);
-		const skillDiceAmountNumber = Number(skillDiceAmount);
+		const successDiceAmountNumber = Number(successDiceAmount);
 
 		if (isNaN(tnNumber) || tnNumber <= 0 || tnNumber > tnMax) {
 			isValid = false;
 		}
-		if (isNaN(skillDiceAmountNumber) || skillDiceAmountNumber <= 0 || skillDiceAmountNumber > skillDiceAmountMax) {
+		if (isNaN(successDiceAmountNumber) || successDiceAmountNumber <= 0 || successDiceAmountNumber > successDiceAmountMax) {
 			isValid = false;
 		}
 
@@ -72,22 +72,22 @@ export default () => {
 
 	const onChange = (_: any, event: any) => {
 		const value = Number(event.target.value);
-		if (isValueValid(event.target.value) && value <= skillDiceAmountMax) {
-			setSkillDiceAmount(`${value}`);
+		if (isValueValid(event.target.value) && value <= successDiceAmountMax) {
+			setSuccessDiceAmount(`${value}`);
 		}
 	};
 
 	const onIncrease = () => {
-		const newValue = Number(skillDiceAmount) + 1;
-		if (newValue <= skillDiceAmountMax) {
-			setSkillDiceAmount(`${newValue}`);
+		const newValue = Number(successDiceAmount) + 1;
+		if (newValue <= successDiceAmountMax) {
+			setSuccessDiceAmount(`${newValue}`);
 		}
 	};
 
 	const onDecrease = () => {
-		const newValue = Number(skillDiceAmount) - 1;
+		const newValue = Number(successDiceAmount) - 1;
 		if (newValue >= 0) {
-			setSkillDiceAmount(`${newValue}`);
+			setSuccessDiceAmount(`${newValue}`);
 		}
 	};
 
@@ -156,7 +156,7 @@ export default () => {
 						<PoolBuilderDie
 							diceType={torSkillDie.diceType}
 							noHeader={true}
-							value={skillDiceAmount}
+							value={successDiceAmount}
 							onChange={onChange}
 							onIncrease={onIncrease}
 							onDecrease={onDecrease}
