@@ -2,16 +2,18 @@ import { getColor } from '../../utils/getColor';
 import joinAsBlocks from '../../utils/joinAsBlocks';
 import getConanHitLocation from '../../utils/getConanHitLocations';
 import getInfinityHitLocation from '../../utils/getInfinityHitLocations';
-import { D6_CONAN, D20_CONAN_HL, D6_INFINITY, D20_INFINITY_HL } from '../../consts/diceConstants';
+import { D6_CONAN, D20_CONAN_HL, D6_INFINITY, D20_INFINITY_HL, TOR_FEAT_DIE } from '../../consts/diceConstants';
 import { DICE_ROLLED, requestMsgReady } from '../../actions/roll.actions';
 import { MINUS, PLUS } from '../../consts/fateConsts';
+import { EYE_SCORE, GANDALF_SCORE } from "../../consts/torDice";
+import { EYE_DESCRIPTION, GANDALF_DESCRIPTION } from "../../components/tor/getDiscordMsgData";
 
 export default (store:any) => (next:any) => (action:any) => {
 	if (action.type === DICE_ROLLED) {
 		const state = store.getState();
 		const { userSettings } = state;
 		const { rerollCount } = state;
-		
+
 		const { payload } = action;
 		const { result, rollOptions } = payload;
 		const {
@@ -34,7 +36,20 @@ export default (store:any) => (next:any) => (action:any) => {
 		const rolledWord = hasMultipleDice ? 'Results' : 'Result';
 		const rolled = `${diceAmount}d${diceTypeNum}`;
 		const username = userSettings.username || 'USERNAME_MISSING';
-		const resultsJoined = joinAsBlocks(results, null, true);
+
+		let featDiceResultsWithIcons;
+		if (rollOptions.diceType === TOR_FEAT_DIE) {
+			featDiceResultsWithIcons = results.map(((result: number) => {
+				if (result === EYE_SCORE) {
+					return EYE_DESCRIPTION;
+				} else if (result === GANDALF_SCORE) {
+					return GANDALF_DESCRIPTION;
+				}
+				return result;
+			}));
+		}
+
+		const resultsJoined = joinAsBlocks(featDiceResultsWithIcons ||results, null, true);
 		const isCombatDie = rollOptions.diceType === D6_CONAN || rollOptions.diceType === D6_INFINITY;
 		const isConanHitLocationDie = rollOptions.diceType === D20_CONAN_HL;
 		const isInfinityHitLocationDie = rollOptions.diceType === D20_INFINITY_HL;
@@ -43,16 +58,16 @@ export default (store:any) => (next:any) => (action:any) => {
 		let msgTitle;
 
 		let description = '';
-		
+
 		if (rollOptions.useModifier && (!isCombatDie && !(isConanHitLocationDie || isInfinityHitLocationDie))) {
 			description = `**Modifier**: \`${modSymbol}${Math.abs(modifier)}\`.`;
 		}
-	
+
 		if (rerollCount) {
 			const timesWord = rerollCount === 1 ? 'time' : 'times';
 			description += `\nRerolled \`${rerollCount}\` ${timesWord}.`;
 		}
-	
+
 		if ((hasMultipleDice || modifier) && (!isCombatDie && !(isConanHitLocationDie || isInfinityHitLocationDie) && !isFate)) {
 			const sumJoined = joinAsBlocks(results, '+', true);
 			let name = `:arrow_right: Sum of ${sumJoined}`;
@@ -92,11 +107,11 @@ export default (store:any) => (next:any) => (action:any) => {
 				value: `:skull: Damage: \`${dmg}\`.\n:boom: Effects: \`${effects}\`.`
 			});
 		}
-	
+
 		if (isConanHitLocationDie) {
 			const hitResult = results[0];
 			const hitLocation = getConanHitLocation(hitResult);
-	
+
 			fields.push({
 				name: ':mens: Hit Location:',
 				value: `\`${hitResult}\` - ${hitLocation}`
@@ -106,7 +121,7 @@ export default (store:any) => (next:any) => (action:any) => {
 		if (isInfinityHitLocationDie) {
 			const hitResult = results[0];
 			const hitLocation = getInfinityHitLocation(hitResult);
-	
+
 			fields.push({
 				name: ':mens: Hit Location:',
 				value: `\`${hitResult}\` - ${hitLocation}`
@@ -138,7 +153,7 @@ export default (store:any) => (next:any) => (action:any) => {
 		} else {
 			msgTitle = `${username} rolled \`${rolled}\`. ${rolledWord}: ${resultsJoined}.`;
 		}
-	
+
 		store.dispatch(requestMsgReady({
 			msgTitle,
 			color: getColor(),

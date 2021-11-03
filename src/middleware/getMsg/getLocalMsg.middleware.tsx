@@ -4,7 +4,7 @@ import { faArrowAltCircleUp, faArrowAltCircleDown, faSquare } from '@fortawesome
 import { faArrowAltCircleRight, faMinus, faPlus, faSkull, faSun } from '@fortawesome/free-solid-svg-icons';
 import joinAsBlocks from '../../utils/joinAsBlocks';
 import CodeSpan from '../../components/CodeSpan/CodeSpan';
-import { D6_CONAN, D20_CONAN_HL, D6_INFINITY, D20_INFINITY_HL } from '../../consts/diceConstants';
+import { D6_CONAN, D20_CONAN_HL, D6_INFINITY, D20_INFINITY_HL, TOR_FEAT_DIE } from '../../consts/diceConstants';
 import HitLocations from '../../components/HitLocations/HitLocations';
 import getConanHitLocation from '../../utils/getConanHitLocations';
 import getInfinityHitLocation from '../../utils/getInfinityHitLocations';
@@ -12,6 +12,8 @@ import styles from '../../components/ResultsModal/ResultsModal.module.css';
 import { DICE_ROLLED, localMsgReady } from '../../actions/roll.actions';
 import { FateResult } from '../../consts/fateConsts';
 import { FateSymbol } from "../utils/FateSymbol";
+import { EYE_SCORE, GANDALF_SCORE } from "../../consts/torDice";
+import { EYE_DESCRIPTION, GANDALF_DESCRIPTION } from "../../components/tor/getDiscordMsgData";
 
 const IconUp = <FontAwesomeIcon icon={faArrowAltCircleUp} />;
 const IconDown = <FontAwesomeIcon icon={faArrowAltCircleDown} />;
@@ -44,7 +46,20 @@ const getLocalMsg = (store:any) => (next:any) => (action:any) => {
 		const hasMultipleDice = diceAmount > 1;
 		const rolledWord = hasMultipleDice ? 'Results' : 'Result';
 		const rolled = `${diceAmount}d${diceTypeNum}`;
-		const resultsJoined = joinAsBlocks(results);
+
+		let featDiceResultsWithIcons;
+		if (rollOptions.diceType === TOR_FEAT_DIE) {
+			featDiceResultsWithIcons = results.map(((result: number) => {
+				if (result === EYE_SCORE) {
+					return EYE_DESCRIPTION;
+				} else if (result === GANDALF_SCORE) {
+					return GANDALF_DESCRIPTION;
+				}
+				return result;
+			}));
+		}
+
+		const resultsJoined = joinAsBlocks(featDiceResultsWithIcons || results);
 		const modifierWithSymbol = <CodeSpan>{modSymbol}{Math.abs(modifier)}</CodeSpan>;
 		const fields = [];
 		const isCombatDie = rollOptions.diceType === D6_CONAN || rollOptions.diceType === D6_INFINITY;
