@@ -41,6 +41,11 @@
     padding: 7px 0 0;
 }
 
+.poolBuilder {
+    max-width: 280px;
+    margin: 0 auto;
+}
+
 .failureText {
     color: var(--header-bg-failure);
 }
