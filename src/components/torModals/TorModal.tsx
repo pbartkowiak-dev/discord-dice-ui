@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import classNames from 'classnames';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-import styles from "./TorModal.module.css";
+import torStyles from "./TorModal.module.css";
 import useTorStore, { State } from "../tor/store";
 import InputRange from "../InputRange/InputRange";
 import Form from "react-bootstrap/Form";
@@ -13,6 +13,7 @@ import { isValueValid } from "../WarhammerMoneyModal/WarhammerMoneyModal";
 import { faEye } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import GandalfRune from "./GandalfRune";
+import { AdversaryRollTooltip, FavouredTooltip, IllFavouredTooltip, MiserableTooltip, WearyTooltip } from "./Tooltips";
 
 export default () => {
 	const torStore = useTorStore((torStore: State) => torStore);
@@ -104,48 +105,12 @@ export default () => {
 			<Modal.Header closeButton>
 				<Modal.Title>The One Ring 2e Roll Options</Modal.Title>
 			</Modal.Header>
-			<Modal.Body className={styles.torModalBody}>
-				<div className={styles.checkboxContainer}>
-					<Form.Check
-						type="checkbox"
-						name="Favoured Roll"
-						id="Favoured Roll"
-						label={(
-							<div>
-								<span>Favoured Roll</span>
-								<InfoTooltip content={(
-									<span>When a roll is <strong>Favoured</strong>, players roll two Feat Dice instead of one, keeping the best result.</span>
-								)} />
-							</div>
-						)}
-						checked={isFavoured}
-						onChange={() => setIsFavoured(!isFavoured)}
-						disabled={isIllFavoured}
-						custom
-					/>
-					<Form.Check
-						type="checkbox"
-						name="Ill-Favoured Roll"
-						id="Ill-Favoured Roll"
-						label={(
-							<div>
-								<span>Ill-Favoured Roll</span>
-								<InfoTooltip content={(
-									<span>When a roll is <strong>Ill-Favoured</strong>, players roll two Feat Dice instead of one, keeping the worst result.</span>
-								)} />
-							</div>
-						)}
-						checked={isIllFavoured}
-						onChange={() => setIsIllFavoured(!isIllFavoured)}
-						disabled={isFavoured}
-						custom
-					/>
-				</div>
-				<div className={styles.tnContainer}>
-					<div className={styles.tnContainerInner}>
+			<Modal.Body className={torStyles.torModalBody}>
+				<section className={torStyles.tnContainer}>
+					<div className={torStyles.tnContainerInner}>
 						<InfoTooltip
 							content="Target Number"
-							className={styles.tnInfoIcon}
+							className={torStyles.tnInfoIcon}
 						/>
 						<Form.Control
 							type="text"
@@ -154,7 +119,7 @@ export default () => {
 							autoComplete="off"
 							onChange={onTnChange}
 							value={tn}
-							className={styles.tnInput}
+							className={torStyles.tnInput}
 						/>
 					</div>
 					<InputRange
@@ -164,68 +129,82 @@ export default () => {
 						max={tnMax}
 						min={tnMin}
 					/>
-				</div>
-				<h5 className={styles.subheader}>Success Dice Number</h5>
-				<PoolBuilderDie
-					diceType={torSkillDie.diceType}
-					noHeader={true}
-					value={skillDiceAmount}
-					onChange={onChange}
-					onIncrease={onIncrease}
-					onDecrease={onDecrease}
-					isDiceImgLarge={false}
-					hideBorder={true}
-				/>
-				<h5 className={styles.subheader}>Conditions</h5>
-				<div className={styles.checkboxContainer}>
-					<Form.Check
-						type="checkbox"
-						name="Weary"
-						id="Weary"
-						label={(
-							<div>
-								<span>Weary</span>
-								<InfoTooltip content={(
-									<span>When a hero is <strong>Weary</strong>, all the Success Dice showing <strong>1</strong>, <strong>2</strong>, or <strong>3</strong> are considered as a result of <strong>0</strong> instead.</span>
-								)} />
-							</div>
-						)}
-						checked={isWeary}
-						onChange={() => setIsWeary(!isWeary)}
-						custom
+				</section>
+				<section className={torStyles.favouredRollSection}>
+					<div className={torStyles.checkboxContainer}>
+						<Form.Check
+							type="checkbox"
+							name="Favoured Roll"
+							id="Favoured Roll"
+							label={<div><span>Favoured Roll</span> <FavouredTooltip /></div>}
+							checked={isFavoured}
+							onChange={() => setIsFavoured(!isFavoured)}
+							disabled={isIllFavoured}
+							custom
+						/>
+						<Form.Check
+							type="checkbox"
+							name="Ill-Favoured Roll"
+							id="Ill-Favoured Roll"
+							label={<div><span>Ill-Favoured Roll</span> <IllFavouredTooltip /></div>}
+							checked={isIllFavoured}
+							onChange={() => setIsIllFavoured(!isIllFavoured)}
+							disabled={isFavoured}
+							custom
+						/>
+					</div>
+				</section>
+				<section>
+					<h5 className={torStyles.subheader}>Success Dice Number</h5>
+					<PoolBuilderDie
+						diceType={torSkillDie.diceType}
+						noHeader={true}
+						value={skillDiceAmount}
+						onChange={onChange}
+						onIncrease={onIncrease}
+						onDecrease={onDecrease}
+						isDiceImgLarge={false}
+						hideBorder={true}
 					/>
-					<Form.Check
-						type="checkbox"
-						name="Miserable"
-						id="Miserable"
-						label={(
-							<div>
-								<span>Miserable</span>
-								<InfoTooltip content={(
-									<span>When a hero is <strong>Miserable</strong>, the roll is considered a Failure if a Feat Die shows the <FontAwesomeIcon icon={faEye} /> icon (<strong>{EYE_SCORE}</strong>), regardless of the total result obtained by the roll.</span>
-								)} />
-							</div>
-						)}
-						checked={isMiserable}
-						onChange={() => setIsMiserable(!isMiserable)}
-						custom
-					/>
-				</div>
-				<h5 className={styles.subheader}>Loremaster's Tools</h5>
-				<div className={styles.checkboxContainer}>
-					<Form.Check
-						type="checkbox"
-						name="isOpposition"
-						id="isOpposition"
-						label="Rolling for an Adversary"
-						checked={isAdversary}
-						onChange={() => setIsAdversary(!isAdversary)}
-						custom
-					/>
-					<InfoTooltip content={(
-						<span>When rolling for <strong>an Adversary</strong>, the <FontAwesomeIcon icon={faEye} /> icon (<strong>{EYE_SCORE}</strong>) becomes the highest result possible, while the <GandalfRune  style={{ fill: '#fff' }} /> rune (<strong>{GANDALF_SCORE}</strong>) becomes the lowest result possible and is read&nbsp;as&nbsp;<strong>0</strong>.</span>
-					)} />
-				</div>
+				</section>
+				<section>
+					<h5 className={torStyles.subheader}>Conditions</h5>
+					<div className={torStyles.checkboxContainer}>
+						<Form.Check
+							type="checkbox"
+							name="Weary"
+							id="Weary"
+							label={<div><span>Weary</span> <WearyTooltip /></div>}
+							checked={isWeary}
+							onChange={() => setIsWeary(!isWeary)}
+							custom
+						/>
+						<Form.Check
+							type="checkbox"
+							name="Miserable"
+							id="Miserable"
+							label={<div><span>Miserable</span> <MiserableTooltip /></div>}
+							checked={isMiserable}
+							onChange={() => setIsMiserable(!isMiserable)}
+							custom
+						/>
+					</div>
+				</section>
+				<section>
+					<h5 className={torStyles.subheader}>Loremaster's Tools</h5>
+					<div className={torStyles.checkboxContainer}>
+						<Form.Check
+							type="checkbox"
+							name="isOpposition"
+							id="isOpposition"
+							label="Rolling for an Adversary"
+							checked={isAdversary}
+							onChange={() => setIsAdversary(!isAdversary)}
+							custom
+						/>
+						<AdversaryRollTooltip />
+					</div>
+				</section>
 			</Modal.Body>
 			<Modal.Footer>
 				<Button variant="secondary" onClick={closeModal}>
