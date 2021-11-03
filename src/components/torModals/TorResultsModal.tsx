@@ -13,22 +13,19 @@ import InputRange from "../InputRange/InputRange";
 import { EYE_SCORE, GANDALF_SCORE } from "../../consts/torDice";
 import rollAndKeepStyles from "../RollAndKeepResultsModal/RollAndKeepResultsModal.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEquals } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faEquals, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { faEye } from "@fortawesome/free-regular-svg-icons";
+import { AdversaryRollTooltip, FavouredTooltip, IllFavouredTooltip, MiserableTooltip, WearyTooltip } from "./Tooltips";
 
 
 function TorResultsModal() {
-
 	const torState = useTorStore((torState: any) => torState);
-
-	console.log('torState', torState)
 	const {
 		isResultsModalOpen,
 		closeResultsModal,
 		isSuccess,
 		featDiceResults,
 		skillDiceResults,
-		skillDiceAmount,
 		isFavoured,
 		isIllFavoured,
 		tn,
@@ -59,103 +56,118 @@ function TorResultsModal() {
 				<Modal.Title className={styles.resultsModalTitle}>Roll Results</Modal.Title>
 			</Modal.Header>
 			<Modal.Body>
-				<div>
-					<div className={torStyles.tnContainer}>
-						<div className={torStyles.tnContainerInner}>
-							<InfoTooltip
-								content="Target Number"
-								className={torStyles.tnInfoIcon}
-							/>
-							<span className={classNames({
-								[torStyles.tnResultNumber] : true,
-								[torStyles.successText]: isSuccess,
-								[torStyles.failureText]: !isSuccess
-							})}>{tn}</span>
-						</div>
+				<section className={torStyles.tnContainer}>
+					<div className={torStyles.tnContainerInner}>
+						<InfoTooltip
+							content="Target Number"
+							className={torStyles.tnInfoIcon}
+						/>
+						<span className={classNames({
+							[torStyles.tnResultNumber] : true,
+							[torStyles.successText]: isSuccess,
+							[torStyles.failureText]: !isSuccess
+						})}>{tn}</span>
 					</div>
-
-					<div className={classNames(styles.poolResultsBlock, styles.resultsBlock)}>
-						<div className={styles.resultsBlockImageContainer}>
-							<img
-								className={styles.resultsBlockImage}
-								src={require(`../../img/tor-success-die.png`)}
-								alt="Success Die"
-							/>
-						</div>
-						<div className={classNames({
-							[styles.resultsBlockContentContainer]: true,
-							[torStyles.isWeary]: isWeary
-						})}>
-							<div>{ skillDiceResults && joinAsBlocks(skillDiceResultsSorted) }</div>
-						</div>
+				</section>
+				<section className={torStyles.favouredRollSection}>
+					<div className={torStyles.checkboxContainer}>
+						<p className={classNames({ [torStyles.dimmed]: !isFavoured })}>{isFavoured ? <FontAwesomeIcon icon={faCheck} /> : <FontAwesomeIcon icon={faTimes} />} Favoured Roll <FavouredTooltip /></p>
+						<p className={classNames({ [torStyles.dimmed]: !isIllFavoured })}>{isIllFavoured ?<FontAwesomeIcon icon={faCheck} /> : <FontAwesomeIcon icon={faTimes} />} Ill-Favoured Roll <IllFavouredTooltip /></p>
 					</div>
-
-					<div className={classNames(styles.poolResultsBlock, styles.resultsBlock)}>
-						<div className={styles.resultsBlockImageContainer}>
-							<img
-								className={styles.resultsBlockImage}
-								src={require(`../../img/tor-feat-die.png`)}
-								alt="Feat Die"
-							/>
-						</div>
-						<div className={classNames({
-							[styles.resultsBlockContentContainer]: true,
-							[torStyles.featDiceResultsBlockContentContainer]: true,
-							[torStyles.isFirstScoreDimmed]: featDiceResults.length > 1 && ((() => {
-								const firstScore = featDiceResults[0];
-								const secondScore = featDiceResults[1];
-								if (firstScore === secondScore) {
-									return false;
-								}
-								return secondScore === featDieScore;
-							})()),
-							[torStyles.isSecondScoreDimmed]: featDiceResults.length > 1 && ((() => {
-								const firstScore = featDiceResults[0];
-								const secondScore = featDiceResults[1];
-								if (firstScore === secondScore) {
-									return true;
-								}
-								return firstScore === featDieScore;
-							})()),
-						})}>
-							<div>{ featDiceResults && joinAsBlocks(featDiceResults) }</div>
-						</div>
+				</section>
+				<section className={classNames(styles.poolResultsBlock, styles.resultsBlock)}>
+					<div className={styles.resultsBlockImageContainer}>
+						<img
+							className={styles.resultsBlockImage}
+							src={require(`../../img/tor-success-die.png`)}
+							alt="Success Die"
+						/>
 					</div>
 					<div className={classNames({
-						[torStyles.equalsRow]: true,
-						[torStyles.successText]: isSuccess,
-						[torStyles.failureText]: !isSuccess,
+						[styles.resultsBlockContentContainer]: true,
+						[torStyles.isWeary]: isWeary
 					})}>
-						<span className={torStyles.equalsContainer}><FontAwesomeIcon className={torStyles.equalsIcon} icon={faEquals} /></span>
-						<span className={classNames({
-							[torStyles.totalScore]: true,
-							[torStyles.struckThroughText]: isAutoSuccess || isAutoFailure,
-						})}
-						>{totalDiceScore}
-						</span>
-						{ isAutoSuccess
-							? (
-								<span> { isAdversary
-									? <FontAwesomeIcon className={torStyles.resultIcon} icon={faEye} />
-									: <img className={torStyles.resultImg} src={require("./assets/gandalf-rune-success.png")} alt="Gandalf Icon"/>
-								} </span>
-							)
-							: null
-						}
-						{ isAutoFailure
-							? (
-								<span> { isAdversary
-									? <img className={torStyles.resultImg} src={require("./assets/gandalf-rune-failure.png")} alt="Gandalf Icon"/>
-									: <FontAwesomeIcon className={torStyles.resultIcon} icon={faEye} />
-							} </span>
-							)
-							: null
-						}
-						<span>({isSuccess ? 'Success' : 'Failure'})
-						</span>
+						<div>{ skillDiceResults && joinAsBlocks(skillDiceResultsSorted) }</div>
 					</div>
-				</div>
+				</section>
 
+				<section className={classNames(styles.poolResultsBlock, styles.resultsBlock)}>
+					<div className={styles.resultsBlockImageContainer}>
+						<img
+							className={styles.resultsBlockImage}
+							src={require(`../../img/tor-feat-die.png`)}
+							alt="Feat Die"
+						/>
+					</div>
+					<div className={classNames({
+						[styles.resultsBlockContentContainer]: true,
+						[torStyles.featDiceResultsBlockContentContainer]: true,
+						[torStyles.isFirstScoreDimmed]: featDiceResults.length > 1 && ((() => {
+							const firstScore = featDiceResults[0];
+							const secondScore = featDiceResults[1];
+							if (firstScore === secondScore) {
+								return false;
+							}
+							return secondScore === featDieScore;
+						})()),
+						[torStyles.isSecondScoreDimmed]: featDiceResults.length > 1 && ((() => {
+							const firstScore = featDiceResults[0];
+							const secondScore = featDiceResults[1];
+							if (firstScore === secondScore) {
+								return true;
+							}
+							return firstScore === featDieScore;
+						})()),
+					})}>
+						<div>{ featDiceResults && joinAsBlocks(featDiceResults) }</div>
+					</div>
+				</section>
+				<section className={classNames({
+					[torStyles.equalsRow]: true,
+					[torStyles.successText]: isSuccess,
+					[torStyles.failureText]: !isSuccess,
+				})}>
+					<span className={torStyles.equalsContainer}><FontAwesomeIcon className={torStyles.equalsIcon} icon={faEquals} /></span>
+					<span className={classNames({
+						[torStyles.totalScore]: true,
+						[torStyles.struckThroughText]: isAutoSuccess || isAutoFailure,
+					})}
+					>{totalDiceScore}
+					</span>
+					{ isAutoSuccess
+						? (
+							<span> { isAdversary
+								? <FontAwesomeIcon className={torStyles.resultIcon} icon={faEye} />
+								: <img className={torStyles.resultImg} src={require("./assets/gandalf-rune-success.png")} alt="Gandalf Icon"/>
+							} </span>
+						)
+						: null
+					}
+					{ isAutoFailure
+						? (
+							<span> { isAdversary
+								? <img className={torStyles.resultImg} src={require("./assets/gandalf-rune-failure.png")} alt="Gandalf Icon"/>
+								: <FontAwesomeIcon className={torStyles.resultIcon} icon={faEye} />
+						} </span>
+						)
+						: null
+					}
+					<span>({isSuccess ? 'Success' : 'Failure'})
+					</span>
+				</section>
+				<section>
+					<h5 className={torStyles.subheader}>Conditions</h5>
+					<div className={torStyles.checkboxContainer}>
+						<p className={classNames({ [torStyles.dimmed]: !isWeary })}>{isWeary ? <FontAwesomeIcon icon={faCheck} /> : <FontAwesomeIcon icon={faTimes} />} Weary <WearyTooltip /></p>
+						<p className={classNames({ [torStyles.dimmed]: !isMiserable })}>{isMiserable ?<FontAwesomeIcon icon={faCheck} /> : <FontAwesomeIcon icon={faTimes} />} Miserable <MiserableTooltip /></p>
+					</div>
+				</section>
+				<section>
+					<h5 className={torStyles.subheader}>Loremaster's Tools</h5>
+					<div className={torStyles.checkboxContainer}>
+						<p className={classNames({ [torStyles.dimmed]: !isAdversary })}>{isAdversary ? <FontAwesomeIcon icon={faCheck} /> : <FontAwesomeIcon icon={faTimes} />} Rolling for an Adversary <AdversaryRollTooltip /></p>
+					</div>
+				</section>
 			</Modal.Body>
 			<Modal.Footer>
 				<Button

@@ -6,8 +6,14 @@
 }
 
 .tnContainer {
-    border-bottom: 1px solid #bebebe;
     padding-bottom: 5px;
+}
+
+.favouredRollSection {
+    border-bottom: 1px solid #bebebe;
+    margin-bottom: 5px;
+    padding-bottom: 5px;
+    padding-top: 5px;
 }
 
 .tnContainerInner {
@@ -30,9 +36,9 @@
 }
 
 .tnResultNumber {
-    font-size: 34px;
+    font-size: 32px;
     font-weight: bold;
-    padding: 4px 0 0;
+    padding: 7px 0 0;
 }
 
 .failureText {
@@ -84,17 +90,12 @@
     flex-direction: column;
 }
 
+.dimmed,
+.isFirstScoreDimmed [data-value]:first-of-type,
+.isSecondScoreDimmed [data-value]:last-of-type,
 .isWeary [data-value="1"],
 .isWeary [data-value="2"],
 .isWeary [data-value="3"] {
-    opacity: .4;
-}
-
-.isFirstScoreDimmed [data-value]:first-of-type {
-    opacity: .4;
-}
-
-.isSecondScoreDimmed [data-value]:last-of-type {
     opacity: .4;
 }
 
