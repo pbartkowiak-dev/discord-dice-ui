@@ -7,7 +7,7 @@ import styles from './WrathAndGloryResultsModal.module.css';
 import ResultsGrid from "./ResultsGrid";
 import ResultsTable from "./ResultsTable";
 import IconsResultsContainer from "./IconsResultsContainer";
-import RerollOverlay from "./RerollOverlay";
+import RerollOverlay from "../ResultsModal/RerollOverlay";
 import PoolBuilderDie from "../PoolBuilder/PoolBuilderDie";
 import { D6 } from "../../consts/diceConstants";
 import { isValueValid } from "../WarhammerMoneyModal/WarhammerMoneyModal";

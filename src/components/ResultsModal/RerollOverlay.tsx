@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import styles from "./WrathAndGloryResultsModal.module.css";
+import styles from "../WrathAndGloryPoolBuilder/WrathAndGloryResultsModal.module.css";
 import Spinner from "react-bootstrap/Spinner";
 
 const RerollOverlay: FC = () => {

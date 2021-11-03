@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import classNames from 'classnames';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import torStyles from "./TorModal.module.css";
@@ -7,12 +6,9 @@ import useTorStore, { State } from "../tor/store";
 import InputRange from "../InputRange/InputRange";
 import Form from "react-bootstrap/Form";
 import InfoTooltip from "../InfoTooltip/InfoTooltip";
-import { EYE_SCORE, GANDALF_SCORE, torSkillDie } from "../../consts/torDice";
+import { torSkillDie } from "../../consts/torDice";
 import PoolBuilderDie from "../PoolBuilder/PoolBuilderDie";
 import { isValueValid } from "../WarhammerMoneyModal/WarhammerMoneyModal";
-import { faEye } from "@fortawesome/free-regular-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import GandalfRune from "./GandalfRune";
 import { AdversaryRollTooltip, FavouredTooltip, IllFavouredTooltip, MiserableTooltip, WearyTooltip } from "./Tooltips";
 
 export default () => {
