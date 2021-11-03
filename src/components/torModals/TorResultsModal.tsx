@@ -10,6 +10,7 @@ import CodeSpan from "../CodeSpan/CodeSpan";
 import InfoTooltip from "../InfoTooltip/InfoTooltip";
 import Form from "react-bootstrap/Form";
 import InputRange from "../InputRange/InputRange";
+import { EYE_SCORE, GANDALF_SCORE } from "../../consts/torDice";
 
 
 function TorResultsModal() {
@@ -27,11 +28,13 @@ function TorResultsModal() {
 		isFavoured,
 		isIllFavoured,
 		tn,
-		isWeary
+		isWeary,
+		isMiserable,
+		isAdversary,
+		featDieScore
 	} = torState;
 
-
-	// const resultsJoined = joinAsBlocks(results);
+	const skillDiceResultsSorted =  skillDiceResults.sort((a: number, b: number) => a - b);
 
 	return (
 		<Modal
@@ -79,7 +82,7 @@ function TorResultsModal() {
 							// important for marking inactive dice
 							[torStyles.isWeary]: isWeary
 						})}>
-							<div>{ skillDiceResults && joinAsBlocks(skillDiceResults.sort((a: number, b: number) => a - b)) }</div>
+							<div>{ skillDiceResults && joinAsBlocks(skillDiceResultsSorted) }</div>
 						</div>
 					</div>
 
@@ -94,6 +97,22 @@ function TorResultsModal() {
 						<div className={classNames({
 							[styles.resultsBlockContentContainer]: true,
 							[torStyles.featDiceResultsBlockContentContainer]: true,
+							[torStyles.isFirstScoreDimmed]: featDiceResults.length && ((() => {
+								const firstScore = featDiceResults[0];
+								const secondScore = featDiceResults[1];
+								if (firstScore === secondScore) {
+									return false;
+								}
+								return secondScore === featDieScore;
+							})()),
+							[torStyles.isSecondScoreDimmed]: featDiceResults.length && ((() => {
+								const firstScore = featDiceResults[0];
+								const secondScore = featDiceResults[1];
+								if (firstScore === secondScore) {
+									return true;
+								}
+								return firstScore === featDieScore;
+							})()),
 						})}>
 							<div>{ featDiceResults && joinAsBlocks(featDiceResults) }</div>
 						</div>

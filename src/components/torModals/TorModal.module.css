@@ -83,7 +83,15 @@
 .isWeary [data-value="1"],
 .isWeary [data-value="2"],
 .isWeary [data-value="3"] {
-    opacity: .5;
+    opacity: .4;
+}
+
+.isFirstScoreDimmed [data-value]:first-of-type {
+    opacity: .4;
+}
+
+.isSecondScoreDimmed [data-value]:last-of-type {
+    opacity: .4;
 }
 
 .featDiceResultsBlockContentContainer [data-value="11"],

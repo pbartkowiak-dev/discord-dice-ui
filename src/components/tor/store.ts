@@ -37,9 +37,9 @@ export type State = {
 
 	// Results
 	isSuccess:  null | boolean;
-	featDiceResults: null | number[];
-	skillDiceResults: null | number[];
-	featDiceScore: null | number;
+	featDiceResults: number[];
+	skillDiceResults: number[];
+	featDieScore: null | number;
 	skillDiceScore: null | number;
 	totalDiceScore: null |  number;
 }
@@ -58,9 +58,9 @@ const useStore = create<State>(((set, get) => ({
 
 	// Results
 	isSuccess: null,
-	featDiceResults: null,
-	skillDiceResults: null,
-	featDiceScore: null,
+	featDiceResults: [],
+	skillDiceResults: [],
+	featDieScore: null,
 	skillDiceScore: null,
 	totalDiceScore: null,
 
@@ -86,7 +86,7 @@ const useStore = create<State>(((set, get) => ({
 			skillDiceAmount,
 			isAdversary,
 			isWeary,
-			isMiserable
+			isMiserable,
 		} = get();
 
 		const featDiceAmount = isFavoured || isIllFavoured ? 2 : 1;
@@ -94,26 +94,24 @@ const useStore = create<State>(((set, get) => ({
 		const skillDiceResults = getResultsArray(6, Number(skillDiceAmount), false, false);
 
 		// Get FEAT DICE score
-		let featDiceScore: number;
+		const FAVOURED_DIE = isAdversary ? EYE_SCORE : GANDALF_SCORE;
+		const ILL_FAVOURED_DIE = isAdversary ? GANDALF_SCORE : EYE_SCORE;
+		let featDieScore: number;
 
 		if (isFavoured) {
-			if (isAdversary && featDiceResults.includes(EYE_SCORE) ) {
-				featDiceScore = EYE_SCORE;
-			} else if (!isAdversary && featDiceResults.includes((GANDALF_SCORE))) {
-				featDiceScore = GANDALF_SCORE;
+			if (featDiceResults.includes(FAVOURED_DIE) ) {
+				featDieScore = FAVOURED_DIE;
 			} else {
-				featDiceScore = Math.max(...featDiceResults);
+				featDieScore = Math.max(...featDiceResults);
 			}
 		} else if (isIllFavoured) {
-			if (isAdversary && featDiceResults.includes(GANDALF_SCORE) ) {
-				featDiceScore = GANDALF_SCORE;
-			} else if (!isAdversary && featDiceResults.includes((EYE_SCORE))) {
-				featDiceScore = EYE_SCORE;
+			if (featDiceResults.includes(ILL_FAVOURED_DIE) ) {
+				featDieScore = ILL_FAVOURED_DIE;
 			} else {
-				featDiceScore = Math.min(...featDiceResults);
+				featDieScore = Math.min(...featDiceResults);
 			}
 		} else {
-			featDiceScore = featDiceResults[0];
+			featDieScore = featDiceResults[0];
 		}
 
 		// Get SUCCESS DICE score
@@ -127,10 +125,10 @@ const useStore = create<State>(((set, get) => ({
 		// Get TOTAL DICE score
 		let totalDiceScore: number;
 
-		if (featDiceScore === EYE_SCORE || featDiceScore == GANDALF_SCORE) {
+		if (featDieScore === EYE_SCORE || featDieScore == GANDALF_SCORE) {
 			totalDiceScore = skillDiceScore;
 		} else {
-			totalDiceScore = skillDiceScore + featDiceScore;
+			totalDiceScore = skillDiceScore + featDieScore;
 		}
 
 		// Get SUCCESS result
@@ -138,34 +136,25 @@ const useStore = create<State>(((set, get) => ({
 
 		// Auto failure
 		if (isMiserable) {
-			if (!isAdversary && featDiceScore === EYE_SCORE) {
-				isSuccess = false;
-			}
-			if (isAdversary && featDiceScore === GANDALF_SCORE) {
+			if (featDieScore === ILL_FAVOURED_DIE) {
 				isSuccess = false;
 			}
 		}
 
 		// Auto success
-		if (!isAdversary && featDiceScore === GANDALF_SCORE) {
+		if (featDieScore === FAVOURED_DIE) {
 			isSuccess = true;
-		} else if (isAdversary && featDiceScore === EYE_SCORE) {
-			isSuccess = true;
-			// Normal success calculation
 		}
 
 		// Set results
 		set({
-			tn,
-			isWeary,
 			isSuccess,
 			featDiceResults,
 			skillDiceResults,
-			featDiceScore,
+			featDieScore,
 			skillDiceScore,
 			totalDiceScore,
 			isResultsModalOpen: true,
-
 		});
 		//
 		// 	reduxStore.dispatch(requestMsgReady(
