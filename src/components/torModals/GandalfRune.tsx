@@ -1,6 +1,5 @@
 // @ts-nocheck
 import React, { FC }  from 'react';
-import gandalfRune from './assets/gandalf-rune.svg'
 
 interface GandalfRuneProps {
 	style?: { [key as string]: string }
