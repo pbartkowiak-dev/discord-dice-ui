@@ -37,6 +37,9 @@ const boldWrap = (string: string, condition: boolean) => {
 	return string;
 }
 
+export const GANDALF_DESCRIPTION = `${GANDALF_SCORE} (Gandalf Rune)`;
+export const EYE_DESCRIPTION = `${EYE_SCORE} (Eye Symbol)`;
+
 export const getDiscordMsgData = ({
 	isSuccess,
 	featDiceResults,
@@ -59,8 +62,6 @@ export const getDiscordMsgData = ({
 	const ILL_FAVOURED_DIE = isAdversary ? GANDALF_SCORE : EYE_SCORE;
 	const YES_ICON = ':heavy_check_mark:';
 	const NO_ICON = ':heavy_multiplication_x:';
-	const GANDALF_DESCRIPTION = `${GANDALF_SCORE} (Gandalf Rune)`;
-	const EYE_DESCRIPTION = `${EYE_SCORE} (Eye Symbol)`;
 
 	let finalScore;
 
