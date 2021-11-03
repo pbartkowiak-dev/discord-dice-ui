@@ -156,16 +156,18 @@ export default () => {
 				</section>
 				<section>
 					<h5 className={torStyles.subheader}>Success Dice Number</h5>
-					<PoolBuilderDie
-						diceType={torSkillDie.diceType}
-						noHeader={true}
-						value={skillDiceAmount}
-						onChange={onChange}
-						onIncrease={onIncrease}
-						onDecrease={onDecrease}
-						isDiceImgLarge={false}
-						hideBorder={true}
-					/>
+					<div className={torStyles.poolBuilder}>
+						<PoolBuilderDie
+							diceType={torSkillDie.diceType}
+							noHeader={true}
+							value={skillDiceAmount}
+							onChange={onChange}
+							onIncrease={onIncrease}
+							onDecrease={onDecrease}
+							isDiceImgLarge={false}
+							hideBorder={true}
+						/>
+					</div>
 				</section>
 				<section>
 					<h5 className={torStyles.subheader}>Conditions</h5>
