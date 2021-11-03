@@ -43,6 +43,10 @@
     color: var(--header-bg);
 }
 
+.struckThroughText {
+    text-decoration: line-through;
+}
+
 .tnContainerInner:after {
     position: absolute;
     content: "";
@@ -119,6 +123,41 @@
 
 .featDiceResultsBlockContentContainer [data-value="12"]:after {
     background-image: url("./assets/gandalf-rune.png");
+}
+
+.equalsRow {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    font-size: 22px;
+    height: 35px;
+}
+
+.equalsRow > span {
+    height: 100%;
+}
+
+.equalsContainer {
+    padding: 2px 0 0 15px;
+    color: #212529;
+}
+
+.totalScore {
+    font-weight: bold;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9;
+    width: 40px;
+}
+
+.resultImg {
+    width: 25px;
+    height: auto;
+}
+
+.resultIcon {
+    padding-right: 8px;
 }
 
 @media only screen and (min-width: 480px) {

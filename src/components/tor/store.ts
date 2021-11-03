@@ -40,7 +40,6 @@ export type State = {
 	featDiceResults: number[];
 	skillDiceResults: number[];
 	featDieScore: null | number;
-	skillDiceScore: null | number;
 	totalDiceScore: null |  number;
 }
 
@@ -61,7 +60,6 @@ const useStore = create<State>(((set, get) => ({
 	featDiceResults: [],
 	skillDiceResults: [],
 	featDieScore: null,
-	skillDiceScore: null,
 	totalDiceScore: null,
 
 	openModal: () => set({ isModalOpen: true }),
@@ -152,7 +150,6 @@ const useStore = create<State>(((set, get) => ({
 			featDiceResults,
 			skillDiceResults,
 			featDieScore,
-			skillDiceScore,
 			totalDiceScore,
 			isResultsModalOpen: true,
 		});
