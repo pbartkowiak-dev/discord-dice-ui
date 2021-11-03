@@ -16,6 +16,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faEquals, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { faEye } from "@fortawesome/free-regular-svg-icons";
 import { AdversaryRollTooltip, FavouredTooltip, IllFavouredTooltip, MiserableTooltip, WearyTooltip } from "./Tooltips";
+import ElvenRune from "./ElvenRune";
 
 
 function TorResultsModal() {
@@ -33,7 +34,7 @@ function TorResultsModal() {
 		isMiserable,
 		isAdversary,
 		featDieScore,
-		totalDiceScore
+		totalDiceScore,
 	} = torState;
 
 	const FAVOURED_DIE = isAdversary ? EYE_SCORE : GANDALF_SCORE;
@@ -43,6 +44,7 @@ function TorResultsModal() {
 	const isAutoFailure = isMiserable && featDieScore === ILL_FAVOURED_DIE;
 
 	const skillDiceResultsSorted =  skillDiceResults.sort((a: number, b: number) => a - b);
+	const specialSuccessesAmount = skillDiceResults.filter((result: number) => result === 6).length;
 
 	return (
 		<Modal
@@ -152,9 +154,13 @@ function TorResultsModal() {
 						)
 						: null
 					}
-					<span>({isSuccess ? 'Success' : 'Failure'})
-					</span>
+					<span>({isSuccess ? 'Success' : 'Failure'})</span>
 				</section>
+				{isSuccess && specialSuccessesAmount > 0 && <section className={torStyles.specialSuccessesSection}>
+					<div>
+						<span className={torStyles.specialSuccessesIcon}><ElvenRune /></span> <CodeSpan>{specialSuccessesAmount}</CodeSpan> Special {specialSuccessesAmount === 1 ? 'Success' : 'Successes'}
+					</div>
+				</section>}
 				<section>
 					<h5 className={torStyles.subheader}>Conditions</h5>
 					<div className={torStyles.checkboxContainer}>

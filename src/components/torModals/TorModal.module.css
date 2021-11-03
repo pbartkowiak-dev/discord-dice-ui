@@ -166,6 +166,16 @@
     padding-right: 8px;
 }
 
+.specialSuccessesSection {
+   display: flex;
+    font-size: 17px;
+    font-weight: bold;
+}
+
+.specialSuccessesIcon {
+    padding-left: 8px;
+}
+
 @media only screen and (min-width: 480px) {
     .checkboxContainer {
         flex-direction: row;
