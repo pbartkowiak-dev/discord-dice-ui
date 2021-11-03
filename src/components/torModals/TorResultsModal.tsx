@@ -1,26 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import classNames from 'classnames';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import joinAsBlocks from "../../utils/joinAsBlocks";
 import torStyles from './TorModal.module.css';
-import useTorStore from '../tor/store';
+import useTorStore, { State } from '../tor/store';
 import styles from '../ResultsModal/ResultsModal.module.css';
 import CodeSpan from "../CodeSpan/CodeSpan";
 import InfoTooltip from "../InfoTooltip/InfoTooltip";
-import Form from "react-bootstrap/Form";
-import InputRange from "../InputRange/InputRange";
 import { EYE_SCORE, GANDALF_SCORE } from "../../consts/torDice";
-import rollAndKeepStyles from "../RollAndKeepResultsModal/RollAndKeepResultsModal.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faEquals, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { faEye } from "@fortawesome/free-regular-svg-icons";
 import { AdversaryRollTooltip, FavouredTooltip, IllFavouredTooltip, MiserableTooltip, WearyTooltip } from "./Tooltips";
 import ElvenRune from "./ElvenRune";
-
+import RerollOverlay from "../ResultsModal/RerollOverlay";
 
 function TorResultsModal() {
-	const torState = useTorStore((torState: any) => torState);
+	const torState = useTorStore((torState: State) => torState);
 	const {
 		isResultsModalOpen,
 		closeResultsModal,
@@ -35,8 +32,11 @@ function TorResultsModal() {
 		isAdversary,
 		featDieScore,
 		totalDiceScore,
+		rollDice,
+		wasRerolled,
 	} = torState;
 
+	const [isRerolling, setIsRerolling] = useState<boolean>(false);
 	const FAVOURED_DIE = isAdversary ? EYE_SCORE : GANDALF_SCORE;
 	const ILL_FAVOURED_DIE = isAdversary ? GANDALF_SCORE : EYE_SCORE;
 
@@ -46,11 +46,22 @@ function TorResultsModal() {
 	const skillDiceResultsSorted =  skillDiceResults.sort((a: number, b: number) => a - b);
 	const specialSuccessesAmount = skillDiceResults.filter((result: number) => result === 6).length;
 
+	const onReroll = () => {
+		setIsRerolling(true);
+
+		setTimeout(() => {
+			setIsRerolling(false);
+			rollDice(true);
+		}, 1000);
+	};
+
 	return (
 		<Modal
 			show={isResultsModalOpen}
 			onHide={closeResultsModal}
 		>
+			<div className={torStyles.resultsModal}>
+			{isRerolling && <RerollOverlay />}
 			<Modal.Header closeButton className={classNames({
 				[styles.resultsModalHeader]: true,
 				[styles.isFailure]: !isSuccess
@@ -73,8 +84,8 @@ function TorResultsModal() {
 				</section>
 				<section className={torStyles.favouredRollSection}>
 					<div className={torStyles.checkboxContainer}>
-						<p className={classNames({ [torStyles.dimmed]: !isFavoured })}>{isFavoured ? <FontAwesomeIcon icon={faCheck} /> : <FontAwesomeIcon icon={faTimes} />} Favoured Roll <FavouredTooltip /></p>
-						<p className={classNames({ [torStyles.dimmed]: !isIllFavoured })}>{isIllFavoured ?<FontAwesomeIcon icon={faCheck} /> : <FontAwesomeIcon icon={faTimes} />} Ill-Favoured Roll <IllFavouredTooltip /></p>
+						<div className={classNames({ [torStyles.dimmed]: !isFavoured })}>{isFavoured ? <FontAwesomeIcon icon={faCheck} /> : <FontAwesomeIcon icon={faTimes} />} Favoured Roll <FavouredTooltip /></div>
+						<div className={classNames({ [torStyles.dimmed]: !isIllFavoured })}>{isIllFavoured ?<FontAwesomeIcon icon={faCheck} /> : <FontAwesomeIcon icon={faTimes} />} Ill-Favoured Roll <IllFavouredTooltip /></div>
 					</div>
 				</section>
 				<section className={classNames(styles.poolResultsBlock, styles.resultsBlock)}>
@@ -164,22 +175,27 @@ function TorResultsModal() {
 				<section>
 					<h5 className={torStyles.subheader}>Conditions</h5>
 					<div className={torStyles.checkboxContainer}>
-						<p className={classNames({ [torStyles.dimmed]: !isWeary })}>{isWeary ? <FontAwesomeIcon icon={faCheck} /> : <FontAwesomeIcon icon={faTimes} />} Weary <WearyTooltip /></p>
-						<p className={classNames({ [torStyles.dimmed]: !isMiserable })}>{isMiserable ?<FontAwesomeIcon icon={faCheck} /> : <FontAwesomeIcon icon={faTimes} />} Miserable <MiserableTooltip /></p>
+						<div className={classNames({ [torStyles.dimmed]: !isWeary })}>{isWeary ? <FontAwesomeIcon icon={faCheck} /> : <FontAwesomeIcon icon={faTimes} />} Weary <WearyTooltip /></div>
+						<div className={classNames({ [torStyles.dimmed]: !isMiserable })}>{isMiserable ?<FontAwesomeIcon icon={faCheck} /> : <FontAwesomeIcon icon={faTimes} />} Miserable <MiserableTooltip /></div>
 					</div>
 				</section>
 				<section>
 					<h5 className={torStyles.subheader}>Loremaster's Tools</h5>
 					<div className={torStyles.checkboxContainer}>
-						<p className={classNames({ [torStyles.dimmed]: !isAdversary })}>{isAdversary ? <FontAwesomeIcon icon={faCheck} /> : <FontAwesomeIcon icon={faTimes} />} Rolling for an Adversary <AdversaryRollTooltip /></p>
+						<div className={classNames({ [torStyles.dimmed]: !isAdversary })}>{isAdversary ? <FontAwesomeIcon icon={faCheck} /> : <FontAwesomeIcon icon={faTimes} />} Rolling for an Adversary <AdversaryRollTooltip /></div>
 					</div>
 				</section>
 			</Modal.Body>
 			<Modal.Footer>
 				<Button
+					variant="outline-primary"
+					disabled={wasRerolled}
+					onClick={onReroll}>Reroll</Button>
+				<Button
 					variant="outline-secondary"
 					onClick={closeResultsModal}>Close</Button>
 			</Modal.Footer>
+			</div>
 		</Modal>
 	);
 }

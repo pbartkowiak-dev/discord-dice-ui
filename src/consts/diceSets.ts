@@ -34,9 +34,7 @@ import {
 	CTHULHU_SHEET_MODAL,
 	COMBAT_TRACKER,
 	WRATH_AND_GLORY_SKILL_TEST,
-	D3, TOR_SKILL_TEST,
-	TOR_FEAT_DIE,
-	TOR_SUCCESS_DIE
+	D3,
 } from './diceConstants';
 
 import { FATE_DIE } from './fateConsts';

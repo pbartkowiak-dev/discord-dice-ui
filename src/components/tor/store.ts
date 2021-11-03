@@ -15,8 +15,7 @@ export type State = {
 	closeModal: () => void;
 	closeResultsModal: () => void;
 
-	rollDice: (isRerollingAllDice?: boolean) => void;
-	rerollAll: () => void;
+	rollDice: (isRerolling?: boolean) => void;
 	wasAllDiceRerolled: boolean;
 
 	tn: string;
@@ -26,6 +25,8 @@ export type State = {
 	isWeary: boolean;
 	isMiserable: boolean;
 	isAdversary: boolean;
+
+	wasRerolled: boolean;
 
 	setTn: (tn: string) => void;
 	setIsFavoured: (isFavoured: boolean) => void;
@@ -55,6 +56,8 @@ const useStore = create<State>(((set, get) => ({
 	isMiserable: false,
 	isAdversary: false,
 
+	wasRerolled: false,
+
 	// Results
 	isSuccess: null,
 	featDiceResults: [],
@@ -62,9 +65,16 @@ const useStore = create<State>(((set, get) => ({
 	featDieScore: null,
 	totalDiceScore: null,
 
-	openModal: () => set({ isModalOpen: true }),
+	openModal: () => set({
+		isModalOpen: true,
+		wasRerolled: false,
+		isSuccess: null,
+		featDiceResults: [],
+		skillDiceResults: [],
+		featDieScore: null,
+		totalDiceScore: null,
+	}),
 	openResultsModal: () => set({ isResultsModalOpen: true }),
-
 	closeModal: () => set({ isModalOpen: false }),
 	closeResultsModal: () => set({ isResultsModalOpen: false }),
 
@@ -76,7 +86,7 @@ const useStore = create<State>(((set, get) => ({
 	setIsAdversary: (isAdversary) => set({ isAdversary }),
 	setSkillDiceAmount: (skillDiceAmount) => set({ skillDiceAmount }),
 
-	rollDice: () => {
+	rollDice: (isRerolling) => {
 		const {
 			tn,
 			isFavoured,
@@ -152,7 +162,9 @@ const useStore = create<State>(((set, get) => ({
 			featDieScore,
 			totalDiceScore,
 			isResultsModalOpen: true,
+			wasRerolled: Boolean(isRerolling)
 		});
+
 		//
 		// 	reduxStore.dispatch(requestMsgReady(
 		// 		getDiscordMsgData({
@@ -167,19 +179,6 @@ const useStore = create<State>(((set, get) => ({
 		// 	reduxStore.dispatch(requestPoolRoll({ pool }));
 		// }
 	},
-
-	rerollAll: () => {
-		const { rollDice } = get();
-
-		// rollDice({
-		// 		// Added dice cannot be rerolled
-		// 		[TOR_SKILL_TEST]: results.length - diceAddedAmount
-		// 	},
-		// 	true
-		// );
-
-		set({ });
-	}
 })));
 
 export default useStore;

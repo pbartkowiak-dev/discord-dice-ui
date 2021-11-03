@@ -104,6 +104,10 @@
     opacity: .4;
 }
 
+.resultsModal {
+    position: relative;
+}
+
 .featDiceResultsBlockContentContainer [data-value="11"],
 .featDiceResultsBlockContentContainer [data-value="12"] {
     position: relative;
