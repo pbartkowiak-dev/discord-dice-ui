@@ -1,7 +1,6 @@
 import reduxStore from "../../store";
 import joinAsBlocks from "../../utils/joinAsBlocks";
 import { FAILURE, getColor, SUCCESS } from "../../utils/getColor";
-import getSuccessLevelString from "../../utils/getSuccessLevelString";
 import { EYE_SCORE, GANDALF_SCORE } from "../../consts/torDice";
 
 interface Props {
@@ -12,7 +11,6 @@ interface Props {
 	totalDiceScore: number;
 	wasRerolled: boolean;
 	tn: string,
-	successDiceAmount: string,
 	isFavoured: boolean,
 	isIllFavoured: boolean,
 	isWeary: boolean,
@@ -47,7 +45,6 @@ export const getDiscordMsgData = ({
 	totalDiceScore,
 	wasRerolled,
 	tn,
-	successDiceAmount,
 	isFavoured,
 	isIllFavoured,
 	isWeary,
@@ -58,10 +55,24 @@ export const getDiscordMsgData = ({
 	const username = userSettings.username || 'USERNAME_MISSING';
 	const fields: Field[] = [];
 
-	const msgTitle = `${username} ${wasRerolled ? '__rerolled__' : 'rolled'} \`${totalDiceScore}\` against \`${tn}\` TN`;
-
+	const FAVOURED_DIE = isAdversary ? EYE_SCORE : GANDALF_SCORE;
+	const ILL_FAVOURED_DIE = isAdversary ? GANDALF_SCORE : EYE_SCORE;
 	const YES_ICON = ':heavy_check_mark:';
 	const NO_ICON = ':heavy_multiplication_x:';
+	const GANDALF_DESCRIPTION = `${GANDALF_SCORE} (Gandalf Rune)`;
+	const EYE_DESCRIPTION = `${EYE_SCORE} (Eye Symbol)`;
+
+	let finalScore;
+
+	if (isMiserable && featDieScore === ILL_FAVOURED_DIE) {
+		finalScore = isAdversary ? GANDALF_DESCRIPTION : EYE_DESCRIPTION;
+	} else if (featDieScore === FAVOURED_DIE) {
+		finalScore = isAdversary ? EYE_DESCRIPTION : GANDALF_DESCRIPTION;
+	} else {
+		finalScore = totalDiceScore;
+	}
+
+	const msgTitle = `${username} ${wasRerolled ? '__rerolled__' : 'rolled'} \`${finalScore}\` against \`${tn}\` TN`;
 
 	let description = isSuccess ? ':green_circle: **Success**' : ':red_circle: **Failure**';
 
@@ -108,9 +119,9 @@ export const getDiscordMsgData = ({
 
 	const featDiceResultsWithIcons = featDiceResults.map((result => {
 		if (result === EYE_SCORE) {
-			return `${EYE_SCORE} (Eye Symbol)`;
+			return EYE_DESCRIPTION;
 		} else if (result === GANDALF_SCORE) {
-			return `${GANDALF_SCORE} (Gandalf Rune)`
+			return GANDALF_DESCRIPTION;
 		}
 		return result;
 	}));
@@ -124,7 +135,7 @@ export const getDiscordMsgData = ({
 
 	const specialSuccessesAmount = successDiceResults.filter((result: number) => result === 6).length;
 
-	if (specialSuccessesAmount) {
+	if (specialSuccessesAmount && isSuccess) {
 		fields.push({
 			name: ':boom: Special Successes Amount:',
 			value: `\`${specialSuccessesAmount}\``

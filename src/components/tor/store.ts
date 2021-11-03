@@ -165,7 +165,6 @@ const useStore = create<State>(((set, get) => ({
 			wasRerolled: Boolean(isRerolling)
 		});
 
-
 		reduxStore.dispatch(requestMsgReady(
 			getDiscordMsgData({
 				isSuccess,
@@ -175,7 +174,6 @@ const useStore = create<State>(((set, get) => ({
 				totalDiceScore,
 				wasRerolled: Boolean(isRerolling),
 				tn,
-				successDiceAmount,
 				isFavoured,
 				isIllFavoured,
 				isWeary,
@@ -183,8 +181,6 @@ const useStore = create<State>(((set, get) => ({
 				isAdversary,
 			})
 		));
-
-
 	},
 })));
 
