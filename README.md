@@ -17,6 +17,7 @@
 >         + [Legend of the Five Rings 5e](#l5r5e)    
 >         + [Narrative Dice](#narrative-dice)    
 >         + [Fate](#fate)    
+>         + [The One Rine 2e](#the-one-ring-2e)    
 > - [Combat Tracker](#combat-tracker)
 > - [Discord Configuration](#discord-configuration)
 > - [Query parameters](#query-params)
@@ -112,6 +113,26 @@ Roll Results:
 ## Fate <a id="fate"></a>
 
 [![Fate dice](./public/fate.png)]()
+
+## The One Ring 2e <a id="the-one-ring-2e"></a>
+
+Allows roll unique TOR dice in the app. Calculates the roll results. Takes into the consideration factors:
+- Hero's conditions (_Weary_, _Miserable_)
+- Rolling the _Favoured_ or _Ill-Favoured Roll_
+- Rolling as an Adversary (reverses results for the Feat Die)
+- Shows the results clearly on Discord chat
+
+Interface:
+[![TOR Interface](./public/tor-interface.png)]()
+
+Skill Test:
+[![TOR Skill Test](./public/tor-skill-test.png)]()
+
+Results Modal:
+[![TOR Results Modal](./public/tor-results-modal.png)]()
+
+Results on Discord:  
+[![TOR Results on Discord](./public/tor-discord-results.png)]()
 
 --------------------------------------------
 
