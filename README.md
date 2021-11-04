@@ -16,7 +16,7 @@ Table of content:
         + [Legend of the Five Rings 5e](#l5r5e)    
         + [Narrative Dice](#narrative-dice)    
         + [Fate](#fate)    
-        + [The One Rine 2e](#the-one-ring-2e)    
+        + [The One Ring 2e](#the-one-ring-2e)    
 - [Combat Tracker](#combat-tracker)
 - [Discord Configuration](#discord-configuration)
 - [Query parameters](#query-params)
