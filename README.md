@@ -2,26 +2,25 @@
 
 # 🎲 Discord Dice UI
 
-**The app is intended to use as a graphical interface dice roller for Discord. You can connect it with your Discord chat and use it to roll some dice without typing!**
+> **Discord Dice UI** is a website based app which can be integrated easily with Discord server. In short, it offers a neat interface to roll dice and provides more advanced functions and dice manipulations for the supported systems. I conceived it as a simpler alternative to more complex VTTs, and as a more advanced alternative to traditional, command driven Discord bots.
 
-> Table of content: 
-> 
-> - [The App Overview](#overview)
->     * Supported Systems:
->         + [Call of Cthulhu 7e](#call-of-cthulhu)
->         + [Warhammer](#warhammer)
->         + [Wrath & Glory](#wrath-and-glory)
->         + [Conan 2d20](#conan-2d20)
->         + [Infinity 2d20](#infinity-2d20)
->         + [Legend of the Five Rings 1e](#l5r1e)
->         + [Legend of the Five Rings 5e](#l5r5e)    
->         + [Narrative Dice](#narrative-dice)    
->         + [Fate](#fate)    
->         + [The One Rine 2e](#the-one-ring-2e)    
-> - [Combat Tracker](#combat-tracker)
-> - [Discord Configuration](#discord-configuration)
-> - [Query parameters](#query-params)
-> - [Developers' Info](#dev-info)
+Table of content:  
+- [The App Overview](#overview)
+    * Supported Systems:
+        + [Call of Cthulhu 7e](#call-of-cthulhu)
+        + [Warhammer](#warhammer)
+        + [Wrath & Glory](#wrath-and-glory)
+        + [Conan 2d20](#conan-2d20)
+        + [Infinity 2d20](#infinity-2d20)
+        + [Legend of the Five Rings 1e](#l5r1e)
+        + [Legend of the Five Rings 5e](#l5r5e)    
+        + [Narrative Dice](#narrative-dice)    
+        + [Fate](#fate)    
+        + [The One Rine 2e](#the-one-ring-2e)    
+- [Combat Tracker](#combat-tracker)
+- [Discord Configuration](#discord-configuration)
+- [Query parameters](#query-params)
+- [Developers' Info](#dev-info)
 
 ## 🎲 The App Overview <a id="overview"></a>
 
@@ -116,19 +115,19 @@ Roll Results:
 
 ## The One Ring 2e <a id="the-one-ring-2e"></a>
 
-Allows roll unique TOR dice in the app. Calculates the roll results. Takes into the consideration factors:
+The app now allows to roll unique TOR dice. It calculates the roll results automatically and takes into the consideration factors:
 - Hero's conditions (_Weary_, _Miserable_)
 - Rolling the _Favoured_ or _Ill-Favoured Roll_
 - Rolling as an Adversary (reverses results for the Feat Die)
 - Shows the results clearly on Discord chat
 
-Interface:
+Interface:  
 [![TOR Interface](./public/tor-interface.png)]()
 
-Skill Test:
+Skill Test:  
 [![TOR Skill Test](./public/tor-skill-test.png)]()
 
-Results Modal:
+Results Modal:  
 [![TOR Results Modal](./public/tor-results-modal.png)]()
 
 Results on Discord:  
