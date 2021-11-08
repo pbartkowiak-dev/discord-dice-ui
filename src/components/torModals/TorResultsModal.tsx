@@ -32,8 +32,7 @@ function TorResultsModal() {
 		isAdversary,
 		featDieScore,
 		totalDiceScore,
-		rollDice,
-		wasRerolled,
+		rollDice
 	} = torState;
 
 	const [isRerolling, setIsRerolling] = useState<boolean>(false);
@@ -189,7 +188,6 @@ function TorResultsModal() {
 			<Modal.Footer>
 				<Button
 					variant="outline-primary"
-					disabled={wasRerolled}
 					onClick={onReroll}>Reroll</Button>
 				<Button
 					variant="outline-secondary"
