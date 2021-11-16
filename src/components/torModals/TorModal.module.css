@@ -42,8 +42,17 @@
 }
 
 .poolBuilder {
-    max-width: 280px;
+    display: flex;
     margin: 0 auto;
+}
+
+.poolBuilder > div {
+    padding: 0 5px;
+    display: flex;
+}
+
+.poolBuilderIcon {
+    align-items: center;
 }
 
 .failureText {
@@ -87,6 +96,17 @@
     color: #6c6c6c;
     letter-spacing: 1px;
     font-weight: 400;
+}
+
+.subheader__split {
+    display: flex;
+    padding: 0 50px;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.subheader__split > span {
+    flex: 1 0 33.33333%;
 }
 
 .checkboxContainer {

@@ -19,7 +19,8 @@ function PoolBuilderDie({
 	noHeader,
 	disabled,
 	variant,
-	hideBorder
+	hideBorder,
+	showBigNumber,
 }: any) {
 	let diceImgPath;
 	let diceImgClassName;
@@ -65,6 +66,7 @@ function PoolBuilderDie({
 					src={diceImgPath}
 				/>
 				}
+				{ showBigNumber && <div className={styles.bigNumber}>{value || 0}</div>}
 			</Card.Body>
 			<Card.Footer className={styles.dieFooter}>
 				{ readOnly && <div className={styles.readOnlyValue}>{value}</div> }

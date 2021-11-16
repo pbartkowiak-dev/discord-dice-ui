@@ -7,7 +7,7 @@ export const torSkillTest = {
 	noDropdown: true
 };
 
-export const torSkillDie = {
+export const torSuccessDie = {
 	diceType: TOR_SUCCESS_DIE,
 	label: 'Success Die',
 	diceImg: 'tor-success-die.png',

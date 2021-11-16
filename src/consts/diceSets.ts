@@ -41,7 +41,7 @@ import { FATE_DIE } from './fateConsts';
 
 import narrativeDice from './narrativeDice';
 import l5rDice from './l5rDice';
-import { torFeatDie, torSkillDie, torSkillTest } from "./torDice";
+import { torFeatDie, torSuccessDie, torSkillTest } from "./torDice";
 
 /*******************************************
  *
@@ -245,6 +245,6 @@ export const wrathAndGloryDiceSet = [{
 
 export const torDiceSet = [
 	torSkillTest,
-	torSkillDie,
+	torSuccessDie,
 	torFeatDie
 ];

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import torStyles from "./TorModal.module.css";
@@ -6,10 +6,13 @@ import useTorStore, { State } from "../tor/store";
 import InputRange from "../InputRange/InputRange";
 import Form from "react-bootstrap/Form";
 import InfoTooltip from "../InfoTooltip/InfoTooltip";
-import { torSkillDie } from "../../consts/torDice";
+import { torSuccessDie } from "../../consts/torDice";
 import PoolBuilderDie from "../PoolBuilder/PoolBuilderDie";
 import { isValueValid } from "../WarhammerMoneyModal/WarhammerMoneyModal";
 import { AdversaryRollTooltip, FavouredTooltip, IllFavouredTooltip, MiserableTooltip, WearyTooltip } from "./Tooltips";
+import classNames from "classnames";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default () => {
 	const torStore = useTorStore((torStore: State) => torStore);
@@ -31,12 +34,15 @@ export default () => {
 		setIsMiserable,
 		setIsAdversary,
 		setSuccessDiceAmount,
+		setModifier,
+		modifier,
 	} = torStore;
 
 	const tnInputId = 'tn-input'
 	const tnMax = 20;
 	const tnMin = 0;
 	const successDiceAmountMax = 20;
+	const modifierMax = 10;
 
 	const isValid = () => {
 		let isValid = true;
@@ -70,24 +76,44 @@ export default () => {
 		}
 	};
 
-	const onChange = (_: any, event: any) => {
+	const onChange = (type: 'successDie' | 'modifier', event: any) => {
 		const value = Number(event.target.value);
-		if (isValueValid(event.target.value) && value <= successDiceAmountMax) {
-			setSuccessDiceAmount(`${value}`);
+		if (type === 'modifier') {
+			if (isValueValid(event.target.value) && value <= modifierMax) {
+				setModifier(`${value}`);
+			}
+		} else {
+			if (isValueValid(event.target.value) && value <= successDiceAmountMax) {
+				setSuccessDiceAmount(`${value}`);
+			}
 		}
 	};
 
-	const onIncrease = () => {
-		const newValue = Number(successDiceAmount) + 1;
-		if (newValue <= successDiceAmountMax) {
-			setSuccessDiceAmount(`${newValue}`);
+	const onIncrease = (type: 'successDie' | 'modifier') => {
+		if (type === 'modifier') {
+			const value = Number(modifier) + 1;
+			if (value <= modifierMax) {
+				setModifier(`${value}`)
+			}
+		} else {
+			const value = Number(successDiceAmount) + 1;
+			if (value <= successDiceAmountMax) {
+				setSuccessDiceAmount(`${value}`);
+			}
 		}
 	};
 
-	const onDecrease = () => {
-		const newValue = Number(successDiceAmount) - 1;
-		if (newValue >= 0) {
-			setSuccessDiceAmount(`${newValue}`);
+	const onDecrease = (type: 'successDie' | 'modifier') => {
+		if (type === 'modifier') {
+			const value = Number(modifier) - 1;
+			if (value >= 0) {
+				setModifier(`${value}`);
+			}
+		} else {
+			const value = Number(successDiceAmount) - 1;
+			if (value >= 0) {
+				setSuccessDiceAmount(`${value}`);
+			}
 		}
 	};
 
@@ -151,18 +177,35 @@ export default () => {
 					</div>
 				</section>
 				<section>
-					<h5 className={torStyles.subheader}>Success Dice Number</h5>
+					<h5 className={classNames(torStyles.subheader, torStyles.subheader__split)}><span>Success Dice Number</span><span>/</span><span>Modifier</span></h5>
 					<div className={torStyles.poolBuilder}>
-						<PoolBuilderDie
-							diceType={torSkillDie.diceType}
-							noHeader={true}
-							value={successDiceAmount}
-							onChange={onChange}
-							onIncrease={onIncrease}
-							onDecrease={onDecrease}
-							isDiceImgLarge={false}
-							hideBorder={true}
-						/>
+						<div>
+							<PoolBuilderDie
+								diceType={torSuccessDie.diceType}
+								noHeader={true}
+								value={successDiceAmount}
+								onChange={(_:any, event: any) => onChange('successDie', event)}
+								onIncrease={() => onIncrease('successDie')}
+								onDecrease={() => onDecrease('successDie')}
+								isDiceImgLarge={false}
+								hideBorder={true}
+							/>
+						</div>
+						<div className={torStyles.poolBuilderIcon}>
+							<FontAwesomeIcon icon={faPlus} />
+						</div>
+						<div>
+							<PoolBuilderDie
+								value={modifier}
+								onChange={(_:any, event: any) => onChange('modifier', event)}
+								onIncrease={() => onIncrease('modifier')}
+								onDecrease={() => onDecrease('modifier')}
+								noImage={true}
+								variant={"secondary"}
+								isDiceImgLarge={false}
+								showBigNumber={true}
+							/>
+						</div>
 					</div>
 				</section>
 				<section>
