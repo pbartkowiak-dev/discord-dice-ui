@@ -10,7 +10,7 @@ function DiceModuleForm() {
 	const fields = [{
 		label: 'Use Modifier',
 		name: 'useModifier',
-		isDisabled: s => s.wrathAndGloryMode || s.narrativeDice || s.rollAndKeepMode
+		isDisabled: s => s.wrathAndGloryMode || s.narrativeDice || s.rollAndKeepMode || s.torMode
 	},{
 		label: 'Call of Cthulhu 7e',
 		name: 'cthulhuMode',

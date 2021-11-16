@@ -34,6 +34,13 @@
 	border: 0;
 }
 
+.bigNumber {
+	display: flex;
+	justify-content: center;
+	text-align: center;
+	font-size: 42px;
+}
+
 .disabled,
 .disabled:hover {
 	opacity: .7 !important;

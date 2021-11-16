@@ -1,7 +1,6 @@
 import create from 'zustand';
-import { TOR_SUCCESS_DIE, TOR_FEAT_DIE, TOR_SKILL_TEST, TorDice } from "../../consts/diceConstants";
 import getResultsArray from "../../utils/getResultsArray";
-import { requestMsgReady, requestPoolRoll } from "../../actions/roll.actions";
+import { requestMsgReady } from "../../actions/roll.actions";
 import reduxStore from '../../store';
 import { getDiscordMsgData } from "./getDiscordMsgData";
 import { EYE_SCORE, GANDALF_SCORE } from "../../consts/torDice";
@@ -20,6 +19,7 @@ export type State = {
 
 	tn: string;
 	successDiceAmount: string;
+	modifier: string;
 	isFavoured: boolean;
 	isIllFavoured: boolean;
 	isWeary: boolean;
@@ -35,6 +35,7 @@ export type State = {
 	setIsMiserable: (isMiserable: boolean) => void;
 	setIsAdversary: (isAdversary: boolean) => void;
 	setSuccessDiceAmount: (successDiceAmount: string) => void;
+	setModifier: (modifier: string) => void;
 
 	// Results
 	isSuccess:  null | boolean;
@@ -50,6 +51,7 @@ const useStore = create<State>(((set, get) => ({
 	wasAllDiceRerolled: false,
 	tn: '',
 	successDiceAmount: '',
+	modifier: '',
 	isFavoured: false,
 	isIllFavoured: false,
 	isWeary: false,
@@ -73,6 +75,7 @@ const useStore = create<State>(((set, get) => ({
 		successDiceResults: [],
 		featDieScore: null,
 		totalDiceScore: null,
+		modifier: '',
 	}),
 	openResultsModal: () => set({ isResultsModalOpen: true }),
 	closeModal: () => set({ isModalOpen: false }),
@@ -85,6 +88,7 @@ const useStore = create<State>(((set, get) => ({
 	setIsMiserable: (isMiserable) => set({ isMiserable }),
 	setIsAdversary: (isAdversary) => set({ isAdversary }),
 	setSuccessDiceAmount: (successDiceAmount) => set({ successDiceAmount }),
+	setModifier: (modifier) => set({ modifier }),
 
 	rollDice: (isRerolling) => {
 		const {
@@ -133,7 +137,7 @@ const useStore = create<State>(((set, get) => ({
 		// Get TOTAL DICE score
 		let totalDiceScore: number;
 
-		if (featDieScore === EYE_SCORE || featDieScore == GANDALF_SCORE) {
+		if (featDieScore === EYE_SCORE || featDieScore === GANDALF_SCORE) {
 			totalDiceScore = successDiceScore;
 		} else {
 			totalDiceScore = successDiceScore + featDieScore;

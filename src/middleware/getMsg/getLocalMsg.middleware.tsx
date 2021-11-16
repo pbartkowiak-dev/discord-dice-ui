@@ -1,7 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowAltCircleUp, faArrowAltCircleDown, faSquare } from '@fortawesome/free-regular-svg-icons';
-import { faArrowAltCircleRight, faMinus, faPlus, faSkull, faSun } from '@fortawesome/free-solid-svg-icons';
+import { faArrowAltCircleUp, faArrowAltCircleDown } from '@fortawesome/free-regular-svg-icons';
+import { faArrowAltCircleRight, faSkull, faSun } from '@fortawesome/free-solid-svg-icons';
 import joinAsBlocks from '../../utils/joinAsBlocks';
 import CodeSpan from '../../components/CodeSpan/CodeSpan';
 import { D6_CONAN, D20_CONAN_HL, D6_INFINITY, D20_INFINITY_HL, TOR_FEAT_DIE } from '../../consts/diceConstants';
