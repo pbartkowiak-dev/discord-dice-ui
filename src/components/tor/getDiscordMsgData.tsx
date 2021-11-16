@@ -10,12 +10,13 @@ interface Props {
 	featDieScore: number;
 	totalDiceScore: number;
 	wasRerolled: boolean;
-	tn: string,
-	isFavoured: boolean,
-	isIllFavoured: boolean,
-	isWeary: boolean,
-	isMiserable: boolean,
-	isAdversary: boolean,
+	tn: string;
+	isFavoured: boolean;
+	isIllFavoured: boolean;
+	isWeary: boolean;
+	isMiserable: boolean;
+	isAdversary: boolean;
+	modifier: string;
 }
 
 interface Field {
@@ -53,6 +54,7 @@ export const getDiscordMsgData = ({
 	isWeary,
 	isMiserable,
 	isAdversary,
+	modifier,
 }: Props): ReturnType => {
 	const { userSettings } = reduxStore.getState()
 	const username = userSettings.username || 'USERNAME_MISSING';
@@ -114,6 +116,13 @@ export const getDiscordMsgData = ({
 	fields.push({
 		name: `:game_die: ${successDiceResults.length === 1 ? 'Success Die Roll Result' : 'Success Dice Roll Results'}:`,
 		value: joinAsBlocks(successDiceResultsSorted, null, true) as string
+	});
+
+	// MODIFIER
+	if (modifier && Number(modifier) > 0)
+	fields.push({
+		name: `:heavy_plus_sign: Modifier:`,
+		value: joinAsBlocks(['+' + modifier], null, true) as string
 	});
 
 	// FEAT DICE
