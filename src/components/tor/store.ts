@@ -96,6 +96,7 @@ const useStore = create<State>(((set, get) => ({
 			isFavoured,
 			isIllFavoured,
 			successDiceAmount,
+			modifier,
 			isAdversary,
 			isWeary,
 			isMiserable,
@@ -141,6 +142,11 @@ const useStore = create<State>(((set, get) => ({
 			totalDiceScore = successDiceScore;
 		} else {
 			totalDiceScore = successDiceScore + featDieScore;
+		}
+
+		// Add MODIFIER to the score
+		if (modifier) {
+			totalDiceScore += Number(modifier);
 		}
 
 		// Get SUCCESS result
