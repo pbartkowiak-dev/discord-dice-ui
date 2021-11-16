@@ -66,6 +66,10 @@
     align-items: center;
 }
 
+.poolBuilderIcon svg {
+    margin-bottom: 40px;
+}
+
 .failureText {
     color: var(--header-bg-failure);
 }
