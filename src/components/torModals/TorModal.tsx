@@ -188,7 +188,7 @@ export default () => {
 				<section>
 					<h5 className={classNames(torStyles.subheader, torStyles.subheader__split)}><span>Success Dice Number</span><span>/</span><span>Modifier</span></h5>
 					<div className={torStyles.poolBuilder}>
-						<div>
+						<div className={torStyles.poolBuilderCol}>
 							<PoolBuilderDie
 								diceType={torSuccessDie.diceType}
 								noHeader={true}
@@ -200,10 +200,10 @@ export default () => {
 								hideBorder={true}
 							/>
 						</div>
-						<div className={torStyles.poolBuilderIcon}>
+						<div className={classNames(torStyles.poolBuilderCol, torStyles.poolBuilderIcon)}>
 							<FontAwesomeIcon icon={faPlus} />
 						</div>
-						<div>
+						<div className={torStyles.poolBuilderCol}>
 							<PoolBuilderDie
 								value={modifier}
 								onChange={(_:any, event: any) => onChange('modifier', event)}
