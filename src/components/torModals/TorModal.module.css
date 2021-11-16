@@ -55,14 +55,17 @@
 .poolBuilder {
     display: flex;
     margin: 0 auto;
+    flex-direction: column;
 }
 
-.poolBuilder > div {
+.poolBuilderCol {
     padding: 0 5px;
+    margin: 0 auto;
     display: flex;
 }
 
 .poolBuilderIcon {
+    display: none;
     align-items: center;
 }
 
@@ -219,12 +222,19 @@
     .checkboxContainer {
         flex-direction: row;
         align-items: center;
+        margin: 0 5px;
+    }
+    .checkboxContainer * + * {
+        margin: 0 5px;
     }
 }
 
-@media only screen and (min-width: 480px) {
-    .checkboxContainer * + * {
-        margin: 0 5px;
+@media only screen and (min-width: 640px) {
+    .poolBuilder {
+        flex-direction: row;
+    }
+    .poolBuilderIcon {
+        display: flex;
     }
 }
 
