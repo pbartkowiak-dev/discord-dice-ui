@@ -10,7 +10,7 @@ import CodeSpan from "../CodeSpan/CodeSpan";
 import InfoTooltip from "../InfoTooltip/InfoTooltip";
 import { EYE_SCORE, GANDALF_SCORE } from "../../consts/torDice";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck, faEquals, faTimes } from "@fortawesome/free-solid-svg-icons";
+import { faCheck, faEquals, faPlus, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { faEye } from "@fortawesome/free-regular-svg-icons";
 import { AdversaryRollTooltip, FavouredTooltip, IllFavouredTooltip, MiserableTooltip, WearyTooltip } from "./Tooltips";
 import ElvenRune from "./ElvenRune";
@@ -32,7 +32,8 @@ function TorResultsModal() {
 		isAdversary,
 		featDieScore,
 		totalDiceScore,
-		rollDice
+		rollDice,
+		modifier,
 	} = torState;
 
 	const [isRerolling, setIsRerolling] = useState<boolean>(false);
@@ -134,6 +135,11 @@ function TorResultsModal() {
 						<div>{ featDiceResults && joinAsBlocks(featDiceResults) }</div>
 					</div>
 				</section>
+
+				{modifier && Number(modifier) > 0 && <section className={classNames(styles.poolResultsBlock, styles.resultsBlock, torStyles.resultsModifierBlock)}>
+					<span><FontAwesomeIcon icon={faPlus}/></span> <span className={torStyles.modifierResult}>{modifier}</span>(Modifier)
+				</section>}
+
 				<section className={classNames({
 					[torStyles.equalsRow]: true,
 					[torStyles.successText]: isSuccess,
