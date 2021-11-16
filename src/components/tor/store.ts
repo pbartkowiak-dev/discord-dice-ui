@@ -190,6 +190,7 @@ const useStore = create<State>(((set, get) => ({
 				isWeary,
 				isMiserable,
 				isAdversary,
+				modifier,
 			})
 		));
 	},
