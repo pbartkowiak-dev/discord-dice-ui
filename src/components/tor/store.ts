@@ -145,8 +145,9 @@ const useStore = create<State>(((set, get) => ({
 		}
 
 		// Add MODIFIER to the score
-		if (modifier) {
-			totalDiceScore += Number(modifier);
+		const modifierNumber = Number(modifier);
+		if (modifier && !isNaN(modifierNumber)) {
+			totalDiceScore += modifierNumber;
 		}
 
 		// Get SUCCESS result

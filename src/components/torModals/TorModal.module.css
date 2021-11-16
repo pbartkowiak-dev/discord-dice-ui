@@ -41,6 +41,17 @@
     padding: 7px 0 0;
 }
 
+.resultsModifierBlock {
+    align-items: center;
+    padding-left: 17px;
+}
+
+.modifierResult {
+    font-size: 24px;
+    padding-left: 10px;
+    padding-right: 5px;
+}
+
 .poolBuilder {
     display: flex;
     margin: 0 auto;
