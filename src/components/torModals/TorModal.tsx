@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import torStyles from "./TorModal.module.css";
@@ -43,6 +43,15 @@ export default () => {
 	const tnMin = 0;
 	const successDiceAmountMax = 20;
 	const modifierMax = 10;
+
+	useEffect(() => {
+		if (isModalOpen && tn) {
+			const inputRange = document.getElementById(tnInputId) as HTMLInputElement;
+			if (inputRange) {
+				inputRange.value = tn;
+			}
+		}
+	}, [isModalOpen]);
 
 	const isValid = () => {
 		let isValid = true;
