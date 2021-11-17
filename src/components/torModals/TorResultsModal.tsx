@@ -136,7 +136,7 @@ function TorResultsModal() {
 					</div>
 				</section>
 
-				{modifier && Number(modifier) > 0 && <section className={classNames(styles.poolResultsBlock, styles.resultsBlock, torStyles.resultsModifierBlock)}>
+				{Number(modifier) !== 0 && !isNaN(Number(modifier)) && <section className={classNames(styles.poolResultsBlock, styles.resultsBlock, torStyles.resultsModifierBlock)}>
 					<span><FontAwesomeIcon icon={faPlus}/></span> <span className={torStyles.modifierResult}>{modifier}</span>(Modifier)
 				</section>}
 

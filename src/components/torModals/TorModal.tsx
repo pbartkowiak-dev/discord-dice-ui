@@ -43,6 +43,7 @@ export default () => {
 	const tnMin = 0;
 	const successDiceAmountMax = 20;
 	const modifierMax = 10;
+	const modifierMin = -10;
 
 	useEffect(() => {
 		if (isModalOpen && tn) {
@@ -88,7 +89,7 @@ export default () => {
 	const onChange = (type: 'successDie' | 'modifier', event: any) => {
 		const value = Number(event.target.value);
 		if (type === 'modifier') {
-			if (isValueValid(event.target.value) && value <= modifierMax) {
+			if (isValueValid(event.target.value) && value <= modifierMax && value >= modifierMin) {
 				setModifier(`${value}`);
 			}
 		} else {
@@ -115,7 +116,7 @@ export default () => {
 	const onDecrease = (type: 'successDie' | 'modifier') => {
 		if (type === 'modifier') {
 			const value = Number(modifier) - 1;
-			if (value >= 0) {
+			if (value >= modifierMin) {
 				setModifier(`${value}`);
 			}
 		} else {

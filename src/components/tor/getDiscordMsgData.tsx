@@ -119,12 +119,17 @@ export const getDiscordMsgData = ({
 	});
 
 	// MODIFIER
-	if (modifier && Number(modifier) > 0)
-	fields.push({
-		name: `:heavy_plus_sign: Modifier:`,
-		value: joinAsBlocks(['+' + modifier], null, true) as string
-	});
+	const modifierNumber = Number(modifier);
+	if (modifier && !isNaN(modifierNumber) && modifierNumber !== 0) {
 
+		const modifierSymbol = modifierNumber > 0 ? '+' : '';
+		const modifierIcon = modifierNumber > 0 ? ':heavy_plus_sign:' : ':heavy_minus_sign:';
+
+		fields.push({
+			name: modifierIcon + ' Modifier',
+			value: joinAsBlocks([modifierSymbol + modifier], null, true) as string
+		});
+	}
 	// FEAT DICE
 
 	const featDiceResultsWithIcons = featDiceResults.map((result => {
