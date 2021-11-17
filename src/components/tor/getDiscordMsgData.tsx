@@ -126,7 +126,7 @@ export const getDiscordMsgData = ({
 		const modifierIcon = modifierNumber > 0 ? ':heavy_plus_sign:' : ':heavy_minus_sign:';
 
 		fields.push({
-			name: modifierIcon + ' Modifier',
+			name: modifierIcon + ' Modifier:',
 			value: joinAsBlocks([modifierSymbol + modifier], null, true) as string
 		});
 	}
