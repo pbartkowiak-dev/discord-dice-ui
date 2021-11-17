@@ -61,7 +61,7 @@ export default () => {
 		if (isNaN(tnNumber) || tnNumber <= 0 || tnNumber > tnMax) {
 			isValid = false;
 		}
-		if (isNaN(successDiceAmountNumber) || successDiceAmountNumber <= 0 || successDiceAmountNumber > successDiceAmountMax) {
+		if (isNaN(successDiceAmountNumber) || successDiceAmountNumber < 0 || successDiceAmountNumber > successDiceAmountMax) {
 			isValid = false;
 		}
 
