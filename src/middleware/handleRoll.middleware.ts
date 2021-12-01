@@ -42,6 +42,8 @@ import combatTrackerStore from "../components/CombatTracker/store";
 import diceModuleOptionsStore from "../components/DiceModuleOptions/store";
 import wrathAndGloryStore from "../components/WrathAndGloryPoolBuilder/store";
 import torStore from "../components/tor/store";
+import xCardStore from "../components/XCard/store";
+import { X_CARD } from "../components/XCard/const";
 
 export default (store:any) => (next:any) => (action:any) => {
 	if (action.type === ROLL_SUBMITTED) {
@@ -57,7 +59,9 @@ export default (store:any) => (next:any) => (action:any) => {
 			diceAmount
 		}));
 
-		if (diceType === TOR_SKILL_TEST) {
+		if (diceType === X_CARD) {
+			xCardStore.getState().openModal();
+		} else if (diceType === TOR_SKILL_TEST) {
 			torStore.getState().openModal();
 		} else if (action?.payload?.pool && diceModuleForm.wrathAndGloryMode) {
 			wrathAndGloryStore.getState().rollDice({...action.payload.pool});
