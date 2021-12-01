@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import { Card } from 'react-bootstrap';
 import styles from './CopyrightModal.module.css';
 
 interface CopyrightModalRowPropTypes {
 	title: string;
-	content: string;
+	content: string | ReactNode;
 	link?: string;
 	link2?: string;
 }

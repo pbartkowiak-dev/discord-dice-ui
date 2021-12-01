@@ -27,9 +27,20 @@ function CopyrightModal({
 				link2="https://github.com/FortAwesome/Font-Awesome"
 			/>
 			<CopyrightModalRow
-				title="Conan 2d20 Tokents"
+				title="Conan 2d20 Tokens"
 				content="Momentum and Doom tokens are taken from Riotous GM blog."
 				link="https://riotousgm.wordpress.com/2017/10/29/conan-tokens/"
+			/>
+			<CopyrightModalRow
+				title="The X-Card"
+				content={(
+					<>
+						<p>The X-Card is an optional tool created by John Stavropoulos that allows anyone in your game
+							(including you) to edit out any content anyone is uncomfortable with as you play.</p>
+						<p>Ask you GM for more details or check the link below.</p>
+					</>
+				)}
+				link="http://tinyurl.com/x-card-rpg"
 			/>
 			</Modal.Body>
 			<Modal.Footer>
