@@ -18,6 +18,7 @@ Table of content:
         + [Fate](#fate)    
         + [The One Ring 2e](#the-one-ring-2e)    
 - [Combat Tracker](#combat-tracker)
+- [X-Card](#x-card)
 - [Discord Configuration](#discord-configuration)
 - [Query parameters](#query-params)
 - [Developers' Info](#dev-info)
@@ -150,6 +151,18 @@ The Combat Tracker lets you organize the combat and share the current state of t
 [![Combat Tracker UI](./public/combat-tracker-1.png)]()
 
 [![Combat Tracker on Discord](./public/combat-tracker-2.png)]()
+
+--------------------------------------------
+
+## X-Card <a id="x-card"></a>
+
+The X-Card is an optional tool created by John Stavropoulos that allows anyone in your game to edit out any content anyone is uncomfortable with as you play.
+
+[![X-Card Modal](./public/x-card-2.png)]()
+
+[![X-Card Submitted on Discord](./public/x-card-1.png)]()
+
+You'll find more details on the X-Card under the following link: [http://tinyurl.com/x-card-rpg](http://tinyurl.com/x-card-rpg)
 
 --------------------------------------------
 
