@@ -14,20 +14,13 @@ export type State = {
 
 const useStore = create<State>(((set, get) => ({
 	isModalOpen: false,
-	isAnonymous: true,
+	isAnonymous: false,
 
-	openModal: () => set({
-		isModalOpen: true,
-		isAnonymous: true,
-	}),
+	openModal: () => set({ isModalOpen: true }),
 
-	closeModal: () => set({
-		isModalOpen: false
-	}),
+	closeModal: () => set({ isModalOpen: false }),
 
-	setIsAnonymous: (isAnonymous) => set({
-		isAnonymous
-	}),
+	setIsAnonymous: (isAnonymous) => set({ isAnonymous }),
 
 	throwXCard() {
 		const {	isAnonymous } = get();

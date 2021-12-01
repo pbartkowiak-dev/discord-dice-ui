@@ -1,12 +1,9 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import useXCardStore, { State } from "./store";
-import InfoTooltip from "../InfoTooltip/InfoTooltip";
-import classNames from "classnames";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Form from "react-bootstrap/Form";
+import styles from './styles.module.css';
 
 export default () => {
 	const xCardStore = useXCardStore((xCardStore: State) => xCardStore);
@@ -30,22 +27,23 @@ export default () => {
 			</Modal.Header>
 			<Modal.Body>
 				<section>
-					<p>If during the games happens anything that's bothering you, please let the group know by submiting the X-Card. You can use this Safety Tool to let to others know you want to skip this scene.</p>
+					<p>If during the games happens anything that's bothering you, please let the group know by submitting the X-Card. You can use this Safety Tool to let others know you want to skip this scene.</p>
 					<p>You don't have to give any reason for doing so.</p>
-					<p>The X-Card exists so anyone could feel comfortable during a game.</p>
+					<p>For more details on X-Card, please ask your GM or refer to <a href="http://tinyurl.com/x-card-rpg">http://tinyurl.com/x-card-rpg</a>.</p>
+				</section>
+				<section className={styles.imgContainer}>
+					<img src={require("../../img/x_card.png")} alt="X-Card"/>
 				</section>
 				<section>
-					<div>
-						<Form.Check
-							type="checkbox"
-							name="isAnonymous"
-							id="isAnonymous"
-							label="Throw the X-Card Anonymously"
-							checked={isAnonymous}
-							onChange={() => setIsAnonymous(!isAnonymous)}
-							custom
-						/>
-					</div>
+					<Form.Check
+						type="checkbox"
+						name="isAnonymous"
+						id="isAnonymous"
+						label="Throw the X-Card Anonymously"
+						checked={isAnonymous}
+						onChange={() => setIsAnonymous(!isAnonymous)}
+						custom
+					/>
 				</section>
 			</Modal.Body>
 			<Modal.Footer>

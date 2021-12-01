@@ -38,6 +38,7 @@ import {
 } from './diceConstants';
 
 import { FATE_DIE } from './fateConsts';
+import { X_CARD } from "../components/XCard/const";
 
 import narrativeDice from './narrativeDice';
 import l5rDice from './l5rDice';
@@ -60,6 +61,14 @@ const combatTracker = {
 	noDropdown: true,
 	isExcludedFromPool: true
 };
+
+const xCard = {
+	diceType: X_CARD,
+	label: 'X-Card',
+	diceImg: 'x_card.png',
+	noDropdown: true,
+	isExcludedFromPool: true
+}
 
 export const commonDice = [{
 	diceType: D100,
@@ -91,7 +100,8 @@ export const classicSet = [
 	label: 'Pool Builder',
 	noDropdown: true
 },
-	combatTracker
+	combatTracker,
+	xCard
 ];
 
 export const poolSet = [
@@ -114,7 +124,9 @@ export const CthulhuSet = [{
 	diceImg: 'sheet-icon.png',
 	label: 'Character Sheet',
 	noDropdown: true
-}];
+},
+	xCard
+];
 
 export const warhammerSet = [{
 	diceType: D100_SL,
@@ -134,7 +146,9 @@ export const warhammerSet = [{
 	label: 'Money converter',
 	diceImg: 'warhammer_money/gold.png',
 	noDropdown: true
-}];
+},
+	xCard
+];
 
 export const conanSet = [{
 	diceType: D20_CONAN_TEST,
@@ -155,7 +169,9 @@ export const conanSet = [{
 	label: 'Update pools',
 	diceImg: 'conan_tokens.png',
 	noDropdown: true
-}];
+},
+	xCard
+];
 
 export const infinitySet = [{
 	diceType: D20_INFINITY_TEST,
@@ -176,7 +192,9 @@ export const infinitySet = [{
 	label: 'Update pools',
 	diceImg: 'infinity_tokens.png',
 	noDropdown: true
-}];
+},
+	xCard
+];
 
 export const narrativeDiceSet = [
 	narrativeDice[BOOST],
@@ -192,7 +210,8 @@ export const narrativeDiceSet = [
 		diceImg: 'narrative_tokens.png',
 		isExcludedFromPool: true,
 		noDropdown: true
-	}
+	},
+	xCard
 ];
 
 export const l5rDiceSet = [
@@ -204,7 +223,9 @@ export const l5rDiceSet = [
 		label: 'd10',
 		isExcludedFromPool: true,
 		noDropdown: true
-}];
+},
+	xCard
+];
 
 export const rollAndKeepDiceSet = [{
 	diceType: D10,
@@ -214,14 +235,16 @@ export const rollAndKeepDiceSet = [{
 	diceType: MODIFIER,
 	label: 'Apply Modifier'
 },
-	combatTracker
+	combatTracker,
+	xCard
 ];
 
 export const fateDiceSet = [{
 	diceType: FATE_DIE,
 	label: 'Fate Dice'
 },
-	combatTracker
+	combatTracker,
+	xCard
 ];
 
 export const wrathAndGloryDiceSet = [{
@@ -240,11 +263,13 @@ export const wrathAndGloryDiceSet = [{
 	isExcludedFromPool: true,
 	noDropdown: true
 },
-	combatTracker
+	combatTracker,
+	xCard
 ];
 
 export const torDiceSet = [
 	torSkillTest,
 	torSuccessDie,
-	torFeatDie
+	torFeatDie,
+	xCard
 ];
