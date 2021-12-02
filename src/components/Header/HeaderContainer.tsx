@@ -7,6 +7,12 @@ import {
 	openCopyrightModal
 } from '../../actions/modals';
 
+function mapStateToProps(state:any) {
+	return {
+		userSettings: state.userSettings
+	};
+}
+
 const mapDispatchToProps = {
 	openSettingsModal,
 	closeSettingsModal,
@@ -15,14 +21,16 @@ const mapDispatchToProps = {
 
 function HeaderContainer({
 	openSettingsModal,
-	openCopyrightModal
+	openCopyrightModal,
+	userSettings
 }:any) {
 	return (
 		<Header
+			userSettings={userSettings}
 			openSettingsModal={openSettingsModal}
 			openCopyrightModal={openCopyrightModal}
 		/>
 	);
 }
 
-export default connect(undefined, mapDispatchToProps)(HeaderContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(HeaderContainer);

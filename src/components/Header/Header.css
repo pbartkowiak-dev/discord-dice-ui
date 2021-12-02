@@ -7,10 +7,25 @@
 	height: 35px;
 }
 
+.icon-container {
+	position: relative;
+}
+
 .icon-settings {
 	font-size: 25px;
 	margin-left: 15px;
 	color: #212529;
+}
+
+.icon-danger {
+	top: -9px;
+	right: -9px;
+	position: absolute;
+}
+
+.settings-text-danger {
+	color: var(--header-bg-failure);
+	font-weight: bold;
 }
 
 .navbar {
