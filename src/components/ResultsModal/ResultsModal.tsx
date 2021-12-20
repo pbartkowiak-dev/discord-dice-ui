@@ -35,7 +35,7 @@ function ResultsModal({
 		);
 	}
 
-	const diceModuleForm = useDiceModuleFormStore(( { state }) => state);
+	const { mode } = useDiceModuleFormStore(( state ) => state);
 
 	return (
 		<Modal
@@ -54,7 +54,7 @@ function ResultsModal({
 				<RerollContainer
 					rollOptions={rollOptions}
 					isPool={isPool}
-					isFate={diceModuleForm?.fateMode}
+					isFate={mode === 'fateMode'}
 					results={results}
 				/>
 			</Modal.Body>

@@ -11,7 +11,12 @@ import LocalStorageManager from "./components/LocalStorageManager/LocalStorageMa
 import useDiceModuleFormStore from './components/DiceModuleOptions/store';
 
 function App() {
-	const { narrativeDice, l5rMode, rollAndKeepMode, wrathAndGloryMode } = useDiceModuleFormStore(( { state }) => state);
+	const { mode } = useDiceModuleFormStore(( state ) => state);
+	const showDiceModule =
+		mode !== 'narrativeDice' &&
+		mode !== 'l5rMode' &&
+		mode !== 'rollAndKeepMode' &&
+		mode !== 'wrathAndGloryMode';
 
 	return (
 		<div className="App">
@@ -19,11 +24,11 @@ function App() {
 			<HeaderContainer />
 			<div className="dice-module-container">
 				<DiceModuleOptions />
-				{ narrativeDice && <NarrativeDicePoolBuilder /> }
-				{ l5rMode && <L5rDicePoolBuilder /> }
-				{ rollAndKeepMode && <RollAndKeepPoolBuilder /> }
-				{ wrathAndGloryMode && <WrathAndGloryPoolBuilder /> }
-				{ !narrativeDice && !l5rMode && !rollAndKeepMode && !wrathAndGloryMode && <DiceModule /> }
+				{ mode === 'narrativeDice' && <NarrativeDicePoolBuilder /> }
+				{ mode === 'l5rMode' && <L5rDicePoolBuilder /> }
+				{ mode === 'rollAndKeepMode' && <RollAndKeepPoolBuilder /> }
+				{ mode === 'wrathAndGloryMode' && <WrathAndGloryPoolBuilder /> }
+				{ showDiceModule && <DiceModule /> }
 			</div>
 			<LocalStorageManager />
 		</div>

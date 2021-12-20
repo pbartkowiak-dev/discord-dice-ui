@@ -13,11 +13,11 @@ const rerollRequested = (store :any) => (next :any) => (action :any) => {
 		const { conanData } = state;
 		const { lastRollOptions } = state;
 		const { itemsToStay } = action.payload
-		const formValues = diceModuleOptionsStore.getState().state;
+		const { mode } = diceModuleOptionsStore.getState();
 
 		store.dispatch(updateRollCounter());
 
-		if (lastRollOptions.pool && formValues.narrativeDice) {
+		if (lastRollOptions.pool && mode === 'narrativeDice') {
 			store.dispatch(requestNarrativeDicePoolRoll({
 				pool: lastRollOptions.pool
 			}));

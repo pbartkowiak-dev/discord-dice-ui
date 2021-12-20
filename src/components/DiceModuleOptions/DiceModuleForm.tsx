@@ -5,70 +5,141 @@ import useDiceModuleFormStore from './store';
 import './DiceModuleForm.css';
 
 function DiceModuleForm() {
-	const { state, toggle } = useDiceModuleFormStore();
-
-	const fields = [{
-		label: 'Use Modifier',
-		name: 'useModifier',
-		isDisabled: s => s.wrathAndGloryMode || s.narrativeDice || s.rollAndKeepMode || s.torMode
-	},{
-		label: 'Call of Cthulhu 7e',
-		name: 'cthulhuMode',
-		isDisabled: s => s.wrathAndGloryMode || s.warhammerMode || s.conanMode || s.infinityMode || s.narrativeDice || s.l5rMode || s.fateMode || s.rollAndKeepMode || s.torMode
-	},{
-		label: 'Warhammer',
-		name: 'warhammerMode',
-		isDisabled: s => s.wrathAndGloryMode || s.cthulhuMode || s.conanMode || s.infinityMode || s.narrativeDice || s.l5rMode || s.fateMode || s.rollAndKeepMode || s.torMode
-	},{
-		label: 'Conan 2d20',
-		name: 'conanMode',
-		isDisabled: s => s.wrathAndGloryMode || s.cthulhuMode || s.warhammerMode || s.infinityMode || s.narrativeDice || s.l5rMode || s.fateMode || s.rollAndKeepMode || s.torMode
-	},{
-		label: 'Infinity 2d20',
-		name: 'infinityMode',
-		isDisabled: s => s.wrathAndGloryMode || s.cthulhuMode || s.warhammerMode || s.conanMode || s.narrativeDice || s.l5rMode || s.fateMode || s.rollAndKeepMode || s.torMode
-	},{
-		label: 'Narrative Dice',
-		name: 'narrativeDice',
-		isDisabled: s => s.wrathAndGloryMode || s.cthulhuMode || s.conanMode || s.infinityMode || s.warhammerMode || s.l5rMode || s.fateMode || s.rollAndKeepMode || s.torMode
-	},{
-		label: 'Fate',
-		name: 'fateMode',
-		isDisabled: s => s.wrathAndGloryMode || s.cthulhuMode || s.conanMode || s.infinityMode || s.warhammerMode || s.narrativeDice || s.l5rMode || s.rollAndKeepMode || s.torMode
-	},{
-		label: 'Roll and Keep',
-		name: 'rollAndKeepMode',
-		isDisabled: s => s.wrathAndGloryMode || s.cthulhuMode || s.conanMode || s.infinityMode || s.warhammerMode || s.narrativeDice || s.fateMode || s.l5rMode || s.torMode
-	},{
-		label: 'L5R 5e',
-		name: 'l5rMode',
-		isDisabled: s => s.wrathAndGloryMode || s.cthulhuMode || s.conanMode || s.infinityMode || s.warhammerMode || s.narrativeDice || s.fateMode || s.rollAndKeepMode || s.torMode
-	}, {
-		label: 'Wrath and Glory',
-		name: 'wrathAndGloryMode',
-		isDisabled: s => s.cthulhuMode || s.conanMode || s.infinityMode || s.warhammerMode || s.narrativeDice || s.fateMode || s.rollAndKeepMode || s.l5rMode || s.torMode
-	}, {
-		label: 'The One Ring 2e',
-		name: 'torMode',
-		isDisabled: s => s.wrathAndGloryMode || s.cthulhuMode || s.conanMode || s.infinityMode || s.warhammerMode || s.narrativeDice || s.fateMode || s.rollAndKeepMode || s.l5rMode
-	}];
+	const { mode, toggleMode, useModifier, toggleModifier } = useDiceModuleFormStore();
+	const disableModifier =
+		mode === 'wrathAndGloryMode' ||
+		mode === 'narrativeDice' ||
+		mode === 'rollAndKeepMode' ||
+		mode === 'torMode';
 
 	return (
-		<div className="dice-module dice-form"> {
-			fields.map(({ label, name, isDisabled }) => (
+		<div>
+			<div className="dice-module dice-form">
 				<Form.Check
 					type="checkbox"
-					label={label}
-					name={name}
-					id={name}
-					key={name}
-					checked={state[name]}
-					disabled={isDisabled(state)}
-					onChange={() => toggle(name)}
+					label='Use Modifier'
+					name='useModifier'
+					id='useModifier'
+					key='useModifier'
+					checked={useModifier}
+					disabled={disableModifier}
+					onChange={toggleMode}
 					custom
 				/>
-			))
-		} </div>
+			</div>
+			<div className="dice-module dice-form">
+				<Form.Check
+					type="radio"
+					label='None'
+					name='none'
+					id='none'
+					key='none'
+					checked={state.cthulhuMode}
+					onChange={() => toggleMode('cthulhuMode')}
+					custom
+				/>
+				<Form.Check
+					type="radio"
+					label='Call of Cthulhu 7e'
+					name='cthulhuMode'
+					id='cthulhuMode'
+					key='cthulhuMode'
+					checked={state.cthulhuMode}
+					onChange={() => toggleMode('cthulhuMode')}
+					custom
+				/>
+				<Form.Check
+					type="radio"
+					label='Warhammer'
+					name='warhammerMode'
+					id='warhammerMode'
+					key='warhammerMode'
+					checked={state.warhammerMode}
+					onChange={() => toggleMode('warhammerMode')}
+					custom
+				/>
+				<Form.Check
+					type="radio"
+					label='Conan 2d20'
+					name='conanMode'
+					id='conanMode'
+					key='conanMode'
+					checked={state.conanMode}
+					onChange={() => toggleMode('conanMode')}
+					custom
+				/>
+				<Form.Check
+					type="radio"
+					label='Infinity 2d20'
+					name='infinityMode'
+					id='infinityMode'
+					key='infinityMode'
+					checked={state.infinityMode}
+					onChange={() => toggleMode('infinityMode')}
+					custom
+				/>
+				<Form.Check
+					type="radio"
+					label='Narrative Dice'
+					name='narrativeDice'
+					id='narrativeDice'
+					key='narrativeDice'
+					checked={state.narrativeDice}
+					onChange={() => toggleMode('narrativeDice')}
+					custom
+				/>
+				<Form.Check
+					type="radio"
+					label='Fate'
+					name='fateMode'
+					id='fateMode'
+					key='fateMode'
+					checked={state.fateMode}
+					onChange={() => toggleMode('fateMode')}
+					custom
+				/>
+				<Form.Check
+					type="radio"
+					label='Roll and Keep'
+					name='rollAndKeepMode'
+					id='rollAndKeepMode'
+					key='rollAndKeepMode'
+					checked={state.rollAndKeepMode}
+					onChange={() => toggleMode('rollAndKeepMode')}
+					custom
+				/>
+				<Form.Check
+					type="radio"
+					label='L5R 5e'
+					name='l5rMode'
+					id='l5rMode'
+					key='l5rMode'
+					checked={state.l5rMode}
+					onChange={() => toggleMode('l5rMode')}
+					custom
+				/>
+				<Form.Check
+					type="radio"
+					label='Wrath and Glory'
+					name='wrathAndGloryMode'
+					id='wrathAndGloryMode'
+					key='wrathAndGloryMode'
+					checked={state.wrathAndGloryMode}
+					onChange={() => toggleMode('wrathAndGloryMode')}
+					custom
+				/>
+				<Form.Check
+					type="radio"
+					label='The One Ring 2e'
+					name='torMode'
+					id='torMode'
+					key='torMode'
+					checked={state.torMode}
+					onChange={() => toggleMode('torMode')}
+					custom
+				/>
+			</div>
+		</div>
 	);
 }
 

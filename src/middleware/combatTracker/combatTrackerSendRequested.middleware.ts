@@ -7,7 +7,7 @@ import diceModuleOptionsStore from "../../components/DiceModuleOptions/store";
 
 export default (store: any) => (next: any) => (action: any) => {
 	if (action.type === COMBAT_TRACKER_SEND_REQUESTED) {
-		const showAdvantage = diceModuleOptionsStore.getState().state.warhammerMode;
+		const showAdvantage = diceModuleOptionsStore.getState().mode === 'warhammerMode';
 
 		const combatTrackerState = useCombatTrackerStore.getState();
 		const { combatants, zones } = combatTrackerState;
