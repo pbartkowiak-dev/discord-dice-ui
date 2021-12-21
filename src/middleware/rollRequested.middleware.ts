@@ -43,7 +43,7 @@ interface rollDiceResult {
 
 export default (store: any) => (next: any) => (action: any) => {
 	if (action.type === DICE_ROLL_REQUESTED) {
-		const diceModuleForm = diceModuleOptionsStore.getState().state;
+		const { mode } = diceModuleOptionsStore.getState();
 
 		let {
 			diceType,
@@ -57,46 +57,46 @@ export default (store: any) => (next: any) => (action: any) => {
 
 		const diceTypeNum = getDieNumberVal(diceType);
 		const result = {} as rollDiceResult;
-	
+
 		if (fortune) {
 			diceAmount = diceAmount - fortune;
 		}
-	
+
 		if (itemsToStay?.length) {
 			diceAmount = diceAmount - itemsToStay.length;
 		}
-	
+
 		result.results = getResultsArray(diceTypeNum, diceAmount);
-	
+
 		if (itemsToStay?.length) {
 			diceAmount = diceAmount + itemsToStay.length;
 		}
-	
+
 		result.modifier = modifier;
 		result.diceAmount = diceAmount;
 		result.diceType = diceType;
 		result.diceTypeNum = diceTypeNum;
-	
+
 		if (fortune) {
 			for (let i = 0; i < fortune; i++) {
 				result.results.push(1);
 			}
 		}
-	
+
 		if (itemsToStay?.length) {
 			for (let i = 0; i < itemsToStay.length; i++) {
 				result.results.push(itemsToStay[i]);
 			}
 		}
-	
+
 		// Sort results
 		result.results = result.results.sort((a: number, b: number) => a - b);
-	
+
 		result.totalWithModifier = result.results.reduce((a, b) => Number(a) + Number(b), Number(modifier));
 		result.totalWithoutModifier = result.totalWithModifier - Number(modifier);
 		result.highest = Math.max(...result.results);
 		result.lowest = Math.min(...result.results);
-	
+
 		if (diceType === D6_CONAN) {
 			const combatDieResults = result.results.reduce((total, current) => {
 				if (current >= 5) {
@@ -113,7 +113,7 @@ export default (store: any) => (next: any) => (action: any) => {
 
 		if (diceType === D6_INFINITY) {
 			const combatDieResults = result.results.reduce((total, current) => {
-				if (current === 6) {					
+				if (current === 6) {
 					total.effects = total.effects + 1;
 				} else if (current === 1 || current === 2) {
 					total.dmg = total.dmg + current;
@@ -134,7 +134,7 @@ export default (store: any) => (next: any) => (action: any) => {
 				false
 			);
 		}
-	
+
 		if (modifier === 0) {
 			result.modSymbol = '';
 		} else if (modifier > 0) {
@@ -162,21 +162,19 @@ export default (store: any) => (next: any) => (action: any) => {
 			}
 		}
 
-		if (diceModuleForm.conanMode && diceType === D20_CONAN_TEST) {
+		if (mode === 'conanMode' && diceType === D20_CONAN_TEST) {
 			store.dispatch(conanDiceRolled({
 				result,
 				rollOptions: {
 					...action.payload,
-					...diceModuleForm,
 					assistanceDiceResults: result.assistanceDiceResults
 				}
 			}));
-		} else if (diceModuleForm.infinityMode && diceType === D20_INFINITY_TEST) {
+		} else if (mode === 'infinityMode' && diceType === D20_INFINITY_TEST) {
 			store.dispatch(infinityDiceRolled({
 				result,
 				rollOptions: {
 					...action.payload,
-					...diceModuleForm,
 					assistanceDiceResults: result.assistanceDiceResults
 				}
 			}));
@@ -185,7 +183,6 @@ export default (store: any) => (next: any) => (action: any) => {
 				result,
 				rollOptions: {
 					...action.payload,
-					...diceModuleForm
 				}
 			}));
 		}

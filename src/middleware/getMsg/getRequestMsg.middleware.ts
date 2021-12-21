@@ -7,13 +7,14 @@ import { DICE_ROLLED, requestMsgReady } from '../../actions/roll.actions';
 import { MINUS, PLUS } from '../../consts/fateConsts';
 import { EYE_SCORE, GANDALF_SCORE } from "../../consts/torDice";
 import { EYE_DESCRIPTION, GANDALF_DESCRIPTION } from "../../components/tor/getDiscordMsgData";
+import diceModuleOptionsStore from "../../components/DiceModuleOptions/store";
 
 export default (store:any) => (next:any) => (action:any) => {
 	if (action.type === DICE_ROLLED) {
+		const { useModifier } = diceModuleOptionsStore.getState();
 		const state = store.getState();
 		const { userSettings } = state;
 		const { rerollCount } = state;
-
 		const { payload } = action;
 		const { result, rollOptions } = payload;
 		const {
@@ -59,7 +60,7 @@ export default (store:any) => (next:any) => (action:any) => {
 
 		let description = '';
 
-		if (rollOptions.useModifier && (!isCombatDie && !(isConanHitLocationDie || isInfinityHitLocationDie))) {
+		if (useModifier && (!isCombatDie && !(isConanHitLocationDie || isInfinityHitLocationDie))) {
 			description = `**Modifier**: \`${modSymbol}${Math.abs(modifier)}\`.`;
 		}
 

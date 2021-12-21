@@ -14,7 +14,7 @@ import { submitRoll } from "../../actions/roll.actions";
 
 function DiceModule () {
 	const dispatch = useDispatch();
-	const { warhammerMode, conanMode, infinityMode, cthulhuMode, fateMode, torMode } = useDiceModuleFormStore(( { state }) => state);
+	const { mode } = useDiceModuleFormStore(( state ) => state);
 
 	const handleRollDice = (diceType: string, diceAmount?: number) => {
 		let diceAmountToRoll: number;
@@ -27,7 +27,7 @@ function DiceModule () {
 				diceAmountToRoll = 1;
 			}
 		} else {
-			diceAmountToRoll = diceAmount
+			diceAmountToRoll = diceAmount;
 		}
 
 		dispatch(submitRoll({
@@ -38,17 +38,17 @@ function DiceModule () {
 
 	// @TODO MOVE TO ONE DICE SET GETTER
 	let diceSetType;
-	if (warhammerMode) {
+	if (mode === 'warhammerMode') {
 		diceSetType = WARHAMMER;
-	} else if(conanMode) {
+	} else if (mode === 'conanMode') {
 		diceSetType = CONAN;
-	} else if(infinityMode) {
+	} else if (mode === 'infinityMode') {
 		diceSetType = INFINITY;
-	} else if (cthulhuMode) {
+	} else if (mode === 'cthulhuMode') {
 		diceSetType = COC;
-	} else if (fateMode) {
+	} else if (mode === 'fateMode') {
 		diceSetType = FATE_DICE;
-	} else if (torMode) {
+	} else if (mode === 'torMode') {
 		diceSetType = TOR_DICE;
 	} else {
 		diceSetType = CLASSIC;

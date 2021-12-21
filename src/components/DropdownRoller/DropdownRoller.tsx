@@ -14,12 +14,8 @@ interface DropdownRoller {
 function DropdownRoller({ onToggle } : DropdownRoller) {
 	const [show, setShow] = useState(false);
 	const dispatch = useDispatch();
-
-	const diceModuleForm = useDiceModuleFormStore(( { state }) => state);
-	const warhammerMode = diceModuleForm?.warhammerMode;
-
+	const { mode } = useDiceModuleFormStore(( state ) => state);
 	const diceRolls = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
-
 	const dropdownRef = useRef(null);
 
 	const closeDropdown = () => {
@@ -68,7 +64,7 @@ function DropdownRoller({ onToggle } : DropdownRoller) {
 			</Dropdown.Toggle>
 			<Dropdown.Menu>
 				<div ref={dropdownRef}>
-					{ warhammerMode && <>
+					{ mode === 'warhammerMode' && <>
 						<Dropdown.Item
 							className={styles.dropdownItem}
 							as="div"

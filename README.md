@@ -205,16 +205,28 @@ In order to get started, **Discord's server admin has to create a Webhook** and 
 ## 🔗 Query Parameters <a id="query-params"></a>
 Several settings can by passed directly in the URL in the following format:
 <pre xmlns="http://www.w3.org/1999/html">
-discord-dice-ui.herokuapp.com/<font color="green"><b>?q=</b></font>foo123<b><font color="orange">&username=</font></b>Django<font color="blue"><b>&sl=</b></font>fast
+discord-dice-ui.herokuapp.com/<font color="green"><b>?q=</b></font>foo123<b><font color="orange">&username=</font></b>Django<font color="blue"><b>&sl=</b></font>fast<font color="red"><b>&mode=</b></font>cthulhuMode
 </pre>
 Available parameters:
--  `q` - Discord Webhook URL
--  `username` - Discord UI Username
+- `q` - Discord Webhook URL
+- `username` - Discord UI Username
 - `sl` - Warhammer Success Level calculation method. Available values:
   - `4e` for default Warhammer 4e Success Level
   - `fast` for Warhammer 4e Fast Success Level
   - `2e` for default Warhammer 2e Degrees of Success
   - `dh` for default Dark Heresy 2e Degrees of Success
+- `mode` - Game mode. Available values:
+    - `none` - Default game mode
+    - `warhammerMode` - Warhammer game mode
+    - `cthulhuMode` - Call of Cthulhu game mode
+    - `conanMode` - Conan game mode
+    - `infinityMode` - Infinity game mode
+    - `narrativeDice` - Default game mode
+    - `rollAndKeepMode` - L5R 1e game mode
+    - `l5rMode` - L5R 5e game mode
+    - `fateMode` - Fate game mode
+    - `wrathAndGloryMod` - Wrath & Glory game mode
+    - `torMode` - The One Ring 2e game mode
 
 
 

@@ -51,7 +51,7 @@ export default (store:any) => (next:any) => (action:any) => {
 		store.dispatch(resetRollCounter());
 		store.dispatch(resetSelectedDice());
 
-		const diceModuleForm = diceModuleOptionsStore.getState().state;
+		const { mode, useModifier } = diceModuleOptionsStore.getState();
 		const { diceType, diceAmount } = action.payload;
 
 		store.dispatch(storeSelectedDice({
@@ -63,17 +63,17 @@ export default (store:any) => (next:any) => (action:any) => {
 			xCardStore.getState().openModal();
 		} else if (diceType === TOR_SKILL_TEST) {
 			torStore.getState().openModal();
-		} else if (action?.payload?.pool && diceModuleForm.wrathAndGloryMode) {
+		} else if (action?.payload?.pool && mode === 'wrathAndGloryMode') {
 			wrathAndGloryStore.getState().rollDice({...action.payload.pool});
-		} else if (action?.payload?.pool && diceModuleForm.rollAndKeepMode) {
+		} else if (action?.payload?.pool && mode === 'rollAndKeepMode') {
 			store.dispatch(requestRollAndKeepRoll({
 				...action.payload
 			}));
-		} else if (action?.payload?.pool && diceModuleForm.l5rMode) {
+		} else if (action?.payload?.pool && mode === 'l5rMode') {
 			store.dispatch(requestL5rRoll({
 				...action.payload
 			}));
-		} else if (action?.payload?.pool && diceModuleForm.narrativeDice) {
+		} else if (action?.payload?.pool && mode === 'narrativeDice') {
 			store.dispatch(requestNarrativeDicePoolRoll({
 				...action.payload
 			}));
@@ -84,9 +84,9 @@ export default (store:any) => (next:any) => (action:any) => {
 		} else if (diceType === COMBAT_TRACKER) {
 			// @ts-ignore
 			combatTrackerStore.setState({ isModalOpen: true });
-		} else if (diceModuleForm.cthulhuMode && diceType === D100_SL) {
+		} else if (mode === 'cthulhuMode' && diceType === D100_SL) {
 			store.dispatch(openCthulhuModal());
-		} else if (diceModuleForm.warhammerMode && diceType === D100_SL) {
+		} else if (mode === 'warhammerMode' && diceType === D100_SL) {
 			store.dispatch(openWarhammerModal())
 		} else if (diceType === D20_CONAN_TEST) {
 			store.dispatch(openConanModal());
@@ -116,7 +116,7 @@ export default (store:any) => (next:any) => (action:any) => {
 			store.dispatch(openWarhammerMoneyModal());
 		} else if (diceType === CTHULHU_SHEET_MODAL) {
 			store.dispatch(openCthulhuSheetModal());
-		} else if (diceModuleForm.useModifier) {
+		} else if (useModifier) {
 			store.dispatch(openModifierModal());
 		} else {
 			store.dispatch(requestRoll({

@@ -116,8 +116,8 @@ export default function Combatant({
 	const lockCombatant = useCombatTrackerStore(({ lockCombatant }) => lockCombatant);
 	const hoverZone = useCombatTrackerStore(({ hoverZone }) => hoverZone);
 
-	const diceModuleForm = useDiceModuleFormStore(( { state }) => state);
-	const showAdvantage = diceModuleForm?.warhammerMode;
+	const { mode } = useDiceModuleFormStore(( state) => state);
+	const showAdvantage = mode === 'warhammerMode';
 
 	const handleStart = () => {
 		setIsDragging(true);

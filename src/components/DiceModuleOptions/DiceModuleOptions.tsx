@@ -8,8 +8,8 @@ import styles from '../DiceModule/DiceModule.module.css';
 import useDiceModuleFormStore from "./store";
 
 function DiceModuleOptions() {
-	const diceModuleFormState = useDiceModuleFormStore(( { state }) => state);
-	const hasAnyOptionActive = !!Object.values(diceModuleFormState).filter(value => value).length;
+	const { mode, useModifier } = useDiceModuleFormStore(( state ) => state);
+	const hasAnyOptionActive = mode !== 'none' || useModifier;
 	const titleClass = `${ hasAnyOptionActive ? `${styles.title} ${styles.active}` : styles.title }`;
 	const indicatorClass = `${ hasAnyOptionActive ? styles.visible : styles.invisible} ${styles.indicator}`;
 	const indicator = <span className={indicatorClass}><FontAwesomeIcon icon={faCircle} /></span>;
