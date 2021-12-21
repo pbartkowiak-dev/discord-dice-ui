@@ -6,3 +6,8 @@
 .dice-module-header {
 	text-align: left;
 }
+
+.dice-module.roll-options {
+	text-align: left;
+	margin-bottom: 10px;
+}

@@ -13,7 +13,15 @@ type Mode =
 |	'l5rMode'
 |	'fateMode'
 |	'wrathAndGloryMode'
-|	'torMode'
+|	'torMode';
+
+export const disallowModifierFor: Mode[] = [
+	'l5rMode',
+	'torMode',
+	'narrativeDice',
+	'rollAndKeepMode',
+	'wrathAndGloryMode',
+];
 
 type State = {
 	useModifier: boolean
@@ -25,7 +33,13 @@ type State = {
 const useStore = create<State>(persist(((set, get) => ({
 	useModifier: false,
 	mode: 'none',
-	toggleMode: (mode) => set({ mode }),
+	toggleMode: (mode) => {
+		set({ mode });
+
+		if (disallowModifierFor.includes(mode)) {
+			set({ useModifier: false });
+		}
+	},
 	toggleModifier: () => {
 		const state = get();
 		set({ useModifier: !state.useModifier });

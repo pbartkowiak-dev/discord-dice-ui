@@ -1,20 +1,16 @@
 // @ts-nocheck
 import React from 'react';
 import Form from 'react-bootstrap/Form';
-import useDiceModuleFormStore from './store';
+import useDiceModuleFormStore, { disallowModifierFor } from './store';
 import './DiceModuleForm.css';
 
 function DiceModuleForm() {
 	const { mode, toggleMode, useModifier, toggleModifier } = useDiceModuleFormStore();
-	const disableModifier =
-		mode === 'wrathAndGloryMode' ||
-		mode === 'narrativeDice' ||
-		mode === 'rollAndKeepMode' ||
-		mode === 'torMode';
+	const disableModifier = disallowModifierFor.includes(mode);
 
 	return (
 		<div>
-			<div className="dice-module dice-form">
+			<div className="dice-module roll-options">
 				<Form.Check
 					type="checkbox"
 					label='Use Modifier'
