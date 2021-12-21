@@ -167,7 +167,6 @@ export default (store: any) => (next: any) => (action: any) => {
 				result,
 				rollOptions: {
 					...action.payload,
-					mode,
 					assistanceDiceResults: result.assistanceDiceResults
 				}
 			}));
@@ -176,7 +175,6 @@ export default (store: any) => (next: any) => (action: any) => {
 				result,
 				rollOptions: {
 					...action.payload,
-					mode,
 					assistanceDiceResults: result.assistanceDiceResults
 				}
 			}));
@@ -185,7 +183,6 @@ export default (store: any) => (next: any) => (action: any) => {
 				result,
 				rollOptions: {
 					...action.payload,
-					mode
 				}
 			}));
 		}

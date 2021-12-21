@@ -14,6 +14,7 @@ import { FateResult } from '../../consts/fateConsts';
 import { FateSymbol } from "../utils/FateSymbol";
 import { EYE_SCORE, GANDALF_SCORE } from "../../consts/torDice";
 import { EYE_DESCRIPTION, GANDALF_DESCRIPTION } from "../../components/tor/getDiscordMsgData";
+import diceModuleOptionsStore from "../../components/DiceModuleOptions/store";
 
 const IconUp = <FontAwesomeIcon icon={faArrowAltCircleUp} />;
 const IconDown = <FontAwesomeIcon icon={faArrowAltCircleDown} />;
@@ -23,6 +24,7 @@ const IconSun = <FontAwesomeIcon icon={faSun} />;
 
 const getLocalMsg = (store:any) => (next:any) => (action:any) => {
 	if (action.type === DICE_ROLLED) {
+		const { useModifier } = diceModuleOptionsStore.getState();
 		const state = store.getState();
 		const { rerollCount } = state;
 
@@ -67,14 +69,14 @@ const getLocalMsg = (store:any) => (next:any) => (action:any) => {
 		const isInfinityHitLocationDie = rollOptions.diceType === D20_INFINITY_HL;
 		const isFate = fateResults && fateResults.length;
 
-		if (rollOptions.useModifier && (!isCombatDie && !(isConanHitLocationDie || isInfinityHitLocationDie))) {
+		if (useModifier && (!isCombatDie && !(isConanHitLocationDie || isInfinityHitLocationDie))) {
 			fields.push(
 				<>Modifier: {modifierWithSymbol}.</>
 			);
 		}
 
-		if ((hasMultipleDice || rollOptions.useModifier || isFate) && (!isCombatDie && !(isConanHitLocationDie || isInfinityHitLocationDie))) {
-			if (rollOptions.useModifier) {
+		if ((hasMultipleDice || useModifier || isFate) && (!isCombatDie && !(isConanHitLocationDie || isInfinityHitLocationDie))) {
+			if (useModifier) {
 				fields.push(
 					<>{IconRight} Total (with {modifierWithSymbol} modifier): <CodeSpan>{fateResultTotal || totalWithModifier}</CodeSpan>.</>
 				);
@@ -179,7 +181,6 @@ const getLocalMsg = (store:any) => (next:any) => (action:any) => {
 			title,
 			fields,
 			rollOptions: {
-				...rollOptions,
 				...rollOptions,
 			},
 			results
