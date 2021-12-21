@@ -23,10 +23,11 @@ function DiceModuleForm() {
 					key='useModifier'
 					checked={useModifier}
 					disabled={disableModifier}
-					onChange={toggleMode}
+					onChange={toggleModifier}
 					custom
 				/>
 			</div>
+			<h5 className="dice-module-header">Select a game mode</h5>
 			<div className="dice-module dice-form">
 				<Form.Check
 					type="radio"
@@ -34,8 +35,8 @@ function DiceModuleForm() {
 					name='none'
 					id='none'
 					key='none'
-					checked={state.cthulhuMode}
-					onChange={() => toggleMode('cthulhuMode')}
+					checked={mode === 'none'}
+					onChange={() => toggleMode('none')}
 					custom
 				/>
 				<Form.Check
@@ -44,7 +45,7 @@ function DiceModuleForm() {
 					name='cthulhuMode'
 					id='cthulhuMode'
 					key='cthulhuMode'
-					checked={state.cthulhuMode}
+					checked={mode === 'cthulhuMode'}
 					onChange={() => toggleMode('cthulhuMode')}
 					custom
 				/>
@@ -54,7 +55,7 @@ function DiceModuleForm() {
 					name='warhammerMode'
 					id='warhammerMode'
 					key='warhammerMode'
-					checked={state.warhammerMode}
+					checked={mode === 'warhammerMode'}
 					onChange={() => toggleMode('warhammerMode')}
 					custom
 				/>
@@ -64,7 +65,7 @@ function DiceModuleForm() {
 					name='conanMode'
 					id='conanMode'
 					key='conanMode'
-					checked={state.conanMode}
+					checked={mode === 'conanMode'}
 					onChange={() => toggleMode('conanMode')}
 					custom
 				/>
@@ -74,7 +75,7 @@ function DiceModuleForm() {
 					name='infinityMode'
 					id='infinityMode'
 					key='infinityMode'
-					checked={state.infinityMode}
+					checked={mode === 'infinityMode'}
 					onChange={() => toggleMode('infinityMode')}
 					custom
 				/>
@@ -84,7 +85,7 @@ function DiceModuleForm() {
 					name='narrativeDice'
 					id='narrativeDice'
 					key='narrativeDice'
-					checked={state.narrativeDice}
+					checked={mode === 'narrativeDice'}
 					onChange={() => toggleMode('narrativeDice')}
 					custom
 				/>
@@ -94,7 +95,7 @@ function DiceModuleForm() {
 					name='fateMode'
 					id='fateMode'
 					key='fateMode'
-					checked={state.fateMode}
+					checked={mode === 'fateMode'}
 					onChange={() => toggleMode('fateMode')}
 					custom
 				/>
@@ -104,7 +105,7 @@ function DiceModuleForm() {
 					name='rollAndKeepMode'
 					id='rollAndKeepMode'
 					key='rollAndKeepMode'
-					checked={state.rollAndKeepMode}
+					checked={mode === 'rollAndKeepMode'}
 					onChange={() => toggleMode('rollAndKeepMode')}
 					custom
 				/>
@@ -114,7 +115,7 @@ function DiceModuleForm() {
 					name='l5rMode'
 					id='l5rMode'
 					key='l5rMode'
-					checked={state.l5rMode}
+					checked={mode === 'l5rMode'}
 					onChange={() => toggleMode('l5rMode')}
 					custom
 				/>
@@ -124,7 +125,7 @@ function DiceModuleForm() {
 					name='wrathAndGloryMode'
 					id='wrathAndGloryMode'
 					key='wrathAndGloryMode'
-					checked={state.wrathAndGloryMode}
+					checked={mode === 'wrathAndGloryMode'}
 					onChange={() => toggleMode('wrathAndGloryMode')}
 					custom
 				/>
@@ -134,7 +135,7 @@ function DiceModuleForm() {
 					name='torMode'
 					id='torMode'
 					key='torMode'
-					checked={state.torMode}
+					checked={mode === 'torMode'}
 					onChange={() => toggleMode('torMode')}
 					custom
 				/>

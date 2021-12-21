@@ -2,3 +2,7 @@
 .custom-control label {
 	cursor: pointer;
 }
+
+.dice-module-header {
+	text-align: left;
+}
