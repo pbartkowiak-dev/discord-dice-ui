@@ -1,25 +1,25 @@
 .active {
-	color: #007bff;
+  color: #007bff;
 }
 
 .title {
-	position: relative;
-	transition: .1s
+  position: relative;
+  transition: 0.1s;
 }
 
 .indicator {
-	font-size: 8px;
-	position: absolute;
-	right: -10px;
-	top: -2px;
-	transition: .1s;
-	color: #007bff;
+  font-size: 8px;
+  position: absolute;
+  right: -10px;
+  top: -2px;
+  transition: 0.1s;
+  color: #007bff;
 }
 
 .visible {
-	opacity: 1;
+  opacity: 1;
 }
 
 .invisible {
-	opacity: 0;
+  opacity: 0;
 }

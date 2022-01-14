@@ -1,51 +1,51 @@
 .logo {
-	height: 35px;
-	display: none;
+  height: 35px;
+  display: none;
 }
 
 .logo-small {
-	height: 35px;
+  height: 35px;
 }
 
 .icon-container {
-	position: relative;
+  position: relative;
 }
 
 .icon-settings {
-	font-size: 25px;
-	margin-left: 15px;
-	color: #212529;
+  font-size: 25px;
+  margin-left: 15px;
+  color: #212529;
 }
 
 .icon-danger {
-	top: -9px;
-	right: -9px;
-	position: absolute;
+  top: -9px;
+  right: -9px;
+  position: absolute;
 }
 
 .settings-text-danger {
-	color: var(--header-bg-failure);
-	font-weight: bold;
+  color: var(--header-bg-failure);
+  font-weight: bold;
 }
 
 .navbar {
-	padding: 0.3rem 1rem;
+  padding: 0.3rem 1rem;
 }
 
 @media only screen and (min-width: 480px) {
-	.logo-small {
-		display: none;
-	}
-	.logo {
-		display: inline-block;
-	}
+  .logo-small {
+    display: none;
+  }
+  .logo {
+    display: inline-block;
+  }
 }
 
 @media only screen and (min-width: 960px) {
-	.logo {
-		height: auto;
-	}
-	.icon-settings {
-		font-size: 35px;
-	}
+  .logo {
+    height: auto;
+  }
+  .icon-settings {
+    font-size: 35px;
+  }
 }

@@ -1,11 +1,11 @@
 .icon {
-	display: none;
-	color: #7c7c7c;
-	font-size: 16px;
+  display: none;
+  color: #7c7c7c;
+  font-size: 16px;
 }
 
 @media only screen and (min-width: 480px) {
-	.icon {
-		display: inline-block;
-	}
+  .icon {
+    display: inline-block;
+  }
 }

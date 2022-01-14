@@ -1,83 +1,77 @@
 :root {
-	--col-gap-mobile : 2px;
-	--col-gap : 8px;
+  --col-gap-mobile: 2px;
+  --col-gap: 8px;
 }
 
 .dice-module-container {
-	width: 100%;
-	text-align: center;
-	display: flex;
-	justify-content: center;
-	flex-direction: column;
-	align-items: center;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
 
 .dice-module {
-	max-width: 350px;
-	width: 98%;
-	margin-bottom: 5px;
+  max-width: 350px;
+  width: 98%;
+  margin-bottom: 5px;
 }
 
 .dice-options .card-body {
-	padding: 10px;
+  padding: 10px;
 }
 
 .dice-form {
-	width: 100%;
-	text-align: left;
-	display: grid;
-	row-gap: 1px;
+  width: 100%;
+  text-align: left;
+  display: grid;
+  row-gap: 1px;
 }
 
 .dice-list {
-	display: grid;
-	grid-gap:
-		var(--col-gap-mobile)
-		var(--col-gap-mobile);
-	grid-template-columns: 1fr;
-	margin-bottom: 35px;
+  display: grid;
+  grid-gap: var(--col-gap-mobile) var(--col-gap-mobile);
+  grid-template-columns: 1fr;
+  margin-bottom: 35px;
 }
 
 @media only screen and (min-width: 480px) {
-	.dice-module {
-		max-width: 1080px;
-	}
-	.dice-options .card-body {
-		padding: 15px;
-	}
-	.dice-list {
-		grid-gap:
-		var(--col-gap)
-		var(--col-gap);
-		grid-template-columns: 1fr 1fr 1fr 1fr;
-		margin-bottom: 15px;
-	}
+  .dice-module {
+    max-width: 1080px;
+  }
+  .dice-options .card-body {
+    padding: 15px;
+  }
+  .dice-list {
+    grid-gap: var(--col-gap) var(--col-gap);
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    margin-bottom: 15px;
+  }
 }
 
 @media only screen and (min-width: 640px) {
-	.dice-form {
-		display: grid;
-		grid-auto-flow: column;
-		grid-template-columns: auto;
-		grid-template-rows: 1fr 1fr 1fr 1fr;
-	}
+  .dice-form {
+    display: grid;
+    grid-auto-flow: column;
+    grid-template-columns: auto;
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+  }
 }
 
 @media only screen and (min-width: 960px) {
-	.dice-module {
-		max-width: 1080px;
-	}
-	.dice-options .card-body {
-		padding: 15px;
-	}
-	.dice-form {
-		grid-template-rows: 1fr 1fr 1fr;
-	}
-	.dice-list {
-		grid-gap:
-		var(--col-gap)
-		var(--col-gap);
-		grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-		margin-bottom: 15px;
-	}
+  .dice-module {
+    max-width: 1080px;
+  }
+  .dice-options .card-body {
+    padding: 15px;
+  }
+  .dice-form {
+    grid-template-rows: 1fr 1fr 1fr;
+  }
+  .dice-list {
+    grid-gap: var(--col-gap) var(--col-gap);
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    margin-bottom: 15px;
+  }
 }

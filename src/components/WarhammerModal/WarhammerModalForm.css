@@ -1,50 +1,50 @@
 .percent-icon-container {
-	position: relative;
+  position: relative;
 }
 
 .percent-icon {
-	position: absolute;
-	right: -22px;
-	font-size: 18px;
-	top: 18px;
-	color: #6e6e6e;
+  position: absolute;
+  right: -22px;
+  font-size: 18px;
+  top: 18px;
+  color: #6e6e6e;
 }
 
-.form-invalid .percent-icon{
-	color: #dc3545;
+.form-invalid .percent-icon {
+  color: #dc3545;
 }
 
 .tooltip-fast-sl-icon {
-	color: #7c7c7c;
+  color: #7c7c7c;
 }
 
 .tooltip-fast-sl .tooltip-inner {
-	text-align: left;
+  text-align: left;
 }
 
 .tooltip-failed {
-	color: #dc3545
+  color: #dc3545;
 }
 
 .tooltip-success {
-	color: #3cb778;
+  color: #3cb778;
 }
 
 .specialSLContainer {
-	margin-bottom: 15px;
+  margin-bottom: 15px;
 }
 
 .specialSLContainer input {
-	margin-right: 10px;
+  margin-right: 10px;
 }
 
 .specialSLContainer label {
-	display: block;
-	margin-bottom: 0;
+  display: block;
+  margin-bottom: 0;
 }
 
 .skill-level-field--with-range {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

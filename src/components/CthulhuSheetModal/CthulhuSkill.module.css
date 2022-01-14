@@ -1,75 +1,74 @@
 .container {
-    display: flex;
-    -webkit-column-break-inside: avoid;
-    page-break-inside: avoid;
-    break-inside: avoid;
+  display: flex;
+  -webkit-column-break-inside: avoid;
+  page-break-inside: avoid;
+  break-inside: avoid;
 }
 
-
 .noValue {
-    opacity: .7;
+  opacity: 0.7;
 }
 
 .containerLabel {
-    display: flex;
-    align-items: center;
-    padding: 0 5px;
-    flex: 1;
-    text-align: left;
+  display: flex;
+  align-items: center;
+  padding: 0 5px;
+  flex: 1;
+  text-align: left;
 }
 
 .containerDerived {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .skillName {
-    line-height: 15px;
-    font-size: 15px;
+  line-height: 15px;
+  font-size: 15px;
 }
 
 .input {
-    text-align: center;
+  text-align: center;
 }
 
 .inputMain {
-    width: 40px;
-    height: 40px;
-    border: 1px solid #bebebe;
-    font-size: 110%;
+  width: 40px;
+  height: 40px;
+  border: 1px solid #bebebe;
+  font-size: 110%;
 }
 
 .inputDerived {
-    width: 30px;
-    height: 20px;
-    font-size: 90%;
-    border: 1px solid #bebebe;
-    border-left: 0;
+  width: 30px;
+  height: 20px;
+  font-size: 90%;
+  border: 1px solid #bebebe;
+  border-left: 0;
 }
 
 .inputTop {
-    border-top-right-radius: 10px;
-    border-bottom: 0;
+  border-top-right-radius: 10px;
+  border-bottom: 0;
 }
 
 .die {
-    width: 43px;
-    height: 43px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
+  width: 43px;
+  height: 43px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 }
 
 .dieImg {
-    width: 85%;
-    filter: grayscale(1);
+  width: 85%;
+  filter: grayscale(1);
 }
 
 .container:hover .dieImg {
-    filter: grayscale(0);
+  filter: grayscale(0);
 }
 
 .container:hover {
-    background: #fafafa;
+  background: #fafafa;
 }

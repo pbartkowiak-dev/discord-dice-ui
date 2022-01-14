@@ -1,22 +1,23 @@
-[![Discord Dice Ui](./public/logo.png)]() 
+[![Discord Dice Ui](./public/logo.png)]()
 
 # 🎲 Discord Dice UI
 
 > **Discord Dice UI** is a website based app which can be integrated easily with Discord server. In short, it offers a neat interface to roll dice and provides more advanced functions and dice manipulations for the supported systems. I conceived it as a simpler alternative to more complex VTTs, and as a more advanced alternative to traditional, command driven Discord bots.
 
-Table of content:  
+Table of content:
+
 - [The App Overview](#overview)
-    * Supported Systems:
-        + [Call of Cthulhu 7e](#call-of-cthulhu)
-        + [Warhammer](#warhammer)
-        + [Wrath & Glory](#wrath-and-glory)
-        + [Conan 2d20](#conan-2d20)
-        + [Infinity 2d20](#infinity-2d20)
-        + [Legend of the Five Rings 1e](#l5r1e)
-        + [Legend of the Five Rings 5e](#l5r5e)    
-        + [Narrative Dice](#narrative-dice)    
-        + [Fate](#fate)    
-        + [The One Ring 2e](#the-one-ring-2e)    
+  - Supported Systems:
+    - [Call of Cthulhu 7e](#call-of-cthulhu)
+    - [Warhammer](#warhammer)
+    - [Wrath & Glory](#wrath-and-glory)
+    - [Conan 2d20](#conan-2d20)
+    - [Infinity 2d20](#infinity-2d20)
+    - [Legend of the Five Rings 1e](#l5r1e)
+    - [Legend of the Five Rings 5e](#l5r5e)
+    - [Narrative Dice](#narrative-dice)
+    - [Fate](#fate)
+    - [The One Ring 2e](#the-one-ring-2e)
 - [Combat Tracker](#combat-tracker)
 - [X-Card](#x-card)
 - [Discord Configuration](#discord-configuration)
@@ -59,6 +60,7 @@ The app can also help with adding and subtracting gold crowns, silver shillings 
 [![Warhammer Money Converter](./public/money_converter.png)]()
 
 ## Wrath & Glory <a id="wrath-and-glory"></a>
+
 - neat, colorful, and interactive interface
 - skill test with automatical Icons calculation
 - various number of Wrath Dice in a roll
@@ -117,6 +119,7 @@ Roll Results:
 ## The One Ring 2e <a id="the-one-ring-2e"></a>
 
 The app now allows to roll unique TOR dice. It calculates the roll results automatically and takes into the consideration factors:
+
 - Hero's conditions (_Weary_, _Miserable_)
 - Rolling the _Favoured_ or _Ill-Favoured Roll_
 - Rolling as an Adversary (reverses results for the Feat Die)
@@ -134,25 +137,26 @@ Results Modal:
 Results on Discord:  
 [![TOR Results on Discord](./public/tor-discord-results.png)]()
 
---------------------------------------------
+---
 
 ## ⚔️ Combat Tracker <a id="combat-tracker"></a>
 
 The Combat Tracker lets you organize the combat and share the current state of the battlefield with other players on Discord. It supports:
+
 - creating combat zones and moving combatants between them
 - adding descriptive conditions
 - adding descriptive wounds
 - sorting combatants in the initiative order
 - tracking HP
 - tracking the advantage (Warhammer 4e support)
-- creating combatants of the same type easily with one click (the _Copy_ button)  
+- creating combatants of the same type easily with one click (the _Copy_ button)
 - saving the favorite combatants for the latter encounters
 
 [![Combat Tracker UI](./public/combat-tracker-1.png)]()
 
 [![Combat Tracker on Discord](./public/combat-tracker-2.png)]()
 
---------------------------------------------
+---
 
 ## X-Card <a id="x-card"></a>
 
@@ -164,50 +168,56 @@ The X-Card is an optional tool created by John Stavropoulos that allows anyone i
 
 You'll find more details on the X-Card under the following link: [http://tinyurl.com/x-card-rpg](http://tinyurl.com/x-card-rpg)
 
---------------------------------------------
+---
 
 ## 🔧 Discord Configuration <a id="discord-configuration"></a>
 
 In order to get started, **Discord's server admin has to create a Webhook** and share a special link with other users. Read below how to do it.
 
 1. As a server's admin open your chat's context menu.
-![how-to-1](./public/how-to-0.png)
+   ![how-to-1](./public/how-to-0.png)
 
 2. Select _Server Settings_ from the context menu.
-![how-to-2](./public/how-to-1.png)
+   ![how-to-2](./public/how-to-1.png)
 
 3. Select _Webhooks_ in the left side menu and then press the button _Create Webhook_.
-![how-to-3](./public/how-to-2.png)
+   ![how-to-3](./public/how-to-2.png)
 
 4. Name your Webhook and provide an icon (optionally). **Copy a link** to obtain your unique Webhook url and press **Save** button to close the modal.
-![how-to-4](./public/how-to-3.png)
-🛑 **Never share your Webhook link publicly and keep it a secret. You don't want to allow strangers to publish messages in your chat.**   
+   ![how-to-4](./public/how-to-3.png)
+   🛑 **Never share your Webhook link publicly and keep it a secret. You don't want to allow strangers to publish messages in your chat.**
 
 5. Now you can share the Webhook url with other players in two ways:
-    1. **Via link param**.  
-    Provide your players a link to an app which looks like this:
-    ```
-    https://discord-dice-ui.herokuapp.com/?q=UNIQUE_CODE_FROM_YOUR_DICORD_WEBHOOK
-    ```
 
-    > 💡 **HINT**: You can generate the link using _Copy App Link_ button in the Setting Modal:
-    >
-    > ![how-to-5](./public/how-to-5.png)
+   1. **Via link param**.  
+      Provide your players a link to an app which looks like this:
 
-    2. **Manually**.  
-    Alternatively, every user has to enter the provided Webhook link url in the Settings modal inside the app. Entering the username is required as well.
-    ![how-to-5](./public/how-to-4.png)
+   ```
+   https://discord-dice-ui.herokuapp.com/?q=UNIQUE_CODE_FROM_YOUR_DICORD_WEBHOOK
+   ```
+
+   > 💡 **HINT**: You can generate the link using _Copy App Link_ button in the Setting Modal:
+   >
+   > ![how-to-5](./public/how-to-5.png)
+
+   2. **Manually**.  
+      Alternatively, every user has to enter the provided Webhook link url in the Settings modal inside the app. Entering the username is required as well.
+      ![how-to-5](./public/how-to-4.png)
 
 6. Saving the Webhook in the app will connect the app with the Discord server.
 
---------------------------------------------
+---
 
 ## 🔗 Query Parameters <a id="query-params"></a>
+
 Several settings can by passed directly in the URL in the following format:
+
 <pre xmlns="http://www.w3.org/1999/html">
 discord-dice-ui.herokuapp.com/<font color="green"><b>?q=</b></font>foo123<b><font color="orange">&username=</font></b>Django<font color="blue"><b>&sl=</b></font>fast<font color="red"><b>&mode=</b></font>cthulhuMode
 </pre>
+
 Available parameters:
+
 - `q` - Discord Webhook URL
 - `username` - Discord UI Username
 - `sl` - Warhammer Success Level calculation method. Available values:
@@ -216,22 +226,20 @@ Available parameters:
   - `2e` for default Warhammer 2e Degrees of Success
   - `dh` for default Dark Heresy 2e Degrees of Success
 - `mode` - Game mode. Available values:
-    - `none` - Default game mode
-    - `warhammerMode` - Warhammer game mode
-    - `cthulhuMode` - Call of Cthulhu game mode
-    - `conanMode` - Conan game mode
-    - `infinityMode` - Infinity game mode
-    - `narrativeDice` - Default game mode
-    - `rollAndKeepMode` - L5R 1e game mode
-    - `l5rMode` - L5R 5e game mode
-    - `fateMode` - Fate game mode
-    - `wrathAndGloryMod` - Wrath & Glory game mode
-    - `torMode` - The One Ring 2e game mode
+  - `none` - Default game mode
+  - `warhammerMode` - Warhammer game mode
+  - `cthulhuMode` - Call of Cthulhu game mode
+  - `conanMode` - Conan game mode
+  - `infinityMode` - Infinity game mode
+  - `narrativeDice` - Default game mode
+  - `rollAndKeepMode` - L5R 1e game mode
+  - `l5rMode` - L5R 5e game mode
+  - `fateMode` - Fate game mode
+  - `wrathAndGloryMod` - Wrath & Glory game mode
+  - `torMode` - The One Ring 2e game mode
 
+---
 
-
-
---------------------------------------------
 ## 👨‍💻 Developers' Info <a id="dev-info"></a>
 
 ### Production build

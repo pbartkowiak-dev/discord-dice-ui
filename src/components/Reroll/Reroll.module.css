@@ -1,45 +1,45 @@
 .container {
-	margin-top: 5px;
-	padding-top: 5px;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+  margin-top: 5px;
+  padding-top: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .row {
-	width: 100%;
-	position: relative;
-	text-align: center;
+  width: 100%;
+  position: relative;
+  text-align: center;
 }
 
 .rollItem {
-	font-size: 20px !important;
-	width: 35px;
-	opacity: .6;
-	cursor: pointer;
-	transition: .1s;
+  font-size: 20px !important;
+  width: 35px;
+  opacity: 0.6;
+  cursor: pointer;
+  transition: 0.1s;
 }
 
 .rollItem:hover,
 .rollItem.active:hover {
-	opacity: .8;
+  opacity: 0.8;
 }
 
 .rollItem.active {
-	opacity: 1;
-	box-shadow: inset 0 0 0 1px black;
+  opacity: 1;
+  box-shadow: inset 0 0 0 1px black;
 }
 
 .rerollInfo {
-	font-size: 15px;
+  font-size: 15px;
 }
 
 .selectItems {
-	margin-bottom: 5px;
+  margin-bottom: 5px;
 }
 
 .resultsElementsRow {
-	margin-top: 4px;
-	margin-bottom: 4px;
+  margin-top: 4px;
+  margin-bottom: 4px;
 }

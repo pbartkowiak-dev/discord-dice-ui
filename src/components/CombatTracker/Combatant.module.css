@@ -1,123 +1,123 @@
 .container {
-    position: relative;
+  position: relative;
 }
 
 .table {
-    display: grid;
-    grid-template-columns: 0.25fr 0.25fr 2.5fr 1fr 1fr;
+  display: grid;
+  grid-template-columns: 0.25fr 0.25fr 2.5fr 1fr 1fr;
 }
 
 .tableWithAdvantage {
-    grid-template-columns: 0.25fr 0.25fr 2.25fr 0.25fr 1fr 1fr;
+  grid-template-columns: 0.25fr 0.25fr 2.25fr 0.25fr 1fr 1fr;
 }
 
 .dragHandle {
-    cursor: grab;
+  cursor: grab;
 }
 
 .cell {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    border-left: 1px solid #c6c6c6;
-    border-top: 1px solid #c6c6c6;
-    flex-direction: column;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border-left: 1px solid #c6c6c6;
+  border-top: 1px solid #c6c6c6;
+  flex-direction: column;
 }
 
 .cellCenter {
-    justify-content: center;
+  justify-content: center;
 }
 
 .cell:first-of-type {
-    border-left: 0;
+  border-left: 0;
 }
 
 .textareaContainer {
-    width: 100%;
+  width: 100%;
 }
 
 .textarea {
-    min-height: 45px;
+  min-height: 45px;
 }
 
 .input {
-    width: 100%;
-    height: 100%;
-    border: 0;
-    font-size: 14px;
-    padding: 0 4px;
-    background: transparent;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  font-size: 14px;
+  padding: 0 4px;
+  background: transparent;
 }
 
 .initiativeInput {
-    text-align: center;
-    height: 30px;
+  text-align: center;
+  height: 30px;
 }
 
 .initiativeLabel {
-    color: #6e6e6e;
-    font-size: 11px;
-    font-family: 'Roboto Mono', 'Courier New', Courier, monospace;
-    text-transform: uppercase;
-    font-weight: bold;
-    text-align: center;
+  color: #6e6e6e;
+  font-size: 11px;
+  font-family: "Roboto Mono", "Courier New", Courier, monospace;
+  text-transform: uppercase;
+  font-weight: bold;
+  text-align: center;
 }
 
 .buttonRow,
 .hpRow {
-    display: flex;
+  display: flex;
 }
 
 .nameInput {
-    font-weight: bold;
-    font-size: 15px;
-    height: 30px;
+  font-weight: bold;
+  font-size: 15px;
+  height: 30px;
 }
 
 .button {
-    width: 35px;
-    height: 35px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 0;
-    cursor: pointer;
-    margin-right: 5px;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  cursor: pointer;
+  margin-right: 5px;
 }
 
 .button:last-of-type {
-    margin-right: 0;
+  margin-right: 0;
 }
 
 :global(.react-draggable-dragging) {
-    background: #eeeeee;
-    z-index: 99999;
-    pointer-events: none;
+  background: #eeeeee;
+  z-index: 99999;
+  pointer-events: none;
 }
 
-:global(.react-draggable-dragging) .input{
-    background: #eeeeee;
+:global(.react-draggable-dragging) .input {
+  background: #eeeeee;
 }
 
 .hpCounter {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 30px;
-    font-family: 'Roboto Mono', 'Courier New', Courier, monospace;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 30px;
+  font-family: "Roboto Mono", "Courier New", Courier, monospace;
 }
 
 .hpInput {
-    width: auto;
-    font-size: 15px;
-    font-weight: bold;
+  width: auto;
+  font-size: 15px;
+  font-weight: bold;
 }
 
 .hpInputLeft {
-    text-align: right;
+  text-align: right;
 }
 
 .hpInputRight {
-    text-align: left;
-    color: #6e6e6e;
+  text-align: left;
+  color: #6e6e6e;
 }

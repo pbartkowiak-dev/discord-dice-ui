@@ -1,35 +1,41 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { closeWarhammerMoneyModal, warhammerMoneyRecalculated } from '../../actions/modals';
-import WarhammerMoneyModal from './WarhammerMoneyModal';
+import React from "react";
+import { connect } from "react-redux";
+import {
+  closeWarhammerMoneyModal,
+  warhammerMoneyRecalculated,
+} from "../../actions/modals";
+import WarhammerMoneyModal from "./WarhammerMoneyModal";
 
-function mapStateToProps(state:any) {
-	return {
-		userSettings: state.userSettings
-	};
+function mapStateToProps(state: any) {
+  return {
+    userSettings: state.userSettings,
+  };
 }
 
 const mapDispatchToProps = {
-	closeWarhammerMoneyModal,
-	warhammerMoneyRecalculated
+  closeWarhammerMoneyModal,
+  warhammerMoneyRecalculated,
 };
 
 function WarhammerMoneyModalContainer({
-	showModal,
-	closeWarhammerMoneyModal,
-	warhammerMoneyRecalculated,
-	userSettings
+  showModal,
+  closeWarhammerMoneyModal,
+  warhammerMoneyRecalculated,
+  userSettings,
 }: any) {
-	const hasHookUrl = !!userSettings.hookUrl;
+  const hasHookUrl = !!userSettings.hookUrl;
 
-	return (
-		<WarhammerMoneyModal
-			showModal={showModal}
-			closeModal={closeWarhammerMoneyModal}
-			warhammerMoneyRecalculated={warhammerMoneyRecalculated}
-			hasHookUrl={hasHookUrl}
-		/>
-	);
+  return (
+    <WarhammerMoneyModal
+      showModal={showModal}
+      closeModal={closeWarhammerMoneyModal}
+      warhammerMoneyRecalculated={warhammerMoneyRecalculated}
+      hasHookUrl={hasHookUrl}
+    />
+  );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(WarhammerMoneyModalContainer);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(WarhammerMoneyModalContainer);

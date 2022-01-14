@@ -1,24 +1,24 @@
 .container {
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    color: #767676;
-    font-size: 15px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  color: #767676;
+  font-size: 15px;
 }
 
 .container :global(.form-group) {
-    margin: 0;
-    padding: 0 10px;
+  margin: 0;
+  padding: 0 10px;
 }
 
 .num {
-    width: 46px;
+  width: 46px;
 }
 
 .numLeft {
-    text-align: right;
+  text-align: right;
 }
 
 .numRight {
-    text-align: left;
+  text-align: left;
 }

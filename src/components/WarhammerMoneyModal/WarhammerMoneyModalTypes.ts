@@ -1,25 +1,25 @@
 export interface MoneyStateTypes {
-	'MONEY_GOLD': string;
-	'MONEY_SILVER': string;
-	'MONEY_BRASS': string;
+  MONEY_GOLD: string;
+  MONEY_SILVER: string;
+  MONEY_BRASS: string;
 }
 
-export type OperationsTypes = 'ADD' | 'SUBTRACT';
+export type OperationsTypes = "ADD" | "SUBTRACT";
 
 export interface WarhammerMoneyRecalculatedPayload {
-	moneyState: MoneyStateTypes,
-	moneyToAddState: MoneyStateTypes,
-	newResultState: MoneyStateTypes,
-	operationState: OperationsTypes
+  moneyState: MoneyStateTypes;
+  moneyToAddState: MoneyStateTypes;
+  newResultState: MoneyStateTypes;
+  operationState: OperationsTypes;
 }
 
 export interface WarhammerMoneyModalProps {
-	showModal: boolean;
-	closeModal: () => void;
-	warhammerMoneyRecalculated: (payload: WarhammerMoneyRecalculatedPayload) => void;
-	hasHookUrl: boolean;
+  showModal: boolean;
+  closeModal: () => void;
+  warhammerMoneyRecalculated: (
+    payload: WarhammerMoneyRecalculatedPayload
+  ) => void;
+  hasHookUrl: boolean;
 }
 
-export type MoneyType = 'MONEY_GOLD'
-	| 'MONEY_SILVER'
-	| 'MONEY_BRASS'
+export type MoneyType = "MONEY_GOLD" | "MONEY_SILVER" | "MONEY_BRASS";

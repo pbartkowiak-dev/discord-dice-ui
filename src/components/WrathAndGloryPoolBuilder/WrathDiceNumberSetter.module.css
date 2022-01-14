@@ -1,41 +1,41 @@
 .container {
-    margin: 10px 0 15px;
-    text-align: left;
-    display: flex;
-    padding: 0 10px;
+  margin: 10px 0 15px;
+  text-align: left;
+  display: flex;
+  padding: 0 10px;
 }
 
 .iconsRow {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-    display: inline-flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: inline-flex;
 }
 
 .iconContainer {
-    margin-left: 8px;
-    cursor: pointer;
-    font-size: 19px;
-    opacity: .4;
+  margin-left: 8px;
+  cursor: pointer;
+  font-size: 19px;
+  opacity: 0.4;
 }
 
 .iconSelected {
-    opacity: 1;
+  opacity: 1;
 }
 
 @media only screen and (max-width: 480px) {
-    .container {
-        flex-direction: column;
-        text-align: center;
-    }
+  .container {
+    flex-direction: column;
+    text-align: center;
+  }
 
-    .iconsRow {
-        margin-top: 5px;
-        justify-content: center;
-    }
+  .iconsRow {
+    margin-top: 5px;
+    justify-content: center;
+  }
 
-    .iconContainer {
-        margin-left: 15px;
-        font-size: 20px;
-    }
+  .iconContainer {
+    margin-left: 15px;
+    font-size: 20px;
+  }
 }

@@ -1,200 +1,200 @@
 .diceContainer {
-	display: grid;
-	grid-template-columns: 1fr;
-	grid-gap: 10px;
-	justify-items: center;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 10px;
+  justify-items: center;
 }
 
 .dieCardTitle {
-	width: 100%;
-	padding: 5px 0 1px;
-	background-color: #f1f1f1;
-	border-bottom: 1px solid #ced4da;
+  width: 100%;
+  padding: 5px 0 1px;
+  background-color: #f1f1f1;
+  border-bottom: 1px solid #ced4da;
 }
 
 .dieImage {
-	width: 50px;
-	height: auto;
-	margin-top: 10px;
-	margin-bottom: 10px;
-	align-self: center;
-	cursor: pointer;
-	opacity: .9;
-	transition: .2s;
+  width: 50px;
+  height: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  align-self: center;
+  cursor: pointer;
+  opacity: 0.9;
+  transition: 0.2s;
 }
 
 .dieImageReadOnly,
 .dieImageReadOnly:hover,
 .dieImage.dieImageReadOnly:hover {
-	opacity: .9;
-	cursor: default;
+  opacity: 0.9;
+  cursor: default;
 }
 
 .noImage {
-	border: 0;
+  border: 0;
 }
 
 .bigNumber {
-	display: flex;
-	justify-content: center;
-	text-align: center;
-	font-size: 42px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  font-size: 42px;
 }
 
 .disabled,
 .disabled:hover {
-	opacity: .7 !important;
-	cursor: not-allowed;
+  opacity: 0.7 !important;
+  cursor: not-allowed;
 }
 
 .disabled .dieImageReadOnly,
 .disabled .dieImageReadOnly:hover,
 .disabled .dieImage.dieImageReadOnly:hover {
-	cursor: not-allowed;
+  cursor: not-allowed;
 }
 
 .dieImage:hover {
-	opacity: 1;
+  opacity: 1;
 }
 
 .dieBody {
-	display: flex;
-	flex-direction: column;
-	padding: 0;
-	overflow: hidden;
-	background: transparent;
-	min-height: auto;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  overflow: hidden;
+  background: transparent;
+  min-height: auto;
 }
 
 .input {
-	border: 0;
-	text-align: center;
-	font-size: 36px;
-	height: 55px;
+  border: 0;
+  text-align: center;
+  font-size: 36px;
+  height: 55px;
 }
 
 .btn {
-	height: 55px;
-	width: 56px;
-	font-size: 26px;
+  height: 55px;
+  width: 56px;
+  font-size: 26px;
 }
 
 @media only screen and (min-width: 480px) {
-	.diceContainer {
-		grid-template-columns: 1fr 1fr;
-	}
-	.dieCardTitle {
-		padding: 7px 0 2px;
-	}
-	.dieImage {
-		margin-top: 10px;
-		margin-bottom: 10px;
-	}
-	.input {
-		text-align: center;
-		height: calc(1.5em + .75rem + 2px);
-		font-size: 1rem;
-		border: 1px solid #ced4da;
-	}
-	.btn {
-		width: auto;
-		height: auto;
-		font-size: inherit;
-		line-height: 1.5;
-	}
-	.dieImage {
-		width: 65px;
-	}
-	.dieImageLarge {
-		width: 95px;
-	}
+  .diceContainer {
+    grid-template-columns: 1fr 1fr;
+  }
+  .dieCardTitle {
+    padding: 7px 0 2px;
+  }
+  .dieImage {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  .input {
+    text-align: center;
+    height: calc(1.5em + 0.75rem + 2px);
+    font-size: 1rem;
+    border: 1px solid #ced4da;
+  }
+  .btn {
+    width: auto;
+    height: auto;
+    font-size: inherit;
+    line-height: 1.5;
+  }
+  .dieImage {
+    width: 65px;
+  }
+  .dieImageLarge {
+    width: 95px;
+  }
 }
 
 @media only screen and (min-width: 640px) {
-	.diceContainer {
-		grid-template-columns: 1fr 1fr 1fr;
-		grid-gap: 15px;
-	}
-	.dieFooter {
-		border-top: 0;
-	}
+  .diceContainer {
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 15px;
+  }
+  .dieFooter {
+    border-top: 0;
+  }
 }
 
 @media only screen and (min-width: 960px) {
-	.diceContainer {
-		grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-	}
+  .diceContainer {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  }
 }
 
 .dieFooter {
-	border-top: 1px solid rgba(0,0,0,.125);
-	padding: 0;
-	background: transparent;
+  border-top: 1px solid rgba(0, 0, 0, 0.125);
+  padding: 0;
+  background: transparent;
 }
 
 @media only screen and (min-width: 480px) {
-	.dieFooter {
-		border-top: 0;
-	}
+  .dieFooter {
+    border-top: 0;
+  }
 }
 
 .disabled .dieFooter {
-	border: 1px solid rgba(0,0,0,.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .readOnlyValue {
-	text-align: center;
-	font-size: 21px;
-	color: #212529;
+  text-align: center;
+  font-size: 21px;
+  color: #212529;
 }
 
 .input {
-	text-align: center;
+  text-align: center;
 }
 
 .counterBtnLeft {
-	border-top-left-radius: 0;
+  border-top-left-radius: 0;
 }
 
 .counterBtnRight {
-	border-top-right-radius: 0;
+  border-top-right-radius: 0;
 }
 
 .poolBuilderBtnContainer {
-	display: flex;
-	justify-content: flex-end;
-	margin-top: 15px;
-	margin-bottom: 15px;
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 
 .narrativePoolBuilder :global(.card) {
-	height: auto;
+  height: auto;
 }
 
 @media only screen and (min-width: 640px) {
-	.narrativePoolBuilder :global(.card) {
-		height: 150px;
-	}
-	.narrativePoolBuilder :global(.dice__image) {
-		width: 65px;
-		height: auto;
-	}
+  .narrativePoolBuilder :global(.card) {
+    height: 150px;
+  }
+  .narrativePoolBuilder :global(.dice__image) {
+    width: 65px;
+    height: auto;
+  }
 }
 
 .narrativePoolBuilder :global(.card-body) {
-	padding: 0;
-	display: flex;
-	justify-content: center;
-	align-items: center;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .noBorder {
-	border: 0;
-	border-bottom: 1px solid #ced4da;
+  border: 0;
+  border-bottom: 1px solid #ced4da;
 }
 
 @media only screen and (min-width: 480px) {
-	.noBorder {
-		border: 0;
-	}
+  .noBorder {
+    border: 0;
+  }
 }

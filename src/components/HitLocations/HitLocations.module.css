@@ -1,35 +1,35 @@
 .container {
-	margin-top: 10px;
-	margin-bottom: 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .header {
-	text-align: center;
-	padding: 3px;
-	font-size: 17px;
+  text-align: center;
+  padding: 3px;
+  font-size: 17px;
 }
 
 .body {
-	text-align: center;
-	position: relative;
+  text-align: center;
+  position: relative;
 }
 
 .tooltip {
-	display: none;
-	position: absolute;
-	right: -10px;
-	top: 0;
-	bottom: 0;
-	margin: auto;
-	color: #7c7c7c
+  display: none;
+  position: absolute;
+  right: -10px;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  color: #7c7c7c;
 }
 
 .tooltipBody {
-	text-align: left;
+  text-align: left;
 }
 
 @media only screen and (min-width: 480px) {
-	.tooltip {
-		display: inline-block;
-	}
+  .tooltip {
+    display: inline-block;
+  }
 }

@@ -1,1 +1,1 @@
-export const X_CARD = 'X_CARD';
+export const X_CARD = "X_CARD";

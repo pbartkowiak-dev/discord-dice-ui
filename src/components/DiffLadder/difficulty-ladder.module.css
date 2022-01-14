@@ -1,84 +1,84 @@
 .table {
-	margin: 5px 0 6px;
-	text-align: center;
-	width: 271px;
+  margin: 5px 0 6px;
+  text-align: center;
+  width: 271px;
 }
 
 .td {
-	padding: 0 !important;
-	font-weight: bold;
+  padding: 0 !important;
+  font-weight: bold;
 }
 
 .label {
-	width: 100%;
-	margin: 0 !important;
-	cursor: pointer;
-	transition: .1s;
-	padding: 2px;
-	font-size: 15px;
-	font-weight: 600;
+  width: 100%;
+  margin: 0 !important;
+  cursor: pointer;
+  transition: 0.1s;
+  padding: 2px;
+  font-size: 15px;
+  font-weight: 600;
 }
 
 .input {
-	display: none;
+  display: none;
 }
 
 .simple {
-	color: #3cb778;
+  color: #3cb778;
 }
 .simple:hover,
 .simple.active {
-	background: #3cb778;
-	color: #fff;
+  background: #3cb778;
+  color: #fff;
 }
 
 .average {
-	color: #33804e;
+  color: #33804e;
 }
 .average:hover,
 .average.active {
-	background: #33804e;
-	color: #fff;
+  background: #33804e;
+  color: #fff;
 }
 
 .challenging {
-	color: #FFD700;
+  color: #ffd700;
 }
 .challenging:hover,
 .challenging.active {
-	background: #fff700;
-	color: #333;
+  background: #fff700;
+  color: #333;
 }
 
 .daunting {
-	color: #ffa500;
+  color: #ffa500;
 }
 .daunting:hover,
 .daunting.active {
-	background: #ffa500;
-	color: #fff;
+  background: #ffa500;
+  color: #fff;
 }
 
 .dire {
-	color: #F17C21;
+  color: #f17c21;
 }
 .dire:hover,
 .dire.active {
-	background: #F17C21;
-	color: #fff;
+  background: #f17c21;
+  color: #fff;
 }
 
 .epic {
-	color: #E25241;	
+  color: #e25241;
 }
 .epic:hover,
 .epic.active {
-	background: #E25241;	
-	color: #fff;
+  background: #e25241;
+  color: #fff;
 }
 
 @media only screen and (min-width: 480px) {
-	.table {
-		width: 349px;
-	}
+  .table {
+    width: 349px;
+  }
 }

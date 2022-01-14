@@ -1,252 +1,254 @@
 :root {
-	--header-bg-failure: #E25241;
-	--header-bg: #3CB778;
-	--header-color: #fff;
+  --header-bg-failure: #e25241;
+  --header-bg: #3cb778;
+  --header-color: #fff;
 }
 
 .resultsModalHeader {
-	background: var(--header-bg);
-	color: var(--header-color);
-	display: block;
-	text-align: center;
-	position: relative;
+  background: var(--header-bg);
+  color: var(--header-color);
+  display: block;
+  text-align: center;
+  position: relative;
 }
 
 .resultsModalTitle {
-	text-align: center;
-	font-weight: bold;
-	color: var(--header-color);
-	margin: 2px 0 0;
+  text-align: center;
+  font-weight: bold;
+  color: var(--header-color);
+  margin: 2px 0 0;
 }
 
 .isFailure {
-	background: var(--header-bg-failure);
+  background: var(--header-bg-failure);
 }
 
 .resultsList {
-	list-style: none;
-	text-align: left;
-	margin-bottom: 0;
-	padding-left: 0;
-	padding-bottom: 5px;
-	border-bottom: 1px solid #bebebe;
+  list-style: none;
+  text-align: left;
+  margin-bottom: 0;
+  padding-left: 0;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #bebebe;
 }
 
 :global(.modal-content) {
-	box-sizing: content-box;
+  box-sizing: content-box;
 }
 
 .resultsModalHeader :global(.close) {
-	color: var(--header-color);
-	position: absolute;
-	top: 10px;
-	right: 10px;
+  color: var(--header-color);
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }
 
 .pushedTitle {
-	text-align: center;
-	font-weight: bold;
-	margin-bottom: 2px;
-	font-size: 1.1rem;
-	text-decoration: underline;
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 2px;
+  font-size: 1.1rem;
+  text-decoration: underline;
 }
 
 .resultsBody {
-	font-size: 1rem;
+  font-size: 1rem;
 }
 
 .generalResult {
-	text-align: center;
-	font-weight: bold;
+  text-align: center;
+  font-weight: bold;
 }
 
 .generalResultSuccess {
-	color: var(--header-bg);
+  color: var(--header-bg);
 }
 
 .generalResultFailure {
-	color: var(--header-bg-failure);
+  color: var(--header-bg-failure);
 }
 
 .slResult {
-	margin-top: 1px;
-	border-top: 1px solid #bebebe;
-	padding-top: 1px;
-	text-align: center;
+  margin-top: 1px;
+  border-top: 1px solid #bebebe;
+  padding-top: 1px;
+  text-align: center;
 }
 
 .slResultLabel {
-	font-weight: bold;
-	font-size: 16px;
+  font-weight: bold;
+  font-size: 16px;
 }
 
 .inactive {
-	opacity: .6;
+  opacity: 0.6;
 }
 
 .assistanceIcon {
-	position: absolute;
-	right: 10px;
-	margin: auto;
-	top: 2px;
-	color: #7c7c7c;
+  position: absolute;
+  right: 10px;
+  margin: auto;
+  top: 2px;
+  color: #7c7c7c;
 }
 
 .slResultSpan {
-	font-size: 18px;
-	min-width: 33px;
+  font-size: 18px;
+  min-width: 33px;
 }
 
 .momentumResults {
-	display: flex;
-	justify-content: space-evenly;
+  display: flex;
+  justify-content: space-evenly;
 }
 
 .rollResults {
-	border-bottom: 1px solid #bebebe;
-	padding-bottom: 5px;
-	margin-bottom: 5px;
+  border-bottom: 1px solid #bebebe;
+  padding-bottom: 5px;
+  margin-bottom: 5px;
 }
 
 .conanResultDetails {
-	line-height: 18px;
-	position: relative;
+  line-height: 18px;
+  position: relative;
 }
 
 .conanResultDetailsAssistance {
-	border-bottom: 1px solid #bebebe;
-	padding-bottom: 4px;
-	margin-bottom: 6px;
+  border-bottom: 1px solid #bebebe;
+  padding-bottom: 4px;
+  margin-bottom: 6px;
 }
 
 .infinityResultDetails {
-	line-height: 18px;
-	position: relative;
+  line-height: 18px;
+  position: relative;
 }
 
 .infinityResultDetailsAssistance {
-	border-bottom: 1px solid #bebebe;
-	padding-bottom: 4px;
-	margin-bottom: 6px;
+  border-bottom: 1px solid #bebebe;
+  padding-bottom: 4px;
+  margin-bottom: 6px;
 }
 
 .resultDetailsRow {
-	margin: 0;
+  margin: 0;
 }
 
 .poolResultsBlock {
-	border-bottom: 1px solid #bebebe;
-	padding-bottom: 2px;
-	margin-bottom: 1px;
+  border-bottom: 1px solid #bebebe;
+  padding-bottom: 2px;
+  margin-bottom: 1px;
 }
 
 .resultsBlock {
-	display: flex;
+  display: flex;
 }
 
 .resultsBlockImage {
-	width: 40px;
-	height: auto;
+  width: 40px;
+  height: auto;
 }
 
 .resultsBlockImageContainer {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	padding-right: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-right: 5px;
 }
 
 .resultsBlockContentContainer {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .poolModifierResult {
-	padding-bottom: 3px;
-	margin-bottom: 5px;
-	border-bottom: 1px solid #bebebe;
+  padding-bottom: 3px;
+  margin-bottom: 5px;
+  border-bottom: 1px solid #bebebe;
 }
 
 .narrativeImageResultBg {
-	width: 67px;
-	height: 67px;
-	display: inline-block;
-	background-size: 100%;
-	position: relative;
-	margin-right: 3px;
+  width: 67px;
+  height: 67px;
+  display: inline-block;
+  background-size: 100%;
+  position: relative;
+  margin-right: 3px;
 }
 
 .narrativeImageResult {
-	width: 50px;
-	height: auto;
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+  width: 50px;
+  height: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .narrativeImageResultIsCube {
-	width: 55px;
-	height: 55px;
+  width: 55px;
+  height: 55px;
 }
 
 .narrativeImageResultTwoSymbols img:nth-child(1) {
-	top: 22px;
-	width: 39px;
+  top: 22px;
+  width: 39px;
 }
 
 .narrativeImageResultTwoSymbols img:nth-child(2) {
-	top: 47px;
-	width: 39px;
+  top: 47px;
+  width: 39px;
 }
 
 .narrativeImageResultIsTriangle {
-	padding-top: 22px;
-	width: 40px;
+  padding-top: 22px;
+  width: 40px;
 }
 
 .narrativeImageResultTwoSymbols img:nth-child(1).narrativeImageResultIsTriangle,
-.narrativeImageResultTwoSymbols img:nth-child(2).narrativeImageResultIsTriangle {
-	width: 25px;
+.narrativeImageResultTwoSymbols
+  img:nth-child(2).narrativeImageResultIsTriangle {
+  width: 25px;
 }
 
-.narrativeImageResultTwoSymbols img:nth-child(2).narrativeImageResultIsTriangle {
-	top: 39px;
+.narrativeImageResultTwoSymbols
+  img:nth-child(2).narrativeImageResultIsTriangle {
+  top: 39px;
 }
 
 .narrativeImageResultTwoSymbols.narrativeImageResultIsCube img:nth-child(1),
 .narrativeImageResultTwoSymbols.narrativeImageResultIsCube img:nth-child(2) {
-	width: 37px;
+  width: 37px;
 }
 
 .narrativeImageResultTwoSymbols.narrativeImageResultIsCube img:nth-child(1) {
-	top: 18px;
-	left: 18px;
+  top: 18px;
+  left: 18px;
 }
 
 .narrativeImageResultTwoSymbols.narrativeImageResultIsCube img:nth-child(2) {
-	top: 38px;
-	left: 38px;
+  top: 38px;
+  left: 38px;
 }
 
 .narrativeImageResultIsDodecahedron {
-	padding-top: 8px;
+  padding-top: 8px;
 }
 
 @media only screen and (min-width: 480px) {
-	.resultsBody {
-		font-size: 1.1rem;
-	}
-	.pushedTitle {
-		margin-bottom: 5px;
-		font-size: 1.3rem;
-	}
-	.slResult {
-		margin-top: 5px;
-		padding-top: 5px;
-	}
-	.resultsBlockImage {
-		width: 45px;
-	}
+  .resultsBody {
+    font-size: 1.1rem;
+  }
+  .pushedTitle {
+    margin-bottom: 5px;
+    font-size: 1.3rem;
+  }
+  .slResult {
+    margin-top: 5px;
+    padding-top: 5px;
+  }
+  .resultsBlockImage {
+    width: 45px;
+  }
 }

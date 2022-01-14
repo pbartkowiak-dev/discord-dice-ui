@@ -1,136 +1,136 @@
 .torModalBody {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
 }
 
 .tnContainer {
-    padding-bottom: 5px;
+  padding-bottom: 5px;
 }
 
 .favouredRollSection {
-    border-bottom: 1px solid #bebebe;
-    margin-bottom: 5px;
-    padding-bottom: 5px;
-    padding-top: 5px;
+  border-bottom: 1px solid #bebebe;
+  margin-bottom: 5px;
+  padding-bottom: 5px;
+  padding-top: 5px;
 }
 
 .tnContainerInner {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-content: center;
-    padding-top: 18px;
-    padding-bottom: 26px;
-    width: 150px;
-    margin: 6px auto 0;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  padding-top: 18px;
+  padding-bottom: 26px;
+  width: 150px;
+  margin: 6px auto 0;
 }
 
 .tnInput {
-    width: 70px;
-    height: 60px;
-    text-align: center;
-    font-size: 25px;
-    border: 0;
+  width: 70px;
+  height: 60px;
+  text-align: center;
+  font-size: 25px;
+  border: 0;
 }
 
 .tnResultNumber {
-    font-size: 32px;
-    font-weight: bold;
-    padding: 7px 0 0;
+  font-size: 32px;
+  font-weight: bold;
+  padding: 7px 0 0;
 }
 
 .resultsModifierBlock {
-    align-items: center;
-    padding-left: 17px;
+  align-items: center;
+  padding-left: 17px;
 }
 
 .modifierResult {
-    font-size: 24px;
-    padding-left: 10px;
-    padding-right: 5px;
+  font-size: 24px;
+  padding-left: 10px;
+  padding-right: 5px;
 }
 
 .poolBuilder {
-    display: flex;
-    margin: 0 auto;
-    flex-direction: column;
+  display: flex;
+  margin: 0 auto;
+  flex-direction: column;
 }
 
 .poolBuilderCol {
-    padding: 0 5px;
-    margin: 0 auto;
-    display: flex;
+  padding: 0 5px;
+  margin: 0 auto;
+  display: flex;
 }
 
 .poolBuilderIcon {
-    display: none;
-    align-items: center;
+  display: none;
+  align-items: center;
 }
 
 .poolBuilderIcon svg {
-    margin-bottom: 40px;
+  margin-bottom: 40px;
 }
 
 .failureText {
-    color: var(--header-bg-failure);
+  color: var(--header-bg-failure);
 }
 
 .successText {
-    color: var(--header-bg);
+  color: var(--header-bg);
 }
 
 .struckThroughText {
-    text-decoration: line-through;
+  text-decoration: line-through;
 }
 
 .tnContainerInner:after {
-    position: absolute;
-    content: "";
-    display: block;
-    border: 4px double #858585;
-    width: 70px;
-    height: 70px;
-    transform: rotate(45deg);
-    top: 13px;
-    left: 0;
-    right: 0;
-    margin: auto;
+  position: absolute;
+  content: "";
+  display: block;
+  border: 4px double #858585;
+  width: 70px;
+  height: 70px;
+  transform: rotate(45deg);
+  top: 13px;
+  left: 0;
+  right: 0;
+  margin: auto;
 }
 
 .tnInfoIcon {
-    position: absolute;
-    top: 15px;
-    right: 24px;
+  position: absolute;
+  top: 15px;
+  right: 24px;
 }
 
 .subheader {
-    text-align: center;
-    text-transform: uppercase;
-    font-size: 15px;
-    margin-top: 10px;
-    padding-bottom: 0;
-    color: #6c6c6c;
-    letter-spacing: 1px;
-    font-weight: 400;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 15px;
+  margin-top: 10px;
+  padding-bottom: 0;
+  color: #6c6c6c;
+  letter-spacing: 1px;
+  font-weight: 400;
 }
 
 .subheader__split {
-    display: flex;
-    padding: 0 50px;
-    align-items: center;
-    justify-content: space-evenly;
+  display: flex;
+  padding: 0 50px;
+  align-items: center;
+  justify-content: space-evenly;
 }
 
 .subheader__split > span {
-    flex: 1 0 33.33333%;
+  flex: 1 0 33.33333%;
 }
 
 .checkboxContainer {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .dimmed,
@@ -139,102 +139,101 @@
 .isWeary [data-value="1"],
 .isWeary [data-value="2"],
 .isWeary [data-value="3"] {
-    opacity: .4;
+  opacity: 0.4;
 }
 
 .resultsModal {
-    position: relative;
+  position: relative;
 }
 
 .featDiceResultsBlockContentContainer [data-value="11"],
 .featDiceResultsBlockContentContainer [data-value="12"] {
-    position: relative;
+  position: relative;
 }
 
 .featDiceResultsBlockContentContainer [data-value="11"]:after,
 .featDiceResultsBlockContentContainer [data-value="12"]:after {
-    content: '';
-    position: absolute;
-    width: 23px;
-    height: 28px;
-    background-color: #f4f4f4;
-    background-repeat: no-repeat;
-    background-size: contain;
-    left: 0;
-    border-radius: 5px;
-    background-position: center;
+  content: "";
+  position: absolute;
+  width: 23px;
+  height: 28px;
+  background-color: #f4f4f4;
+  background-repeat: no-repeat;
+  background-size: contain;
+  left: 0;
+  border-radius: 5px;
+  background-position: center;
 }
 
 .featDiceResultsBlockContentContainer [data-value="11"]:after {
-    background-image: url("./assets/eye-icon.png");
+  background-image: url("./assets/eye-icon.png");
 }
 
 .featDiceResultsBlockContentContainer [data-value="12"]:after {
-    background-image: url("./assets/gandalf-rune.png");
+  background-image: url("./assets/gandalf-rune.png");
 }
 
 .equalsRow {
-    display: flex;
-    align-items: center;
-    font-weight: bold;
-    font-size: 22px;
-    height: 35px;
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  font-size: 22px;
+  height: 35px;
 }
 
 .equalsRow > span {
-    height: 100%;
+  height: 100%;
 }
 
 .equalsContainer {
-    padding: 2px 0 0 15px;
-    color: #212529;
+  padding: 2px 0 0 15px;
+  color: #212529;
 }
 
 .totalScore {
-    font-weight: bold;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9;
-    width: 40px;
+  font-weight: bold;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9;
+  width: 40px;
 }
 
 .resultImg {
-    width: 25px;
-    height: auto;
+  width: 25px;
+  height: auto;
 }
 
 .resultIcon {
-    padding-right: 8px;
+  padding-right: 8px;
 }
 
 .specialSuccessesSection {
-   display: flex;
-    font-size: 17px;
-    font-weight: bold;
+  display: flex;
+  font-size: 17px;
+  font-weight: bold;
 }
 
 .specialSuccessesIcon {
-    padding-left: 8px;
+  padding-left: 8px;
 }
 
 @media only screen and (min-width: 480px) {
-    .checkboxContainer {
-        flex-direction: row;
-        align-items: center;
-        margin: 0 5px;
-    }
-    .checkboxContainer * + * {
-        margin: 0 5px;
-    }
+  .checkboxContainer {
+    flex-direction: row;
+    align-items: center;
+    margin: 0 5px;
+  }
+  .checkboxContainer * + * {
+    margin: 0 5px;
+  }
 }
 
 @media only screen and (min-width: 640px) {
-    .poolBuilder {
-        flex-direction: row;
-    }
-    .poolBuilderIcon {
-        display: flex;
-    }
+  .poolBuilder {
+    flex-direction: row;
+  }
+  .poolBuilderIcon {
+    display: flex;
+  }
 }
-

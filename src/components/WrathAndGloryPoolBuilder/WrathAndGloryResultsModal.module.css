@@ -1,434 +1,433 @@
 .modalWrapper {
-    position: relative;
+  position: relative;
 }
 
 .content {
-    display: flex;
-    gap: 15px;
+  display: flex;
+  gap: 15px;
 }
 
 .rightContent {
-    flex: 1;
+  flex: 1;
 }
 
 .leftContent {
-    display: flex;
+  display: flex;
 }
 
 .resultsGridContainer {
-    width: 100%;
-    display: none;
+  width: 100%;
+  display: none;
 }
 
 .resultsGrid {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    grid-gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-gap: 20px;
 }
 
 .resultsGridSeparator {
-    display: none;
+  display: none;
 }
 
 .gridCell {
-    height: 37px;
-    width: 37px;
+  height: 37px;
+  width: 37px;
 }
 
 .resultsTable {
-    border: 1px solid #363030;
-    border-radius: 2px;
-    width: 135px;
-    background: #e8e3dd;
-    padding: 5px;
-    position: relative;
-    display: flex;
+  border: 1px solid #363030;
+  border-radius: 2px;
+  width: 135px;
+  background: #e8e3dd;
+  padding: 5px;
+  position: relative;
+  display: flex;
 }
 
 .resultsTableWrapper {
-    background: #e8e3dd;
-    border: 1px solid #363030;
-    border-radius: 3px;
-    flex: 1;
+  background: #e8e3dd;
+  border: 1px solid #363030;
+  border-radius: 3px;
+  flex: 1;
 }
 
 .exaltedExclamation {
-    position: absolute;
-    top: -15px;
-    left: 50%;
-    right: 0;
-    transform: translateX(-55%);
-    font-weight: bold;
-    font-style: italic;
-    letter-spacing: 1.2px;
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  right: 0;
+  transform: translateX(-55%);
+  font-weight: bold;
+  font-style: italic;
+  letter-spacing: 1.2px;
 }
 
 .exaltedExclamation:before {
-    position: absolute;
-    content: "";
-    bottom: 4px;
-    width: 120%;
-    height: 11px;
-    left: -4px;
-    background: #e8e3dd;
-    z-index:-1;
-    border-radius: 2px;
+  position: absolute;
+  content: "";
+  bottom: 4px;
+  width: 120%;
+  height: 11px;
+  left: -4px;
+  background: #e8e3dd;
+  z-index: -1;
+  border-radius: 2px;
 }
 
 .resultsRowWrapper {
-    position: relative;
+  position: relative;
 }
 
 .resultsRow {
-    padding: 2px 6px;
-    display: flex;
-    gap: 15px;
-    background: #e8e3dd;
+  padding: 2px 6px;
+  display: flex;
+  gap: 15px;
+  background: #e8e3dd;
 }
 
 .extraIconsContainer {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    z-index: 99;
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  z-index: 99;
 }
 
 .extraIcon {
-    font-size: 12px;
-    color: #444343;
+  font-size: 12px;
+  color: #444343;
 }
 
 .divider {
-    height: 1px;
-    background: #363030;
+  height: 1px;
+  background: #363030;
 }
 
 .resultsRow.exaltedIcon {
-    background: #dda92f;
+  background: #dda92f;
 }
 
 .resultsRow.normalIcon {
-    background: #a4bb2c;
+  background: #a4bb2c;
 }
 
 .resultsRow.isSelected {
-    background: #007bff;
+  background: #007bff;
 }
 
 .iconsContainer {
-    text-align: center;
-    line-height: 14px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    position: relative;
+  text-align: center;
+  line-height: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
 }
 
 .dieContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .die {
-    background: #e7dece;
-    width: 32px;
-    height: 32px;
-    border: 1px solid #1d2125;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 23px;
-    border-radius: 6px;
-    overflow: hidden;
-    position: relative;
-    transform-style: preserve-3d;
+  background: #e7dece;
+  width: 32px;
+  height: 32px;
+  border: 1px solid #1d2125;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 23px;
+  border-radius: 6px;
+  overflow: hidden;
+  position: relative;
+  transform-style: preserve-3d;
 }
 
 .die.wrathDie {
-    background: #da7f31;
+  background: #da7f31;
 }
 
 .die.isSelected {
-    background: #007bff;
+  background: #007bff;
 }
 
 .die.wrathDie.isSelected {
-    background: #0d5cb4;
+  background: #0d5cb4;
 }
 
 .die-2 .dot:nth-of-type(1) {
-    position: absolute;
-    top: 5px;
-    left: 5px;
+  position: absolute;
+  top: 5px;
+  left: 5px;
 }
 
 .die-2 .dot:nth-of-type(2) {
-    position: absolute;
-    bottom: 5px;
-    right: 5px;
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
 }
 
 .die-3 .dot:nth-of-type(1) {
-    position: absolute;
-    top: 5px;
-    left: 5px;
+  position: absolute;
+  top: 5px;
+  left: 5px;
 }
 
 .die-3 .dot:nth-of-type(3) {
-    position: absolute;
-    bottom: 5px;
-    right: 5px;
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
 }
 
 .die-4 .dot:nth-of-type(1) {
-    position: absolute;
-    top: 5px;
-    left: 5px;
+  position: absolute;
+  top: 5px;
+  left: 5px;
 }
 
 .die-4 .dot:nth-of-type(2) {
-    position: absolute;
-    top: 5px;
-    right: 5px;
+  position: absolute;
+  top: 5px;
+  right: 5px;
 }
 
 .die-4 .dot:nth-of-type(3) {
-    position: absolute;
-    bottom: 5px;
-    left: 5px;
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
 }
 
 .die-4 .dot:nth-of-type(4) {
-    position: absolute;
-    bottom: 5px;
-    right: 5px;
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
 }
 
 .die-5 .dot:nth-of-type(2) {
-    position: absolute;
-    bottom: 5px;
-    right: 5px;
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
 }
 .die-5 .dot:nth-of-type(3) {
-    position: absolute;
-    bottom: 5px;
-    left: 5px;
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
 }
 .die-5 .dot:nth-of-type(4) {
-    position: absolute;
-    top: 5px;
-    right: 5px;
+  position: absolute;
+  top: 5px;
+  right: 5px;
 }
 .die-5 .dot:nth-of-type(5) {
-    position: absolute;
-    top: 5px;
-    left: 5px;
+  position: absolute;
+  top: 5px;
+  left: 5px;
 }
 .die-6 .dot:nth-of-type(1) {
-    position: absolute;
-    left: 5px;
+  position: absolute;
+  left: 5px;
 }
 
 .die-6 .dot:nth-of-type(2) {
-    position: absolute;
-    right: 5px;
+  position: absolute;
+  right: 5px;
 }
 
 .die-6 .dot:nth-of-type(3) {
-    position: absolute;
-    bottom: 5px;
-    left: 5px;
+  position: absolute;
+  bottom: 5px;
+  left: 5px;
 }
 .die-6 .dot:nth-of-type(4) {
-    position: absolute;
-    bottom: 5px;
-    right: 5px;
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
 }
 
 .die-6 .dot:nth-of-type(5) {
-    position: absolute;
-    top: 5px;
-    left: 5px;
+  position: absolute;
+  top: 5px;
+  left: 5px;
 }
 
 .die-6 .dot:nth-of-type(6) {
-    position: absolute;
-    top: 5px;
-    right: 5px;
+  position: absolute;
+  top: 5px;
+  right: 5px;
 }
 
 .die:after {
-    content: "";
-    position: absolute;
-    width: 60px;
-    height: 60px;
-    background: black;
-    opacity: 0.05;
-    transform: rotate(45deg);
-    top: 7px;
-    left: 5px;
+  content: "";
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background: black;
+  opacity: 0.05;
+  transform: rotate(45deg);
+  top: 7px;
+  left: 5px;
 }
 
 .normalIconGlow {
-    box-shadow: 0 0 0 3px #a4bb2c;
+  box-shadow: 0 0 0 3px #a4bb2c;
 }
 
 .exaltedIconGlow {
-    box-shadow: 0 0 0 3px #dda92f;
+  box-shadow: 0 0 0 3px #dda92f;
 }
 
 .modifier {
-    font-size: 19px;
-    font-weight: bold;
-    font-style: italic;
+  font-size: 19px;
+  font-weight: bold;
+  font-style: italic;
 }
 
 .iconsText {
-    text-transform: uppercase;
-    font-weight: bold;
-    font-size: 10px;
-    text-align: center;
-    font-style: italic;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 10px;
+  text-align: center;
+  font-style: italic;
 }
 
 .dot {
-    font-size: 6px;
+  font-size: 6px;
 }
 
 .rerollButtonsContainer {
-    width: 100%;
-    margin: 10px 0;
-    gap: 10px;
-    display: flex;
-    justify-content: space-between;
-    flex-direction: column;
+  width: 100%;
+  margin: 10px 0;
+  gap: 10px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
 }
 
 .iconsResultsContainer {
-    margin-top: 10px;
-    gap: 15px;
-    display: flex;
-    flex-direction: column;
+  margin-top: 10px;
+  gap: 15px;
+  display: flex;
+  flex-direction: column;
 }
 
 .totalIconsContainer {
-    width: 73px;
-    height: 73px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    text-align: center;
-    background: #3f3f3d;
-    border: 1px solid #3f3f3d;
-    border-radius: 5px;
-    font-size: 24px;
-    color: #fff;
-    line-height: 28px;
-    font-weight: bold;
-    font-style: italic;
+  width: 73px;
+  height: 73px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+  background: #3f3f3d;
+  border: 1px solid #3f3f3d;
+  border-radius: 5px;
+  font-size: 24px;
+  color: #fff;
+  line-height: 28px;
+  font-weight: bold;
+  font-style: italic;
 }
 
 .totalIconsScore {
-    font-size: 32px;
+  font-size: 32px;
 }
 
 .iconsTextContainer {
-    line-height: 10px;
+  line-height: 10px;
 }
 
 .totalText {
-    font-size: 16px;
+  font-size: 16px;
 }
 
 .iconText {
-    font-size: 19px;
+  font-size: 19px;
 }
 
 .iconsResultsData {
-    margin-top: 2px;
-    line-height: 17px;
+  margin-top: 2px;
+  line-height: 17px;
 }
 
 .rerollOverlay {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
 .rerollBackground {
-    width: 100%;
-    height: 100%;
-    z-index: 999;
-    background: #fff;
-    opacity: .6;
-    top: 0;
-    left: 0;
-    position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+  background: #fff;
+  opacity: 0.6;
+  top: 0;
+  left: 0;
+  position: absolute;
 }
 
 .rerollSpinner {
-    position: absolute;
-    top: 40%;
-    left: 50%;
-    z-index: 9999;
-    margin: 0 auto;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  z-index: 9999;
+  margin: 0 auto;
 }
 
 .pointer {
-    cursor: pointer;
-    transition: .1s;
+  cursor: pointer;
+  transition: 0.1s;
 }
 
 .hover {
-    opacity: .8;
-    background: #007bff !important;
+  opacity: 0.8;
+  background: #007bff !important;
 }
 .notAllowed *,
 .notAllowed {
-    cursor: not-allowed;
+  cursor: not-allowed;
 }
 
 .increaseDicePoolContainer {
-    gap: 15px;
-    justify-content: center;
-    align-items: center;
-    display: flex;
-    flex-direction: column;
+  gap: 15px;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .increaseDicePoolButtonContainer,
 .increaseDicePoolCounterContainer {
-    width: 100%;
+  width: 100%;
 }
 
 .increaseDicePoolButtonContainer > button {
-    width: 100%;
+  width: 100%;
 }
 
 @media only screen and (min-width: 480px) {
-    .resultsGridContainer {
-        display: block;
-    }
-    .resultsGridSeparator {
-        display: block;
-    }
-    .iconsResultsContainer {
-        flex-direction: row;
-    }
-    .rerollButtonsContainer {
-        flex-direction: row;
-    }
-    .increaseDicePoolContainer {
-        flex-direction: row;
-    }
-    .increaseDicePoolCounterContainer {
-        width: 130px;
-    }
-    .increaseDicePoolButtonContainer {
-        width: auto;
-    }
-
+  .resultsGridContainer {
+    display: block;
+  }
+  .resultsGridSeparator {
+    display: block;
+  }
+  .iconsResultsContainer {
+    flex-direction: row;
+  }
+  .rerollButtonsContainer {
+    flex-direction: row;
+  }
+  .increaseDicePoolContainer {
+    flex-direction: row;
+  }
+  .increaseDicePoolCounterContainer {
+    width: 130px;
+  }
+  .increaseDicePoolButtonContainer {
+    width: auto;
+  }
 }

@@ -1,27 +1,30 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { closePoolBuilderModal } from '../../actions/modals';
-import { submitRoll } from '../../actions/roll.actions';
-import PoolBuilderModal from './PoolBuilderModal';
-import { PoolBuilderModalPropTypes } from './PoolBuilderModalTypes';
+import React from "react";
+import { connect } from "react-redux";
+import { closePoolBuilderModal } from "../../actions/modals";
+import { submitRoll } from "../../actions/roll.actions";
+import PoolBuilderModal from "./PoolBuilderModal";
+import { PoolBuilderModalPropTypes } from "./PoolBuilderModalTypes";
 
 const mapDispatchToProps = {
-	closePoolBuilderModal,
-	submitRoll
+  closePoolBuilderModal,
+  submitRoll,
 };
 
 function PoolBuilderModalContainer({
-	closePoolBuilderModal,
-	submitRoll,
-	showModal
+  closePoolBuilderModal,
+  submitRoll,
+  showModal,
 }: PoolBuilderModalPropTypes) {
-	return (
-		<PoolBuilderModal
-			closePoolBuilderModal={closePoolBuilderModal}
-			submitRoll={submitRoll}
-			showModal={showModal}
-		/>
-	);
+  return (
+    <PoolBuilderModal
+      closePoolBuilderModal={closePoolBuilderModal}
+      submitRoll={submitRoll}
+      showModal={showModal}
+    />
+  );
 }
 
-export default connect(undefined, mapDispatchToProps)(PoolBuilderModalContainer);
+export default connect(
+  undefined,
+  mapDispatchToProps
+)(PoolBuilderModalContainer);

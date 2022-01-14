@@ -1,25 +1,25 @@
 .container {
-	padding-top: 8px;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+  padding-top: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .row {
-	width: 100%;
-	position: relative;
-	text-align: center;
+  width: 100%;
+  position: relative;
+  text-align: center;
 }
 
 .luckSpends {
-	font-size: 15px;
+  font-size: 15px;
 }
 
 .pushInfoIcon {
-	position: absolute;
-	margin: auto;
-	top: 0;
-	bottom: 0;
-	right: 11px;
+  position: absolute;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  right: 11px;
 }

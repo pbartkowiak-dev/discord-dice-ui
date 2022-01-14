@@ -1,8 +1,8 @@
-import React from 'react';
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import classNames from 'classnames';
-import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
+import classNames from "classnames";
+import Modal from "react-bootstrap/Modal";
+import Button from "react-bootstrap/Button";
 import styles from "../ResultsModal/ResultsModal.module.css";
 import { closeCthulhuResultsModal } from "../../actions/cthulhu.actions";
 import ResultVsSkillRow from "../ResultVsSkillRow/ResultVsSkillRow";
@@ -11,85 +11,88 @@ import joinAsBlocks from "../../utils/joinAsBlocks";
 import CthulhuPushOptions from "./CthulhuPushOptions";
 
 function CthulhuResultsModal() {
-	const dispatch = useDispatch();
-	const hideModal = () => dispatch(closeCthulhuResultsModal());
-	const cthulhuState = useSelector(({ cthulhuState }: any) => cthulhuState);
-	const lastRollOptions = useSelector(({ lastRollOptions }: any) => lastRollOptions);
-	const { showResultsModal, isPushed, results } = cthulhuState;
+  const dispatch = useDispatch();
+  const hideModal = () => dispatch(closeCthulhuResultsModal());
+  const cthulhuState = useSelector(({ cthulhuState }: any) => cthulhuState);
+  const lastRollOptions = useSelector(
+    ({ lastRollOptions }: any) => lastRollOptions
+  );
+  const { showResultsModal, isPushed, results } = cthulhuState;
 
-	const {
-		skillLevel,
-		finalDieResult,
-		successLevels,
-		rollResults,
-	} = results;
+  const { skillLevel, finalDieResult, successLevels, rollResults } = results;
 
-	if (!successLevels) {
-		return null;
-	}
+  if (!successLevels) {
+    return null;
+  }
 
-	const {
-		cthulhuBonus,
-		cthulhuTwoBonus,
-		cthulhuPenalty,
-		cthulhuTwoPenalty
-	} = lastRollOptions;
+  const { cthulhuBonus, cthulhuTwoBonus, cthulhuPenalty, cthulhuTwoPenalty } =
+    lastRollOptions;
 
-	const {
-		isSuccess,
-	} = successLevels;
+  const { isSuccess } = successLevels;
 
-	const resultsJoined = joinAsBlocks(rollResults);
-	let resultsInfo = null;
+  const resultsJoined = joinAsBlocks(rollResults);
+  let resultsInfo = null;
 
-	if (cthulhuBonus || cthulhuTwoBonus) {
-		const dieWord = cthulhuBonus ? 'one Bonus Die' : 'two Bonus Dice';
-		resultsInfo = <>You rolled <strong>{dieWord}</strong>. Results: {resultsJoined}.</>;
-	} else if (cthulhuPenalty || cthulhuTwoPenalty) {
-		const dieWord = cthulhuPenalty ? 'one Penalty Die' : 'two Penalty Dice';
-		resultsInfo = <>You rolled <strong>{dieWord}</strong>. Results: {resultsJoined}.</>;
-	}
+  if (cthulhuBonus || cthulhuTwoBonus) {
+    const dieWord = cthulhuBonus ? "one Bonus Die" : "two Bonus Dice";
+    resultsInfo = (
+      <>
+        You rolled <strong>{dieWord}</strong>. Results: {resultsJoined}.
+      </>
+    );
+  } else if (cthulhuPenalty || cthulhuTwoPenalty) {
+    const dieWord = cthulhuPenalty ? "one Penalty Die" : "two Penalty Dice";
+    resultsInfo = (
+      <>
+        You rolled <strong>{dieWord}</strong>. Results: {resultsJoined}.
+      </>
+    );
+  }
 
-	const skillLevelString = skillLevel <= 9 ? `0${skillLevel}` : `${skillLevel}`;
-	const canPush = !isSuccess && !isPushed;
+  const skillLevelString = skillLevel <= 9 ? `0${skillLevel}` : `${skillLevel}`;
+  const canPush = !isSuccess && !isPushed;
 
-	return (
-		<Modal
-			show={showResultsModal}
-			onHide={hideModal}
-		>
-			<Modal.Header closeButton className={classNames({
-				[styles.resultsModalHeader]: true,
-				[styles.isFailure]: !isSuccess
-			})}>
-				<Modal.Title className={styles.resultsModalTitle}>Roll Results</Modal.Title>
-			</Modal.Header>
-			<Modal.Body>
-				<div className={styles.rollResults}>{ resultsInfo }</div>
+  return (
+    <Modal show={showResultsModal} onHide={hideModal}>
+      <Modal.Header
+        closeButton
+        className={classNames({
+          [styles.resultsModalHeader]: true,
+          [styles.isFailure]: !isSuccess,
+        })}
+      >
+        <Modal.Title className={styles.resultsModalTitle}>
+          Roll Results
+        </Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <div className={styles.rollResults}>{resultsInfo}</div>
 
-				{/* Results vs Skill */}
-				<ResultVsSkillRow
-					skillLevel={skillLevelString}
-					finalDieResult={finalDieResult}
-					isSuccess={isSuccess}
-				/>
+        {/* Results vs Skill */}
+        <ResultVsSkillRow
+          skillLevel={skillLevelString}
+          finalDieResult={finalDieResult}
+          isSuccess={isSuccess}
+        />
 
-				{/* Success Level Ladder */}
-				<SuccessLevelLadder successLevels={successLevels} />
+        {/* Success Level Ladder */}
+        <SuccessLevelLadder successLevels={successLevels} />
 
-				{/* Push */}
-				{canPush && <CthulhuPushOptions
-					skillLevel={skillLevel}
-					finalDieResult={finalDieResult}
-				/>}
-			</Modal.Body>
-			<Modal.Footer>
-				<Button
-					variant="outline-secondary"
-					onClick={hideModal}>Close</Button>
-			</Modal.Footer>
-		</Modal>
-	);
+        {/* Push */}
+        {canPush && (
+          <CthulhuPushOptions
+            skillLevel={skillLevel}
+            finalDieResult={finalDieResult}
+          />
+        )}
+      </Modal.Body>
+      <Modal.Footer>
+        <Button variant="outline-secondary" onClick={hideModal}>
+          Close
+        </Button>
+      </Modal.Footer>
+    </Modal>
+  );
 }
 
 export default CthulhuResultsModal;

@@ -1,13 +1,13 @@
 .custom-control input,
 .custom-control label {
-	cursor: pointer;
+  cursor: pointer;
 }
 
 .dice-module-header {
-	text-align: left;
+  text-align: left;
 }
 
 .dice-module.roll-options {
-	text-align: left;
-	margin-bottom: 10px;
+  text-align: left;
+  margin-bottom: 10px;
 }

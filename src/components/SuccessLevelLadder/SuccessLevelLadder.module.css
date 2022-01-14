@@ -1,47 +1,47 @@
 .successLevelLadder {
-	text-align: center;
-	margin-top: 5px;
-	margin-bottom: 0;
+  text-align: center;
+  margin-top: 5px;
+  margin-bottom: 0;
 }
 
 .successLevelLadder td {
-	padding: 3px;
+  padding: 3px;
 }
 
 .cellInactive {
-	background-color: #f8f8f8;
-	color: #7c7c7c;
+  background-color: #f8f8f8;
+  color: #7c7c7c;
 }
 
 .successActive {
-	color: #fff;
-	background-color: #3cb778;
-	border-color: #3cb778;
-	font-weight: bold;
+  color: #fff;
+  background-color: #3cb778;
+  border-color: #3cb778;
+  font-weight: bold;
 }
 
 .failureActive {
-	color: #fff;
-	background-color: #E25241;
-	border-color: #E25241;
-	font-weight: bold;
+  color: #fff;
+  background-color: #e25241;
+  border-color: #e25241;
+  font-weight: bold;
 }
 
 .cellContainer {
-	position: relative;
+  position: relative;
 }
 
 .cellIcon {
-	display: none;
+  display: none;
 }
 
 @media only screen and (min-width: 480px) {
-	.cellIcon {
-		position: absolute;
-		display: inline-block;
-		right: 5px;
-		top: 0;
-		bottom: 0;
-		margin: auto;
-	}
+  .cellIcon {
+    position: absolute;
+    display: inline-block;
+    right: 5px;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+  }
 }
