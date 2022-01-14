@@ -30,15 +30,15 @@ const TimesIcon = ({ onClick }: { onClick: (e: any) => void }) => (
   </span>
 );
 
-// @ts-ignore
 const createRenderer =
-  (render) =>
+  (render: any) =>
+  // @ts-ignore
   ({ input, label, id, textMuted, meta, disabled }, ...rest) => {
     return <>{render(input, label, id, textMuted, meta, disabled, rest)}</>;
   };
 
-// @ts-ignore
 const renderInput = createRenderer(
+  // @ts-ignore
   (input, label, id, textMuted, meta, disabled) => {
     const { submitFailed, touched, error } = meta;
     const hasError = !!((submitFailed || touched) && error);
@@ -65,8 +65,8 @@ const renderInput = createRenderer(
   }
 );
 
-// @ts-ignore
 const RenderCheckbox = createRenderer(
+  // @ts-ignore
   (input, label, id, textMuted, meta, disabled) => {
     return (
       <Form.Check

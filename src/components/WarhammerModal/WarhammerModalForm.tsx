@@ -19,9 +19,9 @@ const percentIcon = (
   </span>
 );
 
-// @ts-ignore
 const createRenderer =
-  (render) =>
+  (render: any) =>
+  // @ts-ignore
   ({ input, label, id, inputValue, textMuted, meta, disabled }, ...rest) => {
     return (
       <>
@@ -30,8 +30,8 @@ const createRenderer =
     );
   };
 
-// @ts-ignore
 const renderInput = createRenderer(
+  // @ts-ignore
   (input, label, id, textMuted, meta, disabled) => {
     const { submitFailed, touched, error } = meta;
     const hasError = !!((submitFailed || touched) && error);

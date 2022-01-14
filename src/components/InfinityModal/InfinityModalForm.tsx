@@ -10,9 +10,9 @@ import InfoTooltip from "../InfoTooltip/InfoTooltip";
 import tooltip from "../../locale/tooltip";
 import Accordion from "react-bootstrap/Accordion";
 
-// @ts-ignore
 const createRenderer =
-  (render) =>
+  (render: any) =>
+  // @ts-ignore
   ({ input, label, id, textMuted, meta, disabled, placeholder }, ...rest) => {
     return (
       <>
@@ -47,8 +47,8 @@ const renderInput = createRenderer(
   }
 );
 
-// @ts-ignore
 const RenderCheckbox = createRenderer(
+  // @ts-ignore
   (input, label, id, textMuted, meta, disabled) => {
     return (
       <Form.Check

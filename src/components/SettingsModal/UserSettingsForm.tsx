@@ -8,11 +8,12 @@ import { faCopy } from "@fortawesome/free-regular-svg-icons";
 import { DISCORD_WEBHOOK_URL } from "../../consts/urls";
 import Button from "react-bootstrap/Button";
 
-// @ts-ignore
 const createRenderer =
-  (render) =>
+  (render: any) =>
   (
+    // @ts-ignore
     { input, label, id, textMuted, meta, placeholder, onButtonClick },
+    // @ts-ignore
     ...rest
   ) => {
     return (
@@ -31,8 +32,8 @@ const createRenderer =
     );
   };
 
-// @ts-ignore
 const renderInput = createRenderer(
+  // @ts-ignore
   (input, label, id, textMuted, meta, placeholder, onButtonClick) => {
     const { submitFailed, touched, error } = meta;
     const hasError = !!((submitFailed || touched) && error);
