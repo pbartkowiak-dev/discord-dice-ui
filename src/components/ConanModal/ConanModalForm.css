@@ -14,18 +14,6 @@
   margin-bottom: 0;
 }
 
-.conan-field-icon-times {
-  font-size: 24px;
-  opacity: 0.8;
-  color: #7c7c7c;
-  cursor: pointer;
-}
-
-.conan-field-icon-times:hover {
-  color: #bebebe;
-  opacity: 1;
-}
-
 .conan-radio-fields {
   display: grid;
   grid-auto-flow: column;
@@ -51,15 +39,6 @@
 .conan-radio-fields--assistance {
   width: 250px;
   margin-bottom: 0;
-}
-
-.conan-radio-fields--assistance .die-container {
-  width: auto;
-}
-
-.die-container--remove-dice {
-  padding-bottom: 15px;
-  padding-left: 20px;
 }
 
 .assistance .form-label {
@@ -91,10 +70,6 @@
   color: #212529;
 }
 
-.conan-radio-fields--assistance .dice-icon {
-  font-size: 38px;
-}
-
 .conan-radio-fields--dice-to-roll input {
   margin: 0;
   display: none;
@@ -105,12 +80,7 @@
   margin-bottom: 2px;
 }
 
-.conan-die-select {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
+
 
 .fortune {
   padding: 3px 0 5px;
@@ -141,100 +111,8 @@
   margin-bottom: 0;
 }
 
-.die-label--active {
-  font-weight: bold;
-  color: #28a745;
-}
-
-.die-label--active.die-label--assistance {
-  color: #b8551c;
-}
-
 .assistance-tooltip {
   position: absolute;
   top: 73px;
   right: 125px;
-}
-
-.dice-title {
-  margin-bottom: 0;
-  margin-top: 4px;
-  font-size: 17px;
-  font-weight: bold;
-  text-align: center;
-}
-
-.dice-row {
-  display: flex;
-  justify-content: space-around;
-  width: 460px;
-  margin: 10px auto 3px;
-}
-
-.dice-row-label {
-  cursor: pointer;
-  font-size: 15px;
-}
-
-.dice-icon {
-  font-size: 44px;
-  color: #7e7e7e;
-  cursor: pointer;
-  opacity: 0.8;
-}
-
-.die-container {
-  width: 52px;
-  display: inline-block;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.dice-icon.active {
-  color: #28a745;
-  opacity: 1;
-}
-
-.dice-icon.hovered {
-  color: #bebebe;
-  opacity: 1;
-}
-
-.dice-icon.active.hovered {
-  color: #1ad345;
-  opacity: 1;
-}
-
-.dice-icon--assistance.active {
-  color: #b8551c;
-  opacity: 1;
-}
-.dice-icon--assistance.active.hovered {
-  color: #da8e2c;
-  opacity: 1;
-}
-
-.die-fortune-point {
-  font-size: 21px;
-  position: absolute;
-  top: 7px;
-  margin: 0 auto;
-  right: 11px;
-  font-weight: bold;
-  display: inline-block;
-  background: white;
-  border-radius: 50%;
-  width: 30px;
-  height: 30px;
-  text-align: center;
-  line-height: 31px;
-  color: darkolivegreen;
-  pointer-events: none;
-  display: none;
-}
-
-.die-fortune-point.show {
-  display: inline-block;
 }

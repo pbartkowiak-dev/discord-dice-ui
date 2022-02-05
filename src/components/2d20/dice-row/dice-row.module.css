@@ -1,0 +1,112 @@
+.dieSelect {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.dieContainer {
+    width: 52px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.assistance {
+    width: auto;
+}
+
+.removeDice {
+    padding-bottom: 15px;
+    padding-left: 20px;
+}
+
+.timesIcon {
+    font-size: 24px;
+    opacity: 0.8;
+    color: #7c7c7c;
+    cursor: pointer;
+}
+
+.timesIcon:hover {
+    color: #bebebe;
+    opacity: 1;
+}
+
+.dieLabelActive {
+    font-weight: bold;
+    color: #28a745;
+}
+
+.dieLabelActive.dieLabelAssistance {
+    color: #b8551c;
+}
+
+.dieFortunePoint {
+    font-size: 21px;
+    position: absolute;
+    top: 7px;
+    margin: 0 auto;
+    right: 11px;
+    font-weight: bold;
+    background: white;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    line-height: 31px;
+    color: darkolivegreen;
+    pointer-events: none;
+    display: none;
+}
+
+.dieFortunePoint.show {
+    display: inline-block;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.diceIcon {
+    font-size: 44px;
+    color: #7e7e7e;
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.diceIcon.active {
+    color: #28a745;
+    opacity: 1;
+}
+
+.diceIcon.hovered {
+    color: #bebebe;
+    opacity: 1;
+}
+
+.diceIcon.active.hovered {
+    color: #1ad345;
+    opacity: 1;
+}
+
+.diceIconAssistance {
+    font-size: 38px;
+}
+
+.diceIconAssistance.active {
+    color: #b8551c;
+    opacity: 1;
+}
+.diceIconAssistance.active.hovered {
+    color: #da8e2c;
+    opacity: 1;
+}
+
+.label {
+    color: #7e7e7e;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+}
