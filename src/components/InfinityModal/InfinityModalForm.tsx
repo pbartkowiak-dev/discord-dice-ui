@@ -4,11 +4,11 @@ import { connect } from "react-redux";
 import Form from "react-bootstrap/Form";
 import { Field, reduxForm, formValueSelector } from "redux-form";
 import DiffLadder from "../DiffLadder/DiffLadder";
-import InfinityDiceRow from "./InfinityDiceRow";
 import "./InfinityModalForm.css";
 import InfoTooltip from "../InfoTooltip/InfoTooltip";
 import tooltip from "../../locale/tooltip";
 import Accordion from "react-bootstrap/Accordion";
+import DiceRow from "../2d20/dice-row/dice-row";
 
 const createRenderer =
   (render: any) =>
@@ -53,7 +53,7 @@ const RenderCheckbox = createRenderer(
     return (
       <Form.Check
         type="checkbox"
-        checked={input.value ? true : false}
+        checked={!!input.value}
         label={label}
         disabled={disabled}
         id={id}
@@ -168,7 +168,7 @@ function InfinityModalForm({
       </div>
       <div className="flex-center">
         <div className="infinity-radio-fields infinity-radio-fields--dice-to-roll">
-          <InfinityDiceRow
+          <DiceRow
             dice={dice}
             diceMax={5}
             fortune={fortune}
@@ -241,7 +241,7 @@ function InfinityModalForm({
             <>
               <div className="flex-center">
                 <div className="infinity-radio-fields infinity-radio-fields--dice-to-roll infinity-radio-fields--assistance">
-                  <InfinityDiceRow
+                  <DiceRow
                     dice={assistanceDice}
                     diceMax={4}
                     fortune={0}
