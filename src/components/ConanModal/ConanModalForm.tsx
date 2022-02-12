@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import Form from "react-bootstrap/Form";
 import { Field, reduxForm, formValueSelector } from "redux-form";
 import DiffLadder from "../DiffLadder/DiffLadder";
-import "./ConanModalForm.css";
+import "../2d20/form/form.css";
 import DiceRow from "../2d20/dice-row/dice-row";
 import { focusLabel, tnLabel, untrainedTestLabel } from "../2d20/labels";
 import Fortune from "../2d20/fortune/fortune";
@@ -61,7 +61,10 @@ function ConanModalForm({
 
   return (
     <Form
-      className={invalid && (submitFailed || anyTouched) ? "form-invalid" : ""}
+      className={classNames({
+        "conan-mode-form": true,
+        "form-invalid": invalid && (submitFailed || anyTouched),
+      })}
       id="conan-mode-form"
       onSubmit={handleSubmit}
     >

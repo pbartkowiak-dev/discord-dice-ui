@@ -39,7 +39,7 @@ export const Assistance: FC<Props> = ({
         <Accordion.Collapse eventKey="1">
           <>
             <div className="flex-center">
-              <div className="infinity-radio-fields infinity-radio-fields--dice-to-roll infinity-radio-fields--assistance">
+              <div className="conan-radio-fields conan-radio-fields--dice-to-roll conan-radio-fields--assistance">
                 <DiceRow
                   dice={assistanceDice}
                   diceMax={4}
@@ -51,8 +51,8 @@ export const Assistance: FC<Props> = ({
                 />
               </div>
             </div>
-            <div className="skill-level-field infinity-skill-level-field infinity-skill-level-field--assistance">
-              <div className="infinity-field">
+            <div className="skill-level-field conan-skill-level-field conan-skill-level-field--assistance">
+              <div className="conan-field">
                 <Field
                   id="assistanceFocus"
                   name="assistanceFocus"
@@ -61,7 +61,7 @@ export const Assistance: FC<Props> = ({
                   component={renderInput}
                 />
               </div>
-              <div className="infinity-field">
+              <div className="conan-field">
                 <Field
                   id="assistanceTn"
                   name="assistanceTn"
