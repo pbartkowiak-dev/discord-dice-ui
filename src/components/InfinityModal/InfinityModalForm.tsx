@@ -9,6 +9,14 @@ import InfoTooltip from "../InfoTooltip/InfoTooltip";
 import tooltip from "../../locale/tooltip";
 import Accordion from "react-bootstrap/Accordion";
 import DiceRow from "../2d20/dice-row/dice-row";
+import {
+  assistanceFocusLabel,
+  assistanceTnLabel,
+  focusLabel,
+  tnLabel,
+  untrainedTestLabel,
+} from "../2d20/labels";
+import Fortune from "../2d20/fortune/fortune";
 
 const createRenderer =
   (render: any) =>
@@ -113,36 +121,6 @@ function InfinityModalForm({
     }
   };
 
-  const focusLabel = (
-    <span>
-      Foc <InfoTooltip placement="bottom" content={tooltip.focusInfo} />
-    </span>
-  );
-  const tnLabel = (
-    <span>
-      TN <InfoTooltip placement="bottom" content={tooltip.tnInfo} />
-    </span>
-  );
-  const untrainedTestLabel = (
-    <span>
-      Untrained Test{" "}
-      <InfoTooltip placement="bottom" content={tooltip.untrainedTestInfo} />
-    </span>
-  );
-
-  const assistanceFocusLabel = (
-    <span>
-      Foc{" "}
-      <InfoTooltip placement="bottom" content={tooltip.assistanceFocusInfo} />
-    </span>
-  );
-  const assistanceTnLabel = (
-    <span>
-      TN{" "}
-      <InfoTooltip placement="bottom" content={tooltip.assistanceFocusInfo} />
-    </span>
-  );
-
   return (
     <Form
       className={invalid && (submitFailed || anyTouched) ? "form-invalid" : ""}
@@ -186,47 +164,7 @@ function InfinityModalForm({
         component={RenderCheckbox}
         disabled={focus && Number(focus) > 0}
       />
-      <div className="fortune">
-        <h5 className="fortune-title">
-          Fortune <InfoTooltip content={tooltip.fortuneInfo} />
-        </h5>
-        <div className="infinity-radio-fields">
-          <label className="dice-row-label">
-            <Field name="fortune" component="input" type="radio" value="0" />
-            None
-          </label>
-          <label className="dice-row-label">
-            <Field
-              name="fortune"
-              component="input"
-              type="radio"
-              value="1"
-              onChange={() => (Number(dice) < 3 ? change("dice", "3") : null)}
-            />
-            One
-          </label>
-          <label className="dice-row-label">
-            <Field
-              name="fortune"
-              component="input"
-              type="radio"
-              value="2"
-              onChange={() => (Number(dice) < 4 ? change("dice", "4") : null)}
-            />
-            Two
-          </label>
-          <label className="dice-row-label">
-            <Field
-              name="fortune"
-              component="input"
-              type="radio"
-              value="3"
-              onChange={() => (Number(dice) < 5 ? change("dice", "5") : null)}
-            />
-            Three
-          </label>
-        </div>
-      </div>
+      <Fortune className="fortune" dice={dice} change={change} />
       <div className="assistance">
         <Accordion defaultActiveKey="0">
           <Accordion.Toggle
