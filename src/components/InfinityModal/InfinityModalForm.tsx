@@ -5,72 +5,11 @@ import Form from "react-bootstrap/Form";
 import { Field, reduxForm, formValueSelector } from "redux-form";
 import DiffLadder from "../DiffLadder/DiffLadder";
 import "./InfinityModalForm.css";
-import InfoTooltip from "../InfoTooltip/InfoTooltip";
-import tooltip from "../../locale/tooltip";
-import Accordion from "react-bootstrap/Accordion";
 import DiceRow from "../2d20/dice-row/dice-row";
-import {
-  assistanceFocusLabel,
-  assistanceTnLabel,
-  focusLabel,
-  tnLabel,
-  untrainedTestLabel,
-} from "../2d20/labels";
+import { focusLabel, tnLabel, untrainedTestLabel } from "../2d20/labels";
 import Fortune from "../2d20/fortune/fortune";
-
-const createRenderer =
-  (render: any) =>
-  // @ts-ignore
-  ({ input, label, id, textMuted, meta, disabled, placeholder }, ...rest) => {
-    return (
-      <>
-        {render(input, label, id, textMuted, meta, disabled, placeholder, rest)}
-      </>
-    );
-  };
-
-// @ts-ignore
-const renderInput = createRenderer(
-  (input, label, id, textMuted, meta, disabled, placeholder) => {
-    const { submitFailed, touched, error } = meta;
-    const hasError = !!((submitFailed || touched) && error);
-
-    return (
-      <Form.Group controlId={id}>
-        <Form.Label>{label}</Form.Label>
-        <Form.Control
-          type="text"
-          size="sm"
-          placeholder={placeholder || "0"}
-          autoComplete="off"
-          isInvalid={hasError}
-          {...input}
-        />
-        {hasError && (
-          <Form.Control.Feedback type="invalid">{error}</Form.Control.Feedback>
-        )}
-        {textMuted && <Form.Text className="text-muted">{textMuted}</Form.Text>}
-      </Form.Group>
-    );
-  }
-);
-
-const RenderCheckbox = createRenderer(
-  // @ts-ignore
-  (input, label, id, textMuted, meta, disabled) => {
-    return (
-      <Form.Check
-        type="checkbox"
-        checked={!!input.value}
-        label={label}
-        disabled={disabled}
-        id={id}
-        custom
-        {...input}
-      />
-    );
-  }
-);
+import Assistance from "../2d20/assistance/assistance";
+import { RenderCheckbox, renderInput } from "../2d20/form/form";
 
 function InfinityModalForm({
   change,
@@ -82,7 +21,6 @@ function InfinityModalForm({
 }: any) {
   const { focus, tn, dice, fortune, assistanceDice } = formValues;
   const [hoverState, setHoverState] = useState(0);
-  const [assistanceHover, setAssistanceHover] = useState(0);
 
   const handleDiceChange = (diceAmount: string) => {
     change("dice", diceAmount);
@@ -106,10 +44,6 @@ function InfinityModalForm({
         change("fortune", "0");
       }
     }
-  };
-
-  const handleAssistanceDiceChange = (diceAmount: string) => {
-    change("assistanceDice", diceAmount);
   };
 
   const handleFocusChange = (focusValue: string) => {
@@ -165,55 +99,13 @@ function InfinityModalForm({
         disabled={focus && Number(focus) > 0}
       />
       <Fortune className="fortune" dice={dice} change={change} />
-      <div className="assistance">
-        <Accordion defaultActiveKey="0">
-          <Accordion.Toggle
-            className="assistance-title--container"
-            eventKey="1"
-          >
-            <h5 className="assistance-title">
-              Assistance <InfoTooltip content={tooltip.assistanceInfo} />
-            </h5>
-          </Accordion.Toggle>
-          <Accordion.Collapse eventKey="1">
-            <>
-              <div className="flex-center">
-                <div className="infinity-radio-fields infinity-radio-fields--dice-to-roll infinity-radio-fields--assistance">
-                  <DiceRow
-                    dice={assistanceDice}
-                    diceMax={4}
-                    fortune={0}
-                    hoverState={assistanceHover}
-                    handleOnHover={setAssistanceHover}
-                    handleOnClick={handleAssistanceDiceChange}
-                    isAssistance={true}
-                  />
-                </div>
-              </div>
-              <div className="skill-level-field infinity-skill-level-field infinity-skill-level-field--assistance">
-                <div className="infinity-field">
-                  <Field
-                    id="assistanceFocus"
-                    name="assistanceFocus"
-                    label={assistanceFocusLabel}
-                    placeholder={focus}
-                    component={renderInput}
-                  />
-                </div>
-                <div className="infinity-field">
-                  <Field
-                    id="assistanceTn"
-                    name="assistanceTn"
-                    label={assistanceTnLabel}
-                    placeholder={tn}
-                    component={renderInput}
-                  />
-                </div>
-              </div>
-            </>
-          </Accordion.Collapse>
-        </Accordion>
-      </div>
+      <Assistance
+        className="assistance"
+        assistanceDice={assistanceDice}
+        tn={tn}
+        focus={focus}
+        change={change}
+      />
     </Form>
   );
 }
