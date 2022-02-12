@@ -1,4 +1,4 @@
-#conan-mode-form {
+.conan-mode-form {
   text-align: center;
 }
 
@@ -45,7 +45,7 @@
   font-size: 14px;
 }
 
-#conan-mode-form .assistance .skill-level-field .form-control {
+.conan-mode-form .assistance .skill-level-field .form-control {
   font-size: 15px;
   height: 26px;
 }
@@ -97,17 +97,17 @@
   color: #212529;
 }
 
-#conan-mode-form .skill-level-field .form-control {
+.conan-mode-form .skill-level-field .form-control {
   font-size: 18px;
   height: 34px;
   border-radius: 0;
 }
 
-#conan-mode-form .skill-level-field .form-group {
+.conan-mode-form .skill-level-field .form-group {
   margin-bottom: 0;
 }
 
-#conan-mode-form label {
+.conan-mode-form label {
   margin-bottom: 0;
 }
 

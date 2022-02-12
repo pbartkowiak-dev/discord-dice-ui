@@ -4,12 +4,13 @@ import { connect } from "react-redux";
 import Form from "react-bootstrap/Form";
 import { Field, reduxForm, formValueSelector } from "redux-form";
 import DiffLadder from "../DiffLadder/DiffLadder";
-import "./InfinityModalForm.css";
+import "../2d20/form/form.css";
 import DiceRow from "../2d20/dice-row/dice-row";
 import { focusLabel, tnLabel, untrainedTestLabel } from "../2d20/labels";
 import Fortune from "../2d20/fortune/fortune";
 import Assistance from "../2d20/assistance/assistance";
 import { RenderCheckbox, renderInput } from "../2d20/form/form";
+import classNames from "classnames";
 
 function InfinityModalForm({
   change,
@@ -57,12 +58,15 @@ function InfinityModalForm({
 
   return (
     <Form
-      className={invalid && (submitFailed || anyTouched) ? "form-invalid" : ""}
+      className={classNames({
+        "conan-mode-form": true,
+        "form-invalid": invalid && (submitFailed || anyTouched),
+      })}
       id="infinity-mode-form"
       onSubmit={handleSubmit}
     >
-      <div className="skill-level-field infinity-skill-level-field">
-        <div className="infinity-field">
+      <div className="skill-level-field conan-skill-level-field">
+        <div className="conan-field">
           <Field
             id="focus"
             name="focus"
@@ -71,15 +75,15 @@ function InfinityModalForm({
             component={renderInput}
           />
         </div>
-        <div className="infinity-field">
+        <div className="conan-field">
           <Field id="tn" name="tn" label={tnLabel} component={renderInput} />
         </div>
       </div>
-      <div className="skill-level-field infinity-skill-level-field">
+      <div className="skill-level-field conan-skill-level-field">
         <Field id="difficulty" name="difficulty" component={DiffLadder} />
       </div>
       <div className="flex-center">
-        <div className="infinity-radio-fields infinity-radio-fields--dice-to-roll">
+        <div className="conan-radio-fields conan-radio-fields--dice-to-roll">
           <DiceRow
             dice={dice}
             diceMax={5}

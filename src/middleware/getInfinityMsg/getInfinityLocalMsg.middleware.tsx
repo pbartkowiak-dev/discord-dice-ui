@@ -81,7 +81,7 @@ export default (store: any) => (next: any) => (action: any) => {
     ) : null;
 
     const title = (
-      <div className={styles.infinityResultDetails}>
+      <div className={styles.conanResultDetails}>
         <p className={styles.resultDetailsRow}>
           You rolled <CodeSpan>{diceAmount}d20</CodeSpan>
         </p>
@@ -115,8 +115,8 @@ export default (store: any) => (next: any) => (action: any) => {
       fields.push(
         <div
           className={classNames([
-            styles.infinityResultDetails,
-            styles.infinityResultDetailsAssistance,
+            styles.conanResultDetails,
+            styles.conanResultDetailsAssistance,
           ])}
         >
           <p className={styles.resultDetailsRow}>

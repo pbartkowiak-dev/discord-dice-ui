@@ -119,17 +119,6 @@
   margin-bottom: 6px;
 }
 
-.infinityResultDetails {
-  line-height: 18px;
-  position: relative;
-}
-
-.infinityResultDetailsAssistance {
-  border-bottom: 1px solid #bebebe;
-  padding-bottom: 4px;
-  margin-bottom: 6px;
-}
-
 .resultDetailsRow {
   margin: 0;
 }
