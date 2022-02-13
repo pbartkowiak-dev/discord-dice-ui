@@ -1,5 +1,5 @@
-import InfoTooltip from "../InfoTooltip/InfoTooltip";
-import tooltip from "../../locale/tooltip";
+import InfoTooltip from "../../InfoTooltip/InfoTooltip";
+import tooltip from "../../../locale/tooltip";
 import React from "react";
 
 export const focusLabel = (

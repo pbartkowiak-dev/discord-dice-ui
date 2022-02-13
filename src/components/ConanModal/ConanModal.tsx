@@ -1,9 +1,37 @@
+// @ts-nocheck
 import React from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
-import ConanModalForm from "./ConanModalForm";
 import { D20_CONAN_TEST } from "../../consts/diceConstants";
 import { ConanFormValuesTypes, ConanModalPropTypes } from "./ConanModalTypes";
+import { formValueSelector, reduxForm } from "redux-form";
+import { connect } from "react-redux";
+import { Form2d20 } from "../2d20/form-2d20/form-2d20";
+import { validate } from "../2d20/form-2d20/form-utils";
+
+const form = "ConanModalForm";
+
+const FormElement = reduxForm({
+  form,
+  validate,
+})(Form2d20);
+
+const selector = formValueSelector(form);
+
+const ConanModalForm = connect((state) => ({
+  formValues: selector(
+    state,
+    "difficulty",
+    "untrainedTest",
+    "focus",
+    "tn",
+    "dice",
+    "fortune",
+    "assistanceDice",
+    "assistanceFocus",
+    "assistanceTn"
+  ),
+}))(FormElement);
 
 function ConanModal({
   closeConanModal,
@@ -60,6 +88,7 @@ function ConanModal({
       </Modal.Header>
       <Modal.Body>
         <ConanModalForm
+          formId={form}
           initialValues={initialValues}
           onSubmit={(values) => handleSubmit(values)}
         />
@@ -68,7 +97,7 @@ function ConanModal({
         <Button variant="secondary" onClick={closeConanModal}>
           Cancel
         </Button>
-        <Button variant="success" type="submit" form="conan-mode-form">
+        <Button variant="success" type="submit" form={form}>
           Roll!
         </Button>
       </Modal.Footer>

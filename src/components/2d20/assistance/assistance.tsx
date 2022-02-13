@@ -4,8 +4,8 @@ import InfoTooltip from "../../InfoTooltip/InfoTooltip";
 import tooltip from "../../../locale/tooltip";
 import DiceRow from "../dice-row/dice-row";
 import { Field } from "redux-form";
-import { assistanceFocusLabel, assistanceTnLabel } from "../labels";
-import { renderInput } from "../form/form";
+import { assistanceFocusLabel, assistanceTnLabel } from "../form-2d20/labels";
+import { renderInput } from "../form-2d20/form-utils";
 
 interface Props {
   assistanceDice: string;

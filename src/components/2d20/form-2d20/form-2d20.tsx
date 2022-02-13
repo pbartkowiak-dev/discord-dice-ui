@@ -3,23 +3,24 @@ import React, { useState } from "react";
 import { connect } from "react-redux";
 import Form from "react-bootstrap/Form";
 import { Field, reduxForm, formValueSelector } from "redux-form";
-import DiffLadder from "../DiffLadder/DiffLadder";
-import "../2d20/form/form.css";
-import DiceRow from "../2d20/dice-row/dice-row";
-import { focusLabel, tnLabel, untrainedTestLabel } from "../2d20/labels";
-import Fortune from "../2d20/fortune/fortune";
-import Assistance from "../2d20/assistance/assistance";
-import { RenderCheckbox, renderInput } from "../2d20/form/form";
+import "../form-2d20/form-2d20.css";
+import DiceRow from "../dice-row/dice-row";
+import { focusLabel, tnLabel, untrainedTestLabel } from "./labels";
+import Fortune from "../fortune/fortune";
+import Assistance from "../assistance/assistance";
+import { RenderCheckbox, renderInput } from "./form-utils";
 import classNames from "classnames";
+import DiffLadder from "../DiffLadder/DiffLadder";
 
-function InfinityModalForm({
+export const Form2d20 = ({
+  formId,
   change,
   invalid,
   anyTouched,
   submitFailed,
   handleSubmit,
   formValues,
-}: any) {
+}: any) => {
   const { focus, tn, dice, fortune, assistanceDice } = formValues;
   const [hoverState, setHoverState] = useState(0);
 
@@ -62,7 +63,7 @@ function InfinityModalForm({
         "conan-mode-form": true,
         "form-invalid": invalid && (submitFailed || anyTouched),
       })}
-      id="infinity-mode-form"
+      id={formId}
       onSubmit={handleSubmit}
     >
       <div className="skill-level-field conan-skill-level-field">
@@ -112,7 +113,7 @@ function InfinityModalForm({
       />
     </Form>
   );
-}
+};
 
 interface ErrorPropTypes {
   tn?: string;
@@ -162,27 +163,3 @@ const validate = (values: any) => {
   }
   return errors;
 };
-
-const form = "InfinityModalForm";
-
-const FormElement = reduxForm({
-  form,
-  validate,
-})(InfinityModalForm);
-
-const selector = formValueSelector(form);
-
-export default connect((state) => ({
-  formValues: selector(
-    state,
-    "difficulty",
-    "untrainedTest",
-    "focus",
-    "tn",
-    "dice",
-    "fortune",
-    "assistanceDice",
-    "assistanceFocus",
-    "assistanceTn"
-  ),
-}))(FormElement);

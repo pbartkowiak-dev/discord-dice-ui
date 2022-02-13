@@ -1,12 +1,40 @@
+// @ts-nocheck
 import React from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
-import InfinityModalForm from "./InfinityModalForm";
 import { D20_INFINITY_TEST } from "../../consts/diceConstants";
 import {
   InfinityFormValuesTypes,
   InfinityModalPropTypes,
 } from "./InfinityModalTypes";
+import { formValueSelector, reduxForm } from "redux-form";
+import { validate } from "../2d20/form-2d20/form-utils";
+import { connect } from "react-redux";
+import { Form2d20 } from "../2d20/form-2d20/form-2d20";
+
+const form = "InfinityModalForm";
+
+const FormElement = reduxForm({
+  form,
+  validate,
+})(Form2d20);
+
+const selector = formValueSelector(form);
+
+const InfinityModalForm = connect((state) => ({
+  formValues: selector(
+    state,
+    "difficulty",
+    "untrainedTest",
+    "focus",
+    "tn",
+    "dice",
+    "fortune",
+    "assistanceDice",
+    "assistanceFocus",
+    "assistanceTn"
+  ),
+}))(FormElement);
 
 function InfinityModal({
   closeInfinityModal,
@@ -63,6 +91,7 @@ function InfinityModal({
       </Modal.Header>
       <Modal.Body>
         <InfinityModalForm
+          formId={form}
           initialValues={initialValues}
           onSubmit={(values) => handleSubmit(values)}
         />
@@ -71,7 +100,7 @@ function InfinityModal({
         <Button variant="secondary" onClick={closeInfinityModal}>
           Cancel
         </Button>
-        <Button variant="success" type="submit" form="infinity-mode-form">
+        <Button variant="success" type="submit" form={form}>
           Roll!
         </Button>
       </Modal.Footer>
