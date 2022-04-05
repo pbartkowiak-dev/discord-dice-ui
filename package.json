@@ -1,6 +1,6 @@
 {
   "name": "discord-ui",
-  "version": "15.1.0",
+  "version": "15.1.1",
   "private": true,
   "engines": {
     "node": "14.7.0",
@@ -40,6 +40,7 @@
     "zustand": "^3.4.1"
   },
   "scripts": {
+    "prettier": "prettier --write .",
     "dev": "react-scripts start",
     "start": "serve -s build",
     "build": "react-scripts build",

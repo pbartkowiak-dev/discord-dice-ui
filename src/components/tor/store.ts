@@ -120,18 +120,28 @@ const useStore = create<State>((set, get) => ({
     if (isFavoured) {
       if (featDiceResults.includes(FAVOURED_DIE)) {
         featDieScore = FAVOURED_DIE;
+      } else if (featDiceResults[1] === ILL_FAVOURED_DIE) {
+        featDieScore = featDiceResults[0];
+      } else if (featDiceResults[0] === ILL_FAVOURED_DIE) {
+        featDieScore = featDiceResults[1];
       } else {
         featDieScore = Math.max(...featDiceResults);
       }
     } else if (isIllFavoured) {
       if (featDiceResults.includes(ILL_FAVOURED_DIE)) {
         featDieScore = ILL_FAVOURED_DIE;
+      } else if (featDiceResults[1] === FAVOURED_DIE) {
+        featDieScore = featDiceResults[0];
+      } else if (featDiceResults[0] === FAVOURED_DIE) {
+        featDieScore = featDiceResults[1];
       } else {
         featDieScore = Math.min(...featDiceResults);
       }
     } else {
       featDieScore = featDiceResults[0];
     }
+
+    console.log("featDieScore", featDieScore);
 
     // Get SUCCESS DICE score
     const successDiceScore = successDiceResults.reduce(
