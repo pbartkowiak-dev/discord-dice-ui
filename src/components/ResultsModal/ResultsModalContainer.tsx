@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import { hideMsg } from "../../actions/modals";
 import ResultsModal from "./ResultsModal";
 import { ResultsModalContainerPropTypes } from "./ResultsModalTypes";
+import { D20_CONAN_TEST, D20_INFINITY_TEST } from "../../consts/diceConstants";
+import ResultsModal2d20 from "../2d20/results-modal-2d20/results-modal-2d20";
 
 const mapStateToProps = ({ msg, diceSelected }: any) => {
   return {
@@ -20,6 +22,19 @@ function ResultsModalContainer({
   msgData,
   diceSelected,
 }: ResultsModalContainerPropTypes) {
+  const { diceType } = diceSelected;
+
+  if (diceType === D20_CONAN_TEST || diceType === D20_INFINITY_TEST) {
+    return (
+      <ResultsModal2d20
+        hideMsg={hideMsg}
+        msgData={msgData}
+        showModal={msgData.showMsg}
+        diceSelected={diceSelected}
+      />
+    );
+  }
+
   return (
     <ResultsModal
       hideMsg={hideMsg}
