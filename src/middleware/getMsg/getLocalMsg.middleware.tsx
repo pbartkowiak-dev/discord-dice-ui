@@ -19,8 +19,6 @@ import {
   TOR_FEAT_DIE,
 } from "../../consts/diceConstants";
 import HitLocations from "../../components/HitLocations/HitLocations";
-import getConanHitLocation from "../../utils/getConanHitLocations";
-import getInfinityHitLocation from "../../utils/getInfinityHitLocations";
 import styles from "../../components/ResultsModal/ResultsModal.module.css";
 import { DICE_ROLLED, localMsgReady } from "../../actions/roll.actions";
 import { FateResult } from "../../consts/fateConsts";
@@ -31,6 +29,7 @@ import {
   GANDALF_DESCRIPTION,
 } from "../../components/tor/getDiscordMsgData";
 import diceModuleOptionsStore from "../../components/DiceModuleOptions/store";
+import { get2d20HitLocation } from "../../components/2d20/utils/get-2d20-hit-location";
 
 const IconUp = <FontAwesomeIcon icon={faArrowAltCircleUp} />;
 const IconDown = <FontAwesomeIcon icon={faArrowAltCircleDown} />;
@@ -169,7 +168,7 @@ const getLocalMsg = (store: any) => (next: any) => (action: any) => {
     }
 
     if (isConanHitLocationDie) {
-      const hitLocation = getConanHitLocation(results[0]);
+      const hitLocation = get2d20HitLocation(results[0]);
       fields.push(
         <HitLocations
           hitLocation={hitLocation}
@@ -180,7 +179,7 @@ const getLocalMsg = (store: any) => (next: any) => (action: any) => {
     }
 
     if (isInfinityHitLocationDie) {
-      const hitLocation = getInfinityHitLocation(results[0]);
+      const hitLocation = get2d20HitLocation(results[0]);
       fields.push(
         <HitLocations
           hitLocation={hitLocation}

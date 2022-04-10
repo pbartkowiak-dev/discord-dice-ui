@@ -1,4 +1,4 @@
-export type infinitySuccessLevelType = {
+export type I2d20Success = {
   isSuccess: boolean;
   isFailure: boolean;
   successLevel: number;
@@ -6,7 +6,7 @@ export type infinitySuccessLevelType = {
   momentum: number;
 };
 
-interface getInfinitySuccessLevelPropTypes {
+interface I2d20SuccessLevel {
   results: Array<number>;
   tn: number;
   focus: number;
@@ -15,14 +15,14 @@ interface getInfinitySuccessLevelPropTypes {
   untrainedTest: boolean;
 }
 
-export default ({
+export const get2d20SuccessLevel = ({
   results,
   tn,
   focus,
   difficulty,
   untrainedTest,
   assistanceSuccessLevel,
-}: getInfinitySuccessLevelPropTypes) => {
+}: I2d20SuccessLevel) => {
   const compilationMinVal = untrainedTest ? 19 : 20;
   const compilationMaxVal = 20;
   const focusNum = focus ? Number(focus) : 0;
