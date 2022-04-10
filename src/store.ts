@@ -20,13 +20,12 @@ import warhammerRollRequested from "./middleware/warhammer/warhammerRollRequeste
 import warhammerRerollRequested from "./middleware/warhammer/warhammerRerollRequested.middleware";
 import warhammerSendResults from "./middleware/warhammer/warhammerSendResults.middleware";
 import warhammerMoneyRecalculated from "./middleware/warhammerMoneyRecalculated.middleware";
+// 2d20
+import { get2d20LocalMsg } from "./middleware/2d20/get-2d20-local-msg.middleware";
+import { get2d20RequestMsg } from "./middleware/2d20/get-2d20-request-msg.middleware";
 // Conan
-import getConanLocalMsg from "./middleware/getConanMsg/getConanLocalMsg.middleware";
-import getConanRequestMsg from "./middleware/getConanMsg/getConanRequestMsg.middleware";
 import conanUpdateTokensState from "./middleware/conanUpdateTokensState.middleware";
 // Infinity
-import getInfinityLocalMsg from "./middleware/getInfinityMsg/getInfinityLocalMsg.middleware";
-import getInfinityRequestMsg from "./middleware/getInfinityMsg/getInfinityRequestMsg.middleware";
 import infinityUpdateTokensState from "./middleware/infinityUpdateTokensState.middleware";
 // Pool
 import getLocalPoolMsg from "./middleware/getPoolMsg/getLocalPoolMsg.middleware";
@@ -86,12 +85,10 @@ const rollMiddleware = [
   warhammerRerollRequested,
   warhammerMoneyRecalculated,
 
-  getConanLocalMsg,
-  getConanRequestMsg,
-  conanUpdateTokensState,
+  get2d20LocalMsg,
+  get2d20RequestMsg,
 
-  getInfinityLocalMsg,
-  getInfinityRequestMsg,
+  conanUpdateTokensState,
   infinityUpdateTokensState,
 
   getLocalPoolMsg,

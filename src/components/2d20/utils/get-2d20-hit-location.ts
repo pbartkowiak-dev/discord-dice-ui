@@ -1,4 +1,4 @@
-function getInfinityHitLocation(result: number | string) {
+export const get2d20HitLocation = (result: number | string) => {
   const resultNum = Number(result);
   let hitLocation = "";
   switch (true) {
@@ -22,6 +22,4 @@ function getInfinityHitLocation(result: number | string) {
       break;
   }
   return hitLocation;
-}
-
-export default getInfinityHitLocation;
+};

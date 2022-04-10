@@ -1,7 +1,5 @@
 import { getColor } from "../../utils/getColor";
 import joinAsBlocks from "../../utils/joinAsBlocks";
-import getConanHitLocation from "../../utils/getConanHitLocations";
-import getInfinityHitLocation from "../../utils/getInfinityHitLocations";
 import {
   D6_CONAN,
   D20_CONAN_HL,
@@ -17,6 +15,7 @@ import {
   GANDALF_DESCRIPTION,
 } from "../../components/tor/getDiscordMsgData";
 import diceModuleOptionsStore from "../../components/DiceModuleOptions/store";
+import { get2d20HitLocation } from "../../components/2d20/utils/get-2d20-hit-location";
 
 export default (store: any) => (next: any) => (action: any) => {
   if (action.type === DICE_ROLLED) {
@@ -145,7 +144,7 @@ export default (store: any) => (next: any) => (action: any) => {
 
     if (isConanHitLocationDie) {
       const hitResult = results[0];
-      const hitLocation = getConanHitLocation(hitResult);
+      const hitLocation = get2d20HitLocation(hitResult);
 
       fields.push({
         name: ":mens: Hit Location:",
@@ -155,7 +154,7 @@ export default (store: any) => (next: any) => (action: any) => {
 
     if (isInfinityHitLocationDie) {
       const hitResult = results[0];
-      const hitLocation = getInfinityHitLocation(hitResult);
+      const hitLocation = get2d20HitLocation(hitResult);
 
       fields.push({
         name: ":mens: Hit Location:",
