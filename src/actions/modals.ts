@@ -30,7 +30,6 @@ interface fieldEmbedded {
   name: string;
   value: string;
 }
-// @TODO move it to a proper place
 interface requestParams {
   hookUrl: string;
   msgTitle: string;

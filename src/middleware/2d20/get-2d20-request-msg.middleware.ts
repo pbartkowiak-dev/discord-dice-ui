@@ -2,10 +2,7 @@ import { requestMsgReady } from "../../actions/roll.actions";
 import { CONAN_DICE_ROLLED } from "../../actions/conan.actions";
 import joinAsBlocks from "../../utils/joinAsBlocks";
 import { SUCCESS, FAILURE, getColor } from "../../utils/getColor";
-import {
-  get2d20SuccessLevel,
-  I2d20Success,
-} from "../../components/2d20/utils/get-2d20-success-level";
+import { get2d20SuccessLevel } from "../../components/2d20/utils/get-2d20-success-level";
 import { INFINITY_DICE_ROLLED } from "../../actions/infinity.actions";
 
 export const get2d20RequestMsg =
@@ -40,33 +37,30 @@ export const get2d20RequestMsg =
       const fields = [];
       const resultsJoined = joinAsBlocks(results, null, true);
       const msgTitle = `${username} rolled **\`${diceAmount}d20\`**. Results: ${resultsJoined}.`;
-      let assistanceSuccessLevel: any = {};
       let description;
 
-      if (assistanceDice && assistanceDiceResults) {
-        assistanceSuccessLevel = get2d20SuccessLevel({
-          results: assistanceDiceResults,
-          tn: assistanceTn,
-          focus: assistanceFocus,
-          difficulty: Number(difficulty),
-          untrainedTest: assistanceUntrainedTest || untrainedTest,
-        });
-      }
+      const assistanceSuccessLevel = get2d20SuccessLevel({
+        results: assistanceDiceResults,
+        tn: assistanceTn,
+        focus: assistanceFocus,
+        difficulty: Number(difficulty),
+        untrainedTest: assistanceUntrainedTest || untrainedTest,
+      });
 
-      const successLevel: I2d20Success = get2d20SuccessLevel({
+      const successLevel = get2d20SuccessLevel({
         results: results,
         tn: tn,
         focus: focus,
         difficulty: difficulty,
-        assistanceSuccessLevel: assistanceSuccessLevel.successLevel,
+        assistanceSuccessLevel: assistanceSuccessLevel?.successLevel,
         untrainedTest,
       });
 
-      const successLevelIcon = successLevel.isSuccess
+      const successLevelIcon = successLevel?.isSuccess
         ? ":green_circle:"
         : ":red_circle:";
 
-      description = `Successes: \`${successLevel.successLevel}\` vs. Difficulty: \`${difficulty}\``;
+      description = `Successes: \`${successLevel?.successLevel}\` vs. Difficulty: \`${difficulty}\``;
       description += `\nFocus: \`${focus || 0}\``;
       description += `\nTN: \`${tn}\``;
 
@@ -84,7 +78,7 @@ export const get2d20RequestMsg =
           null,
           true
         );
-        let value = `:game_die: Rolled: ${assistanceDiceResultsJoined}\n:high_brightness: Successes: \`${assistanceSuccessLevel.successLevel}\``;
+        let value = `:game_die: Rolled: ${assistanceDiceResultsJoined}\n:high_brightness: Successes: \`${assistanceSuccessLevel?.successLevel}\``;
 
         if (assistanceTn !== "") {
           value = value + `\nAssistance TN: \`${assistanceTn}\``;
@@ -95,10 +89,10 @@ export const get2d20RequestMsg =
         if (assistanceUntrainedTest) {
           value = value + `\nAssistance Untrained Test`;
         }
-        if (assistanceSuccessLevel.complications) {
+        if (assistanceSuccessLevel?.complications) {
           value =
             value +
-            `\n:black_circle: Complications: \`${assistanceSuccessLevel.complications}\``;
+            `\n:black_circle: Complications: \`${assistanceSuccessLevel?.complications}\``;
         }
         fields.push({
           name: `:busts_in_silhouette: Assistance roll:`,
@@ -115,27 +109,29 @@ export const get2d20RequestMsg =
         });
       }
 
-      if (successLevel.complications) {
+      if (successLevel?.complications) {
         fields.push({
           name: `:black_circle: Complications:`,
-          value: `\`${successLevel.complications}\``,
+          value: `\`${successLevel?.complications}\``,
         });
       }
 
       fields.push({
         name: successLevelIcon + " Roll result:",
-        value: successLevel.isSuccess ? "SUCCESS" : "FAILURE",
+        value: successLevel?.isSuccess ? "SUCCESS" : "FAILURE",
       });
 
       fields.push({
         name: `:boom: Momentum generated:`,
-        value: `\`${successLevel.momentum}\``,
+        value: `\`${successLevel?.momentum}\``,
       });
 
       store.dispatch(
         requestMsgReady({
           msgTitle,
-          color: successLevel.isSuccess ? getColor(SUCCESS) : getColor(FAILURE),
+          color: successLevel?.isSuccess
+            ? getColor(SUCCESS)
+            : getColor(FAILURE),
           fields,
           description,
         })

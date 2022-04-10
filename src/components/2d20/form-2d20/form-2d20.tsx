@@ -1,8 +1,7 @@
 // @ts-nocheck
 import React, { useState } from "react";
-import { connect } from "react-redux";
 import Form from "react-bootstrap/Form";
-import { Field, reduxForm, formValueSelector } from "redux-form";
+import { Field } from "redux-form";
 import "../form-2d20/form-2d20.css";
 import DiceRow from "../dice-row/dice-row";
 import { focusLabel, tnLabel, untrainedTestLabel } from "./labels";
@@ -113,53 +112,4 @@ export const Form2d20 = ({
       />
     </Form>
   );
-};
-
-interface ErrorPropTypes {
-  tn?: string;
-  focus?: string;
-  assistanceFocus?: string;
-  assistanceTn?: string;
-}
-
-const validate = (values: any) => {
-  const errors: ErrorPropTypes = {};
-  const { tn, focus, assistanceTn, assistanceFocus } = values;
-  const tnNumber = parseInt(tn, 10);
-  const focusNumber = parseInt(focus, 10);
-  const assistanceTnNumber = parseInt(assistanceTn, 10);
-  const assistanceFocusNumber = parseInt(assistanceFocus, 10);
-
-  if (!tn || !tn.trim()) {
-    errors.tn = "Target Number cannot be empty";
-  }
-  if (tnNumber < 0) {
-    errors.tn = "Target Number must be equal or greater than 0";
-  }
-  if (tnNumber > 20) {
-    errors.tn = "Target Number must be less than 20";
-  }
-  if (isNaN(tnNumber)) {
-    errors.tn = "Target Number must be a valid number";
-  }
-  if (focus && isNaN(focusNumber)) {
-    errors.focus = "Focus must be a valid number";
-  }
-  if (focus && focusNumber > 5) {
-    errors.focus = "Focus must be less than 5";
-  }
-  // Assistance values
-  if (assistanceFocus && isNaN(assistanceFocusNumber)) {
-    errors.assistanceFocus = "Focus must be a valid number";
-  }
-  if (assistanceFocus && assistanceFocusNumber > 5) {
-    errors.assistanceFocus = "Focus must be less than 5";
-  }
-  if (assistanceTn && isNaN(assistanceTnNumber)) {
-    errors.assistanceTn = "TN must be a valid number";
-  }
-  if (assistanceTnNumber && assistanceTnNumber > 20) {
-    errors.assistanceTn = "Target Number must be less than 20";
-  }
-  return errors;
 };
