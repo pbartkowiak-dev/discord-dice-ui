@@ -43,24 +43,27 @@ function ConanModal({
       assistanceDice,
       dice,
       difficulty,
-      focus,
+      focus = "0",
       fortune,
       tn,
       untrainedTest,
-      assistanceFocus,
+      assistanceFocus = "0",
       assistanceTn,
     } = values;
+
+    const focusValue = focus.trim() === "" ? 0 : Number(focus);
+    const assistanceFocusValue =
+      assistanceFocus.trim() === "" ? focusValue : Number(assistanceFocus);
 
     requestRoll({
       diceType: D20_CONAN_TEST,
       assistanceDice: Number(assistanceDice),
       diceAmount: Number(dice),
       difficulty: Number(difficulty),
-      focus: Number(focus),
+      focus: focusValue,
       fortune: Number(fortune),
       tn: Number(tn),
-      assistanceFocus:
-        assistanceFocus.trim() === "" ? Number(focus) : Number(assistanceFocus),
+      assistanceFocus: assistanceFocusValue,
       assistanceTn:
         assistanceTn.trim() === "" ? Number(tn) : Number(assistanceTn),
       untrainedTest,
