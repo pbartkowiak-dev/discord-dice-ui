@@ -67,6 +67,11 @@ function ResultsModal2d20({
             <div className={styles.resultDetailsRow}>
               You rolled <CodeSpan>{diceAmount}d20</CodeSpan>
             </div>
+            {results.length === 1 && (
+              <div className={styles.resultDetailsRow}>
+                Result: <CodeSpan>{results[0]}</CodeSpan>
+              </div>
+            )}
             <div className={styles.resultDetailsRow}>
               Focus: <CodeSpan>{focus || 0}</CodeSpan>
             </div>
