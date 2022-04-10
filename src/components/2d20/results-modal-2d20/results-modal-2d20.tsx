@@ -1,4 +1,3 @@
-// @ts-nocheck
 import React from "react";
 import Modal from "react-bootstrap/Modal";
 import Button from "react-bootstrap/Button";
@@ -41,13 +40,12 @@ function ResultsModal2d20({
     focus,
     fortune,
     tn,
+    assistanceDice,
     untrainedTest,
     assistanceFocus,
     assistanceTn,
     assistanceUntrainedTest,
   } = rollOptions;
-
-  const assistanceDiceResultsJoined = joinAsBlocks(assistanceDiceResults);
 
   return (
     <Modal show={showModal} onHide={hideMsg}>
@@ -86,59 +84,66 @@ function ResultsModal2d20({
           </div>
         </div>
         {/*  Rerroll Count Field*/}
-        <div className={`${styles.generalResult}`}>
-          Rerolled <CodeSpan>{rerollCount}</CodeSpan>{" "}
-          {rerollCount === 1 ? "time" : "times"}
-        </div>
+        {!!rerollCount && (
+          <div className={`${styles.generalResult}`}>
+            Rerolled <CodeSpan>{rerollCount}</CodeSpan>{" "}
+            {rerollCount === 1 ? "time" : "times"}
+          </div>
+        )}
         {/*  Assistance Field */}
-        <div
-          className={classNames(
-            styles.conanResultDetails,
-            styles.conanResultDetailsAssistance
-          )}
-        >
-          <div className={styles.resultDetailsRow}>
-            <strong>Assistance Roll:</strong>
-          </div>
-          <div className={styles.resultDetailsRow}>
-            Rolled: {assistanceDiceResultsJoined}
-          </div>
-          {assistanceFocus !== "" && (
+        {!!assistanceDice && (
+          <div
+            className={classNames(
+              styles.conanResultDetails,
+              styles.conanResultDetailsAssistance
+            )}
+          >
             <div className={styles.resultDetailsRow}>
-              Assistance Focus: <CodeSpan>{assistanceFocus}</CodeSpan>
+              <strong>Assistance Roll:</strong>
             </div>
-          )}
-          {assistanceTn !== "" && (
             <div className={styles.resultDetailsRow}>
-              Assistance TN: <CodeSpan>{assistanceTn}</CodeSpan>
+              Rolled:{" "}
+              {assistanceDiceResults
+                ? joinAsBlocks(assistanceDiceResults)
+                : null}
             </div>
-          )}
-          {assistanceUntrainedTest && (
+            {assistanceFocus !== "" && (
+              <div className={styles.resultDetailsRow}>
+                Assistance Focus: <CodeSpan>{assistanceFocus}</CodeSpan>
+              </div>
+            )}
+            {assistanceTn !== "" && (
+              <div className={styles.resultDetailsRow}>
+                Assistance TN: <CodeSpan>{assistanceTn}</CodeSpan>
+              </div>
+            )}
+            {!!assistanceUntrainedTest && (
+              <div className={styles.resultDetailsRow}>
+                Assistance Untrained Test
+              </div>
+            )}
             <div className={styles.resultDetailsRow}>
-              Assistance Untrained Test
-            </div>
-          )}
-          <div className={styles.resultDetailsRow}>
-            Successes:{" "}
-            <CodeSpan
-              type={assistanceSuccessLevel.successLevel > 0 ? "success" : ""}
-            >
-              {assistanceSuccessLevel.successLevel}
-            </CodeSpan>
-          </div>
-          {assistanceSuccessLevel.complications && (
-            <div className={styles.assistanceResultRow}>
-              Complications:{" "}
-              <CodeSpan type="failure">
-                {assistanceSuccessLevel.complications}
+              Successes:{" "}
+              <CodeSpan
+                type={assistanceSuccessLevel.successLevel > 0 ? "success" : ""}
+              >
+                {assistanceSuccessLevel.successLevel}
               </CodeSpan>
             </div>
-          )}
-          <InfoTooltip
-            content={tooltip.assistance}
-            className={styles.assistanceIcon}
-          />
-        </div>
+            {!!assistanceSuccessLevel.complications && (
+              <div className={styles.assistanceResultRow}>
+                Complications:{" "}
+                <CodeSpan type="failure">
+                  {assistanceSuccessLevel.complications}
+                </CodeSpan>
+              </div>
+            )}
+            <InfoTooltip
+              content={tooltip.assistance}
+              className={styles.assistanceIcon}
+            />
+          </div>
+        )}
         {/* Results Vs Skill Row*/}
         <ResultVsSkillRow
           skillLevel={difficulty}

@@ -1,12 +1,12 @@
-export type I2d20Success = {
+export interface I2d20SuccessLevel {
   isSuccess: boolean;
   isFailure: boolean;
   successLevel: number;
   complications: number;
   momentum: number;
-};
+}
 
-interface I2d20SuccessLevel {
+export interface Get2d20SuccessLevelProps {
   results: Array<number>;
   tn: number;
   focus: number;
@@ -22,12 +22,16 @@ export const get2d20SuccessLevel = ({
   difficulty,
   untrainedTest,
   assistanceSuccessLevel,
-}: I2d20SuccessLevel) => {
+}: Get2d20SuccessLevelProps): null | I2d20SuccessLevel => {
   const compilationMinVal = untrainedTest ? 19 : 20;
   const compilationMaxVal = 20;
   const focusNum = focus ? Number(focus) : 0;
   let successLevel = 0;
   let complications = 0;
+
+  if (!results) {
+    return null;
+  }
 
   results.forEach((result) => {
     if (result <= tn) {

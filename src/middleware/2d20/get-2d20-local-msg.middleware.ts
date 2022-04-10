@@ -1,12 +1,7 @@
-// @ts-nocheck
-import React from "react";
 import { localMsgReady } from "../../actions/roll.actions";
 import { INFINITY_DICE_ROLLED } from "../../actions/infinity.actions";
 import { CONAN_DICE_ROLLED } from "../../actions/conan.actions";
-import {
-  get2d20SuccessLevel,
-  I2d20SuccessLevel,
-} from "../../components/2d20/utils/get-2d20-success-level";
+import { get2d20SuccessLevel } from "../../components/2d20/utils/get-2d20-success-level";
 
 export const get2d20LocalMsg = (store: any) => (next: any) => (action: any) => {
   if (
@@ -27,30 +22,25 @@ export const get2d20LocalMsg = (store: any) => (next: any) => (action: any) => {
       tn,
       focus,
       untrainedTest,
-      assistanceDice,
       assistanceFocus,
       assistanceTn,
       assistanceUntrainedTest,
     } = rollOptions;
 
-    let assistanceSuccessLevel: Partial<I2d20SuccessLevel> = {};
+    const assistanceSuccessLevel = get2d20SuccessLevel({
+      results: assistanceDiceResults,
+      tn: assistanceTn,
+      focus: assistanceFocus,
+      difficulty: Number(difficulty),
+      untrainedTest: assistanceUntrainedTest || untrainedTest,
+    });
 
-    if (assistanceDice && assistanceDiceResults) {
-      assistanceSuccessLevel = get2d20SuccessLevel({
-        results: assistanceDiceResults,
-        tn: assistanceTn,
-        focus: assistanceFocus,
-        difficulty: Number(difficulty),
-        untrainedTest: assistanceUntrainedTest || untrainedTest,
-      });
-    }
-
-    const successLevel: infinitySuccessLevelType = get2d20SuccessLevel({
+    const successLevel = get2d20SuccessLevel({
       results,
       tn,
       focus,
       difficulty,
-      assistanceSuccessLevel: assistanceSuccessLevel.successLevel,
+      assistanceSuccessLevel: assistanceSuccessLevel?.successLevel,
       untrainedTest,
     });
 

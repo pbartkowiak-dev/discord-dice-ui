@@ -23,8 +23,7 @@ function WarhammerResultsModal() {
     ({ warhammerState }: any) => warhammerState
   );
   const { slType, showResultsModal, results } = warhammerState;
-  const { result, resultReversed, successLevels, skillLevel, hitLocation } =
-    results;
+  const { result, successLevels, skillLevel, hitLocation } = results;
 
   if (!successLevels) {
     return null;
