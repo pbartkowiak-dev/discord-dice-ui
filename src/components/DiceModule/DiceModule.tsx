@@ -3,9 +3,7 @@ import { useDispatch } from "react-redux";
 import "./DiceModule.css";
 import Dice from "./Dice";
 import getDiceSet from "../../utils/getDiceSet";
-import { CONAN } from "../../consts/consts";
-import { INFINITY } from "../../consts/consts";
-import { WARHAMMER } from "../../consts/consts";
+import { CONAN, INFINITY, WARHAMMER, DUNE } from "../../consts/consts";
 import { CLASSIC, TOR_DICE } from "../../consts/diceConstants";
 import { COC } from "../../consts/consts";
 import { FATE_DICE, FATE_DIE } from "../../consts/fateConsts";
@@ -46,6 +44,8 @@ function DiceModule() {
     diceSetType = CONAN;
   } else if (mode === "infinityMode") {
     diceSetType = INFINITY;
+  } else if (mode === "duneMode") {
+    diceSetType = DUNE;
   } else if (mode === "cthulhuMode") {
     diceSetType = COC;
   } else if (mode === "fateMode") {

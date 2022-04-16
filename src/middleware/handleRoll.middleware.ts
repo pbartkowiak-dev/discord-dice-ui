@@ -14,9 +14,12 @@ import {
   CTHULHU_SHEET_MODAL,
   COMBAT_TRACKER,
   TOR_SKILL_TEST,
+  D20_DUNE_TEST,
+  DUNE_TOKENS,
 } from "../consts/diceConstants";
 import {
   openConanModal,
+  openDuneModal,
   openInfinityModal,
   openModifierModal,
   openPoolBuilderModal,
@@ -47,6 +50,7 @@ import wrathAndGloryStore from "../components/WrathAndGloryPoolBuilder/store";
 import torStore from "../components/tor/store";
 import xCardStore from "../components/XCard/store";
 import { X_CARD } from "../components/XCard/const";
+import { openDuneTokensModal } from "../actions/dune.actions";
 
 export default (store: any) => (next: any) => (action: any) => {
   if (action.type === ROLL_SUBMITTED) {
@@ -104,15 +108,11 @@ export default (store: any) => (next: any) => (action: any) => {
       store.dispatch(openConanModal());
     } else if (diceType === D20_INFINITY_TEST) {
       store.dispatch(openInfinityModal());
-    } else if (diceType === D6_CONAN || diceType === D20_CONAN_HL) {
-      store.dispatch(
-        requestRoll({
-          diceType,
-          diceAmount,
-          modifier: 0,
-        })
-      );
-    } else if (diceType === D6_INFINITY || diceType === D20_INFINITY_HL) {
+    } else if (diceType === D20_DUNE_TEST) {
+      store.dispatch(openDuneModal());
+    } else if (
+      [D6_CONAN, D20_CONAN_HL, D6_INFINITY, D20_INFINITY_HL].includes(diceType)
+    ) {
       store.dispatch(
         requestRoll({
           diceType,
@@ -126,6 +126,8 @@ export default (store: any) => (next: any) => (action: any) => {
       store.dispatch(openConanTokensModal());
     } else if (diceType === INFINITY_TOKENS) {
       store.dispatch(openInfinityTokensModal());
+    } else if (diceType === DUNE_TOKENS) {
+      store.dispatch(openDuneTokensModal());
     } else if (diceType === NARRATIVE_TOKENS) {
       store.dispatch(openNarrativeTokensModal());
     } else if (diceType === WARHAMMER_MONEY) {

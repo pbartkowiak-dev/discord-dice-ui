@@ -7,6 +7,7 @@ export type Mode =
   | "cthulhuMode"
   | "conanMode"
   | "infinityMode"
+  | "duneMode"
   | "narrativeDice"
   | "rollAndKeepMode"
   | "l5rMode"
@@ -20,6 +21,7 @@ export const modes: Mode[] = [
   "cthulhuMode",
   "conanMode",
   "infinityMode",
+  "duneMode",
   "narrativeDice",
   "rollAndKeepMode",
   "l5rMode",
