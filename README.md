@@ -231,11 +231,12 @@ Available parameters:
   - `cthulhuMode` - Call of Cthulhu game mode
   - `conanMode` - Conan game mode
   - `infinityMode` - Infinity game mode
-  - `narrativeDice` - Default game mode
+  - `duneMode` - Dune game mode
+  - `narrativeDice` - Narrative game mode (EotE, Genesys)
   - `rollAndKeepMode` - L5R 1e game mode
   - `l5rMode` - L5R 5e game mode
   - `fateMode` - Fate game mode
-  - `wrathAndGloryMod` - Wrath & Glory game mode
+  - `wrathAndGloryMode` - Wrath & Glory game mode
   - `torMode` - The One Ring 2e game mode
 
 ---
@@ -244,9 +245,9 @@ Available parameters:
 
 ### Production build
 
-1. `npm run build`.
+1. `npm run build`
 2. `npm run start` (`serve -s build` command is required by Heroku).
 
-### Development build
+### For local environment development run:
 
-1. `npm run dev`.
+1. `npm run dev`
