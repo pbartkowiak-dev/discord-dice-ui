@@ -35,6 +35,9 @@ import {
   COMBAT_TRACKER,
   WRATH_AND_GLORY_SKILL_TEST,
   D3,
+  DUNE_TOKENS,
+  D20_DUNE_TEST,
+  D20_DUNE,
 } from "./diceConstants";
 
 import { FATE_DIE } from "./fateConsts";
@@ -214,6 +217,25 @@ export const infinitySet = [
     diceType: INFINITY_TOKENS,
     label: "Update pools",
     diceImg: "infinity_tokens.png",
+    noDropdown: true,
+  },
+  xCard,
+];
+
+export const duneSet = [
+  {
+    diceType: D20_DUNE_TEST,
+    label: "Skill Test",
+    noDropdown: true,
+  },
+  {
+    diceType: D20_DUNE,
+    label: "d20",
+  },
+  {
+    diceType: DUNE_TOKENS,
+    label: "Update pools",
+    diceImg: "dune_tokens.png",
     noDropdown: true,
   },
   xCard,

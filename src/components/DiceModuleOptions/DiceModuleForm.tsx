@@ -78,6 +78,16 @@ function DiceModuleForm() {
         />
         <Form.Check
           type="radio"
+          label="Dune 2d20"
+          name="duneMode"
+          id="duneMode"
+          key="duneMode"
+          checked={mode === "duneMode"}
+          onChange={() => toggleMode("duneMode")}
+          custom
+        />
+        <Form.Check
+          type="radio"
           label="Narrative Dice"
           name="narrativeDice"
           id="narrativeDice"

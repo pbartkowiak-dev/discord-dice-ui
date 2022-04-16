@@ -11,8 +11,9 @@ import {
   rollAndKeepDiceSet,
   wrathAndGloryDiceSet,
   torDiceSet,
+  duneSet,
 } from "../consts/diceSets";
-import { WARHAMMER, CONAN, COC, INFINITY } from "../consts/consts";
+import { WARHAMMER, CONAN, COC, INFINITY, DUNE } from "../consts/consts";
 import { DiceSetType } from "../components/DiceModule/DiceTypes";
 import {
   POOL,
@@ -31,6 +32,8 @@ export default (setType: string): DiceSetType => {
     return conanSet;
   } else if (setType === INFINITY) {
     return infinitySet;
+  } else if (setType === DUNE) {
+    return duneSet;
   } else if (setType === COC) {
     return CthulhuSet;
   } else if (setType === POOL) {

@@ -36,11 +36,16 @@ export const D20_INFINITY_TEST = "d20infinity-test";
 export const D20_INFINITY = "d20infinity";
 export const D20_INFINITY_HL = "d20infinity-hl";
 
+export const D20_DUNE_TEST = "dune-test";
+export const D20_DUNE = "d20dune";
+
 export const CONAN_TOKENS = "CONAN_TOKENS";
 export const INFINITY_TOKENS = "INFINITY_TOKENS";
+export const DUNE_TOKENS = "DUNE_TOKENS";
+export const MOMENTUM = "MOMENTUM";
 export const DOOM = "DOOM";
 export const HEAT = "HEAT";
-export const MOMENTUM = "MOMENTUM";
+export const THREAT = "THREAT";
 
 export const NARRATIVE_DICE = "NARRATIVE_DICE";
 export const BOOST = "boost";
