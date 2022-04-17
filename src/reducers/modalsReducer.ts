@@ -13,11 +13,14 @@ import {
   CLOSE_POOL_BUILDER_MODAL,
   CLOSE_INFO_MODAL,
   OPEN_INFO_MODAL,
+  OPEN_DUNE_MODAL,
+  CLOSE_DUNE_MODAL,
 } from "../actions/modals";
 
 export interface ModalsStateTypes {
   isConanModalOpen: boolean;
   isInfinityModalOpen: boolean;
+  isDuneModalOpen: boolean;
   isModifierModalOpen: boolean;
   isSettingsModalOpen: boolean;
   isPoolBuilderModalOpen: boolean;
@@ -28,6 +31,7 @@ export interface ModalsStateTypes {
 const initialState = {
   isConanModalOpen: false,
   isInfinityModalOpen: false,
+  isDuneModalOpen: false,
   isModifierModalOpen: false,
   isSettingsModalOpen: false,
   isPoolBuilderModalOpen: false,
@@ -35,7 +39,6 @@ const initialState = {
   isWarhammerMoneyModalOpen: false,
 };
 
-// @TODO UNIFY REDUCER CASES
 function modalsReducer(state: ModalsStateTypes = initialState, action: any) {
   switch (action.type) {
     case CLOSE_SETTINGS_MODAL:
@@ -77,6 +80,16 @@ function modalsReducer(state: ModalsStateTypes = initialState, action: any) {
       return {
         ...state,
         isInfinityModalOpen: true,
+      };
+    case OPEN_DUNE_MODAL:
+      return {
+        ...state,
+        isDuneModalOpen: true,
+      };
+    case CLOSE_DUNE_MODAL:
+      return {
+        ...state,
+        isDuneModalOpen: false,
       };
     case OPEN_POOL_BUILDER_MODAL:
       return {

@@ -1,13 +1,9 @@
 import {
   POOL,
   D100_SL,
-  D6_CONAN,
   D20_CONAN_TEST,
-  D20_CONAN_HL,
   CONAN_TOKENS,
-  D6_INFINITY,
   D20_INFINITY_TEST,
-  D20_INFINITY_HL,
   INFINITY_TOKENS,
   NARRATIVE_TOKENS,
   WARHAMMER_MONEY,
@@ -110,16 +106,6 @@ export default (store: any) => (next: any) => (action: any) => {
       store.dispatch(openInfinityModal());
     } else if (diceType === D20_DUNE_TEST) {
       store.dispatch(openDuneModal());
-    } else if (
-      [D6_CONAN, D20_CONAN_HL, D6_INFINITY, D20_INFINITY_HL].includes(diceType)
-    ) {
-      store.dispatch(
-        requestRoll({
-          diceType,
-          diceAmount,
-          modifier: 0,
-        })
-      );
     } else if (diceType === POOL) {
       store.dispatch(openPoolBuilderModal());
     } else if (diceType === CONAN_TOKENS) {
