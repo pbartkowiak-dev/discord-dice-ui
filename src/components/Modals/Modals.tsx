@@ -30,6 +30,7 @@ import WrathAndGloryResultsModal from "../WrathAndGloryPoolBuilder/WrathAndGlory
 import TorModal from "../torModals/TorModal";
 import TorResultsModal from "../torModals/TorResultsModal";
 import XCardModal from "../XCard/XCardModal";
+import DuneModalContainer from "../dune-modal/dune-modal-container";
 
 interface modalsPropTypes {
   modalsState: ModalsStateTypes;
@@ -65,6 +66,8 @@ function Modals({
       />
       <ConanModalContainer showModal={modalsState.isConanModalOpen} />
       <InfinityModalContainer showModal={modalsState.isInfinityModalOpen} />
+      <DuneModalContainer showModal={modalsState.isDuneModalOpen} />
+
       <PoolBuilderModalContainer
         showModal={modalsState.isPoolBuilderModalOpen}
       />
