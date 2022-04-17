@@ -92,6 +92,7 @@ function DuneModal({
       <Modal.Body>
         <DuneModalForm
           formId={form}
+          showComplicationRange={true}
           initialValues={initialValues}
           onSubmit={(values) => handleSubmit(values)}
         />

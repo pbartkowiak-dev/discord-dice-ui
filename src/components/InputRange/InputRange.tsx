@@ -9,9 +9,17 @@ interface InputRangeProps {
   hidePercent?: boolean;
   min?: number;
   max?: number;
+  value?: number;
 }
 
-function InputRange({ id, onChange, hidePercent, min, max }: InputRangeProps) {
+function InputRange({
+  id,
+  onChange,
+  hidePercent,
+  min,
+  max,
+  value,
+}: InputRangeProps) {
   return (
     <div className={styles.container}>
       {!hidePercent && (
@@ -24,6 +32,7 @@ function InputRange({ id, onChange, hidePercent, min, max }: InputRangeProps) {
           name={id}
           min={min ?? 1}
           max={max || 100}
+          value={value || 0}
           onChange={onChange}
         />
       </Form.Group>
