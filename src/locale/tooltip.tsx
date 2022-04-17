@@ -140,6 +140,63 @@ export default {
     </span>
   ),
 
+  complicationRange: (
+    <div>
+      <h6>Complication Range</h6>
+      <p style={{ textAlign: "left", fontStyle: "italic" }}>
+        The range of numbers on Die which cause complications.
+      </p>
+      <div className="range-tooltip-row">
+        <div className="range-tooltip-table-header">
+          Comp.
+          <br />
+          Range
+        </div>
+        <div className="range-tooltip-table-header">Description</div>
+        <div className="range-tooltip-table-header">
+          Comp.
+          <br />
+          occur on...
+        </div>
+      </div>
+      <div className="range-tooltip-row">
+        <div>
+          <strong>1</strong>
+        </div>
+        <div>Normal</div>
+        <div>20</div>
+      </div>
+      <div className="range-tooltip-row">
+        <div>
+          <strong>2</strong>
+        </div>
+        <div>Risky</div>
+        <div>19 or 20</div>
+      </div>
+      <div className="range-tooltip-row">
+        <div>
+          <strong>3</strong>
+        </div>
+        <div>Perilous</div>
+        <div>18-20</div>
+      </div>
+      <div className="range-tooltip-row">
+        <div>
+          <strong>4</strong>
+        </div>
+        <div>Precarious</div>
+        <div>17-20</div>
+      </div>
+      <div className="range-tooltip-row">
+        <div>
+          <strong>5</strong>
+        </div>
+        <div>Treacherous</div>
+        <div>16-20</div>
+      </div>
+    </div>
+  ),
+
   warhammer4eSL,
   fastSL,
   warhammer2eSL,

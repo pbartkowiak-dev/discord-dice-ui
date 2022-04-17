@@ -95,6 +95,7 @@ function InfinityModal({
       <Modal.Body>
         <InfinityModalForm
           formId={form}
+          showUntrainedTest={true}
           initialValues={initialValues}
           onSubmit={(values) => handleSubmit(values)}
         />

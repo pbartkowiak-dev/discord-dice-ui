@@ -80,19 +80,53 @@
   margin-bottom: 2px;
 }
 
-.fortune {
+.fortune,
+.complication-range {
   padding: 3px 0 5px;
   margin: 3px 0 0;
   border-top: 1px solid #bebebe;
   border-bottom: 1px solid #bebebe;
 }
 
-.fortune-title {
+.complication-range  {
+  border-bottom: 0;
+}
+
+.fortune-title,
+.complication-range-title {
   margin-bottom: 2px;
   margin-top: 0;
   font-size: 16px;
   text-align: center;
   color: #212529;
+}
+
+.complication-range-input-container {
+  padding-top: 6px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  width: 140px;
+  margin: 0 auto;
+}
+
+.complication-range-input-legend {
+  margin-top: -1px;
+  font-size: 15px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.complication-range-label {
+  cursor: pointer;
+  width: 10px;
+  display: inline-block;
+}
+
+.complication-range-label--active {
+  font-weight: bold;
+  color: #0175ff;
 }
 
 .conan-mode-form .skill-level-field .form-control {
@@ -113,4 +147,29 @@
   position: absolute;
   top: 73px;
   right: 125px;
+}
+
+.complication-range-description {
+  font-weight: bold;
+  color: #0175ff;
+  font-variant: small-caps;
+}
+
+.range-tooltip .tooltip-inner {
+  max-width: 460px;
+}
+
+.range-tooltip-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  border-bottom: 1px solid #1d1d1d;
+}
+
+.range-tooltip-table-header {
+  font-variant: all-petite-caps;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 14px;
+  padding-bottom: 5px;
 }

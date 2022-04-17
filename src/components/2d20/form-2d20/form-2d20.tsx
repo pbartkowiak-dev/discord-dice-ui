@@ -10,6 +10,7 @@ import Assistance from "../assistance/assistance";
 import { RenderCheckbox, renderInput } from "./form-utils";
 import classNames from "classnames";
 import DiffLadder from "../DiffLadder/DiffLadder";
+import { ComplicationRange } from "../complication-range/complication-range";
 
 export const Form2d20 = ({
   formId,
@@ -19,8 +20,11 @@ export const Form2d20 = ({
   submitFailed,
   handleSubmit,
   formValues,
+  showUntrainedTest,
+  showComplicationRange,
 }: any) => {
-  const { focus, tn, dice, fortune, assistanceDice } = formValues;
+  const { focus, tn, dice, fortune, assistanceDice, complicationRange } =
+    formValues;
   const [hoverState, setHoverState] = useState(0);
 
   const handleDiceChange = (diceAmount: string) => {
@@ -95,13 +99,18 @@ export const Form2d20 = ({
           />
         </div>
       </div>
-      <Field
-        name="untrainedTest"
-        id="untrainedTest"
-        label={untrainedTestLabel}
-        component={RenderCheckbox}
-        disabled={focus && Number(focus) > 0}
-      />
+      {showUntrainedTest && (
+        <Field
+          name="untrainedTest"
+          id="untrainedTest"
+          label={untrainedTestLabel}
+          component={RenderCheckbox}
+          disabled={focus && Number(focus) > 0}
+        />
+      )}
+      {showComplicationRange && (
+        <ComplicationRange change={change} value={complicationRange} />
+      )}
       <Fortune className="fortune" dice={dice} change={change} />
       <Assistance
         className="assistance"

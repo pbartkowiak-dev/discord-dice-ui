@@ -92,6 +92,7 @@ function ConanModal({
       <Modal.Body>
         <ConanModalForm
           formId={form}
+          showUntrainedTest={true}
           initialValues={initialValues}
           onSubmit={(values) => handleSubmit(values)}
         />
