@@ -9,6 +9,7 @@ import rollAndKeepData from "./rollAndKeepReducer";
 import l5rData from "./l5rReducer";
 import conanData from "./conanReducer";
 import infinityData from "./infinityReducer";
+import duneData from "./dune-reducer";
 import narrativeDiceData from "./narrativeDicereducer";
 import { reducer as form } from "redux-form";
 import lastRollOptions from "./lastRollOptionsReducer";
@@ -26,6 +27,7 @@ export default combineReducers({
   l5rData,
   conanData,
   infinityData,
+  duneData,
   narrativeDiceData,
   lastRollOptions,
   rerollCount,
