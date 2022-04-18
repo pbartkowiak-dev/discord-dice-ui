@@ -1,4 +1,3 @@
-// @ts-nocheck
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import { Field } from "redux-form";
@@ -12,6 +11,19 @@ import classNames from "classnames";
 import DiffLadder from "../DiffLadder/DiffLadder";
 import { ComplicationRange } from "../complication-range/complication-range";
 
+interface Props {
+  formId: string;
+  change: any;
+  invalid: boolean;
+  anyTouched: boolean;
+  submitFailed: boolean;
+  handleSubmit: any;
+  formValues: any;
+  fortuneHeader?: string;
+  showUntrainedTest?: boolean;
+  showComplicationRange: boolean;
+}
+
 export const Form2d20 = ({
   formId,
   change,
@@ -20,9 +32,10 @@ export const Form2d20 = ({
   submitFailed,
   handleSubmit,
   formValues,
+  fortuneHeader,
   showUntrainedTest,
   showComplicationRange,
-}: any) => {
+}: Props) => {
   const { focus, tn, dice, fortune, assistanceDice, complicationRange } =
     formValues;
   const [hoverState, setHoverState] = useState(0);
@@ -75,7 +88,10 @@ export const Form2d20 = ({
             id="focus"
             name="focus"
             label={focusLabel}
-            onChange={(evt) => handleFocusChange(evt.currentTarget.value)}
+            onChange={(evt: React.ChangeEvent<HTMLInputElement>) =>
+              handleFocusChange(evt.currentTarget.value)
+            }
+            /* @ts-ignore */
             component={renderInput}
           />
         </div>
@@ -111,7 +127,12 @@ export const Form2d20 = ({
       {showComplicationRange && (
         <ComplicationRange change={change} value={complicationRange} />
       )}
-      <Fortune className="fortune" dice={dice} change={change} />
+      <Fortune
+        className="fortune"
+        dice={dice}
+        change={change}
+        header={fortuneHeader}
+      />
       <Assistance
         className="assistance"
         assistanceDice={assistanceDice}

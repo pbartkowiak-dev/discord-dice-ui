@@ -7,13 +7,14 @@ interface Props {
   dice: string;
   change: (name: string, value: string) => void;
   className?: string;
+  header?: string;
 }
 
-export const Fortune: FC<Props> = ({ dice, change, className }) => {
+export const Fortune: FC<Props> = ({ dice, change, className, header }) => {
   return (
     <div className={className}>
       <h5 className="fortune-title">
-        Fortune <InfoTooltip content={tooltip.fortuneInfo} />
+        {header || "Fortune"} <InfoTooltip content={tooltip.fortuneInfo} />
       </h5>
       <div className="conan-radio-fields">
         <label className="dice-row-label">
