@@ -9,14 +9,24 @@ const mapDispatchToProps = {
   requestReroll,
 };
 
+interface Props {
+  complicationThreshold?: number;
+  isPool?: boolean;
+  isFate?: boolean;
+  results: number[];
+  requestReroll: any;
+  hideMsg: () => void;
+}
+
 function RerollContainer({
   hideMsg,
   results,
   requestReroll,
   isPool,
   isFate,
-}: any) {
-  const handleReroll = (itemsToStay: Array<number>) => {
+  complicationThreshold,
+}: Props) {
+  const handleReroll = (itemsToStay?: Array<number>) => {
     hideMsg();
     setTimeout(() => {
       requestReroll({
@@ -28,6 +38,7 @@ function RerollContainer({
   return (
     <Reroll
       handleReroll={handleReroll}
+      complicationThreshold={complicationThreshold}
       results={results}
       isPool={isPool}
       isFate={isFate}

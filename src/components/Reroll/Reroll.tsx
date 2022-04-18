@@ -1,4 +1,3 @@
-// @ts-nocheck
 import React, { useState } from "react";
 import classNames from "classnames/bind";
 import Button from "react-bootstrap/Button";
@@ -8,16 +7,23 @@ import Or from "../Or/Or";
 import mapValueToFate from "../../middleware/utils/mapValueToFate";
 import { FateSymbol } from "../../middleware/utils/FateSymbol";
 
-interface RerollPropTypes {
-  handleReroll: (itemsToStay: Array<number>) => void;
+interface Props {
+  handleReroll: (itemsToStay?: Array<number>) => void;
   results: Array<any>;
-  isPool: boolean;
-  isFate: boolean;
+  isPool?: boolean;
+  isFate?: boolean;
+  complicationThreshold?: number;
 }
 
-function Reroll({ handleReroll, results, isPool, isFate }: RerollPropTypes) {
+function Reroll({
+  handleReroll,
+  results,
+  isPool,
+  isFate,
+  complicationThreshold,
+}: Props) {
   const cx = classNames.bind(styles);
-  const [itemIndexes, setItemIndexes] = useState([]);
+  const [itemIndexes, setItemIndexes] = useState<number[]>([]);
 
   const addItemIndex = (itemIndex: number) => {
     if (itemIndexes.indexOf(itemIndex) === -1) {
@@ -33,10 +39,42 @@ function Reroll({ handleReroll, results, isPool, isFate }: RerollPropTypes) {
 
   if (results.length) {
     const resultsElement = results.map((result: number, index: number) => {
+      const hasComplication =
+        complicationThreshold && result >= complicationThreshold;
+
       if (index === results.length - 1) {
         return (
-          <span key={index} onClick={() => addItemIndex(index)}>
+          <div
+            key={index}
+            onClick={() => addItemIndex(index)}
+            className={styles.resultContainer}
+          >
+            <span>
+              <CodeSpan
+                type={hasComplication ? "complication" : undefined}
+                className={cx({
+                  rollItem: true,
+                  active: itemIndexes.indexOf(index) >= 0,
+                })}
+              >
+                {isFate ? FateSymbol(mapValueToFate(result)) : result}
+              </CodeSpan>
+            </span>
+            {hasComplication && (
+              <span className={styles.compilationText}>Comp</span>
+            )}
+          </div>
+        );
+      }
+      return (
+        <div
+          key={index}
+          onClick={() => addItemIndex(index)}
+          className={styles.resultContainer}
+        >
+          <span>
             <CodeSpan
+              type={hasComplication ? "complication" : undefined}
               className={cx({
                 rollItem: true,
                 active: itemIndexes.indexOf(index) >= 0,
@@ -44,21 +82,12 @@ function Reroll({ handleReroll, results, isPool, isFate }: RerollPropTypes) {
             >
               {isFate ? FateSymbol(mapValueToFate(result)) : result}
             </CodeSpan>
+            ,&nbsp;
           </span>
-        );
-      }
-      return (
-        <span key={index} onClick={() => addItemIndex(index)}>
-          <CodeSpan
-            className={cx({
-              rollItem: true,
-              active: itemIndexes.indexOf(index) >= 0,
-            })}
-          >
-            {isFate ? FateSymbol(mapValueToFate(result)) : result}
-          </CodeSpan>
-          ,&nbsp;
-        </span>
+          {hasComplication && (
+            <span className={styles.compilationText}>Comp</span>
+          )}
+        </div>
       );
     });
 

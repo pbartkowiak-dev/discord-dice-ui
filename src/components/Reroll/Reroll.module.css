@@ -17,7 +17,6 @@
   font-size: 20px !important;
   width: 35px;
   opacity: 0.6;
-  cursor: pointer;
   transition: 0.1s;
 }
 
@@ -43,3 +42,17 @@
   margin-top: 4px;
   margin-bottom: 4px;
 }
+
+.resultContainer {
+  cursor: pointer;
+  display: inline-flex;
+  flex-direction: column;
+}
+
+.compilationText {
+  color: #713b08;
+  font-size: 13px;
+  font-variant: all-petite-caps;
+  text-align: left;
+}
+
