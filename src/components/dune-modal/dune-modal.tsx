@@ -93,6 +93,8 @@ function DuneModal({
         <DuneModalForm
           formId={form}
           showComplicationRange={true}
+          showUntrainedTest={false}
+          showAssistance={false}
           fortuneHeader="Determination"
           initialValues={initialValues}
           onSubmit={(values) => handleSubmit(values)}

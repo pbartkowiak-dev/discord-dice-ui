@@ -20,7 +20,8 @@ interface Props {
   handleSubmit: any;
   formValues: any;
   fortuneHeader?: string;
-  showUntrainedTest?: boolean;
+  showUntrainedTest: boolean;
+  showAssistance: boolean;
   showComplicationRange: boolean;
 }
 
@@ -33,6 +34,7 @@ export const Form2d20 = ({
   handleSubmit,
   formValues,
   fortuneHeader,
+  showAssistance,
   showUntrainedTest,
   showComplicationRange,
 }: Props) => {
@@ -133,13 +135,15 @@ export const Form2d20 = ({
         change={change}
         header={fortuneHeader}
       />
-      <Assistance
-        className="assistance"
-        assistanceDice={assistanceDice}
-        tn={tn}
-        focus={focus}
-        change={change}
-      />
+      {showAssistance && (
+        <Assistance
+          className="assistance"
+          assistanceDice={assistanceDice}
+          tn={tn}
+          focus={focus}
+          change={change}
+        />
+      )}
     </Form>
   );
 };

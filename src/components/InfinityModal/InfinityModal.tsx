@@ -96,6 +96,8 @@ function InfinityModal({
         <InfinityModalForm
           formId={form}
           showUntrainedTest={true}
+          showComplicationRange={false}
+          showAssistance={true}
           initialValues={initialValues}
           onSubmit={(values) => handleSubmit(values)}
         />
