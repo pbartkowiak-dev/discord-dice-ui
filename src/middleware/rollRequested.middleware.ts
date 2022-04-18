@@ -8,10 +8,11 @@ import {
   D6_CONAN,
   D20_INFINITY_TEST,
   D6_INFINITY,
+  D20_DUNE_TEST,
 } from "../consts/diceConstants";
 import { FATE_DIE, MINUS, PLUS } from "../consts/fateConsts";
 import mapValueToFate from "./utils/mapValueToFate";
-import diceModuleOptionsStore from "../components/DiceModuleOptions/store";
+import { duneDiceRolled } from "../actions/dune.actions";
 
 interface rollDiceResult {
   results: Array<number>;
@@ -40,8 +41,6 @@ interface rollDiceResult {
 
 export default (store: any) => (next: any) => (action: any) => {
   if (action.type === DICE_ROLL_REQUESTED) {
-    const { mode } = diceModuleOptionsStore.getState();
-
     let {
       diceType,
       modifier = 0,
@@ -169,7 +168,7 @@ export default (store: any) => (next: any) => (action: any) => {
       }
     }
 
-    if (mode === "conanMode" && diceType === D20_CONAN_TEST) {
+    if (diceType === D20_CONAN_TEST) {
       store.dispatch(
         conanDiceRolled({
           result,
@@ -179,13 +178,22 @@ export default (store: any) => (next: any) => (action: any) => {
           },
         })
       );
-    } else if (mode === "infinityMode" && diceType === D20_INFINITY_TEST) {
+    } else if (diceType === D20_INFINITY_TEST) {
       store.dispatch(
         infinityDiceRolled({
           result,
           rollOptions: {
             ...action.payload,
             assistanceDiceResults: result.assistanceDiceResults,
+          },
+        })
+      );
+    } else if (diceType === D20_DUNE_TEST) {
+      store.dispatch(
+        duneDiceRolled({
+          result,
+          rollOptions: {
+            ...action.payload,
           },
         })
       );

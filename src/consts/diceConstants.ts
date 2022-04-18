@@ -36,7 +36,7 @@ export const D20_INFINITY_TEST = "d20infinity-test";
 export const D20_INFINITY = "d20infinity";
 export const D20_INFINITY_HL = "d20infinity-hl";
 
-export const D20_DUNE_TEST = "dune-test";
+export const D20_DUNE_TEST = "d20dune-test";
 export const D20_DUNE = "d20dune";
 
 export const CONAN_TOKENS = "CONAN_TOKENS";

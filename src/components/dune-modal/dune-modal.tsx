@@ -26,10 +26,7 @@ const DuneModalForm = connect((state) => ({
     "focus",
     "tn",
     "dice",
-    "fortune",
-    "assistanceDice",
-    "assistanceFocus",
-    "assistanceTn"
+    "fortune"
   ),
 }))(FormElement);
 
@@ -40,35 +37,24 @@ function DuneModal({
 }: DuneModalPropTypes) {
   const handleSubmit = (values: ConanFormValuesTypes) => {
     const {
-      assistanceDice,
       dice,
       difficulty,
       focus = "0",
       fortune,
       tn,
       complicationRange,
-      assistanceFocus = "0",
-      assistanceTn,
     } = values;
 
     const focusValue = focus.trim() === "" ? 0 : Number(focus);
-    const assistanceFocusValue =
-      assistanceFocus.trim() === "" ? focusValue : Number(assistanceFocus);
 
     requestRoll({
       diceType: D20_DUNE_TEST,
-      assistanceDice: Number(assistanceDice),
       diceAmount: Number(dice),
       difficulty: Number(difficulty),
       focus: focusValue,
       fortune: Number(fortune),
       tn: Number(tn),
-      assistanceFocus: assistanceFocusValue,
-      assistanceTn:
-        assistanceTn.trim() === "" ? Number(tn) : Number(assistanceTn),
       complicationRange: Number(complicationRange),
-      assistanceUntrainedTest:
-        assistanceFocus && assistanceFocus.trim() === "0",
     });
 
     closeDuneModal();
@@ -76,11 +62,8 @@ function DuneModal({
 
   const initialValues = {
     dice: "2",
-    assistanceDice: "0",
     fortune: "0",
     difficulty: "2",
-    assistanceFocus: "",
-    assistanceTn: "",
     complicationRange: "1",
   };
 
