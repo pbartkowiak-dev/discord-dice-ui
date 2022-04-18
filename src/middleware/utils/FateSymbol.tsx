@@ -6,7 +6,6 @@ import { faMinus, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { faSquare } from "@fortawesome/free-regular-svg-icons";
 
 export const FateSymbol = (result: FateResult) => {
-  console.log("fateSymbol resyult", result);
   if (result === PLUS) {
     return (
       <TooltipWrapper content="Plus">

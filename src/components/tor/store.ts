@@ -141,8 +141,6 @@ const useStore = create<State>((set, get) => ({
       featDieScore = featDiceResults[0];
     }
 
-    console.log("featDieScore", featDieScore);
-
     // Get SUCCESS DICE score
     const successDiceScore = successDiceResults.reduce(
       (previousValue, currentValue) => {

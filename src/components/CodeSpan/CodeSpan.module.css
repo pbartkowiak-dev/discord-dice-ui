@@ -2,7 +2,7 @@
   display: inline-block;
   font-family: "Courier New", Courier, monospace;
   font-weight: bold;
-  padding: 0px 2px;
+  padding: 0 2px;
   border-radius: 5px;
   min-width: 20px;
   text-align: center;
@@ -22,5 +22,12 @@
 }
 
 .inactive {
-  opacity: 0.5;
+  opacity: .5;
 }
+
+.complication {
+  color: #622b13;
+  background-color: #f8cc9b;
+  border-color: #f8cc9b;
+}
+

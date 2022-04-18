@@ -79,8 +79,10 @@ const getLocalMsg = (store: any) => (next: any) => (action: any) => {
     const resultsJoined = joinAsBlocks(featDiceResultsWithIcons || results);
     const modifierWithSymbol = (
       <CodeSpan>
-        {modSymbol}
-        {Math.abs(modifier)}
+        <>
+          {modSymbol}
+          {Math.abs(modifier)}
+        </>
       </CodeSpan>
     );
     const fields = [];
@@ -195,7 +197,7 @@ const getLocalMsg = (store: any) => (next: any) => (action: any) => {
     if (isFate) {
       titleMsg = (
         <div>
-          <strong>You rolled</strong> <CodeSpan>{diceAmount}dF</CodeSpan>
+          <strong>You rolled</strong> <CodeSpan>{`${diceAmount}dF`}</CodeSpan>
           <strong>. {rolledWord}:</strong>
         </div>
       );

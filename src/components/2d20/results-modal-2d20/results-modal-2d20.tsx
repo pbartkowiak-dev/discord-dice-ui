@@ -49,6 +49,14 @@ function ResultsModal2d20({
     complicationRange,
   } = rollOptions;
 
+  let complicationThreshold;
+
+  if (complicationRange) {
+    complicationThreshold = 21 - complicationRange;
+  } else {
+    complicationThreshold = untrainedTest ? 19 : 20;
+  }
+
   return (
     <Modal show={showModal} onHide={hideMsg}>
       <Modal.Header
@@ -67,7 +75,7 @@ function ResultsModal2d20({
           {/* TITLE */}
           <div className={styles.conanResultDetails}>
             <div className={styles.resultDetailsRow}>
-              You rolled <CodeSpan>{diceAmount}d20</CodeSpan>
+              You rolled <CodeSpan>{`${diceAmount}d20`}</CodeSpan>
             </div>
             {results.length === 1 && (
               <div className={styles.resultDetailsRow}>
@@ -146,7 +154,7 @@ function ResultsModal2d20({
             {!!assistanceSuccessLevel.complications && (
               <div className={styles.assistanceResultRow}>
                 Complications:{" "}
-                <CodeSpan type="failure">
+                <CodeSpan type="complication">
                   {assistanceSuccessLevel.complications}
                 </CodeSpan>
               </div>
@@ -193,7 +201,9 @@ function ResultsModal2d20({
             <div>
               <CodeSpan
                 className={styles.slResultSpan}
-                type={successLevel.complications > 0 ? "failure" : "inactive"}
+                type={
+                  successLevel.complications > 0 ? "complication" : "inactive"
+                }
               >
                 {successLevel.complications}
               </CodeSpan>
@@ -222,7 +232,7 @@ function ResultsModal2d20({
         </div>
         {/* Reroll Container*/}
         <RerollContainer
-          rollOptions={rollOptions}
+          complicationThreshold={complicationThreshold}
           isPool={false}
           results={results}
         />

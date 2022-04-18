@@ -9,13 +9,7 @@ import classNames from "classnames";
 
 function ResultsModal({ hideMsg, msgData, showModal }: ResultsModalPropTypes) {
   const { msgParams } = msgData;
-  const {
-    isSuccess,
-    rollOptions = {},
-    title,
-    results = [],
-    isPool,
-  } = msgParams;
+  const { isSuccess, title, results = [], isPool } = msgParams;
 
   let modalBodyList;
 
@@ -48,7 +42,6 @@ function ResultsModal({ hideMsg, msgData, showModal }: ResultsModalPropTypes) {
         {title && <div className={styles.rollResults}>{title}</div>}
         {modalBodyList}
         <RerollContainer
-          rollOptions={rollOptions}
           isPool={isPool}
           isFate={mode === "fateMode"}
           results={results}
