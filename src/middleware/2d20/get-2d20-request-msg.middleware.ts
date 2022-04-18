@@ -34,6 +34,7 @@ export const get2d20RequestMsg =
         assistanceFocus,
         assistanceTn,
         assistanceUntrainedTest,
+        complicationRange,
       } = rollOptions;
       const username = userSettings.username || "USERNAME_MISSING";
       const fields = [];
@@ -72,6 +73,10 @@ export const get2d20RequestMsg =
 
       if (untrainedTest) {
         description += `\nUntrained Test`;
+      }
+
+      if (complicationRange) {
+        description += `\nComplication Range: \`${complicationRange}\``;
       }
 
       if (assistanceDice && assistanceDiceResults?.length) {

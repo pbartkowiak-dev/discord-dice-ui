@@ -27,6 +27,7 @@ export const get2d20LocalMsg = (store: any) => (next: any) => (action: any) => {
       assistanceFocus,
       assistanceTn,
       assistanceUntrainedTest,
+      complicationRange,
     } = rollOptions;
 
     const assistanceSuccessLevel = get2d20SuccessLevel({
@@ -44,6 +45,7 @@ export const get2d20LocalMsg = (store: any) => (next: any) => (action: any) => {
       difficulty,
       assistanceSuccessLevel: assistanceSuccessLevel?.successLevel,
       untrainedTest,
+      complicationRange,
     });
 
     store.dispatch(

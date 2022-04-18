@@ -11,6 +11,7 @@ import joinAsBlocks from "../../../utils/joinAsBlocks";
 import InfoTooltip from "../../InfoTooltip/InfoTooltip";
 import tooltip from "../../../locale/tooltip";
 import ResultVsSkillRow from "../../ResultVsSkillRow/ResultVsSkillRow";
+import { getComplicationRangeName } from "../complication-range/complication-range";
 
 function ResultsModal2d20({
   hideMsg,
@@ -45,6 +46,7 @@ function ResultsModal2d20({
     assistanceFocus,
     assistanceTn,
     assistanceUntrainedTest,
+    complicationRange,
   } = rollOptions;
 
   return (
@@ -84,6 +86,12 @@ function ResultsModal2d20({
             {!!fortune && (
               <div className={styles.resultDetailsRow}>
                 Fortune points used: <CodeSpan>{fortune}</CodeSpan>
+              </div>
+            )}
+            {!!complicationRange && (
+              <div className={styles.resultDetailsRow}>
+                Complication Range: <CodeSpan>{complicationRange}</CodeSpan>(
+                <em>{getComplicationRangeName(complicationRange)}</em>)
               </div>
             )}
           </div>
