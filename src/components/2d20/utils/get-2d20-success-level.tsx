@@ -13,6 +13,7 @@ export interface Get2d20SuccessLevelProps {
   difficulty: number;
   assistanceSuccessLevel?: number;
   untrainedTest: boolean;
+  complicationRange?: number;
 }
 
 export const get2d20SuccessLevel = ({
@@ -22,15 +23,22 @@ export const get2d20SuccessLevel = ({
   difficulty,
   untrainedTest,
   assistanceSuccessLevel,
+  complicationRange,
 }: Get2d20SuccessLevelProps): null | I2d20SuccessLevel => {
-  const compilationMinVal = untrainedTest ? 19 : 20;
   const compilationMaxVal = 20;
   const focusNum = focus ? Number(focus) : 0;
+  let compilationMinVal: number;
   let successLevel = 0;
   let complications = 0;
 
   if (!results) {
     return null;
+  }
+
+  if (complicationRange) {
+    compilationMinVal = 21 - complicationRange;
+  } else {
+    compilationMinVal = untrainedTest ? 19 : 20;
   }
 
   results.forEach((result) => {

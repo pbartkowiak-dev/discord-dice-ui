@@ -15,6 +15,23 @@ interface LabelProps {
   value: string;
 }
 
+export const getComplicationRangeName = (
+  complicationRangeVal: string | number
+) => {
+  const value = Number(complicationRangeVal);
+  switch (value) {
+    case 5:
+      return "Treacherous";
+    case 4:
+      return "Precarious";
+    case 3:
+      return "Perilous";
+    case 2:
+      return "Risky";
+    default:
+      return "Normal";
+  }
+};
 const Label: FC<LabelProps> = ({ onClick, isActive, value }) => {
   return (
     <label
@@ -56,11 +73,7 @@ export const ComplicationRange: FC<Props> = ({ change, value }) => {
       </h5>
       <div className="complication-range-input-container">
         <div className="complication-range-description">
-          {value === "1" && <span>Normal</span>}
-          {value === "2" && <span>Risky</span>}
-          {value === "3" && <span>Perilous</span>}
-          {value === "4" && <span>Precarious</span>}
-          {value === "5" && <span>Treacherous</span>}
+          <span>{getComplicationRangeName(value)}</span>
         </div>
         <InputRange
           id={id}
