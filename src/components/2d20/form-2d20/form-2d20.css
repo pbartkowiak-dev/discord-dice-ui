@@ -41,6 +41,10 @@
   margin-bottom: 0;
 }
 
+.assistance {
+  border-top: 1px solid #bebebe;
+}
+
 .assistance .form-label {
   font-size: 14px;
 }
@@ -85,10 +89,6 @@
   padding: 3px 0 5px;
   margin: 3px 0 0;
   border-top: 1px solid #bebebe;
-  border-bottom: 1px solid #bebebe;
-}
-
-.complication-range  {
   border-bottom: 0;
 }
 
