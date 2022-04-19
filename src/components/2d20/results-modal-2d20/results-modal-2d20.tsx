@@ -12,12 +12,18 @@ import InfoTooltip from "../../InfoTooltip/InfoTooltip";
 import tooltip from "../../../locale/tooltip";
 import ResultVsSkillRow from "../../ResultVsSkillRow/ResultVsSkillRow";
 import { getComplicationRangeName } from "../complication-range/complication-range";
+import { D20_DUNE_TEST } from "../../../consts/diceConstants";
+
+interface ResultsModal2d20Type extends ResultsModalPropTypes {
+  diceType: string;
+}
 
 function ResultsModal2d20({
   hideMsg,
   msgData,
   showModal,
-}: ResultsModalPropTypes) {
+  diceType,
+}: ResultsModal2d20Type) {
   const { msgParams } = msgData;
   const {
     rollOptions,
@@ -32,6 +38,7 @@ function ResultsModal2d20({
     return null;
   }
 
+  const isDune = diceType === D20_DUNE_TEST;
   const { isSuccess } = successLevel;
 
   // Actual values
@@ -93,7 +100,8 @@ function ResultsModal2d20({
             )}
             {!!fortune && (
               <div className={styles.resultDetailsRow}>
-                Fortune points used: <CodeSpan>{fortune}</CodeSpan>
+                {isDune ? "Determination" : "Fortune"} points used:{" "}
+                <CodeSpan>{fortune}</CodeSpan>
               </div>
             )}
             {!!complicationRange && (

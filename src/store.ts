@@ -24,9 +24,12 @@ import warhammerMoneyRecalculated from "./middleware/warhammerMoneyRecalculated.
 import { get2d20LocalMsg } from "./middleware/2d20/get-2d20-local-msg.middleware";
 import { get2d20RequestMsg } from "./middleware/2d20/get-2d20-request-msg.middleware";
 // Conan
-import conanUpdateTokensState from "./middleware/conanUpdateTokensState.middleware";
+import { conanUpdateTokensState } from "./middleware/conan-update-tokens-state.middleware";
 // Infinity
-import infinityUpdateTokensState from "./middleware/infinityUpdateTokensState.middleware";
+import { infinityUpdateTokensState } from "./middleware/infinity-update-tokens-state.middleware";
+// Dune
+import { duneUpdateTokensState } from "./middleware/dune-update-tokens-state.middleware";
+
 // Pool
 import getLocalPoolMsg from "./middleware/getPoolMsg/getLocalPoolMsg.middleware";
 import getRequestPoolMsg from "./middleware/getPoolMsg/getRequestPoolMsg.middleware";
@@ -90,6 +93,7 @@ const rollMiddleware = [
 
   conanUpdateTokensState,
   infinityUpdateTokensState,
+  duneUpdateTokensState,
 
   getLocalPoolMsg,
   getRequestPoolMsg,

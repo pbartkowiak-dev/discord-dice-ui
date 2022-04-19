@@ -1,5 +1,4 @@
 import React from "react";
-import { getComplicationRangeName } from "../components/2d20/complication-range/complication-range";
 
 const warhammer4eSL = (
   <span className="tooltip-fast-sl">
@@ -164,35 +163,35 @@ export default {
         <div>
           <strong>1</strong>
         </div>
-        <div>{getComplicationRangeName(1)}</div>
+        <div>Normal</div>
         <div>20</div>
       </div>
       <div className="range-tooltip-row">
         <div>
           <strong>2</strong>
         </div>
-        <div>{getComplicationRangeName(2)}</div>
+        <div>Risky</div>
         <div>19 or 20</div>
       </div>
       <div className="range-tooltip-row">
         <div>
           <strong>3</strong>
         </div>
-        <div>{getComplicationRangeName(3)}</div>
+        <div>Perilous</div>
         <div>18-20</div>
       </div>
       <div className="range-tooltip-row">
         <div>
           <strong>4</strong>
         </div>
-        <div>{getComplicationRangeName(4)}</div>
+        <div>Precarious</div>
         <div>17-20</div>
       </div>
       <div className="range-tooltip-row">
         <div>
           <strong>5</strong>
         </div>
-        <div>{getComplicationRangeName(5)}</div>
+        <div>Treacherous</div>
         <div>16-20</div>
       </div>
     </div>

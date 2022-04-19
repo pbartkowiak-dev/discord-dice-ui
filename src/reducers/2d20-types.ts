@@ -16,5 +16,4 @@ export interface DuneState {
   showTokensModal: boolean;
   momentum: string;
   threat: string;
-  assistanceDiceResults: Array<number>;
 }
