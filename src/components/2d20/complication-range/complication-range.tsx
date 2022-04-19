@@ -15,23 +15,30 @@ interface LabelProps {
   value: string;
 }
 
+export const TREACHEROUS = "Treacherous";
+export const PRECARIOUS = "Precarious";
+export const PERILOUS = "Perilous";
+export const RISKY = "Risky";
+export const NORMAL = "Normal";
+
 export const getComplicationRangeName = (
   complicationRangeVal: string | number
 ) => {
   const value = Number(complicationRangeVal);
   switch (value) {
     case 5:
-      return "Treacherous";
+      return TREACHEROUS;
     case 4:
-      return "Precarious";
+      return PRECARIOUS;
     case 3:
-      return "Perilous";
+      return PERILOUS;
     case 2:
-      return "Risky";
+      return RISKY;
     default:
-      return "Normal";
+      return NORMAL;
   }
 };
+
 const Label: FC<LabelProps> = ({ onClick, isActive, value }) => {
   return (
     <label

@@ -10,7 +10,6 @@ const initialState: DuneState = {
   showTokensModal: false,
   momentum: "0",
   threat: "0",
-  assistanceDiceResults: [],
 };
 
 export default (state = initialState, action: any) => {

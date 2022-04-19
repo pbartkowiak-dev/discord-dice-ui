@@ -38,6 +38,7 @@ function ResultsModalContainer({
         msgData={msgData}
         showModal={msgData.showMsg}
         diceSelected={diceSelected}
+        diceType={diceType}
       />
     );
   }

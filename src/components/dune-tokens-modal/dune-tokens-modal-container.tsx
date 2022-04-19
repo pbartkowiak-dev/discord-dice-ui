@@ -25,7 +25,7 @@ const DuneTokensModalContainer = ({
     const { tokenOneState, tokenTwoState } = tokensState;
 
     updateTokensState({
-      doom: tokenOneState,
+      threat: tokenOneState,
       momentum: tokenTwoState,
     });
   };

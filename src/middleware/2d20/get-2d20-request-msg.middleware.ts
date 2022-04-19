@@ -5,6 +5,7 @@ import { SUCCESS, FAILURE, getColor } from "../../utils/getColor";
 import { get2d20SuccessLevel } from "../../components/2d20/utils/get-2d20-success-level";
 import { INFINITY_DICE_ROLLED } from "../../actions/infinity.actions";
 import { DUNE_DICE_ROLLED } from "../../actions/dune.actions";
+import { getComplicationRangeName } from "../../components/2d20/complication-range/complication-range";
 
 export const get2d20RequestMsg =
   (store: any) => (next: any) => (action: any) => {
@@ -40,6 +41,8 @@ export const get2d20RequestMsg =
       const fields = [];
       const resultsJoined = joinAsBlocks(results, null, true);
       const msgTitle = `${username} rolled **\`${diceAmount}d20\`**. Results: ${resultsJoined}.`;
+
+      const isDune = action.type === DUNE_DICE_ROLLED;
       let description;
 
       const assistanceSuccessLevel = get2d20SuccessLevel({
@@ -68,7 +71,9 @@ export const get2d20RequestMsg =
       description += `\nTN: \`${tn}\``;
 
       if (fortune && Number(fortune) > 0) {
-        description += `\nFortune points used: \`${fortune}\``;
+        description += `\n${
+          isDune ? "Determination" : "Fortune"
+        } points used: \`${fortune}\``;
       }
 
       if (untrainedTest) {
@@ -76,7 +81,9 @@ export const get2d20RequestMsg =
       }
 
       if (complicationRange) {
-        description += `\nComplication Range: \`${complicationRange}\``;
+        description += `\nComplication Range: \`${complicationRange}\`(_${getComplicationRangeName(
+          complicationRange
+        )}_)`;
       }
 
       if (assistanceDice && assistanceDiceResults?.length) {

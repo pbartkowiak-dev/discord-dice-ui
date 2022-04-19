@@ -16,7 +16,6 @@ export const COMBAT_TRACKER = "COMBAT_TRACKER";
 // TOR
 export type TorSkillDie = "tor-success-die";
 export type TorFeatDie = "tor-feat-die";
-export type TorDice = TorSkillDie | TorFeatDie;
 
 export const TOR_SKILL_TEST = "TOR_SKILL_TEST";
 export const TOR_FEAT_DIE: TorFeatDie = "tor-feat-die";
@@ -42,10 +41,6 @@ export const D20_DUNE = "d20dune";
 export const CONAN_TOKENS = "CONAN_TOKENS";
 export const INFINITY_TOKENS = "INFINITY_TOKENS";
 export const DUNE_TOKENS = "DUNE_TOKENS";
-export const MOMENTUM = "MOMENTUM";
-export const DOOM = "DOOM";
-export const HEAT = "HEAT";
-export const THREAT = "THREAT";
 
 export const NARRATIVE_DICE = "NARRATIVE_DICE";
 export const BOOST = "boost";
@@ -56,8 +51,6 @@ export const FORCE = "force";
 export const PROFICIENCY = "proficiency";
 export const SETBACK = "setback";
 export const NARRATIVE_TOKENS = "NARRATIVE_TOKENS";
-export const DESTINY_LIGHT = "DESTINY_LIGHT";
-export const DESTINY_DARK = "DESTINY_DARK";
 
 export const L5R_DICE = "L5R_DICE";
 export const RING_DIE = "ring_die";
