@@ -13,6 +13,7 @@ Table of content:
     - [Wrath & Glory](#wrath-and-glory)
     - [Conan 2d20](#conan-2d20)
     - [Infinity 2d20](#infinity-2d20)
+    - [Dune 2d20](#dune-2d20)
     - [Legend of the Five Rings 1e](#l5r1e)
     - [Legend of the Five Rings 5e](#l5r5e)
     - [Narrative Dice](#narrative-dice)
@@ -89,7 +90,11 @@ Damage Dice Result (with option to reroll selected dice):
 
 ## Infinity 2d20 <a id="infinity-2d20"></a>
 
-[![Conan 2d20 Mode general interface](./public/infinity-mode-1.png)]()
+[![Infinity 2d20 Mode general interface](./public/infinity-mode-1.png)]()
+
+## Dune 2d20 <a id="infinity-2d20"></a>
+
+[![Dune 2d20 Mode general interface](./public/dune-mode.png)]()
 
 ## Legend of the Five Rings 1e (classical Roll and Keep) <a id="l5r1e"></a>
 
