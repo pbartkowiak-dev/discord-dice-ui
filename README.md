@@ -92,7 +92,7 @@ Damage Dice Result (with option to reroll selected dice):
 
 [![Infinity 2d20 Mode general interface](./public/infinity-mode-1.png)]()
 
-## Dune 2d20 <a id="infinity-2d20"></a>
+## Dune 2d20 <a id="dune-2d20"></a>
 
 [![Dune 2d20 Mode general interface](./public/dune-mode.png)]()
 
