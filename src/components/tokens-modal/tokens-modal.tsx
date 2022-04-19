@@ -4,7 +4,7 @@ import Button from "react-bootstrap/Button";
 import styles from "./tokens-modal.module.css";
 import PoolBuilderDie from "../PoolBuilder/PoolBuilderDie";
 
-type TokenType = "TOKEN_ONE" | "TOKEN_TWO" | "TOKEN_THREE";
+type TokenType = "TOKEN_ONE" | "TOKEN_TWO";
 
 interface Token {
   name: string;
@@ -17,7 +17,6 @@ interface Token {
 export interface TokensState {
   tokenOneState: string;
   tokenTwoState: string;
-  tokenThreeState: string;
 }
 
 interface Props {
@@ -26,7 +25,6 @@ interface Props {
   hideMsg: () => void;
   tokenOne: Token;
   tokenTwo: Token;
-  tokenThree?: Token;
 }
 
 export const TokensModal = ({
@@ -35,24 +33,22 @@ export const TokensModal = ({
   hideMsg,
   tokenOne,
   tokenTwo,
-  tokenThree,
 }: Props) => {
   const [tokenOneState, setTokenOneState] = useState("0");
   const [tokenTwoState, setTokenTwoState] = useState("0");
-  const [tokenThreeState, setTokenThreeState] = useState("0");
 
   const onIncrease = (tokenType: TokenType) => {
     if (tokenType === "TOKEN_ONE") {
       const newVal = Number(tokenOneState) + 1;
-      setTokenOneState(`${newVal}`);
+      if (isValueValid(newVal, tokenOne.min, tokenOne.max)) {
+        setTokenOneState(`${newVal}`);
+      }
     }
     if (tokenType === "TOKEN_TWO") {
       const newVal = Number(tokenTwoState) + 1;
-      setTokenTwoState(`${newVal}`);
-    }
-    if (tokenType === "TOKEN_THREE") {
-      const newVal = Number(tokenTwoState) + 1;
-      setTokenThreeState(`${newVal}`);
+      if (isValueValid(newVal, tokenTwo.min, tokenTwo.max)) {
+        setTokenTwoState(`${newVal}`);
+      }
     }
   };
 
@@ -65,13 +61,12 @@ export const TokensModal = ({
       const newVal = Number(tokenTwoState) - 1;
       if (newVal >= 0) setTokenTwoState(`${newVal}`);
     }
-    if (tokenType === "TOKEN_THREE") {
-      const newVal = Number(tokenThreeState) - 1;
-      if (newVal >= 0) setTokenThreeState(`${newVal}`);
-    }
   };
 
-  const onChange = (tokenType: TokenType, event: any) => {
+  const onChange = (
+    tokenType: TokenType,
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const { value } = event.target;
 
     if (
@@ -86,17 +81,14 @@ export const TokensModal = ({
     ) {
       setTokenTwoState(value);
     }
-    if (
-      tokenType === "TOKEN_THREE" &&
-      isValueValid(value, tokenThree!.min, tokenThree!.max)
-    ) {
-      setTokenTwoState(value);
-    }
   };
 
-  const isValueValid = (val: string, minAmount: number, maxAmount: number) => {
+  const isValueValid = (
+    val: string | number,
+    minAmount: number,
+    maxAmount: number
+  ) => {
     const num = Number(val);
-
     return !isNaN(num) && num >= minAmount && num <= maxAmount;
   };
 
@@ -107,10 +99,7 @@ export const TokensModal = ({
     if (tokenTwo.initialValue) {
       setTokenTwoState(tokenTwo.initialValue);
     }
-    if (tokenThree?.initialValue) {
-      setTokenTwoState(tokenThree?.initialValue);
-    }
-  }, [tokenOne, tokenTwo, tokenThree, showModal]);
+  }, [tokenOne, tokenTwo, showModal]);
 
   return (
     <Modal show={showModal} onHide={hideMsg}>
@@ -139,18 +128,6 @@ export const TokensModal = ({
             onDecrease={onDecrease}
             isDiceImgLarge={true}
           />
-          {!!tokenThree && (
-            <PoolBuilderDie
-              title={tokenThree.name}
-              diceType="TOKEN_THREE"
-              diceImg={tokenThree.img}
-              value={tokenThreeState}
-              onChange={onChange}
-              onIncrease={onIncrease}
-              onDecrease={onDecrease}
-              isDiceImgLarge={true}
-            />
-          )}
         </div>
       </Modal.Body>
       <Modal.Footer>
@@ -163,7 +140,6 @@ export const TokensModal = ({
             handleUpdateTokens({
               tokenOneState,
               tokenTwoState,
-              tokenThreeState,
             })
           }
           type="submit"
