@@ -1,19 +1,19 @@
 import { combineReducers } from "redux";
-import userSettings from "./userSettingsReducer";
-import diceSelected from "./diceSelectedReducer";
-import warhammerState from "./warhammerReducer";
-import cthulhuState from "./cthulhuReducer";
-import modalsState from "./modalsReducer";
-import msg from "./msgReducer";
-import rollAndKeepData from "./rollAndKeepReducer";
-import l5rData from "./l5rReducer";
-import conanData from "./conanReducer";
-import infinityData from "./infinityReducer";
+import userSettings from "./user-settings-reducer";
+import diceSelected from "./dice-selected-reducer";
+import warhammerState from "./warhammer-reducer";
+import cthulhuState from "./cthulhu-reducer";
+import modalsState from "./modals-reducer";
+import msg from "./msg-reducer";
+import rollAndKeepData from "./roll-and-keep-reducer";
+import l5rData from "./l5r-reducer";
+import conanData from "./conan-reducer";
+import infinityData from "./infinity-reducer";
 import duneData from "./dune-reducer";
-import narrativeDiceData from "./narrativeDicereducer";
+import narrativeDiceData from "./narrative-dice-reducer";
 import { reducer as form } from "redux-form";
-import lastRollOptions from "./lastRollOptionsReducer";
-import rerollCount from "./rerollCountReducer";
+import lastRollOptions from "./last-roll-options-reducer";
+import rerollCount from "./reroll-count-reducer";
 
 export default combineReducers({
   userSettings,

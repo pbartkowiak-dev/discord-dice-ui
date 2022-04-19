@@ -4,10 +4,9 @@ import {
   UPDATE_INFINITY_TOKENS_STATE,
   INFINITY_DICE_ROLLED,
 } from "../actions/infinity.actions";
+import { InfinityState } from "./2d20-types";
 
-import { InitialStateType } from "./infinityTypes";
-
-const initialState: InitialStateType = {
+const initialState: InfinityState = {
   showTokensModal: false,
   momentum: "0",
   heat: "0",

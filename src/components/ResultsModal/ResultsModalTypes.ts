@@ -1,4 +1,4 @@
-import { SelectedDiceType } from "../../reducers/diceSelectedReducer";
+import { SelectedDiceType } from "../../reducers/dice-selected-reducer";
 
 export interface ResultsModalContainerPropTypes {
   hideMsg: () => void;

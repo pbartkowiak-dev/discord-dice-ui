@@ -1,15 +1,15 @@
 import { CLOSE_MSG_MODAL } from "../actions/modals";
-import { InitialStateType } from "./conanTypes";
 import {
   DUNE_DICE_ROLLED,
   OPEN_DUNE_TOKENS_MODAL,
   UPDATE_DUNE_TOKENS_STATE,
 } from "../actions/dune.actions";
+import { DuneState } from "./2d20-types";
 
-const initialState: InitialStateType = {
+const initialState: DuneState = {
   showTokensModal: false,
   momentum: "0",
-  doom: "0",
+  threat: "0",
   assistanceDiceResults: [],
 };
 
@@ -19,7 +19,7 @@ export default (state = initialState, action: any) => {
       return {
         ...state,
         momentum: action.payload.momentum,
-        doom: action.payload.doom,
+        threat: action.payload.threat,
         showTokensModal: false,
       };
     }

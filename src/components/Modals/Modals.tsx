@@ -19,7 +19,7 @@ import ConanTokensModalContainer from "../ConanTokensModal/ConanTokensModalConta
 import InfinityTokensModalContainer from "../InfinityTokensModal/InfinityTokensModalContainer";
 import NarrativeTokensModalContainer from "../NarrativeTokensModal/NarrativeTokensModalContainer";
 
-import { ModalsStateTypes } from "../../reducers/modalsReducer";
+import { ModalsStateTypes } from "../../reducers/modals-reducer";
 
 import WarhammerResultsModal from "../WarhammerResultsModal/WarhammerResultsModal";
 import CthulhuResultsModal from "../CthulhuResultsModal/CthulhuResultsModal";

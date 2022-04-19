@@ -4,10 +4,9 @@ import {
   UPDATE_CONAN_TOKENS_STATE,
   CONAN_DICE_ROLLED,
 } from "../actions/conan.actions";
+import { ConanState } from "./2d20-types";
 
-import { InitialStateType } from "./conanTypes";
-
-const initialState: InitialStateType = {
+const initialState: ConanState = {
   showTokensModal: false,
   momentum: "0",
   doom: "0",
