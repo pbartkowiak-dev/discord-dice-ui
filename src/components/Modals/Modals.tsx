@@ -31,6 +31,7 @@ import TorModal from "../torModals/TorModal";
 import TorResultsModal from "../torModals/TorResultsModal";
 import XCardModal from "../XCard/XCardModal";
 import DuneModalContainer from "../dune-modal/dune-modal-container";
+import DuneTokensModalContainer from "../dune-tokens-modal/dune-tokens-modal-container";
 
 interface modalsPropTypes {
   modalsState: ModalsStateTypes;
@@ -74,8 +75,10 @@ function Modals({
       <CopyrightModalContainer showModal={modalsState.isCopyrightModalOpen} />
       <ResultsModalContainer />
       <RollAndKeepResultsModalContainer />
+
       <ConanTokensModalContainer />
       <InfinityTokensModalContainer />
+      <DuneTokensModalContainer />
       <NarrativeTokensModalContainer />
 
       <L5rResultsModalContainer />
