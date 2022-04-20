@@ -32,7 +32,7 @@ const createRenderer =
 
 const renderInput = createRenderer(
   // @ts-ignore
-  (input, label, id, textMuted, meta, disabled) => {
+  (input, label, id, textMuted, meta) => {
     const { submitFailed, touched, error } = meta;
     const hasError = !!((submitFailed || touched) && error);
     return (
@@ -109,6 +109,7 @@ function WarhammerModalForm({
   anyTouched,
   submitFailed,
   handleSubmit,
+  skillLevel,
 }: any) {
   const dispatch = useDispatch();
 
@@ -117,17 +118,8 @@ function WarhammerModalForm({
     localStorageWarhammerSlModeManager.save(slType);
   };
 
-  const rangeId = "warhammer-skill-range";
-
   const handleRangeChange = (event: React.ChangeEvent<HTMLInputElement>) =>
     change("skillLevel", event.target.value);
-
-  const handleSkillChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const skillRange = document.getElementById(rangeId) as HTMLInputElement;
-    if (skillRange) {
-      skillRange.value = event.target.value;
-    }
-  };
 
   return (
     <Form
@@ -184,9 +176,8 @@ function WarhammerModalForm({
           label="Skill level:"
           textMuted="Enter your Character's skill level"
           component={renderInput}
-          onChange={handleSkillChange}
         />
-        <InputRange id={rangeId} onChange={handleRangeChange} />
+        <InputRange onChange={handleRangeChange} value={skillLevel} />
       </div>
     </Form>
   );
@@ -230,5 +221,5 @@ const FormElement = reduxForm({
 const selector = formValueSelector(form);
 
 export default connect((state) => ({
-  formValues: selector(state, "slType"),
+  skillLevel: selector(state, "skillLevel"),
 }))(FormElement);

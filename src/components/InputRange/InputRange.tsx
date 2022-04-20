@@ -4,7 +4,7 @@ import Form from "react-bootstrap/Form";
 import styles from "./InputRange.module.css";
 
 interface InputRangeProps {
-  id: string;
+  id?: string;
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   hidePercent?: boolean;
   min?: number;
@@ -13,7 +13,7 @@ interface InputRangeProps {
 }
 
 function InputRange({
-  id,
+  id = "",
   onChange,
   hidePercent,
   min,
@@ -32,7 +32,7 @@ function InputRange({
           name={id}
           min={min ?? 1}
           max={max || 100}
-          value={value || 0}
+          value={value || undefined}
           onChange={onChange}
         />
       </Form.Group>

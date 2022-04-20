@@ -140,21 +140,13 @@ function CthulhuModalForm({
   handleSubmit,
   specialDie,
   skillId = "",
+  skillLevel,
 }: any) {
   const { cthulhuBonus, cthulhuTwoBonus, cthulhuPenalty, cthulhuTwoPenalty } =
     specialDie;
-  const rangeId = "cthulhu-skill-range";
 
-  const handleRangeChange = (event: React.ChangeEvent<HTMLInputElement>) =>
+  const handleRangeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     change("skillLevel", event.target.value);
-
-  const handleSkillValueChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const skillRange = document.getElementById(rangeId) as HTMLInputElement;
-    if (skillRange) {
-      skillRange.value = event.target.value;
-    }
   };
 
   const handleDropdownChange = (event: any, id: string) => {
@@ -183,9 +175,8 @@ function CthulhuModalForm({
           label="Skill level:"
           textMuted="Enter your Investigator's skill level"
           component={renderInput}
-          onChange={handleSkillValueChange}
         />
-        <InputRange id={rangeId} onChange={handleRangeChange} />
+        <InputRange onChange={handleRangeChange} value={skillLevel} />
       </div>
       <Form.Row className="cthulhu-checkboxes-row">
         <Form.Group as={Col} md="6">
@@ -314,6 +305,7 @@ const selector = formValueSelector(form);
 
 export default connect((state) => ({
   skillId: selector(state, "skillId"),
+  skillLevel: selector(state, "skillLevel"),
   specialDie: selector(
     state,
     "cthulhuBonus",
