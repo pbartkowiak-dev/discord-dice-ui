@@ -54,19 +54,12 @@ const Label: FC<LabelProps> = ({ onClick, isActive, value }) => {
 };
 
 export const ComplicationRange: FC<Props> = ({ change, value }) => {
-  const id = "dune-complication-range";
-
   const handleRangeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     change("complicationRange", event.target.value);
-
-    const skillRange = document.getElementById(id) as HTMLInputElement;
-    if (skillRange) skillRange.value = event.target.value;
   };
 
   const changeRange = (value: string) => {
     change("complicationRange", value);
-    const skillRange = document.getElementById(id) as HTMLInputElement;
-    if (skillRange) skillRange.value = value;
   };
 
   return (
@@ -83,7 +76,6 @@ export const ComplicationRange: FC<Props> = ({ change, value }) => {
           <span>{getComplicationRangeName(value)}</span>
         </div>
         <InputRange
-          id={id}
           onChange={handleRangeChange}
           hidePercent={true}
           min={1}
