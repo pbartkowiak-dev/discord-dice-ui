@@ -255,4 +255,12 @@ Available parameters:
 
 ### For local environment development run:
 
-1. `npm run dev`
+To run the app:
+```
+npm run dev`
+```
+
+To run Prettier globally:
+```
+npm run  prettier
+```
