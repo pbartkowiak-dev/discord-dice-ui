@@ -39,22 +39,51 @@ const createRenderer =
 
 const renderInput = createRenderer(
   // @ts-ignore
-  (input, label, id, textMuted, meta, disabled) => {
+  (input, label, id, textMuted, meta) => {
     const { submitFailed, touched, error } = meta;
+    const numValue = Number(input.value);
     const hasError = !!((submitFailed || touched) && error);
+    const halfValue = isNaN(numValue) ? 0 : Math.floor(numValue * 0.5);
+    const fifthValue = isNaN(numValue) ? 0 : Math.floor(numValue * 0.2);
+
     return (
       <Form.Group controlId={id}>
         <Form.Label>{label}</Form.Label>
-        <div className="percent-icon-container">
-          <Form.Control
-            type="text"
-            size="lg"
-            placeholder="00"
-            autoComplete="off"
-            isInvalid={hasError}
-            {...input}
-          />
-          <PercentIcon />
+        <div className="skill-level-field__cthulhu-group">
+          <div className="percent-icon-container">
+            <Form.Control
+              className="skill-level-field__cthulhu-group__main-input"
+              type="text"
+              size="lg"
+              placeholder="00"
+              autoComplete="off"
+              isInvalid={hasError}
+              {...input}
+            />
+            <PercentIcon />
+          </div>
+          <div className="percent-derived-values">
+            <div>
+              <Form.Control
+                value={numValue ? `${halfValue}%` : ""}
+                className="percent-derived-values__input percent-derived-values__input--half"
+                placeholder="1/2"
+                disabled
+                size="sm"
+                autoComplete="off"
+              />
+            </div>
+            <div>
+              <Form.Control
+                value={numValue ? `${fifthValue}%` : ""}
+                className="percent-derived-values__input percent-derived-values__input--fifth"
+                placeholder="1/5"
+                disabled
+                size="sm"
+                autoComplete="off"
+              />
+            </div>
+          </div>
         </div>
         {hasError && (
           <Form.Control.Feedback type="invalid">{error}</Form.Control.Feedback>

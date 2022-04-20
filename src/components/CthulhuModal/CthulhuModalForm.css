@@ -5,7 +5,7 @@
 }
 
 .skill-level-field .form-control {
-  width: 115px;
+  width: 85px;
   text-align: center;
   margin: 0 auto;
   font-size: 28px;
@@ -19,16 +19,60 @@
   align-items: center;
 }
 
+.skill-level-field__cthulhu-group {
+  display: flex
+}
+
 .percent-icon-container {
   position: relative;
 }
 
+.percent-derived-values {
+  display: flex;
+  flex-direction: column;
+}
+
+.skill-level-field .skill-level-field__cthulhu-group__main-input {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  padding: .5rem 28px .5rem 1rem;
+}
+
+.form-control.is-invalid.skill-level-field__cthulhu-group__main-input,
+.was-validated .form-control.skill-level-field__cthulhu-group__main-input:invalid {
+  background-image: none;
+  padding: .5rem 28px .5rem 1rem;
+}
+
+.skill-level-field .percent-derived-values__input {
+  width: 55px;
+  height: 30px;
+  font-size: 15px;
+  border-left: 0;
+}
+
+.skill-level-field .percent-derived-values__input--half {
+  border-bottom: 0;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.percent-derived-values__input--fifth {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
 .percent-icon {
   position: absolute;
-  right: -22px;
   font-size: 18px;
   top: 18px;
-  color: #6e6e6e;
+  color: #838383;
+}
+
+.skill-level-field__cthulhu-group .percent-icon {
+  right: 10px;
 }
 
 .form-invalid .percent-icon {
