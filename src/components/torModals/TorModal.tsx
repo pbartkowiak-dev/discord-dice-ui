@@ -45,7 +45,7 @@ export default () => {
   } = torStore;
 
   const tnInputId = "tn-input";
-  const tnMax = 20;
+  const tnMax = 35;
   const tnMin = 0;
   const successDiceAmountMax = 20;
   const modifierMax = 10;
