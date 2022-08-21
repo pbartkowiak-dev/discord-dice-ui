@@ -22,7 +22,7 @@
 }
 
 .inactive {
-  opacity: .5;
+  opacity: 0.5;
 }
 
 .complication {
@@ -30,4 +30,3 @@
   background-color: #f8cc9b;
   border-color: #f8cc9b;
 }
-

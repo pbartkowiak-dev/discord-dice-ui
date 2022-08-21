@@ -20,7 +20,7 @@
 }
 
 .skill-level-field__cthulhu-group {
-  display: flex
+  display: flex;
 }
 
 .percent-icon-container {
@@ -35,13 +35,14 @@
 .skill-level-field .skill-level-field__cthulhu-group__main-input {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
-  padding: .5rem 28px .5rem 1rem;
+  padding: 0.5rem 28px 0.5rem 1rem;
 }
 
 .form-control.is-invalid.skill-level-field__cthulhu-group__main-input,
-.was-validated .form-control.skill-level-field__cthulhu-group__main-input:invalid {
+.was-validated
+  .form-control.skill-level-field__cthulhu-group__main-input:invalid {
   background-image: none;
-  padding: .5rem 28px .5rem 1rem;
+  padding: 0.5rem 28px 0.5rem 1rem;
 }
 
 .skill-level-field .percent-derived-values__input {
