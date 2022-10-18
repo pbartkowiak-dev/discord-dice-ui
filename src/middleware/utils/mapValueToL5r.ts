@@ -42,7 +42,7 @@ export default (diceType: string, value: number): string | number => {
       case 10:
         return `${SUCCESS}_${OPPORTUNITY}_${SKILL_DIE}`;
       case 11:
-        return `${EXPLOSIVE_SUCCESS}_${OPPORTUNITY}_${SKILL_DIE}`;
+        return `${EXPLOSIVE_SUCCESS}_${STRIFE}_${SKILL_DIE}`;
       case 12:
         return `${EXPLOSIVE_SUCCESS}_${SKILL_DIE}`;
     }

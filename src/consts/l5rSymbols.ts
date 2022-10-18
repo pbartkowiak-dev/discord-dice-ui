@@ -30,19 +30,19 @@ export default {
 };
 
 export const l5rResults = {
+  // Ring Die
   [`${BLANK}_${RING_DIE}`]: "Blank",
   [`${OPPORTUNITY}_${STRIFE}_${RING_DIE}`]: "Opportunity, Strife",
   [`${OPPORTUNITY}_${RING_DIE}`]: "Opportunity",
   [`${SUCCESS}_${STRIFE}_${RING_DIE}`]: "Success, Strife",
   [`${SUCCESS}_${RING_DIE}`]: "Success",
   [`${EXPLOSIVE_SUCCESS}_${STRIFE}_${RING_DIE}`]: "Explosive Success, Strife",
-
+  // Skill Die
   [`${BLANK}_${SKILL_DIE}`]: "Blank",
   [`${OPPORTUNITY}_${SKILL_DIE}`]: "Opportunity",
   [`${SUCCESS}_${STRIFE}_${SKILL_DIE}`]: "Success, Strife",
   [`${SUCCESS}_${SKILL_DIE}`]: "Success",
   [`${SUCCESS}_${OPPORTUNITY}_${SKILL_DIE}`]: "Success, Opportunity",
-  [`${EXPLOSIVE_SUCCESS}_${OPPORTUNITY}_${SKILL_DIE}`]:
-    "Explosive Success, Opportunity",
+  [`${EXPLOSIVE_SUCCESS}_${STRIFE}_${SKILL_DIE}`]: "Explosive Success, Strife",
   [`${EXPLOSIVE_SUCCESS}_${SKILL_DIE}`]: "Explosive Success",
 };
