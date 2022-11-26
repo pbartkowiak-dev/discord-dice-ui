@@ -23,6 +23,7 @@ interface Props {
   showUntrainedTest: boolean;
   showAssistance: boolean;
   showComplicationRange: boolean;
+  maxFocus?: number
 }
 
 export const Form2d20 = ({
