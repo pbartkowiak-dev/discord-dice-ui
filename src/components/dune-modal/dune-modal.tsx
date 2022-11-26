@@ -8,6 +8,7 @@ import { formValueSelector, reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import { Form2d20 } from "../2d20/form-2d20/form-2d20";
 import { validate } from "../2d20/form-2d20/form-utils";
+import { DUNE_MAX_FOCUS } from '../2d20/form-2d20/const';
 
 const form = "DuneModalForm";
 
@@ -81,6 +82,7 @@ function DuneModal({
           fortuneHeader="Determination"
           initialValues={initialValues}
           onSubmit={(values) => handleSubmit(values)}
+          maxFocus={DUNE_MAX_FOCUS}
         />
       </Modal.Body>
       <Modal.Footer>

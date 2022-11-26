@@ -1,5 +1,6 @@
 import Form from "react-bootstrap/Form";
 import React from "react";
+import { DEFAULT_MAX_FOCUS } from './const';
 
 const createRenderer =
   (render: any) =>
@@ -62,13 +63,14 @@ interface ErrorPropTypes {
   assistanceTn?: string;
 }
 
-export const validate = (values: any) => {
+export const validate = (values: any, formData: any) => {
   const errors: ErrorPropTypes = {};
   const { tn, focus, assistanceTn, assistanceFocus } = values;
   const tnNumber = parseInt(tn, 10);
   const focusNumber = parseInt(focus, 10);
   const assistanceTnNumber = parseInt(assistanceTn, 10);
   const assistanceFocusNumber = parseInt(assistanceFocus, 10);
+  const maxFocus = formData?.maxFocus || DEFAULT_MAX_FOCUS;
 
   if (!tn || !tn.trim()) {
     errors.tn = "Target Number cannot be empty";
@@ -85,8 +87,8 @@ export const validate = (values: any) => {
   if (focus && isNaN(focusNumber)) {
     errors.focus = "Focus must be a valid number";
   }
-  if (focus && focusNumber > 5) {
-    errors.focus = "Focus must be less than 5";
+  if (focus && focusNumber > maxFocus) {
+    errors.focus = `Focus must be less than ${maxFocus}`;
   }
   // Assistance values
   if (assistanceFocus && isNaN(assistanceFocusNumber)) {
