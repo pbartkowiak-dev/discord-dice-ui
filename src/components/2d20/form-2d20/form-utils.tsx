@@ -1,6 +1,6 @@
 import Form from "react-bootstrap/Form";
 import React from "react";
-import { DEFAULT_MAX_FOCUS } from './const';
+import { DEFAULT_MAX_FOCUS } from "./const";
 
 const createRenderer =
   (render: any) =>

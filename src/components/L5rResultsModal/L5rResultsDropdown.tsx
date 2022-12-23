@@ -22,7 +22,6 @@ function L5rResultsDropdown({
   l5rAlterDie,
   l5rRollAdditionalDie,
   isModifyingAllowed,
-  l5rSendState,
   type,
 }: any) {
   const isExplosiveDie = result.includes(EXPLOSIVE_SUCCESS);
@@ -37,13 +36,12 @@ function L5rResultsDropdown({
       index,
       setTo: `${setTo}_${from}`,
     });
-    l5rSendState();
   };
 
   const handleAlterRingDie = (setTo: string) => handleAlterDie(setTo, RING_DIE);
 
-  const handleAlterSkillDie = (setTo: string) => handleAlterDie(setTo, SKILL_DIE);
-
+  const handleAlterSkillDie = (setTo: string) =>
+    handleAlterDie(setTo, SKILL_DIE);
 
   if ((!isExplosiveDie && !isModifyingAllowed) || wasAlreadyExploded) {
     return <>{children}</>;
@@ -52,89 +50,98 @@ function L5rResultsDropdown({
   return (
     <Dropdown className="dropdown-wrapper">
       <Dropdown.Toggle id="kept-die-dropdown">{children}</Dropdown.Toggle>
-      {diceType === RING_DIE
-          ? (
-              <Dropdown.Menu>
-                {isExplosiveDie && !isModifyingAllowed && (
-                    <Dropdown.Item onClick={handleRollAdditionalDie}>
-                      Roll additional die
-                    </Dropdown.Item>
-                )}
-                {isModifyingAllowed && (
-                    <Dropdown.Item
-                        onClick={() => handleAlterRingDie(`${OPPORTUNITY}_${STRIFE}`)}
-                    >
-                      Set to {OpportunityImg} {StrifeImg}
-                    </Dropdown.Item>
-                )}
-                {isModifyingAllowed && (
-                    <Dropdown.Item onClick={() => handleAlterRingDie(`${OPPORTUNITY}`)}>
-                      Set to {OpportunityImg}
-                    </Dropdown.Item>
-                )}
-                {isModifyingAllowed && (
-                    <Dropdown.Item onClick={() => handleAlterRingDie(`${SUCCESS}_${STRIFE}`)}>
-                      Set to {SuccessImg} {StrifeImg}
-                    </Dropdown.Item>
-                )}
-                {isModifyingAllowed && (
-                    <Dropdown.Item onClick={() => handleAlterRingDie(`${SUCCESS}`)}>
-                      Set to {SuccessImg}
-                    </Dropdown.Item>
-                )}
-                {isModifyingAllowed && (
-                    <Dropdown.Item
-                        onClick={() => handleAlterRingDie(`${EXPLOSIVE_SUCCESS}_${STRIFE}`)}
-                    >
-                      Set to {ExplosiveSuccessImg} {StrifeImg}
-                    </Dropdown.Item>
-                )}
-              </Dropdown.Menu>
-          ) : (
-              <Dropdown.Menu>
-                {isExplosiveDie && !isModifyingAllowed && (
-                    <Dropdown.Item onClick={handleRollAdditionalDie}>
-                      Roll additional die
-                    </Dropdown.Item>
-                )}
-                {isModifyingAllowed && (
-                    <Dropdown.Item
-                        onClick={() => handleAlterSkillDie(`${OPPORTUNITY}`)}
-                    >
-                      Set to {OpportunityImg}
-                    </Dropdown.Item>
-                )}
-                {isModifyingAllowed && (
-                    <Dropdown.Item onClick={() => handleAlterSkillDie(`${SUCCESS}_${STRIFE}`)}>
-                      Set to {SuccessImg} {StrifeImg}
-                    </Dropdown.Item>
-                )}
-                {isModifyingAllowed && (
-                    <Dropdown.Item onClick={() => handleAlterSkillDie(`${SUCCESS}`)}>
-                      Set to {SuccessImg}
-                    </Dropdown.Item>
-                )}
-                {isModifyingAllowed && (
-                    <Dropdown.Item onClick={() => handleAlterSkillDie(`${SUCCESS}_${OPPORTUNITY}`)}>
-                      Set to {SuccessImg} {OpportunityImg}
-                    </Dropdown.Item>
-                )}
-                {isModifyingAllowed && (
-                    <Dropdown.Item
-                        onClick={() => handleAlterSkillDie(`${EXPLOSIVE_SUCCESS}_${STRIFE}`)}
-                    >
-                      Set to {ExplosiveSuccessImg} {StrifeImg}
-                    </Dropdown.Item>
-                )}
-                {isModifyingAllowed && (
-                    <Dropdown.Item
-                        onClick={() => handleAlterSkillDie(`${EXPLOSIVE_SUCCESS}`)}
-                    >
-                      Set to {ExplosiveSuccessImg}
-                    </Dropdown.Item>
-                )}
-              </Dropdown.Menu>
+      {diceType === RING_DIE ? (
+        <Dropdown.Menu>
+          {isExplosiveDie && !isModifyingAllowed && (
+            <Dropdown.Item onClick={handleRollAdditionalDie}>
+              Roll additional die
+            </Dropdown.Item>
           )}
+          {isModifyingAllowed && (
+            <Dropdown.Item
+              onClick={() => handleAlterRingDie(`${OPPORTUNITY}_${STRIFE}`)}
+            >
+              Set to {OpportunityImg} {StrifeImg}
+            </Dropdown.Item>
+          )}
+          {isModifyingAllowed && (
+            <Dropdown.Item onClick={() => handleAlterRingDie(`${OPPORTUNITY}`)}>
+              Set to {OpportunityImg}
+            </Dropdown.Item>
+          )}
+          {isModifyingAllowed && (
+            <Dropdown.Item
+              onClick={() => handleAlterRingDie(`${SUCCESS}_${STRIFE}`)}
+            >
+              Set to {SuccessImg} {StrifeImg}
+            </Dropdown.Item>
+          )}
+          {isModifyingAllowed && (
+            <Dropdown.Item onClick={() => handleAlterRingDie(`${SUCCESS}`)}>
+              Set to {SuccessImg}
+            </Dropdown.Item>
+          )}
+          {isModifyingAllowed && (
+            <Dropdown.Item
+              onClick={() =>
+                handleAlterRingDie(`${EXPLOSIVE_SUCCESS}_${STRIFE}`)
+              }
+            >
+              Set to {ExplosiveSuccessImg} {StrifeImg}
+            </Dropdown.Item>
+          )}
+        </Dropdown.Menu>
+      ) : (
+        <Dropdown.Menu>
+          {isExplosiveDie && !isModifyingAllowed && (
+            <Dropdown.Item onClick={handleRollAdditionalDie}>
+              Roll additional die
+            </Dropdown.Item>
+          )}
+          {isModifyingAllowed && (
+            <Dropdown.Item
+              onClick={() => handleAlterSkillDie(`${OPPORTUNITY}`)}
+            >
+              Set to {OpportunityImg}
+            </Dropdown.Item>
+          )}
+          {isModifyingAllowed && (
+            <Dropdown.Item
+              onClick={() => handleAlterSkillDie(`${SUCCESS}_${STRIFE}`)}
+            >
+              Set to {SuccessImg} {StrifeImg}
+            </Dropdown.Item>
+          )}
+          {isModifyingAllowed && (
+            <Dropdown.Item onClick={() => handleAlterSkillDie(`${SUCCESS}`)}>
+              Set to {SuccessImg}
+            </Dropdown.Item>
+          )}
+          {isModifyingAllowed && (
+            <Dropdown.Item
+              onClick={() => handleAlterSkillDie(`${SUCCESS}_${OPPORTUNITY}`)}
+            >
+              Set to {SuccessImg} {OpportunityImg}
+            </Dropdown.Item>
+          )}
+          {isModifyingAllowed && (
+            <Dropdown.Item
+              onClick={() =>
+                handleAlterSkillDie(`${EXPLOSIVE_SUCCESS}_${STRIFE}`)
+              }
+            >
+              Set to {ExplosiveSuccessImg} {StrifeImg}
+            </Dropdown.Item>
+          )}
+          {isModifyingAllowed && (
+            <Dropdown.Item
+              onClick={() => handleAlterSkillDie(`${EXPLOSIVE_SUCCESS}`)}
+            >
+              Set to {ExplosiveSuccessImg}
+            </Dropdown.Item>
+          )}
+        </Dropdown.Menu>
+      )}
     </Dropdown>
   );
 }
