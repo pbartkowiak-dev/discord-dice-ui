@@ -1,18 +1,12 @@
 import React from "react";
 import { Dropdown } from "react-bootstrap";
 
-function L5rResultsDropdown({
-  index,
-  l5rKeepAdditionalDie,
-  l5rSendState,
-  children,
-}: any) {
+function L5rResultsDropdown({ index, l5rKeepAdditionalDie, children }: any) {
   const handleKeepIt = () => {
     l5rKeepAdditionalDie({
       decision: true,
       index,
     });
-    l5rSendState();
   };
 
   const handleDropIt = () => {

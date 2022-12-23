@@ -20,7 +20,7 @@ import l5rStyles from "./L5rResultsModal.module.css";
 import { RING_DIE } from "../../consts/diceConstants";
 import { ROLLED_DIE } from "../../consts/consts";
 
-function L5rResultsDropdown({ type, l5rAddDie, l5rSendState }: any) {
+function L5rResultsDropdown({ type, l5rAddDie }: any) {
   const handleAddDie = (setTo?: string) => {
     if (setTo) {
       l5rAddDie({
@@ -33,7 +33,6 @@ function L5rResultsDropdown({ type, l5rAddDie, l5rSendState }: any) {
         setTo: "",
       });
     }
-    l5rSendState();
   };
 
   const dieTypeString = type === ROLLED_DIE ? "rolled" : "kept";
