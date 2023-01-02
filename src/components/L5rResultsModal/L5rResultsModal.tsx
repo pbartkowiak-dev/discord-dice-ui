@@ -27,7 +27,6 @@ function L5rResultsModal({
   resultsKeptIndexesAltered,
   resultsKeptIndexesExploded,
   resultsDerived,
-
   additionalDiceRolled,
   additionalDiceIndexesKept,
   additionalDiceIndexesDropped,
@@ -381,6 +380,18 @@ function L5rResultsModal({
       <Modal.Footer>
         <Button variant="outline-secondary" onClick={hideMsg}>
           Close
+        </Button>
+        <Button variant="outline-primary" onClick={l5rSendState}>
+          Send Results
+        </Button>
+        <Button
+          variant="outline-success"
+          onClick={() => {
+            l5rSendState();
+            hideMsg();
+          }}
+        >
+          Send Results and Close
         </Button>
       </Modal.Footer>
     </Modal>
